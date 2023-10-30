@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cytpnn70hcfsb"]
+[gd_scene load_steps=3 format=3 uid="uid://cytpnn70hcfsb"]
 
 [ext_resource type="Script" path="res://Menus/settings_menu.gd" id="1_3y8nf"]
+[ext_resource type="PackedScene" uid="uid://dwgry2nkxajfv" path="res://UI/volume_adjuster.tscn" id="2_18w72"]
 
 [node name="Settings_Menu" type="Control"]
 layout_mode = 3
@@ -36,6 +37,18 @@ size_flags_vertical = 3
 [node name="AudioTitle" type="Label" parent="VBoxContainer/Body/Audio"]
 layout_mode = 2
 text = "Audio"
+horizontal_alignment = 1
+
+[node name="VolumeAdjuster" parent="VBoxContainer/Body/Audio" instance=ExtResource("2_18w72")]
+layout_mode = 2
+
+[node name="VolumeAdjuster2" parent="VBoxContainer/Body/Audio" instance=ExtResource("2_18w72")]
+layout_mode = 2
+bus_name = "sfx"
+
+[node name="VolumeAdjuster3" parent="VBoxContainer/Body/Audio" instance=ExtResource("2_18w72")]
+layout_mode = 2
+bus_name = "music"
 
 [node name="Graphics" type="VBoxContainer" parent="VBoxContainer/Body"]
 layout_mode = 2
@@ -44,6 +57,7 @@ size_flags_vertical = 3
 [node name="GraphicsTitle" type="Label" parent="VBoxContainer/Body/Graphics"]
 layout_mode = 2
 text = "Graphics"
+horizontal_alignment = 1
 
 [node name="Footer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

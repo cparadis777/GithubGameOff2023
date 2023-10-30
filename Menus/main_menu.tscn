@@ -40,7 +40,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.5
 
 [node name="Title" type="Label" parent="VBoxContainer/Header"]
 layout_mode = 2

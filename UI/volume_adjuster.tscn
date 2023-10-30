@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwgry2nkxajfv"]
+
+[ext_resource type="Script" path="res://UI/volume_adjuster.gd" id="1_ofsyh"]
+
+[node name="VolumeAdjuster" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ofsyh")
+
+[node name="VolumeBusLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bus Volume: "
+
+[node name="VolumeSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 1.0

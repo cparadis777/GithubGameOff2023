@@ -14,3 +14,9 @@ config/name="Github Game Off 2023"
 run/main_scene="res://Menus/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1900
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
