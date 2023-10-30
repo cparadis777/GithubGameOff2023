@@ -1,4 +1,98 @@
-[gd_resource type="Theme" format=3 uid="uid://salqa0d7og24"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://salqa0d7og24"]
+
+[ext_resource type="StyleBox" uid="uid://d12sva3hx2g77" path="res://UI/Themes/cyber_style_box_flat.tres" id="1_fgtog"]
+[ext_resource type="FontFile" uid="uid://cscfv5b27op2n" path="res://UI/Themes/fonts/Saira/Saira-ExtraLightItalic.ttf" id="1_kb1jf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5e55n"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0352941, 0.0666667, 0.0901961, 0.592157)
+skew = Vector2(0.5, 2.08165e-12)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.968627, 0.803922, 0.0784314, 1)
+border_blend = true
+expand_margin_left = 20.0
+expand_margin_top = 5.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgu83"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.45098, 0.596078, 0.698039, 0.592157)
+skew = Vector2(0.5, 2.08165e-12)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.968627, 0.803922, 0.0784314, 1)
+border_blend = true
+expand_margin_left = 20.0
+expand_margin_top = 5.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtwh4"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.592157)
+skew = Vector2(0.5, 2.08165e-12)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.34902, 0.705882, 0.741176, 1)
+border_blend = true
+expand_margin_left = 20.0
+expand_margin_top = 5.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgjbb"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.5, 2.08165e-12)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.34902, 0.705882, 0.741176, 1)
+border_blend = true
+expand_margin_left = 20.0
+expand_margin_top = 5.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
 
 [resource]
+default_font = ExtResource("1_kb1jf")
+Button/font_sizes/font_size = 32
+Button/styles/focus = SubResource("StyleBoxFlat_5e55n")
+Button/styles/hover = SubResource("StyleBoxFlat_qgu83")
+Button/styles/normal = SubResource("StyleBoxFlat_qtwh4")
+Button/styles/pressed = SubResource("StyleBoxFlat_tgjbb")
+HBoxContainer/constants/separation = 25
+Label/colors/font_color = Color(0, 1, 1, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.827451)
+Label/constants/outline_size = 1
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+Label/font_sizes/font_size = 24
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 20
+MarginContainer/constants/margin_right = 20
+MarginContainer/constants/margin_top = 20
+Panel/styles/panel = ExtResource("1_fgtog")
 VBoxContainer/constants/separation = 25

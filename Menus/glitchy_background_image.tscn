@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmfsia7nx2qdw"]
+
+[ext_resource type="Script" path="res://Menus/glitchy_background_image.gd" id="1_85b4o"]
+[ext_resource type="Texture2D" uid="uid://bv4kpyyv58d6" path="res://art/placeholder/cyberpunk2.png" id="2_2iqga"]
+[ext_resource type="Shader" path="res://art/materials/shaders/glitch_2d_shader.gdshader" id="2_efgef"]
+[ext_resource type="Texture2D" uid="uid://4abind4y0eb0" path="res://art/placeholder/cyberpunk2-low-spec.png" id="3_fjljl"]
+[ext_resource type="AudioStream" uid="uid://ce0lxx5sdqs53" path="res://audio/sfx/placeholder/free-sound-573189__inspectorj__computer-glitching-digital-data-corruption-02-04-loop.wav" id="4_ypwul"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hessb"]
+shader = ExtResource("2_efgef")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 10.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/SCREEN_TEXTURE = ExtResource("2_2iqga")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1r8jm"]
+streams_count = 1
+random_pitch = 1.25
+stream_0/stream = ExtResource("4_ypwul")
+stream_0/weight = 1.0
+
+[node name="GlitchyBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_85b4o")
+high_spec_texture = ExtResource("2_2iqga")
+low_spec_texture = ExtResource("3_fjljl")
+
+[node name="CyberpunkBG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2iqga")
+
+[node name="CyberpunkBGGlitch" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_hessb")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2iqga")
+
+[node name="GlitchTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="GlitchNoise" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_1r8jm")
