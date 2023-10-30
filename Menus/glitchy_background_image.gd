@@ -11,12 +11,13 @@ extends Control
 func _ready():
 	$CyberpunkBGGlitch.hide()
 	activate_glitch_effects()
+	_on_graphics_toggled()
 
 
 func activate_glitch_effects():
 	$GlitchTimer.timeout.connect(_on_glitch_timer_timeout)
 	$GlitchNoise.finished.connect(_on_noise_finished)
-	$GlitchTimer.start()
+	#$GlitchTimer.start()
 
 
 func _on_glitch_timer_timeout():
