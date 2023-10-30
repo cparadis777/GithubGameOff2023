@@ -7,7 +7,7 @@ func _ready():
 	
 
 func connect_button_audio():
-	for button in $VBoxContainer/Body/LeftSide.get_children():
+	for button in %Buttons.get_children():
 		button.mouse_entered.connect($Audio/HoverNoise.play)
 		button.pressed.connect($Audio/ClickNoise.play)
 		
