@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvbhquq3bii1u"]
+
+[ext_resource type="Texture2D" uid="uid://bkjabti7gg0v" path="res://art/placeholder/GenericBackdrop-AI-gen.png" id="1_pgaev"]
+[ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="2_py3o0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xlfeq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0t6y6"]
+albedo_texture = ExtResource("1_pgaev")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_k40fn"]
+material = SubResource("StandardMaterial3D_0t6y6")
+size = Vector2(15, 10)
+
+[node name="Level" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.3775)
+
+[node name="Decorations" type="Node3D" parent="."]
+
+[node name="sphere" type="MeshInstance3D" parent="Decorations"]
+mesh = SubResource("SphereMesh_xlfeq")
+skeleton = NodePath("../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Decorations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4948, 3.00419, 0)
+
+[node name="plane" type="MeshInstance3D" parent="Decorations"]
+transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965926, 0, 0.965926, 0.258819, 0, 0, -5.60138)
+mesh = SubResource("PlaneMesh_k40fn")
+
+[node name="HUD" parent="." instance=ExtResource("2_py3o0")]
