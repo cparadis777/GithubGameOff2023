@@ -126,4 +126,4 @@ layout_mode = 2
 text = "Return to Main"
 
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/Fullscreen/FullscreenCheckButton" to="." method="_on_fullscreen_check_button_toggled"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/GraphicsMode/GraphicsModeOptionList" to="." method="_on_graphics_mode_option_list_pressed"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/GraphicsMode/GraphicsModeOptionList" to="." method="_on_graphics_mode_option_list_item_selected"]

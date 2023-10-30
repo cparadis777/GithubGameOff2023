@@ -16,7 +16,7 @@ func _ready():
 		printerr("Volume Adjuster needs correct bus name: " + self.name + " in " + owner.name)
 	
 
-func _on_volume_slider_drag_ended(valueChanged : bool):
+func _on_volume_slider_drag_ended(_valueChanged : bool):
 	var new_vol_db = linear_to_db($VolumeSlider.value)
 	AudioServer.set_bus_volume_db(busIdx, new_vol_db)
 	

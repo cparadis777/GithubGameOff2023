@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bv4kpyyv58d6"
-path="res://.godot/imported/cyberpunk2.png-0f1a9c3d837f14dee27a56a93dc49410.ctex"
+path="res://.godot/imported/cyberpunk2.png-d95da1491e1d58e81afe4a1c26cad3b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://audio/sfx/placeholder/cyberpunk2.png"
-dest_files=["res://.godot/imported/cyberpunk2.png-0f1a9c3d837f14dee27a56a93dc49410.ctex"]
+source_file="res://art/placeholder/cyberpunk2.png"
+dest_files=["res://.godot/imported/cyberpunk2.png-d95da1491e1d58e81afe4a1c26cad3b2.ctex"]
 
 [params]
 

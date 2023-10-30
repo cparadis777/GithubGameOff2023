@@ -18,5 +18,9 @@ func _on_fullscreen_check_button_toggled(button_pressed):
 		window.mode = Window.MODE_WINDOWED
 
 
-func _on_graphics_mode_option_list_pressed():
-	pass # Replace with function body.
+
+
+func _on_graphics_mode_option_list_item_selected(index):
+	Globals.user_prefs["graphics"] = index
+	if has_node("Background") and get_node("Background").has_method("_on_graphics_toggled"):
+		$Background._on_graphics_toggled()
