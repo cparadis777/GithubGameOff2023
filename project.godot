@@ -29,11 +29,6 @@ window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"
 
-
-[rendering]
-
-textures/canvas_textures/default_texture_filter=0
-
 [input]
 
 move_left={
@@ -76,3 +71,7 @@ shoot={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
