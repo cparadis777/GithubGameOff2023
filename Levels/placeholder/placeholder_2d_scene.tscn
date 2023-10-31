@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbbi07nppapt8"]
+[gd_scene load_steps=15 format=3 uid="uid://bbbi07nppapt8"]
 
-[ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="1_4ny7y"]
+[ext_resource type="Script" path="res://Levels/placeholder/placeholder_2d_scene.gd" id="1_f1b75"]
 [ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="2_injxk"]
+[ext_resource type="Shader" uid="uid://chvota4j62bo5" path="res://art/materials/shaders/pixelify_shader.tres" id="3_a45cf"]
+[ext_resource type="PackedScene" uid="uid://dp40vps5cxn12" path="res://Entities/Player/Basic_2d_platformer_character.tscn" id="3_aaivl"]
+[ext_resource type="Texture2D" uid="uid://b54yanqmxoqqe" path="res://art/placeholder/cybertruck_side.png" id="4_7irb4"]
+[ext_resource type="Texture2D" uid="uid://dqowu1yjmphos" path="res://art/placeholder/chonqing_city_skyline.png" id="4_rmxp0"]
+[ext_resource type="Texture2D" uid="uid://vmpymh7oea61" path="res://art/placeholder/potato.png" id="5_r4g24"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xr3pr"]
 
@@ -10,41 +15,122 @@ width = 2048
 height = 64
 noise = SubResource("FastNoiseLite_xr3pr")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cvpp"]
+size = Vector2(2048, 64)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pvs8e"]
+radius = 25.0
+height = 86.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2yat4"]
+shader = ExtResource("3_a45cf")
+shader_parameter/PixelSize = 0.01
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3smj1"]
+width = 2048
+height = 128
+noise = SubResource("FastNoiseLite_xr3pr")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6xhr2"]
+width = 2048
+height = 256
+noise = SubResource("FastNoiseLite_xr3pr")
+
 [node name="Placeholder2DScene" type="Node2D"]
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.667, 0.667)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(1330, 780)
-texture = ExtResource("1_4ny7y")
-
-[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(670, 780)
-texture = ExtResource("1_4ny7y")
-
-[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(904, 904)
-texture = SubResource("NoiseTexture2D_wucvc")
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.3, 0.3)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(1064, 780)
-texture = ExtResource("1_4ny7y")
-
-[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(404, 780)
-texture = ExtResource("1_4ny7y")
-
-[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(904, 904)
-texture = SubResource("NoiseTexture2D_wucvc")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(948, 536)
+script = ExtResource("1_f1b75")
 
 [node name="HUD" parent="." instance=ExtResource("2_injxk")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_aaivl")]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 35)
+
+[node name="GroundImage" type="Sprite2D" parent="Floor"]
+texture = SubResource("NoiseTexture2D_wucvc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_2cvpp")
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle_01" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(232, -30)
+
+[node name="PotatoImage" type="Sprite2D" parent="Obstacles/Obstacle_01"]
+rotation = 0.0118909
+scale = Vector2(0.696915, 0.696915)
+texture = ExtResource("5_r4g24")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle_01"]
+position = Vector2(0, 2)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_pvs8e")
+
+[node name="Obstacle_02" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(-437, -31)
+
+[node name="PotatoImage" type="Sprite2D" parent="Obstacles/Obstacle_02"]
+rotation = 0.0118909
+scale = Vector2(0.696915, 0.696915)
+texture = ExtResource("5_r4g24")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle_02"]
+position = Vector2(0, 2)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_pvs8e")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxBackground" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.729412, 0.729412, 0.729412, 1)
+position = Vector2(-324, -700)
+motion_scale = Vector2(0.33, 0.33)
+
+[node name="City" type="Sprite2D" parent="ParallaxBackground/ParallaxBackground"]
+texture_repeat = 3
+material = SubResource("ShaderMaterial_2yat4")
+position = Vector2(976, 636)
+scale = Vector2(2, 2)
+texture = ExtResource("4_rmxp0")
+region_enabled = true
+region_rect = Rect2(-2202.5, -11.375, 4644, 695.25)
+
+[node name="ParallaxMidground" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.172549, 0.184314, 0.25098, 1)
+position = Vector2(-222, -263)
+scale = Vector2(0.67, 0.67)
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="GroundImage2" type="Sprite2D" parent="ParallaxBackground/ParallaxMidground"]
+position = Vector2(371.642, 858.209)
+scale = Vector2(1.49254, 1.49254)
+texture = SubResource("NoiseTexture2D_3smj1")
+offset = Vector2(-2, 59)
+
+[node name="cybertruck1" type="Sprite2D" parent="ParallaxBackground/ParallaxMidground"]
+position = Vector2(670, 780)
+texture = ExtResource("4_7irb4")
+
+[node name="cybertruck2" type="Sprite2D" parent="ParallaxBackground/ParallaxMidground"]
+position = Vector2(1330, 780)
+texture = ExtResource("4_7irb4")
+
+[node name="ParallaxForeground" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.305882, 0.301961, 0.423529, 1)
+position = Vector2(-1128, -650)
+motion_scale = Vector2(0.67, 0.67)
+
+[node name="GroundImage3" type="Sprite2D" parent="ParallaxBackground/ParallaxForeground"]
+position = Vector2(1158, 861)
+texture = SubResource("NoiseTexture2D_6xhr2")
+offset = Vector2(2, 125)
+
+[node name="cybertruck1" type="Sprite2D" parent="ParallaxBackground/ParallaxForeground"]
+position = Vector2(670, 780)
+texture = ExtResource("4_7irb4")
+
+[node name="cybertruck2" type="Sprite2D" parent="ParallaxBackground/ParallaxForeground"]
+position = Vector2(1330, 780)
+texture = ExtResource("4_7irb4")

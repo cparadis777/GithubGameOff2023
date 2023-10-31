@@ -1,23 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmfsia7nx2qdw"]
+[gd_scene load_steps=10 format=3 uid="uid://cmfsia7nx2qdw"]
 
 [ext_resource type="Script" path="res://Menus/glitchy_background_image.gd" id="1_85b4o"]
 [ext_resource type="Texture2D" uid="uid://bv4kpyyv58d6" path="res://art/placeholder/cyberpunk2.png" id="2_2iqga"]
 [ext_resource type="Shader" path="res://art/materials/shaders/glitch_2d_shader.gdshader" id="2_efgef"]
 [ext_resource type="Texture2D" uid="uid://4abind4y0eb0" path="res://art/placeholder/cyberpunk2-low-spec.png" id="3_fjljl"]
-[ext_resource type="Shader" uid="uid://chvota4j62bo5" path="res://art/materials/shaders/pixelify_shader_WIP.tres" id="4_etmas"]
+[ext_resource type="Shader" uid="uid://chvota4j62bo5" path="res://art/materials/shaders/pixelify_shader.tres" id="4_etmas"]
 [ext_resource type="AudioStream" uid="uid://ce0lxx5sdqs53" path="res://audio/sfx/placeholder/free-sound-573189__inspectorj__computer-glitching-digital-data-corruption-02-04-loop.wav" id="4_ypwul"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xh0f3"]
 shader = ExtResource("4_etmas")
 shader_parameter/PixelSize = 0.012
-shader_parameter/TextureToPixelify = ExtResource("2_2iqga")
-
-[sub_resource type="Curve" id="Curve_2jnt0"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_ixgca"]
-curve = SubResource("Curve_2jnt0")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hessb"]
 shader = ExtResource("2_efgef")
@@ -53,7 +45,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("CurveTexture_ixgca")
+texture = ExtResource("2_2iqga")
 
 [node name="CyberpunkBG" type="TextureRect" parent="."]
 layout_mode = 1
