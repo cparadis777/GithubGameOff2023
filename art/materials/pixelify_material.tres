@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cw3xoarxkm7x8"]
+
+[ext_resource type="Shader" uid="uid://chvota4j62bo5" path="res://art/materials/shaders/pixelify_shader.tres" id="1_we46k"]
+
+[resource]
+shader = ExtResource("1_we46k")
+shader_parameter/PixelSize = 0.016

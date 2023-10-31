@@ -21,7 +21,7 @@ func connect_button_audio():
 
 func start_game():
 	await get_tree().create_timer(0.5).timeout # wait for click audio
-	get_tree().change_scene_to_file("res://Levels/LevelTemplate.tscn")
+	get_tree().change_scene_to_file("res://Levels/placeholder/placeholder_2d_scene.tscn")
 
 func quit_game():
 	get_tree().quit()
