@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bbbi07nppapt8"]
+[gd_scene load_steps=16 format=3 uid="uid://bbbi07nppapt8"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/placeholder_2d_scene.gd" id="1_f1b75"]
 [ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="2_injxk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b54yanqmxoqqe" path="res://art/placeholder/cybertruck_side.png" id="4_7irb4"]
 [ext_resource type="Texture2D" uid="uid://dqowu1yjmphos" path="res://art/placeholder/chonqing_city_skyline.png" id="4_rmxp0"]
 [ext_resource type="Texture2D" uid="uid://vmpymh7oea61" path="res://art/placeholder/potato.png" id="5_r4g24"]
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="8_gaicn"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xr3pr"]
 
@@ -134,3 +135,7 @@ texture = ExtResource("4_7irb4")
 [node name="cybertruck2" type="Sprite2D" parent="ParallaxBackground/ParallaxForeground"]
 position = Vector2(1330, 780)
 texture = ExtResource("4_7irb4")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="NPC_01" parent="Enemies" instance=ExtResource("8_gaicn")]

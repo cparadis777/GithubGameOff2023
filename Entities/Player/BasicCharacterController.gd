@@ -27,7 +27,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("shoot"):
 		spawn_bullet_toward_mouse()
 
