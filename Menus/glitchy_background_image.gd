@@ -9,6 +9,14 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if Globals.user_prefs["graphics"] == Globals.Graphics.HIGH:
+		$CyberpunkBG.show()
+		$PixelatedBG.hide()
+	else: # low graphics setting
+		$CyberpunkBG.hide()
+		$PixelatedBG.show()
+
+
 	$CyberpunkBGGlitch.hide()
 	activate_glitch_effects()
 	_on_graphics_toggled()
@@ -22,6 +30,7 @@ func activate_glitch_effects():
 
 func _on_glitch_timer_timeout():
 	if Globals.user_prefs["graphics"] == Globals.Graphics.HIGH:
+		$PixelatedBG.hide()
 		$CyberpunkBGGlitch.show()
 		$GlitchNoise.play()
 	else:
@@ -37,9 +46,13 @@ func _on_noise_finished():
 func _on_graphics_toggled():
 	match Globals.user_prefs["graphics"]:
 		Globals.Graphics.LOW:
-			$CyberpunkBG.texture = low_spec_texture
+			#$CyberpunkBG.texture = low_spec_texture
+			$PixelatedBG.show()
+			$CyberpunkBG.hide()
 		Globals.Graphics.HIGH:
-			$CyberpunkBG.texture = high_spec_texture
+			#$CyberpunkBG.texture = high_spec_texture
+			$PixelatedBG.hide()
+			$CyberpunkBG.show()
 			if $GlitchTimer.is_stopped():
 				$GlitchTimer.start()
 
