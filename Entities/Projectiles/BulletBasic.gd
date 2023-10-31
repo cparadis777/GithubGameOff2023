@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed = 350.0
+@export var speed = 150.0
 @export var velocity : Vector2
 
 signal hit

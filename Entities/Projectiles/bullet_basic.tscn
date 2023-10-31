@@ -9,12 +9,14 @@ colors = PackedColorArray(0.281187, 0.281187, 0.281187, 1, 0, 0, 0, 1, 0.398793,
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_c4t53"]
 gradient = SubResource("Gradient_1datc")
+width = 32
+height = 32
 fill = 1
 fill_from = Vector2(0.496951, 0.487805)
 fill_to = Vector2(0.625, 0.0792683)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_47u0y"]
-radius = 20.025
+radius = 9.05539
 
 [node name="BulletBasic" type="Area2D"]
 script = ExtResource("1_gifub")

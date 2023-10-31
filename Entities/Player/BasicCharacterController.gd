@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+@export var SPEED = 100.0
+@export var JUMP_VELOCITY = -175.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -35,8 +35,8 @@ func spawn_bullet_toward_mouse():
 	var targetVector = global_position.direction_to(get_global_mouse_position())
 	var bulletScene = preload("res://Entities/Projectiles/bullet_basic.tscn")
 	var bulletNode = bulletScene.instantiate()
-	var muzzleDistance = 55.0
-	var heightVector = Vector2(0, -50)
+	var muzzleDistance = 15.0
+	var heightVector = Vector2(0, -10)
 	bulletNode.global_position = global_position + targetVector * muzzleDistance + heightVector
 	bulletNode.look_at(targetVector)
 	add_sibling(bulletNode)

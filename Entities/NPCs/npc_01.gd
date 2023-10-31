@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 150.0
-const JUMP_VELOCITY = -400.0
+@export var SPEED = 50.0
+@export var JUMP_VELOCITY = -100.0
 
 enum States { ROLLING, JUMPING, ATTACKING, DEAD }
 var State = States.ROLLING
@@ -37,7 +37,7 @@ func die():
 	State = States.DEAD
 	var tween = create_tween()
 	tween.parallel().tween_property(self, "rotation", PI * 0.5, 0.33)
-	tween.parallel().tween_property(self, "position", position + Vector2(0, 20), 0.33)
+	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
 	$Timer.stop()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 
