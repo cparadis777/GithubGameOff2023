@@ -1,18 +1,16 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://salqa0d7og24"]
 
 [ext_resource type="StyleBox" uid="uid://d12sva3hx2g77" path="res://UI/Themes/cyber_style_box_flat.tres" id="1_fgtog"]
-[ext_resource type="FontFile" uid="uid://cscfv5b27op2n" path="res://UI/Themes/fonts/Saira/Saira-ExtraLightItalic.ttf" id="1_kb1jf"]
+[ext_resource type="FontFile" uid="uid://cscfv5b27op2n" path="res://UI/Themes/fonts/Saira/Saira-ExtraLightItalic.ttf" id="2_u1ol1"]
 
 [resource]
-default_font = ExtResource("1_kb1jf")
+default_font = ExtResource("2_u1ol1")
 Button/font_sizes/font_size = 10
 HBoxContainer/constants/separation = 2
 Label/colors/font_color = Color(0, 1, 1, 1)
-Label/colors/font_outline_color = Color(1, 1, 1, 1)
-Label/colors/font_shadow_color = Color(0, 0, 0, 0.827451)
-Label/constants/outline_size = 1
-Label/constants/shadow_offset_x = 2
-Label/constants/shadow_offset_y = 2
+Label/colors/font_shadow_color = Color(0.231373, 0.231373, 0.231373, 0.780392)
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
 Label/font_sizes/font_size = 10
 MarginContainer/constants/margin_bottom = 5
 MarginContainer/constants/margin_left = 5
