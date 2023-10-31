@@ -32,12 +32,14 @@ hint = 2
 min = 0.001
 max = 0.064
 step = 0.001
+default_value_enabled = true
+default_value = 0.016
 
 [resource]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
-uniform float PixelSize : hint_range(0.0010000000475, 0.06400000303984, 0.0010000000475);
+uniform float PixelSize : hint_range(0.0010000000475, 0.06400000303984, 0.0010000000475) = 0.01600000075996;
 uniform sampler2D TextureToPixelify;
 
 
@@ -81,7 +83,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-551.638, -437.133)
+graph_offset = Vector2(-611.945, -463.305)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(580, -200)

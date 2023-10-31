@@ -1,25 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cytpnn70hcfsb"]
+[gd_scene load_steps=7 format=3 uid="uid://cytpnn70hcfsb"]
 
 [ext_resource type="Script" path="res://Menus/settings_menu.gd" id="1_3y8nf"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="1_sb44g"]
 [ext_resource type="PackedScene" uid="uid://dwgry2nkxajfv" path="res://UI/volume_adjuster.tscn" id="2_18w72"]
 [ext_resource type="PackedScene" uid="uid://cmfsia7nx2qdw" path="res://Menus/glitchy_background_image.tscn" id="3_hein6"]
 [ext_resource type="Texture2D" uid="uid://vmpymh7oea61" path="res://art/placeholder/potato.png" id="3_l54h0"]
-[ext_resource type="Shader" uid="uid://chvota4j62bo5" path="res://art/materials/shaders/pixelify_shader_WIP.tres" id="4_e4lxk"]
 [ext_resource type="Texture2D" uid="uid://chs0n1tsxnlla" path="res://art/placeholder/rtx4090.png" id="4_fx6f0"]
-[ext_resource type="Texture2D" uid="uid://bv4kpyyv58d6" path="res://art/placeholder/cyberpunk2.png" id="5_x7jct"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4mna0"]
-shader = ExtResource("4_e4lxk")
-shader_parameter/PixelSize = 0.012
-shader_parameter/TextureToPixelify = ExtResource("5_x7jct")
-
-[sub_resource type="Curve" id="Curve_cxs8x"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_y3dun"]
-curve = SubResource("Curve_cxs8x")
 
 [node name="Settings_Menu" type="Control"]
 layout_mode = 3
@@ -33,16 +19,6 @@ script = ExtResource("1_3y8nf")
 
 [node name="Background" parent="." instance=ExtResource("3_hein6")]
 layout_mode = 1
-
-[node name="PixelBG" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_4mna0")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CurveTexture_y3dun")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

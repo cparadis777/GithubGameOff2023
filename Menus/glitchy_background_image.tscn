@@ -9,6 +9,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xh0f3"]
 shader = ExtResource("4_etmas")
+shader_parameter/PixelSize = 0.012
 shader_parameter/TextureToPixelify = ExtResource("2_2iqga")
 
 [sub_resource type="Curve" id="Curve_2jnt0"]
