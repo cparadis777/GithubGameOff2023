@@ -11,6 +11,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4mna0"]
 shader = ExtResource("4_e4lxk")
+shader_parameter/PixelSize = 0.012
 shader_parameter/TextureToPixelify = ExtResource("5_x7jct")
 
 [sub_resource type="Curve" id="Curve_cxs8x"]
@@ -34,7 +35,6 @@ script = ExtResource("1_3y8nf")
 layout_mode = 1
 
 [node name="PixelBG" type="TextureRect" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_4mna0")
 layout_mode = 1
 anchors_preset = 15
