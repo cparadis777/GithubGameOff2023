@@ -30,6 +30,15 @@ func _physics_process(delta):
 func _input(_event):
 	if Input.is_action_just_pressed("shoot"):
 		spawn_bullet_toward_mouse()
+	elif Input.is_action_just_pressed("debug"):
+		initiate_debugging_protocol()
+
+
+func initiate_debugging_protocol():
+	if get_viewport().get_camera_2d().zoom == Vector2(1,1):
+		get_viewport().get_camera_2d().zoom = Vector2(0.25, 0.25)
+	else:
+		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
 
 func spawn_bullet_toward_mouse():
 	var targetVector = global_position.direction_to(get_global_mouse_position())

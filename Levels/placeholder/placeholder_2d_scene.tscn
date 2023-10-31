@@ -1,22 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbbi07nppapt8"]
+[gd_scene load_steps=10 format=3 uid="uid://bbbi07nppapt8"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/placeholder_2d_scene.gd" id="1_f1b75"]
 [ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="2_injxk"]
-[ext_resource type="PackedScene" uid="uid://dp40vps5cxn12" path="res://Entities/Player/Basic_2d_platformer_character.tscn" id="3_aaivl"]
+[ext_resource type="PackedScene" uid="uid://dp40vps5cxn12" path="res://Entities/Player/BasicPlayerController.tscn" id="3_aaivl"]
+[ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="4_qmj6i"]
 [ext_resource type="PackedScene" uid="uid://dxuvwpsfp1b68" path="res://art/placeholder/old_parallax_background.tscn" id="5_prx5v"]
 [ext_resource type="Texture2D" uid="uid://vmpymh7oea61" path="res://art/placeholder/potato.png" id="5_r4g24"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="7_opjvx"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="8_gaicn"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xr3pr"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wucvc"]
-width = 2048
-height = 64
-noise = SubResource("FastNoiseLite_xr3pr")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cvpp"]
-size = Vector2(2048, 64)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pvs8e"]
 radius = 8.0
@@ -29,14 +20,7 @@ script = ExtResource("1_f1b75")
 
 [node name="Player" parent="." instance=ExtResource("3_aaivl")]
 
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(0, 35)
-
-[node name="GroundImage" type="Sprite2D" parent="Floor"]
-texture = SubResource("NoiseTexture2D_wucvc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-shape = SubResource("RectangleShape2D_2cvpp")
+[node name="EndlessFloor" parent="." instance=ExtResource("4_qmj6i")]
 
 [node name="Obstacles" type="Node2D" parent="."]
 
