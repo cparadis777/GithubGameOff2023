@@ -12,28 +12,22 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 956.0
-offset_bottom = 544.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.25, 0.25)
 theme = ExtResource("1_sb44g")
 script = ExtResource("1_3y8nf")
 
 [node name="Background" parent="." instance=ExtResource("3_hein6")]
 layout_mode = 1
+offset_right = 656.0
+offset_bottom = 368.0
+scale = Vector2(0.33, 0.33)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -310.5
-offset_right = 300.0
-offset_bottom = 310.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -45,11 +39,17 @@ layout_mode = 2
 
 [node name="Header" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+horizontal_alignment = 1
+
 [node name="Body" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(600, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -60,7 +60,6 @@ size_flags_vertical = 3
 
 [node name="AudioTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Audio"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
 text = "Audio"
 horizontal_alignment = 1
 
@@ -81,7 +80,6 @@ size_flags_vertical = 3
 
 [node name="GraphicsTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
 text = "Graphics"
 horizontal_alignment = 1
 
@@ -98,6 +96,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="GraphicsMode" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics"]
+visible = false
 layout_mode = 2
 
 [node name="GraphicsModeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/GraphicsMode"]
