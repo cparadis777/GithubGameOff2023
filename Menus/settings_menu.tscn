@@ -19,9 +19,6 @@ script = ExtResource("1_3y8nf")
 
 [node name="Background" parent="." instance=ExtResource("3_hein6")]
 layout_mode = 1
-offset_right = 656.0
-offset_bottom = 368.0
-scale = Vector2(0.33, 0.33)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

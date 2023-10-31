@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmfsia7nx2qdw"]
+[gd_scene load_steps=13 format=3 uid="uid://cmfsia7nx2qdw"]
 
 [ext_resource type="Script" path="res://Menus/glitchy_background_image.gd" id="1_85b4o"]
 [ext_resource type="Texture2D" uid="uid://bv4kpyyv58d6" path="res://art/placeholder/cyberpunk2.png" id="2_2iqga"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://4abind4y0eb0" path="res://art/placeholder/cyberpunk2-low-spec.png" id="3_fjljl"]
 [ext_resource type="Shader" uid="uid://chvota4j62bo5" path="res://art/materials/shaders/pixelify_shader.tres" id="4_etmas"]
 [ext_resource type="AudioStream" uid="uid://ce0lxx5sdqs53" path="res://audio/sfx/placeholder/free-sound-573189__inspectorj__computer-glitching-digital-data-corruption-02-04-loop.wav" id="4_ypwul"]
+[ext_resource type="Material" uid="uid://cw3xoarxkm7x8" path="res://art/materials/pixelify_material.tres" id="6_5n02p"]
+[ext_resource type="Texture2D" uid="uid://b7kyygyxeewjm" path="res://art/placeholder/green_bulding_01.png" id="6_vc3oi"]
+[ext_resource type="Texture2D" uid="uid://bs1f0yjd480cy" path="res://art/placeholder/surveilange_eye.png" id="8_qusea"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xh0f3"]
 shader = ExtResource("4_etmas")
@@ -46,6 +49,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_2iqga")
+expand_mode = 3
+stretch_mode = 6
 
 [node name="CyberpunkBG" type="TextureRect" parent="."]
 layout_mode = 1
@@ -55,9 +60,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_2iqga")
+expand_mode = 3
+stretch_mode = 6
 
 [node name="CyberpunkBGGlitch" type="TextureRect" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_hessb")
 layout_mode = 1
 anchors_preset = 15
@@ -66,6 +72,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_2iqga")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Monolith" type="Sprite2D" parent="CyberpunkBGGlitch"]
+material = ExtResource("6_5n02p")
+position = Vector2(235, 88)
+scale = Vector2(0.619116, 0.619116)
+texture = ExtResource("6_vc3oi")
+
+[node name="Eye" type="Sprite2D" parent="CyberpunkBGGlitch"]
+material = ExtResource("6_5n02p")
+position = Vector2(64, 50)
+texture = ExtResource("8_qusea")
 
 [node name="GlitchTimer" type="Timer" parent="."]
 wait_time = 5.0
