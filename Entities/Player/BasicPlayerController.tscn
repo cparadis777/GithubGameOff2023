@@ -1,10 +1,179 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp40vps5cxn12"]
+[gd_scene load_steps=10 format=3 uid="uid://dp40vps5cxn12"]
 
 [ext_resource type="Script" path="res://Entities/Player/BasicPlayerController.gd" id="1_4n4ao"]
-[ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="2_6jjbj"]
+[ext_resource type="Texture2D" uid="uid://c6noe4a5wionl" path="res://art/placeholder/pixel_art_guy.png" id="2_g2b75"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
-height = 22.0
+radius = 14.0
+height = 58.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mu5xc"]
+
+[sub_resource type="Animation" id="Animation_r2a28"]
+resource_name = "kick"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions/Kick/Leg:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Actions/Kick/Leg:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0314482, -1.38502, 0.0314482]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Actions/Kick/Leg/HurtBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_tb0g1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions/Kick/Leg:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Actions/Kick/Leg:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0314482]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Actions/Kick/Leg/HurtBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Actions/Punch/Arm:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Actions/Punch/Arm:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Actions/Punch/HurtBox/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_eihwv"]
+resource_name = "punch"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions/Punch/Arm:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(-2.07, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Actions/Punch/Arm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Actions/Punch/HurtBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.05, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
+_data = {
+"RESET": SubResource("Animation_tb0g1"),
+"kick": SubResource("Animation_r2a28"),
+"punch": SubResource("Animation_eihwv")
+}
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4n4ao")
@@ -13,10 +182,53 @@ script = ExtResource("1_4n4ao")
 position = Vector2(2.08165e-12, -62)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2.1684e-19, -10)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_6jjbj")
+position = Vector2(0, -32)
+texture = ExtResource("2_g2b75")
+region_enabled = true
+region_rect = Rect2(0, 0, 45.382, 63.8855)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.08165e-12, -9)
+position = Vector2(0, -32)
 shape = SubResource("CapsuleShape2D_ghh7o")
+
+[node name="Actions" type="Node2D" parent="."]
+
+[node name="Kick" type="Node2D" parent="Actions"]
+
+[node name="Leg" type="Sprite2D" parent="Actions/Kick"]
+visible = false
+position = Vector2(3, -30)
+rotation = 0.0314482
+texture = ExtResource("2_g2b75")
+offset = Vector2(8, 13)
+region_enabled = true
+region_rect = Rect2(21.7103, 30.7485, 23.1769, 32.7901)
+
+[node name="HurtBox" type="Area2D" parent="Actions/Kick/Leg"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Kick/Leg/HurtBox"]
+position = Vector2(17.9034, 28.4511)
+shape = SubResource("CircleShape2D_pmdka")
+
+[node name="Punch" type="Node2D" parent="Actions"]
+
+[node name="Arm" type="Sprite2D" parent="Actions/Punch"]
+visible = false
+position = Vector2(6.304, -48.0162)
+rotation = -0.448494
+texture = ExtResource("2_g2b75")
+offset = Vector2(-5.848, 2.01624)
+region_enabled = true
+region_rect = Rect2(0.376915, 12.3123, 16.5926, 14.0905)
+
+[node name="HurtBox" type="Area2D" parent="Actions/Punch"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Punch/HurtBox"]
+position = Vector2(37, -52)
+shape = SubResource("CircleShape2D_mu5xc")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_duudu")
+}

@@ -61,3 +61,11 @@ visible = false
 position = Vector2(91, 0)
 
 [node name="ParallaxBackground2" parent="." instance=ExtResource("7_opjvx")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -46.0
+offset_top = -122.0
+offset_right = 101.0
+offset_bottom = -70.0
+text = "A,D, space to move
+<,> to fight"

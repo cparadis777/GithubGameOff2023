@@ -32,7 +32,11 @@ func _input(_event):
 		spawn_bullet_toward_mouse()
 	elif Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
-
+	elif Input.is_action_just_pressed("kick"):
+		kick()
+	elif Input.is_action_just_pressed("punch"):
+		punch()
+		
 
 func initiate_debugging_protocol():
 	if get_viewport().get_camera_2d().zoom == Vector2(1,1):
@@ -50,3 +54,11 @@ func spawn_bullet_toward_mouse():
 	bulletNode.look_at(targetVector)
 	add_sibling(bulletNode)
 	bulletNode.activate(targetVector)
+
+func punch():
+	# use an animation node and hurtboxes later.
+	$AnimationPlayer.play("punch")
+	
+func kick():
+	$AnimationPlayer.play("kick")
+	
