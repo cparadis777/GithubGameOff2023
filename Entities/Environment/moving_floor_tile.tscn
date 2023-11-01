@@ -5,17 +5,17 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xr3pr"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wucvc"]
-width = 320
+width = 256
 height = 64
 noise = SubResource("FastNoiseLite_xr3pr")
 
-[node name="GroundImage3" type="Sprite2D"]
+[node name="FloorPiece" type="Sprite2D"]
 position = Vector2(0, 35)
 texture = SubResource("NoiseTexture2D_wucvc")
 script = ExtResource("1_c3kqg")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -31)
-rect = Rect2(-120, 2.08165e-12, 240, 64)
+rect = Rect2(-128, 2.08165e-12, 256, 64)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

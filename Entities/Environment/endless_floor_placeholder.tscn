@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1abay8tiljxi"]
+[gd_scene load_steps=4 format=3 uid="uid://c1abay8tiljxi"]
 
 [ext_resource type="Script" path="res://Entities/Environment/endless_floor_placeholder.gd" id="1_rhn8s"]
 [ext_resource type="PackedScene" uid="uid://c4iy63kjhi52b" path="res://Entities/Environment/moving_floor_tile.tscn" id="2_emyvb"]
-[ext_resource type="Texture2D" uid="uid://chs0n1tsxnlla" path="res://art/placeholder/rtx4090.png" id="3_c7t0e"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wshx0"]
 
@@ -14,33 +13,14 @@ script = ExtResource("1_rhn8s")
 [node name="InfiniteLine" type="CollisionShape2D" parent="InfiniteFloorStaticBody"]
 shape = SubResource("WorldBoundaryShape2D_wshx0")
 
-[node name="FloorTileImages" type="Node2D" parent="."]
+[node name="FloorTiles" type="Node2D" parent="."]
 
-[node name="GroundImage1" parent="FloorTileImages" instance=ExtResource("2_emyvb")]
+[node name="Tile2" parent="FloorTiles" instance=ExtResource("2_emyvb")]
+self_modulate = Color(0.180392, 0.435294, 0.505882, 1)
+position = Vector2(-256, 35)
 
-[node name="RTXSprite1" type="Sprite2D" parent="FloorTileImages/GroundImage1"]
-position = Vector2(1024.8, -42)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_c7t0e")
+[node name="Tile1" parent="FloorTiles" instance=ExtResource("2_emyvb")]
 
-[node name="Label" type="Label" parent="FloorTileImages/GroundImage1"]
-offset_left = 11.0
-offset_top = -65.0
-offset_right = 51.0
-offset_bottom = -39.0
-text = "Floor 1"
-
-[node name="GroundImage2" parent="FloorTileImages" instance=ExtResource("2_emyvb")]
-position = Vector2(-320, 35)
-
-[node name="RTXSprite2" type="Sprite2D" parent="FloorTileImages/GroundImage2"]
-position = Vector2(1024.8, -42)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_c7t0e")
-
-[node name="Label2" type="Label" parent="FloorTileImages/GroundImage2"]
-offset_left = -69.0
-offset_top = -65.0
-offset_right = -16.0
-offset_bottom = -39.0
-text = "Floor 2"
+[node name="Tile3" parent="FloorTiles" instance=ExtResource("2_emyvb")]
+self_modulate = Color(1, 0.396078, 1, 1)
+position = Vector2(256, 35)
