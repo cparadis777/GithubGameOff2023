@@ -1,6 +1,11 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://bysckxpygs0tx"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://bysckxpygs0tx"]
+
+[sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_baw8e"]
+resource_name = "SpectrumAnalyzer"
 
 [resource]
+bus/0/effect/0/effect = SubResource("AudioEffectSpectrumAnalyzer_baw8e")
+bus/0/effect/0/enabled = true
 bus/1/name = &"sfx"
 bus/1/solo = false
 bus/1/mute = false

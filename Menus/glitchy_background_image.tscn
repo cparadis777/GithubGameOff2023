@@ -92,3 +92,4 @@ one_shot = true
 
 [node name="GlitchNoise" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_1r8jm")
+bus = &"sfx"
