@@ -34,8 +34,8 @@ func _on_glitch_timer_timeout():
 		$CyberpunkBGGlitch.show()
 		$GlitchNoise.play()
 	else:
-		print("graphics = " + str(Globals.user_prefs["graphics"]))
-	
+		#print("graphics = " + str(Globals.user_prefs["graphics"]))
+		pass
 
 
 func _on_noise_finished():
