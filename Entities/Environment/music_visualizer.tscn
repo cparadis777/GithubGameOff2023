@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://boxf3isucgo4t"]
+
+[ext_resource type="Shader" uid="uid://d1dr34g5tjseu" path="res://art/materials/shaders/heightmap_displacement_shader.tres" id="1_t8pk7"]
+[ext_resource type="Script" path="res://Entities/Environment/music_visualizer.gd" id="1_vogh2"]
+[ext_resource type="Texture2D" uid="uid://rxegctac838k" path="res://art/placeholder/wireframe-white.png" id="2_u0arm"]
+[ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="4_hv24b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ot85d"]
+render_priority = 0
+shader = ExtResource("1_t8pk7")
+shader_parameter/magnitude = 0.0
+shader_parameter/wireframe_colour = Color(0, 0.780589, 0.781502, 1)
+shader_parameter/wireframeTexture = ExtResource("2_u0arm")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ysumm"]
+material = SubResource("ShaderMaterial_ot85d")
+size = Vector2(20, 20)
+subdivide_width = 32
+subdivide_depth = 32
+
+[node name="MusicVisualizer" type="Node3D"]
+script = ExtResource("1_vogh2")
+
+[node name="Plane3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ysumm")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_hv24b")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.988409, 0.151813, 0, -0.151813, 0.988409, 0, 1.15026, 10.8877)
+near = 0.001
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.401612, 0.91581, 0, -0.91581, -0.401612, 0, 4.92826, 0)
+sky_mode = 1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

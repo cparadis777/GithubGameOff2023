@@ -16,9 +16,10 @@ size_flags_horizontal = 3
 text = "Bus Volume: "
 
 [node name="VolumeSlider" type="HSlider" parent="."]
-custom_minimum_size = Vector2(200, 35)
+custom_minimum_size = Vector2(48, 16)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 max_value = 1.0
 step = 0.05
 value = 1.0

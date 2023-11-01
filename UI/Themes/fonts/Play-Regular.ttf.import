@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cscfv5b27op2n"
-path="res://.godot/imported/Saira-ExtraLightItalic.ttf-f5e1142a75eb3e71cf09137c8538a36d.fontdata"
+uid="uid://bvp2wxbvoph3e"
+path="res://.godot/imported/Play-Regular.ttf-0859379d68102e1e969414465ad44a1a.fontdata"
 
 [deps]
 
-source_file="res://UI/Themes/fonts/Saira/Saira-ExtraLightItalic.ttf"
-dest_files=["res://.godot/imported/Saira-ExtraLightItalic.ttf-f5e1142a75eb3e71cf09137c8538a36d.fontdata"]
+source_file="res://UI/Themes/fonts/Play-Regular.ttf"
+dest_files=["res://.godot/imported/Play-Regular.ttf-0859379d68102e1e969414465ad44a1a.fontdata"]
 
 [params]
 

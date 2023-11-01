@@ -2,18 +2,18 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cscfv5b27op2n"
-path="res://.godot/imported/Saira-ExtraLightItalic.ttf-f5e1142a75eb3e71cf09137c8538a36d.fontdata"
+uid="uid://bxevnrj6orvls"
+path="res://.godot/imported/PixelifySans-VariableFont_wght.ttf-13a0ed9b6f9f58c2f6cf432f4e95928b.fontdata"
 
 [deps]
 
-source_file="res://UI/Themes/fonts/Saira/Saira-ExtraLightItalic.ttf"
-dest_files=["res://.godot/imported/Saira-ExtraLightItalic.ttf-f5e1142a75eb3e71cf09137c8538a36d.fontdata"]
+source_file="res://UI/Themes/fonts/PixelifySans-VariableFont_wght.ttf"
+dest_files=["res://.godot/imported/PixelifySans-VariableFont_wght.ttf-13a0ed9b6f9f58c2f6cf432f4e95928b.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=2
+antialiasing=0
 generate_mipmaps=false
 multichannel_signed_distance_field=false
 msdf_pixel_range=8

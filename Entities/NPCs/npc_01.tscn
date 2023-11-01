@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://m3aj2pmakgat"]
+
+[ext_resource type="Script" path="res://Entities/NPCs/npc_01.gd" id="1_qkmle"]
+[ext_resource type="Texture2D" uid="uid://bi724p8u5kyfb" path="res://art/placeholder/EUC.png" id="1_x7p4c"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hovi6"]
+radius = 12.6745
+height = 63.3727
+
+[node name="NPC_01" type="CharacterBody2D"]
+scale = Vector2(0.631187, 0.631187)
+script = ExtResource("1_qkmle")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -33.2706)
+shape = SubResource("CapsuleShape2D_hovi6")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Appearance" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Appearance"]
+position = Vector2(0, -33.2706)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_x7p4c")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -2,18 +2,18 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cscfv5b27op2n"
-path="res://.godot/imported/Saira-ExtraLightItalic.ttf-f5e1142a75eb3e71cf09137c8538a36d.fontdata"
+uid="uid://da1i6jnlawpfn"
+path="res://.godot/imported/Play-Bold.ttf-24bcffc5a5687a41159f76bddcc6c31c.fontdata"
 
 [deps]
 
-source_file="res://UI/Themes/fonts/Saira/Saira-ExtraLightItalic.ttf"
-dest_files=["res://.godot/imported/Saira-ExtraLightItalic.ttf-f5e1142a75eb3e71cf09137c8538a36d.fontdata"]
+source_file="res://UI/Themes/fonts/Play-Bold.ttf"
+dest_files=["res://.godot/imported/Play-Bold.ttf-24bcffc5a5687a41159f76bddcc6c31c.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=2
+antialiasing=1
 generate_mipmaps=false
 multichannel_signed_distance_field=false
 msdf_pixel_range=8

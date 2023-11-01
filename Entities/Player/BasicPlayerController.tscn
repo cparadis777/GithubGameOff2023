@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp40vps5cxn12"]
+
+[ext_resource type="Script" path="res://Entities/Player/BasicPlayerController.gd" id="1_4n4ao"]
+[ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="2_6jjbj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
+height = 22.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4n4ao")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2.08165e-12, -62)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.1684e-19, -10)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_6jjbj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.08165e-12, -9)
+shape = SubResource("CapsuleShape2D_ghh7o")

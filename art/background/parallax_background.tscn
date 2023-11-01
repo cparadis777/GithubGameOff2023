@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://dagki3jiubn80"]
+
+[ext_resource type="Script" path="res://art/background/parallax_background.gd" id="1_atib1"]
+[ext_resource type="Texture2D" uid="uid://cu38dj0rtvnpb" path="res://art/background/background-base.png" id="2_hd6an"]
+[ext_resource type="Texture2D" uid="uid://dr0aib0uwgp4i" path="res://art/background/clouds.png" id="3_doa8s"]
+[ext_resource type="Texture2D" uid="uid://ngg04tcbpoq3" path="res://art/background/buildings_far.png" id="4_uawcl"]
+[ext_resource type="Texture2D" uid="uid://bvakv7o6o4ili" path="res://art/background/gradient.png" id="5_oo1ab"]
+[ext_resource type="Texture2D" uid="uid://l4ntg6lo5rpa" path="res://art/background/buildings_near.png" id="6_40hw7"]
+[ext_resource type="Texture2D" uid="uid://ldldij6g8yqh" path="res://art/background/steam.png" id="7_602pe"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+scroll_offset = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("1_atib1")
+
+[node name="Background-base" type="Sprite2D" parent="."]
+position = Vector2(160, 90)
+texture = ExtResource("2_hd6an")
+
+[node name="Clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.001, 0.001)
+motion_mirroring = Vector2(320, 2.08165e-12)
+
+[node name="Background-2" type="Sprite2D" parent="Clouds"]
+position = Vector2(160, 90)
+texture = ExtResource("3_doa8s")
+
+[node name="BuildingsFar" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(320, 2.08165e-12)
+
+[node name="Background-2" type="Sprite2D" parent="BuildingsFar"]
+position = Vector2(160, 90)
+texture = ExtResource("4_uawcl")
+
+[node name="Gradient" type="Sprite2D" parent="."]
+position = Vector2(160, 90)
+texture = ExtResource("5_oo1ab")
+
+[node name="BuildsingsNear" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(320, 2.08165e-12)
+
+[node name="Background-1" type="Sprite2D" parent="BuildsingsNear"]
+position = Vector2(160, 90)
+texture = ExtResource("6_40hw7")
+
+[node name="Steam" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(320, 2.08165e-12)
+
+[node name="Background-1" type="Sprite2D" parent="Steam"]
+position = Vector2(160, 90)
+texture = ExtResource("7_602pe")

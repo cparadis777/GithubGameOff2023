@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbbi07nppapt8"]
+
+[ext_resource type="Script" path="res://Levels/placeholder/placeholder_2d_scene.gd" id="1_f1b75"]
+[ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="2_injxk"]
+[ext_resource type="PackedScene" uid="uid://dp40vps5cxn12" path="res://Entities/Player/BasicPlayerController.tscn" id="3_aaivl"]
+[ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="4_qmj6i"]
+[ext_resource type="PackedScene" uid="uid://dxuvwpsfp1b68" path="res://art/placeholder/old_parallax_background.tscn" id="5_prx5v"]
+[ext_resource type="Texture2D" uid="uid://vmpymh7oea61" path="res://art/placeholder/potato.png" id="5_r4g24"]
+[ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="7_opjvx"]
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="8_gaicn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pvs8e"]
+radius = 8.0
+height = 28.0
+
+[node name="Placeholder2DScene" type="Node2D"]
+script = ExtResource("1_f1b75")
+
+[node name="HUD" parent="." instance=ExtResource("2_injxk")]
+
+[node name="Player" parent="." instance=ExtResource("3_aaivl")]
+
+[node name="EndlessFloor" parent="." instance=ExtResource("4_qmj6i")]
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle_01" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(232, -9)
+
+[node name="PotatoImage" type="Sprite2D" parent="Obstacles/Obstacle_01"]
+position = Vector2(0, 4)
+rotation = 0.0118909
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_r4g24")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle_01"]
+position = Vector2(0, 3)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_pvs8e")
+
+[node name="Obstacle_02" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(-44, -9)
+
+[node name="PotatoImage" type="Sprite2D" parent="Obstacles/Obstacle_02"]
+position = Vector2(0, 4)
+rotation = 0.0118909
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_r4g24")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle_02"]
+position = Vector2(0, 3)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_pvs8e")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("5_prx5v")]
+visible = false
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="NPC_01" parent="Enemies" instance=ExtResource("8_gaicn")]
+position = Vector2(91, 0)
+
+[node name="ParallaxBackground2" parent="." instance=ExtResource("7_opjvx")]

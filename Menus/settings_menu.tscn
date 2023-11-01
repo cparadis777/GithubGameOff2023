@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cytpnn70hcfsb"]
+[gd_scene load_steps=9 format=3 uid="uid://cytpnn70hcfsb"]
 
 [ext_resource type="Script" path="res://Menus/settings_menu.gd" id="1_3y8nf"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="1_sb44g"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cmfsia7nx2qdw" path="res://Menus/glitchy_background_image.tscn" id="3_hein6"]
 [ext_resource type="Texture2D" uid="uid://vmpymh7oea61" path="res://art/placeholder/potato.png" id="3_l54h0"]
 [ext_resource type="Texture2D" uid="uid://chs0n1tsxnlla" path="res://art/placeholder/rtx4090.png" id="4_fx6f0"]
+[ext_resource type="PackedScene" uid="uid://boxf3isucgo4t" path="res://Entities/Environment/music_visualizer.tscn" id="7_vo0f8"]
+[ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="8_12uvy"]
 
 [node name="Settings_Menu" type="Control"]
 layout_mode = 3
@@ -22,15 +24,9 @@ layout_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -310.5
-offset_right = 300.0
-offset_bottom = 310.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -42,11 +38,17 @@ layout_mode = 2
 
 [node name="Header" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+horizontal_alignment = 1
+
 [node name="Body" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(600, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -57,7 +59,6 @@ size_flags_vertical = 3
 
 [node name="AudioTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Audio"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
 text = "Audio"
 horizontal_alignment = 1
 
@@ -78,7 +79,6 @@ size_flags_vertical = 3
 
 [node name="GraphicsTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
 text = "Graphics"
 horizontal_alignment = 1
 
@@ -95,6 +95,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="GraphicsMode" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics"]
+visible = false
 layout_mode = 2
 
 [node name="GraphicsModeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/GraphicsMode"]
@@ -116,7 +117,7 @@ popup/item_1/text = "High-spec"
 popup/item_1/icon = ExtResource("4_fx6f0")
 popup/item_1/id = 1
 
-[node name="Footer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Footer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_stretch_ratio = 0.2
@@ -125,6 +126,24 @@ size_flags_stretch_ratio = 0.2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Return to Main"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Footer"]
+clip_contents = true
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="PanelContainer/MarginContainer/VBoxContainer/Footer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(320, 64)
+render_target_update_mode = 4
+
+[node name="MusicVisualizer" parent="PanelContainer/MarginContainer/VBoxContainer/Footer/SubViewportContainer/SubViewport" instance=ExtResource("7_vo0f8")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_12uvy")
+autoplay = true
+bus = &"music"
 
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/Fullscreen/FullscreenCheckButton" to="." method="_on_fullscreen_check_button_toggled"]
 [connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/GraphicsMode/GraphicsModeOptionList" to="." method="_on_graphics_mode_option_list_item_selected"]
