@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dp40vps5cxn12"]
+[gd_scene load_steps=24 format=3 uid="uid://dp40vps5cxn12"]
 
 [ext_resource type="Script" path="res://Entities/Player/BasicPlayerController.gd" id="1_4n4ao"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_2me7h"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Entities/Player/Idle.gd" id="10_cqyt2"]
 [ext_resource type="Script" path="res://Entities/Player/Run.gd" id="11_hpe5v"]
 [ext_resource type="Script" path="res://Entities/Player/Air.gd" id="12_fmrwh"]
+[ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="13_8mg1b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 7.0
@@ -847,8 +848,6 @@ libraries = {
 "": SubResource("AnimationLibrary_duudu")
 }
 
-[node name="HUD" type="CanvasLayer" parent="."]
-
 [node name="AttackNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_0mkmi")
 bus = &"sfx"
@@ -877,6 +876,8 @@ script = ExtResource("11_hpe5v")
 
 [node name="Air" type="Node" parent="StateMachine"]
 script = ExtResource("12_fmrwh")
+
+[node name="HUD" parent="." instance=ExtResource("13_8mg1b")]
 
 [connection signal="body_entered" from="Body/Actions/Kick/HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="body_entered" from="Body/Actions/Punch/HurtBox" to="." method="_on_hurt_box_body_entered"]

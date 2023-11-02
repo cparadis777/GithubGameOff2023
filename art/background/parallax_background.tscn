@@ -15,39 +15,51 @@ script = ExtResource("1_atib1")
 [node name="Background-base" type="Sprite2D" parent="."]
 position = Vector2(160, 90)
 texture = ExtResource("2_hd6an")
+region_enabled = true
+region_rect = Rect2(-4096, 2.08165e-12, 8192, 180)
 
 [node name="Clouds" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.001, 0.001)
-motion_mirroring = Vector2(320, 2.08165e-12)
 
 [node name="Background-2" type="Sprite2D" parent="Clouds"]
+texture_repeat = 2
 position = Vector2(160, 90)
 texture = ExtResource("3_doa8s")
+region_enabled = true
+region_rect = Rect2(-4092, 2.08165e-12, 8196, 180)
 
 [node name="BuildingsFar" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.1, 0.1)
-motion_mirroring = Vector2(320, 2.08165e-12)
 
 [node name="Background-2" type="Sprite2D" parent="BuildingsFar"]
+texture_repeat = 2
 position = Vector2(160, 90)
 texture = ExtResource("4_uawcl")
+region_enabled = true
+region_rect = Rect2(4096, 2.08165e-12, 8192, 180)
 
 [node name="Gradient" type="Sprite2D" parent="."]
 position = Vector2(160, 90)
 texture = ExtResource("5_oo1ab")
+region_enabled = true
+region_rect = Rect2(-4096, 2.08165e-12, 8192, 180)
 
 [node name="BuildsingsNear" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.3, 0.3)
-motion_mirroring = Vector2(320, 2.08165e-12)
 
 [node name="Background-1" type="Sprite2D" parent="BuildsingsNear"]
+texture_repeat = 2
 position = Vector2(160, 90)
 texture = ExtResource("6_40hw7")
+region_enabled = true
+region_rect = Rect2(-4096, 2.08165e-12, 8192, 180)
 
 [node name="Steam" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.5, 0.5)
-motion_mirroring = Vector2(320, 2.08165e-12)
 
 [node name="Background-1" type="Sprite2D" parent="Steam"]
+texture_repeat = 2
 position = Vector2(160, 90)
 texture = ExtResource("7_602pe")
+region_enabled = true
+region_rect = Rect2(-4096, 2.08165e-12, 8192, 180)
