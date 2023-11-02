@@ -18,15 +18,17 @@ script = ExtResource("1_pyuar")
 Container_scene = ExtResource("2_e7j4h")
 
 [node name="DropPoints" type="Node2D" parent="."]
-position = Vector2(-56, -32)
+position = Vector2(-257, -193)
 script = ExtResource("1_3v7oa")
 n_horizontal = 5
 n_vertical = 5
-new_scale = 0.25
+new_scale = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.25, 0.25)
 
 [node name="Ship" type="StaticBody2D" parent="."]
+scale = Vector2(4, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
 position = Vector2(-96, 4)
