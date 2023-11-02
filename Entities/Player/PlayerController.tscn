@@ -1,9 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=34 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
+[ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
 [ext_resource type="Texture2D" uid="uid://g1vlv65nat5l" path="res://art/placeholder/white_turkeyleg_animation_blank.png" id="3_340x3"]
-[ext_resource type="Texture2D" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
+[ext_resource type="Texture2D" uid="uid://dww0mincdfcua" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
 [ext_resource type="AudioStream" uid="uid://dlpvfrbdrbt7x" path="res://audio/sfx/placeholder/hoo.wav" id="5_byt84"]
 [ext_resource type="AudioStream" uid="uid://5gexndolxdlt" path="res://audio/sfx/placeholder/hah.wav" id="6_777c2"]
 [ext_resource type="AudioStream" uid="uid://csdd0666k7mv1" path="res://audio/sfx/placeholder/hee.wav" id="7_egpjg"]
@@ -793,8 +794,9 @@ stream_0/weight = 1.0
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_8yn75")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(2.08165e-12, -62)
+[node name="Camera2D" parent="." instance=ExtResource("2_n3cgq")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+offset = Vector2(2.08165e-12, -40)
 
 [node name="RoninPlaceholderSprite" type="Sprite2D" parent="."]
 z_index = 2

@@ -141,6 +141,8 @@ func _on_state_transitioned(stateName):
 		"Air":
 			$RoninPlaceholderSprite.hide()
 			$JumpNoises.play()
+			if camera.has_method("_on_player_jumped"):
+				camera._on_player_jumped()
 		"Run":
 			$RoninPlaceholderSprite.show()
 			play_run_animation()
