@@ -70,12 +70,11 @@ func move_container(direction:Utils.Directions) -> void:
 	var next_position = self.get_adjacent_coordinate(direction)
 	if next_position != null and self.current_container != null:
 		if !self.get_drop_point(next_position).is_filled:
-			print(self.current_position)
 			self.current_position = next_position
 			self.current_container.position = self.get_drop_point(current_position).position
 
 func place_container() -> bool:
-
+	get_parent().container_move_ready = false
 	var falling:bool = true
 	var position_to_place = self.current_position
 	while falling:
@@ -86,7 +85,13 @@ func place_container() -> bool:
 	
 	var drop_point_to_use:Marker2D = self.get_drop_point(position_to_place)
 	self.current_container.set_mode("REAL")
-	self.current_container.set_position(drop_point_to_use.position)
+	var tween = get_tree().create_tween()
+	# v = d/t -> t = d/v
+	var tween_time = self.current_position.distance_to(position_to_place)
+	print(tween_time)
+	tween.tween_property(self.current_container, "position", drop_point_to_use.position, tween_time)
+	tween.tween_callback(drop_done)
+	#self.current_container.set_position(drop_point_to_use.position)
 	drop_point_to_use.set_container(self.current_container)
 	self.current_container = null
 	return true
@@ -112,3 +117,6 @@ func check_under(coordinate:Vector2) -> bool:
 	if !drop_point_underneath.is_filled:
 		return true
 	return false
+
+func drop_done()->void:
+	get_parent().container_move_ready = true
