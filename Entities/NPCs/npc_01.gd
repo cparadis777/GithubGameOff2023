@@ -51,13 +51,13 @@ func die():
 	$DecisionTimer.stop()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 
-func _on_hit(damage, impactVector, damageType, knockback):
+func _on_hit(damage, impactVector, _damageType, knockback):
 	if State in [States.ROLLING, States.JUMPING]:
 		$HurtNoises.play()
 		health -= damage
 		if health <= 0:
 			die()
-		else:
+		elif knockback == true:
 			State = States.KNOCKBACK
 			var knockbackSpeed = 20.0
 			velocity = impactVector * knockbackSpeed

@@ -15,7 +15,6 @@ texture = SubResource("NoiseTexture2D_wucvc")
 script = ExtResource("1_c3kqg")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0, -31)
-rect = Rect2(-128, 2.08165e-12, 256, 64)
+rect = Rect2(-128, -160, 256, 320)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
