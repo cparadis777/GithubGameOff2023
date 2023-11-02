@@ -22,7 +22,7 @@ func _on_visible_on_screen_enabler_2d_screen_exited():
 		var camera = get_viewport().get_camera_2d()
 		
 		var direction
-		if camera.global_position.x > self.global_position.x:
+		if camera.get_screen_center_position().x > self.global_position.x:
 			direction = Vector2.RIGHT
 		else:
 			direction = Vector2.LEFT

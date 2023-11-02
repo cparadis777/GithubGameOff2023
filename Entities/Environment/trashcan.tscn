@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1g47w7bhxbg3"]
+
+[ext_resource type="Script" path="res://Entities/Environment/trashcan.gd" id="1_6hnh1"]
+[ext_resource type="Texture2D" uid="uid://8nxvldo0eyyf" path="res://art/placeholder/trashcan.png" id="1_kkr6a"]
+[ext_resource type="AudioStream" uid="uid://cymibnijhml5u" path="res://audio/sfx/placeholder/pot_crash.wav" id="3_lwp8j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umhdh"]
+size = Vector2(32, 12)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xbvcy"]
+streams_count = 1
+random_pitch = 1.25
+stream_0/stream = ExtResource("3_lwp8j")
+stream_0/weight = 1.0
+
+[node name="TrashCan" type="RigidBody2D"]
+position = Vector2(232, -9)
+collision_layer = 8
+script = ExtResource("1_6hnh1")
+
+[node name="CanImage" type="Sprite2D" parent="."]
+position = Vector2(0.112519, 8.63749)
+rotation = 0.0118909
+texture = ExtResource("1_kkr6a")
+offset = Vector2(-0.28656, -14.6351)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.57764e-05, -6)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_umhdh")
+
+[node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_xbvcy")

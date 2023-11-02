@@ -2,8 +2,8 @@
 
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="1_htj5v"]
 [ext_resource type="Script" path="res://Menus/main_menu.gd" id="2_l1a6d"]
+[ext_resource type="PackedScene" uid="uid://bbbi07nppapt8" path="res://Levels/placeholder/Level_01.tscn" id="3_5wtxl"]
 [ext_resource type="Shader" uid="uid://chvota4j62bo5" path="res://art/materials/shaders/pixelify_shader.tres" id="3_20pk7"]
-[ext_resource type="PackedScene" uid="uid://bbbi07nppapt8" path="res://Levels/placeholder/placeholder_2d_scene.tscn" id="3_el574"]
 [ext_resource type="Texture2D" uid="uid://bkjabti7gg0v" path="res://art/placeholder/GenericBackdrop-AI-gen.png" id="3_od4jc"]
 [ext_resource type="Texture2D" uid="uid://ds7wrp282t8d6" path="res://art/placeholder/GameOffLogo.png" id="6_s2pix"]
 [ext_resource type="AudioStream" uid="uid://ccn60h0iwfwbg" path="res://audio/sfx/placeholder/button_hover.wav" id="7_bpl7k"]
@@ -22,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_htj5v")
 script = ExtResource("2_l1a6d")
-game_scene = ExtResource("3_el574")
+game_scene = ExtResource("3_5wtxl")
 
 [node name="Background" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_dvqlr")
