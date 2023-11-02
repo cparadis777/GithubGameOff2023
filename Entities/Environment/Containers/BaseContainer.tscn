@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dgk01ai7d526u"]
 
 [ext_resource type="Texture2D" uid="uid://bw2auvp8r1v5o" path="res://art/shipping_container.png" id="1_flq8s"]
-[ext_resource type="Script" path="res://Entities/Environment/BaseContainer.gd" id="1_xmhax"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_xmhax"]
 [ext_resource type="Texture2D" uid="uid://cr25ww6yimgkk" path="res://art/props/shipping_container_ill_eagle.png" id="3_srdw2"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
