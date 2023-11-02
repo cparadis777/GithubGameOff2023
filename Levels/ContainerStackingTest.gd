@@ -1,12 +1,14 @@
 extends Node2D
 
 @export var Container_scene:PackedScene
+@export var Containers:Array[PackedScene]
 var container_move_ready:bool = true
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var container = Container_scene.instantiate()
+	
+	var container = Containers.pick_random().instantiate()
 	self.set_current_container(container)
 
 
@@ -28,7 +30,7 @@ func _input(event):
 		elif event.is_action_pressed("jump"):
 			if container_move_ready:
 				if $DropPoints.place_container():
-					var container = Container_scene.instantiate()
+					var container = Containers.pick_random().instantiate()
 					self.set_current_container(container)
 
 func set_current_container(container:StaticBody2D):
