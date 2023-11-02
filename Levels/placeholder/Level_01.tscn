@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbbi07nppapt8"]
+[gd_scene load_steps=12 format=3 uid="uid://cg316itqsfouf"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_4cu4p"]
 [ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="2_injxk"]
-[ext_resource type="PackedScene" uid="uid://dp40vps5cxn12" path="res://Entities/Player/PlayerController.tscn" id="3_aaivl"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="3_aaivl"]
 [ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="4_qmj6i"]
-[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/trashcan.tscn" id="5_0mas4"]
+[ext_resource type="PackedScene" path="res://Entities/Environment/trashcan.tscn" id="5_0mas4"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="7_opjvx"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="8_gaicn"]
+[ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/BaseContainer.tscn" id="8_ptkm7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1qp34"]
 sky_top_color = Color(0.168627, 0.215686, 0.372549, 1)
@@ -33,7 +34,7 @@ script = ExtResource("1_4cu4p")
 [node name="Obstacle_01" parent="Obstacles" instance=ExtResource("5_0mas4")]
 
 [node name="Obstacle_02" parent="Obstacles" instance=ExtResource("5_0mas4")]
-position = Vector2(-128, -9)
+position = Vector2(-200, -8)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -52,3 +53,6 @@ text = "A,D, space to move
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w1dff")
+
+[node name="BaseContainer" parent="." instance=ExtResource("8_ptkm7")]
+position = Vector2(-88, -32)

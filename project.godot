@@ -17,9 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Globals="*res://UtilityScripts/globals.gd"
-StageManager="*res://UtilityScripts/StageManager.gd"
-Utils="*res://UtilityScripts/utils.gd"
+Globals="*res://Utilities/UtilityScripts/globals.gd"
+StageManager="*res://Utilities/UtilityScripts/StageManager.gd"
+Utils="*res://Utilities/UtilityScripts/utils.gd"
 
 [display]
 

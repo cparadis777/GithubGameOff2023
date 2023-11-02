@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://one3l2j3vodd"]
+
+[ext_resource type="Script" path="res://Levels/DropPoints.gd" id="1_3v7oa"]
+[ext_resource type="Script" path="res://Levels/ContainerStackingTest.gd" id="1_pyuar"]
+[ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/BaseContainer.tscn" id="2_e7j4h"]
+
+[node name="ContainerStackingTest" type="Node2D"]
+script = ExtResource("1_pyuar")
+Container_scene = ExtResource("2_e7j4h")
+
+[node name="DropPoints" type="Node2D" parent="."]
+position = Vector2(-64, -48)
+script = ExtResource("1_3v7oa")
+n_horizontal = 5
+n_vertical = 5
+new_scale = 0.5
+
+[node name="Camera2D" type="Camera2D" parent="."]

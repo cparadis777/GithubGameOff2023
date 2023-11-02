@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgk01ai7d526u"]
+
+[ext_resource type="Texture2D" uid="uid://bw2auvp8r1v5o" path="res://art/shipping_container.png" id="1_flq8s"]
+[ext_resource type="Script" path="res://Entities/Environment/BaseContainer.gd" id="1_xmhax"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
+a = Vector2(64, -32)
+b = Vector2(-64, -32)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pl5uy"]
+a = Vector2(-64, 32)
+b = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
+size = Vector2(128, 64)
+
+[node name="BaseContainer" type="StaticBody2D"]
+script = ExtResource("1_xmhax")
+exterior_texture = ExtResource("1_flq8s")
+interior_texture = ExtResource("1_flq8s")
+
+[node name="Interior" type="Sprite2D" parent="."]
+z_index = -4
+rotation = 3.14159
+texture = ExtResource("1_flq8s")
+
+[node name="Exterior" type="Sprite2D" parent="."]
+texture = ExtResource("1_flq8s")
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_rgkd6")
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_pl5uy")
+
+[node name="ContainerInterior" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
+shape = SubResource("RectangleShape2D_dnhqr")
+
+[connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
+[connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

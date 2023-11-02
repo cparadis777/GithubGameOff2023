@@ -1,15 +1,15 @@
-[gd_scene load_steps=33 format=3 uid="uid://dp40vps5cxn12"]
+[gd_scene load_steps=33 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
 [ext_resource type="Texture2D" uid="uid://g1vlv65nat5l" path="res://art/placeholder/white_turkeyleg_animation_blank.png" id="3_340x3"]
-[ext_resource type="Texture2D" uid="uid://dww0mincdfcua" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
+[ext_resource type="Texture2D" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
 [ext_resource type="AudioStream" uid="uid://dlpvfrbdrbt7x" path="res://audio/sfx/placeholder/hoo.wav" id="5_byt84"]
 [ext_resource type="AudioStream" uid="uid://5gexndolxdlt" path="res://audio/sfx/placeholder/hah.wav" id="6_777c2"]
 [ext_resource type="AudioStream" uid="uid://csdd0666k7mv1" path="res://audio/sfx/placeholder/hee.wav" id="7_egpjg"]
 [ext_resource type="Texture2D" uid="uid://fd4fp5egfcmb" path="res://art/placeholder/32pixel-runner.png" id="8_gdxyk"]
 [ext_resource type="Texture2D" uid="uid://wlq7m70fouwi" path="res://art/placeholder/richard_williams_walk_cycle.jpeg" id="9_047q4"]
-[ext_resource type="Script" path="res://UtilityScripts/StateMachine.gd" id="10_uxil4"]
+[ext_resource type="Script" path="res://Utilities/UtilityScripts/StateMachine.gd" id="10_6ualt"]
 [ext_resource type="Script" path="res://Entities/Player/Idle.gd" id="11_jtylp"]
 [ext_resource type="Script" path="res://Entities/Player/Run.gd" id="12_oq1kf"]
 [ext_resource type="Script" path="res://Entities/Player/Air.gd" id="13_a17mm"]
@@ -790,7 +790,7 @@ random_pitch = 1.25
 stream_0/stream = ExtResource("18_mdgst")
 stream_0/weight = 1.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_8yn75")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -973,7 +973,7 @@ scale = Vector2(0.185501, 0.185501)
 texture = ExtResource("9_047q4")
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("10_uxil4")
+script = ExtResource("10_6ualt")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]
