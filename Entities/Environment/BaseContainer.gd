@@ -16,13 +16,17 @@ func _process(_delta):
 
 
 func _on_container_interior_body_exited(body:Node2D):
-	print("trigger")
 	if body.is_in_group("Player"):
 		print("Showing outside container")
 		$Exterior.show()
 
 func _on_container_interior_body_entered(body:Node2D):
-	print("trigger")
 	if body.is_in_group("Player"):
 		print("Hidden outside container")
 		$Exterior.hide()
+
+func set_mode(mode:String) -> void:
+	if mode == "GHOST":
+		$Exterior.modulate = Color("005859")
+	if mode == "REAL":
+		$Exterior.modulate = Color("ffffff")

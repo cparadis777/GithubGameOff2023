@@ -1,5 +1,6 @@
 extends Node
 
+enum Directions {UP, RIGHT, DOWN, LEFT}
 
 
 func get_closest_node(nodeList : Array, location : Vector2):

@@ -31,9 +31,11 @@ texture = ExtResource("1_flq8s")
 shape = SubResource("SegmentShape2D_rgkd6")
 
 [node name="BottomCollision" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("SegmentShape2D_pl5uy")
 
 [node name="ContainerInterior" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 shape = SubResource("RectangleShape2D_dnhqr")
