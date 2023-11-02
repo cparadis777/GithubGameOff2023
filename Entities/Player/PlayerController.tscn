@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=48 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
 [ext_resource type="Texture2D" uid="uid://g1vlv65nat5l" path="res://art/placeholder/white_turkeyleg_animation_blank.png" id="3_340x3"]
+[ext_resource type="Texture2D" uid="uid://o8avnxyy8l88" path="res://art/player/cyber-ronin_run.png" id="3_yst2s"]
 [ext_resource type="Texture2D" uid="uid://dww0mincdfcua" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
 [ext_resource type="AudioStream" uid="uid://dlpvfrbdrbt7x" path="res://audio/sfx/placeholder/hoo.wav" id="5_byt84"]
 [ext_resource type="AudioStream" uid="uid://5gexndolxdlt" path="res://audio/sfx/placeholder/hah.wav" id="6_777c2"]
@@ -23,6 +24,108 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 7.0
 height = 22.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elfq8"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53r78"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtkqo"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvpy1"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo0tp"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1yhr"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bf7k"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm850"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t3yo"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu4pw"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2j7h"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwx4o"]
+atlas = ExtResource("3_yst2s")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_adh0r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elfq8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53r78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtkqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvpy1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo0tp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1yhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bf7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm850")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t3yo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu4pw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2j7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kwx4o")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
 radius = 14.0357
@@ -812,6 +915,12 @@ shape = SubResource("CapsuleShape2D_ghh7o")
 
 [node name="Body" type="Node2D" parent="."]
 scale = Vector2(0.470298, 0.470298)
+
+[node name="CyberRoninSprites" type="AnimatedSprite2D" parent="Body"]
+position = Vector2(-57.4104, -68.042)
+scale = Vector2(2.12631, 2.12631)
+sprite_frames = SubResource("SpriteFrames_adh0r")
+animation = &"run"
 
 [node name="Actions" type="Node2D" parent="Body"]
 
