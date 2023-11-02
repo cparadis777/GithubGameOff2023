@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dp40vps5cxn12"]
+[gd_scene load_steps=33 format=3 uid="uid://dp40vps5cxn12"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
@@ -15,6 +15,9 @@
 [ext_resource type="Script" path="res://Entities/Player/Air.gd" id="13_a17mm"]
 [ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="14_fp8yf"]
 [ext_resource type="Script" path="res://Entities/Player/DebugLabel.gd" id="15_7astd"]
+[ext_resource type="AudioStream" uid="uid://bs82arx4ie013" path="res://audio/sfx/placeholder/footstep_01.wav" id="16_05syi"]
+[ext_resource type="AudioStream" uid="uid://cntwdyidbmqxk" path="res://audio/sfx/placeholder/footstep_02.wav" id="17_rwmkq"]
+[ext_resource type="AudioStream" uid="uid://c2tum0uxura5j" path="res://audio/sfx/placeholder/TerribleJumpNoise.wav" id="18_mdgst"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 7.0
@@ -211,6 +214,18 @@ tracks/14/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.280511]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("FootstepNoises:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_1accm"]
@@ -677,6 +692,18 @@ tracks/10/keys = {
 "update": 0,
 "values": [Vector2(0, -31), Vector2(-5.90969e-07, -37), Vector2(0, -31), Vector2(-5.90969e-07, -37), Vector2(0, -31)]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("FootstepNoises:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
 
 [sub_resource type="Animation" id="Animation_6b5og"]
 resource_name = "somersault"
@@ -749,6 +776,19 @@ stream_1/stream = ExtResource("6_777c2")
 stream_1/weight = 1.0
 stream_2/stream = ExtResource("7_egpjg")
 stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lhy5y"]
+streams_count = 2
+stream_0/stream = ExtResource("16_05syi")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("17_rwmkq")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_itygw"]
+streams_count = 1
+random_pitch = 1.25
+stream_0/stream = ExtResource("18_mdgst")
+stream_0/weight = 1.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8yn75")
@@ -954,6 +994,12 @@ position = Vector2(-15, -56)
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("15_7astd")
+
+[node name="FootstepNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_lhy5y")
+
+[node name="JumpNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_itygw")
 
 [connection signal="body_entered" from="Body/Actions/Kick/HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="body_entered" from="Body/Actions/Punch/HurtBox" to="." method="_on_hurt_box_body_entered"]

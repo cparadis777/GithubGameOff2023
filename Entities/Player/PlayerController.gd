@@ -140,6 +140,7 @@ func _on_state_transitioned(stateName):
 	match stateName:
 		"Air":
 			$RoninPlaceholderSprite.hide()
+			$JumpNoises.play()
 		"Run":
 			$RoninPlaceholderSprite.show()
 			play_run_animation()
