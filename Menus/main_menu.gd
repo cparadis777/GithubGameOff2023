@@ -16,9 +16,9 @@ func connect_button_audio():
 
 func connect_button_signals():
 	for button in %Buttons.get_children():
-		if "play" in button.name.to_lower():
-			button.pressed.connect(start_game)
-		elif "quit" in button.name.to_lower():
+#		if "play" in button.name.to_lower():
+#			button.pressed.connect(start_game)
+		if "quit" in button.name.to_lower():
 			button.pressed.connect(quit_game)
 		elif "settings" in button.name.to_lower():
 			button.pressed.connect(view_settings)

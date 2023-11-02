@@ -9,4 +9,7 @@ func _ready():
 	pass # Replace with function body.
 
 
-
+func change_scene_to(scene):
+	if scene is PackedScene:
+		# add some animated transitions later.
+		get_tree().change_scene_to_packed(scene)
