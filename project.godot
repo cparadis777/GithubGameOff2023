@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="Github Game Off 2023"
-run/main_scene="res://Menus/main_menu.tscn"
+run/main_scene="res://Levels/ContainerStackingTest.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Globals="*res://UtilityScripts/globals.gd"
-StageManager="*res://UtilityScripts/StageManager.gd"
-Utils="*res://UtilityScripts/utils.gd"
+Globals="*res://Utilities/UtilityScripts/globals.gd"
+StageManager="*res://Utilities/UtilityScripts/StageManager.gd"
+Utils="*res://Utilities/UtilityScripts/utils.gd"
 
 [display]
 
