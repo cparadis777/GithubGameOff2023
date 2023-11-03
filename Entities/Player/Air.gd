@@ -2,6 +2,7 @@
 extends PlayerState
 
 var already_used_double_jump : bool = false
+var already_used_dash : bool = false
 
 signal double_jumped
 signal landed
@@ -22,6 +23,9 @@ func enter(msg := {}) -> void:
 		player.velocity.y = -player.JUMP_VELOCITY
 	already_used_double_jump = false
 	
+	already_used_dash = msg.has("dashed")
+
+	
 func physics_update(delta: float) -> void:
 	# Horizontal movement.
 
@@ -39,6 +43,8 @@ func physics_update(delta: float) -> void:
 		already_used_double_jump = true
 	elif Input.is_action_just_pressed("kick"):
 		state_machine.transition_to("DescendingKick")
+	elif Input.is_action_just_pressed("punch") and !already_used_dash:
+		state_machine.transition_to("Dash")
 
 	player.move_and_slide()
 

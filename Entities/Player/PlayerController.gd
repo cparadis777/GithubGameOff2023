@@ -195,3 +195,8 @@ func _on_descending_kick_started():
 
 func _on_descending_kick_impacted():
 	pass # not sure what to do here yet.. Probably just ignore it and let the state machine transition to air.
+
+func _on_dash_started():
+	if animation_player.has_animation("dash"):
+		animation_player.play("dash")
+		
