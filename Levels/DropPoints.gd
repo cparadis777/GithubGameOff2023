@@ -12,6 +12,7 @@ var container_height:int = 96
 var drop_points_dict:Dictionary
 var drop_point_targeted
 
+signal weight_added(weight)
 signal drop_over
 
 # Called when the node enters the scene tree for the first time.
@@ -118,6 +119,7 @@ func drop_done()->void:
 	old_parent.remove_child(self.container_dropping)
 	self.drop_point_targeted.add_child(self.container_dropping)
 	self.container_dropping.position = (Vector2(0,0))
+	emit_signal("weight_added", self.container_dropping.weigth)
 	emit_signal("drop_over")
 
 

@@ -12,6 +12,7 @@ var current_column:int
 var markers:Array
 var move_time:float = 0.5
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.create_markers()
