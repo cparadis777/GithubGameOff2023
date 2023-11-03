@@ -3,7 +3,7 @@
 # Generic state machine. Initializes states and delegates engine callbacks
 # (_physics_process, _unhandled_input) to the active state.
 class_name StateMachine
-extends Node
+extends Node2D
 
 # Emitted when transitioning to a new state.
 signal transitioned(state_name)

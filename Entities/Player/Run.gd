@@ -1,6 +1,10 @@
 # Run.gd
 extends PlayerState
 
+func enter(_msg := {}) -> void:
+	if player.has_method("reset_rotation"):
+		player.reset_rotation()
+
 
 func physics_update(delta: float) -> void:
 	# Notice how we have some code duplication between states. That's inherent to the pattern,

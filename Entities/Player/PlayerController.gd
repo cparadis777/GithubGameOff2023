@@ -11,14 +11,16 @@ var speed = SPEED # for state machine
 
 @onready var camera = $Camera2D
 @onready var hud = $HUD
+@onready var animation_player = $AnimationPlayer
+
 
 # relocated to $StateMachine node.. per https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
 #enum States { IDLE, RUNNING, JUMPING, ATTACKING }
 #var State = States.IDLE
 @onready var StateMachine = $StateMachine
 
-var original_body_scale
-
+var original_body_scale : Vector2
+var torso_starting_position : Vector2
 
 signal hit
 
@@ -40,7 +42,7 @@ func _ready():
 	
 	play_idle_animation()
 	original_body_scale = $Body.scale
-
+	torso_starting_position = $Body/Torso.position
 
 func flip_sprites():
 	if Input.is_action_pressed("move_left"):
@@ -48,6 +50,11 @@ func flip_sprites():
 	elif Input.is_action_pressed("move_right"):
 		$Body.scale.x = original_body_scale.x
 	
+func get_last_known_direction():
+	if $Body.scale.x > 0:
+		return 1
+	else:
+		return -1
 
 func _physics_process(_delta):
 	flip_sprites()
@@ -80,6 +87,11 @@ func play_somersault_animation():
 	if $AnimationPlayer.current_animation != "somersault":
 		$AnimationPlayer.play("somersault")
 
+func reset_rotation():
+	# hack for when state changes during a somersault.
+	$Body.rotation = 0
+	$Body/Torso.position = torso_starting_position
+	animation_player.play("RESET")
 
 func initiate_debugging_protocol():
 	if get_viewport().get_camera_2d().zoom == Vector2(1,1):
@@ -123,11 +135,16 @@ func hurt(body):
 
 
 func _on_hurt_box_body_entered(body):
-	# kick or punch
+	# kick or punch or descending_kick
 	hurt(body)
-	
+	if StateMachine.state.name == "DescendingKick":
+		print("landed a descending kick")
+		velocity.x = -velocity.x * 0.5
+		velocity.y = -JUMP_VELOCITY
+		StateMachine.transition_to("Air", {do_jump = true})
 		
-			
+		
+		
 
 
 func _on_animation_player_animation_finished(anim_name):
@@ -171,3 +188,10 @@ func _on_landed():
 	$Body.rotation = 0.0
 	$AnimationPlayer.play("land")
 	
+func _on_descending_kick_started():
+# should animation calls come from the State machine or the player?
+	if animation_player.has_animation("descending_kick"):
+		animation_player.play("descending_kick")
+
+func _on_descending_kick_impacted():
+	pass # not sure what to do here yet.. Probably just ignore it and let the state machine transition to air.

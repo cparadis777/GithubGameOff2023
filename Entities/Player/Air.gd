@@ -37,6 +37,8 @@ func physics_update(delta: float) -> void:
 		player.velocity.y = -player.JUMP_VELOCITY
 		double_jumped.emit()
 		already_used_double_jump = true
+	elif Input.is_action_just_pressed("kick"):
+		state_machine.transition_to("DescendingKick")
 
 	player.move_and_slide()
 

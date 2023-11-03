@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=54 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://g1vlv65nat5l" path="res://art/placeholder/white_turkeyleg_animation_blank.png" id="3_340x3"]
 [ext_resource type="Texture2D" uid="uid://o8avnxyy8l88" path="res://art/player/cyber-ronin_run.png" id="3_yst2s"]
 [ext_resource type="Texture2D" uid="uid://dww0mincdfcua" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
+[ext_resource type="Texture2D" uid="uid://b5kqk4ulv38a2" path="res://art/player/speed_lines.png" id="4_nhl25"]
 [ext_resource type="AudioStream" uid="uid://dlpvfrbdrbt7x" path="res://audio/sfx/placeholder/hoo.wav" id="5_byt84"]
 [ext_resource type="AudioStream" uid="uid://5gexndolxdlt" path="res://audio/sfx/placeholder/hah.wav" id="6_777c2"]
 [ext_resource type="AudioStream" uid="uid://csdd0666k7mv1" path="res://audio/sfx/placeholder/hee.wav" id="7_egpjg"]
@@ -18,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="14_fp8yf"]
 [ext_resource type="Script" path="res://Entities/Player/DebugLabel.gd" id="15_7astd"]
 [ext_resource type="AudioStream" uid="uid://bs82arx4ie013" path="res://audio/sfx/placeholder/footstep_01.wav" id="16_05syi"]
+[ext_resource type="Script" path="res://Entities/Player/DescendingKick.gd" id="16_7kpt4"]
 [ext_resource type="AudioStream" uid="uid://cntwdyidbmqxk" path="res://audio/sfx/placeholder/footstep_02.wav" id="17_rwmkq"]
 [ext_resource type="AudioStream" uid="uid://c2tum0uxura5j" path="res://audio/sfx/placeholder/TerribleJumpNoise.wav" id="18_mdgst"]
 [ext_resource type="AudioStream" uid="uid://dnf4btn7jyc7s" path="res://audio/sfx/placeholder/landing_thud.wav" id="21_y0a8e"]
@@ -383,6 +385,18 @@ tracks/17/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Body/SpeedLines:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_1accm"]
 resource_name = "idle"
@@ -507,6 +521,30 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Body/SpeedLines:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Body/Actions/Kick/HurtBox/CollisionShape2D:disabled")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_r2a28"]
@@ -984,6 +1022,42 @@ tracks/12/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0)]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Body/SpeedLines:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Body/Torso:rotation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.321755, 0.321755]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Body/Actions/Kick/HurtBox/CollisionShape2D:disabled")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_6b5og"]
 resource_name = "somersault"
@@ -1038,9 +1112,74 @@ tracks/3/keys = {
 "values": [0.499649, -0.160355, 0.00320455, 0.499649]
 }
 
+[sub_resource type="Animation" id="Animation_d33i7"]
+resource_name = "descending_kick"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Torso:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.321755, -0.511356, -0.511356, 0.321755]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/Torso/HipR/LegUpperR:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.9165, 0.74112, 0.74112, 1.9165]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/SpeedLines:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Actions/Kick/HurtBox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
 _data = {
 "RESET": SubResource("Animation_tb0g1"),
+"descending_kick": SubResource("Animation_d33i7"),
 "idle": SubResource("Animation_1accm"),
 "kick": SubResource("Animation_r2a28"),
 "land": SubResource("Animation_5ypvc"),
@@ -1070,6 +1209,13 @@ shape = SubResource("CapsuleShape2D_ghh7o")
 
 [node name="Body" type="Node2D" parent="."]
 scale = Vector2(0.470298, 0.470298)
+
+[node name="SpeedLines" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(-70.1683, -59.5367)
+rotation = 0.321755
+scale = Vector2(5.14497, 1.51697)
+texture = ExtResource("4_nhl25")
 
 [node name="CyberRoninSprites" type="AnimatedSprite2D" parent="Body"]
 position = Vector2(-57.4104, -68.042)
@@ -1233,18 +1379,21 @@ position = Vector2(40, -25)
 scale = Vector2(0.185501, 0.185501)
 texture = ExtResource("9_047q4")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("10_6ualt")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node2D" parent="StateMachine"]
 script = ExtResource("11_jtylp")
 
-[node name="Run" type="Node" parent="StateMachine"]
+[node name="Run" type="Node2D" parent="StateMachine"]
 script = ExtResource("12_oq1kf")
 
-[node name="Air" type="Node" parent="StateMachine"]
+[node name="Air" type="Node2D" parent="StateMachine"]
 script = ExtResource("13_a17mm")
+
+[node name="DescendingKick" type="Node2D" parent="StateMachine"]
+script = ExtResource("16_7kpt4")
 
 [node name="Debug" type="Node2D" parent="."]
 position = Vector2(-15, -56)
@@ -1252,6 +1401,8 @@ position = Vector2(-15, -56)
 [node name="StateLabel" type="Label" parent="Debug"]
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_font_sizes/font_size = 10
+text = "state"
 script = ExtResource("15_7astd")
 
 [node name="Audio" type="Node2D" parent="."]
