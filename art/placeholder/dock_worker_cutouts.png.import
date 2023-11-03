@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o8avnxyy8l88"
-path="res://.godot/imported/cyber-ronin_run.png-a5b4d4051b1b52a29314746286db2c21.ctex"
+uid="uid://b8to6pueoyptm"
+path="res://.godot/imported/dock_worker_cutouts.png-5f26fc19f6b7c026ef3c209051f96c60.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/player/cyber-ronin_run.png"
-dest_files=["res://.godot/imported/cyber-ronin_run.png-a5b4d4051b1b52a29314746286db2c21.ctex"]
+source_file="res://art/placeholder/dock_worker_cutouts.png"
+dest_files=["res://.godot/imported/dock_worker_cutouts.png-5f26fc19f6b7c026ef3c209051f96c60.ctex"]
 
 [params]
 

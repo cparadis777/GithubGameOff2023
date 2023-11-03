@@ -137,7 +137,6 @@ func _on_hurt_box_body_entered(body):
 	# kick or punch or descending_kick
 	hurt(body)
 	if StateMachine.state.name == "DescendingKick":
-		print("landed a descending kick")
 		velocity.x = -velocity.x * 0.5
 		velocity.y = -JUMP_VELOCITY
 		StateMachine.transition_to("Air", {do_jump = true})
@@ -206,8 +205,6 @@ func detect_jump_through_platform() -> StaticBody2D:
 	for candidate in candidate_bodies:
 		if candidate.is_in_group("JumpThroughPlatforms") or candidate.name.has("JumpThrough"):
 			jump_through_platform_detected = candidate
-	if jump_through_platform_detected != null:
-		print(jump_through_platform_detected.name)
 	return jump_through_platform_detected
 
 	

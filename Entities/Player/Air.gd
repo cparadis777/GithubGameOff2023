@@ -22,7 +22,6 @@ func enter(msg := {}) -> void:
 	if msg.has("do_jump"):
 		player.velocity.y = -player.JUMP_VELOCITY
 	elif msg.has("do_drop"):
-		print("Air says player is dropping")
 		player.velocity.y = 0.5 * player.JUMP_VELOCITY
 	already_used_double_jump = false
 	

@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="5_ww7q0"]
 [ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="6_aruj1"]
 [ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="7_e1fgr"]
-[ext_resource type="PackedScene" uid="uid://cg316itqsfouf" path="res://Levels/placeholder/Level_01.tscn" id="8_sjimt"]
 [ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="9_3vd6b"]
+[ext_resource type="PackedScene" uid="uid://dmm8rqol80lyr" path="res://Levels/placeholder/Level_01_Interior.tscn" id="9_cgfvo"]
 
 [sub_resource type="Gradient" id="Gradient_1fdak"]
 colors = PackedColorArray(0, 0, 0, 1, 0.234514, 0.154286, 0.209769, 1)
@@ -525,7 +525,7 @@ offset_right = 147.0
 offset_bottom = -806.0
 text = "Level 1"
 script = ExtResource("7_e1fgr")
-scene = ExtResource("8_sjimt")
+scene = ExtResource("9_cgfvo")
 
 [node name="ContainerStackingStartButton" type="Button" parent="Slide4"]
 visible = false

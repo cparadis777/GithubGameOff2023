@@ -33,7 +33,6 @@ func duck():
 func drop_down(platform):
 	# need to notify the platform to disable it's player layer mask temporarily
 	if platform.has_method("allow_player_to_pass"):
-		print("player attempting to drop down")
 		platform.allow_player_to_pass()
 		state_machine.transition_to("Air", {do_drop = true})
 		

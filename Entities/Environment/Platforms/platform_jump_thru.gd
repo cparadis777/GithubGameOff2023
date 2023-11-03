@@ -14,7 +14,6 @@ func _ready():
 
 
 func allow_player_to_pass():
-	print("JumpThroughPlatform is allowing the player to pass.")
 	set_collision_mask_value(1, false)
 	set_collision_layer_value(4, false)
 	$Sprite2D.hide()

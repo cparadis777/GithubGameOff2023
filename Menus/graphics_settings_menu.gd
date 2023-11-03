@@ -11,7 +11,6 @@ func _ready():
 
 func _on_fullscreen_check_button_toggled(button_pressed):
 	var window = get_window()
-	print(window.name)
 	if button_pressed == true:
 		window.mode = Window.MODE_FULLSCREEN
 	else:
