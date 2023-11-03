@@ -129,8 +129,7 @@ func hurt(body):
 
 	if body.has_method("_on_hit"):
 		hit.connect(body._on_hit)
-	hit.emit(damage, impactVector, damageType, knockback)
-	if hit.is_connected(body._on_hit):
+		hit.emit(damage, impactVector, damageType, knockback)
 		hit.disconnect(body._on_hit)
 
 
@@ -200,3 +199,16 @@ func _on_dash_started():
 	if animation_player.has_animation("dash"):
 		animation_player.play("dash")
 		
+		
+func detect_jump_through_platform() -> StaticBody2D:
+	var jump_through_platform_detected
+	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
+	for candidate in candidate_bodies:
+		if candidate.is_in_group("JumpThroughPlatforms") or candidate.name.has("JumpThrough"):
+			jump_through_platform_detected = candidate
+	if jump_through_platform_detected != null:
+		print(jump_through_platform_detected.name)
+	return jump_through_platform_detected
+
+	
+	

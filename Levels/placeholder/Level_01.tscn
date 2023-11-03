@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cg316itqsfouf"]
+[gd_scene load_steps=12 format=3 uid="uid://cg316itqsfouf"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_4cu4p"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="3_aaivl"]
 [ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="4_qmj6i"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/trashcan.tscn" id="5_0mas4"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="7_opjvx"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_fvpf3"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="8_gaicn"]
 [ext_resource type="PackedScene" uid="uid://bp5bfgn3sxr7f" path="res://Entities/Environment/Containers/BlueContainer.tscn" id="8_qyowk"]
 
@@ -53,3 +54,8 @@ environment = SubResource("Environment_w1dff")
 
 [node name="BaseContainer" parent="." instance=ExtResource("8_qyowk")]
 position = Vector2(-312, -48)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("8_fvpf3")]
+position = Vector2(139, -73)
