@@ -1,0 +1,109 @@
+[gd_scene load_steps=13 format=3 uid="uid://bdqawiqxlij23"]
+
+[ext_resource type="Script" path="res://Levels/placeholder/MockLevel.gd" id="1_8r86v"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_5mtnp"]
+[ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="3_8t4jp"]
+[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/trashcan.tscn" id="4_vdqaf"]
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="5_kpchj"]
+[ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="6_lue02"]
+[ext_resource type="PackedScene" uid="uid://bp5bfgn3sxr7f" path="res://Entities/Environment/Containers/BlueContainer.tscn" id="7_t6rgw"]
+[ext_resource type="PackedScene" uid="uid://cecceqk8282a6" path="res://Entities/Environment/Containers/BigContainer.tscn" id="8_vkcjm"]
+[ext_resource type="PackedScene" uid="uid://cexutcxaij4u" path="res://Entities/Environment/basic_platform.tscn" id="9_1gt32"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1qp34"]
+sky_top_color = Color(0.168627, 0.215686, 0.372549, 1)
+sky_horizon_color = Color(0.25098, 0.258824, 0.270588, 1)
+
+[sub_resource type="Sky" id="Sky_6p02m"]
+sky_material = SubResource("ProceduralSkyMaterial_1qp34")
+
+[sub_resource type="Environment" id="Environment_w1dff"]
+background_mode = 2
+sky = SubResource("Sky_6p02m")
+
+[node name="Placeholder2DScene" type="Node2D"]
+script = ExtResource("1_8r86v")
+
+[node name="Player" parent="." instance=ExtResource("2_5mtnp")]
+
+[node name="EndlessFloor" parent="." instance=ExtResource("3_8t4jp")]
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle_01" parent="Obstacles" instance=ExtResource("4_vdqaf")]
+position = Vector2(222, -19)
+
+[node name="Obstacle_02" parent="Obstacles" instance=ExtResource("4_vdqaf")]
+position = Vector2(384, -208)
+
+[node name="Obstacle_03" parent="Obstacles" instance=ExtResource("4_vdqaf")]
+position = Vector2(637, -129)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="NPC_01" parent="Enemies" instance=ExtResource("5_kpchj")]
+position = Vector2(291, -10)
+
+[node name="NPC_02" parent="Enemies" instance=ExtResource("5_kpchj")]
+position = Vector2(287, -202)
+
+[node name="ParallaxBackground2" parent="." instance=ExtResource("6_lue02")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w1dff")
+
+[node name="BaseContainer" parent="." instance=ExtResource("7_t6rgw")]
+position = Vector2(302, -99)
+scale = Vector2(2, 2)
+
+[node name="Exterior" parent="BaseContainer" index="3"]
+visible = false
+
+[node name="BaseContainer2" parent="." instance=ExtResource("8_vkcjm")]
+position = Vector2(689, -99)
+scale = Vector2(2, 2)
+
+[node name="Exterior" parent="BaseContainer2" index="1"]
+visible = false
+
+[node name="TopCollision" parent="BaseContainer2" index="2"]
+disabled = true
+
+[node name="LeftCollision" parent="BaseContainer2" index="4"]
+disabled = true
+
+[node name="BaseContainer3" parent="." instance=ExtResource("8_vkcjm")]
+position = Vector2(689, -291)
+scale = Vector2(2, 2)
+
+[node name="Exterior" parent="BaseContainer3" index="1"]
+visible = false
+
+[node name="BottomCollision" parent="BaseContainer3" index="3"]
+disabled = true
+
+[node name="LeftCollision" parent="BaseContainer3" index="4"]
+disabled = true
+
+[node name="BaseContainer4" parent="." instance=ExtResource("8_vkcjm")]
+position = Vector2(301, -292)
+scale = Vector2(2, 2)
+
+[node name="Exterior" parent="BaseContainer4" index="1"]
+visible = false
+
+[node name="BottomCollision" parent="BaseContainer4" index="3"]
+disabled = true
+
+[node name="RightCollision" parent="BaseContainer4" index="5"]
+disabled = true
+
+[node name="platform_1" parent="." instance=ExtResource("9_1gt32")]
+
+[node name="platform_2" parent="." instance=ExtResource("9_1gt32")]
+position = Vector2(571, -197)
+
+[editable path="BaseContainer"]
+[editable path="BaseContainer2"]
+[editable path="BaseContainer3"]
+[editable path="BaseContainer4"]

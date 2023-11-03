@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://cecceqk8282a6"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_esbkl"]
+[ext_resource type="Texture2D" uid="uid://cr25ww6yimgkk" path="res://art/props/shipping_container_ill_eagle.png" id="2_aex3n"]
+[ext_resource type="Texture2D" uid="uid://bw2auvp8r1v5o" path="res://art/shipping_container.png" id="3_i43v0"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
+a = Vector2(96, -48)
+b = Vector2(-96, -48)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pl5uy"]
+a = Vector2(-96, 48)
+b = Vector2(96, 48)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6s04m"]
+a = Vector2(-96, -48)
+b = Vector2(-96, 48)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_v22jh"]
+a = Vector2(96, -47)
+b = Vector2(96, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
+size = Vector2(192, 96)
+
+[node name="BaseContainer" type="StaticBody2D"]
+script = ExtResource("1_esbkl")
+exterior_texture = ExtResource("2_aex3n")
+interior_texture = ExtResource("2_aex3n")
+
+[node name="Interior" type="Sprite2D" parent="."]
+z_index = -4
+rotation = 3.14159
+texture = ExtResource("3_i43v0")
+
+[node name="Exterior" type="Sprite2D" parent="."]
+texture = ExtResource("2_aex3n")
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_rgkd6")
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_pl5uy")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_6s04m")
+
+[node name="RightCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_v22jh")
+
+[node name="ContainerInterior" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
+shape = SubResource("RectangleShape2D_dnhqr")
+
+[connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
+[connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
