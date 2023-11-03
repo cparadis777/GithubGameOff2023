@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="6_aruj1"]
 [ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="7_e1fgr"]
 [ext_resource type="PackedScene" uid="uid://cg316itqsfouf" path="res://Levels/placeholder/Level_01.tscn" id="8_sjimt"]
-[ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Levels/ContainerStackingTest.tscn" id="9_3vd6b"]
+[ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="9_3vd6b"]
 
 [sub_resource type="Gradient" id="Gradient_1fdak"]
 colors = PackedColorArray(0, 0, 0, 1, 0.234514, 0.154286, 0.209769, 1)
@@ -146,7 +146,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Slide4/StartButton:visible")
+tracks/10/path = NodePath("Slide4/PlatformerStartButton:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -158,7 +158,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Slide4/StartButton2:visible")
+tracks/11/path = NodePath("Slide4/ContainerStackingStartButton:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -318,7 +318,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Slide4/StartButton:visible")
+tracks/10/path = NodePath("Slide4/PlatformerStartButton:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -330,7 +330,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Slide4/StartButton2:visible")
+tracks/11/path = NodePath("Slide4/ContainerStackingStartButton:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -517,7 +517,7 @@ offset_bottom = -854.0
 scale = Vector2(1.67911, 1.67911)
 text = "Manifest Violence"
 
-[node name="StartButton" type="Button" parent="Slide4"]
+[node name="PlatformerStartButton" type="Button" parent="Slide4"]
 visible = false
 offset_left = 85.0
 offset_top = -837.0
@@ -527,7 +527,7 @@ text = "Level 1"
 script = ExtResource("7_e1fgr")
 scene = ExtResource("8_sjimt")
 
-[node name="StartButton2" type="Button" parent="Slide4"]
+[node name="ContainerStackingStartButton" type="Button" parent="Slide4"]
 visible = false
 offset_left = 160.0
 offset_top = -837.0
