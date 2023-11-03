@@ -4,15 +4,24 @@ extends PlayerState
 var already_used_double_jump : bool = false
 
 signal double_jumped
+signal landed
+
+func _ready():
+	super()
+
+	await(owner.ready)
+	if player.has_method("_on_double_jumped"):
+		double_jumped.connect(player._on_double_jumped)
+	if player.has_method("_on_landed"):
+		landed.connect(player._on_landed)
+	
 
 # If we get a message asking us to jump, we jump.
 func enter(msg := {}) -> void:
 	if msg.has("do_jump"):
 		player.velocity.y = -player.JUMP_VELOCITY
 	already_used_double_jump = false
-	if !double_jumped.is_connected(player._on_double_jumped):
-		double_jumped.connect(player._on_double_jumped)
-
+	
 func physics_update(delta: float) -> void:
 	# Horizontal movement.
 
@@ -33,6 +42,7 @@ func physics_update(delta: float) -> void:
 
 	# Landing.
 	if player.is_on_floor():
+		landed.emit()
 		if is_equal_approx(player.velocity.x, 0.0):
 			state_machine.transition_to("Idle")
 		else:

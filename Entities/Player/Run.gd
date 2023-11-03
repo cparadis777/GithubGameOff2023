@@ -13,10 +13,8 @@ func physics_update(delta: float) -> void:
 	# We move the run-specific input code to the state.
 	# A good alternative would be to define a `get_input_direction()` function on the `Player.gd`
 	# script to avoid duplicating these lines in every script.
-	var input_direction_x: float = (
-		Input.get_action_strength("move_right")
-		- Input.get_action_strength("move_left")
-	)
+	var input_direction_x: float = Input.get_axis("move_left", "move_right")
+	
 	player.velocity.x = player.speed * input_direction_x
 	player.velocity.y += player.gravity * delta
 	player.move_and_slide()

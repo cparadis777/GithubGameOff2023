@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 @export var SPEED = 100.0
 var speed = SPEED # for state machine
-@export var JUMP_VELOCITY = 400.0
+@export var JUMP_VELOCITY = 500.0
 
 @onready var camera = $Camera2D
 @onready var hud = $HUD
@@ -70,6 +70,7 @@ func _input(_event):
 func play_run_animation():
 	if $AnimationPlayer.current_animation != "run":
 		$AnimationPlayer.play("run")
+	$Body/CyberRoninSprites.play("run")
 			
 func play_idle_animation():
 	if $AnimationPlayer.current_animation != "idle":
@@ -135,6 +136,9 @@ func _on_animation_player_animation_finished(anim_name):
 			play_run_animation()
 		else:
 			play_idle_animation()
+	elif anim_name == "land":
+		if StateMachine.state.name == "Run":
+			play_run_animation()
 
 func _on_state_transitioned(stateName):
 	match stateName:
@@ -146,12 +150,24 @@ func _on_state_transitioned(stateName):
 				camera._on_player_jumped()
 		"Run":
 			$RoninPlaceholderSprite.show()
-			$Body/CyberRoninSprites.play("run")
-			play_run_animation()
+			if StateMachine.previous_state_name != "Air":
+				play_run_animation()
+			else:
+				pass # just landed.. but we already received a signal for that. _on_landed
+			
+			
 		"Idle":
 			$Body/CyberRoninSprites.play("idle")
-			play_idle_animation()
+			if StateMachine.previous_state_name != "Air":
+				play_idle_animation()
+			else: # just landed.. but we already received a signal for that. _on_landed
+				pass
 			
 		
 func _on_double_jumped():
 	play_somersault_animation()
+
+func _on_landed():
+	$Body.rotation = 0.0
+	$AnimationPlayer.play("land")
+	print("Player landed, but there's no cool noise yet.")
