@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dox17fshlcmcg"]
+
+[ext_resource type="Script" path="res://UI/keybinds.gd" id="1_slr1a"]
+[ext_resource type="PackedScene" uid="uid://c54nt074ler6k" path="res://UI/action_bind.tscn" id="2_wtgtl"]
+
+[node name="Keybinds" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_slr1a")
+
+[node name="KeybindsButton" type="Button" parent="."]
+layout_mode = 2
+toggle_mode = true
+text = "> Show / Adjust Controls"
+
+[node name="Actions" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="action_bind" parent="Actions" instance=ExtResource("2_wtgtl")]
+layout_mode = 2
+
+[connection signal="toggled" from="KeybindsButton" to="." method="_on_keybinds_button_toggled"]

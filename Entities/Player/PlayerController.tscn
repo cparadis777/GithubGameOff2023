@@ -1246,8 +1246,6 @@ script = ExtResource("12_oq1kf")
 [node name="Air" type="Node" parent="StateMachine"]
 script = ExtResource("13_a17mm")
 
-[node name="HUD" parent="." instance=ExtResource("14_fp8yf")]
-
 [node name="Debug" type="Node2D" parent="."]
 position = Vector2(-15, -56)
 
@@ -1271,6 +1269,8 @@ stream = SubResource("AudioStreamRandomizer_h82oh")
 libraries = {
 "": SubResource("AnimationLibrary_duudu")
 }
+
+[node name="HUD" parent="." instance=ExtResource("14_fp8yf")]
 
 [connection signal="body_entered" from="Body/Actions/Kick/HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="body_entered" from="Body/Actions/Punch/HurtBox" to="." method="_on_hurt_box_body_entered"]

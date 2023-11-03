@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://cg316itqsfouf"]
+[gd_scene load_steps=12 format=3 uid="uid://cg316itqsfouf"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_4cu4p"]
-[ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="2_injxk"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="3_aaivl"]
 [ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="4_qmj6i"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/trashcan.tscn" id="5_0mas4"]
@@ -23,8 +22,6 @@ sky = SubResource("Sky_6p02m")
 
 [node name="Placeholder2DScene" type="Node2D"]
 script = ExtResource("1_4cu4p")
-
-[node name="HUD" parent="." instance=ExtResource("2_injxk")]
 
 [node name="Player" parent="." instance=ExtResource("3_aaivl")]
 
