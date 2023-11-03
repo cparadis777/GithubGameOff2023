@@ -2,7 +2,7 @@ extends StaticBody2D
 
 @export var exterior_texture:Texture2D
 @export var interior_texture:Texture2D
-
+var weigth:int
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Exterior.texture = exterior_texture
