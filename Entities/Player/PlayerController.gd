@@ -145,7 +145,7 @@ func _on_state_transitioned(stateName):
 		"Air":
 			$RoninPlaceholderSprite.hide()
 			$Body/CyberRoninSprites.stop()
-			$JumpNoises.play()
+			$Audio/JumpNoises.play()
 			if camera.has_method("_on_player_jumped"):
 				camera._on_player_jumped()
 		"Run":
@@ -170,4 +170,4 @@ func _on_double_jumped():
 func _on_landed():
 	$Body.rotation = 0.0
 	$AnimationPlayer.play("land")
-	print("Player landed, but there's no cool noise yet.")
+	
