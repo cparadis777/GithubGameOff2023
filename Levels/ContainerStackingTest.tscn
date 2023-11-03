@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=8 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Levels/DropPoints.gd" id="1_3v7oa"]
 [ext_resource type="Script" path="res://Levels/ContainerStackingTest.gd" id="1_pyuar"]
-[ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/BaseContainer.tscn" id="2_e7j4h"]
+[ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/Containers/BaseContainer.tscn" id="2_e7j4h"]
+[ext_resource type="PackedScene" uid="uid://bp5bfgn3sxr7f" path="res://Entities/Environment/Containers/BlueContainer.tscn" id="3_un5bh"]
 [ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_vaq0f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wi8fu"]
@@ -16,17 +17,20 @@ b = Vector2(-88, 40)
 position = Vector2(1, 1)
 script = ExtResource("1_pyuar")
 Container_scene = ExtResource("2_e7j4h")
+Containers = Array[PackedScene]([ExtResource("2_e7j4h"), ExtResource("3_un5bh")])
 
 [node name="DropPoints" type="Node2D" parent="."]
-position = Vector2(-56, -32)
+position = Vector2(-257, -193)
 script = ExtResource("1_3v7oa")
 n_horizontal = 5
 n_vertical = 5
-new_scale = 0.25
+new_scale = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.25, 0.25)
 
 [node name="Ship" type="StaticBody2D" parent="."]
+scale = Vector2(4, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
 position = Vector2(-96, 4)

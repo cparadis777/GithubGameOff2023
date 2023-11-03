@@ -9,16 +9,19 @@ func _ready():
 
 
 func connect_button_audio():
-	for button in %Buttons.get_children():
-		button.mouse_entered.connect($Audio/HoverNoise.play)
-		button.pressed.connect($Audio/ClickNoise.play)
+	for container in $VBoxContainer/Body/MarginContainer/Body.get_children():
+		if container is VBoxContainer:
+			for button in container.get_children():
+				button.mouse_entered.connect($Audio/HoverNoise.play)
+				button.pressed.connect($Audio/ClickNoise.play)
 
 
 func connect_button_signals():
-	for button in %Buttons.get_children():
-		if "play" in button.name.to_lower():
-			button.pressed.connect(start_game)
-		elif "quit" in button.name.to_lower():
+	for button in %Buttons2.get_children():
+#		if "play" in button.name.to_lower():
+#			button.pressed.connect(start_game)
+		if "quit" in button.name.to_lower():
+			print("hello quit button")
 			button.pressed.connect(quit_game)
 		elif "settings" in button.name.to_lower():
 			button.pressed.connect(view_settings)

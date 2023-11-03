@@ -15,17 +15,20 @@ func enter(msg := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	# Horizontal movement.
-	var input_direction_x: float = (
-		Input.get_action_strength("move_right")
-		- Input.get_action_strength("move_left")
-	)
+
+	var input_direction_x = Input.get_axis("move_left", "move_right")
+	
 	player.velocity.x = player.speed * input_direction_x
-	# Vertical movement.
-	player.velocity.y += player.gravity * delta
+	
+
+	apply_gravity(delta)
+	end_jump_early_if_player_releases_button()
+	
 	if Input.is_action_just_pressed("jump") and !already_used_double_jump:
 		player.velocity.y = -player.JUMP_VELOCITY
 		double_jumped.emit()
 		already_used_double_jump = true
+
 	player.move_and_slide()
 
 	# Landing.
@@ -34,3 +37,16 @@ func physics_update(delta: float) -> void:
 			state_machine.transition_to("Idle")
 		else:
 			state_machine.transition_to("Run")
+
+func apply_gravity(delta):
+	# Vertical movement.
+	if player.velocity.y < 0: # going up:
+		player.velocity.y += player.gravity * delta
+	else: # going down:
+		player.velocity.y += 2.0 * player.gravity * delta
+
+func 	end_jump_early_if_player_releases_button():
+	if player.velocity.y < 0: # going up:
+		if !Input.is_action_pressed("jump"):
+			player.velocity.y = 0
+			

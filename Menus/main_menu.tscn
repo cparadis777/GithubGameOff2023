@@ -1,13 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://tcanqah85n85"]
+[gd_scene load_steps=12 format=3 uid="uid://tcanqah85n85"]
 
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="1_htj5v"]
 [ext_resource type="Script" path="res://Menus/main_menu.gd" id="2_l1a6d"]
-[ext_resource type="PackedScene" uid="uid://bbbi07nppapt8" path="res://Levels/placeholder/Level_01.tscn" id="3_5wtxl"]
+[ext_resource type="PackedScene" uid="uid://cg316itqsfouf" path="res://Levels/placeholder/Level_01.tscn" id="3_5wtxl"]
 [ext_resource type="Shader" uid="uid://chvota4j62bo5" path="res://art/materials/shaders/pixelify_shader.tres" id="3_20pk7"]
 [ext_resource type="Texture2D" uid="uid://bkjabti7gg0v" path="res://art/placeholder/GenericBackdrop-AI-gen.png" id="3_od4jc"]
 [ext_resource type="Texture2D" uid="uid://ds7wrp282t8d6" path="res://art/placeholder/GameOffLogo.png" id="6_s2pix"]
+[ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="7_4hko4"]
 [ext_resource type="AudioStream" uid="uid://ccn60h0iwfwbg" path="res://audio/sfx/placeholder/button_hover.wav" id="7_bpl7k"]
 [ext_resource type="AudioStream" uid="uid://ditqh6y1ovspx" path="res://audio/sfx/placeholder/button_press.wav" id="8_jgwm5"]
+[ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Levels/ContainerStackingTest.tscn" id="8_q0tx5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dvqlr"]
 shader = ExtResource("3_20pk7")
@@ -66,6 +68,7 @@ layout_mode = 2
 [node name="Body" type="HBoxContainer" parent="VBoxContainer/Body/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 5
 
 [node name="GameOffLogo" type="TextureRect" parent="VBoxContainer/Body/MarginContainer/Body"]
 custom_minimum_size = Vector2(48, 64)
@@ -79,15 +82,27 @@ layout_mode = 2
 size_flags_horizontal = 6
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="VBoxContainer/Body/MarginContainer/Body/Buttons"]
+[node name="PlayButton" parent="VBoxContainer/Body/MarginContainer/Body/Buttons" instance=ExtResource("7_4hko4")]
 layout_mode = 2
-text = "PLAY"
+text = "Platformer"
+scene = ExtResource("3_5wtxl")
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer/Body/MarginContainer/Body/Buttons"]
+[node name="Container" parent="VBoxContainer/Body/MarginContainer/Body/Buttons" instance=ExtResource("7_4hko4")]
+layout_mode = 2
+text = "Container Stacking"
+scene = ExtResource("8_q0tx5")
+
+[node name="Buttons2" type="VBoxContainer" parent="VBoxContainer/Body/MarginContainer/Body"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/Body/MarginContainer/Body/Buttons2"]
 layout_mode = 2
 text = "SETTINGS"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer/Body/MarginContainer/Body/Buttons"]
+[node name="QuitButton" type="Button" parent="VBoxContainer/Body/MarginContainer/Body/Buttons2"]
 layout_mode = 2
 text = "QUIT"
 

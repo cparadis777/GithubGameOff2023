@@ -2,18 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-
-uid="uid://o8avnxyy8l88"
-
-path="res://.godot/imported/cyber-ronin_run.png-a5b4d4051b1b52a29314746286db2c21.ctex"
+uid="uid://cr25ww6yimgkk"
+path="res://.godot/imported/shipping_container_ill_eagle.png-4f4c5b5ca11687fc1eba67d44fb5c33d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/player/cyber-ronin_run.png"
-dest_files=["res://.godot/imported/cyber-ronin_run.png-a5b4d4051b1b52a29314746286db2c21.ctex"]
+source_file="res://art/props/shipping_container_ill_eagle.png"
+dest_files=["res://.godot/imported/shipping_container_ill_eagle.png-4f4c5b5ca11687fc1eba67d44fb5c33d.ctex"]
 
 [params]
 

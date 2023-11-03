@@ -2,18 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-
-uid="uid://o8avnxyy8l88"
-
-path="res://.godot/imported/cyber-ronin_run.png-a5b4d4051b1b52a29314746286db2c21.ctex"
+uid="uid://d1eabu4ga7wal"
+path="res://.godot/imported/shipping_container_ice_and_freezy.png-af7a20b361bed391f99d407b497ea7f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/player/cyber-ronin_run.png"
-dest_files=["res://.godot/imported/cyber-ronin_run.png-a5b4d4051b1b52a29314746286db2c21.ctex"]
+source_file="res://art/props/shipping_container_ice_and_freezy.png"
+dest_files=["res://.godot/imported/shipping_container_ice_and_freezy.png-af7a20b361bed391f99d407b497ea7f9.ctex"]
 
 [params]
 

@@ -1,23 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgk01ai7d526u"]
+[gd_scene load_steps=7 format=3 uid="uid://dgk01ai7d526u"]
 
 [ext_resource type="Texture2D" uid="uid://bw2auvp8r1v5o" path="res://art/shipping_container.png" id="1_flq8s"]
-[ext_resource type="Script" path="res://Entities/Environment/BaseContainer.gd" id="1_xmhax"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_xmhax"]
+[ext_resource type="Texture2D" uid="uid://cr25ww6yimgkk" path="res://art/props/shipping_container_ill_eagle.png" id="3_srdw2"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
-a = Vector2(64, -32)
-b = Vector2(-64, -32)
+a = Vector2(96, -48)
+b = Vector2(-96, -48)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_pl5uy"]
-a = Vector2(-64, 32)
-b = Vector2(64, 32)
+a = Vector2(-96, 48)
+b = Vector2(96, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
-size = Vector2(128, 64)
+size = Vector2(192, 96)
 
 [node name="BaseContainer" type="StaticBody2D"]
 script = ExtResource("1_xmhax")
-exterior_texture = ExtResource("1_flq8s")
-interior_texture = ExtResource("1_flq8s")
+exterior_texture = ExtResource("3_srdw2")
+interior_texture = ExtResource("3_srdw2")
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
@@ -25,17 +26,15 @@ rotation = 3.14159
 texture = ExtResource("1_flq8s")
 
 [node name="Exterior" type="Sprite2D" parent="."]
-texture = ExtResource("1_flq8s")
+texture = ExtResource("3_srdw2")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_rgkd6")
 
 [node name="BottomCollision" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("SegmentShape2D_pl5uy")
 
 [node name="ContainerInterior" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 shape = SubResource("RectangleShape2D_dnhqr")

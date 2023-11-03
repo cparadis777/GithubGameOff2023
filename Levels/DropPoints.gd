@@ -5,8 +5,8 @@ extends Node2D
 @export var new_scale:float
 @onready var drop_point:PackedScene = preload("res://Utilities/UtilityScenes/DropPoint.tscn")
 
-var container_width:int = 128
-var container_height:int = 64
+var container_width:int = 192
+var container_height:int = 96
 var drop_points_dict:Dictionary
 var current_position:Vector2 = Vector2(0,0)
 var current_container
@@ -89,9 +89,8 @@ func place_container() -> bool:
 	# v = d/t -> t = d/v
 	var tween_time = self.current_position.distance_to(position_to_place)
 	print(tween_time)
-	tween.tween_property(self.current_container, "position", drop_point_to_use.position, tween_time)
+	tween.tween_property(self.current_container, "position", drop_point_to_use.position, tween_time).set_trans(tween.TRANS_QUAD).set_ease(tween.EASE_IN)
 	tween.tween_callback(drop_done)
-	#self.current_container.set_position(drop_point_to_use.position)
 	drop_point_to_use.set_container(self.current_container)
 	self.current_container = null
 	return true
