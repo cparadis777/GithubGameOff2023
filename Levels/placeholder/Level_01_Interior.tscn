@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmm8rqol80lyr"]
+[gd_scene load_steps=14 format=3 uid="uid://dmm8rqol80lyr"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
 [ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="3_wke0u"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/trashcan.tscn" id="4_4k4sl"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="5_2wyyn"]
+[ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="7_gq8f5"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
@@ -38,6 +39,9 @@ script = ExtResource("1_foj8b")
 [node name="Player" parent="." instance=ExtResource("2_u6p87")]
 
 [node name="EndlessFloor" parent="." instance=ExtResource("3_wke0u")]
+
+[node name="Sprite2D" parent="EndlessFloor/FloorTiles" index="0"]
+visible = false
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -154,3 +158,14 @@ z_index = -100
 position = Vector2(0, -129)
 texture = SubResource("GradientTexture2D_jycef")
 region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
+
+[node name="Background2" type="Sprite2D" parent="."]
+z_index = -100
+texture_repeat = 2
+position = Vector2(1, -96)
+scale = Vector2(3, 3)
+texture = ExtResource("7_gq8f5")
+region_enabled = true
+region_rect = Rect2(-196, 2.08165e-12, 256, 96)
+
+[editable path="EndlessFloor"]
