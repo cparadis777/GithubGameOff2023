@@ -8,7 +8,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hovi6"]
 radius = 20.5961
-height = 117.239
+height = 63.3727
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s8act"]
 streams_count = 3
@@ -25,7 +25,7 @@ collision_layer = 2
 script = ExtResource("1_qkmle")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -61.7883)
+position = Vector2(1.58432, -31.6863)
 shape = SubResource("CapsuleShape2D_hovi6")
 
 [node name="DecisionTimer" type="Timer" parent="."]
@@ -34,8 +34,8 @@ autostart = true
 [node name="Appearance" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Appearance"]
-position = Vector2(0, -66.5413)
-scale = Vector2(0.4, 0.4)
+position = Vector2(0, -33.2707)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_x7p4c")
 
 [node name="IframesTimer" type="Timer" parent="."]
@@ -43,7 +43,9 @@ wait_time = 0.75
 one_shot = true
 
 [node name="HurtEffect" type="Sprite2D" parent="."]
-position = Vector2(0, -87.1374)
+visible = false
+position = Vector2(0, -45.9452)
+scale = Vector2(0.33, 0.33)
 
 [node name="Star" type="Polygon2D" parent="HurtEffect"]
 color = Color(1, 1, 0.25098, 1)

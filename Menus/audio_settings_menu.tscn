@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct3ytlk7bqmvm"]
+
+[ext_resource type="PackedScene" uid="uid://dwgry2nkxajfv" path="res://UI/volume_adjuster.tscn" id="1_qejnh"]
+
+[node name="Audio" type="VBoxContainer"]
+size_flags_vertical = 3
+
+[node name="AudioTitle" type="Label" parent="."]
+layout_mode = 2
+text = "Audio"
+horizontal_alignment = 1
+
+[node name="VolumeAdjuster" parent="." instance=ExtResource("1_qejnh")]
+layout_mode = 2
+
+[node name="VolumeAdjuster2" parent="." instance=ExtResource("1_qejnh")]
+layout_mode = 2
+bus_name = "sfx"
+
+[node name="VolumeAdjuster3" parent="." instance=ExtResource("1_qejnh")]
+layout_mode = 2
+bus_name = "music"

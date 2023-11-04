@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cytpnn70hcfsb"]
+[gd_scene load_steps=8 format=3 uid="uid://cytpnn70hcfsb"]
 
 [ext_resource type="Script" path="res://Menus/settings_menu.gd" id="1_3y8nf"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="1_sb44g"]
-[ext_resource type="PackedScene" uid="uid://dwgry2nkxajfv" path="res://UI/volume_adjuster.tscn" id="2_18w72"]
 [ext_resource type="PackedScene" uid="uid://cmfsia7nx2qdw" path="res://Menus/glitchy_background_image.tscn" id="3_hein6"]
-[ext_resource type="Texture2D" uid="uid://vmpymh7oea61" path="res://art/placeholder/potato.png" id="3_l54h0"]
-[ext_resource type="Texture2D" uid="uid://chs0n1tsxnlla" path="res://art/placeholder/rtx4090.png" id="4_fx6f0"]
+[ext_resource type="PackedScene" uid="uid://ct3ytlk7bqmvm" path="res://Menus/audio_settings_menu.tscn" id="4_jl8ts"]
+[ext_resource type="PackedScene" uid="uid://b45i070ptb576" path="res://Menus/graphics_settings_menu.tscn" id="5_2ci1o"]
 [ext_resource type="PackedScene" uid="uid://boxf3isucgo4t" path="res://Entities/Environment/music_visualizer.tscn" id="7_vo0f8"]
 [ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="8_12uvy"]
 
@@ -53,69 +52,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 
-[node name="Audio" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Body"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="AudioTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Audio"]
-layout_mode = 2
-text = "Audio"
-horizontal_alignment = 1
-
-[node name="VolumeAdjuster" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Audio" instance=ExtResource("2_18w72")]
+[node name="Audio" parent="PanelContainer/MarginContainer/VBoxContainer/Body" instance=ExtResource("4_jl8ts")]
 layout_mode = 2
 
-[node name="VolumeAdjuster2" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Audio" instance=ExtResource("2_18w72")]
+[node name="Graphics" parent="PanelContainer/MarginContainer/VBoxContainer/Body" instance=ExtResource("5_2ci1o")]
 layout_mode = 2
-bus_name = "sfx"
-
-[node name="VolumeAdjuster3" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Audio" instance=ExtResource("2_18w72")]
-layout_mode = 2
-bus_name = "music"
-
-[node name="Graphics" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Body"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="GraphicsTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics"]
-layout_mode = 2
-text = "Graphics"
-horizontal_alignment = 1
-
-[node name="Fullscreen" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics"]
-layout_mode = 2
-
-[node name="FullscreenLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/Fullscreen"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Fullscreen"
-
-[node name="FullscreenCheckButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/Fullscreen"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="GraphicsMode" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics"]
-visible = false
-layout_mode = 2
-
-[node name="GraphicsModeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/GraphicsMode"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Graphics"
-
-[node name="GraphicsModeOptionList" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/GraphicsMode"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/h_separation = 25
-item_count = 2
-selected = 1
-popup/item_0/text = "Low-spec"
-popup/item_0/icon = ExtResource("3_l54h0")
-popup/item_0/id = 0
-popup/item_1/text = "High-spec"
-popup/item_1/icon = ExtResource("4_fx6f0")
-popup/item_1/id = 1
 
 [node name="Footer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -144,6 +85,3 @@ render_target_update_mode = 4
 stream = ExtResource("8_12uvy")
 autoplay = true
 bus = &"music"
-
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/Fullscreen/FullscreenCheckButton" to="." method="_on_fullscreen_check_button_toggled"]
-[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer/Body/Graphics/GraphicsMode/GraphicsModeOptionList" to="." method="_on_graphics_mode_option_list_item_selected"]

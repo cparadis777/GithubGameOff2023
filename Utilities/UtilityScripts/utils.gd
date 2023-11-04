@@ -11,3 +11,10 @@ func get_closest_node(nodeList : Array, location : Vector2):
 			closest = node
 			closest_dist = location.distance_squared_to(node)
 	return closest
+
+
+func normalize(x, min, max) -> float:
+	x = float(x)
+	min = float(min)
+	max = float(max)
+	return (x-min)/(max-min)

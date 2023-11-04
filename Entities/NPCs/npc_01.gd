@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var SPEED = 50.0
+@export var SPEED = 40.0
 @export var JUMP_VELOCITY = -100.0
 
 @export var health_max = 20.0
@@ -28,6 +28,8 @@ func _physics_process(delta):
 		move_and_slide()
 	elif State == States.KNOCKBACK:
 		move_and_slide()
+		
+	
 	
 
 
@@ -70,4 +72,9 @@ func _on_hit(damage, impactVector, _damageType, knockback):
 func _on_iframes_timer_timeout():
 	if State == States.KNOCKBACK:
 		$HurtEffect/Star.hide()
+		if velocity.x > 0:
+			velocity = Vector2.RIGHT * SPEED
+		else:
+			velocity = Vector2.LEFT * SPEED
+
 		State = States.ROLLING

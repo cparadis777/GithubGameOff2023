@@ -3,13 +3,17 @@ extends Node2D
 @export var n_horizontal:int
 @export var n_vertical:int
 @export var new_scale:float
+
 @onready var drop_point:PackedScene = preload("res://Utilities/UtilityScenes/DropPoint.tscn")
 
-var container_width:int = 128
-var container_height:int = 64
+var container_dropping
+var container_width:int = 192
+var container_height:int = 96
 var drop_points_dict:Dictionary
-var current_position:Vector2 = Vector2(0,0)
-var current_container
+var drop_point_targeted
+
+signal weight_added(weight)
+signal drop_over
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,7 +62,6 @@ func get_adjacent_coordinate(direction:Utils.Directions, coordinate:Vector2 = se
 				return coordinate + Vector2(0,1)
 			else: 
 				return null
-
 		3:
 			if coordinate[0] > 0:
 				return coordinate - Vector2(1, 0)
@@ -66,17 +69,11 @@ func get_adjacent_coordinate(direction:Utils.Directions, coordinate:Vector2 = se
 				return null
 		
 
-func move_container(direction:Utils.Directions) -> void:
-	var next_position = self.get_adjacent_coordinate(direction)
-	if next_position != null and self.current_container != null:
-		if !self.get_drop_point(next_position).is_filled:
-			self.current_position = next_position
-			self.current_container.position = self.get_drop_point(current_position).position
 
-func place_container() -> bool:
-	get_parent().container_move_ready = false
+func place_container(container:StaticBody2D, column:int) -> bool:
 	var falling:bool = true
-	var position_to_place = self.current_position
+	var current_position = Vector2(column, 0)
+	var position_to_place = current_position
 	while falling:
 		if check_under(position_to_place):
 			position_to_place = get_adjacent_coordinate(Utils.Directions.DOWN, position_to_place)
@@ -84,16 +81,15 @@ func place_container() -> bool:
 			falling = false
 	
 	var drop_point_to_use:Marker2D = self.get_drop_point(position_to_place)
-	self.current_container.set_mode("REAL")
 	var tween = get_tree().create_tween()
 	# v = d/t -> t = d/v
-	var tween_time = self.current_position.distance_to(position_to_place)
-	print(tween_time)
-	tween.tween_property(self.current_container, "position", drop_point_to_use.position, tween_time)
+	var tween_time = container.global_position.distance_to(drop_point_to_use.global_position)/100
+	tween.tween_property(container, "global_position", drop_point_to_use.global_position, tween_time).set_trans(tween.TRANS_QUAD).set_ease(tween.EASE_IN)
 	tween.tween_callback(drop_done)
-	#self.current_container.set_position(drop_point_to_use.position)
-	drop_point_to_use.set_container(self.current_container)
-	self.current_container = null
+	drop_point_to_use.set_container(container)
+	self.container_dropping = container
+	self.drop_point_targeted = drop_point_to_use
+
 	return true
 
 func get_drop_point(coord:Vector2):
@@ -119,4 +115,13 @@ func check_under(coordinate:Vector2) -> bool:
 	return false
 
 func drop_done()->void:
-	get_parent().container_move_ready = true
+	var old_parent = self.container_dropping.get_parent()
+	old_parent.remove_child(self.container_dropping)
+	self.drop_point_targeted.add_child(self.container_dropping)
+	self.container_dropping.position = (Vector2(0,0))
+	emit_signal("weight_added", self.container_dropping.weigth)
+	emit_signal("drop_over")
+
+
+func check_drop_possible(column:int) -> bool:
+	return !get_drop_point(Vector2(column,0)).is_filled

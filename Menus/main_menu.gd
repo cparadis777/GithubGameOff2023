@@ -21,7 +21,6 @@ func connect_button_signals():
 #		if "play" in button.name.to_lower():
 #			button.pressed.connect(start_game)
 		if "quit" in button.name.to_lower():
-			print("hello quit button")
 			button.pressed.connect(quit_game)
 		elif "settings" in button.name.to_lower():
 			button.pressed.connect(view_settings)

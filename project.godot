@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Github Game Off 2023"
-run/main_scene="res://Menus/main_menu.tscn"
+run/main_scene="res://CutScenes/intro_animatic.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -87,15 +87,21 @@ kick={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":44,"key_label":0,"unicode":44,"echo":false,"script":null)
 ]
 }
+pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Projectiles"
-2d_physics/layer_4="Environment"
-2d_physics/layer_5="Interactables"
+2d_physics/layer_4="Environment For Player"
+2d_physics/layer_5="Environment For NPCs"
 2d_physics/layer_6="Pickables"
+2d_physics/layer_7="Interactables"
 
 [rendering]
 

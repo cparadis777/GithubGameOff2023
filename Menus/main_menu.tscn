@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="7_4hko4"]
 [ext_resource type="AudioStream" uid="uid://ccn60h0iwfwbg" path="res://audio/sfx/placeholder/button_hover.wav" id="7_bpl7k"]
 [ext_resource type="AudioStream" uid="uid://ditqh6y1ovspx" path="res://audio/sfx/placeholder/button_press.wav" id="8_jgwm5"]
-[ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Levels/ContainerStackingTest.tscn" id="8_q0tx5"]
+[ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="8_q0tx5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dvqlr"]
 shader = ExtResource("3_20pk7")
@@ -115,7 +115,7 @@ size_flags_stretch_ratio = 0.2
 [node name="FooterText" type="Label" parent="VBoxContainer/Footer"]
 custom_minimum_size = Vector2(180, 2.08165e-12)
 layout_mode = 2
-text = "Developed for Github GameOff 2023 by Ced, BunEar, Zach, Guac, gaminrick7, plexsoup"
+text = "Developed for Github GameOff 2023 by Ced, BunEar, Zach, Guac, IanC, plexsoup"
 horizontal_alignment = 1
 autowrap_mode = 3
 
