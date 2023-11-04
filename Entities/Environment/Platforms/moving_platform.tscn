@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://c17sncorbfoal"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Platforms/moving_platform.gd" id="1_ugeys"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dhxm5"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m52p8"]
+width = 48
+height = 16
+noise = SubResource("FastNoiseLite_dhxm5")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjuhk"]
+size = Vector2(48, 16)
+
+[node name="MovingPlatform" type="AnimatableBody2D" groups=["JumpThroughPlatforms"]]
+collision_layer = 24
+collision_mask = 27
+script = ExtResource("1_ugeys")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("NoiseTexture2D_m52p8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.08165e-12, 0)
+shape = SubResource("RectangleShape2D_bjuhk")
+one_way_collision = true
+
+[node name="StateLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = 1.0
+text = "State"
+
+[node name="PositionMarkers" type="Node2D" parent="."]
+
+[node name="Location1" type="Marker2D" parent="PositionMarkers"]
+
+[node name="Location2" type="Marker2D" parent="PositionMarkers"]
+position = Vector2(0, -141)
