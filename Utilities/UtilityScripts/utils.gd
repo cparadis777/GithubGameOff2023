@@ -13,8 +13,8 @@ func get_closest_node(nodeList : Array, location : Vector2):
 	return closest
 
 
-func normalize(x, min, max) -> float:
+func normalize_value(x, min_value, max_value) -> float:
 	x = float(x)
-	min = float(min)
-	max = float(max)
-	return (x-min)/(max-min)
+	min_value = float(min_value)
+	max_value = float(max_value)
+	return (x-min_value)/(max_value-min_value)
