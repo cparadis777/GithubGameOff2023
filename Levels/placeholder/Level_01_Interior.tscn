@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://dmm8rqol80lyr"]
+[gd_scene load_steps=16 format=3 uid="uid://dmm8rqol80lyr"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
 [ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="3_wke0u"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/trashcan.tscn" id="4_4k4sl"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="5_2wyyn"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_ap6lg"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="7_53wf6"]
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="7_gq8f5"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
@@ -41,6 +42,9 @@ script = ExtResource("1_foj8b")
 
 [node name="EndlessFloor" parent="." instance=ExtResource("3_wke0u")]
 
+[node name="InfiniteFloorStaticBody" parent="EndlessFloor" index="0"]
+collision_layer = 3
+
 [node name="Sprite2D" parent="EndlessFloor/FloorTiles" index="0"]
 visible = false
 
@@ -65,6 +69,9 @@ position = Vector2(-137, -10)
 
 [node name="NPC_01" parent="Enemies" instance=ExtResource("5_2wyyn")]
 position = Vector2(91, 0)
+
+[node name="NPC_02_DockWorker" parent="Enemies" instance=ExtResource("6_ap6lg")]
+position = Vector2(-208, -51)
 
 [node name="Label" type="Label" parent="."]
 offset_left = -46.0
