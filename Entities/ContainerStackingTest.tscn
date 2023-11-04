@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_bhv33"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wi8fu"]
-size = Vector2(16, 112)
+size = Vector2(16, 21.5)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_4sa48"]
 a = Vector2(104, 40)
@@ -35,12 +35,10 @@ zoom = Vector2(0.25, 0.25)
 
 [node name="Ship" type="StaticBody2D" parent="."]
 scale = Vector2(4, 4)
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
-position = Vector2(-96, 4)
+position = Vector2(-96, 49.25)
 shape = SubResource("RectangleShape2D_wi8fu")
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Ship"]
 position = Vector2(112, -8)
@@ -51,10 +49,9 @@ shape = SubResource("SegmentShape2D_4sa48")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Ship"]
-position = Vector2(-96, 0.999996)
-scale = Vector2(0.125, 0.859375)
+position = Vector2(-96, 47.25)
+scale = Vector2(0.125, 0.136719)
 texture = ExtResource("4_bhv33")
-metadata/_edit_lock_ = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Ship"]
 position = Vector2(112, -6.00001)
