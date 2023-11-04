@@ -5,7 +5,7 @@
 extends CharacterBody2D
 
 
-@export var SPEED = 100.0
+@export var SPEED = 200.0
 var speed = SPEED # for state machine
 @export var JUMP_VELOCITY = 500.0
 
@@ -203,7 +203,7 @@ func detect_jump_through_platform() -> StaticBody2D:
 	var jump_through_platform_detected
 	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
 	for candidate in candidate_bodies:
-		if candidate.is_in_group("JumpThroughPlatforms") or candidate.name.has("JumpThrough"):
+		if candidate.is_in_group("JumpThroughPlatforms") or "jump" in candidate.name.to_lower():
 			jump_through_platform_detected = candidate
 	return jump_through_platform_detected
 

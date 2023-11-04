@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
-[ext_resource type="Texture2D" uid="uid://cr25ww6yimgkk" path="res://art/props/shipping_container_ill_eagle.png" id="2_asvyr"]
-[ext_resource type="Texture2D" uid="uid://d1eabu4ga7wal" path="res://art/props/shipping_container_ice_and_freezy.png" id="3_n5ip3"]
-[ext_resource type="Texture2D" uid="uid://clmp7dn0a5mk1" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
+[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="2_asvyr"]
+[ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="3_n5ip3"]
+[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
 [ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="5_ww7q0"]
 [ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="6_aruj1"]
 [ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="7_e1fgr"]

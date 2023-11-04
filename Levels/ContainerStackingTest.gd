@@ -15,7 +15,6 @@ func _process(_delta):
 
 func add_weight(weight:int) -> void:
 	self.current_weight += weight
-	var new_percentage = Utils.normalize(self.current_weight, 0, target_weight)
-	print(new_percentage)
+	var new_percentage = Utils.normalize_value(self.current_weight, 0, target_weight)
 	$ProgressBar.value = new_percentage
 

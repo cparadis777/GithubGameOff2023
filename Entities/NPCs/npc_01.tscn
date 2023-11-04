@@ -22,6 +22,7 @@ stream_2/weight = 1.0
 [node name="NPC_01" type="CharacterBody2D" groups=["Enemies"]]
 scale = Vector2(0.631187, 0.631187)
 collision_layer = 2
+collision_mask = 31
 script = ExtResource("1_qkmle")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -22,6 +22,7 @@ func physics_update(delta: float) -> void:
 	player.velocity.x = player.speed * input_direction_x
 	player.velocity.y += player.gravity * delta
 	player.move_and_slide()
+	player.get_platform_velocity()
 
 	if Input.is_action_just_pressed("jump"):
 		state_machine.transition_to("Air", {do_jump = true})

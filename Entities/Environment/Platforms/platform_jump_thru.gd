@@ -8,9 +8,12 @@ extends StaticBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if !has_node("ReactivateTimer"):
+		setup_timer()
 	$ReactivateTimer.timeout.connect(_on_reactivate_timer_timeout)
 	set_collision_layer_value(4, true) # player
 	set_collision_layer_value(5, true) # NPCs
+
 
 
 func allow_player_to_pass():
@@ -19,6 +22,12 @@ func allow_player_to_pass():
 	$Sprite2D.hide()
 	$ReactivateTimer.start()
 
+func setup_timer():
+	var timer = Timer.new()
+	timer.name = "ReactivateTimer"
+	timer.set_wait_time(0.75)
+	add_child(timer)
+		
 func _on_reactivate_timer_timeout():
 	set_collision_mask_value(1, true)
 	set_collision_layer_value(4, true)

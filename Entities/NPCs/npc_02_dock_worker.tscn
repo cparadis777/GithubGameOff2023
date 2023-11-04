@@ -1,0 +1,469 @@
+[gd_scene load_steps=13 format=3 uid="uid://b7lbhsnpyax66"]
+
+[ext_resource type="Texture2D" uid="uid://b8to6pueoyptm" path="res://art/placeholder/dock_worker_cutouts.png" id="1_po8lm"]
+[ext_resource type="Script" path="res://Entities/NPCs/Behaviours/WalkTowardPlayer.gd" id="2_f7ga5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hlt8h"]
+radius = 19.0
+height = 60.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exepe"]
+atlas = ExtResource("1_po8lm")
+region = Rect2(57.021, 60.1806, 28.3128, 30.5514)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kq85o"]
+atlas = ExtResource("1_po8lm")
+region = Rect2(90.0744, 60.3123, 31.8683, 34.2387)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkgjn"]
+atlas = ExtResource("1_po8lm")
+region = Rect2(3.55593, 43.7197, 48.4609, 51.2263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whttp"]
+atlas = ExtResource("1_po8lm")
+region = Rect2(82.8316, 3.29175, 39.6379, 47.6708)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sg0d1"]
+atlas = ExtResource("1_po8lm")
+region = Rect2(56.3625, 8.55924, 23.9671, 35.9506)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hocqj"]
+atlas = ExtResource("1_po8lm")
+region = Rect2(16.3296, 3.55513, 33.5802, 34.8971)
+
+[sub_resource type="Animation" id="Animation_84nqr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PaperDoll/LegL:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaperDoll/LegL:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, 19)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PaperDoll/LegR:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 21)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PaperDoll/LegR:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PaperDoll/Torso/LarmL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-24, -4)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PaperDoll/Torso/LarmL:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PaperDoll/Torso/UArmL:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(18, -14)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PaperDoll/Torso/UArmL:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PaperDoll/Torso:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("PaperDoll/Torso:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("PaperDoll:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("PaperDoll:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("PaperDoll:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("PaperDoll/Torso/Head:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.666667, -16.3333)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("PaperDoll/Torso/Head:rotation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0212914]
+}
+
+[sub_resource type="Animation" id="Animation_h2h41"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PaperDoll/LegL:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.523567, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaperDoll/LegL:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(11, 19), Vector2(8, 21), Vector2(11, 19)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PaperDoll/LegR:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-8, 21), Vector2(1, 21), Vector2(-8, 21)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PaperDoll/LegR:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.36037, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PaperDoll/Torso/LarmL:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-23, -10), Vector2(-20, -6), Vector2(-23, -10)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PaperDoll/Torso/LarmL:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.07902, 0.00653207, 1.07902]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PaperDoll/Torso/UArmL:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(18, -14), Vector2(18, -14)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PaperDoll/Torso/UArmL:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0937, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PaperDoll/Torso:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("PaperDoll/Torso:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("PaperDoll:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("PaperDoll:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("PaperDoll:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("PaperDoll/Torso/Head:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.3, 0.45, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.666667, -16.3333), Vector2(1, -19), Vector2(-5.96046e-08, -14), Vector2(-4, -14), Vector2(1, -20), Vector2(1, -14), Vector2(0.666667, -16.3333)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("PaperDoll/Torso/Head:rotation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.0212914, -0.0212914, -0.0212914]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6d053"]
+_data = {
+"RESET": SubResource("Animation_84nqr"),
+"walk": SubResource("Animation_h2h41")
+}
+
+[node name="NPC_02_DockWorker" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 24
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -30)
+shape = SubResource("CapsuleShape2D_hlt8h")
+
+[node name="PaperDoll" type="Node2D" parent="."]
+
+[node name="LegR" type="Sprite2D" parent="PaperDoll"]
+position = Vector2(-8, 21)
+texture = SubResource("AtlasTexture_exepe")
+offset = Vector2(-3, 10)
+
+[node name="LegL" type="Sprite2D" parent="PaperDoll"]
+position = Vector2(11, 19)
+texture = SubResource("AtlasTexture_kq85o")
+offset = Vector2(4, 12)
+
+[node name="Torso" type="Sprite2D" parent="PaperDoll"]
+texture = SubResource("AtlasTexture_gkgjn")
+
+[node name="UArmL" type="Sprite2D" parent="PaperDoll/Torso"]
+position = Vector2(18, -14)
+texture = SubResource("AtlasTexture_whttp")
+offset = Vector2(12, 15)
+
+[node name="LarmL" type="Sprite2D" parent="PaperDoll/Torso"]
+z_index = -1
+position = Vector2(-24, -4)
+scale = Vector2(-1, -1)
+texture = SubResource("AtlasTexture_sg0d1")
+offset = Vector2(-8, -10)
+
+[node name="Head" type="Sprite2D" parent="PaperDoll/Torso"]
+position = Vector2(0.666667, -16.3333)
+rotation = -0.0212914
+scale = Vector2(1.23821, 1.23821)
+texture = SubResource("AtlasTexture_hocqj")
+offset = Vector2(-3, -12)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6d053")
+}
+
+[node name="Behaviours" type="Node2D" parent="."]
+
+[node name="Movement" type="Node2D" parent="Behaviours"]
+
+[node name="WalkTowardPlayer" type="Node2D" parent="Behaviours/Movement"]
+script = ExtResource("2_f7ga5")
+
+[node name="Attacks" type="Node2D" parent="Behaviours"]
+
+[node name="HeavyMeleeAttack" type="Node2D" parent="Behaviours/Attacks"]
+
+[node name="Defenses" type="Node2D" parent="Behaviours"]
+
+[node name="NoKnockbackDefense" type="Node2D" parent="Behaviours/Defenses"]
