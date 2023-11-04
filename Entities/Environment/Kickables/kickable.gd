@@ -1,22 +1,22 @@
 extends RigidBody2D
 
-var kicked = false
-var kick_iframes_timer : Timer
+var pushed = false
+var push_iframes_timer : Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	kick_iframes_timer = Timer.new()
-	kick_iframes_timer.set_wait_time(0.15)
-	add_child(kick_iframes_timer)
-	kick_iframes_timer.timeout.connect(_on_kick_iframes_timer_timeout)
+	push_iframes_timer = Timer.new()
+	push_iframes_timer.set_wait_time(0.15)
+	add_child(push_iframes_timer)
+	push_iframes_timer.timeout.connect(_on_push_iframes_timer_timeout)
 
-func kick(impactVector):
-	if !kicked:
+func push(impactVector):
+	if !pushed:
 		apply_central_impulse(impactVector)
-		kicked = true
+		pushed = true
 		set_collision_mask_value(4, false)
-		kick_iframes_timer.start()
+		push_iframes_timer.start()
 		
-func _on_kick_iframes_timer_timeout():
-	kicked = false
+func _on_push_iframes_timer_timeout():
+	pushed = false
 	set_collision_mask_value(4, true)
