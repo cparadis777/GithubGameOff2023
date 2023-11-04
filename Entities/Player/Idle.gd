@@ -26,6 +26,8 @@ func physics_update(_delta: float) -> void:
 				duck()
 		else:
 			printerr("coupling problem: Air state requested method detect_jump_through_platform from player, but it did not exist.")
+	
+	player.move_and_slide()
 			
 func duck():
 	print("player wants to duck, but that's not implemented yet.")

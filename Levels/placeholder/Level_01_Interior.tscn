@@ -109,9 +109,6 @@ text = "JumpThroughPlatform"
 [node name="MovingPlatform" parent="Platforms" instance=ExtResource("7_53wf6")]
 position = Vector2(-67, -39)
 
-[node name="EndLocation" parent="Platforms/MovingPlatform" index="2"]
-position = Vector2(0, -158)
-
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="Wall" type="StaticBody2D" parent="Walls"]
