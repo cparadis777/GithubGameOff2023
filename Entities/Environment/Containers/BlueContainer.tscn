@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bp5bfgn3sxr7f"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_40er5"]
+[ext_resource type="Texture2D" uid="uid://d1eabu4ga7wal" path="res://art/props/shipping_container_ice_and_freezy.png" id="2_4oduv"]
+[ext_resource type="Texture2D" uid="uid://cpm3d8w1b5tew" path="res://art/background/shipping_container_ice_and_freezy_INTERIOR.png" id="3_0ebf5"]
+[ext_resource type="PackedScene" uid="uid://dm2tosesjfq22" path="res://Entities/Environment/destructible_wall.tscn" id="4_caqdq"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
+a = Vector2(96, -48)
+b = Vector2(-96, -48)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pl5uy"]
+a = Vector2(-96, 48)
+b = Vector2(96, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
+size = Vector2(192, 96)
+
+[node name="BaseContainer" type="StaticBody2D"]
+script = ExtResource("1_40er5")
+exterior_texture = ExtResource("2_4oduv")
+interior_texture = ExtResource("3_0ebf5")
+
+[node name="DestructibleWall" parent="." instance=ExtResource("4_caqdq")]
+position = Vector2(-88, 48)
+
+[node name="DestructibleWall2" parent="." instance=ExtResource("4_caqdq")]
+position = Vector2(88, 48)
+
+[node name="Interior" type="Sprite2D" parent="."]
+z_index = -4
+texture = ExtResource("3_0ebf5")
+metadata/_edit_lock_ = true
+
+[node name="Exterior" type="Sprite2D" parent="."]
+texture = ExtResource("2_4oduv")
+metadata/_edit_lock_ = true
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_rgkd6")
+metadata/_edit_lock_ = true
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_pl5uy")
+metadata/_edit_lock_ = true
+
+[node name="ContainerInterior" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
+shape = SubResource("RectangleShape2D_dnhqr")
+
+[connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
+[connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

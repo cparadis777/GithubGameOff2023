@@ -1,9 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1abay8tiljxi"]
+[gd_scene load_steps=8 format=3 uid="uid://c1abay8tiljxi"]
 
 [ext_resource type="Script" path="res://Entities/Environment/endless_floor_placeholder.gd" id="1_rhn8s"]
-[ext_resource type="PackedScene" uid="uid://c4iy63kjhi52b" path="res://Entities/Environment/moving_floor_tile.tscn" id="2_emyvb"]
+[ext_resource type="Shader" uid="uid://chvota4j62bo5" path="res://art/materials/shaders/pixelify_shader.tres" id="2_28ar3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wshx0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_voun5"]
+shader = ExtResource("2_28ar3")
+shader_parameter/PixelSize = 0.001
+
+[sub_resource type="Gradient" id="Gradient_aximw"]
+offsets = PackedFloat32Array(0.278736, 0.422414, 0.586207)
+colors = PackedColorArray(0, 0, 0, 1, 0.321728, 0.321728, 0.321728, 1, 0.0795273, 0.0821123, 0.141345, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_di54l"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a5d4o"]
+width = 8192
+height = 64
+color_ramp = SubResource("Gradient_aximw")
+noise = SubResource("FastNoiseLite_di54l")
 
 [node name="EndlessFloor" type="Node2D"]
 script = ExtResource("1_rhn8s")
@@ -15,12 +32,8 @@ shape = SubResource("WorldBoundaryShape2D_wshx0")
 
 [node name="FloorTiles" type="Node2D" parent="."]
 
-[node name="Tile2" parent="FloorTiles" instance=ExtResource("2_emyvb")]
-self_modulate = Color(0.180392, 0.435294, 0.505882, 1)
-position = Vector2(-256, 35)
-
-[node name="Tile1" parent="FloorTiles" instance=ExtResource("2_emyvb")]
-
-[node name="Tile3" parent="FloorTiles" instance=ExtResource("2_emyvb")]
-self_modulate = Color(1, 0.396078, 1, 1)
-position = Vector2(256, 35)
+[node name="Sprite2D" type="Sprite2D" parent="FloorTiles"]
+texture_repeat = 3
+material = SubResource("ShaderMaterial_voun5")
+position = Vector2(0, 32)
+texture = SubResource("NoiseTexture2D_a5d4o")

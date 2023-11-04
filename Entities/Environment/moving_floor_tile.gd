@@ -7,7 +7,6 @@ var State = States.INITIALIZING
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#print($VisibleOnScreenNotifier2D.get_relative_transform_to_parent(self))
 	await get_tree().create_timer(0.1).timeout
 	State = States.READY
 
@@ -22,7 +21,7 @@ func _on_visible_on_screen_enabler_2d_screen_exited():
 		var camera = get_viewport().get_camera_2d()
 		
 		var direction
-		if camera.global_position.x > self.global_position.x:
+		if camera.get_screen_center_position().x > self.global_position.x:
 			direction = Vector2.RIGHT
 		else:
 			direction = Vector2.LEFT

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c54nt074ler6k"]
+
+[ext_resource type="Script" path="res://UI/action_bind.gd" id="1_bnhex"]
+
+[node name="action_bind" type="HBoxContainer"]
+visible = false
+script = ExtResource("1_bnhex")
+
+[node name="ActionName" type="Label" parent="."]
+layout_mode = 2
+
+[node name="KeybindButton" type="Button" parent="."]
+layout_mode = 2
+
+[connection signal="pressed" from="KeybindButton" to="." method="_on_keybind_button_pressed"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://di3cuwne2hwff"]
+
+[ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="1_inica"]
+
+[node name="PlayButton" type="Button"]
+text = "PLAY"
+script = ExtResource("1_inica")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

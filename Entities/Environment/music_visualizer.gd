@@ -17,7 +17,7 @@ func _on_timer_timeout():
 	var channelID = 0
 	var analyzer : AudioEffectSpectrumAnalyzerInstance = AudioServer.get_bus_effect_instance(busID, spectrumAnalyzerEffectID, channelID )
 	var drums = [ 20, 800 ] # rough frequency range
-	var horns = [ 800, 20000] # rough frequency range
+	var _horns = [ 800, 20000] # rough frequency range
 	var instrument = drums
 	var amplitude = analyzer.get_magnitude_for_frequency_range(instrument[0], instrument[1], analyzer.MAGNITUDE_MAX).x # x = left ear
 	var magnitude = 200.0

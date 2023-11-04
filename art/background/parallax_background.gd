@@ -8,4 +8,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	scroll_offset.x -= 40*delta
+	$Clouds.motion_offset.x -= 20 * delta
+	$Steam.motion_offset.x -= 6 * delta

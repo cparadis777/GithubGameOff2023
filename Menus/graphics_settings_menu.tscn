@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://b45i070ptb576"]
+
+[ext_resource type="Script" path="res://Menus/graphics_settings_menu.gd" id="1_lfx7r"]
+
+[node name="Graphics" type="VBoxContainer"]
+size_flags_vertical = 3
+script = ExtResource("1_lfx7r")
+
+[node name="GraphicsTitle" type="Label" parent="."]
+layout_mode = 2
+text = "Graphics"
+horizontal_alignment = 1
+
+[node name="Fullscreen" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="FullscreenLabel" type="Label" parent="Fullscreen"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fullscreen"
+
+[node name="FullscreenCheckButton" type="CheckButton" parent="Fullscreen"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="toggled" from="Fullscreen/FullscreenCheckButton" to="." method="_on_fullscreen_check_button_toggled"]

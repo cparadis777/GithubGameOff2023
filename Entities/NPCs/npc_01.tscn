@@ -1,28 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=8 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/npc_01.gd" id="1_qkmle"]
 [ext_resource type="Texture2D" uid="uid://bi724p8u5kyfb" path="res://art/placeholder/EUC.png" id="1_x7p4c"]
+[ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="3_naqaf"]
+[ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="4_tlhgp"]
+[ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="5_6txwc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hovi6"]
-radius = 12.6745
+radius = 20.5961
 height = 63.3727
 
-[node name="NPC_01" type="CharacterBody2D"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s8act"]
+streams_count = 3
+stream_0/stream = ExtResource("3_naqaf")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_tlhgp")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_6txwc")
+stream_2/weight = 1.0
+
+[node name="NPC_01" type="CharacterBody2D" groups=["Enemies"]]
 scale = Vector2(0.631187, 0.631187)
+collision_layer = 2
 script = ExtResource("1_qkmle")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -33.2706)
+position = Vector2(1.58432, -31.6863)
 shape = SubResource("CapsuleShape2D_hovi6")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="DecisionTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="Appearance" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Appearance"]
-position = Vector2(0, -33.2706)
+position = Vector2(0, -33.2707)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_x7p4c")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="IframesTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
+[node name="HurtEffect" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -45.9452)
+scale = Vector2(0.33, 0.33)
+
+[node name="Star" type="Polygon2D" parent="HurtEffect"]
+color = Color(1, 1, 0.25098, 1)
+polygon = PackedVector2Array(0, -53.8668, 6.33727, -11.0902, 49.1138, -22.1804, 9.5059, 7.92158, 31.6863, 47.5295, 0, 19.0118, -39.6079, 44.3609, -11.0902, 7.92158, -52.2824, -19.0118, -11.0902, -12.6745)
+
+[node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_s8act")
+
+[connection signal="timeout" from="DecisionTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]
