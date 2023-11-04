@@ -78,7 +78,17 @@ func play_run_animation():
 	if $AnimationPlayer.current_animation != "run":
 		$AnimationPlayer.play("run")
 	$Body/CyberRoninSprites.play("run")
-			
+
+func play_jump_launch_animation():
+	$Body/CyberRoninSprites.play("jump_launch")
+
+
+func play_jump_peak_animation():
+	# wait for a signal from Air state
+	# includes frames for falling.
+	$Body/CyberRoninSprites.play("jump_peak")
+
+
 func play_idle_animation():
 	if $AnimationPlayer.current_animation != "idle":
 		$AnimationPlayer.play("idle")
@@ -179,8 +189,14 @@ func _on_state_transitioned(stateName):
 			else: # just landed.. but we already received a signal for that. _on_landed
 				pass
 			
+			
+func _on_jumped(): # from Air state
+	play_jump_launch_animation()
+
+func _on_peak_amplitude_reached(): # from Air state
+	play_jump_peak_animation()
 		
-func _on_double_jumped():
+func _on_double_jumped(): # from Air state
 	play_somersault_animation()
 
 func _on_landed():
