@@ -198,6 +198,9 @@ func _on_descending_kick_impacted():
 func _on_dash_started():
 	if animation_player.has_animation("dash"):
 		animation_player.play("dash")
+	$Body/CyberRoninSprites.play("dash")
+	$Body/SpeedLines.play("default")
+	
 		
 		
 func detect_jump_through_platform() -> StaticBody2D:
