@@ -1,13 +1,14 @@
-[gd_scene load_steps=104 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=117 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
-[ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
+[ext_resource type="PackedScene" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
 [ext_resource type="Texture2D" uid="uid://g1vlv65nat5l" path="res://art/placeholder/white_turkeyleg_animation_blank.png" id="3_340x3"]
 [ext_resource type="Texture2D" uid="uid://o8avnxyy8l88" path="res://art/player/cyber-ronin_run.png" id="3_yst2s"]
 [ext_resource type="Texture2D" uid="uid://dww0mincdfcua" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
 [ext_resource type="Texture2D" uid="uid://b5kqk4ulv38a2" path="res://art/player/speed_lines.png" id="4_nhl25"]
 [ext_resource type="AudioStream" uid="uid://dlpvfrbdrbt7x" path="res://audio/sfx/placeholder/hoo.wav" id="5_byt84"]
+[ext_resource type="Texture2D" uid="uid://dmuqf453q41ks" path="res://art/player/cyber-ronin_dash.png" id="5_rc7or"]
 [ext_resource type="AudioStream" uid="uid://5gexndolxdlt" path="res://audio/sfx/placeholder/hah.wav" id="6_777c2"]
 [ext_resource type="Texture2D" uid="uid://b7a4g8mvnt6if" path="res://art/player/cyber-ronin_idle.png" id="6_qr63n"]
 [ext_resource type="AudioStream" uid="uid://csdd0666k7mv1" path="res://audio/sfx/placeholder/hee.wav" id="7_egpjg"]
@@ -29,6 +30,88 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 7.0
 height = 22.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eytj7"]
+atlas = ExtResource("4_nhl25")
+region = Rect2(0, 0, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otr5b"]
+atlas = ExtResource("4_nhl25")
+region = Rect2(32, 0, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbjtm"]
+atlas = ExtResource("4_nhl25")
+region = Rect2(64, 0, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt00r"]
+atlas = ExtResource("4_nhl25")
+region = Rect2(96, 0, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yehfj"]
+atlas = ExtResource("4_nhl25")
+region = Rect2(0, 0, 37, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4x3fj"]
+atlas = ExtResource("4_nhl25")
+region = Rect2(37, 0, 37, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1lh0"]
+atlas = ExtResource("4_nhl25")
+region = Rect2(74, 0, 37, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt14w"]
+atlas = ExtResource("4_nhl25")
+region = Rect2(111, 0, 37, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ee1v"]
+atlas = ExtResource("4_nhl25")
+region = Rect2(148, 0, 37, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ginxa"]
+atlas = ExtResource("4_nhl25")
+region = Rect2(185, 0, 37, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3ov6f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eytj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otr5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbjtm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt00r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yehfj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x3fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1lh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt14w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ee1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ginxa")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iitsy"]
+atlas = ExtResource("5_rc7or")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elfq8"]
 atlas = ExtResource("3_yst2s")
@@ -264,6 +347,14 @@ region = Rect2(448, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_adh0r"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iitsy")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_elfq8")
@@ -1758,20 +1849,20 @@ shape = SubResource("CapsuleShape2D_ghh7o")
 [node name="Body" type="Node2D" parent="."]
 scale = Vector2(0.470298, 0.470298)
 
-[node name="SpeedLines" type="Sprite2D" parent="Body"]
+[node name="SpeedLines" type="AnimatedSprite2D" parent="Body"]
 visible = false
 position = Vector2(-12.7579, -38.2736)
 scale = Vector2(5.14497, 1.51697)
-texture = ExtResource("4_nhl25")
+sprite_frames = SubResource("SpriteFrames_3ov6f")
+frame = 9
+frame_progress = 1.0
 offset = Vector2(-15.7046, 1.14441e-05)
 
 [node name="CyberRoninSprites" type="AnimatedSprite2D" parent="Body"]
 position = Vector2(4.25262, -68.042)
 scale = Vector2(2.12631, 2.12631)
 sprite_frames = SubResource("SpriteFrames_adh0r")
-animation = &"run"
-frame = 1
-frame_progress = 0.953897
+animation = &"dash"
 speed_scale = 1.5
 
 [node name="Actions" type="Node2D" parent="Body"]
