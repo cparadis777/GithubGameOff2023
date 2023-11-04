@@ -27,6 +27,7 @@ func push(impactVector):
 		set_collision_mask_value(4, false)
 		push_iframes_timer.start()
 		decay_timer.start()
+		$kick_noises.play()
 		
 func _on_push_iframes_timer_timeout():
 	pushed = false
