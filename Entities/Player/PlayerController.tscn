@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
-[ext_resource type="PackedScene" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
+[ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
 [ext_resource type="Texture2D" uid="uid://g1vlv65nat5l" path="res://art/placeholder/white_turkeyleg_animation_blank.png" id="3_340x3"]
 [ext_resource type="Texture2D" uid="uid://o8avnxyy8l88" path="res://art/player/cyber-ronin_run.png" id="3_yst2s"]
 [ext_resource type="Texture2D" uid="uid://dww0mincdfcua" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
 [ext_resource type="Texture2D" uid="uid://b5kqk4ulv38a2" path="res://art/player/speed_lines.png" id="4_nhl25"]
 [ext_resource type="AudioStream" uid="uid://dlpvfrbdrbt7x" path="res://audio/sfx/placeholder/hoo.wav" id="5_byt84"]
 [ext_resource type="AudioStream" uid="uid://5gexndolxdlt" path="res://audio/sfx/placeholder/hah.wav" id="6_777c2"]
-[ext_resource type="Texture2D" uid="uid://dboouvsbueagc" path="res://art/player/cyber-ronin_idle.png" id="6_qr63n"]
+[ext_resource type="Texture2D" uid="uid://b7a4g8mvnt6if" path="res://art/player/cyber-ronin_idle.png" id="6_qr63n"]
 [ext_resource type="AudioStream" uid="uid://csdd0666k7mv1" path="res://audio/sfx/placeholder/hee.wav" id="7_egpjg"]
 [ext_resource type="Texture2D" uid="uid://fd4fp5egfcmb" path="res://art/placeholder/32pixel-runner.png" id="8_gdxyk"]
 [ext_resource type="Texture2D" uid="uid://wlq7m70fouwi" path="res://art/placeholder/richard_williams_walk_cycle.jpeg" id="9_047q4"]
@@ -454,11 +454,11 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
-radius = 14.0357
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_mu5xc"]
 radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
+radius = 14.0357
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o20hr"]
 atlas = ExtResource("4_gxpwb")
@@ -732,6 +732,30 @@ tracks/19/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Body/Actions/Kick/tempVisualizer:visible")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Body/Actions/Punch/tempVisualizer:visible")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_l2b41"]
@@ -1086,6 +1110,42 @@ tracks/5/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/Actions/Kick/tempVisualizer:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Body/Actions/Punch/tempVisualizer:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Body/Actions/Punch/HurtBox/CollisionShape2D:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_5ypvc"]
 resource_name = "land"
@@ -1322,6 +1382,42 @@ tracks/10/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Body/Actions/Punch/tempVisualizer:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Body/Actions/Kick/tempVisualizer:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Body/Actions/Kick/HurtBox/CollisionShape2D:disabled")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_nmpsm"]
@@ -1632,6 +1728,25 @@ speed_scale = 1.5
 
 [node name="Actions" type="Node2D" parent="Body"]
 
+[node name="Punch" type="Node2D" parent="Body/Actions"]
+
+[node name="HurtBox" type="Area2D" parent="Body/Actions/Punch"]
+position = Vector2(30, -50)
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Actions/Punch/HurtBox"]
+shape = SubResource("CircleShape2D_mu5xc")
+disabled = true
+
+[node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/Punch"]
+visible = false
+self_modulate = Color(0.184314, 0.184314, 0.184314, 1)
+position = Vector2(21.2631, -46.7789)
+rotation = -0.0265049
+scale = Vector2(0.582148, 0.582148)
+texture = ExtResource("3_340x3")
+
 [node name="Kick" type="Node2D" parent="Body/Actions"]
 
 [node name="HurtBox" type="Area2D" parent="Body/Actions/Kick"]
@@ -1644,16 +1759,13 @@ collision_mask = 10
 position = Vector2(-7.62939e-06, 1.90735e-06)
 shape = SubResource("CircleShape2D_pmdka")
 
-[node name="Punch" type="Node2D" parent="Body/Actions"]
-
-[node name="HurtBox" type="Area2D" parent="Body/Actions/Punch"]
-position = Vector2(30, -50)
-collision_layer = 0
-collision_mask = 10
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Actions/Punch/HurtBox"]
-shape = SubResource("CircleShape2D_mu5xc")
-disabled = true
+[node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/Kick"]
+visible = false
+self_modulate = Color(0.219608, 0.482353, 0.670588, 1)
+position = Vector2(14.8842, -25.5157)
+rotation = -0.0821496
+scale = Vector2(0.915101, 0.582148)
+texture = ExtResource("3_340x3")
 
 [node name="Torso" type="Node2D" parent="Body"]
 visible = false
@@ -1844,6 +1956,6 @@ collision_mask = 8
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_m8oiq")
 
-[connection signal="body_entered" from="Body/Actions/Kick/HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="body_entered" from="Body/Actions/Punch/HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_entered" from="Body/Actions/Kick/HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
