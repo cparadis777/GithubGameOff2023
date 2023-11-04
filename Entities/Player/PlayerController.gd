@@ -127,6 +127,7 @@ func hurt(body):
 	var knockback = true
 	var damageType = Globals.DamageTypes.IMPACT
 
+	
 	if body.has_method("_on_hit"):
 		hit.connect(body._on_hit)
 		hit.emit(damage, impactVector, damageType, knockback)

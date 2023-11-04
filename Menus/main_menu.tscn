@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://tcanqah85n85"]
+[gd_scene load_steps=13 format=3 uid="uid://tcanqah85n85"]
 
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="1_htj5v"]
 [ext_resource type="Script" path="res://Menus/main_menu.gd" id="2_l1a6d"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ds7wrp282t8d6" path="res://art/placeholder/GameOffLogo.png" id="6_s2pix"]
 [ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="7_4hko4"]
 [ext_resource type="AudioStream" uid="uid://ccn60h0iwfwbg" path="res://audio/sfx/placeholder/button_hover.wav" id="7_bpl7k"]
+[ext_resource type="PackedScene" uid="uid://dmm8rqol80lyr" path="res://Levels/placeholder/Level_01_Interior.tscn" id="8_8vceh"]
 [ext_resource type="AudioStream" uid="uid://ditqh6y1ovspx" path="res://audio/sfx/placeholder/button_press.wav" id="8_jgwm5"]
 [ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="8_q0tx5"]
 
@@ -85,7 +86,7 @@ alignment = 1
 [node name="PlayButton" parent="VBoxContainer/Body/MarginContainer/Body/Buttons" instance=ExtResource("7_4hko4")]
 layout_mode = 2
 text = "Platformer"
-scene = ExtResource("3_5wtxl")
+scene = ExtResource("8_8vceh")
 
 [node name="Container" parent="VBoxContainer/Body/MarginContainer/Body/Buttons" instance=ExtResource("7_4hko4")]
 layout_mode = 2
