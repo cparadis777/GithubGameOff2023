@@ -19,6 +19,7 @@ func spawn_soda_cans(impactVector):
 		await new_soda_can.ready
 		new_soda_can.apply_central_impulse(bounce_vector)
 
+
 func _on_hit(_damage, impactVector, _damageType, _knockback):
 	if !kicked:
 		spawn_soda_cans(impactVector)

@@ -51,6 +51,7 @@ visible = false
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="Obstacle_01" parent="Obstacles" instance=ExtResource("4_4k4sl")]
+position = Vector2(250, -3)
 
 [node name="Label" type="Label" parent="Obstacles/Obstacle_01"]
 offset_left = -14.0
