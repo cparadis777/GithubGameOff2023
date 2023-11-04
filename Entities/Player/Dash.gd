@@ -9,7 +9,7 @@ signal started
 signal impacted
 signal landed
 var direction
-@export var dash_duration : float = 0.25
+@export var dash_duration : float = 0.10
 var dash_speed : float
 var timer
 
@@ -17,7 +17,7 @@ func _ready():
 	super()
 
 	await(owner.ready)
-	dash_speed = player.speed * 4.0
+	dash_speed = player.speed * 2.0
 
 	if player.has_method("_on_dash_started"):
 		started.connect(player._on_dash_started)
