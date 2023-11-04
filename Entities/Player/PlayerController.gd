@@ -5,7 +5,7 @@
 extends CharacterBody2D
 
 
-@export var SPEED = 100.0
+@export var SPEED = 200.0
 var speed = SPEED # for state machine
 @export var JUMP_VELOCITY = 500.0
 
