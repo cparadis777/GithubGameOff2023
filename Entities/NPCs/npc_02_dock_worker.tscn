@@ -1,8 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7lbhsnpyax66"]
+[gd_scene load_steps=22 format=3 uid="uid://b7lbhsnpyax66"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/npc_02_dock_worker.gd" id="1_513fr"]
 [ext_resource type="Texture2D" uid="uid://b8to6pueoyptm" path="res://art/placeholder/dock_worker_cutouts.png" id="1_po8lm"]
 [ext_resource type="Script" path="res://Entities/NPCs/Behaviours/WalkTowardPlayer.gd" id="2_f7ga5"]
+[ext_resource type="Script" path="res://Entities/NPCs/HeavyMeleeAttack.gd" id="4_agf2e"]
+[ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="4_iy4en"]
+[ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="5_fls2h"]
+[ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_26f2k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hlt8h"]
 radius = 12.0
@@ -20,6 +24,10 @@ region = Rect2(90.0744, 60.3123, 31.8683, 34.2387)
 atlas = ExtResource("1_po8lm")
 region = Rect2(3.55593, 43.7197, 48.4609, 51.2263)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hocqj"]
+atlas = ExtResource("1_po8lm")
+region = Rect2(16.3296, 3.55513, 33.5802, 34.8971)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_whttp"]
 atlas = ExtResource("1_po8lm")
 region = Rect2(82.8316, 3.29175, 39.6379, 47.6708)
@@ -28,9 +36,14 @@ region = Rect2(82.8316, 3.29175, 39.6379, 47.6708)
 atlas = ExtResource("1_po8lm")
 region = Rect2(56.3625, 8.55924, 23.9671, 35.9506)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hocqj"]
-atlas = ExtResource("1_po8lm")
-region = Rect2(16.3296, 3.55513, 33.5802, 34.8971)
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q0ksa"]
+streams_count = 3
+stream_0/stream = ExtResource("4_iy4en")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_fls2h")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_26f2k")
+stream_2/weight = 1.0
 
 [sub_resource type="Animation" id="Animation_84nqr"]
 length = 0.001
@@ -177,6 +190,205 @@ tracks/11/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [-0.0212914]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("PaperDoll:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -26)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("BloodSmear:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("BloodSmear:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.44)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("HurtFlash:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_3g14y"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PaperDoll:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -26), Vector2(9.76929e-14, -9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaperDoll:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PaperDoll/Torso/UArmL:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.87214]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PaperDoll/LegL:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.15072]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PaperDoll/Torso/Head:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.666667, -16.3333), Vector2(-0.273216, -9.9352)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PaperDoll/Torso/Head:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.338493]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BloodSmear:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BloodSmear:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.023, 0.01), Vector2(1, 0.44)]
+}
+
+[sub_resource type="Animation" id="Animation_c1mdp"]
+resource_name = "hurt"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HurtFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaperDoll/Torso:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.337877, 0.0258795]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PaperDoll/Torso/Head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.666667, -16.3333), Vector2(10.3397, -23.4143), Vector2(0.666667, -16.3333)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PaperDoll/Torso/Head:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.349603, 0.301707, -0.349603]
 }
 
 [sub_resource type="Animation" id="Animation_h2h41"]
@@ -329,20 +541,80 @@ tracks/11/keys = {
 "values": [-0.0212914, -0.0212914, -0.0212914]
 }
 
+[sub_resource type="Animation" id="Animation_ls87y"]
+resource_name = "melee_attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PaperDoll/Torso:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.401426, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaperDoll/Torso/UArmL:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 2.86234, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PaperDoll/Torso/LarmL:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PaperDoll/LegR:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.49226, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6d053"]
 _data = {
 "RESET": SubResource("Animation_84nqr"),
+"die": SubResource("Animation_3g14y"),
+"hurt": SubResource("Animation_c1mdp"),
+"melee_attack": SubResource("Animation_ls87y"),
 "walk": SubResource("Animation_h2h41")
 }
 
-[node name="NPC_02_DockWorker" type="CharacterBody2D"]
+[node name="NPC_02_DockWorker" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 2
-collision_mask = 24
+collision_mask = 25
 script = ExtResource("1_513fr")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -28)
 shape = SubResource("CapsuleShape2D_hlt8h")
+
+[node name="BloodSmear" type="Polygon2D" parent="."]
+visible = false
+scale = Vector2(1, 0.44)
+color = Color(0.321569, 0.0862745, 0.0862745, 1)
+polygon = PackedVector2Array(25, -6, 14, -4, 4, -1, -11, -3, -18, -5, -35, -2, -43, 5, -39, 10, -26, 10, -23, 6, -10, 6, 1, 10, 10, 5, 23, 5, 36, 0)
 
 [node name="PaperDoll" type="Node2D" parent="."]
 position = Vector2(0, -26)
@@ -361,6 +633,13 @@ offset = Vector2(4, 12)
 [node name="Torso" type="Sprite2D" parent="PaperDoll"]
 texture = SubResource("AtlasTexture_gkgjn")
 
+[node name="Head" type="Sprite2D" parent="PaperDoll/Torso"]
+position = Vector2(0.666667, -16.3333)
+rotation = -0.0212914
+scale = Vector2(1.23821, 1.23821)
+texture = SubResource("AtlasTexture_hocqj")
+offset = Vector2(-3, -12)
+
 [node name="UArmL" type="Sprite2D" parent="PaperDoll/Torso"]
 position = Vector2(18, -14)
 texture = SubResource("AtlasTexture_whttp")
@@ -373,18 +652,6 @@ scale = Vector2(-1, -1)
 texture = SubResource("AtlasTexture_sg0d1")
 offset = Vector2(-8, -10)
 
-[node name="Head" type="Sprite2D" parent="PaperDoll/Torso"]
-position = Vector2(0.666667, -16.3333)
-rotation = -0.0212914
-scale = Vector2(1.23821, 1.23821)
-texture = SubResource("AtlasTexture_hocqj")
-offset = Vector2(-3, -12)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_6d053")
-}
-
 [node name="Behaviours" type="Node2D" parent="."]
 
 [node name="Movement" type="Node2D" parent="Behaviours"]
@@ -395,7 +662,52 @@ script = ExtResource("2_f7ga5")
 [node name="Attacks" type="Node2D" parent="Behaviours"]
 
 [node name="HeavyMeleeAttack" type="Node2D" parent="Behaviours/Attacks"]
+script = ExtResource("4_agf2e")
+
+[node name="RecoilTimer" type="Timer" parent="Behaviours/Attacks/HeavyMeleeAttack"]
+wait_time = 0.3
+one_shot = true
+
+[node name="ReloadTimer" type="Timer" parent="Behaviours/Attacks/HeavyMeleeAttack"]
+wait_time = 2.0
+one_shot = true
+
+[node name="HeavyRangeAttack" type="Node2D" parent="Behaviours/Attacks"]
 
 [node name="Defenses" type="Node2D" parent="Behaviours"]
 
 [node name="NoKnockbackDefense" type="Node2D" parent="Behaviours/Defenses"]
+
+[node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_q0ksa")
+volume_db = 3.0
+pitch_scale = 0.67
+
+[node name="HurtFlash" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.764706, 0.729412, 0.278431, 1)
+polygon = PackedVector2Array(2, -20, -9, -11, -2, -27, -17, -34, -1, -35, 5, -53, 6, -36, 23, -37, 8, -27, 20, -13)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6d053")
+}
+
+[node name="DecayTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="BloodTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="IFramesTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="Behaviours/Attacks/HeavyMeleeAttack/RecoilTimer" to="Behaviours/Attacks/HeavyMeleeAttack" method="_on_recoil_timer_timeout"]
+[connection signal="timeout" from="Behaviours/Attacks/HeavyMeleeAttack/ReloadTimer" to="Behaviours/Attacks/HeavyMeleeAttack" method="_on_reload_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="DecayTimer" to="." method="_on_decay_timer_timeout"]
+[connection signal="timeout" from="BloodTimer" to="." method="_on_blood_timer_timeout"]
+[connection signal="timeout" from="IFramesTimer" to="." method="_on_i_frames_timer_timeout"]

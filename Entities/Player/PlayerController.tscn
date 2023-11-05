@@ -1,8 +1,11 @@
-[gd_scene load_steps=134 format=3 uid="uid://bs3xmnbwmhy8h"]
+
+[gd_scene load_steps=139 format=3 uid="uid://bs3xmnbwmhy8h"]
+
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
-[ext_resource type="PackedScene" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
+[ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
+[ext_resource type="Script" path="res://Entities/Player/LookaheadCameraFollower.gd" id="2_x7k1v"]
 [ext_resource type="Texture2D" uid="uid://g1vlv65nat5l" path="res://art/placeholder/white_turkeyleg_animation_blank.png" id="3_340x3"]
 [ext_resource type="Texture2D" uid="uid://o8avnxyy8l88" path="res://art/player/cyber-ronin_run.png" id="3_yst2s"]
 [ext_resource type="Texture2D" uid="uid://dww0mincdfcua" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
@@ -17,7 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://fd4fp5egfcmb" path="res://art/placeholder/32pixel-runner.png" id="8_gdxyk"]
 [ext_resource type="Texture2D" uid="uid://wlq7m70fouwi" path="res://art/placeholder/richard_williams_walk_cycle.jpeg" id="9_047q4"]
 [ext_resource type="Script" path="res://Utilities/UtilityScripts/StateMachine.gd" id="10_6ualt"]
+[ext_resource type="Texture2D" uid="uid://bcegm346f4cwp" path="res://art/placeholder/glove.png" id="11_1m3yk"]
 [ext_resource type="Script" path="res://Entities/Player/Idle.gd" id="11_jtylp"]
+[ext_resource type="Texture2D" uid="uid://cnaxu2cut8lyw" path="res://art/placeholder/boot.png" id="12_en4ep"]
 [ext_resource type="Script" path="res://Entities/Player/Run.gd" id="12_oq1kf"]
 [ext_resource type="Script" path="res://Entities/Player/Air.gd" id="13_a17mm"]
 [ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="14_fp8yf"]
@@ -994,9 +999,22 @@ tracks/23/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Body/SpeedLines:self_modulate")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_l2b41"]
 resource_name = "dash"
+length = 0.33
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1004,10 +1022,10 @@ tracks/0/path = NodePath("Body/SpeedLines:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1068,6 +1086,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/SpeedLines:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_d33i7"]
@@ -1952,9 +1982,14 @@ size = Vector2(14, 14)
 collision_mask = 15
 script = ExtResource("1_8yn75")
 
-[node name="Camera2D" parent="." instance=ExtResource("2_n3cgq")]
+[node name="Lookahead" type="Node2D" parent="."]
+position = Vector2(2.08165e-12, -32)
+script = ExtResource("2_x7k1v")
+
+[node name="Camera2D" parent="Lookahead" instance=ExtResource("2_n3cgq")]
 position = Vector2(2.08165e-12, 2.08165e-12)
-offset = Vector2(2.08165e-12, -40)
+
+[node name="Sprite2D" type="Sprite2D" parent="Lookahead"]
 
 [node name="RoninPlaceholderSprite" type="Sprite2D" parent="."]
 z_index = 2
@@ -2003,11 +2038,10 @@ disabled = true
 
 [node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/Punch"]
 visible = false
-self_modulate = Color(0.184314, 0.184314, 0.184314, 1)
-position = Vector2(21.2631, -46.7789)
+position = Vector2(25.5157, -48.9052)
 rotation = -0.0265049
 scale = Vector2(0.582148, 0.582148)
-texture = ExtResource("3_340x3")
+texture = ExtResource("11_1m3yk")
 
 [node name="Kick" type="Node2D" parent="Body/Actions"]
 
@@ -2024,10 +2058,9 @@ shape = SubResource("CircleShape2D_pmdka")
 [node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/Kick"]
 visible = false
 self_modulate = Color(0.219608, 0.482353, 0.670588, 1)
-position = Vector2(14.8842, -25.5157)
+position = Vector2(27.6421, -27.6421)
 rotation = -0.0821496
-scale = Vector2(0.915101, 0.582148)
-texture = ExtResource("3_340x3")
+texture = ExtResource("12_en4ep")
 
 [node name="Torso" type="Node2D" parent="Body"]
 visible = false

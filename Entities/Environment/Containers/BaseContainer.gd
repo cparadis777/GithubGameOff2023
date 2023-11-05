@@ -1,17 +1,30 @@
 extends StaticBody2D
 
 @export var exterior_texture:Texture2D
-@export var interior_texture:Texture2D
+
 var weigth:int = 100
+var grid_position:Vector2 = Vector2(100,100)
+
+var entrances = {
+	Utils.Directions.LEFT: false,
+	Utils.Directions.UP: false,
+	Utils.Directions.RIGHT: false,
+	Utils.Directions.DOWN: false,
+}
+
+# entrance_arrows:Dictionary = {Utils.Directions.LEFT: null}
 # Called when the node enters the scene tree for the first time.
+
 func _ready():
 	$Exterior.texture = exterior_texture
-	$Interior.texture = interior_texture
+	#print("setting arrows")
+
+	#print("done setting arrows")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+func set_grid_position(coordinate:Vector2) -> void:
+	self.grid_position = coordinate
+	$Label.text = "%s" % coordinate
 
 
 
@@ -25,8 +38,30 @@ func _on_container_interior_body_entered(body:Node2D):
 		print("Hidden outside container")
 		$Exterior.hide()
 
-func set_mode(mode:String) -> void:
-	if mode == "GHOST":
-		$Exterior.modulate = Color("005859")
-	if mode == "REAL":
-		$Exterior.modulate = Color("ffffff")
+func set_entrances(directions) -> void:
+
+	var entrance_arrows = {
+	Utils.Directions.LEFT: $LeftArrow,
+	Utils.Directions.UP: $TopArrow,
+	Utils.Directions.RIGHT: $RightArrow,
+	Utils.Directions.DOWN: $DownArrow,
+}
+
+	for entrance in entrance_arrows:
+		print(entrance)
+		entrance_arrows[entrance].hide()
+	for direction in directions:
+		self.entrances[direction] = true
+		entrance_arrows[direction].show()
+
+func hide_entrance(direction) -> void:
+	var entrance_arrows = {
+	Utils.Directions.LEFT: $LeftArrow,
+	Utils.Directions.UP: $TopArrow,
+	Utils.Directions.RIGHT: $RightArrow,
+	Utils.Directions.DOWN: $DownArrow,
+	}
+
+	entrance_arrows[direction].hide()
+
+

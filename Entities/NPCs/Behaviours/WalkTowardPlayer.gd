@@ -14,7 +14,6 @@ var State = States.WAITING
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await owner.ready
-	print("npc behaviour: owner = " + owner.name)
 	prepare_decision_timer()
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 	original_doll_scale = owner.get_node("PaperDoll").scale
@@ -46,7 +45,7 @@ func get_gravity_vector(delta) -> Vector2:
 	return gravity_vector
 
 
-func get_goal_vector(delta) -> Vector2:
+func get_goal_vector(_delta) -> Vector2:
 	var goal_vector = Vector2.ZERO
 	if global_position.distance_squared_to(target_location) > melee_range * melee_range:
 		var direction_x = choose_direction()

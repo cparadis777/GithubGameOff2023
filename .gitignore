@@ -4,3 +4,11 @@
 # System/tool-specific ignores
 .DS_Store
 
+# More Godot stuff
+.import/
+export.cfg
+export_presets.cfg
+
+# large files and reference files, no sharing required
+/src
+/exports

@@ -5,11 +5,11 @@
 extends CharacterBody2D
 
 
-@export var SPEED = 200.0
+@export var SPEED = 150.0
 var speed = SPEED # for state machine
-@export var JUMP_VELOCITY = 500.0
+@export var JUMP_VELOCITY = 375.0
 
-@onready var camera = $Camera2D
+@onready var camera = $Lookahead/Camera2D
 @onready var hud = $HUD
 @onready var animation_player = $AnimationPlayer
 
@@ -173,8 +173,7 @@ func _on_state_transitioned(stateName):
 			$RoninPlaceholderSprite.hide()
 			$Body/CyberRoninSprites.stop()
 			$Audio/JumpNoises.play()
-			if camera.has_method("_on_player_jumped"):
-				camera._on_player_jumped()
+			
 		"Run":
 			$RoninPlaceholderSprite.show()
 			if StateMachine.previous_state_name != "Air":
