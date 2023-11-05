@@ -16,7 +16,7 @@ var move_time:float = 0.5
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.create_markers()
-	self.set_current_container(containers[1].instantiate())
+	self.set_current_container(containers[0].instantiate())
 	self.move_ready = true
 	$RichTextLabel.text = "%s kg" % self.current_container.weigth
 
@@ -36,6 +36,7 @@ func _input(event):
 
 func select_random_container() -> StaticBody2D:
 	var new_container = containers.pick_random().instantiate()
+	new_container.self_modulate = Utils.random_color()
 	return new_container
 
 func set_current_container(container:StaticBody2D):
@@ -78,7 +79,6 @@ func place_container() -> void:
 		drop_zone.place_container(self.current_container, current_column)
 		self.current_container = null
 		
-
 func refesh_container() -> void:
 	self.set_current_container(select_random_container())
 	self.move_ready = true
@@ -86,3 +86,6 @@ func refesh_container() -> void:
 
 func move_done()->void:
 	self.move_ready = true
+
+func randomize_container_access():
+	pass

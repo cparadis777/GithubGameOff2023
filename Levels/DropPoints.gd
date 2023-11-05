@@ -3,12 +3,13 @@ extends Node2D
 @export var n_horizontal:int
 @export var n_vertical:int
 @export var new_scale:float
+@export var container_width:int = 96
+@export var container_height:int = 48
 
 @onready var drop_point:PackedScene = preload("res://Utilities/UtilityScenes/DropPoint.tscn")
 
 var container_dropping
-var container_width:int = 192
-var container_height:int = 96
+
 var drop_points_dict:Dictionary
 var drop_point_targeted
 

@@ -21,3 +21,6 @@ func normalize_value(x, min_value, max_value) -> float:
 	min_value = float(min_value)
 	max_value = float(max_value)
 	return (x-min_value)/(max_value-min_value)
+
+func random_color() -> Color:
+	return Color(randf(), randf(), randf())

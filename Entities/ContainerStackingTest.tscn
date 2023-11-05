@@ -43,23 +43,24 @@ script = ExtResource("1_3hcry")
 target_weight = 300
 
 [node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("2_30gk4")]
-position = Vector2(-257, -321)
+position = Vector2(-65, -225)
 n_columns = 4
 drop_zone = NodePath("../DropPoints")
 
 [node name="DropPoints" type="Node2D" parent="."]
-position = Vector2(-257, -161)
+position = Vector2(-65, -193)
 script = ExtResource("3_i3vix")
 n_horizontal = 4
 n_vertical = 4
 new_scale = 1.0
+container_width = 48
+container_height = 24
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -177)
-zoom = Vector2(0.25, 0.25)
 
 [node name="Ship" type="StaticBody2D" parent="."]
-scale = Vector2(4, 4)
+position = Vector2(-1, -145)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
 position = Vector2(-96, 49.25)
@@ -91,10 +92,10 @@ texture = ExtResource("4_bhv33")
 metadata/_edit_lock_ = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -457.0
-offset_top = 183.0
-offset_right = -44.0
-offset_bottom = 218.0
+offset_left = -116.0
+offset_top = -89.0
+offset_right = -9.0
+offset_bottom = -78.0
 rotation = -1.5708
 max_value = 1.0
 show_percentage = false
