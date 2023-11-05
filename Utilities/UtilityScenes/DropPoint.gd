@@ -2,12 +2,13 @@ extends Marker2D
 
 var grid_position:Vector2
 var is_filled:bool
+var container:StaticBody2D
 var neighbors = {
-	Utils.Directions.UP: null,
-	Utils.Directions.RIGHT: null,
-	Utils.Directions.DOWN: null,
-	Utils.Directions.LEFT: null
-	}
+	Utils.Directions.LEFT:null,
+	Utils.Directions.UP:null,
+	Utils.Directions.RIGHT:null,
+	Utils.Directions.DOWN:null
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,15 +22,24 @@ func _process(_delta):
 func set_grid_position(coords:Vector2) -> void:
 	self.grid_position = coords
 
-func set_container(_container:StaticBody2D) -> bool:
+func set_container(new_container:StaticBody2D) -> bool:
 	if !self.is_filled:
-		#self.add_child(container)
-		#container.position = Vector2(0,0)
+		self.container = new_container
 		self.is_filled = true
+		container.set_grid_position(self.grid_position)
+		for direction in Utils.Directions.values():
+			var neighbor = self.neighbors[direction]
+			if neighbor != null:
+				if neighbor.is_filled:
+					self.container.hide_entrance(direction)
+					neighbor.container.hide_entrance(Utils.get_opposite_direction(direction))
 		return true
 	else:
 		return false
 
-func set_neighbor(direction: Utils.Directions, neighbor:StaticBody2D ) -> void:
-	neighbors[direction] = neighbor
-
+func set_neighbors() -> void:
+	for direction in neighbors:
+		var coordinate_to_check = get_parent().get_adjacent_coordinate(direction, self.grid_position)
+		if coordinate_to_check != null:
+			var neighboring_drop_point = get_parent().drop_points_dict[coordinate_to_check]
+			self.neighbors[direction] =neighboring_drop_point

@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://mq11awte3lc6"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_1ex3p"]
+[ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_evbk3"]
+[ext_resource type="Texture2D" uid="uid://cb102o7cgap8t" path="res://art/placeholder/PlaceholderContainer.png" id="4_qh7js"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
+a = Vector2(48, -24)
+b = Vector2(-48, -24)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pl5uy"]
+a = Vector2(-192, 96)
+b = Vector2(192, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
+size = Vector2(384, 192)
+
+[node name="BaseContainer" type="StaticBody2D" groups=["containers"]]
+script = ExtResource("1_1ex3p")
+exterior_texture = ExtResource("4_qh7js")
+interior_texture = ExtResource("4_qh7js")
+
+[node name="LeftArrow" type="Sprite2D" parent="."]
+position = Vector2(-36, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_evbk3")
+
+[node name="TopArrow" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_evbk3")
+
+[node name="RightArrow" type="Sprite2D" parent="."]
+position = Vector2(36, 0)
+rotation = -3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_evbk3")
+
+[node name="DownArrow" type="Sprite2D" parent="."]
+position = Vector2(0, 24)
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_evbk3")
+
+[node name="Interior" type="Sprite2D" parent="."]
+z_index = -4
+rotation = 3.14159
+texture = ExtResource("4_qh7js")
+
+[node name="Exterior" type="Sprite2D" parent="."]
+texture = ExtResource("4_qh7js")
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("SegmentShape2D_rgkd6")
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("SegmentShape2D_pl5uy")
+
+[node name="ContainerInterior" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
+shape = SubResource("RectangleShape2D_dnhqr")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_left = -18.0
+offset_top = -11.0
+offset_right = 18.0
+offset_bottom = 12.0
+text = "(0,0)"
+
+[connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
+[connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
