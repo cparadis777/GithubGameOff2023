@@ -16,6 +16,6 @@ func _input(event):
 		$AnimationPlayer.seek(14.9, true)
 
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	get_node("Slide4-TitleMenu/PlatformerStartButton").grab_focus()
 	
