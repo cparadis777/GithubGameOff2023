@@ -33,6 +33,16 @@ func set_container(new_container:StaticBody2D) -> bool:
 				if neighbor.is_filled:
 					self.container.hide_entrance(direction)
 					neighbor.container.hide_entrance(Utils.get_opposite_direction(direction))
+		if self.grid_position[0] == 0:
+			self.container.hide_entrance(Utils.Directions.LEFT)
+		elif self.grid_position[0] == get_parent().n_horizontal-1:
+			self.container.hide_entrance(Utils.Directions.RIGHT)
+		
+		if self.grid_position[1] == 0:
+			self.container.hide_entrance(Utils.Directions.UP)
+		elif self.grid_position[1] == get_parent().n_vertical-1:
+			self.container.hide_entrance(Utils.Directions.DOWN)
+
 		return true
 	else:
 		return false
