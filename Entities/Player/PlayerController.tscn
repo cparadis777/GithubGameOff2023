@@ -1,6 +1,4 @@
-
-[gd_scene load_steps=139 format=3 uid="uid://bs3xmnbwmhy8h"]
-
+[gd_scene load_steps=137 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
