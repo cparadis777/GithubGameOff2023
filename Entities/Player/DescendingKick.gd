@@ -8,6 +8,8 @@ signal impacted
 signal landed
 var direction
 
+@export var speed_multiplier : float = 2.5
+
 func _ready():
 	super()
 
@@ -22,16 +24,14 @@ func _ready():
 
 # If we get a message asking us kick, while in the Air, we descending kick
 func enter(_msg := {}) -> void:
-	player.velocity.y = 0.25 * player.JUMP_VELOCITY # going down
+	player.velocity.y = 0.5 * player.JUMP_VELOCITY # going down
 	
 	
 	direction = player.get_last_known_direction()
 	if player.has_method("reset_rotation"):
 		player.reset_rotation()
 	
-	player.velocity.x = player.speed * direction
-	var fudge_factor = 3.5 # how fast do you want the descending kick to be?
-	player.velocity *= fudge_factor
+	player.velocity.x = speed_multiplier * player.speed * direction 
 	started.emit() # so player can play animation
 
 

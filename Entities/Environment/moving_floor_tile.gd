@@ -7,7 +7,6 @@ var State = States.INITIALIZING
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#print($VisibleOnScreenNotifier2D.get_relative_transform_to_parent(self))
 	await get_tree().create_timer(0.1).timeout
 	State = States.READY
 

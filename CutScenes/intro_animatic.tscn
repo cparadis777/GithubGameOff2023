@@ -1,15 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=17 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
-[ext_resource type="Texture2D" uid="uid://cr25ww6yimgkk" path="res://art/props/shipping_container_ill_eagle.png" id="2_asvyr"]
-[ext_resource type="Texture2D" uid="uid://d1eabu4ga7wal" path="res://art/props/shipping_container_ice_and_freezy.png" id="3_n5ip3"]
-[ext_resource type="Texture2D" uid="uid://clmp7dn0a5mk1" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
+[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="2_asvyr"]
+[ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="3_n5ip3"]
+[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
 [ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="5_ww7q0"]
 [ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="6_aruj1"]
 [ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="7_e1fgr"]
-[ext_resource type="PackedScene" uid="uid://cg316itqsfouf" path="res://Levels/placeholder/Level_01.tscn" id="8_sjimt"]
 [ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="9_3vd6b"]
+[ext_resource type="PackedScene" uid="uid://dmm8rqol80lyr" path="res://Levels/placeholder/Level_01_Interior.tscn" id="9_cgfvo"]
 
 [sub_resource type="Gradient" id="Gradient_1fdak"]
 colors = PackedColorArray(0, 0, 0, 1, 0.234514, 0.154286, 0.209769, 1)
@@ -21,12 +21,21 @@ height = 1344
 fill_from = Vector2(0.528678, 1)
 fill_to = Vector2(0.538653, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pos6s"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+shadow_size = 5
+shadow_offset = Vector2(2, 2)
+
 [sub_resource type="Animation" id="Animation_m453i"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Slide1:visible")
+tracks/0/path = NodePath("Slide1-Me:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -38,7 +47,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Slide2:visible")
+tracks/1/path = NodePath("Slide2-Workplace:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -50,7 +59,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Slide1:modulate")
+tracks/2/path = NodePath("Slide1-Me:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -62,7 +71,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Slide2:self_modulate")
+tracks/3/path = NodePath("Slide2-Workplace:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -86,7 +95,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Slide4:visible")
+tracks/5/path = NodePath("Slide4-TitleMenu:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -98,7 +107,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Slide4/ManifestLabel:self_modulate")
+tracks/6/path = NodePath("Slide4-TitleMenu/ManifestLabel:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -110,7 +119,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Slide4/in:visible")
+tracks/7/path = NodePath("Slide4-TitleMenu/in:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -122,7 +131,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Slide4/in:self_modulate")
+tracks/8/path = NodePath("Slide4-TitleMenu/in:self_modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -146,7 +155,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Slide4/PlatformerStartButton:visible")
+tracks/10/path = NodePath("Slide4-TitleMenu/PlatformerStartButton:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -158,7 +167,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Slide4/ContainerStackingStartButton:visible")
+tracks/11/path = NodePath("Slide4-TitleMenu/ContainerStackingStartButton:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -191,14 +200,38 @@ tracks/13/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Camera2D/escToSkipLabel:self_modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Slide1-Me/ThisIsMeLabel:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_sqojr"]
 resource_name = "intro_animatic"
-length = 15.0
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Slide1:visible")
+tracks/0/path = NodePath("Slide1-Me:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -210,7 +243,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Slide2:visible")
+tracks/1/path = NodePath("Slide2-Workplace:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -222,7 +255,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Slide1:modulate")
+tracks/2/path = NodePath("Slide1-Me:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -234,7 +267,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Slide2:self_modulate")
+tracks/3/path = NodePath("Slide2-Workplace:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -250,15 +283,15 @@ tracks/4/path = NodePath("Camera2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(3.1, 6.2, 6.9, 8.1),
+"times": PackedFloat32Array(4, 6.2, 7.3, 8.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -787), Vector2(0, -787), Vector2(2.08165e-12, -980)]
+"values": [Vector2(0, 0), Vector2(0, -742), Vector2(0, -742), Vector2(2.08165e-12, -980)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Slide4:visible")
+tracks/5/path = NodePath("Slide4-TitleMenu:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -270,7 +303,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Slide4/ManifestLabel:self_modulate")
+tracks/6/path = NodePath("Slide4-TitleMenu/ManifestLabel:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -282,7 +315,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Slide4/in:visible")
+tracks/7/path = NodePath("Slide4-TitleMenu/in:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -294,7 +327,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Slide4/in:self_modulate")
+tracks/8/path = NodePath("Slide4-TitleMenu/in:self_modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -318,7 +351,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Slide4/PlatformerStartButton:visible")
+tracks/10/path = NodePath("Slide4-TitleMenu/PlatformerStartButton:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -330,7 +363,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Slide4/ContainerStackingStartButton:visible")
+tracks/11/path = NodePath("Slide4-TitleMenu/ContainerStackingStartButton:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -363,6 +396,30 @@ tracks/13/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Camera2D/escToSkipLabel:self_modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(2, 3.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Slide1-Me/ThisIsMeLabel:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_23747"]
 _data = {
@@ -377,98 +434,91 @@ script = ExtResource("1_642u7")
 position = Vector2(159, -308)
 texture = SubResource("GradientTexture2D_pkyp2")
 
-[node name="Slide1" type="Node2D" parent="."]
+[node name="Slide1-Me" type="Node2D" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0)
 
-[node name="PlayerSprite" type="Sprite2D" parent="Slide1"]
-position = Vector2(56, 62)
-scale = Vector2(0.5, 0.5)
+[node name="PlayerSprite" type="Sprite2D" parent="Slide1-Me"]
+position = Vector2(69, 91)
 texture = ExtResource("1_xlbbx")
 
-[node name="Label" type="Label" parent="Slide1"]
-offset_left = 16.0
-offset_top = 6.0
-offset_right = 110.0
-offset_bottom = 32.0
+[node name="ThisIsMeLabel" type="Label" parent="Slide1-Me"]
+offset_left = 19.0
+offset_top = 27.0
+offset_right = 113.0
+offset_bottom = 53.0
 text = "This is Me."
 
-[node name="Slide2" type="Node2D" parent="."]
+[node name="Slide2-Workplace" type="Node2D" parent="."]
 visible = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Slide2"]
-position = Vector2(232, 152)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_asvyr")
+[node name="Ship" type="Polygon2D" parent="Slide2-Workplace"]
+color = Color(0.392157, 0.498039, 0.309804, 1)
+polygon = PackedVector2Array(172, 120, 47, 120, 27, 83, 10, 83, 43, 164, 82, 200, 149, 234, 499, 231, 497, 119)
 
-[node name="Sprite2D2" type="Sprite2D" parent="Slide2"]
-position = Vector2(243, 82)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_n5ip3")
+[node name="Evil Corp" type="Label" parent="Slide2-Workplace/Ship"]
+offset_left = 215.0
+offset_top = 122.0
+offset_right = 316.0
+offset_bottom = 159.0
+theme_override_colors/font_color = Color(0, 0, 0, 0.521569)
+theme_override_font_sizes/font_size = 24
+text = "Evil Corp"
 
-[node name="Sprite2D3" type="Sprite2D" parent="Slide2"]
-position = Vector2(231, 12)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("4_dco4t")
+[node name="MegaShip" type="Label" parent="Slide2-Workplace/Ship"]
+offset_left = 160.0
+offset_top = 154.0
+offset_right = 365.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0, 0, 0, 0.521569)
+text = "MegaShip - HN83725"
 
-[node name="Sprite2D4" type="Sprite2D" parent="Slide2"]
-position = Vector2(239, -60)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_asvyr")
+[node name="ShippingContainers" type="Node2D" parent="Slide2-Workplace"]
 
-[node name="Sprite2D5" type="Sprite2D" parent="Slide2"]
-position = Vector2(250, -130)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_n5ip3")
-
-[node name="Sprite2D6" type="Sprite2D" parent="Slide2"]
-position = Vector2(238, -200)
+[node name="Sprite2D3" type="Sprite2D" parent="Slide2-Workplace/ShippingContainers"]
+position = Vector2(279, 48)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("4_dco4t")
 
-[node name="Sprite2D7" type="Sprite2D" parent="Slide2"]
-position = Vector2(232, -272)
+[node name="Sprite2D4" type="Sprite2D" parent="Slide2-Workplace/ShippingContainers"]
+position = Vector2(269, -96)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_asvyr")
 
-[node name="Sprite2D8" type="Sprite2D" parent="Slide2"]
-position = Vector2(243, -342)
+[node name="Sprite2D5" type="Sprite2D" parent="Slide2-Workplace/ShippingContainers"]
+position = Vector2(283, -241)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_n5ip3")
 
-[node name="Sprite2D9" type="Sprite2D" parent="Slide2"]
-position = Vector2(231, -412)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("4_dco4t")
-
-[node name="Sprite2D10" type="Sprite2D" parent="Slide2"]
-position = Vector2(231, -483)
+[node name="Sprite2D10" type="Sprite2D" parent="Slide2-Workplace/ShippingContainers"]
+position = Vector2(264, -384)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_asvyr")
 
-[node name="Sprite2D11" type="Sprite2D" parent="Slide2"]
-position = Vector2(242, -553)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_n5ip3")
-
-[node name="Sprite2D12" type="Sprite2D" parent="Slide2"]
-position = Vector2(230, -623)
+[node name="Sprite2D12" type="Sprite2D" parent="Slide2-Workplace/ShippingContainers"]
+position = Vector2(269, -526)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("4_dco4t")
 
-[node name="Label" type="Label" parent="Slide2"]
+[node name="Panel" type="PanelContainer" parent="Slide2-Workplace"]
+offset_left = 110.0
+offset_top = 60.0
+offset_right = 150.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pos6s")
+
+[node name="WorkplaceLabel" type="Label" parent="Slide2-Workplace/Panel"]
 custom_minimum_size = Vector2(96, 2.08165e-12)
-offset_left = 90.0
-offset_top = 53.0
-offset_right = 186.0
-offset_bottom = 105.0
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
 text = "This is my workplace"
 autowrap_mode = 2
 
 [node name="Slide3" type="Node2D" parent="."]
 
 [node name="Boss" type="Sprite2D" parent="Slide3"]
-position = Vector2(220, -718)
+position = Vector2(240, -655)
 scale = Vector2(2, 2)
 texture = ExtResource("5_ww7q0")
 
@@ -483,10 +533,10 @@ text = "This is my Boss"
 stream = ExtResource("6_aruj1")
 volume_db = -9.0
 
-[node name="Slide4" type="Node2D" parent="."]
+[node name="Slide4-TitleMenu" type="Node2D" parent="."]
 visible = false
 
-[node name="ThreatLabel" type="Label" parent="Slide4"]
+[node name="ThreatLabel" type="Label" parent="Slide4-TitleMenu"]
 offset_left = 71.0
 offset_top = -944.0
 offset_right = 188.0
@@ -494,7 +544,7 @@ offset_bottom = -918.0
 scale = Vector2(1.56431, 1.56431)
 text = "Today he dies!"
 
-[node name="in" type="Label" parent="Slide4"]
+[node name="in" type="Label" parent="Slide4-TitleMenu"]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 5
@@ -508,7 +558,7 @@ grow_horizontal = 2
 scale = Vector2(1.56431, 1.56431)
 text = "in"
 
-[node name="ManifestLabel" type="Label" parent="Slide4"]
+[node name="ManifestLabel" type="Label" parent="Slide4-TitleMenu"]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = 36.0
 offset_top = -880.0
@@ -517,7 +567,7 @@ offset_bottom = -854.0
 scale = Vector2(1.67911, 1.67911)
 text = "Manifest Violence"
 
-[node name="PlatformerStartButton" type="Button" parent="Slide4"]
+[node name="PlatformerStartButton" type="Button" parent="Slide4-TitleMenu"]
 visible = false
 offset_left = 85.0
 offset_top = -837.0
@@ -525,9 +575,9 @@ offset_right = 147.0
 offset_bottom = -806.0
 text = "Level 1"
 script = ExtResource("7_e1fgr")
-scene = ExtResource("8_sjimt")
+scene = ExtResource("9_cgfvo")
 
-[node name="ContainerStackingStartButton" type="Button" parent="Slide4"]
+[node name="ContainerStackingStartButton" type="Button" parent="Slide4-TitleMenu"]
 visible = false
 offset_left = 160.0
 offset_top = -837.0
@@ -557,3 +607,5 @@ text = "...esc to skip"
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Press any key..."
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -21,9 +21,26 @@ func physics_update(delta: float) -> void:
 	
 	player.velocity.x = player.speed * input_direction_x
 	player.velocity.y += player.gravity * delta
-	player.move_and_slide()
+	var collision_detected = player.move_and_slide()
+	if collision_detected:
+		var collision : KinematicCollision2D = player.get_last_slide_collision()
+		attempt_to_push(collision)
+
+	player.get_platform_velocity()
 
 	if Input.is_action_just_pressed("jump"):
 		state_machine.transition_to("Air", {do_jump = true})
 	elif is_equal_approx(input_direction_x, 0.0):
 		state_machine.transition_to("Idle")
+
+
+func attempt_to_push(collision : KinematicCollision2D):
+	var body = collision.get_collider()
+	if body.is_in_group("Pushables"):
+		var magnitude = 3.5
+		var impactVector = magnitude * (player.global_position.direction_to(body.global_position) + Vector2.UP)
+		if body.has_method("push"):
+			body.push(impactVector)
+	
+
+	

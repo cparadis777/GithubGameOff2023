@@ -2,18 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://bw2auvp8r1v5o" path="res://art/shipping_container.png" id="1_flq8s"]
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_xmhax"]
-[ext_resource type="Texture2D" uid="uid://cr25ww6yimgkk" path="res://art/props/shipping_container_ill_eagle.png" id="3_srdw2"]
+[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="3_srdw2"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
-a = Vector2(96, -48)
-b = Vector2(-96, -48)
+a = Vector2(192, -96)
+b = Vector2(-192, -96)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_pl5uy"]
-a = Vector2(-96, 48)
-b = Vector2(96, 48)
+a = Vector2(-192, 96)
+b = Vector2(192, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
-size = Vector2(192, 96)
+size = Vector2(384, 192)
 
 [node name="BaseContainer" type="StaticBody2D"]
 script = ExtResource("1_xmhax")
@@ -35,6 +35,7 @@ shape = SubResource("SegmentShape2D_rgkd6")
 shape = SubResource("SegmentShape2D_pl5uy")
 
 [node name="ContainerInterior" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 shape = SubResource("RectangleShape2D_dnhqr")
