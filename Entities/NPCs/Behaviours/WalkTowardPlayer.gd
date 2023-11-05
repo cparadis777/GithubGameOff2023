@@ -46,7 +46,7 @@ func get_gravity_vector(delta) -> Vector2:
 	return gravity_vector
 
 
-func get_goal_vector(delta) -> Vector2:
+func get_goal_vector(_delta) -> Vector2:
 	var goal_vector = Vector2.ZERO
 	if global_position.distance_squared_to(target_location) > melee_range * melee_range:
 		var direction_x = choose_direction()
