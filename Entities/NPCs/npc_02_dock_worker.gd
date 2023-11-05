@@ -18,12 +18,18 @@ var previous_state : States
 
 func _ready():
 	$Behaviours/Movement/WalkTowardPlayer.activate()
+	$Behaviours/Attacks/HeavyMeleeAttack.activate()
+	
 	original_doll_scale = $PaperDoll.scale
 	State = States.ALERT
 	$HurtFlash.hide()
 
 func _physics_process(delta):
 	if State == States.ALERT:
+		for attack in $Behaviours/Attacks.get_children():
+			if attack.has_method("is_active") and attack.is_active():
+				attack.attempt_to_attack()
+		
 		for movement in $Behaviours/Movement.get_children():
 			if movement.is_active():
 				velocity += movement.get_movement_vector(delta)
@@ -34,8 +40,10 @@ func _physics_process(delta):
 
 func update_animations():
 	$PaperDoll.scale.x = signf(velocity.x) * original_doll_scale.x
-	if abs(velocity.x) > 0 and $AnimationPlayer.current_animation != "walk":
-		$AnimationPlayer.play("walk")
+	if abs(velocity.x) > 0:
+		var anim = $AnimationPlayer.current_animation
+		if anim == "":
+			$AnimationPlayer.play("walk")
 
 func begin_dying():
 	print("dockworker dying")
@@ -56,7 +64,7 @@ func initiate_iframes():
 func play_hurt_noise():
 	$HurtNoises.play()
 	
-func _on_hit(damage, impactVector, damageType, knockback):
+func _on_hit(damage, _impactVector, _damageType, _knockback):
 	if not State in [ States.DYING, States.DEAD, States.INITIALIZING ]:
 		health -= damage
 		# no knockback for burly NPC
