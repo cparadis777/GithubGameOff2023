@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dmm8rqol80lyr"]
+[gd_scene load_steps=22 format=3 uid="uid://dmm8rqol80lyr"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="7_gq8f5"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
 [ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="9_fc1mv"]
+[ext_resource type="Texture2D" uid="uid://67m50eh8jeq1" path="res://art/materials/shaders/2DOmniLight.png" id="10_u1mfk"]
+[ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="11_wyb6i"]
+[ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="12_hiokx"]
+[ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="12_ujqxr"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
 offsets = PackedFloat32Array(0, 0.301818, 0.829091)
@@ -34,6 +38,12 @@ width = 640
 height = 256
 fill_from = Vector2(0.486284, 1)
 fill_to = Vector2(0.511222, 0)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j7lsu"]
+polygon = PackedVector2Array(-315, 7, -313, -246, 313, -247, 318, 5, 344, 4, 336, -265, -339, -263, -336, 8)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34npf"]
+light_mode = 1
 
 [node name="InteriorContainerLevelMockup01" type="Node2D"]
 script = ExtResource("1_foj8b")
@@ -200,5 +210,97 @@ offset_bottom = 24.0343
 scale = Vector2(1.2316, 1.2316)
 text = "A,D, space to move
 <,> to fight"
+
+[node name="Lighting" type="Node2D" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
+color = Color(0.152941, 0.176471, 0.215686, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Lighting"]
+position = Vector2(-218, -174)
+energy = 2.0
+range_z_min = -512
+range_z_max = 512
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.737255)
+texture = ExtResource("10_u1mfk")
+texture_scale = 3.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lighting"]
+position = Vector2(0, -98)
+energy = 2.0
+range_z_min = -512
+range_z_max = 512
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.737255)
+texture = ExtResource("10_u1mfk")
+texture_scale = 3.0
+
+[node name="PointLight2D3" type="PointLight2D" parent="Lighting"]
+position = Vector2(272, -60)
+energy = 2.0
+range_z_min = -512
+range_z_max = 512
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.737255)
+texture = ExtResource("10_u1mfk")
+texture_scale = 3.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
+occluder = SubResource("OccluderPolygon2D_j7lsu")
+
+[node name="NeonLight" type="PointLight2D" parent="Lighting"]
+position = Vector2(133.5, -149)
+scale = Vector2(1.38125, 1)
+texture = ExtResource("11_wyb6i")
+texture_scale = 5.0
+
+[node name="Line2D" type="Line2D" parent="Lighting/NeonLight"]
+material = SubResource("CanvasItemMaterial_34npf")
+points = PackedVector2Array(-48, 0, 53.9367, 0)
+width = 5.0
+default_color = Color(1, 0.129412, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="NeonLight2" type="PointLight2D" parent="Lighting"]
+position = Vector2(-218, -78)
+scale = Vector2(1.38125, 1)
+texture = ExtResource("11_wyb6i")
+texture_scale = 5.0
+
+[node name="Line2D" type="Line2D" parent="Lighting/NeonLight2"]
+material = SubResource("CanvasItemMaterial_34npf")
+points = PackedVector2Array(-48, 0, 53.9367, 0)
+width = 5.0
+default_color = Color(1, 0.129412, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="NeonLight3" type="PointLight2D" parent="Lighting"]
+position = Vector2(195, -81)
+scale = Vector2(1.38125, 1)
+texture = ExtResource("11_wyb6i")
+texture_scale = 5.0
+
+[node name="Line2D" type="Line2D" parent="Lighting/NeonLight3"]
+material = SubResource("CanvasItemMaterial_34npf")
+points = PackedVector2Array(-48, 0, 53.9367, 0)
+width = 5.0
+default_color = Color(1, 0.129412, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="SwitchedLight" parent="Lighting" instance=ExtResource("12_hiokx")]
+visible = false
+
+[node name="Switches" type="Node2D" parent="."]
+
+[node name="LightSwitch" parent="Switches" node_paths=PackedStringArray("linked_node") instance=ExtResource("12_ujqxr")]
+position = Vector2(141, -1)
+linked_node = NodePath("../../Lighting/SwitchedLight")
 
 [editable path="Platforms/MovingPlatform"]

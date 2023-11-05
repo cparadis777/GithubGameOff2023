@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dalx4u4rteba3"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Lights/switched_light.gd" id="1_lnnlw"]
+
+[node name="SwitchedLight" type="DirectionalLight2D"]
+energy = 0.8
+script = ExtResource("1_lnnlw")
