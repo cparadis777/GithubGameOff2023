@@ -34,6 +34,7 @@ func _physics_process(delta):
 			if movement.is_active():
 				velocity += movement.get_movement_vector(delta)
 		update_animations()
+		#print("dock worker velocity: " + str(velocity))
 		move_and_slide()
 	elif State == States.IDLE:
 		move_and_slide() # required for standing on moving platforms
