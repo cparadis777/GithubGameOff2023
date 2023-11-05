@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=139 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
@@ -18,7 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://fd4fp5egfcmb" path="res://art/placeholder/32pixel-runner.png" id="8_gdxyk"]
 [ext_resource type="Texture2D" uid="uid://wlq7m70fouwi" path="res://art/placeholder/richard_williams_walk_cycle.jpeg" id="9_047q4"]
 [ext_resource type="Script" path="res://Utilities/UtilityScripts/StateMachine.gd" id="10_6ualt"]
+[ext_resource type="Texture2D" uid="uid://bcegm346f4cwp" path="res://art/placeholder/glove.png" id="11_1m3yk"]
 [ext_resource type="Script" path="res://Entities/Player/Idle.gd" id="11_jtylp"]
+[ext_resource type="Texture2D" uid="uid://cnaxu2cut8lyw" path="res://art/placeholder/boot.png" id="12_en4ep"]
 [ext_resource type="Script" path="res://Entities/Player/Run.gd" id="12_oq1kf"]
 [ext_resource type="Script" path="res://Entities/Player/Air.gd" id="13_a17mm"]
 [ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="14_fp8yf"]
@@ -2047,11 +2049,10 @@ disabled = true
 
 [node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/Punch"]
 visible = false
-self_modulate = Color(0.184314, 0.184314, 0.184314, 1)
-position = Vector2(21.2631, -46.7789)
+position = Vector2(25.5157, -48.9052)
 rotation = -0.0265049
 scale = Vector2(0.582148, 0.582148)
-texture = ExtResource("3_340x3")
+texture = ExtResource("11_1m3yk")
 
 [node name="Kick" type="Node2D" parent="Body/Actions"]
 
@@ -2068,10 +2069,9 @@ shape = SubResource("CircleShape2D_pmdka")
 [node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/Kick"]
 visible = false
 self_modulate = Color(0.219608, 0.482353, 0.670588, 1)
-position = Vector2(14.8842, -25.5157)
+position = Vector2(27.6421, -27.6421)
 rotation = -0.0821496
-scale = Vector2(0.915101, 0.582148)
-texture = ExtResource("3_340x3")
+texture = ExtResource("12_en4ep")
 
 [node name="Torso" type="Node2D" parent="Body"]
 visible = false
