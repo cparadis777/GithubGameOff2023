@@ -14,7 +14,6 @@ var State = States.WAITING
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await owner.ready
-	print("npc behaviour: owner = " + owner.name)
 	prepare_decision_timer()
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 	original_doll_scale = owner.get_node("PaperDoll").scale
