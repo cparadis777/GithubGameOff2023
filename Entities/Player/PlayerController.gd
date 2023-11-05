@@ -5,11 +5,11 @@
 extends CharacterBody2D
 
 
-@export var SPEED = 200.0
+@export var SPEED = 150.0
 var speed = SPEED # for state machine
-@export var JUMP_VELOCITY = 500.0
+@export var JUMP_VELOCITY = 375.0
 
-@onready var camera = $Camera2D
+@onready var camera = $Lookahead/Camera2D
 @onready var hud = $HUD
 @onready var animation_player = $AnimationPlayer
 
@@ -78,14 +78,25 @@ func play_run_animation():
 	if $AnimationPlayer.current_animation != "run":
 		$AnimationPlayer.play("run")
 	$Body/CyberRoninSprites.play("run")
-			
+
+func play_jump_launch_animation():
+	$Body/CyberRoninSprites.play("jump_launch")
+
+
+func play_jump_peak_animation():
+	# wait for a signal from Air state
+	# includes frames for falling.
+	$Body/CyberRoninSprites.play("jump_peak")
+
+
 func play_idle_animation():
 	if $AnimationPlayer.current_animation != "idle":
 		$AnimationPlayer.play("idle")
 
 func play_somersault_animation():
-	if $AnimationPlayer.current_animation != "somersault":
-		$AnimationPlayer.play("somersault")
+	#if $AnimationPlayer.current_animation != "somersault":
+		#$AnimationPlayer.play("somersault")
+	$Body/CyberRoninSprites.play("double_jump")
 
 func reset_rotation():
 	# hack for when state changes during a somersault.
@@ -127,6 +138,7 @@ func hurt(body):
 	var knockback = true
 	var damageType = Globals.DamageTypes.IMPACT
 
+	
 	if body.has_method("_on_hit"):
 		hit.connect(body._on_hit)
 		hit.emit(damage, impactVector, damageType, knockback)
@@ -161,8 +173,7 @@ func _on_state_transitioned(stateName):
 			$RoninPlaceholderSprite.hide()
 			$Body/CyberRoninSprites.stop()
 			$Audio/JumpNoises.play()
-			if camera.has_method("_on_player_jumped"):
-				camera._on_player_jumped()
+			
 		"Run":
 			$RoninPlaceholderSprite.show()
 			if StateMachine.previous_state_name != "Air":
@@ -178,8 +189,14 @@ func _on_state_transitioned(stateName):
 			else: # just landed.. but we already received a signal for that. _on_landed
 				pass
 			
+			
+func _on_jumped(): # from Air state
+	play_jump_launch_animation()
+
+func _on_peak_amplitude_reached(): # from Air state
+	play_jump_peak_animation()
 		
-func _on_double_jumped():
+func _on_double_jumped(): # from Air state
 	play_somersault_animation()
 
 func _on_landed():
@@ -197,6 +214,9 @@ func _on_descending_kick_impacted():
 func _on_dash_started():
 	if animation_player.has_animation("dash"):
 		animation_player.play("dash")
+	$Body/CyberRoninSprites.play("dash")
+	$Body/SpeedLines.play("default")
+	
 		
 		
 func detect_jump_through_platform() -> StaticBody2D:
