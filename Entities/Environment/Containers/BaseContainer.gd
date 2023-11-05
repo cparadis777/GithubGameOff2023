@@ -1,7 +1,6 @@
 extends StaticBody2D
 
 @export var exterior_texture:Texture2D
-@export var interior_texture:Texture2D
 
 var weigth:int = 100
 var grid_position:Vector2 = Vector2(100,100)
@@ -18,7 +17,6 @@ var entrances = {
 
 func _ready():
 	$Exterior.texture = exterior_texture
-	$Interior.texture = interior_texture
 	#print("setting arrows")
 
 	#print("done setting arrows")
@@ -65,3 +63,5 @@ func hide_entrance(direction) -> void:
 	}
 
 	entrance_arrows[direction].hide()
+
+
