@@ -2,6 +2,19 @@ extends Node
 
 enum Directions {UP, RIGHT, DOWN, LEFT}
 
+func get_opposite_direction(direction:Utils.Directions) -> Utils.Directions:
+	match direction:
+		0:
+			return Utils.Directions.DOWN
+		1:
+			return Utils.Directions.LEFT
+		2: 
+			return Utils.Directions.UP
+		3: 
+			return Utils.Directions.RIGHT
+		_:
+			return Utils.Directions.DOWN
+
 
 func get_closest_node(nodeList : Array, location : Vector2):
 	if not nodeList is Array: # received a single object?

@@ -43,7 +43,7 @@ script = ExtResource("1_3hcry")
 target_weight = 300
 
 [node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("2_30gk4")]
-position = Vector2(-65, -225)
+position = Vector2(-64, -225)
 n_columns = 4
 drop_zone = NodePath("../DropPoints")
 

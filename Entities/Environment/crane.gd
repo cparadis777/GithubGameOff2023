@@ -36,7 +36,8 @@ func _input(event):
 
 func select_random_container() -> StaticBody2D:
 	var new_container = containers.pick_random().instantiate()
-	new_container.self_modulate = Utils.random_color()
+	new_container.get_node("Exterior").self_modulate = Utils.random_color()
+	self.randomize_container_access(new_container)
 	return new_container
 
 func set_current_container(container:StaticBody2D):
@@ -87,5 +88,6 @@ func refesh_container() -> void:
 func move_done()->void:
 	self.move_ready = true
 
-func randomize_container_access():
-	pass
+func randomize_container_access(container):
+	var sides = [Utils.Directions.LEFT, Utils.Directions.UP, Utils.Directions.RIGHT, Utils.Directions.DOWN]
+	container.set_entrances([sides.pick_random()])
