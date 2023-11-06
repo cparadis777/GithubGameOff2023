@@ -42,7 +42,7 @@ func _ready():
 	hud.show()
 	
 	play_idle_animation()
-	original_body_scale = $Body.scale
+	original_body_scale = $Body/CyberRoninSprites.scale
 	torso_starting_position = $Body/Torso.position
 
 func flip_sprites():
@@ -78,29 +78,32 @@ func _input(_event):
 func play_run_animation():
 	if $AnimationPlayer.current_animation != "run":
 		$AnimationPlayer.play("run")
-	$CyberRoninSprites.play("run")
+	$Body/CyberRoninSprites.play("run")
 
 func play_jump_launch_animation():
-	$CyberRoninSprites.play("jump_launch")
+	$Body/CyberRoninSprites.play("jump_launch")
 
 
 func play_jump_peak_animation():
 	# wait for a signal from Air state
 	# includes frames for falling.
-	$CyberRoninSprites.play("jump_peak")
+	$Body/CyberRoninSprites.play("jump_peak")
 
 
 func play_idle_animation():
-	position.x = floor(position.x)
-	position.y = floor(position.y)
+	pass
+#	position.x = floor(position.x)
+#	position.y = floor(position.y)
 	#if $AnimationPlayer.current_animation != "idle":
 	#	$AnimationPlayer.play("idle")
-	#$CyberRoninSprites.play("idle")
+	$AnimationPlayer.stop()
+	$Body/CyberRoninSprites.stop()
+	$Body/CyberRoninSprites.play("idle")
 
 func play_somersault_animation():
 	#if $AnimationPlayer.current_animation != "somersault":
 		#$AnimationPlayer.play("somersault")
-	$CyberRoninSprites.play("double_jump")
+	$Body/CyberRoninSprites.play("double_jump")
 
 func reset_rotation():
 	# hack for when state changes during a somersault.
@@ -129,13 +132,13 @@ func fast_punch():
 	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
 		if $AnimationPlayer.current_animation != "fast_punch":
 			$AnimationPlayer.play("fast_punch")
-		$CyberRoninSprites.play("fast_punch")
+		$Body/CyberRoninSprites.play("fast_punch")
 		
 func strong_punch():
 	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
 		if $AnimationPlayer.current_animation != "strong_punch":
 			$AnimationPlayer.play("strong_punch")
-		$CyberRoninSprites.play("strong_punch")
+		$Body/CyberRoninSprites.play("strong_punch")
 
 
 func hurt(body):
@@ -178,7 +181,7 @@ func _on_state_transitioned(stateName):
 	match stateName:
 		"Air":
 			#$old_static_RoninPlaceholderSprite.hide()
-			$CyberRoninSprites.stop()
+			$Body/CyberRoninSprites.stop()
 			$Audio/JumpNoises.play()
 			
 		"Run":
@@ -190,7 +193,6 @@ func _on_state_transitioned(stateName):
 			
 			
 		"Idle":
-			$CyberRoninSprites.play("idle")
 			if StateMachine.previous_state_name != "Air":
 				play_idle_animation()
 			else: # just landed.. but we already received a signal for that. _on_landed
@@ -214,7 +216,7 @@ func _on_descending_kick_started():
 # should animation calls come from the State machine or the player?
 	if animation_player.has_animation("descending_kick"):
 		#animation_player.play("descending_kick")
-		$CyberRoninSprites.play("descending_kick")
+		$Body/CyberRoninSprites.play("descending_kick")
 
 func _on_descending_kick_impacted():
 	pass # not sure what to do here yet.. Probably just ignore it and let the state machine transition to air.
@@ -222,7 +224,7 @@ func _on_descending_kick_impacted():
 func _on_dash_started():
 	if animation_player.has_animation("dash"):
 		animation_player.play("dash")
-	$CyberRoninSprites.play("dash")
+	$Body/CyberRoninSprites.play("dash")
 	$Body/SpeedLines.play("default")
 	
 		
