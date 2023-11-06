@@ -208,7 +208,8 @@ func _on_landed():
 func _on_descending_kick_started():
 # should animation calls come from the State machine or the player?
 	if animation_player.has_animation("descending_kick"):
-		animation_player.play("descending_kick")
+		#animation_player.play("descending_kick")
+		$Body/CyberRoninSprites.play("downward_kick")
 
 func _on_descending_kick_impacted():
 	pass # not sure what to do here yet.. Probably just ignore it and let the state machine transition to air.
