@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=161 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://csdd0666k7mv1" path="res://audio/sfx/placeholder/hee.wav" id="7_egpjg"]
 [ext_resource type="Texture2D" uid="uid://c3o30r2iupugf" path="res://art/player/cyber-ronin_double_jump.png" id="7_i325b"]
 [ext_resource type="Texture2D" uid="uid://bh3kj8hhfrjiw" path="res://art/player/cyber-ronin_jump.png" id="8_6vqcr"]
+[ext_resource type="Texture2D" uid="uid://0tmrv4c2srvf" path="res://art/player/cyber-ronin_downward_kick.png" id="8_aowfm"]
 [ext_resource type="Texture2D" uid="uid://fd4fp5egfcmb" path="res://art/placeholder/32pixel-runner.png" id="8_gdxyk"]
 [ext_resource type="Texture2D" uid="uid://wlq7m70fouwi" path="res://art/placeholder/richard_williams_walk_cycle.jpeg" id="9_047q4"]
 [ext_resource type="Texture2D" uid="uid://duual2ixvp7ai" path="res://art/player/cyber-ronin_light_punch.png" id="10_1l2sy"]
@@ -139,6 +140,22 @@ region = Rect2(345, 0, 115, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_qw1wk"]
 atlas = ExtResource("7_i325b")
 region = Rect2(460, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1h3lt"]
+atlas = ExtResource("8_aowfm")
+region = Rect2(0, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thorh"]
+atlas = ExtResource("8_aowfm")
+region = Rect2(115, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ys6n6"]
+atlas = ExtResource("8_aowfm")
+region = Rect2(230, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhnu3"]
+atlas = ExtResource("8_aowfm")
+region = Rect2(345, 0, 115, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dpo5s"]
 atlas = ExtResource("6_qr63n")
@@ -517,6 +534,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1h3lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thorh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ys6n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhnu3")
+}],
+"loop": false,
+"name": &"downward_kick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_dpo5s")
 }, {
 "duration": 1.0,
@@ -732,7 +766,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sgd34")
 }],
-"loop": true,
+"loop": false,
 "name": &"light_punch",
 "speed": 5.0
 }, {
@@ -767,7 +801,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5xr11")
 }],
-"loop": true,
+"loop": false,
 "name": &"punch",
 "speed": 5.0
 }, {
@@ -1921,7 +1955,7 @@ offset = Vector2(-15.7046, 1.14441e-05)
 position = Vector2(36.1473, -68.042)
 scale = Vector2(2.12631, 2.12631)
 sprite_frames = SubResource("SpriteFrames_adh0r")
-animation = &"light_punch"
+animation = &"punch"
 speed_scale = 1.5
 
 [node name="Actions" type="Node2D" parent="Body"]
