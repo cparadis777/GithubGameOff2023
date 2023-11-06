@@ -29,7 +29,7 @@ func get_closest_node(nodeList : Array, location : Vector2):
 	return closest
 
 
-func normalize_value(x, min_value, max_value) -> float:
+func normalize_value(x, min_value, max_value) -> float: # for progress bars, etc.
 	x = float(x)
 	min_value = float(min_value)
 	max_value = float(max_value)
