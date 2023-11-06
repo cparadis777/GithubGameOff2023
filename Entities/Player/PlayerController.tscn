@@ -845,15 +845,6 @@ radius = 14.0357
 atlas = ExtResource("4_gxpwb")
 region = Rect2(191, 193.5, 106, 104)
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0mkmi"]
-streams_count = 3
-stream_0/stream = ExtResource("5_byt84")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("6_777c2")
-stream_1/weight = 1.0
-stream_2/stream = ExtResource("7_egpjg")
-stream_2/weight = 1.0
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lhy5y"]
 streams_count = 2
 stream_0/stream = ExtResource("16_05syi")
@@ -871,6 +862,15 @@ stream_0/weight = 1.0
 streams_count = 1
 stream_0/stream = ExtResource("21_y0a8e")
 stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0mkmi"]
+streams_count = 3
+stream_0/stream = ExtResource("5_byt84")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_777c2")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("7_egpjg")
+stream_2/weight = 1.0
 
 [sub_resource type="Animation" id="Animation_tb0g1"]
 length = 0.001
@@ -1009,7 +1009,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("AttackNoises:playing")
+tracks/11/path = NodePath("Audio/AttackNoises:playing")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -1250,7 +1250,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackNoises:playing")
+tracks/1/path = NodePath("Audio/AttackNoises:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1599,7 +1599,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackNoises:playing")
+tracks/1/path = NodePath("Audio/AttackNoises:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1672,7 +1672,7 @@ shape = SubResource("CapsuleShape2D_ghh7o")
 [node name="CyberRoninSprites" type="AnimatedSprite2D" parent="Body"]
 position = Vector2(18, -31)
 sprite_frames = SubResource("SpriteFrames_adh0r")
-animation = &"dash"
+animation = &"strong_punch"
 
 [node name="SpeedLines" type="AnimatedSprite2D" parent="Body"]
 visible = false
@@ -1838,10 +1838,6 @@ scale = Vector2(0.581697, 0.581696)
 texture = ExtResource("3_340x3")
 offset = Vector2(17.7187, 0.855423)
 
-[node name="AttackNoises" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_0mkmi")
-bus = &"sfx"
-
 [node name="RunnerPlaceholder" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(21, -15)
@@ -1894,6 +1890,10 @@ stream = SubResource("AudioStreamRandomizer_itygw")
 
 [node name="LandingNoises" type="AudioStreamPlayer2D" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_h82oh")
+
+[node name="AttackNoises" type="AudioStreamPlayer2D" parent="Audio"]
+stream = SubResource("AudioStreamRandomizer_0mkmi")
+bus = &"sfx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

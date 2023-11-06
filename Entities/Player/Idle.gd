@@ -29,6 +29,8 @@ func physics_update(_delta: float) -> void:
 
 	if player.detect_moving_platform() != null:
 		player.move_and_slide()
+	else:
+		player.global_position = floor(player.global_position)
 			
 func duck():
 	print("player wants to duck, but that's not implemented yet.")
