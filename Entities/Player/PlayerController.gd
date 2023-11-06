@@ -1,5 +1,5 @@
 # Player Controller for 2D action platformer
-# move, jump, kick, punch, shoot, interact, etc.
+# move, jump, strong_punch, fast_punch, shoot, interact, etc.
 
 
 extends CharacterBody2D
@@ -36,9 +36,10 @@ func _enter_tree():
 	
 
 func _ready():
-	$Body/Actions/Kick/HurtBox/CollisionShape2D.disabled = true
-	$Body/Actions/Punch/HurtBox/CollisionShape2D.disabled = true
+	$Body/Actions/strong_punch/HurtBox/CollisionShape2D.disabled = true
+	$Body/Actions/fast_punch/HurtBox/CollisionShape2D.disabled = true
 	$ReferenceRunCycle.hide()
+	hud.show()
 	
 	play_idle_animation()
 	original_body_scale = $Body.scale
@@ -66,12 +67,12 @@ func _input(_event):
 		spawn_bullet_toward_mouse()
 	elif Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
-	elif Input.is_action_just_pressed("kick"):
+	elif Input.is_action_just_pressed("strong_punch"):
 		if $AnimationPlayer.current_animation != "somersault":
-			kick()
-	elif Input.is_action_just_pressed("punch"):
+			strong_punch()
+	elif Input.is_action_just_pressed("fast_punch"):
 		if $AnimationPlayer.current_animation != "somersault":
-			punch()
+			fast_punch()
 
 
 func play_run_animation():
@@ -121,17 +122,17 @@ func spawn_bullet_toward_mouse():
 	add_sibling(bulletNode)
 	bulletNode.activate(targetVector)
 
-func punch():
+func fast_punch():
 	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
-		if $AnimationPlayer.current_animation != "punch":
-			$AnimationPlayer.play("punch")
-		$Body/CyberRoninSprites.play("punch")
+		if $AnimationPlayer.current_animation != "fast_punch":
+			$AnimationPlayer.play("fast_punch")
+		$Body/CyberRoninSprites.play("fast_punch")
 		
-func kick():
+func strong_punch():
 	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
-		if $AnimationPlayer.current_animation != "kick":
-			$AnimationPlayer.play("kick")
-		$Body/CyberRoninSprites.play("light_punch")
+		if $AnimationPlayer.current_animation != "strong_punch":
+			$AnimationPlayer.play("strong_punch")
+		$Body/CyberRoninSprites.play("strong_punch")
 
 
 func hurt(body):
@@ -148,7 +149,8 @@ func hurt(body):
 
 
 func _on_hurt_box_body_entered(body):
-	# kick or punch or descending_kick
+	# TODO: consider splitting this into a separate function for each type of attack
+	# strong_punch, fast_punch or descending_kick
 	hurt(body)
 	if StateMachine.state.name == "DescendingKick":
 		velocity.x = -velocity.x * 0.5
@@ -160,7 +162,7 @@ func _on_hurt_box_body_entered(body):
 
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name in [ "punch", "kick" ]:
+	if anim_name in [ "fast_punch", "strong_punch" ]:
 		if velocity.length_squared() > 0.5:
 			play_run_animation()
 		else:
@@ -209,7 +211,7 @@ func _on_descending_kick_started():
 # should animation calls come from the State machine or the player?
 	if animation_player.has_animation("descending_kick"):
 		#animation_player.play("descending_kick")
-		$Body/CyberRoninSprites.play("downward_kick")
+		$Body/CyberRoninSprites.play("descending_kick")
 
 func _on_descending_kick_impacted():
 	pass # not sure what to do here yet.. Probably just ignore it and let the state machine transition to air.
