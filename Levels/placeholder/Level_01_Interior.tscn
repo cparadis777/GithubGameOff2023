@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/trashcan.tscn" id="4_4k4sl"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="5_2wyyn"]
-[ext_resource type="PackedScene" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_ap6lg"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_ap6lg"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="7_53wf6"]
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="7_gq8f5"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
@@ -52,6 +52,7 @@ script = ExtResource("1_foj8b")
 position = Vector2(0, -77)
 
 [node name="Player" parent="." instance=ExtResource("2_u6p87")]
+position = Vector2(1, -30)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -163,7 +164,7 @@ position = Vector2(0.499985, -318)
 shape = SubResource("RectangleShape2D_5tgv5")
 
 [node name="Floor" type="StaticBody2D" parent="Walls" groups=["Floors"]]
-position = Vector2(-313, 5)
+position = Vector2(-313, 6)
 rotation = 1.5708
 collision_layer = 24
 collision_mask = 15
@@ -177,6 +178,11 @@ offset = Vector2(-1.20056, -90.1335)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Floor"]
 position = Vector2(0.499985, -318)
 shape = SubResource("RectangleShape2D_5tgv5")
+
+[node name="Line2D" type="Line2D" parent="Walls/Floor"]
+position = Vector2(-4.99999, 2.00003)
+points = PackedVector2Array(0, 0, 2.08165e-12, -640)
+width = 1.0
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -100

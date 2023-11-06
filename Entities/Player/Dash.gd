@@ -1,5 +1,5 @@
 # Dash.gd
-# when in air, if player presses punch, they'll dash-punch
+# when in air, if player presses fast_punch, they'll dash-punch
 
 extends PlayerState
 
