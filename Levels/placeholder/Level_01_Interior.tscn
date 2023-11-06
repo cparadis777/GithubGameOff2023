@@ -52,6 +52,7 @@ script = ExtResource("1_foj8b")
 position = Vector2(0, -77)
 
 [node name="Player" parent="." instance=ExtResource("2_u6p87")]
+position = Vector2(1, -30)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -163,7 +164,7 @@ position = Vector2(0.499985, -318)
 shape = SubResource("RectangleShape2D_5tgv5")
 
 [node name="Floor" type="StaticBody2D" parent="Walls" groups=["Floors"]]
-position = Vector2(-313, 5)
+position = Vector2(-313, 6)
 rotation = 1.5708
 collision_layer = 24
 collision_mask = 15
@@ -177,6 +178,11 @@ offset = Vector2(-1.20056, -90.1335)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Floor"]
 position = Vector2(0.499985, -318)
 shape = SubResource("RectangleShape2D_5tgv5")
+
+[node name="Line2D" type="Line2D" parent="Walls/Floor"]
+position = Vector2(-4.99999, 2.00003)
+points = PackedVector2Array(0, 0, 2.08165e-12, -640)
+width = 1.0
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -100

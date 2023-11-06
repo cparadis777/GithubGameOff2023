@@ -130,15 +130,15 @@ func spawn_bullet_toward_mouse():
 
 func fast_punch():
 	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
-		if $AnimationPlayer.current_animation != "fast_punch":
+		if $AnimationPlayer.current_animation not in ["fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("fast_punch")
-		$Body/CyberRoninSprites.play("fast_punch")
+			$Body/CyberRoninSprites.play("fast_punch")
 		
 func strong_punch():
 	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
-		if $AnimationPlayer.current_animation != "strong_punch":
+		if $AnimationPlayer.current_animation not in [ "fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("strong_punch")
-		$Body/CyberRoninSprites.play("strong_punch")
+			$Body/CyberRoninSprites.play("strong_punch")
 
 
 func hurt(body):
