@@ -16,7 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://csdd0666k7mv1" path="res://audio/sfx/placeholder/hee.wav" id="7_egpjg"]
 [ext_resource type="Texture2D" uid="uid://c3o30r2iupugf" path="res://art/player/cyber-ronin_double_jump.png" id="7_i325b"]
 [ext_resource type="Texture2D" uid="uid://bh3kj8hhfrjiw" path="res://art/player/cyber-ronin_jump.png" id="8_6vqcr"]
-[ext_resource type="Texture2D" uid="uid://0tmrv4c2srvf" path="res://art/player/cyber-ronin_downward_kick.png" id="8_aowfm"]
 [ext_resource type="Texture2D" uid="uid://fd4fp5egfcmb" path="res://art/placeholder/32pixel-runner.png" id="8_gdxyk"]
 [ext_resource type="Texture2D" uid="uid://wlq7m70fouwi" path="res://art/placeholder/richard_williams_walk_cycle.jpeg" id="9_047q4"]
 [ext_resource type="Texture2D" uid="uid://duual2ixvp7ai" path="res://art/player/cyber-ronin_light_punch.png" id="10_1l2sy"]
@@ -80,7 +79,6 @@ region = Rect2(345, 0, 115, 64)
 atlas = ExtResource("7_i325b")
 region = Rect2(460, 0, 115, 64)
 
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_sy40m"]
 atlas = ExtResource("10_1l2sy")
 region = Rect2(0, 0, 115, 64)
@@ -108,7 +106,6 @@ region = Rect2(575, 0, 115, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_sgd34"]
 atlas = ExtResource("10_1l2sy")
 region = Rect2(690, 0, 115, 64)
-
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dpo5s"]
 atlas = ExtResource("6_qr63n")
@@ -476,22 +473,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-
-"texture": SubResource("AtlasTexture_1h3lt")
+"texture": SubResource("AtlasTexture_sy40m")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_thorh")
+"texture": SubResource("AtlasTexture_pxrtl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ys6n6")
+"texture": SubResource("AtlasTexture_kxx7l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vhnu3")
+"texture": SubResource("AtlasTexture_cnafn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uau8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4p6et")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgd34")
 }],
 "loop": false,
-"name": &"downward_kick",
-"speed": 5.0
-
+"name": &"fast_punch",
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -713,11 +717,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x7vwn")
 }],
-
-"loop": false,
-"name": &"light_punch",
-"speed": 5.0
-
+"loop": true,
+"name": &"run",
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -751,7 +753,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_5xr11")
 }],
 "loop": false,
-
 "name": &"strong_punch",
 "speed": 15.0
 }]
@@ -801,7 +802,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eytj7")
-
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_otr5b")
@@ -1682,7 +1682,6 @@ sprite_frames = SubResource("SpriteFrames_3ov6f")
 frame = 9
 frame_progress = 1.0
 offset = Vector2(-15.7046, 1.14441e-05)
-
 
 [node name="Actions" type="Node2D" parent="Body"]
 
