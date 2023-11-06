@@ -91,8 +91,11 @@ func play_jump_peak_animation():
 
 
 func play_idle_animation():
-	if $AnimationPlayer.current_animation != "idle":
-		$AnimationPlayer.play("idle")
+	position.x = floor(position.x)
+	position.y = floor(position.y)
+	#if $AnimationPlayer.current_animation != "idle":
+	#	$AnimationPlayer.play("idle")
+	#$Body/CyberRoninSprites.play("idle")
 
 func play_somersault_animation():
 	#if $AnimationPlayer.current_animation != "somersault":
@@ -232,5 +235,12 @@ func detect_jump_through_platform() -> StaticBody2D:
 			jump_through_platform_detected = candidate
 	return jump_through_platform_detected
 
+func detect_moving_platform() -> AnimatableBody2D:
+	var moving_platform_detected
+	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
+	for candidate in candidate_bodies:
+		if candidate.is_in_group("MovingPlatforms") or candidate is AnimatableBody2D or "moving" in candidate.name.to_lower():
+			moving_platform_detected = candidate
+	return moving_platform_detected
 	
 	
