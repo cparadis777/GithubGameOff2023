@@ -125,11 +125,13 @@ func punch():
 	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
 		if $AnimationPlayer.current_animation != "punch":
 			$AnimationPlayer.play("punch")
+		$Body/CyberRoninSprites.play("punch")
 		
 func kick():
 	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
 		if $AnimationPlayer.current_animation != "kick":
 			$AnimationPlayer.play("kick")
+		$Body/CyberRoninSprites.play("light_punch")
 
 
 func hurt(body):
@@ -170,12 +172,12 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_state_transitioned(stateName):
 	match stateName:
 		"Air":
-			$RoninPlaceholderSprite.hide()
+			#$old_static_RoninPlaceholderSprite.hide()
 			$Body/CyberRoninSprites.stop()
 			$Audio/JumpNoises.play()
 			
 		"Run":
-			$RoninPlaceholderSprite.show()
+			#$old_static_RoninPlaceholderSprite.show()
 			if StateMachine.previous_state_name != "Air":
 				play_run_animation()
 			else:
