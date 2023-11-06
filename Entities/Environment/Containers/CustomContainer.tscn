@@ -1,39 +1,39 @@
 [gd_scene load_steps=9 format=3 uid="uid://cecceqk8282a6"]
 
-[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_esbkl"]
-[ext_resource type="Texture2D" uid="uid://cr25ww6yimgkk" path="res://art/props/shipping_container_ill_eagle.png" id="2_aex3n"]
-[ext_resource type="Texture2D" uid="uid://bw2auvp8r1v5o" path="res://art/shipping_container.png" id="3_i43v0"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/CustomContainer.gd" id="1_12uk0"]
+[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="2_aex3n"]
+[ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="3_dkb3v"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
-a = Vector2(96, -48)
-b = Vector2(-96, -48)
+a = Vector2(192, -96)
+b = Vector2(-192, -96)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_pl5uy"]
-a = Vector2(-96, 48)
-b = Vector2(96, 48)
+a = Vector2(-192, 96)
+b = Vector2(192, 96)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_6s04m"]
-a = Vector2(-96, -48)
-b = Vector2(-96, 48)
+a = Vector2(-192, -96)
+b = Vector2(-192, 95)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_v22jh"]
-a = Vector2(96, -47)
-b = Vector2(96, 48)
+a = Vector2(192, -96)
+b = Vector2(192, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
-size = Vector2(192, 96)
+size = Vector2(384, 192)
 
 [node name="BaseContainer" type="StaticBody2D"]
-script = ExtResource("1_esbkl")
-exterior_texture = ExtResource("2_aex3n")
-interior_texture = ExtResource("2_aex3n")
+script = ExtResource("1_12uk0")
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
-rotation = 3.14159
-texture = ExtResource("3_i43v0")
+position = Vector2(0, -6.55651e-06)
+scale = Vector2(2, 2)
+texture = ExtResource("3_dkb3v")
 
 [node name="Exterior" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_aex3n")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]
