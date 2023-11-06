@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgk01ai7d526u"]
+[gd_scene load_steps=9 format=3 uid="uid://cecceqk8282a6"]
 
-[ext_resource type="Texture2D" uid="uid://bw2auvp8r1v5o" path="res://art/shipping_container.png" id="1_flq8s"]
-[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_xmhax"]
-[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="3_srdw2"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/CustomContainer.gd" id="1_12uk0"]
+[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="2_aex3n"]
+[ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="3_dkb3v"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
 a = Vector2(192, -96)
@@ -12,20 +12,28 @@ b = Vector2(-192, -96)
 a = Vector2(-192, 96)
 b = Vector2(192, 96)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6s04m"]
+a = Vector2(-192, -96)
+b = Vector2(-192, 95)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_v22jh"]
+a = Vector2(192, -96)
+b = Vector2(192, 96)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
 size = Vector2(384, 192)
 
 [node name="BaseContainer" type="StaticBody2D"]
-script = ExtResource("1_xmhax")
-exterior_texture = ExtResource("3_srdw2")
+script = ExtResource("1_12uk0")
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
-rotation = 3.14159
-texture = ExtResource("1_flq8s")
+position = Vector2(0, -6.55651e-06)
+scale = Vector2(2, 2)
+texture = ExtResource("3_dkb3v")
 
 [node name="Exterior" type="Sprite2D" parent="."]
-texture = ExtResource("3_srdw2")
+texture = ExtResource("2_aex3n")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_rgkd6")
@@ -33,8 +41,13 @@ shape = SubResource("SegmentShape2D_rgkd6")
 [node name="BottomCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_pl5uy")
 
+[node name="LeftCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_6s04m")
+
+[node name="RightCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_v22jh")
+
 [node name="ContainerInterior" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 shape = SubResource("RectangleShape2D_dnhqr")
