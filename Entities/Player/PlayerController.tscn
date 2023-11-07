@@ -1,4 +1,4 @@
-[gd_scene load_steps=161 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=164 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
@@ -34,6 +34,9 @@
 [ext_resource type="Script" path="res://Entities/Player/Dash.gd" id="18_6dmrt"]
 [ext_resource type="AudioStream" uid="uid://c2tum0uxura5j" path="res://audio/sfx/placeholder/TerribleJumpNoise.wav" id="18_mdgst"]
 [ext_resource type="AudioStream" uid="uid://dnf4btn7jyc7s" path="res://audio/sfx/placeholder/landing_thud.wav" id="21_y0a8e"]
+[ext_resource type="AudioStream" uid="uid://dfvldllfwqfmj" path="res://audio/sfx/placeholder/windup2.wav" id="34_iwlpj"]
+[ext_resource type="AudioStream" uid="uid://duvsdlg5vdcu5" path="res://audio/sfx/placeholder/follow_through_2.wav" id="35_tnuvo"]
+[ext_resource type="AudioStream" uid="uid://dyi2jeb1182w0" path="res://audio/sfx/placeholder/whip.wav" id="36_hlp8x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 16.0
@@ -839,7 +842,7 @@ animations = [{
 radius = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
-radius = 14.0357
+radius = 23.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o20hr"]
 atlas = ExtResource("4_gxpwb")
@@ -1150,6 +1153,78 @@ tracks/22/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Body/CyberRoninSprites:animation")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fast_punch"]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Body/CyberRoninSprites:frame")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/25/type = "value"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Body/CyberRoninSprites:position")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(18, -31)]
+}
+tracks/26/type = "value"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Audio/Windup:playing")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("Audio/FollowThrough:playing")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/28/type = "value"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Audio/WhipCrack:playing")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_l2b41"]
 resource_name = "dash"
@@ -1233,7 +1308,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_eihwv"]
 resource_name = "fast_punch"
-length = 0.6
+length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1242,7 +1317,7 @@ tracks/0/path = NodePath("Body/Actions/fast_punch/HurtBox/CollisionShape2D:disab
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0, 0.15, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -1254,7 +1329,7 @@ tracks/1/path = NodePath("Audio/AttackNoises:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0.15, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -1270,6 +1345,42 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/CyberRoninSprites:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fast_punch"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/CyberRoninSprites:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 6]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/CyberRoninSprites:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.35, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(18, -31), Vector2(2.08165e-12, -31), Vector2(17, -31), Vector2(18, -31)]
 }
 
 [sub_resource type="Animation" id="Animation_1accm"]
@@ -1582,7 +1693,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_r2a28"]
 resource_name = "strong_punch"
-length = 0.8
+length = 0.9
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1591,7 +1702,7 @@ tracks/0/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:dis
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0, 0.35, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -1599,23 +1710,83 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Audio/AttackNoises:playing")
+tracks/1/path = NodePath("Body/Actions/fast_punch/HurtBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Body/Actions/fast_punch/HurtBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Body/CyberRoninSprites:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"strong_punch"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/CyberRoninSprites:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 4, 9]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/CyberRoninSprites:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(18, -31), Vector2(2.08165e-12, -31), Vector2(2.08165e-12, -31), Vector2(18, -31)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Audio/Windup:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Audio/FollowThrough:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Audio/WhipCrack:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.45),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -1672,7 +1843,7 @@ shape = SubResource("CapsuleShape2D_ghh7o")
 [node name="CyberRoninSprites" type="AnimatedSprite2D" parent="Body"]
 position = Vector2(18, -31)
 sprite_frames = SubResource("SpriteFrames_adh0r")
-animation = &"strong_punch"
+animation = &"fast_punch"
 
 [node name="SpeedLines" type="AnimatedSprite2D" parent="Body"]
 visible = false
@@ -1712,7 +1883,7 @@ collision_layer = 0
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Actions/strong_punch/HurtBox"]
-position = Vector2(-7.62939e-06, 1.90735e-06)
+position = Vector2(-0.28299, -8.99555)
 shape = SubResource("CircleShape2D_pmdka")
 
 [node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/strong_punch"]
@@ -1894,6 +2065,16 @@ stream = SubResource("AudioStreamRandomizer_h82oh")
 [node name="AttackNoises" type="AudioStreamPlayer2D" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_0mkmi")
 bus = &"sfx"
+
+[node name="Windup" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("34_iwlpj")
+
+[node name="FollowThrough" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("35_tnuvo")
+
+[node name="WhipCrack" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("36_hlp8x")
+pitch_scale = 0.67
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

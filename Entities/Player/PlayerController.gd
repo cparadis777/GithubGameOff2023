@@ -132,7 +132,7 @@ func fast_punch():
 	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
 		if $AnimationPlayer.current_animation not in ["fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("fast_punch")
-			$Body/CyberRoninSprites.play("fast_punch")
+			#$Body/CyberRoninSprites.play("fast_punch")
 		
 func strong_punch():
 	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
