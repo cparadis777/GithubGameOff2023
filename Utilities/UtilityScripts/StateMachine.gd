@@ -12,7 +12,7 @@ signal transitioned(state_name)
 @export var initial_state := NodePath()
 
 # The current active state. At the start of the game, we get the `initial_state`.
-@onready var state: State = get_node(initial_state)
+@onready var state: EntityState = get_node(initial_state)
 var previous_state_name : String
 
 func _ready() -> void:

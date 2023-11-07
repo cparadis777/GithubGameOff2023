@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=10 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Levels/ContainerStackingTest.gd" id="1_3hcry"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
 [ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="2_o08nb"]
 [ext_resource type="Script" path="res://Levels/DropPoints.gd" id="3_i3vix"]
 [ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_bhv33"]
+[ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wi8fu"]
 size = Vector2(16, 21.5)
@@ -42,24 +43,36 @@ position = Vector2(1, 1)
 script = ExtResource("1_3hcry")
 target_weight = 300
 
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="QuitButton-ReturnToMenu" parent="HUD" instance=ExtResource("6_n282g")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -42.0
+offset_bottom = 31.0
+grow_horizontal = 0
+
 [node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("2_30gk4")]
-position = Vector2(-257, -321)
+position = Vector2(-64, -225)
 n_columns = 4
 drop_zone = NodePath("../DropPoints")
 
 [node name="DropPoints" type="Node2D" parent="."]
-position = Vector2(-257, -161)
+position = Vector2(-65, -193)
 script = ExtResource("3_i3vix")
 n_horizontal = 4
 n_vertical = 4
 new_scale = 1.0
+container_width = 48
+container_height = 24
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -177)
-zoom = Vector2(0.25, 0.25)
 
 [node name="Ship" type="StaticBody2D" parent="."]
-scale = Vector2(4, 4)
+position = Vector2(-1, -145)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
 position = Vector2(-96, 49.25)
@@ -91,10 +104,10 @@ texture = ExtResource("4_bhv33")
 metadata/_edit_lock_ = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -457.0
-offset_top = 183.0
-offset_right = -44.0
-offset_bottom = 218.0
+offset_left = -116.0
+offset_top = -89.0
+offset_right = -9.0
+offset_bottom = -78.0
 rotation = -1.5708
 max_value = 1.0
 show_percentage = false

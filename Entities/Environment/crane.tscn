@@ -1,19 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5vova3vmv6p7"]
+[gd_scene load_steps=4 format=3 uid="uid://c5vova3vmv6p7"]
 
 [ext_resource type="Script" path="res://Entities/Environment/crane.gd" id="1_iyal4"]
-[ext_resource type="PackedScene" uid="uid://bp5bfgn3sxr7f" path="res://Entities/Environment/Containers/BlueContainer.tscn" id="2_xo4it"]
-[ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/Containers/BaseContainer.tscn" id="3_yn1br"]
+[ext_resource type="PackedScene" uid="uid://mq11awte3lc6" path="res://Entities/Environment/PlaceHolders/PlaceholderDroppableContainer.tscn" id="2_go6ni"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="4_l15jl"]
 
 [node name="crane" type="Node2D"]
 script = ExtResource("1_iyal4")
 n_columns = 5
-containers = Array[PackedScene]([ExtResource("2_xo4it"), ExtResource("3_yn1br")])
-container_width = 192
+containers = Array[PackedScene]([ExtResource("2_go6ni")])
+container_width = 48
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -112.0
-offset_top = -88.0
-offset_right = 112.0
-offset_bottom = -40.0
+offset_top = 16.0
+offset_right = 152.0
+offset_bottom = 64.0
 theme = ExtResource("4_l15jl")
