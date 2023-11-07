@@ -198,7 +198,7 @@ func _on_state_transitioned(stateName):
 			
 			
 		"Idle":
-			if StateMachine.previous_state_name in ["Idle"]:
+			if StateMachine.previous_state_name in ["Run"]:
 				play_idle_animation()
 			elif StateMachine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
 				play_idle_animation()
