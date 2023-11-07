@@ -4,6 +4,7 @@ var player_near : bool = false
 var pressed : bool = false
 
 @export var next_scene:PackedScene
+@export_range(0.0, 2.0, 0.1) var wait_seconds:float = 0.0
 
 signal toggled(pressed)
 
@@ -15,8 +16,7 @@ func _ready():
 func level_transition():
 	print_debug("level_transition()")
 	toggled.emit(pressed)
-	# some kind of transition animation?
-	StageManager.change_scene_to(next_scene)
+	SceneTransition.change_scene(next_scene, wait_seconds)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if !pressed and Input.is_action_just_pressed("interact") and player_near:
