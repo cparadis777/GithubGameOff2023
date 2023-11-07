@@ -60,19 +60,19 @@ func get_last_known_direction():
 func _physics_process(_delta):
 	flip_sprites()
 	$Debug.global_rotation = 0.0
-
-	
-func _input(_event):
 	if Input.is_action_just_pressed("shoot"):
 		spawn_bullet_toward_mouse()
 	elif Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
 	elif Input.is_action_just_pressed("strong_punch"):
-		if $AnimationPlayer.current_animation != "somersault":
+		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
 			strong_punch()
 	elif Input.is_action_just_pressed("fast_punch"):
-		if $AnimationPlayer.current_animation != "somersault":
+		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
 			fast_punch()
+
+
+
 
 
 func play_run_animation():
@@ -129,16 +129,16 @@ func spawn_bullet_toward_mouse():
 	bulletNode.activate(targetVector)
 
 func fast_punch():
-	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
+	if StateMachine.state.name in [ "Idle", "Run" ]:
 		if $AnimationPlayer.current_animation not in ["fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("fast_punch")
 			#$Body/CyberRoninSprites.play("fast_punch")
 		
 func strong_punch():
-	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
+	if StateMachine.state.name in [ "Idle", "Run" ]:
 		if $AnimationPlayer.current_animation not in [ "fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("strong_punch")
-			$Body/CyberRoninSprites.play("strong_punch")
+			#$Body/CyberRoninSprites.play("strong_punch")
 
 
 func hurt(body):
