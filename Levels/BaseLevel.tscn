@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxs8ht00yrfp7"]
+[gd_scene load_steps=8 format=3 uid="uid://cxs8ht00yrfp7"]
 
 [ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/Containers/BaseContainer.tscn" id="1_omew2"]
 [ext_resource type="Script" path="res://Levels/BaseLevel.gd" id="2_25rwd"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="3_5dvsj"]
 [ext_resource type="Texture2D" uid="uid://cpm3d8w1b5tew" path="res://art/background/shipping_container_ice_and_freezy_INTERIOR.png" id="3_etmvf"]
+[ext_resource type="PackedScene" uid="uid://b75mqcyc3pmmw" path="res://Entities/Environment/switches/LevelDoor.tscn" id="5_i32gn"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k88s5"]
 a = Vector2(-192, -96)
@@ -45,3 +46,5 @@ shape = SubResource("SegmentShape2D_k88s5")
 
 [node name="RightCollision" type="CollisionShape2D" parent="." index="8"]
 shape = SubResource("SegmentShape2D_1ek2t")
+
+[node name="TransitionDoor" parent="." index="12" instance=ExtResource("5_i32gn")]
