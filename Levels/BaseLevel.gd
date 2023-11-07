@@ -1,4 +1,4 @@
-extends "res://Entities/Environment/Containers/BaseContainer.gd"
+extends Node2D
 
 @export var level_width: int = 384
 @export var level_height: int = 192
@@ -10,7 +10,6 @@ enum dir_flags {LEFT = 1, RIGHT = 2, UP = 4, DOWN = 8}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	StageManager.current_level = self
 	var directions = []
 	if (exit_flags & dir_flags.LEFT):
 		directions.push_back(Utils.Directions.LEFT)
@@ -20,7 +19,7 @@ func _ready():
 		directions.push_back(Utils.Directions.UP)
 	if (exit_flags & dir_flags.DOWN):
 		directions.push_back(Utils.Directions.DOWN)
-	set_entrances(directions)
+	$BaseContainer.set_entrances(directions)
 	
 	
 
