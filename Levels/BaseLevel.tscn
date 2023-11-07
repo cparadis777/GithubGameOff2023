@@ -1,50 +1,52 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxs8ht00yrfp7"]
+[gd_scene load_steps=8 format=3 uid="uid://d236kkv4xp3qw"]
 
-[ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/Containers/BaseContainer.tscn" id="1_omew2"]
-[ext_resource type="Script" path="res://Levels/BaseLevel.gd" id="2_25rwd"]
-[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="3_5dvsj"]
-[ext_resource type="Texture2D" uid="uid://cpm3d8w1b5tew" path="res://art/background/shipping_container_ice_and_freezy_INTERIOR.png" id="3_etmvf"]
-[ext_resource type="PackedScene" uid="uid://b75mqcyc3pmmw" path="res://Entities/Environment/switches/LevelDoor.tscn" id="5_i32gn"]
+[ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/Containers/BaseContainer.tscn" id="1_k16lk"]
+[ext_resource type="Script" path="res://Levels/BaseLevel.gd" id="1_m15gi"]
+[ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="3_evdql"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="3_n7xin"]
+[ext_resource type="PackedScene" uid="uid://b75mqcyc3pmmw" path="res://Entities/Environment/switches/LevelDoor.tscn" id="4_embi4"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_k88s5"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pjkui"]
 a = Vector2(-192, -96)
 b = Vector2(-192, 95)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_1ek2t"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_r5xtv"]
 a = Vector2(192, -96)
 b = Vector2(192, 96)
 
-[node name="BaseLevel" instance=ExtResource("1_omew2")]
-script = ExtResource("2_25rwd")
-level_width = 384
-level_height = 192
-exit_flags = 0
-enter_from = 0
-exterior_texture = null
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource("1_m15gi")
+exit_flags = 3
 
-[node name="Interior" parent="." index="0"]
+[node name="BaseContainer" parent="." instance=ExtResource("1_k16lk")]
+
+[node name="Interior" parent="BaseContainer" index="0"]
 rotation = 0.0
-texture = ExtResource("3_etmvf")
+scale = Vector2(2, 2)
+texture = ExtResource("3_evdql")
 
-[node name="Player" parent="." index="1" instance=ExtResource("3_5dvsj")]
-position = Vector2(-163, 77)
-
-[node name="LeftArrow" parent="." index="2"]
+[node name="LeftArrow" parent="BaseContainer" index="1"]
 position = Vector2(-45, 0)
 
-[node name="RightArrow" parent="." index="3"]
+[node name="RightArrow" parent="BaseContainer" index="2"]
 position = Vector2(45, 0)
 
-[node name="UpArrow" parent="." index="4"]
-position = Vector2(0, -35)
+[node name="UpArrow" parent="BaseContainer" index="3"]
+position = Vector2(0, -45)
 
-[node name="DownArrow" parent="." index="5"]
-position = Vector2(0, 35)
+[node name="DownArrow" parent="BaseContainer" index="4"]
+position = Vector2(0, 45)
 
-[node name="LeftCollision" type="CollisionShape2D" parent="." index="7"]
-shape = SubResource("SegmentShape2D_k88s5")
+[node name="LeftCollision" type="CollisionShape2D" parent="BaseContainer"]
+shape = SubResource("SegmentShape2D_pjkui")
 
-[node name="RightCollision" type="CollisionShape2D" parent="." index="8"]
-shape = SubResource("SegmentShape2D_1ek2t")
+[node name="RightCollision" type="CollisionShape2D" parent="BaseContainer"]
+shape = SubResource("SegmentShape2D_r5xtv")
 
-[node name="TransitionDoor" parent="." index="12" instance=ExtResource("5_i32gn")]
+[node name="Player" parent="." instance=ExtResource("3_n7xin")]
+position = Vector2(-158, 83)
+
+[node name="NextLevelDoor" parent="." instance=ExtResource("4_embi4")]
+position = Vector2(163, 55)
+
+[editable path="BaseContainer"]
