@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc001bp1r3fvp"
-path="res://.godot/imported/soyda.png-c45e7e1576d41ef577bc9719ef47fd25.ctex"
+uid="uid://bmsrysllnn6jw"
+path="res://.godot/imported/shipping_container_soyda.png-462b9120b0d78f3b10f6447f6ebf13c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/props/soyda.png"
-dest_files=["res://.godot/imported/soyda.png-c45e7e1576d41ef577bc9719ef47fd25.ctex"]
+source_file="res://art/props/shipping_container_soyda.png"
+dest_files=["res://.godot/imported/shipping_container_soyda.png-462b9120b0d78f3b10f6447f6ebf13c1.ctex"]
 
 [params]
 

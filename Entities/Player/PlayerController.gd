@@ -60,25 +60,25 @@ func get_last_known_direction():
 func _physics_process(_delta):
 	flip_sprites()
 	$Debug.global_rotation = 0.0
-
-	
-func _input(_event):
 	if Input.is_action_just_pressed("shoot"):
 		spawn_bullet_toward_mouse()
 	elif Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
 	elif Input.is_action_just_pressed("strong_punch"):
-		if $AnimationPlayer.current_animation != "somersault":
+		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
 			strong_punch()
 	elif Input.is_action_just_pressed("fast_punch"):
-		if $AnimationPlayer.current_animation != "somersault":
+		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
 			fast_punch()
+
+
+
 
 
 func play_run_animation():
 	if $AnimationPlayer.current_animation != "run":
 		$AnimationPlayer.play("run")
-	$Body/CyberRoninSprites.play("run")
+	#$Body/CyberRoninSprites.play("run")
 
 func play_jump_launch_animation():
 	$Body/CyberRoninSprites.play("jump_launch")
@@ -91,14 +91,13 @@ func play_jump_peak_animation():
 
 
 func play_idle_animation():
-	pass
+	
 #	position.x = floor(position.x)
 #	position.y = floor(position.y)
-	#if $AnimationPlayer.current_animation != "idle":
-	#	$AnimationPlayer.play("idle")
-	$AnimationPlayer.stop()
-	$Body/CyberRoninSprites.stop()
-	$Body/CyberRoninSprites.play("idle")
+	if $AnimationPlayer.current_animation != "idle":
+		$AnimationPlayer.play("idle")
+	#$Body/CyberRoninSprites.stop()
+	#$Body/CyberRoninSprites.play("idle")
 
 func play_somersault_animation():
 	#if $AnimationPlayer.current_animation != "somersault":
@@ -129,16 +128,16 @@ func spawn_bullet_toward_mouse():
 	bulletNode.activate(targetVector)
 
 func fast_punch():
-	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
+	if StateMachine.state.name in [ "Idle", "Run" ]:
 		if $AnimationPlayer.current_animation not in ["fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("fast_punch")
-			$Body/CyberRoninSprites.play("fast_punch")
+			#$Body/CyberRoninSprites.play("fast_punch")
 		
 func strong_punch():
-	if StateMachine.state.name in [ "Idle", "Run", "Air" ]:
+	if StateMachine.state.name in [ "Idle", "Run" ]:
 		if $AnimationPlayer.current_animation not in [ "fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("strong_punch")
-			$Body/CyberRoninSprites.play("strong_punch")
+			#$Body/CyberRoninSprites.play("strong_punch")
 
 
 func hurt(body):
@@ -176,6 +175,9 @@ func _on_animation_player_animation_finished(anim_name):
 	elif anim_name == "land":
 		if StateMachine.state.name == "Run":
 			play_run_animation()
+		elif StateMachine.state.name == "Idle":
+			play_idle_animation()
+	
 
 func _on_state_transitioned(stateName):
 	match stateName:
@@ -185,19 +187,22 @@ func _on_state_transitioned(stateName):
 			$Audio/JumpNoises.play()
 			
 		"Run":
+			# see also, signal coming into _on_landed()
 			#$old_static_RoninPlaceholderSprite.show()
-			if StateMachine.previous_state_name != "Air":
+			if StateMachine.previous_state_name in ["Idle"]:
 				play_run_animation()
-			else:
-				pass # just landed.. but we already received a signal for that. _on_landed
+			elif StateMachine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
+				play_run_animation()
+				# TODO change this to a landing animation.
+				
 			
 			
 		"Idle":
-			if StateMachine.previous_state_name != "Air":
+			if StateMachine.previous_state_name in ["Run"]:
 				play_idle_animation()
-			else: # just landed.. but we already received a signal for that. _on_landed
-				pass
-			
+			elif StateMachine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
+				play_idle_animation()
+				# TODO change this to a landing animation
 			
 func _on_jumped(): # from Air state
 	play_jump_launch_animation()
@@ -209,8 +214,11 @@ func _on_double_jumped(): # from Air state
 	play_somersault_animation()
 
 func _on_landed():
-	$Body.rotation = 0.0
-	$AnimationPlayer.play("land")
+	pass
+#	$Body.rotation = 0.0
+#	if StateMachine.state.name == "Idle":
+#		$AnimationPlayer.play("land")
+
 	
 func _on_descending_kick_started():
 # should animation calls come from the State machine or the player?
