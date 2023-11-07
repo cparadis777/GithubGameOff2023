@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Globals="*res://Utilities/UtilityScripts/globals.gd"
 StageManager="*res://Utilities/UtilityScripts/StageManager.gd"
 Utils="*res://Utilities/UtilityScripts/utils.gd"
+SceneTransition="*res://Utilities/UtilityScenes/SceneTransition.tscn"
 
 [display]
 
