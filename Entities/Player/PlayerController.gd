@@ -78,7 +78,7 @@ func _physics_process(_delta):
 func play_run_animation():
 	if $AnimationPlayer.current_animation != "run":
 		$AnimationPlayer.play("run")
-	$Body/CyberRoninSprites.play("run")
+	#$Body/CyberRoninSprites.play("run")
 
 func play_jump_launch_animation():
 	$Body/CyberRoninSprites.play("jump_launch")
@@ -187,19 +187,22 @@ func _on_state_transitioned(stateName):
 			$Audio/JumpNoises.play()
 			
 		"Run":
+			# see also, signal coming into _on_landed()
 			#$old_static_RoninPlaceholderSprite.show()
-			if StateMachine.previous_state_name != "Air":
+			if StateMachine.previous_state_name in ["Idle"]:
 				play_run_animation()
-			else:
-				pass # just landed.. but we already received a signal for that. _on_landed
+			elif StateMachine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
+				play_run_animation()
+				# TODO change this to a landing animation.
+				
 			
 			
 		"Idle":
-			if StateMachine.previous_state_name != "Air":
+			if StateMachine.previous_state_name in ["Idle"]:
 				play_idle_animation()
-			else: # just landed.. but we already received a signal for that. _on_landed
-				pass
-			
+			elif StateMachine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
+				play_idle_animation()
+				# TODO change this to a landing animation
 			
 func _on_jumped(): # from Air state
 	play_jump_launch_animation()
@@ -211,9 +214,10 @@ func _on_double_jumped(): # from Air state
 	play_somersault_animation()
 
 func _on_landed():
-	$Body.rotation = 0.0
-	if StateMachine.state.name == "Idle":
-		$AnimationPlayer.play("land")
+	pass
+#	$Body.rotation = 0.0
+#	if StateMachine.state.name == "Idle":
+#		$AnimationPlayer.play("land")
 
 	
 func _on_descending_kick_started():
