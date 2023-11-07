@@ -91,14 +91,13 @@ func play_jump_peak_animation():
 
 
 func play_idle_animation():
-	pass
+	
 #	position.x = floor(position.x)
 #	position.y = floor(position.y)
-	#if $AnimationPlayer.current_animation != "idle":
-	#	$AnimationPlayer.play("idle")
-	$AnimationPlayer.stop()
-	$Body/CyberRoninSprites.stop()
-	$Body/CyberRoninSprites.play("idle")
+	if $AnimationPlayer.current_animation != "idle":
+		$AnimationPlayer.play("idle")
+	#$Body/CyberRoninSprites.stop()
+	#$Body/CyberRoninSprites.play("idle")
 
 func play_somersault_animation():
 	#if $AnimationPlayer.current_animation != "somersault":
@@ -176,6 +175,9 @@ func _on_animation_player_animation_finished(anim_name):
 	elif anim_name == "land":
 		if StateMachine.state.name == "Run":
 			play_run_animation()
+		elif StateMachine.state.name == "Idle":
+			play_idle_animation()
+	
 
 func _on_state_transitioned(stateName):
 	match stateName:
@@ -210,7 +212,9 @@ func _on_double_jumped(): # from Air state
 
 func _on_landed():
 	$Body.rotation = 0.0
-	$AnimationPlayer.play("land")
+	if StateMachine.state.name == "Idle":
+		$AnimationPlayer.play("land")
+
 	
 func _on_descending_kick_started():
 # should animation calls come from the State machine or the player?
