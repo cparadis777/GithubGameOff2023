@@ -160,11 +160,14 @@ func hurt(body):
 func _on_hurt_box_body_entered(body):
 	# TODO: consider splitting this into a separate function for each type of attack
 	# strong_punch, fast_punch, and descending_kick
-	hurt(body)
-	if StateMachine.state.name == "DescendingKick":
-		velocity.x = -velocity.x * 0.5
-		velocity.y = -JUMP_VELOCITY
-		StateMachine.transition_to("Air", {do_jump = true})
+	
+	if body.is_in_group("Enemies"):
+		hurt(body)
+		
+		if StateMachine.state.name == "DescendingKick":
+			velocity.x = -velocity.x * 0.5
+			velocity.y = -JUMP_VELOCITY
+			StateMachine.transition_to("Air", {do_jump = true})
 		
 		
 		
