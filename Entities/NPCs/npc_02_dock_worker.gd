@@ -61,7 +61,7 @@ func begin_dying():
 	print("dockworker dying")
 	State = States.DYING
 	$AnimationPlayer.play("die")
-
+	$HitBox.set_deferred("disabled", true)
 
 func begin_decaying():
 	State = States.DEAD
