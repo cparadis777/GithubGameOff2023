@@ -17,8 +17,8 @@ func update_health_display(health_fraction_remaining : float):
 		
 
 
-func _on_player_hurt():
-	update_health_display(player.health / player.max_health)
+func _on_player_hit():
+	update_health_display(player.health / player.health_max)
 	
 
 

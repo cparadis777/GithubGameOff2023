@@ -43,6 +43,7 @@ func _ready():
 	$Body/Actions/fast_punch/HurtBox/CollisionShape2D.disabled = true
 	$ReferenceRunCycle.hide()
 	hud.show()
+	hit.connect(hud._on_player_hit)
 	
 	play_idle_animation()
 	original_body_scale = $Body/CyberRoninSprites.scale
@@ -235,7 +236,7 @@ func _on_descending_kick_started():
 
 func _on_descending_kick_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		hurt(body, true)
+		inflict_harm(body, true)
 		if state_machine.state.name == "DescendingKick":
 			velocity.x = -velocity.x * 0.5
 			velocity.y = -JUMP_VELOCITY
@@ -271,7 +272,7 @@ func detect_moving_platform() -> AnimatableBody2D:
 	
 	
 
-func hurt(body, knockback: bool):
+func inflict_harm(body, knockback: bool):
 	var damage = 10.0
 	var impactVector = body.global_position - self.global_position
 	var damageType = Globals.DamageTypes.IMPACT
@@ -285,7 +286,7 @@ func hurt(body, knockback: bool):
 
 func _on_fast_punch_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		hurt(body, false)
+		inflict_harm(body, false)
 		
 		
 	
@@ -293,18 +294,21 @@ func _on_strong_punch_hurtbox_body_entered(body):
 	# strong_punch, fast_punch, and descending_kick
 	
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		hurt(body, true)
+		inflict_harm(body, true)
 		
 func _on_hit(damage, _impactVector, _damageType : Globals.DamageTypes = Globals.DamageTypes.IMPACT, knockback: bool = false):
 	if state_machine.state.name != "IFrames":
 		health -= damage
-	if health <= 0:
-		begin_dying()
-	state_machine.transition_to("IFrames")
-	$AnimationPlayer.play("iframes")
-	if knockback:
-		pass # TODO, implement knockback
+		hit.emit()
+		state_machine.transition_to("IFrames")
+		$AnimationPlayer.play("iframes")
+		if knockback:
+			pass # TODO, implement knockback
 
+		if health <= 0:
+			begin_dying()
+	
+	
 func begin_dying():
 	printerr("player is dying, but that's not implemented yet.")
 

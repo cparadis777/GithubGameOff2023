@@ -1,11 +1,14 @@
-[gd_scene load_steps=24 format=3 uid="uid://b7lbhsnpyax66"]
+[gd_scene load_steps=27 format=3 uid="uid://b7lbhsnpyax66"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/npc_02_dock_worker.gd" id="1_513fr"]
 [ext_resource type="Texture2D" uid="uid://b8to6pueoyptm" path="res://art/placeholder/dock_worker_cutouts.png" id="1_po8lm"]
 [ext_resource type="Script" path="res://Entities/NPCs/Behaviours/WalkTowardPlayer.gd" id="2_f7ga5"]
+[ext_resource type="Script" path="res://Entities/NPCs/Behaviours/PlayerDetection.gd" id="3_itenm"]
 [ext_resource type="Script" path="res://Entities/NPCs/HeavyMeleeAttack.gd" id="4_agf2e"]
+[ext_resource type="Texture2D" uid="uid://bsgyd5cohss47" path="res://art/decals/alert.png" id="4_iy3h1"]
 [ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="4_iy4en"]
 [ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="5_fls2h"]
+[ext_resource type="AudioStream" uid="uid://3fgiln43r0y0" path="res://audio/sfx/placeholder/alert.wav" id="5_ksjfc"]
 [ext_resource type="AudioStream" uid="uid://bvxslxhu2o73k" path="res://audio/sfx/placeholder/648959__ienba__heavy-book.wav" id="5_t3spr"]
 [ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_26f2k"]
 
@@ -753,6 +756,21 @@ texture = SubResource("AtlasTexture_sg0d1")
 offset = Vector2(-8, -10)
 
 [node name="Behaviours" type="Node2D" parent="."]
+
+[node name="PlayerDetection" type="Node2D" parent="Behaviours"]
+script = ExtResource("3_itenm")
+
+[node name="AlertSprite" type="Sprite2D" parent="Behaviours/PlayerDetection"]
+visible = false
+position = Vector2(-10, -70)
+texture = ExtResource("4_iy3h1")
+
+[node name="RayCast2D" type="RayCast2D" parent="Behaviours/PlayerDetection"]
+position = Vector2(11, -46)
+target_position = Vector2(164, 0)
+
+[node name="AlertNoise" type="AudioStreamPlayer2D" parent="Behaviours/PlayerDetection"]
+stream = ExtResource("5_ksjfc")
 
 [node name="Movement" type="Node2D" parent="Behaviours"]
 
