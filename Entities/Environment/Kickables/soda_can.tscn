@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://coqkjhe8s4lj8"]
 
-[ext_resource type="Texture2D" uid="uid://doy7bjgfpx26m" path="res://art/props/soyda.png" id="1_6247q"]
+[ext_resource type="Texture2D" uid="uid://bc001bp1r3fvp" path="res://art/props/soyda.png" id="1_6247q"]
 [ext_resource type="Script" path="res://Entities/Environment/Kickables/kickable.gd" id="1_rtrcs"]
 [ext_resource type="AudioStream" uid="uid://bnxk7kug46cp1" path="res://audio/sfx/placeholder/tin_can_01.wav" id="3_jr4l1"]
 [ext_resource type="AudioStream" uid="uid://cnqa7wirinrvv" path="res://audio/sfx/placeholder/tin_can_02.wav" id="4_mdqvb"]
