@@ -68,18 +68,6 @@ func _physics_process(_delta):
 		spawn_bullet_toward_mouse()
 	elif Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
-	
-#	# why is this here instead of in Air and Run and Idle?
-#	elif Input.is_action_just_pressed("strong_punch"):
-#		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
-#			if $WallDetector.is_colliding():
-#				printerr("Player is trying to punch through terrain. Do something about it.")
-#			strong_punch()
-#	elif Input.is_action_just_pressed("fast_punch"):
-#		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
-#			fast_punch()
-
-
 
 
 
