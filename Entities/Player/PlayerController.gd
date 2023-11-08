@@ -25,8 +25,8 @@ var health = health_max
 var original_body_scale : Vector2
 var original_sprite_position : Vector2
 
-signal hit
-
+signal hit(damage, impactVector, damageType, knockback)
+signal injured
 
 
 
@@ -43,7 +43,7 @@ func _ready():
 	$Body/Actions/fast_punch/HurtBox/CollisionShape2D.disabled = true
 	$ReferenceRunCycle.hide()
 	hud.show()
-	hit.connect(hud._on_player_hit)
+	injured.connect(hud._on_player_hit)
 	
 	play_idle_animation()
 	original_body_scale = $Body/CyberRoninSprites.scale
@@ -299,7 +299,7 @@ func _on_strong_punch_hurtbox_body_entered(body):
 func _on_hit(damage, _impactVector, _damageType : Globals.DamageTypes = Globals.DamageTypes.IMPACT, knockback: bool = false):
 	if state_machine.state.name != "IFrames":
 		health -= damage
-		hit.emit()
+		injured.emit()
 		state_machine.transition_to("IFrames")
 		$AnimationPlayer.play("iframes")
 		if knockback:
