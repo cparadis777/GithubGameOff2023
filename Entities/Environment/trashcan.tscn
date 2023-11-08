@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b1g47w7bhxbg3"]
 
 [ext_resource type="Script" path="res://Entities/Environment/trashcan.gd" id="1_6hnh1"]
-[ext_resource type="Texture2D" uid="uid://db8320eyqql7q" path="res://art/props/tall_crate.png" id="2_v3y8r"]
+[ext_resource type="Texture2D" uid="uid://cmmdpoq1x6uav" path="res://art/props/tall_crate.png" id="2_v3y8r"]
 [ext_resource type="AudioStream" uid="uid://cymibnijhml5u" path="res://audio/sfx/placeholder/pot_crash.wav" id="3_lwp8j"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g7ife"]
@@ -18,7 +18,7 @@ stream_0/weight = 1.0
 radius = 14.0
 height = 60.0
 
-[node name="TrashCan" type="RigidBody2D"]
+[node name="TrashCan" type="RigidBody2D" groups=["Kickables"]]
 position = Vector2(320, 0)
 collision_layer = 8
 collision_mask = 27

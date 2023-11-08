@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=166 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
@@ -41,6 +41,8 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 7.0
 height = 38.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8hms"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6dpu"]
 atlas = ExtResource("5_rc7or")
@@ -839,7 +841,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7h8"]
-size = Vector2(31, 32)
+size = Vector2(43, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
 radius = 23.0
@@ -1660,6 +1662,11 @@ size = Vector2(14, 14)
 collision_mask = 15
 script = ExtResource("1_8yn75")
 
+[node name="WallDetector" type="RayCast2D" parent="."]
+position = Vector2(0, -19)
+target_position = Vector2(58, 0)
+collision_mask = 8
+
 [node name="Lookahead" type="Node2D" parent="."]
 position = Vector2(2.08165e-12, -32)
 script = ExtResource("2_x7k1v")
@@ -1685,6 +1692,14 @@ region_rect = Rect2(0, 0, 45.382, 63.8855)
 [node name="MovementCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -19)
 shape = SubResource("CapsuleShape2D_ghh7o")
+
+[node name="PushBox" type="AnimatableBody2D" parent="."]
+position = Vector2(24, -18)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushBox"]
+shape = SubResource("RectangleShape2D_a8hms")
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -1712,7 +1727,7 @@ collision_layer = 0
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Actions/fast_punch/HurtBox"]
-position = Vector2(0.5, 1)
+position = Vector2(-15.5, 1)
 shape = SubResource("RectangleShape2D_is7h8")
 disabled = true
 
@@ -1927,10 +1942,13 @@ bus = &"sfx"
 
 [node name="Windup" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("34_iwlpj")
+volume_db = -8.0
+pitch_scale = 1.25
 
 [node name="FollowThrough" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("35_tnuvo")
-volume_db = -3.2
+volume_db = -8.0
+pitch_scale = 1.25
 
 [node name="WhipCrack" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("36_hlp8x")

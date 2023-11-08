@@ -68,6 +68,8 @@ func _physics_process(_delta):
 	# why is this here instead of in Air and Run and Idle?
 	elif Input.is_action_just_pressed("strong_punch"):
 		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
+			if $WallDetector.is_colliding():
+				printerr("Player is trying to punch through terrain. Do something about it.")
 			strong_punch()
 	elif Input.is_action_just_pressed("fast_punch"):
 		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
@@ -161,14 +163,13 @@ func _on_hurt_box_body_entered(body):
 	# TODO: consider splitting this into a separate function for each type of attack
 	# strong_punch, fast_punch, and descending_kick
 	
-	if body.is_in_group("Enemies"):
+	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 		hurt(body)
 		
 		if StateMachine.state.name == "DescendingKick":
 			velocity.x = -velocity.x * 0.5
 			velocity.y = -JUMP_VELOCITY
 			StateMachine.transition_to("Air", {do_jump = true})
-		
 		
 		
 
