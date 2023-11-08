@@ -146,31 +146,7 @@ func strong_punch():
 			#$Body/CyberRoninSprites.play("strong_punch")
 
 
-func hurt(body):
-	var damage = 10.0
-	var impactVector = body.global_position - self.global_position
-	var knockback = true
-	var damageType = Globals.DamageTypes.IMPACT
 
-	
-	if body.has_method("_on_hit"):
-		hit.connect(body._on_hit)
-		hit.emit(damage, impactVector, damageType, knockback)
-		hit.disconnect(body._on_hit)
-
-
-func _on_hurt_box_body_entered(body):
-	# TODO: consider splitting this into a separate function for each type of attack
-	# strong_punch, fast_punch, and descending_kick
-	
-	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		hurt(body)
-		
-		if StateMachine.state.name == "DescendingKick":
-			velocity.x = -velocity.x * 0.5
-			velocity.y = -JUMP_VELOCITY
-			StateMachine.transition_to("Air", {do_jump = true})
-		
 		
 
 
@@ -253,14 +229,24 @@ func _on_descending_kick_started():
 		animation_player.play("descending_kick")
 		#$Body/CyberRoninSprites.play("descending_kick")
 
+
+func _on_descending_kick_hurtbox_body_entered(body):
+	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
+		hurt(body, true)
+		if StateMachine.state.name == "DescendingKick":
+			velocity.x = -velocity.x * 0.5
+			velocity.y = -JUMP_VELOCITY
+			StateMachine.transition_to("Air", {do_jump = true})
+		
+
 func _on_descending_kick_impacted():
 	pass # not sure what to do here yet.. Probably just ignore it and let the state machine transition to air.
 
 func _on_dash_started():
 	if animation_player.has_animation("dash"):
 		animation_player.play("dash")
-	$Body/CyberRoninSprites.play("dash")
-	$Body/SpeedLines.play("default")
+#	$Body/CyberRoninSprites.play("dash")
+#	$Body/SpeedLines.play("default")
 	
 		
 		
@@ -281,3 +267,28 @@ func detect_moving_platform() -> AnimatableBody2D:
 	return moving_platform_detected
 	
 	
+
+func hurt(body, knockback: bool):
+	var damage = 10.0
+	var impactVector = body.global_position - self.global_position
+	var damageType = Globals.DamageTypes.IMPACT
+
+		
+	if body.has_method("_on_hit"):
+		hit.connect(body._on_hit)
+		hit.emit(damage, impactVector, damageType, knockback)
+		hit.disconnect(body._on_hit)
+
+
+func _on_fast_punch_hurtbox_body_entered(body):
+	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
+		hurt(body, false)
+		
+		
+	
+func _on_strong_punch_hurtbox_body_entered(body):
+	# strong_punch, fast_punch, and descending_kick
+	
+	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
+		hurt(body, true)
+		
