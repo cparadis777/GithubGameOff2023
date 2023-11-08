@@ -20,7 +20,7 @@ var speed = SPEED # for state machine
 @onready var StateMachine = $StateMachine
 
 var original_body_scale : Vector2
-var torso_starting_position : Vector2
+var original_sprite_position : Vector2
 
 signal hit
 
@@ -43,7 +43,7 @@ func _ready():
 	
 	play_idle_animation()
 	original_body_scale = $Body/CyberRoninSprites.scale
-	torso_starting_position = $Body/Torso.position
+	original_sprite_position = $Body/CyberRoninSprites.position
 
 func flip_sprites():
 	if Input.is_action_pressed("move_left"):
@@ -64,6 +64,8 @@ func _physics_process(_delta):
 		spawn_bullet_toward_mouse()
 	elif Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
+	
+	# why is this here instead of in Air and Run and Idle?
 	elif Input.is_action_just_pressed("strong_punch"):
 		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
 			strong_punch()
@@ -106,15 +108,17 @@ func play_somersault_animation():
 
 func reset_rotation():
 	# hack for when state changes during a somersault.
-	$Body.rotation = 0
-	$Body/Torso.position = torso_starting_position
 	animation_player.play("RESET")
 
 func initiate_debugging_protocol():
-	if get_viewport().get_camera_2d().zoom == Vector2(1,1):
-		get_viewport().get_camera_2d().zoom = Vector2(0.25, 0.25)
+	if Engine.time_scale == 1.0:
+		Engine.time_scale = 0.25
 	else:
-		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
+		Engine.time_scale = 1.0
+#	if get_viewport().get_camera_2d().zoom == Vector2(1,1):
+#		get_viewport().get_camera_2d().zoom = Vector2(0.25, 0.25)
+#	else:
+#		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
 
 func spawn_bullet_toward_mouse():
 	var targetVector = global_position.direction_to(get_global_mouse_position())
@@ -155,7 +159,7 @@ func hurt(body):
 
 func _on_hurt_box_body_entered(body):
 	# TODO: consider splitting this into a separate function for each type of attack
-	# strong_punch, fast_punch or descending_kick
+	# strong_punch, fast_punch, and descending_kick
 	hurt(body)
 	if StateMachine.state.name == "DescendingKick":
 		velocity.x = -velocity.x * 0.5
@@ -177,9 +181,24 @@ func _on_animation_player_animation_finished(anim_name):
 			play_run_animation()
 		elif StateMachine.state.name == "Idle":
 			play_idle_animation()
-	
+
+func disable_all_hurtboxes():
+	var hurtboxes = [ 
+		$Body/Actions/fast_punch/HurtBox/CollisionShape2D,
+		$Body/Actions/strong_punch/HurtBox/CollisionShape2D,
+		$Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D,
+	]
+
+	for hurtbox in hurtboxes:
+		hurtbox.set_deferred("disabled", true)
+
+func reset_sprite_position():
+	$Body/CyberRoninSprites.position = original_sprite_position
 
 func _on_state_transitioned(stateName):
+	disable_all_hurtboxes() # let animations turn them back on
+	reset_sprite_position()
+
 	match stateName:
 		"Air":
 			#$old_static_RoninPlaceholderSprite.hide()
@@ -203,6 +222,10 @@ func _on_state_transitioned(stateName):
 			elif StateMachine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
 				play_idle_animation()
 				# TODO change this to a landing animation
+		
+		"DescendingKick":
+			pass # see _on_descending_kick_started()
+
 			
 func _on_jumped(): # from Air state
 	play_jump_launch_animation()
@@ -223,8 +246,8 @@ func _on_landed():
 func _on_descending_kick_started():
 # should animation calls come from the State machine or the player?
 	if animation_player.has_animation("descending_kick"):
-		#animation_player.play("descending_kick")
-		$Body/CyberRoninSprites.play("descending_kick")
+		animation_player.play("descending_kick")
+		#$Body/CyberRoninSprites.play("descending_kick")
 
 func _on_descending_kick_impacted():
 	pass # not sure what to do here yet.. Probably just ignore it and let the state machine transition to air.

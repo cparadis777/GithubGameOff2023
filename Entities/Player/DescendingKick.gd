@@ -38,12 +38,14 @@ func enter(_msg := {}) -> void:
 func physics_update(_delta: float) -> void:
 	# No further Horizontal decisions.
 	player.move_and_slide()
-
+	
 	# Landing.
 	if player.is_on_floor():
+		# this seems to fire early or too often.. why?
 		landed.emit()
 		if is_equal_approx(player.velocity.x, 0.0):
 			state_machine.transition_to("Idle")
 		else:
 			state_machine.transition_to("Run")
-
+	
+	

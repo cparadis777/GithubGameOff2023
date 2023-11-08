@@ -1,4 +1,4 @@
-[gd_scene load_steps=164 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=165 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="Texture2D" uid="uid://ci4mcwkrm8vi0" path="res://art/placeholder/cyber-ronin_first_draft.png" id="2_c26f8"]
@@ -39,7 +39,7 @@
 [ext_resource type="AudioStream" uid="uid://dyi2jeb1182w0" path="res://audio/sfx/placeholder/whip.wav" id="36_hlp8x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
-radius = 16.0
+radius = 7.0
 height = 38.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6dpu"]
@@ -838,11 +838,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mu5xc"]
-radius = 14.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_is7h8"]
+size = Vector2(31, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
 radius = 23.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ucv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o20hr"]
 atlas = ExtResource("4_gxpwb")
@@ -887,7 +889,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -995,7 +997,7 @@ tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"fast_punch"]
+"values": [&"idle"]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -1048,50 +1050,14 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Audio/WhipCrack:volume_db")
+tracks/14/path = NodePath("Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D:disabled")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-8.0]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Audio/Windup:pitch_scale")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Audio/FollowThrough:pitch_scale")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("Audio/FollowThrough:volume_db")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-3.2]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_l2b41"]
@@ -1136,7 +1102,8 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_d33i7"]
 resource_name = "descending_kick"
-length = 2.0
+length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1156,10 +1123,10 @@ tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:dis
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1172,6 +1139,42 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.630507]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/CyberRoninSprites:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"descending_kick"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/CyberRoninSprites:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_eihwv"]
@@ -1712,7 +1715,7 @@ shape = SubResource("CapsuleShape2D_ghh7o")
 [node name="CyberRoninSprites" type="AnimatedSprite2D" parent="Body"]
 position = Vector2(18, -31)
 sprite_frames = SubResource("SpriteFrames_adh0r")
-animation = &"fast_punch"
+animation = &"idle"
 
 [node name="SpeedLines" type="AnimatedSprite2D" parent="Body"]
 visible = false
@@ -1733,7 +1736,8 @@ collision_layer = 0
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Actions/fast_punch/HurtBox"]
-shape = SubResource("CircleShape2D_mu5xc")
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_is7h8")
 disabled = true
 
 [node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/fast_punch"]
@@ -1754,6 +1758,7 @@ collision_mask = 10
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Actions/strong_punch/HurtBox"]
 position = Vector2(-0.28299, -8.99555)
 shape = SubResource("CircleShape2D_pmdka")
+disabled = true
 
 [node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/strong_punch"]
 visible = false
@@ -1761,6 +1766,15 @@ self_modulate = Color(0.219608, 0.482353, 0.670588, 1)
 position = Vector2(27.6421, -27.6421)
 rotation = -0.0821496
 texture = ExtResource("12_en4ep")
+
+[node name="descending_kick" type="Node2D" parent="Body/Actions"]
+
+[node name="HurtBox" type="Area2D" parent="Body/Actions/descending_kick"]
+
+[node name="DescendingKickCollisionShape2D" type="CollisionShape2D" parent="Body/Actions/descending_kick/HurtBox"]
+position = Vector2(20, 4)
+shape = SubResource("RectangleShape2D_k6ucv")
+disabled = true
 
 [node name="Torso" type="Node2D" parent="Body"]
 visible = false
@@ -1966,4 +1980,5 @@ shape = SubResource("RectangleShape2D_m8oiq")
 
 [connection signal="body_entered" from="Body/Actions/fast_punch/HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="body_entered" from="Body/Actions/strong_punch/HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_entered" from="Body/Actions/descending_kick/HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
