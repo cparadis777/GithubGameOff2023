@@ -3,12 +3,13 @@ extends Node2D
 @export var n_horizontal:int
 @export var n_vertical:int
 @export var new_scale:float
+@export var container_width:int = 96
+@export var container_height:int = 48
 
 @onready var drop_point:PackedScene = preload("res://Utilities/UtilityScenes/DropPoint.tscn")
 
 var container_dropping
-var container_width:int = 192
-var container_height:int = 96
+
 var drop_points_dict:Dictionary
 var drop_point_targeted
 
@@ -30,13 +31,14 @@ func generate_drop_points() -> void:
 		for j in range(self.n_vertical):
 			#TODO: Probably refactor so we generate the drop points around the center instead of from a corner
 			var new_point:Marker2D = drop_point.instantiate()
-			#var new_position:Vector2 = Vector2(i*0.5*self.container_width, j*0.5*self.container_height)
 			var new_position:Vector2 = Vector2(i*self.container_width, j*self.container_height)
 			var new_grid_position:Vector2 = Vector2(i,j)
 			new_point.position = new_position
 			new_point.set_grid_position(new_grid_position)
 			drop_points_dict[new_grid_position] = new_point
 			self.add_child(new_point)
+	for coordinate in drop_points_dict:
+		drop_points_dict[coordinate].set_neighbors()
 
 func add_container(container:StaticBody2D, grid_position:Vector2) -> bool:
 	var drop_point_to_use:Marker2D = self.get_drop_point(grid_position)

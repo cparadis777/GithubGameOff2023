@@ -1,7 +1,7 @@
 # From: https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
 
 # Virtual base class for all states.
-class_name State
+class_name EntityState
 extends Node2D
 
 # Reference to the state machine, to call its `transition_to()` method directly.

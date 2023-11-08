@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmpouufnlcxkn"]
+
+[ext_resource type="Material" uid="uid://cw3xoarxkm7x8" path="res://art/materials/pixelify_material.tres" id="1_0til8"]
+
+[sub_resource type="Gradient" id="Gradient_dvayo"]
+offsets = PackedFloat32Array(0, 0.892216)
+colors = PackedColorArray(0.372549, 0, 0.396078, 1, 0.596236, 0.99262, 0.584102, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tk4jt"]
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_njy88"]
+width = 180
+height = 16
+color_ramp = SubResource("Gradient_dvayo")
+noise = SubResource("FastNoiseLite_tk4jt")
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_l4eng"]
+a = Vector2(-90, 2.08165e-12)
+b = Vector2(90, 2.08165e-12)
+
+[node name="BasicPlatform" type="StaticBody2D"]
+collision_layer = 24
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_0til8")
+scale = Vector2(1, 0.5)
+texture = SubResource("NoiseTexture2D_njy88")
+
+[node name="SolidTopCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("SegmentShape2D_l4eng")

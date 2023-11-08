@@ -8,6 +8,8 @@ signal impacted
 signal landed
 var direction
 
+@export var speed_multiplier : float = 2.5
+
 func _ready():
 	super()
 
@@ -22,28 +24,28 @@ func _ready():
 
 # If we get a message asking us kick, while in the Air, we descending kick
 func enter(_msg := {}) -> void:
-	player.velocity.y = 0.25 * player.JUMP_VELOCITY # going down
+	player.velocity.y = 0.5 * player.JUMP_VELOCITY # going down
 	
 	
 	direction = player.get_last_known_direction()
 	if player.has_method("reset_rotation"):
 		player.reset_rotation()
 	
-	player.velocity.x = player.speed * direction
-	var fudge_factor = 3.5 # how fast do you want the descending kick to be?
-	player.velocity *= fudge_factor
+	player.velocity.x = speed_multiplier * player.speed * direction 
 	started.emit() # so player can play animation
 
 
 func physics_update(_delta: float) -> void:
 	# No further Horizontal decisions.
 	player.move_and_slide()
-
+	
 	# Landing.
 	if player.is_on_floor():
+		# this seems to fire early or too often.. why?
 		landed.emit()
 		if is_equal_approx(player.velocity.x, 0.0):
 			state_machine.transition_to("Idle")
 		else:
 			state_machine.transition_to("Run")
-
+	
+	

@@ -1,5 +1,5 @@
 # Dash.gd
-# when in air, if player presses punch, they'll dash-punch
+# when in air, if player presses fast_punch, they'll dash-punch
 
 extends PlayerState
 
@@ -9,7 +9,8 @@ signal started
 signal impacted
 signal landed
 var direction
-@export var dash_duration : float = 0.10
+@export var dash_duration : float = 0.33
+@export var speed_multiplier : float = 2.75
 var dash_speed : float
 var timer
 
@@ -17,7 +18,7 @@ func _ready():
 	super()
 
 	await(owner.ready)
-	dash_speed = player.speed * 2.0
+	dash_speed = player.speed * speed_multiplier
 
 	if player.has_method("_on_dash_started"):
 		started.connect(player._on_dash_started)
@@ -38,8 +39,7 @@ func enter(_msg := {}) -> void:
 		player.reset_rotation()
 	
 	player.velocity.x = dash_speed * direction
-	var fudge_factor = 3.5 # how fast do you want the descending kick to be?
-	player.velocity *= fudge_factor
+	
 	started.emit() # so player can play animation
 
 

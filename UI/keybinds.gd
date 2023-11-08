@@ -6,7 +6,7 @@ func _ready():
 	$Actions.hide()
 	$KeybindsButton.text = "> Controls"
 
-	var actions = ["move_left", "move_right", "jump", "punch", "kick", "shoot"]
+	var actions = ["move_left", "move_right", "jump", "fast_punch", "strong_punch", "shoot"]
 	for action in actions:
 		var container = $Actions/action_bind.duplicate()
 				
