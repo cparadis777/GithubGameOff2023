@@ -102,9 +102,9 @@ func play_idle_animation():
 	#$Body/CyberRoninSprites.play("idle")
 
 func play_somersault_animation():
-	#if $AnimationPlayer.current_animation != "somersault":
-		#$AnimationPlayer.play("somersault")
-	$Body/CyberRoninSprites.play("double_jump")
+	if $AnimationPlayer.current_animation != "somersault":
+		$AnimationPlayer.play("somersault")
+	#$Body/CyberRoninSprites.play("double_jump")
 
 func reset_rotation():
 	# hack for when state changes during a somersault.
