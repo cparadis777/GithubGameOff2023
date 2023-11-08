@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cmpouufnlcxkn" path="res://Entities/Environment/Platforms/basic_platform.tscn" id="7_qltk1"]
 [ext_resource type="PackedScene" uid="uid://cecceqk8282a6" path="res://Entities/Environment/Containers/CustomContainer.tscn" id="8_vkcjm"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="11_kcey2"]
-[ext_resource type="PackedScene" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="13_f4g4x"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="13_f4g4x"]
 [ext_resource type="PackedScene" uid="uid://b75mqcyc3pmmw" path="res://Entities/Environment/switches/LevelDoor.tscn" id="14_eu3y3"]
 [ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="15_cefeg"]
 
