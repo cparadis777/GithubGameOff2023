@@ -35,7 +35,8 @@ func enter(msg := {}) -> void:
 	
 	already_used_dash = msg.has("dashed")
 
-	
+
+# Note: Not the same as built in function physics_process!
 func physics_update(delta: float) -> void:
 	# Horizontal movement.
 

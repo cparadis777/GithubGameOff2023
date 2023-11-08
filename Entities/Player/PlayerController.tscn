@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=168 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -33,6 +33,8 @@
 [ext_resource type="Script" path="res://Entities/Player/Dash.gd" id="18_6dmrt"]
 [ext_resource type="AudioStream" uid="uid://c2tum0uxura5j" path="res://audio/sfx/placeholder/TerribleJumpNoise.wav" id="18_mdgst"]
 [ext_resource type="AudioStream" uid="uid://dnf4btn7jyc7s" path="res://audio/sfx/placeholder/landing_thud.wav" id="21_y0a8e"]
+[ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
+[ext_resource type="Script" path="res://Entities/Player/Dying.gd" id="26_npw41"]
 [ext_resource type="AudioStream" uid="uid://dfvldllfwqfmj" path="res://audio/sfx/placeholder/windup2.wav" id="34_iwlpj"]
 [ext_resource type="AudioStream" uid="uid://duvsdlg5vdcu5" path="res://audio/sfx/placeholder/follow_through_2.wav" id="35_tnuvo"]
 [ext_resource type="AudioStream" uid="uid://dyi2jeb1182w0" path="res://audio/sfx/placeholder/whip.wav" id="36_hlp8x"]
@@ -1072,6 +1074,18 @@ tracks/15/keys = {
 "update": 1,
 "values": [9]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("StateMachine/IFrames/HurtFlash:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_l2b41"]
 resource_name = "dash"
@@ -1714,6 +1728,22 @@ tracks/8/keys = {
 "values": [3.0, -3.2]
 }
 
+[sub_resource type="Animation" id="Animation_dcdmg"]
+resource_name = "iframes"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/IFrames/HurtFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
 _data = {
 "RESET": SubResource("Animation_tb0g1"),
@@ -1721,6 +1751,7 @@ _data = {
 "descending_kick": SubResource("Animation_d33i7"),
 "fast_punch": SubResource("Animation_eihwv"),
 "idle": SubResource("Animation_1accm"),
+"iframes": SubResource("Animation_dcdmg"),
 "land": SubResource("Animation_5ypvc"),
 "run": SubResource("Animation_nmpsm"),
 "somersault": SubResource("Animation_6b5og"),
@@ -1977,6 +2008,33 @@ script = ExtResource("16_7kpt4")
 
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("18_6dmrt")
+
+[node name="IFrames" type="Node2D" parent="StateMachine"]
+script = ExtResource("25_hry2y")
+
+[node name="HurtFlash" type="Polygon2D" parent="StateMachine/IFrames"]
+visible = false
+color = Color(1, 0.207843, 0.396078, 0.596078)
+polygon = PackedVector2Array(-6, -18, -20, -29, -6, -28, 0, -45, 5, -30, 17, -30, 5, -18, 14, -1, 1, -11, -11, -1)
+
+[node name="Dying" type="Node2D" parent="StateMachine"]
+script = ExtResource("26_npw41")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="StateMachine/Dying"]
+position = Vector2(0, -19)
+emitting = false
+amount = 32
+emission_shape = 3
+emission_rect_extents = Vector2(8, 8)
+direction = Vector2(2.08165e-12, -1)
+initial_velocity_min = 300.0
+initial_velocity_max = 300.0
+angle_min = 45.0
+angle_max = 45.0
+scale_amount_min = 3.0
+scale_amount_max = 8.0
+color = Color(0.501961, 0, 0.137255, 1)
+hue_variation_max = 0.1
 
 [node name="Debug" type="Node2D" parent="."]
 position = Vector2(-15, -56)

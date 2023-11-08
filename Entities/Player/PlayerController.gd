@@ -13,11 +13,14 @@ var speed = SPEED # for state machine
 @onready var hud = $HUD
 @onready var animation_player = $AnimationPlayer
 
+@export var health_max = 100
+var health = health_max
 
-# relocated to $StateMachine node.. per https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
+
+# relocated to $state_machine node.. per https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
 #enum States { IDLE, RUNNING, JUMPING, ATTACKING }
 #var State = States.IDLE
-@onready var StateMachine = $StateMachine
+@onready var state_machine = $StateMachine
 
 var original_body_scale : Vector2
 var original_sprite_position : Vector2
@@ -134,13 +137,13 @@ func spawn_bullet_toward_mouse():
 	bulletNode.activate(targetVector)
 
 func fast_punch():
-	if StateMachine.state.name in [ "Idle", "Run" ]:
+	if state_machine.state.name in [ "Idle", "Run" ]:
 		if $AnimationPlayer.current_animation not in ["fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("fast_punch")
 			#$Body/CyberRoninSprites.play("fast_punch")
 		
 func strong_punch():
-	if StateMachine.state.name in [ "Idle", "Run" ]:
+	if state_machine.state.name in [ "Idle", "Run" ]:
 		if $AnimationPlayer.current_animation not in [ "fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("strong_punch")
 			#$Body/CyberRoninSprites.play("strong_punch")
@@ -157,9 +160,9 @@ func _on_animation_player_animation_finished(anim_name):
 		else:
 			play_idle_animation()
 	elif anim_name == "land":
-		if StateMachine.state.name == "Run":
+		if state_machine.state.name == "Run":
 			play_run_animation()
-		elif StateMachine.state.name == "Idle":
+		elif state_machine.state.name == "Idle":
 			play_idle_animation()
 
 func disable_all_hurtboxes():
@@ -188,18 +191,18 @@ func _on_state_transitioned(stateName):
 		"Run":
 			# see also, signal coming into _on_landed()
 			#$old_static_RoninPlaceholderSprite.show()
-			if StateMachine.previous_state_name in ["Idle"]:
+			if state_machine.previous_state_name in ["Idle"]:
 				play_run_animation()
-			elif StateMachine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
+			elif state_machine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
 				play_run_animation()
 				# TODO change this to a landing animation.
 				
 			
 			
 		"Idle":
-			if StateMachine.previous_state_name in ["Run"]:
+			if state_machine.previous_state_name in ["Run"]:
 				play_idle_animation()
-			elif StateMachine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
+			elif state_machine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
 				play_idle_animation()
 				# TODO change this to a landing animation
 		
@@ -219,7 +222,7 @@ func _on_double_jumped(): # from Air state
 func _on_landed():
 	pass
 #	$Body.rotation = 0.0
-#	if StateMachine.state.name == "Idle":
+#	if state_machine.state.name == "Idle":
 #		$AnimationPlayer.play("land")
 
 	
@@ -233,10 +236,10 @@ func _on_descending_kick_started():
 func _on_descending_kick_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 		hurt(body, true)
-		if StateMachine.state.name == "DescendingKick":
+		if state_machine.state.name == "DescendingKick":
 			velocity.x = -velocity.x * 0.5
 			velocity.y = -JUMP_VELOCITY
-			StateMachine.transition_to("Air", {do_jump = true})
+			state_machine.transition_to("Air", {do_jump = true})
 		
 
 func _on_descending_kick_impacted():
@@ -292,3 +295,22 @@ func _on_strong_punch_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 		hurt(body, true)
 		
+func _on_hit(damage, _impactVector, _damageType : Globals.DamageTypes = Globals.DamageTypes.IMPACT, knockback: bool = false):
+	if state_machine.state.name != "IFrames":
+		health -= damage
+	if health <= 0:
+		begin_dying()
+	state_machine.transition_to("IFrames")
+	$AnimationPlayer.play("iframes")
+	if knockback:
+		pass # TODO, implement knockback
+
+func begin_dying():
+	printerr("player is dying, but that's not implemented yet.")
+
+func _on_iframes_started():
+	pass
+	
+func _on_iframes_finished():
+	pass
+

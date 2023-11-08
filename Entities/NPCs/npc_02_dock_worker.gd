@@ -12,6 +12,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var health_max = 100
 @onready var health = health_max
 
+
+
 enum States { INITIALIZING, PAUSED, IDLE, ALERT, IFRAMES, DYING, DEAD }
 var State :States = States.INITIALIZING :
 	set(value):
@@ -49,6 +51,7 @@ func _physics_process(delta):
 
 func update_animations():
 	$PaperDoll.scale.x = signf(velocity.x) * original_doll_scale.x
+	$Behaviours.scale.x = signf(velocity.x)
 	if abs(velocity.x) > 0:
 		var anim = $AnimationPlayer.current_animation
 		if anim == "":
@@ -109,3 +112,4 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_i_frames_timer_timeout():
 	State = previous_state
 	$HurtFlash.hide()
+
