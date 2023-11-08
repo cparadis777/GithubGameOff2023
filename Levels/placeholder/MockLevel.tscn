@@ -36,6 +36,7 @@ position = Vector2(369, -8)
 [node name="EndlessFloor" parent="." instance=ExtResource("3_8t4jp")]
 
 [node name="Containers" type="Node2D" parent="."]
+visible = false
 
 [node name="BaseContainer" parent="Containers" instance=ExtResource("8_vkcjm")]
 position = Vector2(528, -96)
@@ -218,7 +219,7 @@ scale = Vector2(1, 0.7)
 
 [node name="NextLevelDoor" parent="." instance=ExtResource("14_eu3y3")]
 z_index = -1
-position = Vector2(1439, -435)
+position = Vector2(493, -37)
 next_scene = ExtResource("15_cefeg")
 wait_seconds = 0.5
 

@@ -1102,6 +1102,9 @@ tracks/17/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_xnet1"]
+resource_name = "begin_dying"
+
 [sub_resource type="Animation" id="Animation_l2b41"]
 resource_name = "dash"
 length = 0.3
@@ -1278,6 +1281,22 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_u6k5a"]
+resource_name = "die"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
 }
 
 [sub_resource type="Animation" id="Animation_eihwv"]
@@ -1757,25 +1776,6 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [3.0, -3.2]
-}
-
-[sub_resource type="Animation" id="Animation_xnet1"]
-resource_name = "begin_dying"
-
-[sub_resource type="Animation" id="Animation_u6k5a"]
-resource_name = "die"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.5708]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
