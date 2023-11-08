@@ -13,7 +13,7 @@ var speed = SPEED # for state machine
 @onready var hud = $HUD
 @onready var animation_player = $AnimationPlayer
 
-@export var health_max = 100
+@export var health_max = 100.0
 var health = health_max
 
 
@@ -160,8 +160,9 @@ func _on_animation_player_animation_finished(anim_name):
 			state_machine.transition_to("Run")
 			play_run_animation()
 		else:
-			state_machine.transition_to("Idle")
-			play_idle_animation()
+			pass
+#			state_machine.transition_to("Idle")
+#			play_idle_animation()
 
 	elif anim_name == "land":
 		if state_machine.state.name == "Run":
@@ -300,7 +301,7 @@ func _on_strong_punch_hurtbox_body_entered(body):
 		inflict_harm(body, true)
 		
 func _on_hit(damage, _impactVector, _damageType : Globals.DamageTypes = Globals.DamageTypes.IMPACT, knockback: bool = false):
-	if state_machine.state.name != "IFrames":
+	if state_machine.state.name not in [ "IFrames", "Dying", "Dead"]:
 		health -= damage
 		injured.emit()
 		state_machine.transition_to("IFrames")
@@ -309,11 +310,13 @@ func _on_hit(damage, _impactVector, _damageType : Globals.DamageTypes = Globals.
 			pass # TODO, implement knockback
 
 		if health <= 0:
+			print("health = " + str(health))
 			begin_dying()
 	
 	
 func begin_dying():
-	printerr("player is dying, but that's not implemented yet.")
+	state_machine.transition_to("Dying")
+	animation_player.play("begin_dying")
 
 func _on_iframes_started():
 	pass
@@ -321,3 +324,7 @@ func _on_iframes_started():
 func _on_iframes_finished():
 	pass
 
+func _on_player_died():
+	animation_player.play("die")
+	
+	

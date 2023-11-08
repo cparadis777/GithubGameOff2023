@@ -34,9 +34,11 @@ func _exit():
 	$HurtFlash.hide()
 
 func _on_iframes_timer_timeout():
-	finished.emit()
-	if player.is_on_floor():
-		state_machine.transition_to("Idle")
-	else:
-		state_machine.transition_to("Air")
+	$HurtFlash.hide()
+	if state_machine.state.name not in [ "Dying", "Dead" ]:
+		finished.emit()
+		if player.is_on_floor():
+			state_machine.transition_to("Idle")
+		else:
+			state_machine.transition_to("Air")
 		

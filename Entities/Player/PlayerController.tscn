@@ -1,4 +1,4 @@
-[gd_scene load_steps=170 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=173 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -35,6 +35,7 @@
 [ext_resource type="AudioStream" uid="uid://dnf4btn7jyc7s" path="res://audio/sfx/placeholder/landing_thud.wav" id="21_y0a8e"]
 [ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
 [ext_resource type="Script" path="res://Entities/Player/Dying.gd" id="26_npw41"]
+[ext_resource type="Script" path="res://Entities/Player/Dead.gd" id="27_0qqb8"]
 [ext_resource type="Script" path="res://Entities/Player/StrongPunch.gd" id="27_487ye"]
 [ext_resource type="Script" path="res://Entities/Player/FastPunch.gd" id="28_amcrx"]
 [ext_resource type="AudioStream" uid="uid://dfvldllfwqfmj" path="res://audio/sfx/placeholder/windup2.wav" id="34_iwlpj"]
@@ -1088,6 +1089,18 @@ tracks/16/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Body:rotation")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_l2b41"]
 resource_name = "dash"
@@ -1746,11 +1759,32 @@ tracks/8/keys = {
 "values": [3.0, -3.2]
 }
 
+[sub_resource type="Animation" id="Animation_xnet1"]
+resource_name = "begin_dying"
+
+[sub_resource type="Animation" id="Animation_u6k5a"]
+resource_name = "die"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
 _data = {
 "RESET": SubResource("Animation_tb0g1"),
+"begin_dying": SubResource("Animation_xnet1"),
 "dash": SubResource("Animation_l2b41"),
 "descending_kick": SubResource("Animation_d33i7"),
+"die": SubResource("Animation_u6k5a"),
 "fast_punch": SubResource("Animation_eihwv"),
 "idle": SubResource("Animation_1accm"),
 "iframes": SubResource("Animation_dcdmg"),
@@ -2037,6 +2071,26 @@ scale_amount_min = 3.0
 scale_amount_max = 8.0
 color = Color(0.501961, 0, 0.137255, 1)
 hue_variation_max = 0.1
+
+[node name="Timer" type="Timer" parent="StateMachine/Dying"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Dead" type="Node2D" parent="StateMachine"]
+script = ExtResource("27_0qqb8")
+
+[node name="Timer" type="Timer" parent="StateMachine/Dead"]
+
+[node name="Label" type="Label" parent="StateMachine/Dead"]
+visible = false
+z_index = 20
+offset_left = -53.0
+offset_top = -64.0
+offset_right = 101.0
+offset_bottom = -12.0
+text = "That is unfortunate.
+You died."
+horizontal_alignment = 1
 
 [node name="StrongPunch" type="Node2D" parent="StateMachine"]
 script = ExtResource("27_487ye")
