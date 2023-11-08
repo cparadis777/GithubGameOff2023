@@ -69,15 +69,15 @@ func _physics_process(_delta):
 	elif Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
 	
-	# why is this here instead of in Air and Run and Idle?
-	elif Input.is_action_just_pressed("strong_punch"):
-		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
-			if $WallDetector.is_colliding():
-				printerr("Player is trying to punch through terrain. Do something about it.")
-			strong_punch()
-	elif Input.is_action_just_pressed("fast_punch"):
-		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
-			fast_punch()
+#	# why is this here instead of in Air and Run and Idle?
+#	elif Input.is_action_just_pressed("strong_punch"):
+#		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
+#			if $WallDetector.is_colliding():
+#				printerr("Player is trying to punch through terrain. Do something about it.")
+#			strong_punch()
+#	elif Input.is_action_just_pressed("fast_punch"):
+#		if $AnimationPlayer.current_animation not in [ "somersault", "fast_punch", "strong_punch", "jump" ]:
+#			fast_punch()
 
 
 
@@ -126,6 +126,7 @@ func initiate_debugging_protocol():
 #	else:
 #		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
 
+
 func spawn_bullet_toward_mouse():
 	var targetVector = global_position.direction_to(get_global_mouse_position())
 	var bulletScene = preload("res://Entities/Projectiles/bullet_basic.tscn")
@@ -137,29 +138,31 @@ func spawn_bullet_toward_mouse():
 	add_sibling(bulletNode)
 	bulletNode.activate(targetVector)
 
+
 func fast_punch():
-	if state_machine.state.name in [ "Idle", "Run" ]:
+	if state_machine.state.name == "FastPunch":
 		if $AnimationPlayer.current_animation not in ["fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("fast_punch")
 			#$Body/CyberRoninSprites.play("fast_punch")
-		
+
+
 func strong_punch():
-	if state_machine.state.name in [ "Idle", "Run" ]:
+	if state_machine.state.name == "StrongPunch":
 		if $AnimationPlayer.current_animation not in [ "fast_punch", "strong_punch"]:
 			$AnimationPlayer.play("strong_punch")
 			#$Body/CyberRoninSprites.play("strong_punch")
 
 
 
-		
-
-
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name in [ "fast_punch", "strong_punch" ]:
 		if velocity.length_squared() > 0.5:
+			state_machine.transition_to("Run")
 			play_run_animation()
 		else:
+			state_machine.transition_to("Idle")
 			play_idle_animation()
+
 	elif anim_name == "land":
 		if state_machine.state.name == "Run":
 			play_run_animation()

@@ -11,7 +11,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if State != States.ALERT:
 		if PlayerDetector.is_colliding():
 			if PlayerDetector.get_collider() == StageManager.current_player:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=170 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -35,6 +35,8 @@
 [ext_resource type="AudioStream" uid="uid://dnf4btn7jyc7s" path="res://audio/sfx/placeholder/landing_thud.wav" id="21_y0a8e"]
 [ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
 [ext_resource type="Script" path="res://Entities/Player/Dying.gd" id="26_npw41"]
+[ext_resource type="Script" path="res://Entities/Player/StrongPunch.gd" id="27_487ye"]
+[ext_resource type="Script" path="res://Entities/Player/FastPunch.gd" id="28_amcrx"]
 [ext_resource type="AudioStream" uid="uid://dfvldllfwqfmj" path="res://audio/sfx/placeholder/windup2.wav" id="34_iwlpj"]
 [ext_resource type="AudioStream" uid="uid://duvsdlg5vdcu5" path="res://audio/sfx/placeholder/follow_through_2.wav" id="35_tnuvo"]
 [ext_resource type="AudioStream" uid="uid://dyi2jeb1182w0" path="res://audio/sfx/placeholder/whip.wav" id="36_hlp8x"]
@@ -2035,6 +2037,12 @@ scale_amount_min = 3.0
 scale_amount_max = 8.0
 color = Color(0.501961, 0, 0.137255, 1)
 hue_variation_max = 0.1
+
+[node name="StrongPunch" type="Node2D" parent="StateMachine"]
+script = ExtResource("27_487ye")
+
+[node name="FastPunch" type="Node2D" parent="StateMachine"]
+script = ExtResource("28_amcrx")
 
 [node name="Debug" type="Node2D" parent="."]
 position = Vector2(-15, -56)
