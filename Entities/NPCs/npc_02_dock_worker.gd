@@ -1,3 +1,7 @@
+# use to generate a vector towards the player, which you can then
+# add to other vectors (like gravity, whatever) before move_and_slide()
+
+
 extends CharacterBody2D
 
 
@@ -77,7 +81,7 @@ func play_hurt_noise():
 	$HurtNoises.play()
 
 func knockback(knockbackVector):
-	var magnitude = 10.0
+	var magnitude = 70.0
 	velocity = knockbackVector * magnitude
 	
 func _on_hit(damage, _impactVector, _damageType, _knockback):
