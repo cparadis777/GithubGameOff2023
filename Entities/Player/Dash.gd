@@ -35,8 +35,8 @@ func enter(_msg := {}) -> void:
 	timer.timeout.connect(_on_timer_timeout)
 	
 	direction = player.get_last_known_direction()
-	if player.has_method("reset_rotation"):
-		player.reset_rotation()
+#	if player.has_method("reset_rotation"):
+#		player.reset_rotation()
 	
 	player.velocity.x = dash_speed * direction
 	

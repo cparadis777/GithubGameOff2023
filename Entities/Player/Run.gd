@@ -33,6 +33,13 @@ func physics_update(delta: float) -> void:
 	elif is_equal_approx(input_direction_x, 0.0):
 		state_machine.transition_to("Idle")
 
+	elif Input.is_action_just_pressed("strong_punch"):
+		state_machine.transition_to("StrongPunch")
+			
+	elif Input.is_action_just_pressed("fast_punch"):
+		state_machine.transition_to("FastPunch")
+			
+
 
 func attempt_to_push(collision : KinematicCollision2D):
 	var body = collision.get_collider()

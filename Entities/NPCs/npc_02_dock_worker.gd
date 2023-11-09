@@ -12,8 +12,16 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var health_max = 100
 @onready var health = health_max
 
+
+
 enum States { INITIALIZING, PAUSED, IDLE, ALERT, IFRAMES, DYING, DEAD }
-var State = States.INITIALIZING
+var State :States = States.INITIALIZING :
+	set(value):
+		previous_state = State
+		State = value
+	get:
+		return State
+
 var previous_state : States
 
 func _ready():
@@ -38,9 +46,12 @@ func _physics_process(delta):
 		move_and_slide()
 	elif State == States.IDLE:
 		move_and_slide() # required for standing on moving platforms
+	elif State == States.IFRAMES:
+		move_and_slide() # don't change velocity, just go.
 
 func update_animations():
 	$PaperDoll.scale.x = signf(velocity.x) * original_doll_scale.x
+	$Behaviours.scale.x = signf(velocity.x)
 	if abs(velocity.x) > 0:
 		var anim = $AnimationPlayer.current_animation
 		if anim == "":
@@ -50,7 +61,7 @@ func begin_dying():
 	print("dockworker dying")
 	State = States.DYING
 	$AnimationPlayer.play("die")
-
+	$HitBox.set_deferred("disabled", true)
 
 func begin_decaying():
 	State = States.DEAD
@@ -64,11 +75,14 @@ func initiate_iframes():
 
 func play_hurt_noise():
 	$HurtNoises.play()
+
+func knockback(knockbackVector):
+	var magnitude = 10.0
+	velocity = knockbackVector * magnitude
 	
 func _on_hit(damage, _impactVector, _damageType, _knockback):
-	if not State in [ States.DYING, States.DEAD, States.INITIALIZING ]:
+	if not State in [ States.DYING, States.DEAD, States.INITIALIZING, States.IFRAMES ]:
 		health -= damage
-		# no knockback for burly NPC
 		if health <= 0:
 			begin_dying()
 		else:
@@ -76,7 +90,8 @@ func _on_hit(damage, _impactVector, _damageType, _knockback):
 			#$HurtFlash.show()
 			$AnimationPlayer.play("hurt")
 			initiate_iframes()
-		
+			if _knockback:
+				knockback(_impactVector)
 
 
 
@@ -97,3 +112,4 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_i_frames_timer_timeout():
 	State = previous_state
 	$HurtFlash.hide()
+
