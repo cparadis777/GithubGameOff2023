@@ -35,7 +35,8 @@ func enter(msg := {}) -> void:
 	
 	already_used_dash = msg.has("dashed")
 
-	
+
+# Note: Not the same as built in function physics_process!
 func physics_update(delta: float) -> void:
 	# Horizontal movement.
 
@@ -48,12 +49,14 @@ func physics_update(delta: float) -> void:
 	if player.velocity.y < 0.1 and not already_signalled_peak_amplitude:
 		peak_amplitude_reached.emit()
 		already_signalled_peak_amplitude = true
+	
+	
 	end_jump_early_if_player_releases_button()
 	
 	if Input.is_action_just_pressed("jump") and !already_used_double_jump:
+		already_used_double_jump = true
 		player.velocity.y = -player.JUMP_VELOCITY
 		double_jumped.emit()
-		already_used_double_jump = true
 	elif Input.is_action_just_pressed("strong_punch"):
 		state_machine.transition_to("DescendingKick")
 	elif Input.is_action_just_pressed("fast_punch") and !already_used_dash:
@@ -76,8 +79,8 @@ func apply_gravity(delta):
 	else: # going down:
 		player.velocity.y += 2.0 * player.gravity * delta
 
-func 	end_jump_early_if_player_releases_button():
-	if player.velocity.y < 0: # going up:
+func end_jump_early_if_player_releases_button():
+	if player.velocity.y < 0 and !already_used_double_jump: # going up:
 		if !Input.is_action_pressed("jump"):
 			player.velocity.y = 0
 			

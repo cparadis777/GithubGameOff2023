@@ -27,5 +27,9 @@ func _on_timer_timeout():
 func _on_body_entered(body):
 	if body.has_method("_on_hit"):
 		hit.connect(body._on_hit)
-		hit.emit()
+		var damage = 10
+		var impactVector = velocity
+		var damageType = Globals.DamageTypes.IMPACT
+		var knockback = false
+		hit.emit(damage, impactVector, damageType, knockback)
 		queue_free()

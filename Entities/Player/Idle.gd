@@ -31,7 +31,15 @@ func physics_update(_delta: float) -> void:
 		player.move_and_slide()
 	else:
 		player.global_position = floor(player.global_position)
+
+	if Input.is_action_just_pressed("strong_punch"):
+		state_machine.transition_to("StrongPunch")
 			
+	elif Input.is_action_just_pressed("fast_punch"):
+		state_machine.transition_to("FastPunch")
+
+
+
 func duck():
 	print("player wants to duck, but that's not implemented yet.")
 	

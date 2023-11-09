@@ -11,7 +11,7 @@ enum Systems { PlayerState, PlayerHealth }
 func _process(_delta):
 	match system_to_monitor:
 		Systems.PlayerState:
-			text = owner.StateMachine.state.name
+			text = owner.state_machine.state.name
 		Systems.PlayerHealth:
 			text = str(owner.health)
 

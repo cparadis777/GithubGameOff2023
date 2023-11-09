@@ -1,11 +1,16 @@
-[gd_scene load_steps=22 format=3 uid="uid://b7lbhsnpyax66"]
+[gd_scene load_steps=28 format=3 uid="uid://b7lbhsnpyax66"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/npc_02_dock_worker.gd" id="1_513fr"]
 [ext_resource type="Texture2D" uid="uid://b8to6pueoyptm" path="res://art/placeholder/dock_worker_cutouts.png" id="1_po8lm"]
 [ext_resource type="Script" path="res://Entities/NPCs/Behaviours/WalkTowardPlayer.gd" id="2_f7ga5"]
+[ext_resource type="Script" path="res://Entities/NPCs/Behaviours/PlayerDetection.gd" id="3_itenm"]
+[ext_resource type="Texture2D" uid="uid://7u2q42qj3pru" path="res://art/placeholder/dock_worker_cutouts2.png" id="3_nkxsq"]
 [ext_resource type="Script" path="res://Entities/NPCs/HeavyMeleeAttack.gd" id="4_agf2e"]
+[ext_resource type="Texture2D" uid="uid://bsgyd5cohss47" path="res://art/decals/alert.png" id="4_iy3h1"]
 [ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="4_iy4en"]
 [ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="5_fls2h"]
+[ext_resource type="AudioStream" uid="uid://3fgiln43r0y0" path="res://audio/sfx/placeholder/alert.wav" id="5_ksjfc"]
+[ext_resource type="AudioStream" uid="uid://bvxslxhu2o73k" path="res://audio/sfx/placeholder/648959__ienba__heavy-book.wav" id="5_t3spr"]
 [ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_26f2k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hlt8h"]
@@ -25,7 +30,7 @@ atlas = ExtResource("1_po8lm")
 region = Rect2(3.55593, 43.7197, 48.4609, 51.2263)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hocqj"]
-atlas = ExtResource("1_po8lm")
+atlas = ExtResource("3_nkxsq")
 region = Rect2(16.3296, 3.55513, 33.5802, 34.8971)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_whttp"]
@@ -35,6 +40,8 @@ region = Rect2(82.8316, 3.29175, 39.6379, 47.6708)
 [sub_resource type="AtlasTexture" id="AtlasTexture_sg0d1"]
 atlas = ExtResource("1_po8lm")
 region = Rect2(56.3625, 8.55924, 23.9671, 35.9506)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wg01u"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q0ksa"]
 streams_count = 3
@@ -239,6 +246,54 @@ tracks/15/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Behaviours/Attacks/HeavyMeleeAttack/AttackSmear:color")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.682353)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Behaviours/Attacks/HeavyMeleeAttack/AttackSmear:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Behaviours/Attacks/HeavyMeleeAttack/HurtBox/CollisionShape2D:disabled")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Behaviours/Attacks/HeavyMeleeAttack/HitNoise:playing")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_3g14y"]
 resource_name = "die"
@@ -391,6 +446,106 @@ tracks/3/keys = {
 "values": [-0.349603, 0.301707, -0.349603]
 }
 
+[sub_resource type="Animation" id="Animation_ls87y"]
+resource_name = "melee_attack"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PaperDoll/Torso:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.401426, 0.401426, -0.494498, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PaperDoll/Torso/UArmL:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.86234, 2.86234, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PaperDoll/Torso/LarmL:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 3.14159, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PaperDoll/LegR:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.49226, 1.49226, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Behaviours/Attacks/HeavyMeleeAttack/AttackSmear:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.682353)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Behaviours/Attacks/HeavyMeleeAttack/AttackSmear:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Behaviours/Attacks/HeavyMeleeAttack/HurtBox/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.65, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Behaviours/Attacks/HeavyMeleeAttack/HitNoise:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.65, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="Animation" id="Animation_h2h41"]
 resource_name = "walk"
 length = 0.6
@@ -541,57 +696,6 @@ tracks/11/keys = {
 "values": [-0.0212914, -0.0212914, -0.0212914]
 }
 
-[sub_resource type="Animation" id="Animation_ls87y"]
-resource_name = "melee_attack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PaperDoll/Torso:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.401426, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PaperDoll/Torso/UArmL:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 2.86234, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PaperDoll/Torso/LarmL:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 3.14159, 0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PaperDoll/LegR:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 1.49226, 0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6d053"]
 _data = {
 "RESET": SubResource("Animation_84nqr"),
@@ -654,6 +758,21 @@ offset = Vector2(-8, -10)
 
 [node name="Behaviours" type="Node2D" parent="."]
 
+[node name="PlayerDetection" type="Node2D" parent="Behaviours"]
+script = ExtResource("3_itenm")
+
+[node name="AlertSprite" type="Sprite2D" parent="Behaviours/PlayerDetection"]
+visible = false
+position = Vector2(-10, -70)
+texture = ExtResource("4_iy3h1")
+
+[node name="RayCast2D" type="RayCast2D" parent="Behaviours/PlayerDetection"]
+position = Vector2(11, -46)
+target_position = Vector2(164, 0)
+
+[node name="AlertNoise" type="AudioStreamPlayer2D" parent="Behaviours/PlayerDetection"]
+stream = ExtResource("5_ksjfc")
+
 [node name="Movement" type="Node2D" parent="Behaviours"]
 
 [node name="WalkTowardPlayer" type="Node2D" parent="Behaviours/Movement"]
@@ -671,6 +790,22 @@ one_shot = true
 [node name="ReloadTimer" type="Timer" parent="Behaviours/Attacks/HeavyMeleeAttack"]
 wait_time = 2.0
 one_shot = true
+
+[node name="HurtBox" type="Area2D" parent="Behaviours/Attacks/HeavyMeleeAttack"]
+position = Vector2(30, -25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Behaviours/Attacks/HeavyMeleeAttack/HurtBox"]
+shape = SubResource("CircleShape2D_wg01u")
+disabled = true
+
+[node name="AttackSmear" type="Polygon2D" parent="Behaviours/Attacks/HeavyMeleeAttack"]
+visible = false
+position = Vector2(26, -25)
+color = Color(1, 1, 1, 0.682353)
+polygon = PackedVector2Array(1, 1, 1, -13, -5, -25, -19, -33, -38, -33, -21, -24, -16, -15, -15, -8, -17, 1)
+
+[node name="HitNoise" type="AudioStreamPlayer2D" parent="Behaviours/Attacks/HeavyMeleeAttack"]
+stream = ExtResource("5_t3spr")
 
 [node name="HeavyRangeAttack" type="Node2D" parent="Behaviours/Attacks"]
 
@@ -707,6 +842,7 @@ one_shot = true
 
 [connection signal="timeout" from="Behaviours/Attacks/HeavyMeleeAttack/RecoilTimer" to="Behaviours/Attacks/HeavyMeleeAttack" method="_on_recoil_timer_timeout"]
 [connection signal="timeout" from="Behaviours/Attacks/HeavyMeleeAttack/ReloadTimer" to="Behaviours/Attacks/HeavyMeleeAttack" method="_on_reload_timer_timeout"]
+[connection signal="body_entered" from="Behaviours/Attacks/HeavyMeleeAttack/HurtBox" to="Behaviours/Attacks/HeavyMeleeAttack" method="_on_hurt_box_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="DecayTimer" to="." method="_on_decay_timer_timeout"]
 [connection signal="timeout" from="BloodTimer" to="." method="_on_blood_timer_timeout"]

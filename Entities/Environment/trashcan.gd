@@ -3,6 +3,8 @@ extends RigidBody2D
 var kicked = false
 
 @export var soda_can : PackedScene = preload("res://Entities/Environment/Kickables/soda_can.tscn")
+var hits = 0
+var max_hits = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +21,17 @@ func spawn_soda_cans(impactVector):
 		await new_soda_can.ready
 		new_soda_can.apply_central_impulse(bounce_vector)
 
+func spawn_cracks():
+	for sprite in $DamageSprites.get_children():
+		if sprite.get_index() < hits:
+			sprite.show()
+		else:
+			sprite.hide()
+			
+func die():
+	$CPUParticles2D.emitting = true
+	await get_tree().create_timer(0.5).timeout
+	queue_free()
 
 func _on_hit(_damage, impactVector, _damageType, _knockback):
 	if !kicked:
@@ -29,5 +42,8 @@ func _on_hit(_damage, impactVector, _damageType, _knockback):
 	$HurtNoises.play()
 	apply_central_impulse(impactVector * intensity + Vector2.UP * 10.0 * intensity)
 	kicked = true
-	
+	hits += 1
+	spawn_cracks()
+	if hits > max_hits:
+		die()
 	

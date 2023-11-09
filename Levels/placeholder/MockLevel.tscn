@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bdqawiqxlij23"]
+[gd_scene load_steps=19 format=3 uid="uid://bdqawiqxlij23"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/MockLevel.gd" id="1_8r86v"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_5mtnp"]
@@ -12,7 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://cmpouufnlcxkn" path="res://Entities/Environment/Platforms/basic_platform.tscn" id="7_qltk1"]
 [ext_resource type="PackedScene" uid="uid://cecceqk8282a6" path="res://Entities/Environment/Containers/CustomContainer.tscn" id="8_vkcjm"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="11_kcey2"]
-[ext_resource type="PackedScene" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="13_f4g4x"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="13_f4g4x"]
+[ext_resource type="PackedScene" uid="uid://b75mqcyc3pmmw" path="res://Entities/Environment/switches/LevelDoor.tscn" id="14_eu3y3"]
+[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="15_cefeg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1qp34"]
 sky_top_color = Color(0.168627, 0.215686, 0.372549, 1)
@@ -87,9 +89,6 @@ position = Vector2(907.051, -455.272)
 
 [node name="Obstacle_06" parent="Obstacles" instance=ExtResource("4_vdqaf")]
 position = Vector2(1243.57, -390.061)
-
-[node name="Obstacle_07" parent="Obstacles" instance=ExtResource("4_vdqaf")]
-position = Vector2(1389.87, -386.758)
 
 [node name="Obstacle_08" parent="Obstacles" instance=ExtResource("4_vdqaf")]
 position = Vector2(1147.3, -391.949)
@@ -216,6 +215,12 @@ scale = Vector2(1, 1.36)
 [node name="DestructibleWall3" parent="Walls" instance=ExtResource("6_46m30")]
 position = Vector2(873.467, -500.363)
 scale = Vector2(1, 0.7)
+
+[node name="NextLevelDoor" parent="." instance=ExtResource("14_eu3y3")]
+z_index = -1
+position = Vector2(1439, -435)
+next_scene = ExtResource("15_cefeg")
+wait_seconds = 0.5
 
 [node name="ParallaxBackground2" parent="." instance=ExtResource("6_lue02")]
 

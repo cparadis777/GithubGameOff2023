@@ -49,6 +49,7 @@ rotation = -1.5708
 texture = ExtResource("3_mqimq")
 
 [node name="Exterior" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_aex3n")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]
