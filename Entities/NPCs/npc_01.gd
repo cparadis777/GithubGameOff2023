@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var SPEED = 40.0
 @export var JUMP_VELOCITY = -100.0
 
-@export var health_max = 20.0
+@export var health_max = 30.0
 var health = health_max
 
 
@@ -41,8 +41,8 @@ func apply_gravity(delta):
 
 func _on_timer_timeout():
 	if State in [ States.ROLLING ]:
-		$Appearance.scale.x = -$Appearance.scale.x
-		velocity = -velocity
+		velocity = -velocity.clamp(Vector2.LEFT * SPEED, Vector2.RIGHT * SPEED )
+		$Appearance.scale.x = sign(velocity.x)
 
 
 func die():
@@ -61,10 +61,11 @@ func _on_hit(damage, impactVector, _damageType, knockback):
 			die()
 		elif knockback == true:
 			State = States.KNOCKBACK
-			var knockbackSpeed = 20.0
+			var knockbackSpeed = 250.0
 			velocity = impactVector * knockbackSpeed
 			$IframesTimer.start()
-			$HurtEffect/Star.show()
+			$AnimationPlayer.play("hit")
+			#$HurtEffect/Star.show()
 
 
 

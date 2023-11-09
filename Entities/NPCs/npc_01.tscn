@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=12 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/npc_01.gd" id="1_qkmle"]
 [ext_resource type="Texture2D" uid="uid://bi724p8u5kyfb" path="res://art/placeholder/EUC.png" id="1_x7p4c"]
+[ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_mgsqu"]
 [ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="3_naqaf"]
 [ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="4_tlhgp"]
 [ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="5_6txwc"]
@@ -19,6 +20,91 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("5_6txwc")
 stream_2/weight = 1.0
 
+[sub_resource type="Animation" id="Animation_iaf2y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:material:shader_parameter/iframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtNoises:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ft728"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:material:shader_parameter/iframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtNoises:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4p0tx"]
+_data = {
+"RESET": SubResource("Animation_iaf2y"),
+"hit": SubResource("Animation_ft728")
+}
+
 [node name="NPC_01" type="CharacterBody2D" groups=["Enemies"]]
 scale = Vector2(0.631187, 0.631187)
 collision_layer = 2
@@ -35,12 +121,13 @@ autostart = true
 [node name="Appearance" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Appearance"]
+material = ExtResource("2_mgsqu")
 position = Vector2(0, -33.2707)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_x7p4c")
 
 [node name="IframesTimer" type="Timer" parent="."]
-wait_time = 0.75
+wait_time = 0.2
 one_shot = true
 
 [node name="HurtEffect" type="Sprite2D" parent="."]
@@ -54,6 +141,11 @@ polygon = PackedVector2Array(0, -53.8668, 6.33727, -11.0902, 49.1138, -22.1804, 
 
 [node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_s8act")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4p0tx")
+}
 
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]

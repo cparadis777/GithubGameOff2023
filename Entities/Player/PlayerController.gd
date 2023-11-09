@@ -266,7 +266,7 @@ func detect_moving_platform() -> AnimatableBody2D:
 
 func inflict_harm(body, knockback: bool):
 	var damage = 10.0
-	var impactVector = body.global_position - self.global_position
+	var impactVector = self.global_position.direction_to(body.global_position)
 	var damageType = Globals.DamageTypes.IMPACT
 
 		
