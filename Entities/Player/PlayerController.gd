@@ -16,6 +16,7 @@ var speed = SPEED # for state machine
 @export var health_max = 100.0
 var health = health_max
 
+var iframes : bool = false
 
 # relocated to $state_machine node.. per https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
 #enum States { IDLE, RUNNING, JUMPING, ATTACKING }
@@ -287,11 +288,10 @@ func _on_strong_punch_hurtbox_body_entered(body):
 
 #receive injury
 func _on_hit(damage, _impactVector, _damageType : Globals.DamageTypes = Globals.DamageTypes.IMPACT, knockback: bool = false):
-	if state_machine.state.name not in [ "IFrames", "Dying", "Dead"]:
+	if !iframes and (state_machine.state.name not in [ "Dying", "Dead"]):
 		health -= damage
 		injured.emit()
-		state_machine.transition_to("IFrames")
-		$AnimationPlayer.play("iframes")
+		$IFrames.start()
 		if knockback:
 			pass # TODO, implement knockback
 
@@ -305,10 +305,14 @@ func begin_dying():
 	animation_player.play("begin_dying")
 
 func _on_iframes_started():
-	pass
+	iframes = true
+	var hit_flash_material : Material = $Body/CyberRoninSprites.material
+	hit_flash_material.set_shader_parameter("IFrames", true)
 	
 func _on_iframes_finished():
-	pass
+	iframes = false
+	var hit_flash_material : Material = $Body/CyberRoninSprites.material
+	hit_flash_material.set_shader_parameter("IFrames", false)
 
 func _on_player_died():
 	animation_player.play("die")

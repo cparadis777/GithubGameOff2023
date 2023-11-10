@@ -1,4 +1,4 @@
-[gd_scene load_steps=181 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=182 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dww0mincdfcua" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
 [ext_resource type="Texture2D" uid="uid://b5kqk4ulv38a2" path="res://art/player/speed_lines.png" id="4_nhl25"]
 [ext_resource type="AudioStream" uid="uid://dlpvfrbdrbt7x" path="res://audio/sfx/placeholder/hoo.wav" id="5_byt84"]
+[ext_resource type="Material" uid="uid://1wyuo2vl67hk" path="res://art/materials/player_hit_flash.tres" id="5_hitmp"]
 [ext_resource type="Texture2D" uid="uid://dmuqf453q41ks" path="res://art/player/cyber-ronin_dash.png" id="5_rc7or"]
 [ext_resource type="AudioStream" uid="uid://5gexndolxdlt" path="res://audio/sfx/placeholder/hah.wav" id="6_777c2"]
 [ext_resource type="Texture2D" uid="uid://b7a4g8mvnt6if" path="res://art/player/cyber-ronin_idle.png" id="6_qr63n"]
@@ -1116,7 +1117,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("StateMachine/IFrames/HurtFlash:visible")
+tracks/16/path = NodePath("IFrames/HurtFlash:visible")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -1144,6 +1145,18 @@ tracks/18/path = NodePath("Audio/JumpNoises:playing")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Body/CyberRoninSprites:material:shader_parameter/iframes")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1591,10 +1604,22 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("StateMachine/IFrames/HurtFlash:visible")
+tracks/0/path = NodePath("IFrames/HurtFlash:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/CyberRoninSprites:material:shader_parameter/iframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -1977,9 +2002,18 @@ drag_bottom_margin = 0.2
 position = Vector2(0, -19)
 shape = SubResource("CapsuleShape2D_ghh7o")
 
+[node name="IFrames" type="Node2D" parent="."]
+script = ExtResource("25_hry2y")
+
+[node name="HurtFlash" type="Polygon2D" parent="IFrames"]
+visible = false
+color = Color(1, 0.207843, 0.396078, 0.596078)
+polygon = PackedVector2Array(-6, -18, -20, -29, -6, -28, 0, -45, 5, -30, 17, -30, 5, -18, 14, -1, 1, -11, -11, -1)
+
 [node name="Body" type="Node2D" parent="."]
 
 [node name="CyberRoninSprites" type="AnimatedSprite2D" parent="Body"]
+material = ExtResource("5_hitmp")
 position = Vector2(18, -31)
 sprite_frames = SubResource("SpriteFrames_adh0r")
 animation = &"idle"
@@ -2204,14 +2238,6 @@ script = ExtResource("25_hj8m7")
 
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("18_6dmrt")
-
-[node name="IFrames" type="Node2D" parent="StateMachine"]
-script = ExtResource("25_hry2y")
-
-[node name="HurtFlash" type="Polygon2D" parent="StateMachine/IFrames"]
-visible = false
-color = Color(1, 0.207843, 0.396078, 0.596078)
-polygon = PackedVector2Array(-6, -18, -20, -29, -6, -28, 0, -45, 5, -30, 17, -30, 5, -18, 14, -1, 1, -11, -11, -1)
 
 [node name="Dying" type="Node2D" parent="StateMachine"]
 script = ExtResource("26_npw41")
