@@ -8,7 +8,7 @@ extends PlayerState
 enum SubStates { HOVERING, SOMERSAULTING }
 var SubState = SubStates.HOVERING
 
-const double_jump_velocity_multiplier = 1.25
+const double_jump_velocity_multiplier = 1.0
 
 
 signal initiated_hover

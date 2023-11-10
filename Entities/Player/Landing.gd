@@ -29,7 +29,7 @@ func physics_update(_delta):
 
 
 func _on_player_animation_finished(anim_name):
-	if anim_name == "landed":
+	if anim_name == "land":
 		if abs(player.velocity.x) > 0.05: 
 			state_machine.transition_to("Idle")
 		else:
