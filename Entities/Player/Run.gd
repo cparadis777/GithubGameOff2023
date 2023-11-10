@@ -1,10 +1,17 @@
 # Run.gd
 extends PlayerState
 
-func enter(_msg := {}) -> void:
-	if player.has_method("reset_rotation"):
-		player.reset_rotation()
+signal running_started
 
+func _ready():
+	super()
+	await owner.ready
+	if player.has_method("_on_started_running"):
+		running_started.connect(player._on_started_running)
+
+
+func enter(_msg := {}) -> void:
+	running_started.emit()
 
 func physics_update(delta: float) -> void:
 	# Notice how we have some code duplication between states. That's inherent to the pattern,
@@ -49,5 +56,4 @@ func attempt_to_push(collision : KinematicCollision2D):
 		if body.has_method("push"):
 			body.push(impactVector)
 	
-
 	

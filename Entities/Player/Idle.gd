@@ -2,8 +2,19 @@
 extends PlayerState
 var ducking : bool = false
 
+signal started_idling
+
+func _ready():
+	super()
+	await owner.ready
+	if player.has_method("_on_started_idling"):
+		started_idling.connect(player._on_started_idling)
+
+
 func enter(_msg := {}) -> void:
+	super()
 	player.velocity = Vector2.ZERO
+	started_idling.emit()
 
 
 func physics_update(_delta: float) -> void:

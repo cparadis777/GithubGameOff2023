@@ -42,10 +42,5 @@ func physics_update(_delta: float) -> void:
 	# Landing.
 	if player.is_on_floor():
 		# this seems to fire early or too often.. why?
-		landed.emit()
-		if is_equal_approx(player.velocity.x, 0.0):
-			state_machine.transition_to("Idle")
-		else:
-			state_machine.transition_to("Run")
-	
+		state_machine.transition_to("Landing")
 	

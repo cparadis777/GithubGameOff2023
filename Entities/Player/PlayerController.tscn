@@ -1,4 +1,4 @@
-[gd_scene load_steps=175 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=181 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -34,6 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://c2tum0uxura5j" path="res://audio/sfx/placeholder/TerribleJumpNoise.wav" id="18_mdgst"]
 [ext_resource type="AudioStream" uid="uid://dnf4btn7jyc7s" path="res://audio/sfx/placeholder/landing_thud.wav" id="21_y0a8e"]
 [ext_resource type="Script" path="res://Entities/Player/DoubleJump.gd" id="23_r318r"]
+[ext_resource type="Script" path="res://Entities/Player/Landing.gd" id="25_hj8m7"]
 [ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
 [ext_resource type="Script" path="res://Entities/Player/Dying.gd" id="26_npw41"]
 [ext_resource type="Script" path="res://Entities/Player/Dead.gd" id="27_0qqb8"]
@@ -354,6 +355,22 @@ region = Rect2(460, 0, 115, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_t00fv"]
 atlas = ExtResource("8_6vqcr")
 region = Rect2(345, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxusk"]
+atlas = ExtResource("8_6vqcr")
+region = Rect2(1150, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_roamo"]
+atlas = ExtResource("8_6vqcr")
+region = Rect2(1150, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu4w5"]
+atlas = ExtResource("8_6vqcr")
+region = Rect2(1035, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5qgu"]
+atlas = ExtResource("6_qr63n")
+region = Rect2(0, 0, 115, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tx0mb"]
 atlas = ExtResource("3_yst2s")
@@ -699,6 +716,23 @@ animations = [{
 "loop": false,
 "name": &"jump_peak",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxusk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_roamo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu4w5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5qgu")
+}],
+"loop": true,
+"name": &"land",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1102,6 +1136,18 @@ tracks/17/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Audio/JumpNoises:playing")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_xnet1"]
 resource_name = "begin_dying"
@@ -1303,7 +1349,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_eihwv"]
 resource_name = "fast_punch"
 length = 0.4
-loop_mode = 1
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1557,7 +1602,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_5ypvc"]
 resource_name = "land"
-length = 0.67
+length = 0.15
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1566,10 +1611,34 @@ tracks/0/path = NodePath("Audio/LandingNoises:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.35, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true, false, false]
+"values": [true, false, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/CyberRoninSprites:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"land"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/CyberRoninSprites:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
 }
 
 [sub_resource type="Animation" id="Animation_nmpsm"]
@@ -1808,6 +1877,46 @@ tracks/8/keys = {
 "values": [3.0, -3.2]
 }
 
+[sub_resource type="Animation" id="Animation_3vst0"]
+resource_name = "jump_launch"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/CyberRoninSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump_launch"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Audio/JumpNoises:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/CyberRoninSprites:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
 _data = {
 "RESET": SubResource("Animation_tb0g1"),
@@ -1818,6 +1927,7 @@ _data = {
 "fast_punch": SubResource("Animation_eihwv"),
 "idle": SubResource("Animation_1accm"),
 "iframes": SubResource("Animation_dcdmg"),
+"jump_launch": SubResource("Animation_3vst0"),
 "land": SubResource("Animation_5ypvc"),
 "run": SubResource("Animation_nmpsm"),
 "somersault_execute": SubResource("Animation_6b5og"),
@@ -2076,6 +2186,9 @@ script = ExtResource("23_r318r")
 [node name="DescendingKick" type="Node2D" parent="StateMachine"]
 script = ExtResource("16_7kpt4")
 
+[node name="Landing" type="Node2D" parent="StateMachine"]
+script = ExtResource("25_hj8m7")
+
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("18_6dmrt")
 
@@ -2160,15 +2273,17 @@ bus = &"sfx"
 
 [node name="Windup" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("34_iwlpj")
-volume_db = -8.0
-pitch_scale = 1.25
+volume_db = -7.0
+pitch_scale = 1.28125
 
 [node name="FollowThrough" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("35_tnuvo")
-volume_db = 3.0
+volume_db = -8.0
+pitch_scale = 1.25
 
 [node name="WhipCrack" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("36_hlp8x")
+volume_db = -8.0
 pitch_scale = 0.67
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

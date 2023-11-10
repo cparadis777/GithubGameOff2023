@@ -8,6 +8,7 @@ extends PlayerState
 enum SubStates { HOVERING, SOMERSAULTING }
 var SubState = SubStates.HOVERING
 
+const double_jump_velocity_multiplier = 1.25
 
 
 signal initiated_hover
@@ -17,7 +18,7 @@ signal landed
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super()
-	await(owner.ready)
+	await owner.ready
 	if player.has_method("_on_double_jump_hover_initiated"):
 		initiated_hover.connect(player._on_double_jump_hover_initiated)
 	if player.has_method("_on_double_jump_somersault_initiated"):
@@ -33,7 +34,7 @@ func physics_update(delta):
 	land_if_possible()
 
 func apply_gravity(delta):
-	if SubState == SubStates.SOMERSAULTING:
+	if SubState in [ SubStates.HOVERING, SubStates.SOMERSAULTING]:
 		# Vertical movement.
 		if player.velocity.y < 0: # going up:
 			player.velocity.y += player.gravity * delta
@@ -60,12 +61,12 @@ func enter(_msg := {}):
 	initiate_hover()
 
 func initiate_hover():
+	player.velocity.y = -double_jump_velocity_multiplier * player.JUMP_VELOCITY
 	SubState = SubStates.HOVERING
 	initiated_hover.emit()
 
 func execute_somersault():
 	SubState = SubStates.SOMERSAULTING
-	player.velocity.y = -2.0 * player.JUMP_VELOCITY
 	initiated_somersault.emit()
 
 

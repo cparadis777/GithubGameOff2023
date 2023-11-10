@@ -64,9 +64,9 @@ func get_last_known_direction():
 func _physics_process(_delta):
 	flip_sprites()
 	$Debug.global_rotation = 0.0
-	if Input.is_action_just_pressed("shoot"):
-		spawn_bullet_toward_mouse()
-	elif Input.is_action_just_pressed("debug"):
+#	if Input.is_action_just_pressed("shoot"):
+#		spawn_bullet_toward_mouse()
+	if Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
 
 
@@ -76,8 +76,7 @@ func play_run_animation():
 		$AnimationPlayer.play("run")
 	#$Body/CyberRoninSprites.play("run")
 
-func play_jump_launch_animation():
-	$Body/CyberRoninSprites.play("jump_launch")
+
 
 
 func play_jump_peak_animation():
@@ -116,34 +115,64 @@ func initiate_debugging_protocol():
 #		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
 
 
-func spawn_bullet_toward_mouse():
-	var targetVector = global_position.direction_to(get_global_mouse_position())
-	var bulletScene = preload("res://Entities/Projectiles/bullet_basic.tscn")
-	var bulletNode = bulletScene.instantiate()
-	var muzzleDistance = 15.0
-	var heightVector = Vector2(0, -10)
-	bulletNode.global_position = global_position + targetVector * muzzleDistance + heightVector
-	bulletNode.look_at(targetVector)
-	add_sibling(bulletNode)
-	bulletNode.activate(targetVector)
+#func spawn_bullet_toward_mouse():
+#	var targetVector = global_position.direction_to(get_global_mouse_position())
+#	var bulletScene = preload("res://Entities/Projectiles/bullet_basic.tscn")
+#	var bulletNode = bulletScene.instantiate()
+#	var muzzleDistance = 15.0
+#	var heightVector = Vector2(0, -10)
+#	bulletNode.global_position = global_position + targetVector * muzzleDistance + heightVector
+#	bulletNode.look_at(targetVector)
+#	add_sibling(bulletNode)
+#	bulletNode.activate(targetVector)
 
 
-func fast_punch():
-	if state_machine.state.name == "FastPunch":
-		if $AnimationPlayer.current_animation not in ["fast_punch", "strong_punch"]:
-			$AnimationPlayer.play("fast_punch")
-			#$Body/CyberRoninSprites.play("fast_punch")
 
 
-func strong_punch():
-	if state_machine.state.name == "StrongPunch":
-		if $AnimationPlayer.current_animation not in [ "fast_punch", "strong_punch"]:
-			$AnimationPlayer.play("strong_punch")
-			#$Body/CyberRoninSprites.play("strong_punch")
+func reset_sprite_position():
+	$Body/CyberRoninSprites.position = original_sprite_position
 
+
+func detect_jump_through_platform() -> StaticBody2D:
+	var jump_through_platform_detected
+	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
+	for candidate in candidate_bodies:
+		if candidate.is_in_group("JumpThroughPlatforms") or "jump" in candidate.name.to_lower():
+			jump_through_platform_detected = candidate
+	return jump_through_platform_detected
+
+func detect_moving_platform() -> AnimatableBody2D:
+	var moving_platform_detected
+	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
+	for candidate in candidate_bodies:
+		if candidate.is_in_group("MovingPlatforms") or candidate is AnimatableBody2D or "moving" in candidate.name.to_lower():
+			moving_platform_detected = candidate
+	return moving_platform_detected
+	
+
+## ====---- State Transitions ----====
+
+# opportunities to refactor.
+	# Currently, there are three places which might trigger a new animation or new logic...
+		# _on_animation_player_animation_finished()
+		# signals, like _on_landed() or _on_double_jump_somersault_initiated()
+		# _on_state_transitioned.
+	# Pick one and standardize on it.
+	
+
+#888888888888                                             88           88                                       
+#     88                                                  ""    ,d     ""                                       
+#     88                                                        88                                              
+#     88  8b,dPPYba,  ,adPPYYba,  8b,dPPYba,   ,adPPYba,  88  MM88MMM  88   ,adPPYba,   8b,dPPYba,   ,adPPYba,  
+#     88  88P'   "Y8  ""     `Y8  88P'   `"8a  I8[    ""  88    88     88  a8"     "8a  88P'   `"8a  I8[    ""  
+#     88  88          ,adPPPPP88  88       88   `"Y8ba,   88    88     88  8b       d8  88       88   `"Y8ba,   
+#     88  88          88,    ,88  88       88  aa    ]8I  88    88,    88  "8a,   ,a8"  88       88  aa    ]8I  
+#     88  88          `"8bbdP"Y8  88       88  `"YbbdP"'  88    "Y888  88   `"YbbdP"'   88       88  `"YbbdP"'  	
 
 
 func _on_animation_player_animation_finished(anim_name):
+	#note: this could be triggered after the next animation has started.
+	
 	# pass the info on to the state machine, so they can coordinate velocity, etc.
 	if state_machine.state.has_method("_on_player_animation_finished"):
 		state_machine.state._on_player_animation_finished(anim_name)
@@ -162,52 +191,16 @@ func _on_animation_player_animation_finished(anim_name):
 			play_run_animation()
 		elif state_machine.state.name == "Idle":
 			play_idle_animation()
-	elif "somersault" in anim_name:
-		print("PlayerController.gd, animation finished: " + anim_name)
 
 
-func disable_all_hurtboxes():
-	var hurtboxes = [ 
-		$Body/Actions/fast_punch/HurtBox/CollisionShape2D,
-		$Body/Actions/strong_punch/HurtBox/CollisionShape2D,
-		$Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D,
-	]
-
-	for hurtbox in hurtboxes:
-		hurtbox.set_deferred("disabled", true)
-
-func reset_sprite_position():
-	$Body/CyberRoninSprites.position = original_sprite_position
-
-func _on_state_transitioned(stateName):
+func _on_state_transitioned(_stateName):
 	disable_all_hurtboxes() # let animations turn them back on
 	reset_sprite_position()
+	# see all incoming signals below.. from various states.
 
-	match stateName:
-		"Air":
-			#$old_static_RoninPlaceholderSprite.hide()
-			$Body/CyberRoninSprites.stop()
-			$Audio/JumpNoises.play()
-		"Run":
-			# see also, signal coming into _on_landed()
-			#$old_static_RoninPlaceholderSprite.show()
-			if state_machine.previous_state_name in ["Idle"]:
-				play_run_animation()
-			elif state_machine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
-				play_run_animation()
-				# TODO change this to a landing animation.
-		"Idle":
-			if state_machine.previous_state_name in ["Run"]:
-				play_idle_animation()
-			elif state_machine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
-				play_idle_animation()
-				# TODO change this to a landing animation
-		"DescendingKick":
-			pass # see _on_descending_kick_started()
 
-			
 func _on_jumped(): # from Air state
-	play_jump_launch_animation()
+	$Body/CyberRoninSprites.play("jump_launch")
 
 func _on_peak_amplitude_reached(): # from Air state
 	play_jump_peak_animation()
@@ -218,13 +211,14 @@ func _on_double_jump_hover_initiated(): # from Air state
 func _on_double_jump_somersault_initiated():
 	play_somersault_animation("execute")
 	
-	
 func _on_landed():
-	pass
-#	$Body.rotation = 0.0
-#	if state_machine.state.name == "Idle":
-#		$AnimationPlayer.play("land")
+	$AnimationPlayer.play("land")
 
+func _on_started_idling():
+	$AnimationPlayer.play("idle")
+
+func _on_started_running():
+	$AnimationPlayer.play("run")
 	
 func _on_descending_kick_started():
 # should animation calls come from the State machine or the player?
@@ -252,23 +246,41 @@ func _on_dash_started():
 #	$Body/SpeedLines.play("default")
 
 
-func detect_jump_through_platform() -> StaticBody2D:
-	var jump_through_platform_detected
-	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
-	for candidate in candidate_bodies:
-		if candidate.is_in_group("JumpThroughPlatforms") or "jump" in candidate.name.to_lower():
-			jump_through_platform_detected = candidate
-	return jump_through_platform_detected
+#  ,ad8888ba,                                    88                                
+# d8"'    `"8b                                   88                         ,d     
+#d8'                                             88                         88     
+#88              ,adPPYba,   88,dPYba,,adPYba,   88,dPPYba,   ,adPPYYba,  MM88MMM  
+#88             a8"     "8a  88P'   "88"    "8a  88P'    "8a  ""     `Y8    88     
+#Y8,            8b       d8  88      88      88  88       d8  ,adPPPPP88    88     
+# Y8a.    .a8P  "8a,   ,a8"  88      88      88  88b,   ,a8"  88,    ,88    88,    
+#  `"Y8888Y"'    `"YbbdP"'   88      88      88  8Y"Ybbd8"'   `"8bbdP"Y8    "Y888  
 
-func detect_moving_platform() -> AnimatableBody2D:
-	var moving_platform_detected
-	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
-	for candidate in candidate_bodies:
-		if candidate.is_in_group("MovingPlatforms") or candidate is AnimatableBody2D or "moving" in candidate.name.to_lower():
-			moving_platform_detected = candidate
-	return moving_platform_detected
-	
-	
+
+func fast_punch():
+	if state_machine.state.name == "FastPunch":
+		if $AnimationPlayer.current_animation not in ["fast_punch", "strong_punch"]:
+			$AnimationPlayer.play("fast_punch")
+			#$Body/CyberRoninSprites.play("fast_punch")
+
+
+func strong_punch():
+	if state_machine.state.name == "StrongPunch":
+		if $AnimationPlayer.current_animation not in [ "fast_punch", "strong_punch"]:
+			$AnimationPlayer.play("strong_punch")
+			#$Body/CyberRoninSprites.play("strong_punch")
+
+
+
+func disable_all_hurtboxes():
+	var hurtboxes = [ 
+		$Body/Actions/fast_punch/HurtBox/CollisionShape2D,
+		$Body/Actions/strong_punch/HurtBox/CollisionShape2D,
+		$Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D,
+	]
+
+	for hurtbox in hurtboxes:
+		hurtbox.set_deferred("disabled", true)
+
 
 func inflict_harm(body, knockback: bool):
 	var damage = 10.0

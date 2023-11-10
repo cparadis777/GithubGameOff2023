@@ -2,21 +2,19 @@
 extends PlayerState
 
 var already_used_double_jump : bool = false
-
 var already_used_dash : bool = false
 var already_signalled_peak_amplitude : bool = false
 
 
 signal jumped
 signal peak_amplitude_reached
-signal landed
+
 
 func _ready():
 	super()
 
-	await(owner.ready)
-	if player.has_method("_on_landed"):
-		landed.connect(player._on_landed)
+	await owner.ready
+
 	if player.has_method("_on_jumped"):
 		jumped.connect(player._on_jumped)
 	if player.has_method("_on_peak_amplitude_reached"):
@@ -66,27 +64,11 @@ func allow_player_to_change_direction_midair():
 
 func land_if_possible():
 	if player.is_on_floor():
-		landed.emit()
-		if is_equal_approx(player.velocity.x, 0.0):
-			state_machine.transition_to("Idle")
-		else:
-			state_machine.transition_to("Run")
-
-
-#func initiate_double_jump():
-#	already_used_double_jump = true
-#	somersault_initiation_complete = false
-#	double_jump_initiated.emit()
-#
-#func execute_double_jump():
-#	somersault_initiation_complete = true
-#	player.velocity.y = -player.JUMP_VELOCITY
-#	double_jump_executed.emit()
+		state_machine.transition_to("Landing")
 
 
 func apply_gravity(delta):
-	# Vertical movement.
-
+#	# Vertical movement.
 	if player.velocity.y < 0: # going up:
 		player.velocity.y += player.gravity * delta
 		if player.velocity.y > -0.1 and !already_signalled_peak_amplitude:
