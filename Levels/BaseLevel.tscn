@@ -17,7 +17,6 @@ b = Vector2(192, 96)
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_m15gi")
-exit_flags = 3
 
 [node name="BaseContainer" parent="." instance=ExtResource("1_k16lk")]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=173 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=174 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -38,6 +38,7 @@
 [ext_resource type="Script" path="res://Entities/Player/Dead.gd" id="27_0qqb8"]
 [ext_resource type="Script" path="res://Entities/Player/StrongPunch.gd" id="27_487ye"]
 [ext_resource type="Script" path="res://Entities/Player/FastPunch.gd" id="28_amcrx"]
+[ext_resource type="Script" path="res://Entities/Player/Enter.gd" id="30_bbbly"]
 [ext_resource type="AudioStream" uid="uid://dfvldllfwqfmj" path="res://audio/sfx/placeholder/windup2.wav" id="34_iwlpj"]
 [ext_resource type="AudioStream" uid="uid://duvsdlg5vdcu5" path="res://audio/sfx/placeholder/follow_through_2.wav" id="35_tnuvo"]
 [ext_resource type="AudioStream" uid="uid://dyi2jeb1182w0" path="res://audio/sfx/placeholder/whip.wav" id="36_hlp8x"]
@@ -2097,6 +2098,9 @@ script = ExtResource("27_487ye")
 
 [node name="FastPunch" type="Node2D" parent="StateMachine"]
 script = ExtResource("28_amcrx")
+
+[node name="Enter" type="Node2D" parent="StateMachine"]
+script = ExtResource("30_bbbly")
 
 [node name="Debug" type="Node2D" parent="."]
 position = Vector2(-15, -56)

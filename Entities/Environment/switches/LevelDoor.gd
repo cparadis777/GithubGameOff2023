@@ -1,7 +1,5 @@
 extends Area2D
 
-#Defines whether an exit is a horizontal doorway vertical ladder/hatch
-enum DoorOrientation {HORIZONTAL, VERTICAL}
 
 @export var next_scene:PackedScene
 # how long to wait on a b screen before next scene
@@ -9,7 +7,6 @@ enum DoorOrientation {HORIZONTAL, VERTICAL}
 # how long this side of the transition animation will take
 @export_range(0.0, 2.0, 0.1) var transition_seconds:float = 0.5
 @export var unlocked:bool = true;
-@export var orientation:DoorOrientation = DoorOrientation.HORIZONTAL
 @export var location:Utils.Directions
 
 var player_near : bool = false
@@ -28,9 +25,10 @@ func exit_level():
 	get_tree().get_root().set_process_input(false)
 	
 	level_exited.emit()
-	
+	StageManager.current_player.state_machine.transition_to("Enter", {"dir": location})
 	SceneTransition.change_scene(next_scene, wait_seconds)
 	await get_tree().create_timer(wait_seconds + transition_seconds).timeout
+	StageManager.current_player.state_machine.transition_to("Idle")
 	
 
 # Should be done on load of a level
