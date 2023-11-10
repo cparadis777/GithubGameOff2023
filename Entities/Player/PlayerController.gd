@@ -171,31 +171,18 @@ func detect_moving_platform() -> AnimatableBody2D:
 
 
 func _on_animation_player_animation_finished(anim_name):
-	#note: this could be triggered after the next animation has started.
+	#NOTE: this could be triggered after the next animation has started.
 	
 	# pass the info on to the state machine, so they can coordinate velocity, etc.
 	if state_machine.state.has_method("_on_player_animation_finished"):
 		state_machine.state._on_player_animation_finished(anim_name)
-	
-	# TODO: move this into FastPunch and StrongPunch states.
-	if anim_name in [ "fast_punch", "strong_punch" ]:
-		if velocity.length_squared() > 0.5:
-			state_machine.transition_to("Run")
-			play_run_animation()
-		else:
-			pass
-#			state_machine.transition_to("Idle")
-#			play_idle_animation()
-	elif anim_name == "land":
-		if state_machine.state.name == "Run":
-			play_run_animation()
-		elif state_machine.state.name == "Idle":
-			play_idle_animation()
 
 
 func _on_state_transitioned(_stateName):
-	disable_all_hurtboxes() # let animations turn them back on
-	reset_sprite_position()
+	#disable_all_hurtboxes() # let animations turn them back on
+	#reset_sprite_position()
+	pass
+	
 	# see all incoming signals below.. from various states.
 
 
@@ -256,17 +243,17 @@ func _on_dash_started():
 #  `"Y8888Y"'    `"YbbdP"'   88      88      88  8Y"Ybbd8"'   `"8bbdP"Y8    "Y888  
 
 
-func fast_punch():
+func fast_punch(): # comes from $StateMachine/FastPunch
 	if state_machine.state.name == "FastPunch":
-		if $AnimationPlayer.current_animation not in ["fast_punch", "strong_punch"]:
-			$AnimationPlayer.play("fast_punch")
+		if animation_player.current_animation not in ["fast_punch", "strong_punch"]:
+			animation_player.play("fast_punch")
 			#$Body/CyberRoninSprites.play("fast_punch")
 
 
-func strong_punch():
+func strong_punch(): # comes from $StateMachine/StrongPunch
 	if state_machine.state.name == "StrongPunch":
-		if $AnimationPlayer.current_animation not in [ "fast_punch", "strong_punch"]:
-			$AnimationPlayer.play("strong_punch")
+		if animation_player.current_animation not in [ "fast_punch", "strong_punch"]:
+			animation_player.play("strong_punch")
 			#$Body/CyberRoninSprites.play("strong_punch")
 
 

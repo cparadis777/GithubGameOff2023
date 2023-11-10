@@ -42,7 +42,6 @@ func physics_update(delta: float) -> void:
 
 	elif Input.is_action_just_pressed("strong_punch"):
 		state_machine.transition_to("StrongPunch")
-			
 	elif Input.is_action_just_pressed("fast_punch"):
 		state_machine.transition_to("FastPunch")
 			

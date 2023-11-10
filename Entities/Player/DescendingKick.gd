@@ -12,8 +12,8 @@ var direction
 
 func _ready():
 	super()
+	await owner.ready
 
-	await(owner.ready)
 	if player.has_method("_on_descending_kick_started"):
 		started.connect(player._on_descending_kick_started)
 	if player.has_method("_on_descending_kick_impacted"):

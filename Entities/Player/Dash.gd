@@ -17,7 +17,7 @@ var timer
 func _ready():
 	super()
 
-	await(owner.ready)
+	await owner.ready
 	dash_speed = player.speed * speed_multiplier
 
 	if player.has_method("_on_dash_started"):
