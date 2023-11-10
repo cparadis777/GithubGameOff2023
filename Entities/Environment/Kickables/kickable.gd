@@ -22,7 +22,8 @@ func _ready():
 
 func push(impactVector):
 	if !pushed:
-		apply_central_impulse(impactVector)
+		var magnitude = 1.0
+		apply_central_impulse(impactVector * magnitude)
 		pushed = true
 		set_collision_mask_value(4, false)
 		push_iframes_timer.start()

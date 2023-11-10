@@ -95,10 +95,11 @@ func play_idle_animation():
 	#$Body/CyberRoninSprites.stop()
 	#$Body/CyberRoninSprites.play("idle")
 
-func play_somersault_animation():
-	if $AnimationPlayer.current_animation != "somersault":
-		$AnimationPlayer.play("somersault")
-	#$Body/CyberRoninSprites.play("double_jump")
+func play_somersault_animation(anim_name_surfix : String):
+	# somersault_initiate or somersault_execute
+	if $AnimationPlayer.current_animation != "somersault_" + anim_name_surfix:
+		$AnimationPlayer.play("somersault_" + anim_name_surfix)
+	
 
 func reset_rotation():
 	# hack for when state changes during a somersault.
@@ -143,6 +144,11 @@ func strong_punch():
 
 
 func _on_animation_player_animation_finished(anim_name):
+	# pass the info on to the state machine, so they can coordinate velocity, etc.
+	if state_machine.state.has_method("_on_player_animation_finished"):
+		state_machine.state._on_player_animation_finished(anim_name)
+	
+	# TODO: move this into FastPunch and StrongPunch states.
 	if anim_name in [ "fast_punch", "strong_punch" ]:
 		if velocity.length_squared() > 0.5:
 			state_machine.transition_to("Run")
@@ -151,12 +157,14 @@ func _on_animation_player_animation_finished(anim_name):
 			pass
 #			state_machine.transition_to("Idle")
 #			play_idle_animation()
-
 	elif anim_name == "land":
 		if state_machine.state.name == "Run":
 			play_run_animation()
 		elif state_machine.state.name == "Idle":
 			play_idle_animation()
+	elif "somersault" in anim_name:
+		print("PlayerController.gd, animation finished: " + anim_name)
+
 
 func disable_all_hurtboxes():
 	var hurtboxes = [ 
@@ -180,7 +188,6 @@ func _on_state_transitioned(stateName):
 			#$old_static_RoninPlaceholderSprite.hide()
 			$Body/CyberRoninSprites.stop()
 			$Audio/JumpNoises.play()
-			
 		"Run":
 			# see also, signal coming into _on_landed()
 			#$old_static_RoninPlaceholderSprite.show()
@@ -189,16 +196,12 @@ func _on_state_transitioned(stateName):
 			elif state_machine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
 				play_run_animation()
 				# TODO change this to a landing animation.
-				
-			
-			
 		"Idle":
 			if state_machine.previous_state_name in ["Run"]:
 				play_idle_animation()
 			elif state_machine.previous_state_name in ["Air", "DescendingKick", "Dash"]:
 				play_idle_animation()
 				# TODO change this to a landing animation
-		
 		"DescendingKick":
 			pass # see _on_descending_kick_started()
 
@@ -209,9 +212,13 @@ func _on_jumped(): # from Air state
 func _on_peak_amplitude_reached(): # from Air state
 	play_jump_peak_animation()
 		
-func _on_double_jumped(): # from Air state
-	play_somersault_animation()
+func _on_double_jump_hover_initiated(): # from Air state
+	play_somersault_animation("initiate")
 
+func _on_double_jump_somersault_initiated():
+	play_somersault_animation("execute")
+	
+	
 func _on_landed():
 	pass
 #	$Body.rotation = 0.0
@@ -233,7 +240,7 @@ func _on_descending_kick_hurtbox_body_entered(body):
 			velocity.x = -velocity.x * 0.5
 			velocity.y = -JUMP_VELOCITY
 			state_machine.transition_to("Air", {do_jump = true})
-		
+
 
 func _on_descending_kick_impacted():
 	pass # not sure what to do here yet.. Probably just ignore it and let the state machine transition to air.
@@ -243,9 +250,8 @@ func _on_dash_started():
 		animation_player.play("dash")
 #	$Body/CyberRoninSprites.play("dash")
 #	$Body/SpeedLines.play("default")
-	
-		
-		
+
+
 func detect_jump_through_platform() -> StaticBody2D:
 	var jump_through_platform_detected
 	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()

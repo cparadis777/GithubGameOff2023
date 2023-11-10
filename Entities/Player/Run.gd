@@ -44,7 +44,7 @@ func physics_update(delta: float) -> void:
 func attempt_to_push(collision : KinematicCollision2D):
 	var body = collision.get_collider()
 	if body.is_in_group("Pushables"):
-		var magnitude = 3.5
+		var magnitude = 4.5
 		var impactVector = magnitude * (player.global_position.direction_to(body.global_position) + Vector2.UP)
 		if body.has_method("push"):
 			body.push(impactVector)

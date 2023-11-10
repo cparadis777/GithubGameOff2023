@@ -31,7 +31,7 @@ func _ready():
 # If we get a message asking us kick, while in the Air, we descending kick
 func enter(_msg := {}) -> void:
 	player.velocity.y = 0 # stay flat
-	timer = get_tree().create_timer(dash_duration)
+	timer = get_tree().create_timer(dash_duration) #starts automatically
 	timer.timeout.connect(_on_timer_timeout)
 	
 	direction = player.get_last_known_direction()
