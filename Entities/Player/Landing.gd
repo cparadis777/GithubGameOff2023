@@ -13,10 +13,9 @@ func _ready():
 
 func enter(_msg := {} ) -> void:
 	super()
-	if abs(Input.get_axis("move_left", "move_right")) > 0:
-		state_machine.transition_to("Run")
-	else:
-		landed.emit() # player will play an animation
+#	if abs(Input.get_axis("move_left", "move_right")) > 0:
+#		state_machine.transition_to("Run")
+	landed.emit() # player will play an animation
 	
 	
 func exit():

@@ -886,6 +886,7 @@ size = Vector2(27, 32)
 radius = 23.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ucv"]
+size = Vector2(16, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o20hr"]
 atlas = ExtResource("4_gxpwb")
@@ -1264,7 +1265,7 @@ tracks/0/path = NodePath("Body/SpeedLines:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 2),
+"times": PackedFloat32Array(0, 0.1, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1324,10 +1325,10 @@ tracks/5/path = NodePath("Body/Actions/descending_kick/HurtBox/DescendingKickCol
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_u6k5a"]
@@ -1916,6 +1917,18 @@ tracks/8/keys = {
 "update": 0,
 "values": [3.0, -3.2]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D:disabled")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
 _data = {
@@ -2035,7 +2048,7 @@ collision_layer = 0
 collision_mask = 10
 
 [node name="DescendingKickCollisionShape2D" type="CollisionShape2D" parent="Body/Actions/descending_kick/HurtBox"]
-position = Vector2(20, 4)
+position = Vector2(7, -6.5)
 shape = SubResource("RectangleShape2D_k6ucv")
 disabled = true
 
@@ -2227,6 +2240,7 @@ one_shot = true
 script = ExtResource("27_0qqb8")
 
 [node name="Timer" type="Timer" parent="StateMachine/Dead"]
+one_shot = true
 
 [node name="Label" type="Label" parent="StateMachine/Dead"]
 visible = false
@@ -2278,7 +2292,7 @@ pitch_scale = 1.28125
 
 [node name="FollowThrough" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("35_tnuvo")
-volume_db = -8.0
+volume_db = 3.0
 pitch_scale = 1.25
 
 [node name="WhipCrack" type="AudioStreamPlayer2D" parent="Audio"]

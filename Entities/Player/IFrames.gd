@@ -9,9 +9,10 @@ signal finished
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super()
-	await(owner.ready)
+	await owner.ready
 	
 	iframes_timer = Timer.new()
+	iframes_timer.one_shot = true
 	iframes_timer.set_wait_time(0.5)
 	iframes_timer.timeout.connect(_on_iframes_timer_timeout)
 	
@@ -35,7 +36,7 @@ func _exit():
 
 func _on_iframes_timer_timeout():
 	$HurtFlash.hide()
-	if state_machine.state.name not in [ "Dying", "Dead" ]:
+	if state_machine.state.name == "IFrames":
 		finished.emit()
 		if player.is_on_floor():
 			state_machine.transition_to("Idle")

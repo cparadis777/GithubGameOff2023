@@ -18,36 +18,37 @@ func enter(_msg := {}) -> void:
 
 
 func physics_update(_delta: float) -> void:
-	if not player.is_on_floor():
-		state_machine.transition_to("Air")
+	
+#	if not player.is_on_floor():
+#		state_machine.transition_to("Air")
+#		return
+	if Input.is_action_just_pressed("strong_punch"):
+		state_machine.transition_to("StrongPunch")
+		return
+	elif Input.is_action_just_pressed("fast_punch"):
+		state_machine.transition_to("FastPunch")
 		return
 
-	if Input.is_action_just_pressed("jump"):
+
+	elif Input.is_action_just_pressed("jump"):
 		state_machine.transition_to("Air", {do_jump = true})
 	elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 		state_machine.transition_to("Run")
 
 	# can also duck and jump down through some platforms.
-	if Input.is_action_just_pressed("move_down"):
+	elif Input.is_action_just_pressed("move_down"):
 		if player.has_method("detect_jump_through_platform"):
 			var platform = player.detect_jump_through_platform()
 			if platform != null:
 				drop_down(platform)
 			else:
 				duck()
-		else:
-			printerr("coupling problem: Air state requested method detect_jump_through_platform from player, but it did not exist.")
 
-	if player.detect_moving_platform() != null:
+	elif player.detect_moving_platform() != null:
 		player.move_and_slide()
-	else:
+	else: # make sure player sprite is snapped to pixels
 		player.global_position = floor(player.global_position)
 
-	if Input.is_action_just_pressed("strong_punch"):
-		state_machine.transition_to("StrongPunch")
-			
-	elif Input.is_action_just_pressed("fast_punch"):
-		state_machine.transition_to("FastPunch")
 
 
 
@@ -60,6 +61,6 @@ func drop_down(platform):
 		platform.allow_player_to_pass()
 		state_machine.transition_to("Air", {do_drop = true})
 		
-	
+
 	
 

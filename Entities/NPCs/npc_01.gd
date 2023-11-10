@@ -40,7 +40,8 @@ func apply_gravity(delta):
 func _on_timer_timeout():
 	if State in [ States.ROLLING ]:
 		velocity = -velocity.clamp(Vector2.LEFT * SPEED, Vector2.RIGHT * SPEED )
-		$Appearance.scale.x = sign(velocity.x)
+		if abs(velocity.x) > 0:
+			$Appearance.scale.x = sign(velocity.x)
 
 
 func die():

@@ -4,7 +4,6 @@ extends PlayerState
 var already_used_double_jump : bool = false
 
 signal started
-signal impacted
 signal landed
 var direction
 
@@ -16,8 +15,6 @@ func _ready():
 
 	if player.has_method("_on_descending_kick_started"):
 		started.connect(player._on_descending_kick_started)
-	if player.has_method("_on_descending_kick_impacted"):
-		impacted.connect(player._on_descending_kick_impacted)
 	if player.has_method("_on_landed"):
 		landed.connect(player._on_landed) # same function which Air connects to.
 

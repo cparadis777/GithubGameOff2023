@@ -45,15 +45,13 @@ func _ready():
 	hud.show()
 	injured.connect(hud._on_player_hit)
 	
-	play_idle_animation()
+	#play_idle_animation()
 	original_body_scale = $Body/CyberRoninSprites.scale
 	original_sprite_position = $Body/CyberRoninSprites.position
 
 func flip_sprites():
-	if Input.is_action_pressed("move_left"):
-		$Body.scale.x = -original_body_scale.x
-	elif Input.is_action_pressed("move_right"):
-		$Body.scale.x = original_body_scale.x
+	if abs(velocity.x) > 0:
+		$Body.scale.x = sign(velocity.x) * original_body_scale.x
 	
 func get_last_known_direction():
 	if $Body.scale.x > 0:
@@ -179,15 +177,16 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_state_transitioned(_stateName):
-	#disable_all_hurtboxes() # let animations turn them back on
+	disable_all_hurtboxes() # let animations turn them back on
 	#reset_sprite_position()
-	pass
+	
 	
 	# see all incoming signals below.. from various states.
 
 
 func _on_jumped(): # from Air state
-	$Body/CyberRoninSprites.play("jump_launch")
+	animation_player.play("jump_launch")
+	#$Body/CyberRoninSprites.play("jump_launch")
 
 func _on_peak_amplitude_reached(): # from Air state
 	play_jump_peak_animation()
@@ -214,17 +213,6 @@ func _on_descending_kick_started():
 		#$Body/CyberRoninSprites.play("descending_kick")
 
 
-func _on_descending_kick_hurtbox_body_entered(body):
-	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		inflict_harm(body, true)
-		if state_machine.state.name == "DescendingKick":
-			velocity.x = -velocity.x * 0.5
-			velocity.y = -JUMP_VELOCITY
-			state_machine.transition_to("Air", {do_jump = true})
-
-
-func _on_descending_kick_impacted():
-	pass # not sure what to do here yet.. Probably just ignore it and let the state machine transition to air.
 
 func _on_dash_started():
 	if animation_player.has_animation("dash"):
@@ -250,12 +238,9 @@ func fast_punch(): # comes from $StateMachine/FastPunch
 			#$Body/CyberRoninSprites.play("fast_punch")
 
 
-func strong_punch(): # comes from $StateMachine/StrongPunch
-	if state_machine.state.name == "StrongPunch":
-		if animation_player.current_animation not in [ "fast_punch", "strong_punch"]:
-			animation_player.play("strong_punch")
-			#$Body/CyberRoninSprites.play("strong_punch")
-
+func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
+	animation_player.play("strong_punch")
+		
 
 
 func disable_all_hurtboxes():
@@ -281,18 +266,26 @@ func inflict_harm(body, knockback: bool):
 		hit.disconnect(body._on_hit)
 
 
+func _on_descending_kick_hurtbox_body_entered(body):
+	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
+		if state_machine.state.name == "DescendingKick":
+			inflict_harm(body, true)
+			velocity.x = -velocity.x
+			velocity.y = - 1.25 * JUMP_VELOCITY
+			state_machine.transition_to("Air", {"do_jump" = true})
+
 func _on_fast_punch_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		inflict_harm(body, false)
-		
-		
-	
+		if state_machine.state.name == "FastPunch":
+			inflict_harm(body, false)
+
 func _on_strong_punch_hurtbox_body_entered(body):
-	# strong_punch, fast_punch, and descending_kick
-	
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		inflict_harm(body, true)
-		
+		if state_machine.state.name == "StrongPunch":
+			inflict_harm(body, true)
+
+
+#receive injury
 func _on_hit(damage, _impactVector, _damageType : Globals.DamageTypes = Globals.DamageTypes.IMPACT, knockback: bool = false):
 	if state_machine.state.name not in [ "IFrames", "Dying", "Dead"]:
 		health -= damage
