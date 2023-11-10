@@ -28,7 +28,7 @@ func _ready():
 func physics_update(delta):
 	apply_gravity(delta)
 	check_for_attack_requests()
-	check_for_jump_button_release()
+	#check_for_jump_button_release()
 	player.move_and_slide()
 	land_if_possible()
 
@@ -65,7 +65,7 @@ func initiate_hover():
 
 func execute_somersault():
 	SubState = SubStates.SOMERSAULTING
-	player.velocity.y = -player.JUMP_VELOCITY
+	player.velocity.y = -2.0 * player.JUMP_VELOCITY
 	initiated_somersault.emit()
 
 
@@ -83,7 +83,7 @@ func exit():
 	
 func _on_player_animation_finished(anim_name):
 	if anim_name == "somersault_initiate":
-		pass # hold while key is pressed
+		execute_somersault()
 	elif anim_name == "somersault_execute":
 		state_machine.transition_to("Air", {"double_jumped" : true})
 		
