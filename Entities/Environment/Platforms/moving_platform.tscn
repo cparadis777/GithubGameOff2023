@@ -29,6 +29,7 @@ shape = SubResource("RectangleShape2D_bjuhk")
 one_way_collision = true
 
 [node name="StateLabel" type="Label" parent="."]
+visible = false
 offset_left = -20.0
 offset_top = -25.0
 offset_right = 20.0

@@ -2028,8 +2028,8 @@ offset = Vector2(-15.7046, 1.14441e-05)
 
 [node name="PushBox" type="AnimatableBody2D" parent="Body"]
 position = Vector2(24, -18)
-collision_layer = 16
-collision_mask = 2
+collision_layer = 0
+collision_mask = 0
 
 [node name="PushBoxColShape" type="CollisionShape2D" parent="Body/PushBox"]
 shape = SubResource("RectangleShape2D_a8hms")

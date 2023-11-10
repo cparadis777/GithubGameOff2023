@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=23 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_ap6lg"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="7_53wf6"]
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="7_gq8f5"]
+[ext_resource type="PackedScene" uid="uid://daqb2qqfyv1v5" path="res://Entities/Environment/Platforms/moving_girder.tscn" id="7_rx2d0"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
 [ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="9_fc1mv"]
 [ext_resource type="Texture2D" uid="uid://67m50eh8jeq1" path="res://art/materials/shaders/2DOmniLight.png" id="10_u1mfk"]
@@ -112,8 +113,17 @@ offset_right = 94.0
 offset_bottom = 13.0
 text = "JumpThroughPlatform"
 
+[node name="MovingGirder" parent="Platforms" instance=ExtResource("7_rx2d0")]
+position = Vector2(-68, -38)
+
+[node name="Location2" parent="Platforms/MovingGirder/PositionMarkers" index="0"]
+position = Vector2(2, -143)
+
 [node name="MovingPlatform" parent="Platforms" instance=ExtResource("7_53wf6")]
-position = Vector2(-67, -39)
+position = Vector2(84, -41)
+
+[node name="Location2" parent="Platforms/MovingPlatform/PositionMarkers" index="0"]
+position = Vector2(1, -82)
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -309,4 +319,5 @@ visible = false
 position = Vector2(141, -1)
 linked_node = NodePath("../../Lighting/SwitchedLight")
 
+[editable path="Platforms/MovingGirder"]
 [editable path="Platforms/MovingPlatform"]
