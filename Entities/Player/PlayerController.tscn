@@ -845,7 +845,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8hms"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7h8"]
-size = Vector2(43, 32)
+size = Vector2(27, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
 radius = 23.0
@@ -1856,7 +1856,7 @@ collision_layer = 0
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Actions/fast_punch/HurtBox"]
-position = Vector2(-15.5, 1)
+position = Vector2(-23.5, 1)
 shape = SubResource("RectangleShape2D_is7h8")
 disabled = true
 

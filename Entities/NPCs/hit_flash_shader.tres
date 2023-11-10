@@ -1,0 +1,80 @@
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://ofsllb4jr2er"]
+
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_ju7v6"]
+parameter_name = "iframes"
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_nr4h4"]
+output_port_for_preview = 0
+parameter_name = "FlashColor"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_3w8g7"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_7r1sp"]
+input_name = "texture"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ctjx5"]
+output_port_for_preview = 0
+source = 5
+
+[sub_resource type="VisualShaderNodeSwitch" id="VisualShaderNodeSwitch_pd5gr"]
+default_input_values = [0, false, 1, Vector3(1, 1, 1), 2, Vector3(0, 0, 0)]
+op_type = 4
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform bool iframes;
+uniform vec4 FlashColor : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+
+void fragment() {
+// BooleanParameter:2
+	bool n_out2p0 = iframes;
+
+
+	vec4 n_out7p0;
+// Texture2D:7
+	n_out7p0 = texture(TEXTURE, UV);
+
+
+// ColorParameter:3
+	vec4 n_out3p0 = FlashColor;
+
+
+// MultiplyAdd:5
+	vec3 n_in5p1 = vec3(1.00000, 1.00000, 1.00000);
+	vec3 n_out5p0 = (vec3(n_out7p0.xyz) * n_in5p1) + vec3(n_out3p0.xyz);
+
+
+	vec3 n_out8p0;
+// Switch:8
+	n_out8p0 = mix(vec3(n_out7p0.xyz), n_out5p0, float(n_out2p0));
+
+
+// Output:0
+	COLOR.rgb = n_out8p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(1900, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeBooleanParameter_ju7v6")
+nodes/fragment/2/position = Vector2(1280, -340)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_nr4h4")
+nodes/fragment/3/position = Vector2(40, 480)
+nodes/fragment/5/node = SubResource("VisualShaderNodeMultiplyAdd_3w8g7")
+nodes/fragment/5/position = Vector2(900, 800)
+nodes/fragment/6/node = SubResource("VisualShaderNodeInput_7r1sp")
+nodes/fragment/6/position = Vector2(-100, -160)
+nodes/fragment/7/node = SubResource("VisualShaderNodeTexture_ctjx5")
+nodes/fragment/7/position = Vector2(540, -220)
+nodes/fragment/8/node = SubResource("VisualShaderNodeSwitch_pd5gr")
+nodes/fragment/8/position = Vector2(1460, 200)
+nodes/fragment/connections = PackedInt32Array(3, 0, 5, 2, 6, 0, 7, 2, 7, 0, 5, 0, 2, 0, 8, 0, 5, 0, 8, 1, 7, 0, 8, 2, 8, 0, 0, 0)
