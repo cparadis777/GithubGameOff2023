@@ -41,17 +41,18 @@ position = Vector2(0, 45)
 [node name="Exterior" parent="BaseContainer" index="5"]
 visible = false
 
+[node name="NextLevelDoor" parent="BaseContainer" instance=ExtResource("4_embi4")]
+position = Vector2(173, 63)
+
 [node name="LeftCollision" type="CollisionShape2D" parent="BaseContainer"]
 shape = SubResource("SegmentShape2D_pjkui")
 
 [node name="RightCollision" type="CollisionShape2D" parent="BaseContainer"]
 shape = SubResource("SegmentShape2D_r5xtv")
+disabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_n7xin")]
 position = Vector2(-158, 83)
-
-[node name="NextLevelDoor" parent="." instance=ExtResource("4_embi4")]
-position = Vector2(173, 63)
 
 [node name="ExteriorTextures" type="Node2D" parent="."]
 
@@ -86,5 +87,7 @@ texture = ExtResource("6_xg2ok")
 [node name="ExteriorNW" type="Sprite2D" parent="ExteriorTextures"]
 position = Vector2(-384, -192)
 texture = ExtResource("6_xg2ok")
+
+[connection signal="level_exited" from="BaseContainer/NextLevelDoor" to="." method="_on_next_level_door_level_exited"]
 
 [editable path="BaseContainer"]

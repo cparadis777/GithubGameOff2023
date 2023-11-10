@@ -15,7 +15,7 @@ enum DoorOrientation {HORIZONTAL, VERTICAL}
 var player_near : bool = false
 var pressed : bool = false
 
-signal toggled(pressed)
+signal level_exited()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,12 +24,11 @@ func _ready():
 
 func exit_level():
 	print_debug("exit_level()")
-	# temporarily disable input and world physics, but next level must re-enable
-
+	# temporarily disable input and world physics, but next level must re-enable?
 	get_tree().get_root().set_process_input(false)
-
-	toggled.emit(pressed)
-	StageManager.current_player.play_run_animation()
+	
+	level_exited.emit()
+	
 	SceneTransition.change_scene(next_scene, wait_seconds)
 	await get_tree().create_timer(wait_seconds + transition_seconds).timeout
 	
@@ -40,9 +39,11 @@ func enter_level():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("interact") and player_near and unlocked:
+	if Input.is_action_just_pressed("interact") and player_near and unlocked and !pressed:
 		pressed = true;
 		exit_level()
+	if pressed:
+		StageManager.current_player.velocity.x = StageManager.current_player.speed
 
 func _on_body_entered(body):
 	if body == StageManager.current_player:

@@ -21,8 +21,17 @@ func _ready():
 		directions.push_back(Utils.Directions.DOWN)
 	$BaseContainer.set_entrances(directions)
 	
-	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+# enable or disable the collider walls
+func set_walls_disabled(state:bool) -> void:
+	$BaseContainer/BottomCollision.disabled = state
+	$BaseContainer/TopCollision.disabled = state
+	$BaseContainer/LeftCollision.disabled = state
+	$BaseContainer/RightCollision.disabled = state
+	
+
+func _on_next_level_door_level_exited():
+	set_walls_disabled(true)

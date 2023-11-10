@@ -36,7 +36,6 @@ position = Vector2(369, -8)
 [node name="EndlessFloor" parent="." instance=ExtResource("3_8t4jp")]
 
 [node name="Containers" type="Node2D" parent="."]
-visible = false
 
 [node name="BaseContainer" parent="Containers" instance=ExtResource("8_vkcjm")]
 position = Vector2(528, -96)
