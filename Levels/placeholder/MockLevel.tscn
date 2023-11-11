@@ -194,6 +194,8 @@ scale = Vector2(0.875, 1)
 
 [node name="MovingPlatform2" parent="Platforms" instance=ExtResource("5_ksw2d")]
 position = Vector2(1167.42, -470.862)
+show_piston = false
+show_cables = false
 
 [node name="StateLabel" parent="Platforms/MovingPlatform2" index="2"]
 metadata/_edit_use_anchors_ = true

@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=25 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/trashcan.tscn" id="4_4k4sl"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="5_2wyyn"]
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_ap6lg"]
+[ext_resource type="PackedScene" uid="uid://4ubg2v861dlv" path="res://Entities/NPCs/boss_npc.tscn" id="6_t74po"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="7_53wf6"]
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="7_gq8f5"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
@@ -85,6 +86,9 @@ position = Vector2(91, 0)
 
 [node name="NPC_02_DockWorker" parent="Enemies" instance=ExtResource("6_ap6lg")]
 position = Vector2(-205, -12)
+
+[node name="BossNPC" parent="Enemies" instance=ExtResource("6_t74po")]
+position = Vector2(181, -168)
 
 [node name="Platforms" type="Node2D" parent="."]
 

@@ -46,12 +46,20 @@ func _physics_process(delta):
 			if movement.is_active():
 				velocity += movement.get_movement_vector(delta)
 		update_animations()
-		#print("dock worker velocity: " + str(velocity))
+		apply_gravity(delta)
 		move_and_slide()
-	elif State == States.IDLE:
-		move_and_slide() # required for standing on moving platforms
-	elif State == States.IFRAMES:
-		move_and_slide() # don't change velocity, just go.
+	elif State in [States.IDLE, States.IFRAMES]:
+		# no new horizontal movement
+		apply_gravity(delta)
+		move_and_slide()
+
+
+func apply_gravity(delta):
+	# consider adding an escape if State == States.IFRAMES
+	
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	
 
 func update_animations():
 	$PaperDoll.scale.x = signf(velocity.x) * original_doll_scale.x
@@ -82,7 +90,7 @@ func play_hurt_noise():
 	$HurtNoises.play()
 
 func knockback(knockbackVector):
-	var magnitude = 70.0
+	var magnitude = 66.0 # two thirds as much as a regular NPC
 	velocity = knockbackVector * magnitude
 	
 func _on_hit(damage, _impactVector, _damageType, _knockback):
