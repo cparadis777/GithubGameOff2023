@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2g1ag8e5bgkg"]
+[gd_scene load_steps=11 format=3 uid="uid://b1g47w7bhxbg3"]
 
-[ext_resource type="Script" path="res://Entities/Environment/trashcan.gd" id="1_6hnh1"]
-[ext_resource type="Texture2D" uid="uid://cmmdpoq1x6uav" path="res://art/props/tall_crate.png" id="2_v3y8r"]
-[ext_resource type="AudioStream" uid="uid://cymibnijhml5u" path="res://audio/sfx/placeholder/pot_crash.wav" id="3_lwp8j"]
-[ext_resource type="Texture2D" uid="uid://diptuh82n6chi" path="res://art/decals/crack_01.png" id="4_dftsc"]
-[ext_resource type="Texture2D" uid="uid://6dvgde1ma80j" path="res://art/decals/crack_02.png" id="5_vbql5"]
-[ext_resource type="Texture2D" uid="uid://d0id0y38gcmhm" path="res://art/props/random_rock_debris.png" id="6_bc3qi"]
+[ext_resource type="Script" path="res://Entities/Environment/trashcan.gd" id="1_j5cn8"]
+[ext_resource type="Texture2D" uid="uid://cqr0xoftb77n4" path="res://art/props/soyda_box.png" id="2_kfg2d"]
+[ext_resource type="AudioStream" uid="uid://cymibnijhml5u" path="res://audio/sfx/placeholder/pot_crash.wav" id="3_yxgcr"]
+[ext_resource type="Texture2D" uid="uid://diptuh82n6chi" path="res://art/decals/crack_01.png" id="4_iype6"]
+[ext_resource type="Texture2D" uid="uid://6dvgde1ma80j" path="res://art/decals/crack_02.png" id="5_b765y"]
+[ext_resource type="Texture2D" uid="uid://d0id0y38gcmhm" path="res://art/props/random_rock_debris.png" id="6_vher2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g7ife"]
 friction = 0.5
@@ -14,12 +14,11 @@ bounce = 0.15
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xbvcy"]
 streams_count = 1
 random_pitch = 1.25
-stream_0/stream = ExtResource("3_lwp8j")
+stream_0/stream = ExtResource("3_yxgcr")
 stream_0/weight = 1.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7sea"]
-radius = 14.0
-height = 60.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_woali"]
+size = Vector2(18, 10)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y6la3"]
 particles_animation = true
@@ -27,18 +26,17 @@ particles_anim_h_frames = 2
 particles_anim_v_frames = 2
 particles_anim_loop = false
 
-[node name="TrashCan" type="RigidBody2D" groups=["Kickables"]]
-position = Vector2(320, 0)
+[node name="SoydaBox" type="RigidBody2D" groups=["Kickables"]]
 collision_layer = 8
 collision_mask = 27
 mass = 0.75
 physics_material_override = SubResource("PhysicsMaterial_g7ife")
-script = ExtResource("1_6hnh1")
+script = ExtResource("1_j5cn8")
 
 [node name="CanImage" type="Sprite2D" parent="."]
 position = Vector2(6.85453e-07, -18)
 rotation = 0.0118909
-texture = ExtResource("2_v3y8r")
+texture = ExtResource("2_kfg2d")
 offset = Vector2(-0.28656, -14.6351)
 
 [node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
@@ -46,8 +44,8 @@ stream = SubResource("AudioStreamRandomizer_xbvcy")
 volume_db = -9.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -30)
-shape = SubResource("CapsuleShape2D_e7sea")
+position = Vector2(-1, -33)
+shape = SubResource("RectangleShape2D_woali")
 
 [node name="DamageSprites" type="Node2D" parent="."]
 
@@ -55,19 +53,19 @@ shape = SubResource("CapsuleShape2D_e7sea")
 visible = false
 position = Vector2(0, -19)
 rotation = 0.928987
-texture = ExtResource("4_dftsc")
+texture = ExtResource("4_iype6")
 
 [node name="crack2" type="Sprite2D" parent="DamageSprites"]
 visible = false
 position = Vector2(0, -40)
 rotation = 2.56926
-texture = ExtResource("4_dftsc")
+texture = ExtResource("4_iype6")
 
 [node name="crack3" type="Sprite2D" parent="DamageSprites"]
 visible = false
 position = Vector2(0, -33)
 rotation = 0.928987
-texture = ExtResource("5_vbql5")
+texture = ExtResource("5_b765y")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_y6la3")
@@ -76,7 +74,7 @@ emitting = false
 amount = 32
 one_shot = true
 explosiveness = 0.71
-texture = ExtResource("6_bc3qi")
+texture = ExtResource("6_vher2")
 emission_shape = 3
 emission_rect_extents = Vector2(8, 12)
 direction = Vector2(2.08165e-12, -1)
