@@ -1936,12 +1936,15 @@ script = ExtResource("15_7astd")
 
 [node name="FootstepNoises" type="AudioStreamPlayer2D" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_lhy5y")
+bus = &"sfx"
 
 [node name="JumpNoises" type="AudioStreamPlayer2D" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_itygw")
+bus = &"sfx"
 
 [node name="LandingNoises" type="AudioStreamPlayer2D" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_h82oh")
+bus = &"sfx"
 
 [node name="AttackNoises" type="AudioStreamPlayer2D" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_0mkmi")
@@ -1949,14 +1952,17 @@ bus = &"sfx"
 
 [node name="Windup" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("34_iwlpj")
+bus = &"sfx"
 
 [node name="FollowThrough" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("35_tnuvo")
 volume_db = -3.2
+bus = &"sfx"
 
 [node name="WhipCrack" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("36_hlp8x")
 pitch_scale = 0.67
+bus = &"sfx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

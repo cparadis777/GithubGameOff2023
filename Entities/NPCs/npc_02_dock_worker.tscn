@@ -773,6 +773,7 @@ target_position = Vector2(164, 0)
 
 [node name="AlertNoise" type="AudioStreamPlayer2D" parent="Behaviours/PlayerDetection"]
 stream = ExtResource("5_ksjfc")
+bus = &"sfx"
 
 [node name="Movement" type="Node2D" parent="Behaviours"]
 
@@ -807,6 +808,7 @@ polygon = PackedVector2Array(1, 1, 1, -13, -5, -25, -19, -33, -38, -33, -21, -24
 
 [node name="HitNoise" type="AudioStreamPlayer2D" parent="Behaviours/Attacks/HeavyMeleeAttack"]
 stream = ExtResource("5_t3spr")
+bus = &"sfx"
 
 [node name="HeavyRangeAttack" type="Node2D" parent="Behaviours/Attacks"]
 
@@ -818,6 +820,7 @@ stream = ExtResource("5_t3spr")
 stream = SubResource("AudioStreamRandomizer_q0ksa")
 volume_db = 3.0
 pitch_scale = 0.67
+bus = &"sfx"
 
 [node name="HurtFlash" type="Polygon2D" parent="."]
 visible = false
