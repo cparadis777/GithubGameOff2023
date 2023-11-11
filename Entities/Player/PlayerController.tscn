@@ -1887,7 +1887,6 @@ script = ExtResource("15_7astd")
 [node name="Audio" type="Node2D" parent="."]
 
 [node name="FootstepNoises" type="AudioStreamPlayer2D" parent="Audio"]
-visible = false
 stream = SubResource("AudioStreamRandomizer_lhy5y")
 
 [node name="JumpNoises" type="AudioStreamPlayer2D" parent="Audio"]

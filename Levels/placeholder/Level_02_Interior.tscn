@@ -76,41 +76,56 @@ position = Vector2(158.91, 0)
 [node name="VendingMachine3" parent="Obstacles" instance=ExtResource("3_0a4xq")]
 position = Vector2(24.045, 0)
 
-[node name="SoydaBox" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-200.589, -93.373)
+[node name="StackOfSoydaCrates" type="Node2D" parent="Obstacles"]
+position = Vector2(-222, -125)
 
-[node name="SoydaBox2" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-200.589, -103.898)
+[node name="SoydaBox" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(22.175, 4.22)
+max_hits = 1
 
-[node name="SoydaBox3" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-200.589, -113.723)
+[node name="SoydaBox2" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(14, -6.00001)
+max_hits = 1
 
-[node name="SoydaBox4" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-218.584, -113.858)
+[node name="SoydaBox3" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(40, 4.00001)
+max_hits = 1
 
-[node name="SoydaBox5" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-236.879, -113.633)
+[node name="SoydaBox4" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(4.18001, -16.265)
+max_hits = 1
 
-[node name="SoydaBox6" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-254.764, -113.633)
+[node name="SoydaBox5" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(-14.115, -16.04)
+max_hits = 1
 
-[node name="SoydaBox9" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-200.589, -123.593)
+[node name="SoydaBox6" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(-32, -16.04)
+max_hits = 1
 
-[node name="SoydaBox10" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-218.584, -123.593)
+[node name="SoydaBox9" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(32, -7)
+max_hits = 1
 
-[node name="SoydaBox11" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-236.879, -123.593)
+[node name="SoydaBox10" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(23, -17)
+max_hits = 1
 
-[node name="SoydaBox12" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-254.764, -123.593)
+[node name="SoydaBox11" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(-14.115, -26)
+max_hits = 1
 
-[node name="SoydaBox7" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-254.719, -103.813)
+[node name="SoydaBox12" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(13, -27)
+max_hits = 1
 
-[node name="SoydaBox8" parent="Obstacles" instance=ExtResource("4_72dgh")]
-position = Vector2(-254.514, -93.668)
+[node name="SoydaBox7" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(-29, -7)
+max_hits = 1
+
+[node name="SoydaBox8" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(-36, 3)
+max_hits = 1
 
 [node name="Enemies" type="Node2D" parent="."]
 

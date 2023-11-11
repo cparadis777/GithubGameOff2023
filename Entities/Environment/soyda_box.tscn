@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1g47w7bhxbg3"]
+[gd_scene load_steps=10 format=3 uid="uid://b1g47w7bhxbg3"]
 
 [ext_resource type="Script" path="res://Entities/Environment/trashcan.gd" id="1_j5cn8"]
 [ext_resource type="Texture2D" uid="uid://cqr0xoftb77n4" path="res://art/props/soyda_box.png" id="2_kfg2d"]
 [ext_resource type="AudioStream" uid="uid://cymibnijhml5u" path="res://audio/sfx/placeholder/pot_crash.wav" id="3_yxgcr"]
 [ext_resource type="Texture2D" uid="uid://diptuh82n6chi" path="res://art/decals/crack_01.png" id="4_iype6"]
-[ext_resource type="Texture2D" uid="uid://6dvgde1ma80j" path="res://art/decals/crack_02.png" id="5_b765y"]
 [ext_resource type="Texture2D" uid="uid://d0id0y38gcmhm" path="res://art/props/random_rock_debris.png" id="6_vher2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g7ife"]
@@ -34,7 +33,7 @@ physics_material_override = SubResource("PhysicsMaterial_g7ife")
 script = ExtResource("1_j5cn8")
 
 [node name="CanImage" type="Sprite2D" parent="."]
-position = Vector2(6.85453e-07, -18)
+position = Vector2(1, 10)
 rotation = 0.0118909
 texture = ExtResource("2_kfg2d")
 offset = Vector2(-0.28656, -14.6351)
@@ -44,32 +43,28 @@ stream = SubResource("AudioStreamRandomizer_xbvcy")
 volume_db = -9.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -33)
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_woali")
 
 [node name="DamageSprites" type="Node2D" parent="."]
 
 [node name="crack1" type="Sprite2D" parent="DamageSprites"]
 visible = false
-position = Vector2(0, -19)
-rotation = 0.928987
+position = Vector2(3, -6)
+rotation = 0.531609
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_iype6")
 
 [node name="crack2" type="Sprite2D" parent="DamageSprites"]
 visible = false
-position = Vector2(0, -40)
+position = Vector2(-4, -3)
 rotation = 2.56926
+scale = Vector2(0.33, 0.33)
 texture = ExtResource("4_iype6")
-
-[node name="crack3" type="Sprite2D" parent="DamageSprites"]
-visible = false
-position = Vector2(0, -33)
-rotation = 0.928987
-texture = ExtResource("5_b765y")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_y6la3")
-position = Vector2(0, -30)
+position = Vector2(0, -5)
 emitting = false
 amount = 32
 one_shot = true
