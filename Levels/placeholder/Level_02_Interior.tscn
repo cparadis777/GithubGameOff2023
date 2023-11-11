@@ -1,19 +1,19 @@
-[gd_scene load_steps=25 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=25 format=3 uid="uid://bpcm0ph14ms2a"]
 
-[ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
-[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
-[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="4_4k4sl"]
-[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="5_2wyyn"]
-[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_ap6lg"]
-[ext_resource type="PackedScene" uid="uid://4ubg2v861dlv" path="res://Entities/NPCs/boss_npc.tscn" id="6_t74po"]
-[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="7_53wf6"]
-[ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="7_gq8f5"]
-[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
-[ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="9_fc1mv"]
-[ext_resource type="Texture2D" uid="uid://67m50eh8jeq1" path="res://art/materials/shaders/2DOmniLight.png" id="10_u1mfk"]
-[ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="11_wyb6i"]
-[ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="12_hiokx"]
-[ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="12_ujqxr"]
+[ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_o6e4m"]
+[ext_resource type="PackedScene" uid="uid://b75mqcyc3pmmw" path="res://Entities/Environment/switches/LevelDoor.tscn" id="2_6njsc"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_gmshf"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="3_0a4xq"]
+[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="4_72dgh"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="5_rxof7"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="7_6gr5w"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="8_ybspo"]
+[ext_resource type="Texture2D" uid="uid://ds5c6ostoi5d7" path="res://art/interiors/shipping_container_soyda_INTERIOR.png" id="9_8i8fx"]
+[ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="10_ou7lf"]
+[ext_resource type="Texture2D" uid="uid://67m50eh8jeq1" path="res://art/materials/shaders/2DOmniLight.png" id="11_gak4l"]
+[ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="12_kp4b5"]
+[ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="13_yfsqs"]
+[ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="14_jkofo"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
 offsets = PackedFloat32Array(0, 0.301818, 0.829091)
@@ -53,56 +53,82 @@ blend_mode = 1
 light_mode = 1
 
 [node name="InteriorContainerLevelMockup01" type="Node2D"]
-script = ExtResource("1_foj8b")
+script = ExtResource("1_o6e4m")
+
+[node name="NextLevelDoor" parent="." instance=ExtResource("2_6njsc")]
+position = Vector2(146.206, -193.653)
 
 [node name="CameraTarget" type="Marker2D" parent="."]
 position = Vector2(0, -77)
 
-[node name="Player" parent="." instance=ExtResource("2_u6p87")]
-position = Vector2(1, -30)
+[node name="Player" parent="." instance=ExtResource("2_gmshf")]
+position = Vector2(-257.98, 2.04)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
-[node name="Obstacle_01" parent="Obstacles" instance=ExtResource("4_4k4sl")]
-position = Vector2(250, -3)
+[node name="VendingMachine" parent="Obstacles" instance=ExtResource("3_0a4xq")]
+position = Vector2(-120.72, 0)
 
-[node name="Label" type="Label" parent="Obstacles/Obstacle_01"]
-offset_left = -14.0
-offset_top = -27.0
-offset_right = 46.0
-offset_bottom = 25.0
-scale = Vector2(0.774249, 0.774249)
-text = "Kick 
-Me"
-horizontal_alignment = 1
+[node name="VendingMachine2" parent="Obstacles" instance=ExtResource("3_0a4xq")]
+position = Vector2(158.91, 0)
 
-[node name="Obstacle_02" parent="Obstacles" instance=ExtResource("4_4k4sl")]
-position = Vector2(-137, -10)
+[node name="VendingMachine3" parent="Obstacles" instance=ExtResource("3_0a4xq")]
+position = Vector2(24.045, 0)
+
+[node name="SoydaBox" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-200.589, -93.373)
+
+[node name="SoydaBox2" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-200.589, -103.898)
+
+[node name="SoydaBox3" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-200.589, -113.723)
+
+[node name="SoydaBox4" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-218.584, -113.858)
+
+[node name="SoydaBox5" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-236.879, -113.633)
+
+[node name="SoydaBox6" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-254.764, -113.633)
+
+[node name="SoydaBox9" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-200.589, -123.593)
+
+[node name="SoydaBox10" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-218.584, -123.593)
+
+[node name="SoydaBox11" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-236.879, -123.593)
+
+[node name="SoydaBox12" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-254.764, -123.593)
+
+[node name="SoydaBox7" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-254.719, -103.813)
+
+[node name="SoydaBox8" parent="Obstacles" instance=ExtResource("4_72dgh")]
+position = Vector2(-254.514, -93.668)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="NPC_01" parent="Enemies" instance=ExtResource("5_2wyyn")]
-position = Vector2(91, 0)
+[node name="NPC_02_DockWorker" parent="Enemies" instance=ExtResource("5_rxof7")]
+position = Vector2(-49.39, -2.28)
 
-[node name="NPC_02_DockWorker" parent="Enemies" instance=ExtResource("6_ap6lg")]
-position = Vector2(-205, -12)
-
-[node name="BossNPC" parent="Enemies" instance=ExtResource("6_t74po")]
-position = Vector2(181, -168)
+[node name="NPC_02_DockWorker2" parent="Enemies" instance=ExtResource("5_rxof7")]
+position = Vector2(107.375, -2.28)
 
 [node name="Platforms" type="Node2D" parent="."]
 
-[node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("8_q88vj")]
-position = Vector2(201, -87)
-
-[node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("8_q88vj")]
+[node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("7_6gr5w")]
 position = Vector2(135, -161)
 
-[node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("8_q88vj")]
-position = Vector2(-206, -88)
+[node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("7_6gr5w")]
+position = Vector2(-221.775, -121.565)
 
-[node name="MovingPlatform" parent="Platforms" instance=ExtResource("7_53wf6")]
-position = Vector2(84, -41)
+[node name="MovingPlatform" parent="Platforms" instance=ExtResource("8_ybspo")]
+position = Vector2(269.755, -41)
 
 [node name="FloorHeightMarker" parent="Platforms/MovingPlatform/Piston" index="0"]
 position = Vector2(0, 41)
@@ -181,7 +207,7 @@ z_index = -100
 texture_repeat = 2
 position = Vector2(1, -96)
 scale = Vector2(3, 3)
-texture = ExtResource("7_gq8f5")
+texture = ExtResource("9_8i8fx")
 region_enabled = true
 region_rect = Rect2(-196, 2.08165e-12, 256, 96)
 
@@ -192,7 +218,7 @@ scale = Vector2(0.333333, 0.333333)
 [node name="Sprite2D" type="Sprite2D" parent="Background/Hints"]
 position = Vector2(3, -94)
 scale = Vector2(0.393339, 0.393339)
-texture = ExtResource("9_fc1mv")
+texture = ExtResource("10_ou7lf")
 
 [node name="Label" type="Label" parent="Background/Hints/Sprite2D"]
 offset_left = -91.5241
@@ -215,34 +241,25 @@ region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
 [node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
 color = Color(0.152941, 0.176471, 0.215686, 1)
 
-[node name="PointLight2D" type="PointLight2D" parent="Lighting"]
-position = Vector2(-218, -174)
-energy = 2.0
-range_z_min = -512
-range_z_max = 512
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.737255)
-texture = ExtResource("10_u1mfk")
-texture_scale = 3.0
-
 [node name="PointLight2D2" type="PointLight2D" parent="Lighting"]
-position = Vector2(0, -98)
+position = Vector2(-289, -166)
+scale = Vector2(2.73307, 2.27474)
 energy = 2.0
 range_z_min = -512
 range_z_max = 512
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.737255)
-texture = ExtResource("10_u1mfk")
+texture = ExtResource("11_gak4l")
 texture_scale = 3.0
 
 [node name="PointLight2D3" type="PointLight2D" parent="Lighting"]
-position = Vector2(247, -177)
+position = Vector2(250, -198)
 energy = 2.0
 range_z_min = -512
 range_z_max = 512
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.737255)
-texture = ExtResource("10_u1mfk")
+texture = ExtResource("11_gak4l")
 texture_scale = 3.0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
@@ -252,7 +269,7 @@ occluder = SubResource("OccluderPolygon2D_j7lsu")
 material = SubResource("CanvasItemMaterial_tj7bk")
 position = Vector2(74, -228)
 scale = Vector2(5, 5)
-texture = ExtResource("11_wyb6i")
+texture = ExtResource("12_kp4b5")
 
 [node name="Line2D" type="Line2D" parent="Lighting/NeonLight"]
 material = SubResource("CanvasItemMaterial_34npf")
@@ -268,7 +285,7 @@ end_cap_mode = 2
 material = SubResource("CanvasItemMaterial_tj7bk")
 position = Vector2(-76, -227)
 scale = Vector2(5, 5)
-texture = ExtResource("11_wyb6i")
+texture = ExtResource("12_kp4b5")
 
 [node name="Line2D" type="Line2D" parent="Lighting/NeonLight2"]
 material = SubResource("CanvasItemMaterial_34npf")
@@ -280,13 +297,13 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="SwitchedLight" parent="Lighting" instance=ExtResource("12_hiokx")]
+[node name="SwitchedLight" parent="Lighting" instance=ExtResource("13_yfsqs")]
 visible = false
 
 [node name="Switches" type="Node2D" parent="."]
 
-[node name="LightSwitch" parent="Switches" node_paths=PackedStringArray("linked_node") instance=ExtResource("12_ujqxr")]
-position = Vector2(141, -1)
+[node name="LightSwitch" parent="Switches" node_paths=PackedStringArray("linked_node") instance=ExtResource("14_jkofo")]
+position = Vector2(-221.705, -121.15)
 linked_node = NodePath("../../Lighting/SwitchedLight")
 
 [editable path="Platforms/MovingPlatform"]
