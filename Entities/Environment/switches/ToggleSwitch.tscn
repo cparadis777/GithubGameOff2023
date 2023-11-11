@@ -6,8 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4pe6"]
 size = Vector2(62, 33)
 
-[node name="Switch" type="Area2D"]
+[node name="Switch" type="Area2D" node_paths=PackedStringArray("linked_nodes")]
 script = ExtResource("1_rx8c2")
+linked_nodes = [null]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 rotation = -0.785398
