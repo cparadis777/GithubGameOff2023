@@ -16,7 +16,10 @@ var entrances = {
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
-	$Exterior.texture = exterior_texture
+	if has_node("Exterior"):
+		$Exterior.show()
+		$Exterior.texture = exterior_texture
+
 	#print("setting arrows")
 
 	#print("done setting arrows")
@@ -48,7 +51,7 @@ func set_entrances(directions) -> void:
 }
 
 	for entrance in entrance_arrows:
-		print(entrance)
+		print("BaseContainer.gd: entrange = " + str(entrance))
 		entrance_arrows[entrance].hide()
 	for direction in directions:
 		self.entrances[direction] = true

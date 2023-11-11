@@ -19,13 +19,15 @@ func toggle_switch():
 	var index = int(pressed)
 	$Polygon2D.color = colors[index]
 	$Polygon2D.rotation = rotations[index]
+	$ClickNoise.play()
 	toggled.emit(pressed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_action_just_pressed("interact") and $Timer.is_stopped():
-		toggle_switch()
-		$Timer.start()
+		if StageManager.current_player in get_overlapping_bodies():
+			toggle_switch()
+			$Timer.start()
 
 func _on_body_entered(body):
 	if body == StageManager.current_player:

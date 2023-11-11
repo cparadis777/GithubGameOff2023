@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq2iho7xgdhl6"]
+
+[ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="1_4s0hk"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_b7bcp"]
+
+[node name="player_testing_ground" type="Node2D"]
+
+[node name="EndlessFloor" parent="." instance=ExtResource("1_4s0hk")]
+
+[node name="Player" parent="." instance=ExtResource("2_b7bcp")]

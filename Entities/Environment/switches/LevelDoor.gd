@@ -18,7 +18,7 @@ func level_transition():
 	toggled.emit(pressed)
 	SceneTransition.change_scene(next_scene, wait_seconds)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if !pressed and Input.is_action_just_pressed("interact") and player_near:
 		pressed = true;
 		level_transition()
