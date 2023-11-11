@@ -55,5 +55,6 @@ anim_offset_max = 1.0
 
 [node name="DemolitionNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_6dulq")
+bus = &"sfx"
 
 [connection signal="finished" from="DemolitionNoises" to="." method="_on_demolition_noises_finished"]
