@@ -27,7 +27,7 @@ streams_count = 1
 stream_0/stream = ExtResource("3_s845f")
 stream_0/weight = 1.0
 
-[node name="DestructibleWall" type="StaticBody2D"]
+[node name="DestructibleWall" type="StaticBody2D" groups=["Kickables"]]
 collision_layer = 8
 script = ExtResource("1_dmkyx")
 
