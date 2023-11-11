@@ -59,12 +59,13 @@ func _on_hit(damage, impactVector, _damageType, knockback):
 		health -= damage
 		if health <= 0:
 			die()
+			return
 		elif knockback == true:
 			State = States.KNOCKBACK
 			var knockbackSpeed = 250.0
 			velocity = impactVector * knockbackSpeed
-			$IframesTimer.start()
-			$AnimationPlayer.play("hit")
+		$IframesTimer.start()
+		$AnimationPlayer.play("hit")
 			#$HurtEffect/Star.show()
 
 

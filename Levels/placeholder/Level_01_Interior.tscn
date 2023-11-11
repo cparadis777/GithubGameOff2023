@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=24 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
@@ -42,6 +42,9 @@ fill_to = Vector2(0.511222, 0)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j7lsu"]
 polygon = PackedVector2Array(-315, 7, -313, -246, 313, -247, 318, 5, 344, 4, 336, -265, -339, -263, -336, 8)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tj7bk"]
+blend_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34npf"]
 light_mode = 1
@@ -265,14 +268,15 @@ texture_scale = 3.0
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
 occluder = SubResource("OccluderPolygon2D_j7lsu")
 
-[node name="NeonLight" type="PointLight2D" parent="Lighting"]
+[node name="NeonLight" type="Sprite2D" parent="Lighting"]
+material = SubResource("CanvasItemMaterial_tj7bk")
 position = Vector2(133.5, -149)
-scale = Vector2(1.38125, 1)
+scale = Vector2(5, 5)
 texture = ExtResource("11_wyb6i")
-texture_scale = 5.0
 
 [node name="Line2D" type="Line2D" parent="Lighting/NeonLight"]
 material = SubResource("CanvasItemMaterial_34npf")
+scale = Vector2(0.2, 0.2)
 points = PackedVector2Array(-48, 0, 53.9367, 0)
 width = 5.0
 default_color = Color(1, 0.129412, 1, 1)

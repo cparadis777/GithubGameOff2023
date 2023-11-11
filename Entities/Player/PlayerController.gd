@@ -13,8 +13,9 @@ var speed = SPEED # for state machine
 @onready var hud = $HUD
 @onready var animation_player = $AnimationPlayer
 
-@export var health_max = 100.0
+@export var health_max = 30.0 # 10 per heart
 var health = health_max
+var temporary_health_bonus = 0
 
 var iframes : bool = false
 
