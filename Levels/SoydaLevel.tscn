@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg2eewsbfdmsm"]
+[gd_scene load_steps=11 format=3 uid="uid://by5b1ubnb3pp3"]
 
 [ext_resource type="Script" path="res://Levels/BaseLevel.gd" id="1_s4xqo"]
 [ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/Containers/BaseContainer.tscn" id="2_eqbxn"]
