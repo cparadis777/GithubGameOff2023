@@ -62,7 +62,7 @@ func _on_hit(damage, impactVector, _damageType, knockback):
 			return
 		elif knockback == true:
 			State = States.KNOCKBACK
-			var knockbackSpeed = 250.0
+			var knockbackSpeed = 100.0
 			velocity = impactVector * knockbackSpeed
 		$IframesTimer.start()
 		$AnimationPlayer.play("hit")

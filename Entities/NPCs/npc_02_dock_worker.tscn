@@ -709,6 +709,7 @@ _data = {
 collision_layer = 2
 collision_mask = 25
 script = ExtResource("1_513fr")
+health_max = 500
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -28)

@@ -21,6 +21,7 @@ func enter(_msg := {}) -> void:
 	punch_num_in_sequence = (punch_num_in_sequence + 1) % sequence_animations.size() 
 	$UnbrokenSequenceTimer.start(time_before_sequence_resets)
 	
+	
 func _on_player_animation_finished(anim_name):
 	if anim_name in sequence_animations:
 		if abs(Input.get_axis("move_left", "move_right")) > 0:
