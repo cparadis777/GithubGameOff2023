@@ -127,6 +127,18 @@ tracks/9/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("VBoxContainer/Container/Dumpster/Dumpster_facade:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_iib52"]
 resource_name = "dumpster_fire"
@@ -251,6 +263,18 @@ tracks/9/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("VBoxContainer/Container/Dumpster/Dumpster_facade:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 5.1, 9.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uojyf"]
 _data = {
@@ -287,7 +311,15 @@ size_flags_vertical = 3
 [node name="Dumpster" type="Sprite2D" parent="VBoxContainer/Container"]
 position = Vector2(230, 67)
 texture = ExtResource("1_fpo6b")
-hframes = 2
+hframes = 3
+
+[node name="Dumpster_facade" type="Sprite2D" parent="VBoxContainer/Container/Dumpster"]
+visible = false
+z_index = 2
+position = Vector2(-2, -1)
+texture = ExtResource("1_fpo6b")
+hframes = 3
+frame = 2
 
 [node name="FatBoss" type="Sprite2D" parent="VBoxContainer/Container"]
 position = Vector2(-107, 71)
