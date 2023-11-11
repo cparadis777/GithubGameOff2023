@@ -59,9 +59,11 @@ shape = SubResource("SegmentShape2D_pl5uy")
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_6s04m")
+disabled = true
 
 [node name="RightCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_v22jh")
+disabled = true
 
 [node name="ContainerInterior" type="Area2D" parent="."]
 

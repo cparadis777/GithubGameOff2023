@@ -1,18 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://bj3d6rfcnc2am"]
+[gd_scene load_steps=7 format=3 uid="uid://bj3d6rfcnc2am"]
 
 [ext_resource type="Script" path="res://Levels/GeneratedPlayspace.gd" id="1_guo8s"]
 [ext_resource type="Script" path="res://Levels/ContainerGrid.gd" id="2_0shpo"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_5n0k1"]
 [ext_resource type="PackedScene" uid="uid://c2slp1rb0plu" path="res://Utilities/UtilityScenes/ContainerSlot.tscn" id="3_xh56m"]
+[ext_resource type="PackedScene" uid="uid://cecceqk8282a6" path="res://Entities/Environment/Containers/CustomContainer.tscn" id="4_460lr"]
+[ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_yhops"]
 
 [node name="GeneratedPlayspace" type="Node2D"]
 script = ExtResource("1_guo8s")
+
+[node name="Player" parent="." instance=ExtResource("2_5n0k1")]
+position = Vector2(281, 63)
 
 [node name="ContainerGrid" type="Node2D" parent="."]
 script = ExtResource("2_0shpo")
 containerSlotScene = ExtResource("3_xh56m")
 container_width = 384
 container_height = 192
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ContainerGrid"]
+visible = false
+texture = ExtResource("4_yhops")
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(318, 126)
+enabled = false
 zoom = Vector2(0.1, 0.1)
+
+[node name="BaseContainer" parent="." instance=ExtResource("4_460lr")]
+position = Vector2(0, 192)
+
+[node name="BaseContainer2" parent="." instance=ExtResource("4_460lr")]
+position = Vector2(384, 192)

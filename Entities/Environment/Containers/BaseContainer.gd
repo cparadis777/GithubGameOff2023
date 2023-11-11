@@ -52,7 +52,7 @@ func set_entrances(directions) -> void:
 }
 
 	for entrance in entrance_arrows:
-		print("BaseContainer.gd: entrange = " + str(entrance))
+		#print("BaseContainer.gd: entrange = " + str(entrance))
 		entrance_arrows[entrance].hide()
 	for direction in directions:
 		self.entrances[direction] = true

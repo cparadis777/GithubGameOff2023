@@ -30,6 +30,7 @@ script = ExtResource("1_e6lbn")
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
 position = Vector2(0, -6.55651e-06)
+scale = Vector2(2, 2)
 texture = ExtResource("2_oroii")
 
 [node name="LeftArrow" type="Sprite2D" parent="."]
@@ -59,9 +60,11 @@ shape = SubResource("SegmentShape2D_pl5uy")
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_6s04m")
+disabled = true
 
 [node name="RightCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_v22jh")
+disabled = true
 
 [node name="ContainerInterior" type="Area2D" parent="."]
 
