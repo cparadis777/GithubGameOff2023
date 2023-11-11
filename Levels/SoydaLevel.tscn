@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://dg2eewsbfdmsm"]
+
+[ext_resource type="Script" path="res://Levels/BaseLevel.gd" id="1_s4xqo"]
+[ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/Containers/BaseContainer.tscn" id="2_eqbxn"]
+[ext_resource type="Texture2D" uid="uid://ds5c6ostoi5d7" path="res://art/interiors/shipping_container_soyda_INTERIOR.png" id="3_wm2wg"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="4_hjlkc"]
+[ext_resource type="PackedScene" uid="uid://b75mqcyc3pmmw" path="res://Entities/Environment/switches/LevelDoor.tscn" id="5_x3emi"]
+[ext_resource type="PackedScene" uid="uid://d11oodik6574k" path="res://art/tilemap.tscn" id="6_vdjwv"]
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="7_ro4ya"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="8_lb7vd"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pjkui"]
+a = Vector2(-192, -96)
+b = Vector2(-192, 95)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_r5xtv"]
+a = Vector2(192, -96)
+b = Vector2(192, 96)
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource("1_s4xqo")
+exit_flags = 3
+
+[node name="BaseContainer" parent="." instance=ExtResource("2_eqbxn")]
+
+[node name="Interior" parent="BaseContainer" index="0"]
+position = Vector2(0.5, 1.00001)
+rotation = 0.0
+scale = Vector2(1.0026, 1)
+texture = ExtResource("3_wm2wg")
+
+[node name="LeftArrow" parent="BaseContainer" index="1"]
+position = Vector2(-45, 0)
+
+[node name="RightArrow" parent="BaseContainer" index="2"]
+position = Vector2(45, 0)
+
+[node name="UpArrow" parent="BaseContainer" index="3"]
+position = Vector2(0, -45)
+
+[node name="DownArrow" parent="BaseContainer" index="4"]
+position = Vector2(0, 45)
+
+[node name="LeftCollision" type="CollisionShape2D" parent="BaseContainer"]
+shape = SubResource("SegmentShape2D_pjkui")
+
+[node name="RightCollision" type="CollisionShape2D" parent="BaseContainer"]
+shape = SubResource("SegmentShape2D_r5xtv")
+
+[node name="Player" parent="." instance=ExtResource("4_hjlkc")]
+position = Vector2(-158, 47)
+
+[node name="NextLevelDoor" parent="." instance=ExtResource("5_x3emi")]
+position = Vector2(167, -61)
+
+[node name="TileMap" parent="." instance=ExtResource("6_vdjwv")]
+layer_0/tile_data = PackedInt32Array(262132, 131072, 0, 262133, 196608, 0, 262134, 262144, 0, 262135, 327680, 0, 262136, 393216, 0, 262137, 458752, 0, 327668, 131072, 1, 327669, 196608, 1, 327670, 262144, 1, 327671, 327680, 1, 327672, 393216, 1, 327673, 458752, 1)
+
+[node name="NPC_01" parent="." instance=ExtResource("7_ro4ya")]
+position = Vector2(53, 13)
+
+[node name="NPC_02_DockWorker" parent="." instance=ExtResource("8_lb7vd")]
+position = Vector2(-33, 62)
+scale = Vector2(-1, 1)
+
+[editable path="BaseContainer"]
