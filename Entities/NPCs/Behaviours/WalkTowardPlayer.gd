@@ -41,7 +41,7 @@ func get_movement_vector(delta):
 func get_gravity_vector(delta) -> Vector2:
 	var gravity_vector = Vector2.ZERO
 	if not owner.is_on_floor():
-		gravity_vector = owner.velocity + (Vector2.DOWN * gravity * delta)
+		gravity_vector.y = owner.velocity.y + (gravity * delta)
 	return gravity_vector
 
 

@@ -17,5 +17,6 @@ func _input(event):
 
 
 func _on_animation_player_animation_finished(_anim_name):
-	get_node("Slide4-TitleMenu/PlatformerStartButton").grab_focus()
+	pass
+	#find_node("PlatformerStartButton").grab_focus()
 	

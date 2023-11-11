@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgk01ai7d526u"]
+[gd_scene load_steps=8 format=3 uid="uid://dgk01ai7d526u"]
 
 [ext_resource type="Texture2D" uid="uid://bw2auvp8r1v5o" path="res://art/shipping_container.png" id="1_flq8s"]
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_xmhax"]
 [ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="3_srdw2"]
+[ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="4_k4yci"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
 a = Vector2(192, -96)
@@ -18,14 +19,29 @@ size = Vector2(384, 192)
 [node name="BaseContainer" type="StaticBody2D"]
 script = ExtResource("1_xmhax")
 exterior_texture = ExtResource("3_srdw2")
-interior_texture = ExtResource("3_srdw2")
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
 rotation = 3.14159
 texture = ExtResource("1_flq8s")
 
+[node name="LeftArrow" type="Sprite2D" parent="."]
+texture = ExtResource("4_k4yci")
+
+[node name="RightArrow" type="Sprite2D" parent="."]
+texture = ExtResource("4_k4yci")
+flip_h = true
+
+[node name="UpArrow" type="Sprite2D" parent="."]
+rotation = 1.57079
+texture = ExtResource("4_k4yci")
+
+[node name="DownArrow" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("4_k4yci")
+
 [node name="Exterior" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("3_srdw2")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]

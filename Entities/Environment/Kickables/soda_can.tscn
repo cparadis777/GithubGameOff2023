@@ -1,13 +1,12 @@
 [gd_scene load_steps=7 format=3 uid="uid://coqkjhe8s4lj8"]
 
-[ext_resource type="Texture2D" uid="uid://doy7bjgfpx26m" path="res://art/props/soyda.png" id="1_6247q"]
 [ext_resource type="Script" path="res://Entities/Environment/Kickables/kickable.gd" id="1_rtrcs"]
+[ext_resource type="Texture2D" uid="uid://b7ju88feji3pv" path="res://art/props/soyda-sheet.png" id="2_wip2h"]
 [ext_resource type="AudioStream" uid="uid://bnxk7kug46cp1" path="res://audio/sfx/placeholder/tin_can_01.wav" id="3_jr4l1"]
 [ext_resource type="AudioStream" uid="uid://cnqa7wirinrvv" path="res://audio/sfx/placeholder/tin_can_02.wav" id="4_mdqvb"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d2301"]
-radius = 6.0
-height = 16.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_jf14e"]
+radius = 4.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4rqnp"]
 streams_count = 2
@@ -25,11 +24,12 @@ script = ExtResource("1_rtrcs")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_6247q")
+texture = ExtResource("2_wip2h")
+hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_d2301")
+shape = SubResource("CircleShape2D_jf14e")
 
 [node name="kick_noises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_4rqnp")

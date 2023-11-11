@@ -12,6 +12,9 @@ var trigger_node
 @export var speed = 20.0
 var velocity : Vector2 = Vector2.ZERO
 
+@export var show_piston : bool = true
+@export var show_cables : bool = true
+
 var locations : PackedVector2Array = []
 var current_destination_index = 1
 var distance_tolerance = 5.0
@@ -28,6 +31,9 @@ func _ready():
 	for locationMarker in $PositionMarkers.get_children():
 		locations.push_back(locationMarker.global_position)
 	locations.push_back(self.global_position) # make ours go last, so there's no long delay for the tween
+
+	$Piston.visible = show_piston
+	$CraneCables.visible = show_cables
 	
 	setup_tween()
 
