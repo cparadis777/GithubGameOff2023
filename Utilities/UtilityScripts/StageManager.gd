@@ -2,6 +2,7 @@ extends Node
 
 var current_level
 var current_player
+var playspace_parameters: Dictionary
 
 var beat_the_boss_screen : PackedScene = preload("res://CutScenes/BeatTheBoss.tscn")
 var player_dead_scene: PackedScene = preload("res://CutScenes/PlayerDead.tscn")
@@ -29,3 +30,8 @@ func end_game(status):
 			change_scene_to(beat_the_boss_screen)
 		"lose":
 			change_scene_to(player_dead_scene)
+
+
+func set_playspace_parameters(data:Dictionary) -> void:
+	self.playspace_parameters = data
+	print(self.playspace_parameters)

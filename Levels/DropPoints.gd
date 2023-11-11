@@ -24,9 +24,8 @@ func _process(_delta):
 func generate_drop_points() -> void:
 	for i in range(self.n_horizontal):
 		for j in range(self.n_vertical):
-			#TODO: Probably refactor so we generate the drop points around the center instead of from a corner
 			var new_point:Marker2D = drop_point.instantiate()
-			var new_position:Vector2 = Vector2(i*self.container_width, j*self.container_height)
+			var new_position:Vector2 = Vector2(i*self.container_width, -j*self.container_height)
 			var new_grid_position:Vector2 = Vector2(i,j)
 			new_point.position = new_position
 			new_point.set_grid_position(new_grid_position)
@@ -46,7 +45,7 @@ func add_container(container:StaticBody2D, grid_position:Vector2) -> bool:
 
 func place_container(container:StaticBody2D, column:int) -> bool:
 	var falling:bool = true
-	var current_position = Vector2(column, 0)
+	var current_position = Vector2(column, self.n_vertical-1)
 	var position_to_place = current_position
 	while falling:
 		if check_under(position_to_place):
@@ -98,7 +97,7 @@ func drop_done()->void:
 
 
 func check_drop_possible(column:int) -> bool:
-	return !get_drop_point(Vector2(column,0)).is_filled
+	return !get_drop_point(Vector2(column,self.n_vertical-1)).is_filled
 
 
 func export_data() -> Dictionary:

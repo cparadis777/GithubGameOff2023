@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://one3l2j3vodd"]
 
-[ext_resource type="Script" path="res://Levels/ContainerStackingTest.gd" id="1_3hcry"]
+[ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
 [ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="2_o08nb"]
 [ext_resource type="Script" path="res://Levels/DropPoints.gd" id="3_i3vix"]
@@ -40,7 +40,7 @@ shader_parameter/vignette_opacity = 0.5
 
 [node name="ContainerStackingTest" type="Node2D"]
 position = Vector2(1, 1)
-script = ExtResource("1_3hcry")
+script = ExtResource("1_f2v7x")
 target_weight = 300
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -60,7 +60,7 @@ n_columns = 4
 drop_zone = NodePath("../DropPoints")
 
 [node name="DropPoints" type="Node2D" parent="."]
-position = Vector2(-65, -193)
+position = Vector2(-65, -113)
 script = ExtResource("3_i3vix")
 new_scale = 1.0
 n_horizontal = 4

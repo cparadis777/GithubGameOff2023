@@ -4,6 +4,8 @@ extends Node2D
 @onready var container_grid = $ContainerGrid
 
 func _ready():
+	self.create_playspace(StageManager.playspace_parameters)
+"""
 	create_playspace({
 		"shape": Vector2(2,2),
 		"containers": {
@@ -28,15 +30,17 @@ func _ready():
 	}
 }
 )
+"""
 
 
 """
 Form of playspace_parameters:
-{shape: Vector2(n,m),
-containers: {
-	Vector2(x,y): {
-		type: ContainerProperties.container_type, exits: {
-				Utils.Directions: bool
+{
+	shape: Vector2(n,m),
+	containers: {
+		Vector2(x,y): {
+			type: ContainerProperties.container_type, exits: {
+					Utils.Directions: bool
 			}
 		}	
 	}

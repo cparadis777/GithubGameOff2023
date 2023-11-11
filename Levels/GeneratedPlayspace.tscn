@@ -15,4 +15,4 @@ container_height = 192
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(318, 126)
-zoom = Vector2(0.25, 0.25)
+zoom = Vector2(0.1, 0.1)

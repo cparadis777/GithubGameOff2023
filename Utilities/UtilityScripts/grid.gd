@@ -9,7 +9,7 @@ class_name Grid
 
 func get_adjacent_coordinate(direction:Utils.Directions, coordinate:Vector2 = self.current_position):
 	match direction:
-		0:
+		2:
 			if coordinate[1] > 0:
 				return coordinate - Vector2(0,1)
 			else: 
@@ -19,7 +19,7 @@ func get_adjacent_coordinate(direction:Utils.Directions, coordinate:Vector2 = se
 				return coordinate + Vector2(1,0)
 			else: 
 				return null
-		2:
+		0:
 			if coordinate[1] < self.n_vertical-1:
 				return coordinate + Vector2(0,1)
 			else: 

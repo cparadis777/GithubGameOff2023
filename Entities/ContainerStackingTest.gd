@@ -21,4 +21,4 @@ func add_weight(weight:int) -> void:
 
 
 func _on_quit_button_return_to_menu_pressed():
-	print($DropPoints.export_data())
+	StageManager.set_playspace_parameters($DropPoints.export_data())
