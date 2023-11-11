@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c50xhy0kffvss"]
+
+[ext_resource type="Texture2D" uid="uid://d0ubm5vspa80d" path="res://art/UI/heart.png" id="1_yknoi"]
+[ext_resource type="Script" path="res://UI/UI_heart.gd" id="2_g4b50"]
+
+[node name="Heart" type="TextureRect"]
+custom_minimum_size = Vector2(16, 16)
+texture = ExtResource("1_yknoi")
+script = ExtResource("2_g4b50")

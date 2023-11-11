@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="1_toomh"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_toomh")
 shader_parameter/iframes = false
 shader_parameter/FlashColor = Color(1, 1, 1, 1)

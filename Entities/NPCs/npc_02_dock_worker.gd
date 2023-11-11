@@ -66,6 +66,7 @@ func begin_dying():
 	State = States.DYING
 	$AnimationPlayer.play("die")
 	$HitBox.set_deferred("disabled", true)
+	$Behaviours/Attacks/HeavyMeleeAttack/AttackSmear.hide()
 
 func begin_decaying():
 	State = States.DEAD

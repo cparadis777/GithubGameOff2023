@@ -4,7 +4,7 @@ var melee_range : float = 35.0
 var current_attack_num = 0
 var attacks_per_sequence = 3
 
-@export var damage : float = 25.0
+@export var damage : float = 10.0
 @export var inflict_knockback : bool = true
 
 var active : bool = false

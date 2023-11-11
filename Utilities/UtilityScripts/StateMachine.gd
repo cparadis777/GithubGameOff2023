@@ -16,7 +16,7 @@ signal transitioned(state_name)
 var previous_state_name : String
 
 func _ready() -> void:
-	await(owner.ready)
+	await owner.ready
 	transitioned.connect(owner._on_state_transitioned)
 
 	# The state machine assigns itself to the State objects' state_machine property.

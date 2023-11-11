@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=24 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
@@ -29,6 +29,9 @@ size = Vector2(16, 232)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5tgv5"]
 size = Vector2(13, 624)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sjdu5"]
+blend_mode = 3
+
 [sub_resource type="Gradient" id="Gradient_vgmee"]
 colors = PackedColorArray(0, 0, 0, 1, 0.321035, 0.445742, 0.479878, 1)
 
@@ -41,6 +44,9 @@ fill_to = Vector2(0.511222, 0)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j7lsu"]
 polygon = PackedVector2Array(-315, 7, -313, -246, 313, -247, 318, 5, 344, 4, 336, -265, -339, -263, -336, 8)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tj7bk"]
+blend_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34npf"]
 light_mode = 1
@@ -85,35 +91,17 @@ position = Vector2(-205, -12)
 [node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("8_q88vj")]
 position = Vector2(201, -87)
 
-[node name="Label" type="Label" parent="Platforms/JumpThroughPlatform"]
-offset_left = -89.0
-offset_top = -13.0
-offset_right = 94.0
-offset_bottom = 13.0
-text = "JumpThroughPlatform"
-
 [node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("8_q88vj")]
 position = Vector2(135, -161)
-
-[node name="Label" type="Label" parent="Platforms/JumpThroughPlatform2"]
-offset_left = -89.0
-offset_top = -13.0
-offset_right = 94.0
-offset_bottom = 13.0
-text = "JumpThroughPlatform"
 
 [node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("8_q88vj")]
 position = Vector2(-206, -88)
 
-[node name="Label" type="Label" parent="Platforms/JumpThroughPlatform3"]
-offset_left = -89.0
-offset_top = -13.0
-offset_right = 94.0
-offset_bottom = 13.0
-text = "JumpThroughPlatform"
-
 [node name="MovingPlatform" parent="Platforms" instance=ExtResource("7_53wf6")]
-position = Vector2(-67, -39)
+position = Vector2(84, -41)
+
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform/Piston" index="0"]
+position = Vector2(0, 41)
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -186,12 +174,6 @@ width = 1.0
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -100
-position = Vector2(0, -129)
-texture = SubResource("GradientTexture2D_jycef")
-region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
-
-[node name="Background2" type="Sprite2D" parent="."]
-z_index = -100
 texture_repeat = 2
 position = Vector2(1, -96)
 scale = Vector2(3, 3)
@@ -199,16 +181,16 @@ texture = ExtResource("7_gq8f5")
 region_enabled = true
 region_rect = Rect2(-196, 2.08165e-12, 256, 96)
 
-[node name="Hints" type="Node2D" parent="Background2"]
+[node name="Hints" type="Node2D" parent="Background"]
 position = Vector2(-0.333333, 32.3333)
 scale = Vector2(0.333333, 0.333333)
 
-[node name="Sprite2D" type="Sprite2D" parent="Background2/Hints"]
+[node name="Sprite2D" type="Sprite2D" parent="Background/Hints"]
 position = Vector2(3, -94)
 scale = Vector2(0.393339, 0.393339)
 texture = ExtResource("9_fc1mv")
 
-[node name="Label" type="Label" parent="Background2/Hints/Sprite2D"]
+[node name="Label" type="Label" parent="Background/Hints/Sprite2D"]
 offset_left = -91.5241
 offset_top = -27.9657
 offset_right = 55.4759
@@ -216,6 +198,13 @@ offset_bottom = 24.0343
 scale = Vector2(1.2316, 1.2316)
 text = "A,D, space to move
 <,> to fight"
+
+[node name="FakeAO" type="Sprite2D" parent="."]
+z_index = -100
+material = SubResource("CanvasItemMaterial_sjdu5")
+position = Vector2(0, -129)
+texture = SubResource("GradientTexture2D_jycef")
+region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
 
 [node name="Lighting" type="Node2D" parent="."]
 
@@ -243,7 +232,7 @@ texture = ExtResource("10_u1mfk")
 texture_scale = 3.0
 
 [node name="PointLight2D3" type="PointLight2D" parent="Lighting"]
-position = Vector2(272, -60)
+position = Vector2(247, -177)
 energy = 2.0
 range_z_min = -512
 range_z_max = 512
@@ -255,14 +244,15 @@ texture_scale = 3.0
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
 occluder = SubResource("OccluderPolygon2D_j7lsu")
 
-[node name="NeonLight" type="PointLight2D" parent="Lighting"]
-position = Vector2(133.5, -149)
-scale = Vector2(1.38125, 1)
+[node name="NeonLight" type="Sprite2D" parent="Lighting"]
+material = SubResource("CanvasItemMaterial_tj7bk")
+position = Vector2(74, -228)
+scale = Vector2(5, 5)
 texture = ExtResource("11_wyb6i")
-texture_scale = 5.0
 
 [node name="Line2D" type="Line2D" parent="Lighting/NeonLight"]
 material = SubResource("CanvasItemMaterial_34npf")
+scale = Vector2(0.2, 0.2)
 points = PackedVector2Array(-48, 0, 53.9367, 0)
 width = 5.0
 default_color = Color(1, 0.129412, 1, 1)
@@ -270,29 +260,15 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="NeonLight2" type="PointLight2D" parent="Lighting"]
-position = Vector2(-218, -78)
-scale = Vector2(1.38125, 1)
+[node name="NeonLight2" type="Sprite2D" parent="Lighting"]
+material = SubResource("CanvasItemMaterial_tj7bk")
+position = Vector2(-76, -227)
+scale = Vector2(5, 5)
 texture = ExtResource("11_wyb6i")
-texture_scale = 5.0
 
 [node name="Line2D" type="Line2D" parent="Lighting/NeonLight2"]
 material = SubResource("CanvasItemMaterial_34npf")
-points = PackedVector2Array(-48, 0, 53.9367, 0)
-width = 5.0
-default_color = Color(1, 0.129412, 1, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="NeonLight3" type="PointLight2D" parent="Lighting"]
-position = Vector2(195, -81)
-scale = Vector2(1.38125, 1)
-texture = ExtResource("11_wyb6i")
-texture_scale = 5.0
-
-[node name="Line2D" type="Line2D" parent="Lighting/NeonLight3"]
-material = SubResource("CanvasItemMaterial_34npf")
+scale = Vector2(0.2, 0.2)
 points = PackedVector2Array(-48, 0, 53.9367, 0)
 width = 5.0
 default_color = Color(1, 0.129412, 1, 1)

@@ -151,7 +151,7 @@ position = Vector2(426, -139)
 
 [node name="JumpThroughPlatform5" parent="Platforms" instance=ExtResource("11_kcey2")]
 position = Vector2(876, -71)
-scale = Vector2(0.575, 1)
+scale = Vector2(0.5, 0.5)
 
 [node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("11_kcey2")]
 position = Vector2(1059, -188)
