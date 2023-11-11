@@ -233,10 +233,10 @@ func _on_dash_started():
 #  `"Y8888Y"'    `"YbbdP"'   88      88      88  8Y"Ybbd8"'   `"8bbdP"Y8    "Y888  
 
 
-func fast_punch(): # comes from $StateMachine/FastPunch
+func fast_punch(anim_name): # comes from $StateMachine/FastPunch
 	if state_machine.state.name == "FastPunch":
-		if animation_player.current_animation not in ["fast_punch", "strong_punch"]:
-			animation_player.play("fast_punch")
+		if not "punch" in animation_player.current_animation:
+			animation_player.play(anim_name)
 			#$Body/CyberRoninSprites.play("fast_punch")
 
 
