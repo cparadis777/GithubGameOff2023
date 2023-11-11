@@ -99,3 +99,18 @@ func drop_done()->void:
 
 func check_drop_possible(column:int) -> bool:
 	return !get_drop_point(Vector2(column,0)).is_filled
+
+
+func export_data() -> Dictionary:
+	var data = {}
+	
+	data["shape"] = Vector2(self.n_horizontal, self.n_vertical)
+	var containers = {}
+	for coordinate in self.drop_points_dict:
+		if self.drop_points_dict[coordinate].container != null:
+			var type = self.drop_points_dict[coordinate].container.type
+			var exits = self.drop_points_dict[coordinate].container.entrances
+			containers[coordinate] = {"type": type, "exits": exits}
+		
+	data["containers"] = containers
+	return data

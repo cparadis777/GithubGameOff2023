@@ -4,6 +4,7 @@ extends StaticBody2D
 
 var weigth:int = 100
 var grid_position:Vector2 = Vector2(100,100)
+var type: ContainerProperties.container_type = ContainerProperties.container_type.BLUE
 
 var entrances = {
 	Utils.Directions.LEFT: false,

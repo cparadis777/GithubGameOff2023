@@ -62,9 +62,9 @@ drop_zone = NodePath("../DropPoints")
 [node name="DropPoints" type="Node2D" parent="."]
 position = Vector2(-65, -193)
 script = ExtResource("3_i3vix")
+new_scale = 1.0
 n_horizontal = 4
 n_vertical = 4
-new_scale = 1.0
 container_width = 48
 container_height = 24
 
@@ -121,5 +121,6 @@ offset_right = 686.0
 offset_bottom = 298.0
 color = Color(1, 1, 1, 0)
 
+[connection signal="pressed" from="HUD/QuitButton-ReturnToMenu" to="." method="_on_quit_button_return_to_menu_pressed"]
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]

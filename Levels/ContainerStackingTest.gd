@@ -18,3 +18,7 @@ func add_weight(weight:int) -> void:
 	var new_percentage = Utils.normalize_value(self.current_weight, 0, target_weight)
 	$ProgressBar.value = new_percentage
 
+
+
+func _on_quit_button_return_to_menu_pressed():
+	print($DropPoints.export_data())
