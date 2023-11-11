@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dr840r1p2wh3c"]
+
+[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_hoo44"]
+[ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="2_owabt"]
+[ext_resource type="Texture2D" uid="uid://bvg7st7se3cvj" path="res://art/placeholder/gamepad_button_down.png" id="3_36uld"]
+[ext_resource type="PackedScene" uid="uid://cmpouufnlcxkn" path="res://Entities/Environment/Platforms/basic_platform.tscn" id="4_e0alr"]
+
+[node name="BaseLevel" instance=ExtResource("1_hoo44")]
+
+[node name="RunDemo" parent="BaseContainer" index="11" instance=ExtResource("2_owabt")]
+position = Vector2(-66, 7)
+animation_name = "run"
+label_text = "A             D
+<-            ->"
+
+[node name="JumpDemo" parent="BaseContainer" index="12" instance=ExtResource("2_owabt")]
+position = Vector2(128, -4)
+animation_name = "jump_peak"
+label_text = " "
+button_texture = ExtResource("3_36uld")
+
+[node name="NextLevelDoor" parent="." index="2"]
+position = Vector2(171, 15)
+
+[node name="BasicPlatform" parent="." index="3" instance=ExtResource("4_e0alr")]
+position = Vector2(163, 52)
+scale = Vector2(0.305, 1)
+
+[editable path="BaseContainer"]
