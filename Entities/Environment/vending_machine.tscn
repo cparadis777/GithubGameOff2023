@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://c7o8et7ct0ph1"]
+
+[ext_resource type="Script" path="res://Entities/Environment/trashcan.gd" id="1_26mxr"]
+[ext_resource type="Texture2D" uid="uid://csewhn410vv07" path="res://art/props/soyda_vending_machine.png" id="2_7wq6o"]
+[ext_resource type="AudioStream" uid="uid://cymibnijhml5u" path="res://audio/sfx/placeholder/pot_crash.wav" id="3_vpetn"]
+[ext_resource type="Texture2D" uid="uid://diptuh82n6chi" path="res://art/decals/crack_01.png" id="4_1ux8u"]
+[ext_resource type="Texture2D" uid="uid://6dvgde1ma80j" path="res://art/decals/crack_02.png" id="5_i2dy0"]
+[ext_resource type="Texture2D" uid="uid://d0id0y38gcmhm" path="res://art/props/random_rock_debris.png" id="6_xy88v"]
+[ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="7_kc3mj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g7ife"]
+friction = 0.5
+bounce = 0.15
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xbvcy"]
+streams_count = 1
+random_pitch = 1.25
+stream_0/stream = ExtResource("3_vpetn")
+stream_0/weight = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hsb5"]
+size = Vector2(37, 61)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y6la3"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[node name="VendingMachine" type="RigidBody2D" groups=["Kickables"]]
+position = Vector2(320, 0)
+collision_layer = 8
+collision_mask = 27
+mass = 0.75
+physics_material_override = SubResource("PhysicsMaterial_g7ife")
+script = ExtResource("1_26mxr")
+
+[node name="CanImage" type="Sprite2D" parent="."]
+position = Vector2(2.20891, -11.4405)
+rotation = 0.0118909
+scale = Vector2(1.13451, 1.26096)
+texture = ExtResource("2_7wq6o")
+offset = Vector2(-0.28656, -14.6351)
+
+[node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_xbvcy")
+volume_db = -9.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -30.5)
+shape = SubResource("RectangleShape2D_7hsb5")
+
+[node name="DamageSprites" type="Node2D" parent="."]
+
+[node name="crack1" type="Sprite2D" parent="DamageSprites"]
+visible = false
+position = Vector2(0, -19)
+rotation = 0.928987
+texture = ExtResource("4_1ux8u")
+
+[node name="crack2" type="Sprite2D" parent="DamageSprites"]
+visible = false
+position = Vector2(0, -40)
+rotation = 2.56926
+texture = ExtResource("4_1ux8u")
+
+[node name="crack3" type="Sprite2D" parent="DamageSprites"]
+visible = false
+position = Vector2(0, -33)
+rotation = 0.928987
+texture = ExtResource("5_i2dy0")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_y6la3")
+position = Vector2(0, -30)
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 0.71
+texture = ExtResource("6_xy88v")
+emission_shape = 3
+emission_rect_extents = Vector2(8, 12)
+direction = Vector2(2.08165e-12, -1)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+angle_max = 180.0
+scale_amount_min = 0.15
+scale_amount_max = 0.5
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-3.00001, -32)
+scale = Vector2(0.906249, 5.41667)
+texture = ExtResource("7_kc3mj")

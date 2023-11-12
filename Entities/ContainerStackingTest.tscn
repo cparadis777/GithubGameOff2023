@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=11 format=3 uid="uid://one3l2j3vodd"]
 
-[ext_resource type="Script" path="res://Levels/ContainerStackingTest.gd" id="1_3hcry"]
+[ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
 [ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="2_o08nb"]
 [ext_resource type="Script" path="res://Levels/DropPoints.gd" id="3_i3vix"]
+[ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="3_tcnfn"]
 [ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_bhv33"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
 
@@ -18,7 +19,7 @@ b = Vector2(-88, 40)
 shader = ExtResource("2_o08nb")
 shader_parameter/overlay = true
 shader_parameter/scanlines_opacity = 0.4
-shader_parameter/scanlines_width = 0.25
+shader_parameter/scanlines_width = 0.195
 shader_parameter/grille_opacity = 0.3
 shader_parameter/resolution = Vector2(640, 480)
 shader_parameter/pixelate = false
@@ -40,19 +41,25 @@ shader_parameter/vignette_opacity = 0.5
 
 [node name="ContainerStackingTest" type="Node2D"]
 position = Vector2(1, 1)
-script = ExtResource("1_3hcry")
+script = ExtResource("1_f2v7x")
 target_weight = 300
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="QuitButton-ReturnToMenu" parent="HUD" instance=ExtResource("6_n282g")]
-anchors_preset = 1
-anchor_left = 1.0
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+anchors_preset = 10
 anchor_right = 1.0
-offset_left = -42.0
-offset_bottom = 31.0
-grow_horizontal = 0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="QuitButton-ReturnToMenu" parent="HUD/HBoxContainer" instance=ExtResource("6_n282g")]
+layout_mode = 2
+
+[node name="FightButton" parent="HUD/HBoxContainer" instance=ExtResource("3_tcnfn")]
+layout_mode = 2
+text = "Fight!"
+scene_path = "res://Levels/GeneratedPlayspace.tscn"
 
 [node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("2_30gk4")]
 position = Vector2(-64, -225)
@@ -60,11 +67,11 @@ n_columns = 4
 drop_zone = NodePath("../DropPoints")
 
 [node name="DropPoints" type="Node2D" parent="."]
-position = Vector2(-65, -193)
+position = Vector2(-65, -113)
 script = ExtResource("3_i3vix")
+new_scale = 1.0
 n_horizontal = 4
 n_vertical = 4
-new_scale = 1.0
 container_width = 48
 container_height = 24
 
@@ -121,5 +128,6 @@ offset_right = 686.0
 offset_bottom = 298.0
 color = Color(1, 1, 1, 0)
 
+[connection signal="pressed" from="HUD/HBoxContainer/QuitButton-ReturnToMenu" to="." method="_on_quit_button_return_to_menu_pressed"]
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]

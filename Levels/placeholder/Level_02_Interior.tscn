@@ -1,0 +1,320 @@
+[gd_scene load_steps=26 format=3 uid="uid://bpcm0ph14ms2a"]
+
+[ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_o6e4m"]
+[ext_resource type="PackedScene" uid="uid://b75mqcyc3pmmw" path="res://Entities/Environment/switches/LevelDoor.tscn" id="2_6njsc"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_gmshf"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="3_0a4xq"]
+[ext_resource type="PackedScene" uid="uid://cg316itqsfouf" path="res://Levels/placeholder/Level_01.tscn" id="3_cpcl4"]
+[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="4_72dgh"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="5_rxof7"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="7_6gr5w"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="8_ybspo"]
+[ext_resource type="Texture2D" uid="uid://ds5c6ostoi5d7" path="res://art/interiors/shipping_container_soyda_INTERIOR.png" id="9_8i8fx"]
+[ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="10_ou7lf"]
+[ext_resource type="PackedScene" uid="uid://dnsnay6jrr7ic" path="res://Entities/Environment/Lights/switched_blacklight_inverse.tscn" id="11_p43u0"]
+[ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="12_kp4b5"]
+[ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="13_yfsqs"]
+[ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="14_jkofo"]
+
+[sub_resource type="Gradient" id="Gradient_m6aon"]
+offsets = PackedFloat32Array(0, 0.301818, 0.829091)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yknl7"]
+gradient = SubResource("Gradient_m6aon")
+width = 16
+height = 180
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgn8w"]
+size = Vector2(16, 232)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tgv5"]
+size = Vector2(13, 624)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sjdu5"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_vgmee"]
+offsets = PackedFloat32Array(0, 0.413043)
+colors = PackedColorArray(0, 0, 0, 0.941176, 0.321569, 0.447059, 0.478431, 0.941176)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jycef"]
+gradient = SubResource("Gradient_vgmee")
+width = 640
+height = 256
+fill_from = Vector2(0.486284, 1)
+fill_to = Vector2(0.511222, 0)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j7lsu"]
+polygon = PackedVector2Array(-315, 7, -313, -246, 313, -247, 318, 5, 344, 4, 336, -265, -339, -263, -336, 8)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tj7bk"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34npf"]
+light_mode = 1
+
+[node name="InteriorContainerLevelMockup01" type="Node2D"]
+script = ExtResource("1_o6e4m")
+
+[node name="NextLevelDoor" parent="." instance=ExtResource("2_6njsc")]
+position = Vector2(146.206, -193.653)
+next_scene = ExtResource("3_cpcl4")
+
+[node name="CameraTarget" type="Marker2D" parent="."]
+position = Vector2(0, -77)
+
+[node name="Player" parent="." instance=ExtResource("2_gmshf")]
+position = Vector2(-257.98, 2.04)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="VendingMachine" parent="Obstacles" instance=ExtResource("3_0a4xq")]
+position = Vector2(-120.72, 0)
+
+[node name="VendingMachine2" parent="Obstacles" instance=ExtResource("3_0a4xq")]
+position = Vector2(158.91, 0)
+
+[node name="VendingMachine3" parent="Obstacles" instance=ExtResource("3_0a4xq")]
+position = Vector2(24.045, 0)
+
+[node name="StackOfSoydaCrates" type="Node2D" parent="Obstacles"]
+position = Vector2(-222, -125)
+
+[node name="SoydaBox" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(22.175, 4.22)
+max_hits = 1
+
+[node name="SoydaBox2" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(14, -6.00001)
+max_hits = 1
+
+[node name="SoydaBox3" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(40, 4.00001)
+max_hits = 1
+
+[node name="SoydaBox4" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(4.18001, -16.265)
+max_hits = 1
+
+[node name="SoydaBox5" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(-14.115, -16.04)
+max_hits = 1
+
+[node name="SoydaBox6" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(-32, -16.04)
+max_hits = 1
+
+[node name="SoydaBox9" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(32, -7)
+max_hits = 1
+
+[node name="SoydaBox10" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(23, -17)
+max_hits = 1
+
+[node name="SoydaBox11" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(-14.115, -26)
+max_hits = 1
+
+[node name="SoydaBox12" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(13, -27)
+max_hits = 1
+
+[node name="SoydaBox7" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(-29, -7)
+max_hits = 1
+
+[node name="SoydaBox8" parent="Obstacles/StackOfSoydaCrates" instance=ExtResource("4_72dgh")]
+position = Vector2(-36, 3)
+max_hits = 1
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="NPC_02_DockWorker" parent="Enemies" instance=ExtResource("5_rxof7")]
+position = Vector2(-49.39, -2.28)
+
+[node name="NPC_02_DockWorker2" parent="Enemies" instance=ExtResource("5_rxof7")]
+position = Vector2(107.375, -2.28)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("7_6gr5w")]
+position = Vector2(135, -161)
+
+[node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("7_6gr5w")]
+position = Vector2(-221.775, -121.565)
+
+[node name="MovingPlatform" parent="Platforms" instance=ExtResource("8_ybspo")]
+position = Vector2(269.755, -41)
+
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform/Piston" index="0"]
+position = Vector2(0, 41)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall" type="StaticBody2D" parent="Walls"]
+position = Vector2(-313, 2.08165e-12)
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Wall"]
+position = Vector2(0, -1)
+scale = Vector2(1, 1.28)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(1, -90)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
+position = Vector2(0, -118)
+shape = SubResource("RectangleShape2D_dgn8w")
+
+[node name="Wall2" type="StaticBody2D" parent="Walls"]
+position = Vector2(317, 2.08165e-12)
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Wall2"]
+position = Vector2(-2, -6)
+scale = Vector2(1, 1.32)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(0, -86)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
+position = Vector2(-2, -118)
+shape = SubResource("RectangleShape2D_dgn8w")
+
+[node name="Ceiling" type="StaticBody2D" parent="Walls"]
+position = Vector2(-313, -245)
+rotation = 1.5708
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Ceiling"]
+position = Vector2(3.20056, -1.73215)
+scale = Vector2(1, 3.48358)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(-1.20056, -90.1335)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Ceiling"]
+position = Vector2(0.499985, -318)
+shape = SubResource("RectangleShape2D_5tgv5")
+
+[node name="Floor" type="StaticBody2D" parent="Walls" groups=["Floors"]]
+position = Vector2(-313, 6)
+rotation = 1.5708
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Floor"]
+position = Vector2(3.20056, -1.73215)
+scale = Vector2(1, 3.48358)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(-1.20056, -90.1335)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Floor"]
+position = Vector2(0.499985, -318)
+shape = SubResource("RectangleShape2D_5tgv5")
+
+[node name="Line2D" type="Line2D" parent="Walls/Floor"]
+position = Vector2(-4.99999, 2.00003)
+points = PackedVector2Array(0, 0, 2.08165e-12, -640)
+width = 1.0
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -100
+texture_repeat = 2
+position = Vector2(1, -96)
+scale = Vector2(3, 3)
+texture = ExtResource("9_8i8fx")
+region_enabled = true
+region_rect = Rect2(-196, 2.08165e-12, 256, 96)
+
+[node name="PolygonMask" type="Polygon2D" parent="Background"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(105.333, -51.6667, 106.333, 33.6667, -106.333, 32.6667, -106, -50, -129.667, -50, -129.667, 49.3333, 129.667, 50, 130, -51.6667)
+
+[node name="Hints" type="Node2D" parent="Background"]
+position = Vector2(-0.333333, 32.3333)
+scale = Vector2(0.333333, 0.333333)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/Hints"]
+position = Vector2(3, -94)
+scale = Vector2(0.393339, 0.393339)
+texture = ExtResource("10_ou7lf")
+
+[node name="Label" type="Label" parent="Background/Hints/Sprite2D"]
+offset_left = -91.5241
+offset_top = -27.9657
+offset_right = 55.4759
+offset_bottom = 24.0343
+scale = Vector2(1.2316, 1.2316)
+text = "A,D, space to move
+<,> to fight"
+
+[node name="FakeAO" type="Sprite2D" parent="."]
+z_index = -100
+material = SubResource("CanvasItemMaterial_sjdu5")
+position = Vector2(0, -129)
+texture = SubResource("GradientTexture2D_jycef")
+region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
+
+[node name="Lighting" type="Node2D" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
+color = Color(0.266667, 0.254902, 0.282353, 1)
+
+[node name="SwitchedBlacklightInversePointlight1" parent="Lighting" instance=ExtResource("11_p43u0")]
+position = Vector2(-253, -206)
+scale = Vector2(2.73307, 2.27474)
+energy = 0.6
+
+[node name="SwitchedBlacklightInversePointlight2" parent="Lighting" instance=ExtResource("11_p43u0")]
+position = Vector2(234, -196)
+energy = 0.6
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
+occluder = SubResource("OccluderPolygon2D_j7lsu")
+
+[node name="NeonLight" type="Sprite2D" parent="Lighting"]
+material = SubResource("CanvasItemMaterial_tj7bk")
+position = Vector2(74, -228)
+scale = Vector2(5, 5)
+texture = ExtResource("12_kp4b5")
+
+[node name="Line2D" type="Line2D" parent="Lighting/NeonLight"]
+material = SubResource("CanvasItemMaterial_34npf")
+scale = Vector2(0.2, 0.2)
+points = PackedVector2Array(-48, 0, 53.9367, 0)
+width = 5.0
+default_color = Color(1, 0.129412, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="NeonLight2" type="Sprite2D" parent="Lighting"]
+material = SubResource("CanvasItemMaterial_tj7bk")
+position = Vector2(-76, -227)
+scale = Vector2(5, 5)
+texture = ExtResource("12_kp4b5")
+
+[node name="Line2D" type="Line2D" parent="Lighting/NeonLight2"]
+material = SubResource("CanvasItemMaterial_34npf")
+scale = Vector2(0.2, 0.2)
+points = PackedVector2Array(-48, 0, 53.9367, 0)
+width = 5.0
+default_color = Color(1, 0.129412, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="SwitchedLight" parent="Lighting" instance=ExtResource("13_yfsqs")]
+visible = false
+energy = 0.75
+
+[node name="Switches" type="Node2D" parent="."]
+
+[node name="LightSwitch" parent="Switches" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("14_jkofo")]
+position = Vector2(-221.705, -121.15)
+linked_nodes = [NodePath("../../Lighting/SwitchedLight"), NodePath("../../Lighting/SwitchedBlacklightInversePointlight1"), NodePath("../../Lighting/SwitchedBlacklightInversePointlight2")]
+
+[editable path="Platforms/MovingPlatform"]

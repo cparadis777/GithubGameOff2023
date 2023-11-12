@@ -1,16 +1,17 @@
-[gd_scene load_steps=24 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=26 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
-[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/trashcan.tscn" id="4_4k4sl"]
+[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="4_4k4sl"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="5_2wyyn"]
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_ap6lg"]
+[ext_resource type="PackedScene" uid="uid://4ubg2v861dlv" path="res://Entities/NPCs/boss_npc.tscn" id="6_t74po"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="7_53wf6"]
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="7_gq8f5"]
-[ext_resource type="PackedScene" uid="uid://daqb2qqfyv1v5" path="res://Entities/Environment/Platforms/moving_girder.tscn" id="7_rx2d0"]
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="7_rrg24"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
 [ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="9_fc1mv"]
-[ext_resource type="Texture2D" uid="uid://67m50eh8jeq1" path="res://art/materials/shaders/2DOmniLight.png" id="10_u1mfk"]
+[ext_resource type="PackedScene" uid="uid://dnsnay6jrr7ic" path="res://Entities/Environment/Lights/switched_blacklight_inverse.tscn" id="11_vsk2m"]
 [ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="11_wyb6i"]
 [ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="12_hiokx"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="12_ujqxr"]
@@ -30,8 +31,12 @@ size = Vector2(16, 232)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5tgv5"]
 size = Vector2(13, 624)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sjdu5"]
+blend_mode = 3
+
 [sub_resource type="Gradient" id="Gradient_vgmee"]
-colors = PackedColorArray(0, 0, 0, 1, 0.321035, 0.445742, 0.479878, 1)
+offsets = PackedFloat32Array(0, 0.506211)
+colors = PackedColorArray(0, 0, 0, 0.666667, 0.321569, 0.447059, 0.478431, 0.666667)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_jycef"]
 gradient = SubResource("Gradient_vgmee")
@@ -84,49 +89,28 @@ position = Vector2(91, 0)
 [node name="NPC_02_DockWorker" parent="Enemies" instance=ExtResource("6_ap6lg")]
 position = Vector2(-205, -12)
 
+[node name="BossNPC" parent="Enemies" instance=ExtResource("6_t74po")]
+position = Vector2(181, -168)
+
+[node name="RunningAssassin" parent="Enemies" instance=ExtResource("7_rrg24")]
+position = Vector2(-88, -1)
+
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("8_q88vj")]
 position = Vector2(201, -87)
 
-[node name="Label" type="Label" parent="Platforms/JumpThroughPlatform"]
-offset_left = -89.0
-offset_top = -13.0
-offset_right = 94.0
-offset_bottom = 13.0
-text = "JumpThroughPlatform"
-
 [node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("8_q88vj")]
 position = Vector2(135, -161)
-
-[node name="Label" type="Label" parent="Platforms/JumpThroughPlatform2"]
-offset_left = -89.0
-offset_top = -13.0
-offset_right = 94.0
-offset_bottom = 13.0
-text = "JumpThroughPlatform"
 
 [node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("8_q88vj")]
 position = Vector2(-206, -88)
 
-[node name="Label" type="Label" parent="Platforms/JumpThroughPlatform3"]
-offset_left = -89.0
-offset_top = -13.0
-offset_right = 94.0
-offset_bottom = 13.0
-text = "JumpThroughPlatform"
-
-[node name="MovingGirder" parent="Platforms" instance=ExtResource("7_rx2d0")]
-position = Vector2(-68, -38)
-
-[node name="Location2" parent="Platforms/MovingGirder/PositionMarkers" index="0"]
-position = Vector2(2, -143)
-
 [node name="MovingPlatform" parent="Platforms" instance=ExtResource("7_53wf6")]
 position = Vector2(84, -41)
 
-[node name="Location2" parent="Platforms/MovingPlatform/PositionMarkers" index="0"]
-position = Vector2(1, -82)
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform/Piston" index="0"]
+position = Vector2(0, 41)
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -199,12 +183,6 @@ width = 1.0
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -100
-position = Vector2(0, -129)
-texture = SubResource("GradientTexture2D_jycef")
-region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
-
-[node name="Background2" type="Sprite2D" parent="."]
-z_index = -100
 texture_repeat = 2
 position = Vector2(1, -96)
 scale = Vector2(3, 3)
@@ -212,16 +190,16 @@ texture = ExtResource("7_gq8f5")
 region_enabled = true
 region_rect = Rect2(-196, 2.08165e-12, 256, 96)
 
-[node name="Hints" type="Node2D" parent="Background2"]
+[node name="Hints" type="Node2D" parent="Background"]
 position = Vector2(-0.333333, 32.3333)
 scale = Vector2(0.333333, 0.333333)
 
-[node name="Sprite2D" type="Sprite2D" parent="Background2/Hints"]
+[node name="Sprite2D" type="Sprite2D" parent="Background/Hints"]
 position = Vector2(3, -94)
 scale = Vector2(0.393339, 0.393339)
 texture = ExtResource("9_fc1mv")
 
-[node name="Label" type="Label" parent="Background2/Hints/Sprite2D"]
+[node name="Label" type="Label" parent="Background/Hints/Sprite2D"]
 offset_left = -91.5241
 offset_top = -27.9657
 offset_right = 55.4759
@@ -230,47 +208,33 @@ scale = Vector2(1.2316, 1.2316)
 text = "A,D, space to move
 <,> to fight"
 
+[node name="FakeAO" type="Sprite2D" parent="."]
+visible = false
+z_index = -100
+material = SubResource("CanvasItemMaterial_sjdu5")
+position = Vector2(0, -129)
+texture = SubResource("GradientTexture2D_jycef")
+region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
+
 [node name="Lighting" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
-color = Color(0.152941, 0.176471, 0.215686, 1)
+color = Color(0.25098, 0.286275, 0.345098, 1)
 
-[node name="PointLight2D" type="PointLight2D" parent="Lighting"]
-position = Vector2(-218, -174)
-energy = 2.0
-range_z_min = -512
-range_z_max = 512
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.737255)
-texture = ExtResource("10_u1mfk")
-texture_scale = 3.0
+[node name="InverseBlacklight" parent="Lighting" instance=ExtResource("11_vsk2m")]
 
-[node name="PointLight2D2" type="PointLight2D" parent="Lighting"]
-position = Vector2(0, -98)
-energy = 2.0
-range_z_min = -512
-range_z_max = 512
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.737255)
-texture = ExtResource("10_u1mfk")
-texture_scale = 3.0
+[node name="InverseBlacklight2" parent="Lighting" instance=ExtResource("11_vsk2m")]
+position = Vector2(-7, -77)
 
-[node name="PointLight2D3" type="PointLight2D" parent="Lighting"]
-position = Vector2(272, -60)
-energy = 2.0
-range_z_min = -512
-range_z_max = 512
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.737255)
-texture = ExtResource("10_u1mfk")
-texture_scale = 3.0
+[node name="InverseBlacklight3" parent="Lighting" instance=ExtResource("11_vsk2m")]
+position = Vector2(232, -164)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
 occluder = SubResource("OccluderPolygon2D_j7lsu")
 
 [node name="NeonLight" type="Sprite2D" parent="Lighting"]
 material = SubResource("CanvasItemMaterial_tj7bk")
-position = Vector2(133.5, -149)
+position = Vector2(74, -228)
 scale = Vector2(5, 5)
 texture = ExtResource("11_wyb6i")
 
@@ -284,29 +248,15 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="NeonLight2" type="PointLight2D" parent="Lighting"]
-position = Vector2(-218, -78)
-scale = Vector2(1.38125, 1)
+[node name="NeonLight2" type="Sprite2D" parent="Lighting"]
+material = SubResource("CanvasItemMaterial_tj7bk")
+position = Vector2(-76, -227)
+scale = Vector2(5, 5)
 texture = ExtResource("11_wyb6i")
-texture_scale = 5.0
 
 [node name="Line2D" type="Line2D" parent="Lighting/NeonLight2"]
 material = SubResource("CanvasItemMaterial_34npf")
-points = PackedVector2Array(-48, 0, 53.9367, 0)
-width = 5.0
-default_color = Color(1, 0.129412, 1, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="NeonLight3" type="PointLight2D" parent="Lighting"]
-position = Vector2(195, -81)
-scale = Vector2(1.38125, 1)
-texture = ExtResource("11_wyb6i")
-texture_scale = 5.0
-
-[node name="Line2D" type="Line2D" parent="Lighting/NeonLight3"]
-material = SubResource("CanvasItemMaterial_34npf")
+scale = Vector2(0.2, 0.2)
 points = PackedVector2Array(-48, 0, 53.9367, 0)
 width = 5.0
 default_color = Color(1, 0.129412, 1, 1)
@@ -316,12 +266,12 @@ end_cap_mode = 2
 
 [node name="SwitchedLight" parent="Lighting" instance=ExtResource("12_hiokx")]
 visible = false
+energy = 1.2
 
 [node name="Switches" type="Node2D" parent="."]
 
-[node name="LightSwitch" parent="Switches" node_paths=PackedStringArray("linked_node") instance=ExtResource("12_ujqxr")]
+[node name="LightSwitch" parent="Switches" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("12_ujqxr")]
 position = Vector2(141, -1)
-linked_node = NodePath("../../Lighting/SwitchedLight")
+linked_nodes = [NodePath("../../Lighting/InverseBlacklight"), NodePath("../../Lighting/InverseBlacklight2"), NodePath("../../Lighting/InverseBlacklight3"), NodePath("../../Lighting/SwitchedLight")]
 
-[editable path="Platforms/MovingGirder"]
 [editable path="Platforms/MovingPlatform"]

@@ -48,8 +48,9 @@ func _on_recoil_timer_timeout():
 
 
 func _on_hurt_box_body_entered(body):
-	if body == StageManager.current_player or body.is_in_group("Player") or body.name.to_lower().has("player"):
+	if body == StageManager.current_player or body.is_in_group("Player") or "player" in body.name.to_lower():
 		if body.has_method("_on_hit"):
-			var impactVector = global_position.direction_to(body.global_position)
-			var damageType = Globals.DamageTypes.IMPACT
-			body._on_hit(damage, impactVector, damageType, inflict_knockback)
+			var attackPacket = AttackPacket.new()
+			attackPacket.impact_vector = global_position.direction_to(body.global_position)
+			attackPacket.damage_type = Globals.DamageTypes.IMPACT
+			body._on_hit(attackPacket)

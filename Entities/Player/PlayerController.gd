@@ -27,6 +27,8 @@ var iframes : bool = false
 var original_body_scale : Vector2
 var original_sprite_position : Vector2
 
+var last_fast_punch_animation : String
+
 signal hit(damage, impactVector, damageType, knockback)
 signal injured
 
@@ -233,10 +235,11 @@ func _on_dash_started():
 #  `"Y8888Y"'    `"YbbdP"'   88      88      88  8Y"Ybbd8"'   `"8bbdP"Y8    "Y888  
 
 
-func fast_punch(): # comes from $StateMachine/FastPunch
+func fast_punch(anim_name): # comes from $StateMachine/FastPunch
 	if state_machine.state.name == "FastPunch":
-		if animation_player.current_animation not in ["fast_punch", "strong_punch"]:
-			animation_player.play("fast_punch")
+		if not "punch" in animation_player.current_animation:
+			last_fast_punch_animation = anim_name
+			animation_player.play(anim_name)
 			#$Body/CyberRoninSprites.play("fast_punch")
 
 
@@ -256,16 +259,24 @@ func disable_all_hurtboxes():
 		hurtbox.set_deferred("disabled", true)
 
 
-func inflict_harm(body, knockback: bool):
-	var damage = 10.0
-	var impactVector = self.global_position.direction_to(body.global_position)
-	var damageType = Globals.DamageTypes.IMPACT
-
-		
+func inflict_harm(body, knockback_magnitude : float = 1.0, uppercut: bool = false):
+	var attackPacket = AttackPacket.new()
+	attackPacket.damage = 10.0
+	attackPacket.impact_vector = self.global_position.direction_to(body.global_position)
+	# impactVector is normalized.. so we need knockback_magnitude to amplify it.
+	var up_force = 1.5
+	if uppercut: 
+		attackPacket.impact_vector += Vector2.UP * up_force
+	attackPacket.impact_vector *= knockback_magnitude
+	#var damageType = Globals.DamageTypes.IMPACT
+	attackPacket.knockback = (knockback_magnitude > 0.9)
+	attackPacket.damage_type = Globals.DamageTypes.IMPACT
+	
 	if body.has_method("_on_hit"):
 		hit.connect(body._on_hit)
-		hit.emit(damage, impactVector, damageType, knockback)
+		hit.emit(attackPacket)
 		hit.disconnect(body._on_hit)
+
 
 
 func _on_descending_kick_hurtbox_body_entered(body):
@@ -279,21 +290,27 @@ func _on_descending_kick_hurtbox_body_entered(body):
 func _on_fast_punch_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 		if state_machine.state.name == "FastPunch":
-			inflict_harm(body, false)
+			var punch_animations = ["fast_punch_1", "fast_punch_2", "fast_punch_3"]
+			var knockback_magnitude = punch_animations.find(last_fast_punch_animation)
+			var uppercut = (last_fast_punch_animation == "fast_punch_3")
+			inflict_harm(body, knockback_magnitude, uppercut)
+
 
 func _on_strong_punch_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		if state_machine.state.name == "StrongPunch":
-			inflict_harm(body, true)
+		if state_machine.state.name in ["StrongPunch", "Dash"]:
+			var knockback_magnitude = 3.0
+			var uppercut = false
+			inflict_harm(body, knockback_magnitude, uppercut)
 
 
 #receive injury
-func _on_hit(damage, _impactVector, _damageType : Globals.DamageTypes = Globals.DamageTypes.IMPACT, knockback: bool = false):
+func _on_hit(attackPacket):
 	if !iframes and (state_machine.state.name not in [ "Dying", "Dead"]):
-		health -= damage
+		health -= attackPacket.damage
 		injured.emit()
 		$IFrames.start()
-		if knockback:
+		if attackPacket.knockback:
 			pass # TODO, implement knockback
 
 		if health <= 0:
