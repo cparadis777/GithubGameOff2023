@@ -12,8 +12,13 @@ func _ready():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func physics_update(_delta):
-	pass
+func physics_update(delta):
+	move_forward(delta)
+	
+func move_forward(delta):
+	player.velocity.x = player.SPEED * 0.33 * player.get_last_known_direction()
+	player.move_and_slide()
+	
 
 func enter(_msg := {}) -> void:
 	$UnbrokenSequenceTimer.stop() # start over
