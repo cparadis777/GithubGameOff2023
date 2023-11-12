@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=15 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
@@ -7,11 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
 [ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="5_ww7q0"]
 [ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="6_aruj1"]
-[ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="7_e1fgr"]
-[ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="9_3vd6b"]
-[ext_resource type="PackedScene" uid="uid://b527h0udon0w5" path="res://Levels/placeholder/Level_01_Interior.tscn" id="9_cgfvo"]
-[ext_resource type="PackedScene" uid="uid://bdqawiqxlij23" path="res://Levels/placeholder/MockLevel.tscn" id="11_l5voa"]
-[ext_resource type="PackedScene" uid="uid://bpcm0ph14ms2a" path="res://Levels/placeholder/Level_02_Interior.tscn" id="12_t5qcy"]
+[ext_resource type="PackedScene" uid="uid://dttldmdwah7bk" path="res://Menus/scene_selection_buttons.tscn" id="8_wjniq"]
 
 [sub_resource type="Gradient" id="Gradient_1fdak"]
 colors = PackedColorArray(0, 0, 0, 1, 0.234514, 0.154286, 0.209769, 1)
@@ -529,10 +525,10 @@ self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 60.0
-offset_top = -938.0
-offset_right = 177.0
-offset_bottom = -912.0
+offset_left = 183.0
+offset_top = -972.0
+offset_right = 300.0
+offset_bottom = -946.0
 grow_horizontal = 2
 scale = Vector2(1.56431, 1.56431)
 text = "in"
@@ -541,49 +537,14 @@ horizontal_alignment = 1
 [node name="ManifestLabel" type="Label" parent="Slide4-TitleMenu"]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = 36.0
-offset_top = -908.0
+offset_top = -941.0
 offset_right = 187.0
-offset_bottom = -882.0
+offset_bottom = -915.0
 scale = Vector2(1.67911, 1.67911)
 text = "Manifest Violence"
 horizontal_alignment = 1
 
-[node name="Buttons" type="GridContainer" parent="Slide4-TitleMenu"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 52.0
-offset_top = -831.0
-offset_right = 257.0
-offset_bottom = -800.0
-grow_horizontal = 2
-grow_vertical = 0
-columns = 2
-
-[node name="PlatformerStartButton" type="Button" parent="Slide4-TitleMenu/Buttons"]
-layout_mode = 2
-text = "plex Test"
-script = ExtResource("7_e1fgr")
-scene = ExtResource("9_cgfvo")
-
-[node name="ContainerStackingStartButton" type="Button" parent="Slide4-TitleMenu/Buttons"]
-layout_mode = 2
-text = "Ced Stacking"
-script = ExtResource("7_e1fgr")
-scene = ExtResource("9_3vd6b")
-
-[node name="LevelMockupButton" type="Button" parent="Slide4-TitleMenu/Buttons"]
-layout_mode = 2
-text = "IanC Mock Level"
-script = ExtResource("7_e1fgr")
-scene = ExtResource("11_l5voa")
-
-[node name="GuacLevel_2_Interior" type="Button" parent="Slide4-TitleMenu/Buttons"]
-layout_mode = 2
-text = "Guac Level 2"
-script = ExtResource("7_e1fgr")
-scene = ExtResource("12_t5qcy")
+[node name="Buttons" parent="Slide4-TitleMenu" instance=ExtResource("8_wjniq")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
