@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://UI/hud.gd" id="1_6dq2i"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="2_3esp5"]
-[ext_resource type="Texture2D" uid="uid://d0ubm5vspa80d" path="res://art/UI/heart.png" id="3_3m1ck"]
+[ext_resource type="PackedScene" uid="uid://c50xhy0kffvss" path="res://UI/UI_heart.tscn" id="3_8whcm"]
 [ext_resource type="PackedScene" uid="uid://cdwi4w5rusxt5" path="res://UI/in_game_pause_menu.tscn" id="3_jpu2h"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="3_ueh2v"]
 
@@ -37,30 +37,20 @@ layout_mode = 2
 size_flags_vertical = 4
 columns = 5
 
-[node name="Heart" type="TextureRect" parent="Control/HBoxContainer/HealthIcons"]
-custom_minimum_size = Vector2(16, 16)
+[node name="Heart" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
 layout_mode = 2
-texture = ExtResource("3_3m1ck")
 
-[node name="Heart2" type="TextureRect" parent="Control/HBoxContainer/HealthIcons"]
-custom_minimum_size = Vector2(16, 16)
+[node name="Heart2" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
 layout_mode = 2
-texture = ExtResource("3_3m1ck")
 
-[node name="Heart3" type="TextureRect" parent="Control/HBoxContainer/HealthIcons"]
-custom_minimum_size = Vector2(16, 16)
+[node name="Heart3" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
 layout_mode = 2
-texture = ExtResource("3_3m1ck")
 
-[node name="Heart4" type="TextureRect" parent="Control/HBoxContainer/HealthIcons"]
-custom_minimum_size = Vector2(16, 16)
+[node name="Heart4" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
 layout_mode = 2
-texture = ExtResource("3_3m1ck")
 
-[node name="Heart5" type="TextureRect" parent="Control/HBoxContainer/HealthIcons"]
-custom_minimum_size = Vector2(16, 16)
+[node name="Heart5" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
 layout_mode = 2
-texture = ExtResource("3_3m1ck")
 
 [node name="QuitButton-ReturnToMenu" parent="Control/HBoxContainer" instance=ExtResource("3_ueh2v")]
 layout_mode = 2

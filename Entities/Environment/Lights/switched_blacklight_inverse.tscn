@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnsnay6jrr7ic"]
+
+[ext_resource type="Texture2D" uid="uid://67m50eh8jeq1" path="res://art/materials/shaders/2DOmniLight.png" id="1_4gbat"]
+[ext_resource type="Script" path="res://Entities/Environment/Lights/switched_light.gd" id="2_43osu"]
+
+[node name="SwitchedBlacklightInversePointlight" type="PointLight2D"]
+position = Vector2(-218, -174)
+range_z_min = -512
+range_z_max = 512
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.737255)
+texture = ExtResource("1_4gbat")
+texture_scale = 3.0
+script = ExtResource("2_43osu")
+inverse = true

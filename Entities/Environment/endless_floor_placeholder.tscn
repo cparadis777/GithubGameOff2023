@@ -30,6 +30,7 @@ collision_layer = 24
 collision_mask = 3
 
 [node name="InfiniteLine" type="CollisionShape2D" parent="InfiniteFloorStaticBody"]
+position = Vector2(0, 1)
 shape = SubResource("WorldBoundaryShape2D_wshx0")
 
 [node name="FloorTiles" type="Node2D" parent="."]

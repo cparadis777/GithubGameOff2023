@@ -15,12 +15,16 @@ var State = States.ROLLING
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+signal died
+
 func _ready():
 	velocity = Vector2.RIGHT * SPEED
 	$HurtEffect/Star.hide()
+	died.connect(StageManager._on_NPC_died)
 
 func jump():
 	velocity.y = JUMP_VELOCITY
+
 
 func _physics_process(delta):
 	if State in [ States.ROLLING, States.JUMPING ]:
@@ -28,10 +32,6 @@ func _physics_process(delta):
 		move_and_slide()
 	elif State == States.KNOCKBACK:
 		move_and_slide()
-		
-	
-	
-
 
 
 func apply_gravity(delta):
@@ -42,7 +42,8 @@ func apply_gravity(delta):
 func _on_timer_timeout():
 	if State in [ States.ROLLING ]:
 		velocity = -velocity.clamp(Vector2.LEFT * SPEED, Vector2.RIGHT * SPEED )
-		$Appearance.scale.x = sign(velocity.x)
+		if abs(velocity.x) > 0:
+			$Appearance.scale.x = sign(velocity.x)
 
 
 func die():
@@ -52,22 +53,22 @@ func die():
 	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
 	$DecisionTimer.stop()
 	$CollisionShape2D.call_deferred("set_disabled", true)
+	died.emit(name)
 
-func _on_hit(damage, impactVector, _damageType, knockback):
+func _on_hit(attackPacket : AttackPacket):
 	if State in [States.ROLLING, States.JUMPING]:
 		$HurtNoises.play()
-		health -= damage
+		health -= attackPacket.damage
 		if health <= 0:
 			die()
-		elif knockback == true:
+			return
+		elif attackPacket.knockback == true:
 			State = States.KNOCKBACK
-			var knockbackSpeed = 250.0
-			velocity = impactVector * knockbackSpeed
-			$IframesTimer.start()
-			$AnimationPlayer.play("hit")
+			var knockbackMultiplier = 1.25
+			velocity = attackPacket.impact_vector * attackPacket.knockback_speed * knockbackMultiplier
+		$IframesTimer.start()
+		$AnimationPlayer.play("hit")
 			#$HurtEffect/Star.show()
-
-
 
 
 func _on_iframes_timer_timeout():

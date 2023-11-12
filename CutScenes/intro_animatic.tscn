@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=19 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="9_3vd6b"]
 [ext_resource type="PackedScene" uid="uid://b527h0udon0w5" path="res://Levels/placeholder/Level_01_Interior.tscn" id="9_cgfvo"]
 [ext_resource type="PackedScene" uid="uid://bdqawiqxlij23" path="res://Levels/placeholder/MockLevel.tscn" id="11_l5voa"]
+[ext_resource type="PackedScene" uid="uid://bpcm0ph14ms2a" path="res://Levels/placeholder/Level_02_Interior.tscn" id="12_t5qcy"]
 
 [sub_resource type="Gradient" id="Gradient_1fdak"]
 colors = PackedColorArray(0, 0, 0, 1, 0.234514, 0.154286, 0.209769, 1)
@@ -578,10 +579,11 @@ text = "IanC Mock Level"
 script = ExtResource("7_e1fgr")
 scene = ExtResource("11_l5voa")
 
-[node name="ContainerStackingStartButton2" type="Button" parent="Slide4-TitleMenu/Buttons"]
+[node name="GuacLevel_2_Interior" type="Button" parent="Slide4-TitleMenu/Buttons"]
 layout_mode = 2
-text = "<blank>"
+text = "Guac Level 2"
 script = ExtResource("7_e1fgr")
+scene = ExtResource("12_t5qcy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -51,7 +51,7 @@ shape = SubResource("SegmentShape2D_r5xtv")
 disabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_n7xin")]
-position = Vector2(-158, 83)
+position = Vector2(-159, 88)
 
 [node name="ExteriorTextures" type="Node2D" parent="."]
 

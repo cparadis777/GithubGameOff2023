@@ -8,6 +8,8 @@ extends "res://Entities/Environment/Containers/BaseContainer.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Exterior.show()
+	
 	var left_wall = $LeftCollision
 	var right_wall = $RightCollision
 	var top_wall = $TopCollision
