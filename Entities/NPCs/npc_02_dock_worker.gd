@@ -13,7 +13,7 @@ var original_doll_scale : Vector2
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@export var health_max = 100
+@export var health_max = 200
 @onready var health = health_max
 
 var avatar_root : Node2D
@@ -79,7 +79,6 @@ func begin_dying():
 	State = States.DYING
 	$AnimationPlayer.play("die")
 	$HitBox.set_deferred("disabled", true)
-	$Behaviours/Attacks/HeavyMeleeAttack/AttackSmear.hide()
 
 func begin_decaying():
 	State = States.DEAD
