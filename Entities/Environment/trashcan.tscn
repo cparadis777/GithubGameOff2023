@@ -44,6 +44,7 @@ offset = Vector2(-0.28656, -14.6351)
 [node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_xbvcy")
 volume_db = -9.0
+bus = &"sfx"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -30)

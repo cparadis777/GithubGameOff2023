@@ -578,7 +578,7 @@ text = "IanC Mock Level"
 script = ExtResource("7_e1fgr")
 scene = ExtResource("11_l5voa")
 
-[node name="ContainerStackingStartButton2" type="Button" parent="Slide4-TitleMenu/Buttons"]
+[node name="BlankButton" type="Button" parent="Slide4-TitleMenu/Buttons"]
 layout_mode = 2
 text = "<blank>"
 script = ExtResource("7_e1fgr")

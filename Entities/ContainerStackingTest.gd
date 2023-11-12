@@ -7,14 +7,13 @@ var current_weight:int
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$ProgressBar.value = 0
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+	find_child("FightButton").pressed.connect(_on_fight_button_pressed)
 
 func add_weight(weight:int) -> void:
 	self.current_weight += weight
 	var new_percentage = Utils.normalize_value(self.current_weight, 0, target_weight)
 	$ProgressBar.value = new_percentage
 
+
+func _on_fight_button_pressed():
+	StageManager.set_playspace_parameters($DropPoints.export_data())

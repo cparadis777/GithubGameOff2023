@@ -3,14 +3,15 @@ extends Area2D
 var player_near : bool = false
 var pressed : bool = false
 
-@export var linked_node : Node2D
+@export var linked_nodes : Array[Node]
 signal toggled(pressed)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if linked_node != null and is_instance_valid(linked_node):
-		if linked_node.has_method("_on_switch_toggled"):
-			toggled.connect(linked_node._on_switch_toggled)
+	for linked_node in linked_nodes:
+		if linked_node != null and is_instance_valid(linked_node):
+			if linked_node.has_method("_on_switch_toggled"):
+				toggled.connect(linked_node._on_switch_toggled)
 
 func toggle_switch():
 	var rotations = [ -PI/4.0, PI/4.0 ]

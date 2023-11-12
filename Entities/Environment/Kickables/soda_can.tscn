@@ -33,3 +33,4 @@ shape = SubResource("CircleShape2D_jf14e")
 
 [node name="kick_noises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_4rqnp")
+bus = &"sfx"

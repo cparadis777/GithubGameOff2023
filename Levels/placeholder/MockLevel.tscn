@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Levels/placeholder/MockLevel.gd" id="1_8r86v"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_5mtnp"]
 [ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="3_8t4jp"]
-[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/trashcan.tscn" id="4_vdqaf"]
+[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="4_vdqaf"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="5_kpchj"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="5_ksw2d"]
 [ext_resource type="PackedScene" uid="uid://dm2tosesjfq22" path="res://Entities/Environment/destructible_wall.tscn" id="6_46m30"]

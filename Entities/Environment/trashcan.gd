@@ -3,12 +3,13 @@ extends RigidBody2D
 var kicked = false
 
 @export var soda_can : PackedScene = preload("res://Entities/Environment/Kickables/soda_can.tscn")
+@export var max_hits = 2
 var hits = 0
-var max_hits = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	for crack in $DamageSprites.get_children():
+		crack.hide()
 
 func spawn_soda_cans(impactVector):
 	for i in range(randi_range(3,7)):

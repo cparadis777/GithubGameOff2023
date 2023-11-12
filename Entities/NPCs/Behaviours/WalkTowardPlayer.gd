@@ -16,7 +16,7 @@ func _ready():
 	await owner.ready
 	prepare_decision_timer()
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-	original_doll_scale = owner.get_node("PaperDoll").scale
+	original_doll_scale = owner.avatar_root.scale
 
 func activate():
 	State = States.ACTIVE

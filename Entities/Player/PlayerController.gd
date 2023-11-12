@@ -296,7 +296,7 @@ func _on_fast_punch_hurtbox_body_entered(body):
 
 func _on_strong_punch_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		if state_machine.state.name == "StrongPunch":
+		if state_machine.state.name in ["StrongPunch", "Dash"]:
 			var knockback_magnitude = 3.0
 			var uppercut = false
 			inflict_harm(body, knockback_magnitude, uppercut)

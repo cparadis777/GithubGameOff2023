@@ -2,9 +2,10 @@ extends Node
 
 var current_level
 var current_player
+var playspace_parameters: Dictionary
 
-var beat_the_boss_screen : PackedScene = preload("res://CutScenes/BeatTheBoss.tscn")
-var player_dead_scene: PackedScene = preload("res://CutScenes/PlayerDead.tscn")
+var beat_the_boss_screen : PackedScene = preload("res://CutScenes/BeatTheBossWinCutscene.tscn")
+var player_dead_scene: PackedScene = preload("res://CutScenes/PlayerDeadLoseCutscene.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +16,9 @@ func change_scene_to(scene):
 	if scene is PackedScene:
 		# add some animated transitions later.
 		get_tree().change_scene_to_packed(scene)
+	elif scene is String:
+		get_tree().change_scene_to_file(scene)
+
 
 func _on_NPC_died(npc_name):
 	if "boss" in npc_name.to_lower():
@@ -29,3 +33,8 @@ func end_game(status):
 			change_scene_to(beat_the_boss_screen)
 		"lose":
 			change_scene_to(player_dead_scene)
+
+
+func set_playspace_parameters(data:Dictionary) -> void:
+	self.playspace_parameters = data
+	print(self.playspace_parameters)
