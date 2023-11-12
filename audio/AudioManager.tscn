@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgc4ihpc28ck8"]
+
+[ext_resource type="Script" path="res://audio/AudioManager.gd" id="1_uk81m"]
+[ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="2_2u8ci"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_uk81m")
+
+[node name="Track1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_2u8ci")
