@@ -53,6 +53,7 @@ func _ready():
 	original_body_scale = $Body/CyberRoninSprites.scale
 	original_sprite_position = $Body/CyberRoninSprites.position
 
+
 func flip_sprites():
 	if abs(velocity.x) > 0:
 		$Body.scale.x = sign(velocity.x) * original_body_scale.x
