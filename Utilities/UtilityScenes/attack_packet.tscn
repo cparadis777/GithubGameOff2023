@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://box4j3n0x07gr"]
+
+[ext_resource type="Script" path="res://Utilities/UtilityScenes/attack_packet.gd" id="1_dg73a"]
+
+[node name="AttackPacket_Guide" type="Node2D"]
+script = ExtResource("1_dg73a")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Combat is like a dance: dancers have to lead and follow.
+
+Attack Packets deliver information about each attack. They could also contain logic which the follow (injured party) could rely on.
+"
+autowrap_mode = 2

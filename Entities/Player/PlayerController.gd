@@ -260,19 +260,21 @@ func disable_all_hurtboxes():
 
 
 func inflict_harm(body, knockback_magnitude : float = 1.0, uppercut: bool = false):
-	var damage = 10.0
-	var impactVector = self.global_position.direction_to(body.global_position)
+	var attackPacket = AttackPacket.new()
+	attackPacket.damage = 10.0
+	attackPacket.impact_vector = self.global_position.direction_to(body.global_position)
 	# impactVector is normalized.. so we need knockback_magnitude to amplify it.
 	var up_force = 1.5
 	if uppercut: 
-		impactVector += Vector2.UP * up_force
-	impactVector *= knockback_magnitude
-	var damageType = Globals.DamageTypes.IMPACT
-
+		attackPacket.impact_vector += Vector2.UP * up_force
+	attackPacket.impact_vector *= knockback_magnitude
+	#var damageType = Globals.DamageTypes.IMPACT
+	attackPacket.knockback = (knockback_magnitude > 0.9)
+	attackPacket.damage_type = Globals.DamageTypes.IMPACT
+	
 	if body.has_method("_on_hit"):
 		hit.connect(body._on_hit)
-		var knockback = (knockback_magnitude > 0.9)
-		hit.emit(damage, impactVector, damageType, knockback)
+		hit.emit(attackPacket)
 		hit.disconnect(body._on_hit)
 
 
@@ -296,19 +298,19 @@ func _on_fast_punch_hurtbox_body_entered(body):
 
 func _on_strong_punch_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		if state_machine.state.name == "StrongPunch":
+		if state_machine.state.name in ["StrongPunch", "Dash"]:
 			var knockback_magnitude = 3.0
 			var uppercut = false
 			inflict_harm(body, knockback_magnitude, uppercut)
 
 
 #receive injury
-func _on_hit(damage, _impactVector, _damageType : Globals.DamageTypes = Globals.DamageTypes.IMPACT, knockback: bool = false):
+func _on_hit(attackPacket):
 	if !iframes and (state_machine.state.name not in [ "Dying", "Dead"]):
-		health -= damage
+		health -= attackPacket.damage
 		injured.emit()
 		$IFrames.start()
-		if knockback:
+		if attackPacket.knockback:
 			pass # TODO, implement knockback
 
 		if health <= 0:

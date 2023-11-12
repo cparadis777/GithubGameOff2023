@@ -55,17 +55,17 @@ func die():
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	died.emit(name)
 
-func _on_hit(damage, impactVector, _damageType, knockback):
+func _on_hit(attackPacket : AttackPacket):
 	if State in [States.ROLLING, States.JUMPING]:
 		$HurtNoises.play()
-		health -= damage
+		health -= attackPacket.damage
 		if health <= 0:
 			die()
 			return
-		elif knockback == true:
+		elif attackPacket.knockback == true:
 			State = States.KNOCKBACK
-			var knockbackSpeed = 100.0
-			velocity = impactVector * knockbackSpeed
+			var knockbackMultiplier = 1.25
+			velocity = attackPacket.impact_vector * attackPacket.knockback_speed * knockbackMultiplier
 		$IframesTimer.start()
 		$AnimationPlayer.play("hit")
 			#$HurtEffect/Star.show()
