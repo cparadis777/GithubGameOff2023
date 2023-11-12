@@ -34,14 +34,14 @@ func die():
 	await get_tree().create_timer(0.5).timeout
 	queue_free()
 
-func _on_hit(_damage, impactVector, _damageType, _knockback):
+func _on_hit(attackPacket : AttackPacket):
 	if !kicked:
-		spawn_soda_cans(impactVector)
+		spawn_soda_cans(attackPacket.impact_vector)
 		
 	freeze = false
-	var intensity = 15.0
+	var knockbackMultiplier = 1.5
 	$HurtNoises.play()
-	apply_central_impulse(impactVector * intensity + Vector2.UP * 10.0 * intensity)
+	apply_central_impulse( (attackPacket.impact_vector + Vector2.UP) * attackPacket.knockback_speed * knockbackMultiplier)
 	kicked = true
 	hits += 1
 	spawn_cracks()

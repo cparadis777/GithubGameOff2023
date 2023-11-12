@@ -26,6 +26,8 @@ var State :States = States.INITIALIZING :
 	get:
 		return State
 
+
+
 var previous_state : States
 
 func _ready():
@@ -96,10 +98,13 @@ func play_hurt_noise():
 func knockback(knockbackVector):
 	var magnitude = 66.0 # two thirds as much as a regular NPC
 	velocity = knockbackVector * magnitude
+
+
 	
-func _on_hit(damage, _impactVector, _damageType, _knockback):
+func _on_hit(attackPacket : AttackPacket):
 	if not State in [ States.DYING, States.DEAD, States.INITIALIZING, States.IFRAMES ]:
-		health -= damage
+
+		health -= attackPacket.damage
 		if health <= 0:
 			begin_dying()
 		else:
@@ -107,9 +112,8 @@ func _on_hit(damage, _impactVector, _damageType, _knockback):
 			#$HurtFlash.show()
 			$AnimationPlayer.play("hurt")
 			initiate_iframes()
-			if _knockback:
-				knockback(_impactVector)
-
+			if attackPacket.knockback:
+				knockback(attackPacket.impact_vector)
 
 
 func _on_decay_timer_timeout():
