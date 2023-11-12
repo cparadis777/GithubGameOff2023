@@ -16,7 +16,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var health_max = 100
 @onready var health = health_max
 
-
+var avatar_root : Node2D
 
 enum States { INITIALIZING, PAUSED, IDLE, ALERT, IFRAMES, DYING, DEAD }
 var State :States = States.INITIALIZING :
@@ -32,7 +32,12 @@ func _ready():
 	$Behaviours/Movement/WalkTowardPlayer.activate()
 	$Behaviours/Attacks/HeavyMeleeAttack.activate()
 	
-	original_doll_scale = $PaperDoll.scale
+	if has_node("Sprites"):
+		avatar_root = $Sprites
+	elif has_node("PaperDoll"):
+		avatar_root = $PaperDoll.scale
+	original_doll_scale = avatar_root.scale
+	
 	State = States.ALERT
 	$HurtFlash.hide()
 
@@ -62,7 +67,7 @@ func apply_gravity(delta):
 	
 
 func update_animations():
-	$PaperDoll.scale.x = signf(velocity.x) * original_doll_scale.x
+	avatar_root.scale.x = signf(velocity.x) * original_doll_scale.x
 	$Behaviours.scale.x = signf(velocity.x)
 	if abs(velocity.x) > 0:
 		var anim = $AnimationPlayer.current_animation
@@ -109,7 +114,7 @@ func _on_hit(damage, _impactVector, _damageType, _knockback):
 
 
 func _on_decay_timer_timeout():
-	$PaperDoll.hide()
+	avatar_root.hide()
 	$BloodTimer.start()
 
 
@@ -120,6 +125,8 @@ func _on_blood_timer_timeout():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "die":
 		begin_decaying()
+	elif anim_name == "melee_attack":
+		pass # handled in update_animations() already.
 
 
 func _on_i_frames_timer_timeout():
