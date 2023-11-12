@@ -16,9 +16,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var health_max = 200
 @onready var health = health_max
 
+@onready var animation_player = $AnimationPlayer
 var avatar_root : Node2D
 
-enum States { INITIALIZING, PAUSED, IDLE, ALERT, IFRAMES, DYING, DEAD }
+enum Goals { ATTACK, DEFEND } # add RELAX, RELOCATE later.
+var current_goal = Goals.ATTACK
+
+enum States { INITIALIZING, PAUSED, IDLE, ALERT, IFRAMES, DEFENDING, DYING, DEAD }
 var State :States = States.INITIALIZING :
 	set(value):
 		previous_state = State
@@ -33,6 +37,7 @@ var previous_state : States
 func _ready():
 	$Behaviours/Movement/WalkTowardPlayer.activate()
 	$Behaviours/Attacks/HeavyMeleeAttack.activate()
+	$Behaviours/Defenses/ArmShieldDefense.activate()
 	
 	if has_node("Sprites"):
 		avatar_root = $Sprites
@@ -43,12 +48,25 @@ func _ready():
 	State = States.ALERT
 	$HurtFlash.hide()
 
+	$DecisionTimer.start()
+
+func activate():
+	# consider putting the DecisionTimer start in here.
+	# that will let levels spawn without paused NPCs
+	pass
+	
+
 func _physics_process(delta):
 	if State == States.ALERT:
-		for attack in $Behaviours/Attacks.get_children():
-			if attack.has_method("is_active") and attack.is_active():
-				attack.attempt_to_attack()
-		
+		if current_goal == Goals.ATTACK:
+			for attack in $Behaviours/Attacks.get_children():
+				if attack.has_method("is_active") and attack.is_active():
+					attack.attempt_to_attack()
+		elif current_goal == Goals.DEFEND:
+			for defense in $Behaviours/Defenses.get_children():
+				if defense.has_method("is_active") and defense.is_active():
+					defense.attempt_to_defend()
+			
 		for movement in $Behaviours/Movement.get_children():
 			if movement.is_active():
 				velocity += movement.get_movement_vector(delta)
@@ -102,7 +120,7 @@ func knockback(knockbackVector):
 
 	
 func _on_hit(attackPacket : AttackPacket):
-	if not State in [ States.DYING, States.DEAD, States.INITIALIZING, States.IFRAMES ]:
+	if State in [ States.IDLE, States.ALERT ]:
 
 		health -= attackPacket.damage
 		if health <= 0:
@@ -114,7 +132,11 @@ func _on_hit(attackPacket : AttackPacket):
 			initiate_iframes()
 			if attackPacket.knockback:
 				knockback(attackPacket.impact_vector)
-
+	elif State == States.DEFENDING:
+		# play a symbol clash noise or something.
+		# maybe knock back the player
+		$Behaviours/Defenses/ArmShieldDefense._on_hit(attackPacket)
+		
 
 func _on_decay_timer_timeout():
 	avatar_root.hide()
@@ -136,3 +158,7 @@ func _on_i_frames_timer_timeout():
 	State = previous_state
 	$HurtFlash.hide()
 
+
+
+func _on_decision_timer_timeout():
+	current_goal = Goals.values().pick_random()
