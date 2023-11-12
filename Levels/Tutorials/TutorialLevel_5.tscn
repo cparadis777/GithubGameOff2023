@@ -21,9 +21,6 @@ position = Vector2(10, 11)
 [node name="DownArrow" parent="BaseContainer" index="4"]
 position = Vector2(0, 42)
 
-[node name="Exterior" parent="BaseContainer" index="5"]
-visible = false
-
 [node name="SwitchDemo" parent="BaseContainer" index="8" instance=ExtResource("3_tamoy")]
 position = Vector2(-82, 61)
 animation_name = "fast_punch"
@@ -39,23 +36,24 @@ flip_h = true
 position = Vector2(-84, 19)
 texture = ExtResource("4_xxja8")
 
+[node name="NextLevelDoor" parent="BaseContainer" index="10"]
+position = Vector2(-111, -77)
+rotation = -1.5708
+
 [node name="Player" parent="." index="1"]
-position = Vector2(177, 94)
+position = Vector2(119, 70)
 
-[node name="NextLevelDoor" parent="." index="2"]
-position = Vector2(-118, -77)
-
-[node name="JumpThroughPlatform" parent="." index="3" instance=ExtResource("2_y80d6")]
-position = Vector2(-107, -44)
-
-[node name="Obstacles" type="Node2D" parent="." index="4"]
+[node name="Obstacles" type="Node2D" parent="." index="2"]
 
 [node name="VendingMachine" parent="Obstacles" index="0" instance=ExtResource("5_jonlp")]
 position = Vector2(-57, 93)
 
-[node name="MovingGirder" parent="." index="5" instance=ExtResource("6_dn4kt")]
+[node name="MovingGirder" parent="." index="3" instance=ExtResource("6_dn4kt")]
 position = Vector2(10, 87)
 trigger_node_path = NodePath("../Switch")
+
+[node name="JumpThroughPlatform" parent="." index="5" instance=ExtResource("2_y80d6")]
+position = Vector2(-107, -44)
 
 [node name="Switch" parent="." index="6" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("7_hwa8q")]
 position = Vector2(-123, 94)
