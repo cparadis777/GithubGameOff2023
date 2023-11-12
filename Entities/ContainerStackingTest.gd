@@ -7,6 +7,7 @@ var current_weight:int
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$ProgressBar.value = 0
+	find_child("FightButton").pressed.connect(_on_fight_button_pressed)
 
 func add_weight(weight:int) -> void:
 	self.current_weight += weight
@@ -14,5 +15,5 @@ func add_weight(weight:int) -> void:
 	$ProgressBar.value = new_percentage
 
 
-func _on_quit_button_return_to_menu_pressed():
+func _on_fight_button_pressed():
 	StageManager.set_playspace_parameters($DropPoints.export_data())
