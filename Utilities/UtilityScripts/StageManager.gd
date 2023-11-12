@@ -4,8 +4,8 @@ var current_level
 var current_player
 var playspace_parameters: Dictionary
 
-var beat_the_boss_screen : PackedScene = preload("res://CutScenes/BeatTheBoss.tscn")
-var player_dead_scene: PackedScene = preload("res://CutScenes/PlayerDead.tscn")
+var beat_the_boss_screen : PackedScene = preload("res://CutScenes/BeatTheBossWinCutscene.tscn")
+var player_dead_scene: PackedScene = preload("res://CutScenes/PlayerDeadLoseCutscene.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
