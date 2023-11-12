@@ -15,7 +15,7 @@ func _ready():
 func physics_update(delta):
 	move_forward(delta)
 	
-func move_forward(delta):
+func move_forward(_delta):
 	player.velocity.x = player.SPEED * 0.33 * player.get_last_known_direction()
 	player.move_and_slide()
 	
