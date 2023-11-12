@@ -151,7 +151,14 @@ func detect_moving_platform() -> AnimatableBody2D:
 			moving_platform_detected = candidate
 	return moving_platform_detected
 	
-
+func detect_npcs_underfoot():
+	var npcs_detected = []
+	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
+	for candidate in candidate_bodies:
+		if candidate.is_in_group("Enemies") or "npc" in candidate.name.to_lower():
+			npcs_detected.push_back(candidate)
+	return npcs_detected
+	
 ## ====---- State Transitions ----====
 
 # opportunities to refactor.
