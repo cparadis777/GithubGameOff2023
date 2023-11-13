@@ -17,6 +17,14 @@ var speed = SPEED # for state machine
 var health = health_max
 var temporary_health_bonus = 0
 
+@export var damage_defaults := {
+	"FastPunch":10,
+	"StrongPunch":20, # plus charge time
+	"DescendingKick":25,
+	"Dash":15
+}
+
+
 var iframes : bool = false
 
 # relocated to $state_machine node.. per https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
@@ -43,7 +51,6 @@ func _enter_tree():
 	
 
 func _ready():
-	$Body/Actions/strong_punch/HurtBox/StrongCollisionShape.disabled = true
 	$Body/Actions/fast_punch/HurtBox/CollisionShape2D.disabled = true
 	$ReferenceRunCycle.hide()
 	hud.show()
@@ -54,10 +61,12 @@ func _ready():
 	original_sprite_position = $Body/CyberRoninSprites.position
 	hit.connect(StageManager._on_damage_packet_sent)
 
+
 func flip_sprites():
 	if abs(velocity.x) > 0:
 		$Body.scale.x = sign(velocity.x) * original_body_scale.x
-	
+		$StateMachine.scale.x = $Body.scale.x
+
 func get_last_known_direction():
 	if $Body.scale.x > 0:
 		return 1
@@ -77,8 +86,7 @@ func _physics_process(_delta):
 func play_run_animation():
 	if $AnimationPlayer.current_animation != "run":
 		$AnimationPlayer.play("run")
-	#$Body/CyberRoninSprites.play("run")
-
+	
 
 
 
@@ -89,13 +97,9 @@ func play_jump_peak_animation():
 
 
 func play_idle_animation():
-	
-#	position.x = floor(position.x)
-#	position.y = floor(position.y)
 	if $AnimationPlayer.current_animation != "idle":
 		$AnimationPlayer.play("idle")
-	#$Body/CyberRoninSprites.stop()
-	#$Body/CyberRoninSprites.play("idle")
+
 
 func play_somersault_animation(anim_name_surfix : String):
 	# somersault_initiate or somersault_execute
@@ -116,19 +120,6 @@ func initiate_debugging_protocol():
 #		get_viewport().get_camera_2d().zoom = Vector2(0.25, 0.25)
 #	else:
 #		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
-
-
-#func spawn_bullet_toward_mouse():
-#	var targetVector = global_position.direction_to(get_global_mouse_position())
-#	var bulletScene = preload("res://Entities/Projectiles/bullet_basic.tscn")
-#	var bulletNode = bulletScene.instantiate()
-#	var muzzleDistance = 15.0
-#	var heightVector = Vector2(0, -10)
-#	bulletNode.global_position = global_position + targetVector * muzzleDistance + heightVector
-#	bulletNode.look_at(targetVector)
-#	add_sibling(bulletNode)
-#	bulletNode.activate(targetVector)
-
 
 
 
@@ -160,15 +151,7 @@ func detect_npcs_underfoot():
 			npcs_detected.push_back(candidate)
 	return npcs_detected
 	
-## ====---- State Transitions ----====
 
-# opportunities to refactor.
-	# Currently, there are three places which might trigger a new animation or new logic...
-		# _on_animation_player_animation_finished()
-		# signals, like _on_landed() or _on_double_jump_somersault_initiated()
-		# _on_state_transitioned.
-	# Pick one and standardize on it.
-	
 
 #888888888888                                             88           88                                       
 #     88                                                  ""    ,d     ""                                       
@@ -260,7 +243,7 @@ func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 func disable_all_hurtboxes():
 	var hurtboxes = [ 
 		$Body/Actions/fast_punch/HurtBox/CollisionShape2D,
-		$Body/Actions/strong_punch/HurtBox/StrongCollisionShape,
+		#$Body/Actions/strong_punch/HurtBox/StrongCollisionShape,
 		$Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D,
 	]
 
@@ -268,10 +251,10 @@ func disable_all_hurtboxes():
 		hurtbox.set_deferred("disabled", true)
 
 
-func inflict_harm(body, knockback_magnitude : float = 1.0, uppercut: bool = false):
+func inflict_harm(body, damage: float = 10.0, knockback_magnitude : float = 1.0, uppercut: bool = false):
 	var attackPacket = AttackPacket.new()
 	attackPacket.recipient = body
-	attackPacket.damage = 10.0
+	attackPacket.damage = damage
 	attackPacket.impact_vector = self.global_position.direction_to(body.global_position)
 	# impactVector is normalized.. so we need knockback_magnitude to amplify it.
 	var up_force = 1.5
@@ -293,7 +276,7 @@ func inflict_harm(body, knockback_magnitude : float = 1.0, uppercut: bool = fals
 func _on_descending_kick_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 		if state_machine.state.name == "DescendingKick":
-			inflict_harm(body, true)
+			inflict_harm(body, 20, true, false)
 			velocity.x = -velocity.x
 			velocity.y = - 1.25 * JUMP_VELOCITY
 			state_machine.transition_to("Air", {"do_jump" = true})
@@ -304,15 +287,15 @@ func _on_fast_punch_hurtbox_body_entered(body):
 			var punch_animations = ["fast_punch_1", "fast_punch_2", "fast_punch_3"]
 			var knockback_magnitude = punch_animations.find(last_fast_punch_animation)
 			var uppercut = (last_fast_punch_animation == "fast_punch_3")
-			inflict_harm(body, knockback_magnitude, uppercut)
+			inflict_harm(body, 10, knockback_magnitude, uppercut)
 
-
-func _on_strong_punch_hurtbox_body_entered(body):
-	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		if state_machine.state.name in ["StrongPunch", "Dash"]:
-			var knockback_magnitude = 3.0
-			var uppercut = false
-			inflict_harm(body, knockback_magnitude, uppercut)
+#
+#func _on_strong_punch_hurtbox_body_entered(body):
+#	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
+#		if state_machine.state.name in ["StrongPunch", "Dash"]:
+#			var knockback_magnitude = 3.0
+#			var uppercut = false
+#			inflict_harm(body, knockback_magnitude, uppercut)
 
 
 #receive injury

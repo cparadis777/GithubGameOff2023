@@ -13,11 +13,13 @@ var direction
 @export var speed_multiplier : float = 2.75
 var dash_speed : float
 var timer
+var damage
 
 func _ready():
 	super()
 
 	await owner.ready
+	damage = player.damage_defaults[name]
 	dash_speed = player.speed * speed_multiplier
 
 	if player.has_method("_on_dash_started"):

@@ -9,6 +9,9 @@ var time_of_entry : int # msec
 var last_polling_time : int = time_of_entry
 var interval_between_polls : int = 200 #msec
 
+var final_charge_duration : int
+var damage
+
 @export var moving : bool = false
 @export var cancel_frames_active: bool = false
 
@@ -18,7 +21,9 @@ func _ready():
 	charge_vfx.hide()
 	super()
 	await owner.ready
+	damage = player.damage_defaults[name]
 	started.connect(player._on_strong_punch_started)
+	$HurtBox/StrongCollisionShape.disabled = true
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_update(delta):
@@ -82,6 +87,7 @@ func move_forward(_delta):
 #	moving = false
 
 func execute_punch():
+	final_charge_duration = Time.get_ticks_msec() - time_of_entry
 	charge_vfx.lifetime = 0.5
 	charge_vfx.emitting = false
 	SubState = SubStates.EXECUTING
@@ -94,6 +100,7 @@ func hold_for_key_release():
 	
 
 func enter(_msg := {}) -> void:
+	final_charge_duration = 0
 	time_of_entry = Time.get_ticks_msec()
 	started.emit() # to the player
 	SubState = SubStates.CHARGING
@@ -128,3 +135,15 @@ func _on_player_animation_finished(anim_name):
 			state_machine.transition_to("Run")
 		else:
 			state_machine.transition_to("Idle")
+
+
+func _on_hurt_box_body_entered(body):
+	if state_machine.state == self:
+		if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
+			var charge_multiplier = clampf(float(final_charge_duration) / 500.0, 1.0, 3.5)
+			var actual_damage = floor(damage * charge_multiplier)
+			var knockback_magnitude = 3.0
+			var uppercut = false
+			
+			
+			player.inflict_harm(body, actual_damage, knockback_magnitude, uppercut)

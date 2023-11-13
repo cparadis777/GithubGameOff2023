@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=86 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://Utilities/UtilityScripts/StateMachine.gd" id="10_6ualt"]
 [ext_resource type="Texture2D" uid="uid://bcegm346f4cwp" path="res://art/placeholder/glove.png" id="11_1m3yk"]
 [ext_resource type="Script" path="res://Entities/Player/Idle.gd" id="11_jtylp"]
-[ext_resource type="Texture2D" uid="uid://cnaxu2cut8lyw" path="res://art/placeholder/boot.png" id="12_en4ep"]
 [ext_resource type="Script" path="res://Entities/Player/Run.gd" id="12_oq1kf"]
 [ext_resource type="Script" path="res://Entities/Player/Air.gd" id="13_a17mm"]
 [ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="14_fp8yf"]
@@ -130,15 +129,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7h8"]
 size = Vector2(27, 32)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
-radius = 23.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ucv"]
 size = Vector2(16, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o20hr"]
 atlas = ExtResource("4_gxpwb")
 region = Rect2(191, 193.5, 106, 104)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
+radius = 23.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_55nlg"]
 streams_count = 1
@@ -201,7 +200,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
+tracks/0/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -485,7 +484,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
+tracks/3/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -585,7 +584,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
+tracks/1/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -702,7 +701,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
+tracks/2/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -851,7 +850,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
+tracks/2/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -988,7 +987,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
+tracks/1/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1161,7 +1160,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
+tracks/1/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1384,7 +1383,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
+tracks/2/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1494,7 +1493,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
+tracks/0/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1797,37 +1796,6 @@ rotation = -0.0265049
 scale = Vector2(0.582148, 0.582148)
 texture = ExtResource("11_1m3yk")
 
-[node name="strong_punch" type="Node2D" parent="Body/Actions"]
-
-[node name="ChargeParticles" type="CPUParticles2D" parent="Body/Actions/strong_punch"]
-visible = false
-z_index = 1
-position = Vector2(-15, -18)
-amount = 48
-lifetime = 0.5
-direction = Vector2(-1, 2.08165e-12)
-gravity = Vector2(2.08165e-12, 2.08165e-12)
-initial_velocity_min = 40.0
-initial_velocity_max = 80.0
-
-[node name="HurtBox" type="Area2D" parent="Body/Actions/strong_punch"]
-position = Vector2(44, -14)
-rotation = 0.0314482
-collision_layer = 0
-collision_mask = 10
-
-[node name="StrongCollisionShape" type="CollisionShape2D" parent="Body/Actions/strong_punch/HurtBox"]
-position = Vector2(-0.28299, -8.99555)
-shape = SubResource("CircleShape2D_pmdka")
-disabled = true
-
-[node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/strong_punch"]
-visible = false
-self_modulate = Color(0.219608, 0.482353, 0.670588, 1)
-position = Vector2(27.6421, -27.6421)
-rotation = -0.0821496
-texture = ExtResource("12_en4ep")
-
 [node name="descending_kick" type="Node2D" parent="Body/Actions"]
 
 [node name="HurtBox" type="Area2D" parent="Body/Actions/descending_kick"]
@@ -2035,9 +2003,30 @@ horizontal_alignment = 1
 
 [node name="StrongPunch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("charge_vfx")]
 script = ExtResource("27_487ye")
-moving = true
-cancel_frames_active = true
-charge_vfx = NodePath("../../Body/Actions/strong_punch/ChargeParticles")
+charge_vfx = NodePath("ChargeParticles")
+
+[node name="ChargeParticles" type="CPUParticles2D" parent="StateMachine/StrongPunch"]
+visible = false
+z_index = 1
+position = Vector2(-15, -18)
+amount = 48
+lifetime = 0.5
+direction = Vector2(-1, 2.08165e-12)
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+
+[node name="HurtBox" type="Area2D" parent="StateMachine/StrongPunch"]
+position = Vector2(44, -14)
+rotation = 0.0314482
+scale = Vector2(1, 1)
+collision_layer = 0
+collision_mask = 10
+
+[node name="StrongCollisionShape" type="CollisionShape2D" parent="StateMachine/StrongPunch/HurtBox"]
+position = Vector2(-0.28299, -8.99555)
+shape = SubResource("CircleShape2D_pmdka")
+disabled = true
 
 [node name="FastPunch" type="Node2D" parent="StateMachine"]
 script = ExtResource("28_amcrx")
@@ -2109,7 +2098,7 @@ pitch_scale = 1.25
 
 [node name="FollowThrough" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("34_npuaa")
-volume_db = -1.96
+volume_db = 3.0
 pitch_scale = 1.1
 
 [node name="WhipCrack" type="AudioStreamPlayer2D" parent="Audio"]
@@ -2134,8 +2123,8 @@ position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_m8oiq")
 
 [connection signal="body_entered" from="Body/Actions/fast_punch/HurtBox" to="." method="_on_fast_punch_hurtbox_body_entered"]
-[connection signal="body_entered" from="Body/Actions/strong_punch/HurtBox" to="." method="_on_strong_punch_hurtbox_body_entered"]
 [connection signal="body_entered" from="Body/Actions/descending_kick/HurtBox" to="." method="_on_descending_kick_hurtbox_body_entered"]
 [connection signal="timeout" from="StateMachine/Dead/Timer" to="StateMachine/Dead" method="_on_timer_timeout"]
+[connection signal="body_entered" from="StateMachine/StrongPunch/HurtBox" to="StateMachine/StrongPunch" method="_on_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/FastPunch/UnbrokenSequenceTimer" to="StateMachine/FastPunch" method="_on_unbroken_sequence_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

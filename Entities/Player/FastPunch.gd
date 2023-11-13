@@ -2,6 +2,7 @@ extends PlayerState
 
 var sequence_animations = ["fast_punch_1","fast_punch_2","fast_punch_3"]
 var punch_num_in_sequence = 0
+var damage
 
 @export var time_before_sequence_resets : float = 2.0
 
@@ -9,7 +10,7 @@ var punch_num_in_sequence = 0
 func _ready():
 	super()
 	await owner.ready 
-	
+	damage = player.damage_defaults[name]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_update(delta):
