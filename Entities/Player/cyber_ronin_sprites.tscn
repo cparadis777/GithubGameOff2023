@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://bxyn1mq357nt6"]
+[gd_scene load_steps=129 format=3 uid="uid://bxyn1mq357nt6"]
 
 [ext_resource type="Material" uid="uid://1wyuo2vl67hk" path="res://art/materials/player_hit_flash.tres" id="1_a2rkb"]
 [ext_resource type="Texture2D" uid="uid://dmuqf453q41ks" path="res://art/player/cyber-ronin_dash.png" id="2_islpf"]
@@ -15,21 +15,25 @@
 atlas = ExtResource("2_islpf")
 region = Rect2(0, 0, 115, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m552x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_42gkf"]
 atlas = ExtResource("3_qvoy6")
 region = Rect2(0, 0, 115, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ulmfx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipuhv"]
 atlas = ExtResource("3_qvoy6")
 region = Rect2(115, 0, 115, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wj4f6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ahjd"]
 atlas = ExtResource("3_qvoy6")
 region = Rect2(230, 0, 115, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p6fqp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6spl"]
 atlas = ExtResource("3_qvoy6")
 region = Rect2(345, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imj6d"]
+atlas = ExtResource("3_qvoy6")
+region = Rect2(460, 0, 115, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cjtln"]
 atlas = ExtResource("4_ovc6f")
@@ -492,16 +496,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m552x")
+"texture": SubResource("AtlasTexture_42gkf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ulmfx")
+"texture": SubResource("AtlasTexture_ipuhv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wj4f6")
+"texture": SubResource("AtlasTexture_5ahjd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p6fqp")
+"texture": SubResource("AtlasTexture_i6spl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imj6d")
 }],
 "loop": false,
 "name": &"descending_kick",
@@ -898,6 +905,4 @@ animations = [{
 material = ExtResource("1_a2rkb")
 position = Vector2(18, -31)
 sprite_frames = SubResource("SpriteFrames_adh0r")
-animation = &"run"
-frame = 4
-frame_progress = 0.524198
+animation = &"descending_kick"

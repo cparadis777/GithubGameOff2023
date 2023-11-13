@@ -625,10 +625,10 @@ tracks/4/path = NodePath("Body/CyberRoninSprites:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0, 3]
+"values": [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1759,8 +1759,6 @@ polygon = PackedVector2Array(-6, -18, -20, -29, -6, -28, 0, -45, 5, -30, 17, -30
 
 [node name="CyberRoninSprites" parent="Body" instance=ExtResource("5_tbet1")]
 animation = &"idle"
-frame = 0
-frame_progress = 0.0
 
 [node name="SpeedLines" type="AnimatedSprite2D" parent="Body"]
 visible = false
@@ -1971,7 +1969,7 @@ texture = ExtResource("9_047q4")
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("10_6ualt")
-initial_state = NodePath("Air")
+initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node2D" parent="StateMachine"]
 script = ExtResource("11_jtylp")
@@ -2111,7 +2109,7 @@ pitch_scale = 1.25
 
 [node name="FollowThrough" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("34_npuaa")
-volume_db = -3.2
+volume_db = 3.0
 pitch_scale = 1.1
 
 [node name="WhipCrack" type="AudioStreamPlayer2D" parent="Audio"]
@@ -2129,7 +2127,7 @@ visible = false
 [node name="PlatformDetector" type="Area2D" parent="."]
 position = Vector2(0, 5)
 collision_layer = 0
-collision_mask = 10
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector"]
 position = Vector2(0, -5)
