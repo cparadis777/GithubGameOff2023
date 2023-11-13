@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b1y1s1mkpdm5x"
+path="res://.godot/imported/ManifestViolenceProject_Fight Theme.mp3-0dc75c2b499363d3d276eab09ca41d0b.mp3str"
+
+[deps]
+
+source_file="res://audio/music/ManifestViolenceProject_Fight Theme.mp3"
+dest_files=["res://.godot/imported/ManifestViolenceProject_Fight Theme.mp3-0dc75c2b499363d3d276eab09ca41d0b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

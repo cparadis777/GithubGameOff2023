@@ -32,7 +32,7 @@ func physics_update(_delta: float) -> void:
 
 	elif Input.is_action_just_pressed("jump"):
 		state_machine.transition_to("Air", {do_jump = true})
-	elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+	elif Input.get_axis("move_left", "move_right") != 0:
 		state_machine.transition_to("Run")
 
 	# can also duck and jump down through some platforms.
@@ -46,8 +46,13 @@ func physics_update(_delta: float) -> void:
 
 	elif player.detect_moving_platform() != null:
 		player.move_and_slide()
-	else: # make sure player sprite is snapped to pixels
-		player.global_position = floor(player.global_position)
+	
+	else:
+		player.move_and_slide()
+		if not player.is_on_floor():
+			state_machine.transition_to("Air")
+#	else: # make sure player sprite is snapped to pixels
+#		player.global_position = floor(player.global_position)
 
 
 

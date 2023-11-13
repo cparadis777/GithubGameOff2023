@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var SPEED = 40.0
 @export var JUMP_VELOCITY = -100.0
 
-@export var health_max = 30.0
+@export var health_max = 250.0
 var health = health_max
 
 
@@ -15,12 +15,15 @@ var State = States.ROLLING
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+signal hurt
 signal died
 
 func _ready():
+	$AnimationPlayer.play("RESET")
 	velocity = Vector2.RIGHT * SPEED
-	$HurtEffect/Star.hide()
+	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)
+
 
 func jump():
 	velocity.y = JUMP_VELOCITY
@@ -69,7 +72,7 @@ func _on_hit(attackPacket : AttackPacket):
 		$IframesTimer.start()
 		$AnimationPlayer.play("hit")
 			#$HurtEffect/Star.show()
-
+		hurt.emit(attackPacket)
 
 func _on_iframes_timer_timeout():
 	if State == States.KNOCKBACK:

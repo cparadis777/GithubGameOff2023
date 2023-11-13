@@ -51,6 +51,10 @@ func _on_hurt_box_body_entered(body):
 	if body == StageManager.current_player or body.is_in_group("Player") or "player" in body.name.to_lower():
 		if body.has_method("_on_hit"):
 			var attackPacket = AttackPacket.new()
+			attackPacket.originator = self
+			attackPacket.recipient = body
+			attackPacket.damage_type = Globals.DamageTypes.IMPACT
 			attackPacket.impact_vector = global_position.direction_to(body.global_position)
 			attackPacket.damage_type = Globals.DamageTypes.IMPACT
+			
 			body._on_hit(attackPacket)

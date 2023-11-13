@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=90 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -22,7 +22,7 @@
 [ext_resource type="Script" path="res://Entities/Player/DoubleJump.gd" id="23_r318r"]
 [ext_resource type="Script" path="res://Entities/Player/Landing.gd" id="25_hj8m7"]
 [ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
-[ext_resource type="AudioStream" uid="uid://5kaw3j72bprq" path="res://audio/sfx/player_sfx/player_voicestab_strong.mp3" id="26_5bnsl"]
+[ext_resource type="AudioStream" uid="uid://dc7gsumgrm00a" path="res://audio/sfx/player_sfx/voicestab_strong.mp3" id="26_fcwrm"]
 [ext_resource type="AudioStream" uid="uid://bh0t1hf0r8rtc" path="res://audio/sfx/player_sfx/player_footstep1.mp3" id="26_g2ra6"]
 [ext_resource type="AudioStream" uid="uid://t0fsnacyiibe" path="res://audio/sfx/player_sfx/descending_kick.mp3" id="26_lnchu"]
 [ext_resource type="AudioStream" uid="uid://cntr8a167bnat" path="res://audio/sfx/player_sfx/light_woosh.mp3" id="26_mxutp"]
@@ -36,10 +36,13 @@
 [ext_resource type="AudioStream" uid="uid://dmdyophg1b664" path="res://audio/sfx/player_sfx/player_bigpunch_windup.mp3" id="33_1iw53"]
 [ext_resource type="AudioStream" uid="uid://ciyy6k8ypat5t" path="res://audio/sfx/player_sfx/player_landing.mp3" id="33_pqi3m"]
 [ext_resource type="AudioStream" uid="uid://q3jmglkcy5h4" path="res://audio/sfx/player_sfx/player_voicestab_1.mp3" id="34_05ijs"]
+[ext_resource type="AudioStream" uid="uid://bnhvkw7iuhmln" path="res://audio/sfx/player_sfx/voicestab1.mp3" id="34_g2d7q"]
 [ext_resource type="AudioStream" uid="uid://dnnrx2b3i55sw" path="res://audio/sfx/player_sfx/player_bigpunch_swing.mp3" id="34_npuaa"]
 [ext_resource type="AudioStream" uid="uid://c8jvjcuc1vre4" path="res://audio/sfx/player_sfx/player_voicestab_2.mp3" id="35_2qmis"]
+[ext_resource type="AudioStream" uid="uid://c7nwlhk5rumyb" path="res://audio/sfx/player_sfx/voicestab2.mp3" id="35_4xerg"]
 [ext_resource type="AudioStream" uid="uid://ddnyec60dy814" path="res://audio/sfx/player_sfx/player_bigpunch_impact.mp3" id="35_d8w2s"]
 [ext_resource type="AudioStream" uid="uid://bbofqj1ipoq3a" path="res://audio/sfx/player_sfx/player_voicestab_3.mp3" id="36_eop45"]
+[ext_resource type="AudioStream" uid="uid://crhop5u1slpyn" path="res://audio/sfx/player_sfx/voicestab3.mp3" id="36_kvnmj"]
 [ext_resource type="AudioStream" uid="uid://n4n0l2bsxb5l" path="res://audio/sfx/player_sfx/windup1.mp3" id="36_mtjp3"]
 [ext_resource type="AudioStream" uid="uid://br5l83jx1plaa" path="res://audio/sfx/player_sfx/windup2.mp3" id="37_3onqu"]
 
@@ -142,9 +145,9 @@ region = Rect2(191, 193.5, 106, 104)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_55nlg"]
 streams_count = 1
-random_pitch = 1.07
+random_pitch = 1.05
 random_volume_offset_db = 0.0
-stream_0/stream = ExtResource("26_5bnsl")
+stream_0/stream = ExtResource("26_fcwrm")
 stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1rom0"]
@@ -181,13 +184,19 @@ stream_0/stream = ExtResource("33_pqi3m")
 stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0mkmi"]
-streams_count = 3
-stream_0/stream = ExtResource("34_05ijs")
+streams_count = 6
+stream_0/stream = ExtResource("34_g2d7q")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("35_2qmis")
+stream_1/stream = ExtResource("35_4xerg")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("36_eop45")
+stream_2/stream = ExtResource("36_kvnmj")
 stream_2/weight = 1.0
+stream_3/stream = ExtResource("34_05ijs")
+stream_3/weight = 3.0
+stream_4/stream = ExtResource("35_2qmis")
+stream_4/weight = 3.0
+stream_5/stream = ExtResource("36_eop45")
+stream_5/weight = 3.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ntyix"]
 streams_count = 2
@@ -1420,6 +1429,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_6b5og"]
 resource_name = "somersault_execute"
+length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1440,10 +1450,10 @@ tracks/1/path = NodePath("Body/CyberRoninSprites:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [1, 4]
+"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1646,18 +1656,6 @@ tracks/12/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Audio/StrongAttackNoise:volume_db")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
@@ -2009,7 +2007,8 @@ script = ExtResource("15_7astd")
 
 [node name="StrongAttackNoise" type="AudioStreamPlayer2D" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_55nlg")
-pitch_scale = 0.98
+volume_db = 2.081
+pitch_scale = 1.07
 bus = &"sfx"
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="Audio"]
@@ -2055,12 +2054,13 @@ pitch_scale = 1.25
 
 [node name="Windup_Weak" type="AudioStreamPlayer2D" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_ntyix")
+volume_db = -8.0
 pitch_scale = 1.25
 
 [node name="FollowThrough" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("34_npuaa")
 volume_db = 3.0
-pitch_scale = 1.1
+pitch_scale = 1.25
 
 [node name="WhipCrack" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("35_d8w2s")

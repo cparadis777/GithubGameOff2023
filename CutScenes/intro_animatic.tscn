@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=18 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
@@ -6,12 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="3_n5ip3"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
 [ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="5_ww7q0"]
-[ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="6_aruj1"]
 [ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="7_e1fgr"]
 [ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="9_3vd6b"]
 [ext_resource type="PackedScene" uid="uid://b527h0udon0w5" path="res://Levels/placeholder/Level_01_Interior.tscn" id="9_cgfvo"]
+[ext_resource type="PackedScene" uid="uid://bgc4ihpc28ck8" path="res://audio/AudioManager.tscn" id="11_fl0tt"]
 [ext_resource type="PackedScene" uid="uid://bdqawiqxlij23" path="res://Levels/placeholder/MockLevel.tscn" id="11_l5voa"]
-[ext_resource type="PackedScene" uid="uid://bpcm0ph14ms2a" path="res://Levels/placeholder/Level_02_Interior.tscn" id="12_t5qcy"]
 
 [sub_resource type="Gradient" id="Gradient_1fdak"]
 colors = PackedColorArray(0, 0, 0, 1, 0.234514, 0.154286, 0.209769, 1)
@@ -157,58 +156,46 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("AudioStreamPlayer:playing")
+tracks/10/path = NodePath("Camera2D/escToSkipLabel:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Camera2D/escToSkipLabel:visible")
+tracks/11/path = NodePath("Camera2D/escToSkipLabel:self_modulate")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Camera2D/escToSkipLabel:self_modulate")
+tracks/12/path = NodePath("Slide1-Me/ThisIsMeLabel:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [true]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Slide1-Me/ThisIsMeLabel:visible")
+tracks/13/path = NodePath("Slide4-TitleMenu/Buttons:visible")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Slide4-TitleMenu/Buttons:visible")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -341,58 +328,46 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("AudioStreamPlayer:playing")
+tracks/10/path = NodePath("Camera2D/escToSkipLabel:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Camera2D/escToSkipLabel:visible")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
 "times": PackedFloat32Array(0, 8.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Camera2D/escToSkipLabel:self_modulate")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Camera2D/escToSkipLabel:self_modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
 "times": PackedFloat32Array(2, 3.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Slide1-Me/ThisIsMeLabel:visible")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Slide1-Me/ThisIsMeLabel:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
 "times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Slide4-TitleMenu/Buttons:visible")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Slide4-TitleMenu/Buttons:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
 "times": PackedFloat32Array(7.2, 9.5, 10),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
@@ -507,10 +482,6 @@ offset_right = 159.0
 offset_bottom = -697.0
 text = "This is my Boss"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_aruj1")
-volume_db = -9.0
-
 [node name="Slide4-TitleMenu" type="Node2D" parent="."]
 visible = false
 
@@ -579,11 +550,10 @@ text = "IanC Mock Level"
 script = ExtResource("7_e1fgr")
 scene = ExtResource("11_l5voa")
 
-[node name="GuacLevel_2_Interior" type="Button" parent="Slide4-TitleMenu/Buttons"]
+[node name="ContainerStackingStartButton2" type="Button" parent="Slide4-TitleMenu/Buttons"]
 layout_mode = 2
-text = "Guac Level 2"
+text = "<blank>"
 script = ExtResource("7_e1fgr")
-scene = ExtResource("12_t5qcy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -605,5 +575,7 @@ text = "...esc to skip"
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Press any key..."
+
+[node name="AudioManager" parent="." instance=ExtResource("11_fl0tt")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

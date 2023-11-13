@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ty7sstgurklx"
-path="res://.godot/imported/cyber-sprinter_placeholder.png-dfd70a07bc81d2f659082857de88069f.ctex"
+uid="uid://cwarjebrvytm"
+path="res://.godot/imported/cyber-ronin-icon.png-1ba54e508cc3bed7942b1d41ac9d4df4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Enemies/Cyber-Sprinter/cyber-sprinter_placeholder.png"
-dest_files=["res://.godot/imported/cyber-sprinter_placeholder.png-dfd70a07bc81d2f659082857de88069f.ctex"]
+source_file="res://art/player/cyber-ronin-icon.png"
+dest_files=["res://.godot/imported/cyber-ronin-icon.png-1ba54e508cc3bed7942b1d41ac9d4df4.ctex"]
 
 [params]
 

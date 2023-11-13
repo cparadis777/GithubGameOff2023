@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="11_wyb6i"]
 [ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="12_hiokx"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="12_ujqxr"]
+[ext_resource type="PackedScene" uid="uid://bgc4ihpc28ck8" path="res://audio/AudioManager.tscn" id="15_7nkfj"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
 offsets = PackedFloat32Array(0, 0.301818, 0.829091)
@@ -113,6 +114,7 @@ position = Vector2(84, -41)
 position = Vector2(0, 41)
 
 [node name="Walls" type="Node2D" parent="."]
+scale = Vector2(1.33, 1.33)
 
 [node name="Wall" type="StaticBody2D" parent="Walls"]
 position = Vector2(-313, 2.08165e-12)
@@ -273,5 +275,7 @@ energy = 1.2
 [node name="LightSwitch" parent="Switches" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("12_ujqxr")]
 position = Vector2(141, -1)
 linked_nodes = [NodePath("../../Lighting/InverseBlacklight"), NodePath("../../Lighting/InverseBlacklight2"), NodePath("../../Lighting/InverseBlacklight3"), NodePath("../../Lighting/SwitchedLight")]
+
+[node name="AudioManager" parent="." instance=ExtResource("15_7nkfj")]
 
 [editable path="Platforms/MovingPlatform"]

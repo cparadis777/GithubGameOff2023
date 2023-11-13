@@ -22,7 +22,7 @@ func update_health_display(health_remaining : float):
 
 
 
-func _on_player_hit():
+func _on_player_hit(_attackPacket):
 	update_health_display(player.health)
 	
 
