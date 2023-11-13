@@ -201,7 +201,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -485,7 +485,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
+tracks/3/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -585,7 +585,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -702,7 +702,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -851,7 +851,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -988,7 +988,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1161,7 +1161,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1384,7 +1384,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1494,7 +1494,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Body/Actions/strong_punch/HurtBox/StrongCollisionShape:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1666,15 +1666,36 @@ tracks/14/path = NodePath("StateMachine/StrongPunch")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0.2, 0.65),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"start_moving"
-}, {
-"args": [],
-"method": &"stop_moving"
+"method": &"hold_for_key_release"
 }]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("StateMachine/StrongPunch:cancel_frames_active")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("StateMachine/StrongPunch:moving")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.65),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
@@ -1780,13 +1801,24 @@ texture = ExtResource("11_1m3yk")
 
 [node name="strong_punch" type="Node2D" parent="Body/Actions"]
 
+[node name="ChargeParticles" type="CPUParticles2D" parent="Body/Actions/strong_punch"]
+visible = false
+z_index = 1
+position = Vector2(-15, -18)
+amount = 48
+lifetime = 0.5
+direction = Vector2(-1, 2.08165e-12)
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+
 [node name="HurtBox" type="Area2D" parent="Body/Actions/strong_punch"]
 position = Vector2(44, -14)
 rotation = 0.0314482
 collision_layer = 0
 collision_mask = 10
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Actions/strong_punch/HurtBox"]
+[node name="StrongCollisionShape" type="CollisionShape2D" parent="Body/Actions/strong_punch/HurtBox"]
 position = Vector2(-0.28299, -8.99555)
 shape = SubResource("CircleShape2D_pmdka")
 disabled = true
@@ -2003,8 +2035,11 @@ text = "That is unfortunate.
 You died."
 horizontal_alignment = 1
 
-[node name="StrongPunch" type="Node2D" parent="StateMachine"]
+[node name="StrongPunch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("charge_vfx")]
 script = ExtResource("27_487ye")
+moving = true
+cancel_frames_active = true
+charge_vfx = NodePath("../../Body/Actions/strong_punch/ChargeParticles")
 
 [node name="FastPunch" type="Node2D" parent="StateMachine"]
 script = ExtResource("28_amcrx")

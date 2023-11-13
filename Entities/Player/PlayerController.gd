@@ -43,7 +43,7 @@ func _enter_tree():
 	
 
 func _ready():
-	$Body/Actions/strong_punch/HurtBox/CollisionShape2D.disabled = true
+	$Body/Actions/strong_punch/HurtBox/StrongCollisionShape.disabled = true
 	$Body/Actions/fast_punch/HurtBox/CollisionShape2D.disabled = true
 	$ReferenceRunCycle.hide()
 	hud.show()
@@ -245,6 +245,7 @@ func _on_dash_started():
 
 func fast_punch(anim_name): # comes from $StateMachine/FastPunch
 	if state_machine.state.name == "FastPunch":
+		# play 3 animation sequence.
 		if not "punch" in animation_player.current_animation:
 			last_fast_punch_animation = anim_name
 			animation_player.play(anim_name)
@@ -259,7 +260,7 @@ func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 func disable_all_hurtboxes():
 	var hurtboxes = [ 
 		$Body/Actions/fast_punch/HurtBox/CollisionShape2D,
-		$Body/Actions/strong_punch/HurtBox/CollisionShape2D,
+		$Body/Actions/strong_punch/HurtBox/StrongCollisionShape,
 		$Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D,
 	]
 

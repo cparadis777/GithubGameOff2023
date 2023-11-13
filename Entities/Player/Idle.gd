@@ -47,10 +47,12 @@ func physics_update(_delta: float) -> void:
 	elif player.detect_moving_platform() != null:
 		player.move_and_slide()
 	
-	elif !player.is_on_floor():
-		state_machine.transition_to("Air")
-	else: # make sure player sprite is snapped to pixels
-		player.global_position = floor(player.global_position)
+	else:
+		player.move_and_slide()
+		if not player.is_on_floor():
+			state_machine.transition_to("Air")
+#	else: # make sure player sprite is snapped to pixels
+#		player.global_position = floor(player.global_position)
 
 
 
