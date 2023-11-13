@@ -19,8 +19,8 @@ signal hurt
 signal died
 
 func _ready():
+	$AnimationPlayer.play("RESET")
 	velocity = Vector2.RIGHT * SPEED
-	$HurtEffect/Star.hide()
 	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)
 

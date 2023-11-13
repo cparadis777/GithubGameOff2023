@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=87 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -135,6 +135,9 @@ size = Vector2(16, 15)
 [sub_resource type="AtlasTexture" id="AtlasTexture_o20hr"]
 atlas = ExtResource("4_gxpwb")
 region = Rect2(191, 193.5, 106, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_un5oy"]
+size = Vector2(20, 38)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
 radius = 23.0
@@ -437,6 +440,18 @@ tracks/19/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("StateMachine/Dash/DashHurtBox/DashCollisionShape:disabled")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_xnet1"]
 resource_name = "begin_dying"
@@ -484,67 +499,67 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
+tracks/3/path = NodePath("Body/SpeedLines:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Body/SpeedLines:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0.02, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0, 9]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Body/CyberRoninSprites:animation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/CyberRoninSprites:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"dash"]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Body/CyberRoninSprites:frame")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/CyberRoninSprites:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 0]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Body/SpeedLines:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body/SpeedLines:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-13, -21), Vector2(-13, -21)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Audio/Dash:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Audio/Dash:playing")
+tracks/8/path = NodePath("Audio/AttackNoises:playing")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -556,14 +571,14 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Audio/AttackNoises:playing")
+tracks/9/path = NodePath("StateMachine/Dash/DashHurtBox/DashCollisionShape:disabled")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_d33i7"]
@@ -1960,6 +1975,15 @@ script = ExtResource("25_hj8m7")
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("18_6dmrt")
 
+[node name="DashHurtBox" type="Area2D" parent="StateMachine/Dash"]
+collision_layer = 0
+collision_mask = 66
+
+[node name="DashCollisionShape" type="CollisionShape2D" parent="StateMachine/Dash/DashHurtBox"]
+position = Vector2(13, -19)
+shape = SubResource("RectangleShape2D_un5oy")
+disabled = true
+
 [node name="Dying" type="Node2D" parent="StateMachine"]
 script = ExtResource("26_npw41")
 
@@ -2123,6 +2147,7 @@ shape = SubResource("RectangleShape2D_m8oiq")
 
 [connection signal="body_entered" from="Body/Actions/fast_punch/HurtBox" to="." method="_on_fast_punch_hurtbox_body_entered"]
 [connection signal="body_entered" from="Body/Actions/descending_kick/HurtBox" to="." method="_on_descending_kick_hurtbox_body_entered"]
+[connection signal="body_entered" from="StateMachine/Dash/DashHurtBox" to="StateMachine/Dash" method="_on_dash_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/Dead/Timer" to="StateMachine/Dead" method="_on_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/StrongPunch/HurtBox" to="StateMachine/StrongPunch" method="_on_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/FastPunch/UnbrokenSequenceTimer" to="StateMachine/FastPunch" method="_on_unbroken_sequence_timer_timeout"]
