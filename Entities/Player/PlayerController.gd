@@ -52,7 +52,7 @@ func _ready():
 	#play_idle_animation()
 	original_body_scale = $Body/CyberRoninSprites.scale
 	original_sprite_position = $Body/CyberRoninSprites.position
-
+	hit.connect(StageManager._on_damage_packet_sent)
 
 func flip_sprites():
 	if abs(velocity.x) > 0:
@@ -270,6 +270,7 @@ func disable_all_hurtboxes():
 
 func inflict_harm(body, knockback_magnitude : float = 1.0, uppercut: bool = false):
 	var attackPacket = AttackPacket.new()
+	attackPacket.recipient = body
 	attackPacket.damage = 10.0
 	attackPacket.impact_vector = self.global_position.direction_to(body.global_position)
 	# impactVector is normalized.. so we need knockback_magnitude to amplify it.
@@ -286,7 +287,8 @@ func inflict_harm(body, knockback_magnitude : float = 1.0, uppercut: bool = fals
 		hit.emit(attackPacket)
 		hit.disconnect(body._on_hit)
 
-
+	# StageManager also gets a copy of the attackPacket
+	
 
 func _on_descending_kick_hurtbox_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
