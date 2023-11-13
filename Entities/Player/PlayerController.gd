@@ -37,7 +37,7 @@ var original_sprite_position : Vector2
 
 var last_fast_punch_animation : String
 
-signal hit(damage, impactVector, damageType, knockback)
+signal hit(attackPacket)
 signal injured
 
 
@@ -55,12 +55,11 @@ func _ready():
 	$ReferenceRunCycle.hide()
 	hud.show()
 	injured.connect(hud._on_player_hit)
-	
+	injured.connect(StageManager._on_damage_packet_processed)
 	#play_idle_animation()
 	original_body_scale = $Body/CyberRoninSprites.scale
 	original_sprite_position = $Body/CyberRoninSprites.position
-	hit.connect(StageManager._on_damage_packet_sent)
-
+	
 
 func flip_sprites():
 	if abs(velocity.x) > 0:
@@ -302,7 +301,7 @@ func _on_fast_punch_hurtbox_body_entered(body):
 func _on_hit(attackPacket):
 	if !iframes and (state_machine.state.name not in [ "Dying", "Dead"]):
 		health -= attackPacket.damage
-		injured.emit()
+		injured.emit(attackPacket)
 		$IFrames.start()
 		if attackPacket.knockback:
 			pass # TODO, implement knockback

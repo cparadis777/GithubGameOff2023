@@ -2019,7 +2019,6 @@ initial_velocity_max = 80.0
 [node name="HurtBox" type="Area2D" parent="StateMachine/StrongPunch"]
 position = Vector2(44, -14)
 rotation = 0.0314482
-scale = Vector2(1, 1)
 collision_layer = 0
 collision_mask = 10
 

@@ -1,25 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cu7rl382f0dfc"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Popups/popup_numbers.gd" id="1_xpgn8"]
+[ext_resource type="StyleBox" uid="uid://b32ggnvds7hat" path="res://UI/Themes/popup_text_style_box_flat.tres" id="2_4coqx"]
 [ext_resource type="FontFile" uid="uid://omfb1ygxtm6w" path="res://UI/Themes/fonts/Saira/Saira-Bold.ttf" id="2_mj0w5"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xi18a"]
-bg_color = Color(0.486275, 0.231373, 0.521569, 1)
-skew = Vector2(0.2, 2.08165e-12)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.435294, 0.921569, 0.941176, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-corner_detail = 1
-shadow_color = Color(0.298039, 0.439216, 0.6, 0.6)
-shadow_size = 5
-anti_aliasing = false
-anti_aliasing_size = 2.0
 
 [node name="PopupNumbers" type="Node2D"]
 scale = Vector2(0.33, 0.33)
@@ -37,7 +20,7 @@ offset_right = 12.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xi18a")
+theme_override_styles/panel = ExtResource("2_4coqx")
 
 [node name="Label" type="Label" parent="PanelContainer"]
 layout_mode = 2

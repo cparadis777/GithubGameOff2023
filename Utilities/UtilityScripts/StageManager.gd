@@ -40,14 +40,19 @@ func set_playspace_parameters(data:Dictionary) -> void:
 	print(self.playspace_parameters)
 
 
-func popup_text(text, location : Vector2):
+func popup_text(text, location : Vector2, color):
 	var newPopup = preload("res://Entities/Environment/Popups/popup_numbers.tscn").instantiate()
 	newPopup.global_position = location
 	add_child(newPopup)
-	newPopup.popup(text)
+	newPopup.popup(text, color)
 
-func _on_damage_packet_sent(attackPacket: AttackPacket):
+func _on_damage_packet_processed(attackPacket: AttackPacket):
 	# TODO: perhaps instead of the attacker sending the packet,
 	# the recipient should relay the packet AFTER they take off their armor
 	var location = attackPacket.recipient.global_position + Vector2(0,-40)
-	popup_text(attackPacket.damage, location)
+	var color
+	if attackPacket.recipient == current_player:
+		color = Color.DARK_RED
+	else:
+		color = Color.BLUE_VIOLET
+	popup_text(attackPacket.damage - attackPacket.damage_blocked, location, color)

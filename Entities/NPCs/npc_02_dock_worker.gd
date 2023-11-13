@@ -32,7 +32,7 @@ var State :States = States.INITIALIZING :
 	get:
 		return State
 
-
+signal hurt(attackPacket)
 
 var previous_state : States
 
@@ -51,6 +51,9 @@ func _ready():
 	$HurtFlash.hide()
 
 	$DecisionTimer.start()
+
+	hurt.connect(StageManager._on_damage_packet_processed)
+
 
 func activate():
 	# consider putting the DecisionTimer start in here.
@@ -144,6 +147,7 @@ func _on_hit(attackPacket : AttackPacket):
 	if State in [ States.IDLE, States.ALERT ]:
 
 		health -= attackPacket.damage
+		hurt.emit(attackPacket)
 		if health <= 0:
 			begin_dying()
 		else:
@@ -154,10 +158,11 @@ func _on_hit(attackPacket : AttackPacket):
 			if attackPacket.knockback:
 				knockback(attackPacket.impact_vector)
 	elif State == States.DEFENDING:
+		attackPacket.damage_blocked = attackPacket.damage
 		# play a symbol clash noise or something.
 		# maybe knock back the player
 		$Behaviours/Defenses/ArmShieldDefense._on_hit(attackPacket)
-		
+		hurt.emit(attackPacket)
 
 func _on_decay_timer_timeout():
 	avatar_root.hide()

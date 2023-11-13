@@ -15,12 +15,15 @@ var State = States.ROLLING
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+signal hurt
 signal died
 
 func _ready():
 	velocity = Vector2.RIGHT * SPEED
 	$HurtEffect/Star.hide()
+	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)
+
 
 func jump():
 	velocity.y = JUMP_VELOCITY
@@ -69,7 +72,7 @@ func _on_hit(attackPacket : AttackPacket):
 		$IframesTimer.start()
 		$AnimationPlayer.play("hit")
 			#$HurtEffect/Star.show()
-
+		hurt.emit(attackPacket)
 
 func _on_iframes_timer_timeout():
 	if State == States.KNOCKBACK:
