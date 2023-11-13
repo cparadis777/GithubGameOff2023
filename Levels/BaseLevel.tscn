@@ -44,7 +44,7 @@ shape = SubResource("SegmentShape2D_pjkui")
 shape = SubResource("SegmentShape2D_r5xtv")
 
 [node name="Player" parent="." instance=ExtResource("3_n7xin")]
-position = Vector2(-158, 83)
+position = Vector2(-159, 88)
 
 [node name="NextLevelDoor" parent="." instance=ExtResource("4_embi4")]
 position = Vector2(163, 55)

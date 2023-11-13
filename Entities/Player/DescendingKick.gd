@@ -38,6 +38,10 @@ func physics_update(_delta: float) -> void:
 	
 	# Landing.
 	if player.is_on_floor():
-		# this seems to fire early or too often.. why?
-		state_machine.transition_to("Landing")
+		if player.detect_npcs_underfoot().size() > 0:
+			player.velocity.x = -player.velocity.x
+			state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
+		else:
+			state_machine.transition_to("Landing")
+		
 	

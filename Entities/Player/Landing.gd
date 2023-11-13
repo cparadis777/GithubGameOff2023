@@ -15,14 +15,16 @@ func enter(_msg := {} ) -> void:
 	super()
 #	if abs(Input.get_axis("move_left", "move_right")) > 0:
 #		state_machine.transition_to("Run")
+	player.velocity.y = 0
 	landed.emit() # player will play an animation
-	
 	
 func exit():
 	super()
 
 func physics_update(_delta):
-	if Input.is_action_just_pressed("jump"):
+	if player.detect_npcs_underfoot().size() > 0:
+		state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
+	elif Input.is_action_just_pressed("jump"):
 		state_machine.transition_to("Jump")
 	elif abs(Input.get_axis("move_left", "move_right")) > 0:
 		state_machine.transition_to("Run")

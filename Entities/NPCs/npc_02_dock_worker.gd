@@ -9,6 +9,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var original_doll_scale : Vector2
+var last_known_direction : int = 1
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -19,6 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animation_player = $AnimationPlayer
 var avatar_root : Node2D
 
+@onready var player = StageManager.current_player
 enum Goals { ATTACK, DEFEND } # add RELAX, RELOCATE later.
 var current_goal = Goals.ATTACK
 
@@ -77,18 +79,37 @@ func _physics_process(delta):
 		# no new horizontal movement
 		apply_gravity(delta)
 		move_and_slide()
+	elif State == States.DEFENDING:
+		point_at_player()
+		flip_sprites()
 
+	if velocity.x != 0:
+		last_known_direction = sign(velocity.x)
 
 func apply_gravity(delta):
 	# consider adding an escape if State == States.IFRAMES
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
+
+func point_at_player():
+		
+	if global_position.x < player.global_position.x:
+		velocity.x = abs(velocity.x) * 1
+	else:
+		velocity.x = abs(velocity.x) * -1
+
+	if velocity.x == 0:
+		last_known_direction = sign(player.global_position.x - global_position.x)
+
+
+func flip_sprites():
+	avatar_root.scale.x = last_known_direction * original_doll_scale.x
+	$Behaviours.scale.x = last_known_direction
 	
 
 func update_animations():
-	avatar_root.scale.x = signf(velocity.x) * original_doll_scale.x
-	$Behaviours.scale.x = signf(velocity.x)
+	flip_sprites()
 	if abs(velocity.x) > 0:
 		var anim = $AnimationPlayer.current_animation
 		if anim == "":

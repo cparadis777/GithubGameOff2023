@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var SPEED = 40.0
 @export var JUMP_VELOCITY = -100.0
 
-@export var health_max = 30.0
+@export var health_max = 250.0
 var health = health_max
 
 
