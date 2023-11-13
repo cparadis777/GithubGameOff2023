@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=90 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Utilities/UtilityScripts/StateMachine.gd" id="10_6ualt"]
 [ext_resource type="Texture2D" uid="uid://bcegm346f4cwp" path="res://art/placeholder/glove.png" id="11_1m3yk"]
 [ext_resource type="Script" path="res://Entities/Player/Idle.gd" id="11_jtylp"]
+[ext_resource type="Texture2D" uid="uid://cnaxu2cut8lyw" path="res://art/placeholder/boot.png" id="12_en4ep"]
 [ext_resource type="Script" path="res://Entities/Player/Run.gd" id="12_oq1kf"]
 [ext_resource type="Script" path="res://Entities/Player/Air.gd" id="13_a17mm"]
 [ext_resource type="PackedScene" uid="uid://djciwn4x702tr" path="res://UI/hud.tscn" id="14_fp8yf"]
@@ -21,7 +22,7 @@
 [ext_resource type="Script" path="res://Entities/Player/DoubleJump.gd" id="23_r318r"]
 [ext_resource type="Script" path="res://Entities/Player/Landing.gd" id="25_hj8m7"]
 [ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
-[ext_resource type="AudioStream" uid="uid://5kaw3j72bprq" path="res://audio/sfx/player_sfx/player_voicestab_strong.mp3" id="26_5bnsl"]
+[ext_resource type="AudioStream" uid="uid://dc7gsumgrm00a" path="res://audio/sfx/player_sfx/voicestab_strong.mp3" id="26_fcwrm"]
 [ext_resource type="AudioStream" uid="uid://bh0t1hf0r8rtc" path="res://audio/sfx/player_sfx/player_footstep1.mp3" id="26_g2ra6"]
 [ext_resource type="AudioStream" uid="uid://t0fsnacyiibe" path="res://audio/sfx/player_sfx/descending_kick.mp3" id="26_lnchu"]
 [ext_resource type="AudioStream" uid="uid://cntr8a167bnat" path="res://audio/sfx/player_sfx/light_woosh.mp3" id="26_mxutp"]
@@ -35,10 +36,13 @@
 [ext_resource type="AudioStream" uid="uid://dmdyophg1b664" path="res://audio/sfx/player_sfx/player_bigpunch_windup.mp3" id="33_1iw53"]
 [ext_resource type="AudioStream" uid="uid://ciyy6k8ypat5t" path="res://audio/sfx/player_sfx/player_landing.mp3" id="33_pqi3m"]
 [ext_resource type="AudioStream" uid="uid://q3jmglkcy5h4" path="res://audio/sfx/player_sfx/player_voicestab_1.mp3" id="34_05ijs"]
+[ext_resource type="AudioStream" uid="uid://bnhvkw7iuhmln" path="res://audio/sfx/player_sfx/voicestab1.mp3" id="34_g2d7q"]
 [ext_resource type="AudioStream" uid="uid://dnnrx2b3i55sw" path="res://audio/sfx/player_sfx/player_bigpunch_swing.mp3" id="34_npuaa"]
 [ext_resource type="AudioStream" uid="uid://c8jvjcuc1vre4" path="res://audio/sfx/player_sfx/player_voicestab_2.mp3" id="35_2qmis"]
+[ext_resource type="AudioStream" uid="uid://c7nwlhk5rumyb" path="res://audio/sfx/player_sfx/voicestab2.mp3" id="35_4xerg"]
 [ext_resource type="AudioStream" uid="uid://ddnyec60dy814" path="res://audio/sfx/player_sfx/player_bigpunch_impact.mp3" id="35_d8w2s"]
 [ext_resource type="AudioStream" uid="uid://bbofqj1ipoq3a" path="res://audio/sfx/player_sfx/player_voicestab_3.mp3" id="36_eop45"]
+[ext_resource type="AudioStream" uid="uid://crhop5u1slpyn" path="res://audio/sfx/player_sfx/voicestab3.mp3" id="36_kvnmj"]
 [ext_resource type="AudioStream" uid="uid://n4n0l2bsxb5l" path="res://audio/sfx/player_sfx/windup1.mp3" id="36_mtjp3"]
 [ext_resource type="AudioStream" uid="uid://br5l83jx1plaa" path="res://audio/sfx/player_sfx/windup2.mp3" id="37_3onqu"]
 
@@ -129,6 +133,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7h8"]
 size = Vector2(27, 32)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
+radius = 23.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ucv"]
 size = Vector2(16, 15)
 
@@ -136,17 +143,11 @@ size = Vector2(16, 15)
 atlas = ExtResource("4_gxpwb")
 region = Rect2(191, 193.5, 106, 104)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_un5oy"]
-size = Vector2(20, 38)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
-radius = 23.0
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_55nlg"]
 streams_count = 1
-random_pitch = 1.07
+random_pitch = 1.05
 random_volume_offset_db = 0.0
-stream_0/stream = ExtResource("26_5bnsl")
+stream_0/stream = ExtResource("26_fcwrm")
 stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1rom0"]
@@ -183,13 +184,19 @@ stream_0/stream = ExtResource("33_pqi3m")
 stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0mkmi"]
-streams_count = 3
-stream_0/stream = ExtResource("34_05ijs")
+streams_count = 6
+stream_0/stream = ExtResource("34_g2d7q")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("35_2qmis")
+stream_1/stream = ExtResource("35_4xerg")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("36_eop45")
+stream_2/stream = ExtResource("36_kvnmj")
 stream_2/weight = 1.0
+stream_3/stream = ExtResource("34_05ijs")
+stream_3/weight = 3.0
+stream_4/stream = ExtResource("35_2qmis")
+stream_4/weight = 3.0
+stream_5/stream = ExtResource("36_eop45")
+stream_5/weight = 3.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ntyix"]
 streams_count = 2
@@ -203,7 +210,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
+tracks/0/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -440,18 +447,6 @@ tracks/19/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/20/type = "value"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("StateMachine/Dash/DashHurtBox/DashCollisionShape:disabled")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_xnet1"]
 resource_name = "begin_dying"
@@ -499,67 +494,67 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Body/SpeedLines:frame")
+tracks/3/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/SpeedLines:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0.02, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0, 9]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Body/CyberRoninSprites:animation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body/CyberRoninSprites:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"dash"]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Body/CyberRoninSprites:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 0]
-}
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Body/SpeedLines:position")
+tracks/6/path = NodePath("Body/CyberRoninSprites:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-13, -21), Vector2(-13, -21)]
+"update": 1,
+"values": [0, 0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Audio/Dash:playing")
+tracks/7/path = NodePath("Body/SpeedLines:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"update": 0,
+"values": [Vector2(-13, -21), Vector2(-13, -21)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Audio/AttackNoises:playing")
+tracks/8/path = NodePath("Audio/Dash:playing")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -571,14 +566,14 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("StateMachine/Dash/DashHurtBox/DashCollisionShape:disabled")
+tracks/9/path = NodePath("Audio/AttackNoises:playing")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_d33i7"]
@@ -599,7 +594,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
+tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -639,10 +634,10 @@ tracks/4/path = NodePath("Body/CyberRoninSprites:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
+"values": [0, 3]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -716,7 +711,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
+tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -865,7 +860,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
+tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1002,7 +997,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
+tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1175,7 +1170,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
+tracks/1/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1398,7 +1393,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
+tracks/2/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1508,7 +1503,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:disabled")
+tracks/0/path = NodePath("Body/Actions/strong_punch/HurtBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1661,56 +1656,6 @@ tracks/12/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Audio/StrongAttackNoise:volume_db")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/14/type = "method"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("StateMachine/StrongPunch")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0.15),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"hold_for_key_release"
-}]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("StateMachine/StrongPunch:cancel_frames_active")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.3, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("StateMachine/StrongPunch:moving")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.65),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
 _data = {
@@ -1773,6 +1718,8 @@ polygon = PackedVector2Array(-6, -18, -20, -29, -6, -28, 0, -45, 5, -30, 17, -30
 
 [node name="CyberRoninSprites" parent="Body" instance=ExtResource("5_tbet1")]
 animation = &"idle"
+frame = 0
+frame_progress = 0.0
 
 [node name="SpeedLines" type="AnimatedSprite2D" parent="Body"]
 visible = false
@@ -1810,6 +1757,26 @@ position = Vector2(25.5157, -48.9052)
 rotation = -0.0265049
 scale = Vector2(0.582148, 0.582148)
 texture = ExtResource("11_1m3yk")
+
+[node name="strong_punch" type="Node2D" parent="Body/Actions"]
+
+[node name="HurtBox" type="Area2D" parent="Body/Actions/strong_punch"]
+position = Vector2(44, -14)
+rotation = 0.0314482
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Actions/strong_punch/HurtBox"]
+position = Vector2(-0.28299, -8.99555)
+shape = SubResource("CircleShape2D_pmdka")
+disabled = true
+
+[node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/strong_punch"]
+visible = false
+self_modulate = Color(0.219608, 0.482353, 0.670588, 1)
+position = Vector2(27.6421, -27.6421)
+rotation = -0.0821496
+texture = ExtResource("12_en4ep")
 
 [node name="descending_kick" type="Node2D" parent="Body/Actions"]
 
@@ -1975,15 +1942,6 @@ script = ExtResource("25_hj8m7")
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("18_6dmrt")
 
-[node name="DashHurtBox" type="Area2D" parent="StateMachine/Dash"]
-collision_layer = 0
-collision_mask = 66
-
-[node name="DashCollisionShape" type="CollisionShape2D" parent="StateMachine/Dash/DashHurtBox"]
-position = Vector2(13, -19)
-shape = SubResource("RectangleShape2D_un5oy")
-disabled = true
-
 [node name="Dying" type="Node2D" parent="StateMachine"]
 script = ExtResource("26_npw41")
 
@@ -2025,31 +1983,8 @@ text = "That is unfortunate.
 You died."
 horizontal_alignment = 1
 
-[node name="StrongPunch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("charge_vfx")]
+[node name="StrongPunch" type="Node2D" parent="StateMachine"]
 script = ExtResource("27_487ye")
-charge_vfx = NodePath("ChargeParticles")
-
-[node name="ChargeParticles" type="CPUParticles2D" parent="StateMachine/StrongPunch"]
-visible = false
-z_index = 1
-position = Vector2(-15, -18)
-amount = 48
-lifetime = 0.5
-direction = Vector2(-1, 2.08165e-12)
-gravity = Vector2(2.08165e-12, 2.08165e-12)
-initial_velocity_min = 40.0
-initial_velocity_max = 80.0
-
-[node name="HurtBox" type="Area2D" parent="StateMachine/StrongPunch"]
-position = Vector2(44, -14)
-rotation = 0.0314482
-collision_layer = 0
-collision_mask = 10
-
-[node name="StrongCollisionShape" type="CollisionShape2D" parent="StateMachine/StrongPunch/HurtBox"]
-position = Vector2(-0.28299, -8.99555)
-shape = SubResource("CircleShape2D_pmdka")
-disabled = true
 
 [node name="FastPunch" type="Node2D" parent="StateMachine"]
 script = ExtResource("28_amcrx")
@@ -2071,7 +2006,8 @@ script = ExtResource("15_7astd")
 
 [node name="StrongAttackNoise" type="AudioStreamPlayer2D" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_55nlg")
-pitch_scale = 0.98
+volume_db = 2.081
+pitch_scale = 1.07
 bus = &"sfx"
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="Audio"]
@@ -2117,12 +2053,13 @@ pitch_scale = 1.25
 
 [node name="Windup_Weak" type="AudioStreamPlayer2D" parent="Audio"]
 stream = SubResource("AudioStreamRandomizer_ntyix")
+volume_db = -8.0
 pitch_scale = 1.25
 
 [node name="FollowThrough" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("34_npuaa")
 volume_db = 3.0
-pitch_scale = 1.1
+pitch_scale = 1.25
 
 [node name="WhipCrack" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("35_d8w2s")
@@ -2139,16 +2076,15 @@ visible = false
 [node name="PlatformDetector" type="Area2D" parent="."]
 position = Vector2(0, 5)
 collision_layer = 0
-collision_mask = 10
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector"]
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_m8oiq")
 
 [connection signal="body_entered" from="Body/Actions/fast_punch/HurtBox" to="." method="_on_fast_punch_hurtbox_body_entered"]
+[connection signal="body_entered" from="Body/Actions/strong_punch/HurtBox" to="." method="_on_strong_punch_hurtbox_body_entered"]
 [connection signal="body_entered" from="Body/Actions/descending_kick/HurtBox" to="." method="_on_descending_kick_hurtbox_body_entered"]
-[connection signal="body_entered" from="StateMachine/Dash/DashHurtBox" to="StateMachine/Dash" method="_on_dash_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/Dead/Timer" to="StateMachine/Dead" method="_on_timer_timeout"]
-[connection signal="body_entered" from="StateMachine/StrongPunch/HurtBox" to="StateMachine/StrongPunch" method="_on_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/FastPunch/UnbrokenSequenceTimer" to="StateMachine/FastPunch" method="_on_unbroken_sequence_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
