@@ -113,6 +113,7 @@ position = Vector2(84, -41)
 position = Vector2(0, 41)
 
 [node name="Walls" type="Node2D" parent="."]
+scale = Vector2(1.33, 1.33)
 
 [node name="Wall" type="StaticBody2D" parent="Walls"]
 position = Vector2(-313, 2.08165e-12)
