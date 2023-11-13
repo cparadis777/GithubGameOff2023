@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=26 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="11_wyb6i"]
 [ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="12_hiokx"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="12_ujqxr"]
+[ext_resource type="PackedScene" uid="uid://bgc4ihpc28ck8" path="res://audio/AudioManager.tscn" id="15_7nkfj"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
 offsets = PackedFloat32Array(0, 0.301818, 0.829091)
@@ -288,5 +289,7 @@ visible = false
 [node name="LightSwitch" parent="Switches" node_paths=PackedStringArray("linked_node") instance=ExtResource("12_ujqxr")]
 position = Vector2(141, -1)
 linked_node = NodePath("../../Lighting/SwitchedLight")
+
+[node name="AudioManager" parent="." instance=ExtResource("15_7nkfj")]
 
 [editable path="Platforms/MovingPlatform"]
