@@ -33,6 +33,13 @@ func physics_update(delta):
 	elif SubState == SubStates.EXECUTING and moving:
 		move_forward(delta)
 
+	allow_early_exit()
+	
+func allow_early_exit():
+	# some frames are marked as cancel frames.
+	# if player presses an action during those frames,
+	# they should be permitted to start a new action
+	# see: Masahiro Sakurai https://www.youtube.com/watch?v=LewXWM7HDd8
 	if cancel_frames_active:
 		if Input.is_action_just_pressed("jump"):
 			state_machine.transition_to("Air", {"do_jump" = true})
@@ -106,7 +113,8 @@ func enter(_msg := {}) -> void:
 	
 	
 func exit():
-	reset_vfx
+	player.animation_player.stop()
+	reset_vfx()
 	charge_vfx.hide()
 	moving = false
 	SubState = SubStates.INITIALIZING

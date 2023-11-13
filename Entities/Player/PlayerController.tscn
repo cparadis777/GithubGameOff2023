@@ -1680,7 +1680,7 @@ tracks/15/path = NodePath("StateMachine/StrongPunch:cancel_frames_active")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.3, 0.45),
+"times": PackedFloat32Array(0, 0.05, 0.3, 0.55),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [false, true, false, true]
@@ -2109,7 +2109,7 @@ pitch_scale = 1.25
 
 [node name="FollowThrough" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("34_npuaa")
-volume_db = 3.0
+volume_db = -1.96
 pitch_scale = 1.1
 
 [node name="WhipCrack" type="AudioStreamPlayer2D" parent="Audio"]
