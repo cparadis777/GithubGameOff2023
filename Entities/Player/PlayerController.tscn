@@ -22,8 +22,8 @@
 [ext_resource type="Script" path="res://Entities/Player/Landing.gd" id="25_hj8m7"]
 [ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
 [ext_resource type="PackedScene" uid="uid://dxjihdq7d8mpk" path="res://Entities/Player/player_audio.tscn" id="25_x3gmp"]
+[ext_resource type="AnimationLibrary" uid="uid://cdw7kwxvck8tn" path="res://Entities/Player/PlayerAnimationLibrary.tres" id="26_6myd8"]
 [ext_resource type="Script" path="res://Entities/Player/Dying.gd" id="26_npw41"]
-[ext_resource type="PackedScene" uid="uid://dd2i4vug01jvn" path="res://Entities/Player/player_animations.tscn" id="26_usfop"]
 [ext_resource type="Script" path="res://Entities/Player/Dead.gd" id="27_0qqb8"]
 [ext_resource type="Script" path="res://Entities/Player/StrongPunch.gd" id="27_487ye"]
 [ext_resource type="Script" path="res://Entities/Player/FastPunch.gd" id="28_amcrx"]
@@ -429,6 +429,8 @@ disabled = true
 [node name="CPUParticles2D" type="CPUParticles2D" parent="StateMachine/StrongPunch"]
 visible = false
 position = Vector2(-15, -18)
+amount = 40
+lifetime = 0.5
 direction = Vector2(-1, 2.08165e-12)
 gravity = Vector2(2.08165e-12, 2.08165e-12)
 initial_velocity_max = 40.0
@@ -451,7 +453,10 @@ script = ExtResource("15_7astd")
 
 [node name="Audio" parent="." instance=ExtResource("25_x3gmp")]
 
-[node name="AnimationPlayer" parent="." instance=ExtResource("26_usfop")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": ExtResource("26_6myd8")
+}
 
 [node name="HUD" parent="." instance=ExtResource("14_fp8yf")]
 visible = false
@@ -470,3 +475,4 @@ shape = SubResource("RectangleShape2D_m8oiq")
 [connection signal="timeout" from="StateMachine/Dead/Timer" to="StateMachine/Dead" method="_on_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/StrongPunch/HurtBox" to="StateMachine/StrongPunch" method="_on_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/FastPunch/UnbrokenSequenceTimer" to="StateMachine/FastPunch" method="_on_unbroken_sequence_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

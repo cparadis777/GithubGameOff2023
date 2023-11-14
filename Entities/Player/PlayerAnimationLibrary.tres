@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dd2i4vug01jvn"]
+[gd_resource type="AnimationLibrary" load_steps=17 format=3 uid="uid://cdw7kwxvck8tn"]
 
 [sub_resource type="Animation" id="Animation_tb0g1"]
 length = 0.001
@@ -1471,7 +1471,7 @@ tracks/13/path = NodePath("StateMachine/StrongPunch:moving")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.7),
+"times": PackedFloat32Array(0, 0.35, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -1483,7 +1483,7 @@ tracks/14/path = NodePath("StateMachine/StrongPunch:cancel_frames_active")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.3, 0.65),
+"times": PackedFloat32Array(0, 0.05, 0.35, 0.65),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [false, true, false, true]
@@ -1509,13 +1509,13 @@ tracks/16/path = NodePath("StateMachine/StrongPunch/CPUParticles2D:visible")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
+"times": PackedFloat32Array(0, 0.15, 0.35),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_duudu"]
+[resource]
 _data = {
 "RESET": SubResource("Animation_tb0g1"),
 "begin_dying": SubResource("Animation_xnet1"),
@@ -1533,9 +1533,4 @@ _data = {
 "somersault_execute": SubResource("Animation_6b5og"),
 "somersault_initiate": SubResource("Animation_heygv"),
 "strong_punch": SubResource("Animation_r2a28")
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer"]
-libraries = {
-"": SubResource("AnimationLibrary_duudu")
 }

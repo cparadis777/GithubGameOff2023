@@ -76,7 +76,7 @@ func amplify_vfx(delta):
 		
 	
 func move_forward(_delta):
-	player.velocity.x = player.SPEED * 0.75 * player.get_last_known_direction()
+	player.velocity.x = player.SPEED * 1.25 * player.get_last_known_direction()
 	player.move_and_slide()
 
 # moved to property track in animation player
