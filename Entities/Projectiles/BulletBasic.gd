@@ -17,7 +17,7 @@ func activate(travelVector):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if velocity != null:
-		position += velocity * delta
+		global_position += velocity * delta
 
 
 func _on_timer_timeout():
@@ -27,9 +27,13 @@ func _on_timer_timeout():
 func _on_body_entered(body):
 	if body.has_method("_on_hit"):
 		hit.connect(body._on_hit)
-		var damage = 10
-		var impactVector = velocity
-		var damageType = Globals.DamageTypes.IMPACT
-		var knockback = false
-		hit.emit(damage, impactVector, damageType, knockback)
-		queue_free()
+		var attackPacket = AttackPacket.new()
+		attackPacket.damage = 10
+		attackPacket.originator = self
+		attackPacket.recipient = body
+		attackPacket.impact_vector = velocity
+		attackPacket.damage_type = Globals.DamageTypes.IMPACT
+		attackPacket.knockback = false
+		hit.emit(attackPacket)
+		call_deferred("queue_free")
+		

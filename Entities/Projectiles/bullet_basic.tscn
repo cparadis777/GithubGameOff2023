@@ -19,6 +19,7 @@ fill_to = Vector2(0.625, 0.0792683)
 radius = 9.05539
 
 [node name="BulletBasic" type="Area2D"]
+top_level = true
 script = ExtResource("1_gifub")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

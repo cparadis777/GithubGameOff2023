@@ -89,6 +89,7 @@ func die():
 func _on_hit(attackPacket : AttackPacket):
 	if State in [States.RUNNING, States.JUMPING, States.IDLE]:
 		$HurtNoises.play()
+		reset_attacks()
 		health -= attackPacket.damage
 		if health <= 0:
 			die()
@@ -101,6 +102,11 @@ func _on_hit(attackPacket : AttackPacket):
 		$AnimationPlayer.play("hurt")
 			#$HurtEffect/Star.show()
 		hurt.emit(attackPacket)
+
+func reset_attacks():
+	for attack in $Behaviours/Attacks.get_children():
+		if attack.has_method("stop"):
+			attack.stop()
 
 func _on_iframes_timer_timeout():
 	if State == States.KNOCKBACK:

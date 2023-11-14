@@ -1,0 +1,215 @@
+[gd_scene load_steps=19 format=3 uid="uid://c5en3lqt0m2df"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Traps/star_trap_shooter.gd" id="1_6i0da"]
+[ext_resource type="Texture2D" uid="uid://c4mkrso2beskh" path="res://art/placeholder/star_trap.png" id="1_vmtbw"]
+[ext_resource type="PackedScene" uid="uid://gtmk5sbwr3hj" path="res://Entities/Environment/Traps/Behaviours/shoot_stars.tscn" id="3_m0oxd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfoww"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsqgd"]
+atlas = ExtResource("1_vmtbw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kygyr"]
+atlas = ExtResource("1_vmtbw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbnmq"]
+atlas = ExtResource("1_vmtbw")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbx4j"]
+atlas = ExtResource("1_vmtbw")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo466"]
+atlas = ExtResource("1_vmtbw")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca6cm"]
+atlas = ExtResource("1_vmtbw")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xixo0"]
+atlas = ExtResource("1_vmtbw")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2lu4"]
+atlas = ExtResource("1_vmtbw")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq73k"]
+atlas = ExtResource("1_vmtbw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsjd6"]
+atlas = ExtResource("1_vmtbw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ds01k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsqgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kygyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbnmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbx4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo466")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca6cm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xixo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2lu4")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq73k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq73k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsjd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq73k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq73k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq73k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_ip4xb"]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 7]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Behaviours/Attacks/ShootStars")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"launch_bullet"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mfrm1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ttt3y"]
+_data = {
+"RESET": SubResource("Animation_mfrm1"),
+"shoot": SubResource("Animation_ip4xb")
+}
+
+[node name="StarTrap-Shooter" type="AnimatableBody2D" groups=["Enemies"]]
+script = ExtResource("1_6i0da")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.830646
+shape = SubResource("RectangleShape2D_gfoww")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ds01k")
+animation = &"attack"
+
+[node name="Behaviours" type="Node2D" parent="."]
+
+[node name="Attacks" type="Node2D" parent="Behaviours"]
+
+[node name="ShootStars" parent="Behaviours/Attacks" instance=ExtResource("3_m0oxd")]
+
+[node name="DecisionTimer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ttt3y")
+}
+
+[node name="Debug" type="Node2D" parent="."]
+
+[node name="StateLabel" type="Label" parent="Debug"]
+offset_left = -15.0
+offset_top = -36.0
+offset_right = 25.0
+offset_bottom = -10.0
+theme_override_font_sizes/font_size = 10
+text = "state"
+
+[connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
