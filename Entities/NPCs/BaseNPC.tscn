@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=16 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
@@ -111,12 +111,16 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_plb34"]
 resource_name = "run"
 
+[sub_resource type="Animation" id="Animation_gsqip"]
+resource_name = "idle"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4p0tx"]
 _data = {
 "RESET": SubResource("Animation_iaf2y"),
 "attack": SubResource("Animation_qhpe2"),
 "die": SubResource("Animation_io00w"),
 "hurt": SubResource("Animation_ft728"),
+"idle": SubResource("Animation_gsqip"),
 "run": SubResource("Animation_plb34")
 }
 
@@ -188,5 +192,5 @@ polygon = PackedVector2Array(0, -53.8668, 6.33727, -11.0902, 49.1138, -22.1804, 
 stream = SubResource("AudioStreamRandomizer_s8act")
 bus = &"sfx"
 
-[connection signal="timeout" from="DecisionTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
 [connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]
