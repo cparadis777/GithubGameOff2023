@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=3 uid="uid://bxyn1mq357nt6"]
+[gd_scene load_steps=135 format=3 uid="uid://bxyn1mq357nt6"]
 
 [ext_resource type="Material" uid="uid://1wyuo2vl67hk" path="res://art/materials/player_hit_flash.tres" id="1_a2rkb"]
 [ext_resource type="Texture2D" uid="uid://dmuqf453q41ks" path="res://art/player/cyber-ronin_dash.png" id="2_islpf"]
@@ -11,9 +11,29 @@
 [ext_resource type="Texture2D" uid="uid://o8avnxyy8l88" path="res://art/player/cyber-ronin_run.png" id="9_bpjqb"]
 [ext_resource type="Texture2D" uid="uid://rwndcki88l21" path="res://art/player/cyber-ronin_heavy_punch.png" id="10_jw2d4"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m6dpu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o40sw"]
 atlas = ExtResource("2_islpf")
 region = Rect2(0, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4mid"]
+atlas = ExtResource("2_islpf")
+region = Rect2(115, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ck5m"]
+atlas = ExtResource("2_islpf")
+region = Rect2(230, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_878h0"]
+atlas = ExtResource("2_islpf")
+region = Rect2(345, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwahs"]
+atlas = ExtResource("2_islpf")
+region = Rect2(460, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fof78"]
+atlas = ExtResource("2_islpf")
+region = Rect2(575, 0, 115, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_42gkf"]
 atlas = ExtResource("3_qvoy6")
@@ -487,7 +507,22 @@ region = Rect2(1955, 0, 115, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m6dpu")
+"texture": SubResource("AtlasTexture_o40sw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4mid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ck5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_878h0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwahs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fof78")
 }],
 "loop": true,
 "name": &"dash",
@@ -912,6 +947,4 @@ animations = [{
 material = ExtResource("1_a2rkb")
 position = Vector2(18, -31)
 sprite_frames = SubResource("SpriteFrames_adh0r")
-animation = &"double_jump"
-frame = 5
-frame_progress = 1.0
+animation = &"dash"
