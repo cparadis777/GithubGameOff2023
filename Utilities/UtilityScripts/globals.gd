@@ -1,6 +1,6 @@
 extends Node
 
-enum DifficultyScale {
+enum DifficultyScales {
 	TRIVIAL,
 	SIMPLE,
 	BABY,
