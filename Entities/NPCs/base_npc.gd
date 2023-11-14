@@ -51,14 +51,21 @@ func _physics_process(delta):
 		apply_gravity(delta)
 		move_and_slide()
 		update_animations()
-		if !$Behaviours/Sensors/FloorSensor.is_colliding():
+		if is_at_end_of_platform() or is_obstructed():
 			turn_around()
-		elif $Behaviours/Sensors/ObstacleSensor.is_colliding():
-			turn_around()
+		
 	elif State == States.KNOCKBACK:
 		move_and_slide()
 
+func is_at_end_of_platform():
+		if is_on_floor() and !$Behaviours/Sensors/FloorSensor.is_colliding():
+			return true
 
+func is_obstructed():
+	if $Behaviours/Sensors/ObstacleSensor.is_colliding():
+		return true
+	
+	
 func update_animations():
 	if animation_player.current_animation == "":
 		if animation_player.has_animation(animations[State]):
@@ -110,7 +117,7 @@ func turn_around():
 	direction = -direction
 	if State == States.RUNNING:
 		velocity.x = SPEED * direction
-		velocity = velocity.clamp(Vector2.LEFT * SPEED, Vector2.RIGHT * SPEED )
+		velocity.x = clamp(velocity.x, -SPEED, SPEED )
 	$Appearance.scale.x = direction
 	$Behaviours.scale.x = direction
 	

@@ -169,8 +169,6 @@ polygon = PackedVector2Array(-6, -18, -20, -29, -6, -28, 0, -45, 5, -30, 17, -30
 
 [node name="CyberRoninSprites" parent="Body" instance=ExtResource("5_tbet1")]
 animation = &"idle"
-frame = 0
-frame_progress = 0.0
 
 [node name="SpeedLines" type="AnimatedSprite2D" parent="Body"]
 visible = false
@@ -479,7 +477,7 @@ visible = false
 [node name="PlatformDetector" type="Area2D" parent="."]
 position = Vector2(0, 5)
 collision_layer = 0
-collision_mask = 8
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector"]
 position = Vector2(0, -5)
