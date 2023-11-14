@@ -14,3 +14,8 @@ scene_path = "res://Levels/Containers/Container1.tscn"
 [node name="Container2" type="Node" parent="."]
 script = ExtResource("2_5buau")
 scene_path = "res://Levels/Containers/Container2.tscn"
+
+[node name="Container3" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_type = 1
+scene_path = "res://Levels/Containers/Container2.tscn"
