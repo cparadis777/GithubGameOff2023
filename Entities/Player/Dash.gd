@@ -69,6 +69,8 @@ func _on_dash_hurt_box_body_entered(body):
 			attackPacket.damage = damage
 			attackPacket.originator = self
 			attackPacket.recipient = body
+			attackPacket.knockback = true
+			attackPacket.knockback_speed = 150.0
 			hit.connect(body._on_hit)
 			hit.emit(attackPacket)
 			hit.disconnect(body._on_hit)

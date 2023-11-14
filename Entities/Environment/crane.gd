@@ -44,6 +44,7 @@ func set_current_container(container:StaticBody2D):
 	self.current_container = container
 	self.add_child(self.current_container)
 	self.current_container.position = markers[current_column].position
+	$CraneJaw.position[0] = markers[current_column].position[0]
 
 func create_markers() -> void:
 	for i in range(n_columns):
@@ -59,8 +60,9 @@ func move_container(direction:Utils.Directions) -> void:
 				if current_column < n_columns - 1:
 					self.move_ready = false
 					self.current_column += 1
-					var tween = get_tree().create_tween()
+					var tween = get_tree().create_tween().set_parallel(true)
 					tween.tween_property(self.current_container, "position", self.markers[self.current_column].position, self.move_time)
+					tween.tween_property($CraneJaw, "position", Vector2(self.markers[self.current_column].position[0], $CraneJaw.position[1]), self.move_time)
 					tween.tween_callback(move_done)
 				else:
 					pass
@@ -68,8 +70,9 @@ func move_container(direction:Utils.Directions) -> void:
 				if current_column != 0:
 					self.move_ready = false
 					self.current_column -= 1
-					var tween = get_tree().create_tween()
+					var tween = get_tree().create_tween().set_parallel(true)
 					tween.tween_property(self.current_container, "position", self.markers[self.current_column].position, self.move_time)
+					tween.tween_property($CraneJaw, "position", Vector2(self.markers[self.current_column].position[0], $CraneJaw.position[1]), self.move_time)
 					tween.tween_callback(move_done)
 				else:
 					pass
@@ -79,6 +82,7 @@ func place_container() -> void:
 		self.move_ready = false
 		drop_zone.place_container(self.current_container, current_column)
 		self.current_container = null
+		$CraneJaw.play()
 		
 func refesh_container() -> void:
 	self.set_current_container(select_random_container())
@@ -91,3 +95,7 @@ func move_done()->void:
 func randomize_container_access(container):
 	var sides = [Utils.Directions.LEFT, Utils.Directions.UP, Utils.Directions.RIGHT, Utils.Directions.DOWN]
 	container.set_entrances([sides.pick_random()])
+
+
+func _on_crane_jaw_animation_finished():
+	$CraneJaw.set_frame(0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=12 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="3_tcnfn"]
 [ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_bhv33"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
+[ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="8_18gwl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wi8fu"]
 size = Vector2(16, 21.5)
@@ -61,11 +62,6 @@ layout_mode = 2
 text = "Fight!"
 scene_path = "res://Levels/GeneratedPlayspace.tscn"
 
-[node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("2_30gk4")]
-position = Vector2(-64, -225)
-n_columns = 4
-drop_zone = NodePath("../DropPoints")
-
 [node name="DropPoints" type="Node2D" parent="."]
 position = Vector2(-65, -113)
 script = ExtResource("3_i3vix")
@@ -111,10 +107,11 @@ texture = ExtResource("4_bhv33")
 metadata/_edit_lock_ = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -116.0
-offset_top = -89.0
-offset_right = -9.0
-offset_bottom = -78.0
+z_index = 1
+offset_left = 135.0
+offset_top = -97.0
+offset_right = 242.0
+offset_bottom = -86.0
 rotation = -1.5708
 max_value = 1.0
 show_percentage = false
@@ -128,6 +125,31 @@ offset_right = 686.0
 offset_bottom = 298.0
 color = Color(1, 1, 1, 0)
 
-[connection signal="pressed" from="HUD/HBoxContainer/QuitButton-ReturnToMenu" to="." method="_on_quit_button_return_to_menu_pressed"]
+[node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("2_30gk4")]
+position = Vector2(-64, -225)
+n_columns = 4
+drop_zone = NodePath("../DropPoints")
+
+[node name="Instructions" type="Node2D" parent="."]
+position = Vector2(0, -177)
+
+[node name="placement" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("8_18gwl")]
+visible = false
+position = Vector2(-9, -1)
+next_slide = NodePath("../weight")
+info_text = "Place containers 
+to create a contiguous path 
+from Start (A) to Finish (B)
+(Arrow keys or WASD to move, space to drop.)"
+
+[node name="weight" parent="Instructions" instance=ExtResource("8_18gwl")]
+visible = false
+position = Vector2(-9, -1)
+info_text = "The weight of each shipping
+container reflects 
+the amount and difficulty of
+teamsters, thugs, and assassins
+contained within."
+
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
