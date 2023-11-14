@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp3hllbhu1duj"]
+
+[ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="1_vmxbr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tj7bk"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34npf"]
+light_mode = 1
+
+[node name="NeonLight" type="Sprite2D"]
+material = SubResource("CanvasItemMaterial_tj7bk")
+position = Vector2(74, -228)
+scale = Vector2(5, 5)
+texture = ExtResource("1_vmxbr")
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource("CanvasItemMaterial_34npf")
+scale = Vector2(0.2, 0.2)
+points = PackedVector2Array(-48, 0, 53.9367, 0)
+width = 5.0
+default_color = Color(1, 0.129412, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
