@@ -26,9 +26,7 @@ enum DifficultyScales {
 enum Graphics { LOW, HIGH }
 enum DamageTypes { WEAK_MELEE, STRONG_MELEE, IMPACT, PIERCE, FIRE, POISON, ELECTRICAL, BLEED }
 
-var game_settings = {
-	"difficulty" : DifficultyScales.TRIVIAL,
-}
+var difficulty : DifficultyScales = DifficultyScales.TRIVIAL
 
 
 var player_stats = {}
