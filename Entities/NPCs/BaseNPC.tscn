@@ -108,11 +108,11 @@ tracks/2/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_plb34"]
-resource_name = "run"
-
 [sub_resource type="Animation" id="Animation_gsqip"]
 resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_plb34"]
+resource_name = "run"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4p0tx"]
 _data = {

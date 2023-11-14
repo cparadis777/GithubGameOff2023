@@ -74,7 +74,7 @@ func die():
 	died.emit(name)
 
 func _on_hit(attackPacket : AttackPacket):
-	if State in [States.RUNNING, States.JUMPING]:
+	if State in [States.RUNNING, States.JUMPING, States.IDLE]:
 		$HurtNoises.play()
 		health -= attackPacket.damage
 		if health <= 0:
