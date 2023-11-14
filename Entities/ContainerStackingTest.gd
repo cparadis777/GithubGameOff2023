@@ -6,12 +6,11 @@ var current_weight:int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Instructions/InfoPopup.hide()
 	$ProgressBar.value = 0
 	find_child("FightButton").pressed.connect(_on_fight_button_pressed)
 
 	await get_tree().create_timer(1).timeout
-	$Instructions/InfoPopup.popup()
+	$Instructions/placement.popup()
 
 func add_weight(weight:int) -> void:
 	self.current_weight += weight

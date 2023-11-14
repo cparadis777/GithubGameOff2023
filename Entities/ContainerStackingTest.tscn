@@ -133,12 +133,23 @@ drop_zone = NodePath("../DropPoints")
 [node name="Instructions" type="Node2D" parent="."]
 position = Vector2(0, -177)
 
-[node name="InfoPopup" parent="Instructions" instance=ExtResource("8_18gwl")]
+[node name="placement" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("8_18gwl")]
+visible = false
 position = Vector2(-9, -1)
+next_slide = NodePath("../weight")
 info_text = "Place containers 
 to create a contiguous path 
 from Start (A) to Finish (B)
 (Arrow keys or WASD to move, space to drop.)"
+
+[node name="weight" parent="Instructions" instance=ExtResource("8_18gwl")]
+visible = false
+position = Vector2(-9, -1)
+info_text = "The weight of each shipping
+container reflects 
+the amount and difficulty of
+teamsters, thugs, and assassins
+contained within."
 
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
