@@ -1,20 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://b75mqcyc3pmmw"]
 
 [ext_resource type="Script" path="res://Entities/Environment/switches/LevelDoor.gd" id="1_uedfe"]
-[ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="2_7eok6"]
+[ext_resource type="Texture2D" uid="uid://gjt4qop4npq3" path="res://art/placeholder/container-exit.png" id="2_sllgx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3jmv"]
 size = Vector2(38.5, 65)
 
-[node name="NextLevelDoor" type="Area2D"]
+[node name="LevelDoor" type="Area2D"]
 script = ExtResource("1_uedfe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_j3jmv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.152344, 0.152344)
-texture = ExtResource("2_7eok6")
+position = Vector2(-14, 0)
+scale = Vector2(2.05029, 2.01446)
+texture = ExtResource("2_sllgx")
 
 [node name="Label" type="Label" parent="."]
 visible = false

@@ -62,14 +62,11 @@ tracks/3/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_plb34"]
-resource_name = "run"
+[sub_resource type="Animation" id="Animation_qhpe2"]
+resource_name = "attack"
 
 [sub_resource type="Animation" id="Animation_io00w"]
 resource_name = "die"
-
-[sub_resource type="Animation" id="Animation_qhpe2"]
-resource_name = "attack"
 
 [sub_resource type="Animation" id="Animation_ft728"]
 resource_name = "hurt"
@@ -110,6 +107,9 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+
+[sub_resource type="Animation" id="Animation_plb34"]
+resource_name = "run"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4p0tx"]
 _data = {
