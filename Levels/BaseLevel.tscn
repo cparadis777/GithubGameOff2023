@@ -50,7 +50,6 @@ shape = SubResource("SegmentShape2D_pjkui")
 
 [node name="RightCollision" type="CollisionShape2D" parent="BaseContainer"]
 shape = SubResource("SegmentShape2D_r5xtv")
-disabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_n7xin")]
 position = Vector2(-159, 88)
