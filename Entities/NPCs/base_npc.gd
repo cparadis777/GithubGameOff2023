@@ -17,6 +17,8 @@ var animations = ["run", "jump", "hurt", "attack", "die"]
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var direction : int = 1
+
 signal hurt
 signal died
 
@@ -49,10 +51,21 @@ func _physics_process(delta):
 		apply_gravity(delta)
 		move_and_slide()
 		update_animations()
+		if is_at_end_of_platform() or is_obstructed():
+			turn_around()
+		
 	elif State == States.KNOCKBACK:
 		move_and_slide()
 
+func is_at_end_of_platform():
+		if is_on_floor() and !$Behaviours/Sensors/FloorSensor.is_colliding():
+			return true
 
+func is_obstructed():
+	if $Behaviours/Sensors/ObstacleSensor.is_colliding():
+		return true
+	
+	
 func update_animations():
 	if animation_player.current_animation == "":
 		if animation_player.has_animation(animations[State]):
@@ -100,14 +113,21 @@ func _on_iframes_timer_timeout():
 		State = States.RUNNING
 
 
+func turn_around():
+	direction = -direction
+	if State == States.RUNNING:
+		velocity.x = SPEED * direction
+		velocity.x = clamp(velocity.x, -SPEED, SPEED )
+	$Appearance.scale.x = direction
+	$Behaviours.scale.x = direction
+	
 func _on_decision_timer_timeout():
 	if State in [ States.IDLE, States.RUNNING ]:
 		State = [States.IDLE, States.RUNNING].pick_random()
 
 		if State == States.RUNNING:
 			animation_player.play("run")
-			velocity = -velocity.clamp(Vector2.LEFT * SPEED, Vector2.RIGHT * SPEED )
-			if abs(velocity.x) > 0:
-				$Appearance.scale.x = sign(velocity.x)
+			if randf()<0.33:
+				turn_around()
 		elif State == States.IDLE:
 			animation_player.play("idle")

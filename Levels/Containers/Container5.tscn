@@ -1,0 +1,195 @@
+[gd_scene load_steps=14 format=3 uid="uid://dbfvdcaoychco"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Containers/CustomContainer.gd" id="1_b8eip"]
+[ext_resource type="Texture2D" uid="uid://ds5c6ostoi5d7" path="res://art/interiors/shipping_container_soyda_INTERIOR.png" id="2_kemym"]
+[ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_wtojj"]
+[ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="4_fnn2j"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="5_bthx0"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="6_oil12"]
+[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="7_4urif"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="7_vea3b"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
+a = Vector2(192, -96)
+b = Vector2(-192, -96)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pl5uy"]
+a = Vector2(-192, 96)
+b = Vector2(192, 96)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6s04m"]
+a = Vector2(-192, -96)
+b = Vector2(-192, 95)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_v22jh"]
+a = Vector2(192, -96)
+b = Vector2(192, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
+size = Vector2(384, 192)
+
+[node name="BaseContainer" type="StaticBody2D"]
+script = ExtResource("1_b8eip")
+enter_right = true
+enter_down = true
+
+[node name="Interior" type="Sprite2D" parent="."]
+z_index = -4
+texture = ExtResource("2_kemym")
+region_rect = Rect2(-441, -223.5, 785, 424.5)
+
+[node name="LeftArrow" type="Sprite2D" parent="."]
+texture = ExtResource("3_wtojj")
+
+[node name="RightArrow" type="Sprite2D" parent="."]
+texture = ExtResource("3_wtojj")
+flip_h = true
+
+[node name="UpArrow" type="Sprite2D" parent="."]
+rotation = 1.57079
+texture = ExtResource("3_wtojj")
+
+[node name="DownArrow" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("3_wtojj")
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="VendingMachine" parent="Obstacles" instance=ExtResource("6_oil12")]
+position = Vector2(122, 95)
+
+[node name="VendingMachine2" parent="Obstacles" instance=ExtResource("6_oil12")]
+position = Vector2(-173, 95)
+
+[node name="SoydaBox" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(152, 95)
+
+[node name="SoydaBox2" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(153, 85)
+
+[node name="SoydaBox3" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(-41, 22)
+
+[node name="SoydaBox16" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(-42, 12)
+
+[node name="SoydaBox17" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(-44, 2)
+
+[node name="SoydaBox18" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(-42, -8)
+
+[node name="SoydaBox19" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(-39, -18)
+
+[node name="SoydaBox20" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(48, 12)
+
+[node name="SoydaBox21" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(52, 2)
+
+[node name="SoydaBox22" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(49, -8)
+
+[node name="SoydaBox23" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(45, -18)
+
+[node name="SoydaBox4" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(51, 22)
+
+[node name="SoydaBox5" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(96, 95)
+
+[node name="SoydaBox6" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(-144, 94)
+
+[node name="SoydaBox7" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(-144, 84)
+
+[node name="SoydaBox8" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(-126, 94)
+
+[node name="SoydaBox9" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(-155, -37)
+
+[node name="SoydaBox10" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(150, -37)
+
+[node name="SoydaBox11" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(131, -37)
+
+[node name="SoydaBox12" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(112, -37)
+
+[node name="SoydaBox13" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(138, -47)
+
+[node name="SoydaBox14" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(119, -47)
+
+[node name="SoydaBox15" parent="Obstacles" instance=ExtResource("7_4urif")]
+position = Vector2(129, -57)
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="EnemySpawnPoints" type="Node2D" parent="."]
+
+[node name="Point0" type="Node2D" parent="EnemySpawnPoints"]
+position = Vector2(61, 94)
+
+[node name="Point1" type="Node2D" parent="EnemySpawnPoints"]
+position = Vector2(-71, 94)
+
+[node name="Point2" type="Node2D" parent="EnemySpawnPoints"]
+position = Vector2(-89, -38)
+
+[node name="Point3" type="Node2D" parent="EnemySpawnPoints"]
+position = Vector2(0, 22)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("5_bthx0")]
+visible = false
+position = Vector2(111, 95)
+
+[node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("5_bthx0")]
+position = Vector2(-117, -37)
+scale = Vector2(0.656052, 0.656052)
+
+[node name="JumpThroughPlatform4" parent="Platforms" instance=ExtResource("5_bthx0")]
+position = Vector2(107, -37)
+scale = Vector2(0.656052, 0.656052)
+
+[node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("5_bthx0")]
+position = Vector2(0, 22)
+
+[node name="JumpThroughPlatform5" parent="Platforms" instance=ExtResource("5_bthx0")]
+visible = false
+position = Vector2(-109, 95)
+
+[node name="Player" parent="." instance=ExtResource("7_vea3b")]
+position = Vector2(0.75, -0.25)
+
+[node name="Exterior" type="Sprite2D" parent="."]
+texture = ExtResource("4_fnn2j")
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_rgkd6")
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_pl5uy")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_6s04m")
+
+[node name="RightCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_v22jh")
+
+[node name="ContainerInterior" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
+shape = SubResource("RectangleShape2D_dnhqr")
+
+[connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
+[connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

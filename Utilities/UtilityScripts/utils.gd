@@ -1,5 +1,7 @@
 extends Node
 
+enum DirectionFlags {NIL = 0, LEFT = 1, RIGHT = 2, UP = 4, DOWN = 8}
+
 enum Directions {UP, RIGHT, DOWN, LEFT}
 
 func get_opposite_direction(direction:Utils.Directions) -> Utils.Directions:

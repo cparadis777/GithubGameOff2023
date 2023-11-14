@@ -160,6 +160,16 @@ texture = ExtResource("3_6th61")
 
 [node name="Sensors" type="Node2D" parent="Behaviours"]
 
+[node name="ObstacleSensor" type="RayCast2D" parent="Behaviours/Sensors"]
+position = Vector2(4.75295, -12.6745)
+target_position = Vector2(32, 2.08165e-12)
+collision_mask = 16
+
+[node name="FloorSensor" type="RayCast2D" parent="Behaviours/Sensors"]
+position = Vector2(25.3491, -4.75295)
+target_position = Vector2(2.08165e-12, 16)
+collision_mask = 16
+
 [node name="DecisionMaking" type="Node2D" parent="Behaviours"]
 
 [node name="Movement" type="Node2D" parent="Behaviours"]

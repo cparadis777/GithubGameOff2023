@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+@export var next_slide : Node
 
 @export_multiline var info_text : String :
 	set(value):
@@ -32,4 +33,6 @@ func popup():
 
 func _on_close_panel_button_pressed():
 	hide()
+	if next_slide:
+		next_slide.show()
 	
