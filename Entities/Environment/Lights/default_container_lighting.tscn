@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://bty5gh70uklnu"]
+
+[ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="1_i61i2"]
+[ext_resource type="PackedScene" uid="uid://dnsnay6jrr7ic" path="res://Entities/Environment/Lights/switched_blacklight_inverse.tscn" id="2_akv4m"]
+[ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="3_12bab"]
+[ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="4_3ss08"]
+[ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="5_0q27h"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j7lsu"]
+polygon = PackedVector2Array(-315, 7, -313, -246, 313, -247, 318, 5, 344, 4, 336, -265, -339, -263, -336, 8)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tj7bk"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34npf"]
+light_mode = 1
+
+[node name="Lighting" type="Node2D"]
+
+[node name="CanvasModulate" parent="." instance=ExtResource("1_i61i2")]
+
+[node name="InverseBlacklight" parent="." instance=ExtResource("2_akv4m")]
+
+[node name="InverseBlacklight2" parent="." instance=ExtResource("2_akv4m")]
+position = Vector2(-7, -77)
+
+[node name="InverseBlacklight3" parent="." instance=ExtResource("2_akv4m")]
+position = Vector2(232, -164)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_j7lsu")
+
+[node name="NeonLight" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_tj7bk")
+position = Vector2(74, -228)
+scale = Vector2(5, 5)
+texture = ExtResource("3_12bab")
+
+[node name="Line2D" type="Line2D" parent="NeonLight"]
+material = SubResource("CanvasItemMaterial_34npf")
+scale = Vector2(0.2, 0.2)
+points = PackedVector2Array(-48, 0, 53.9367, 0)
+width = 5.0
+default_color = Color(1, 0.129412, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="NeonLight2" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_tj7bk")
+position = Vector2(-76, -227)
+scale = Vector2(5, 5)
+texture = ExtResource("3_12bab")
+
+[node name="Line2D" type="Line2D" parent="NeonLight2"]
+material = SubResource("CanvasItemMaterial_34npf")
+scale = Vector2(0.2, 0.2)
+points = PackedVector2Array(-48, 0, 53.9367, 0)
+width = 5.0
+default_color = Color(1, 0.129412, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="SwitchedLight" parent="." instance=ExtResource("4_3ss08")]
+visible = false
+energy = 1.2
+
+[node name="Switches" type="Node2D" parent="."]
+
+[node name="LightSwitch" parent="Switches" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("5_0q27h")]
+position = Vector2(141, -1)
+linked_nodes = [NodePath("../../InverseBlacklight"), NodePath("../../InverseBlacklight2"), NodePath("../../InverseBlacklight3"), NodePath("../../SwitchedLight")]
