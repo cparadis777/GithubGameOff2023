@@ -32,7 +32,7 @@ func enter_level():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("interact") and player_near and unlocked and !pressed:
 		pressed = true;
 		exit_level()
