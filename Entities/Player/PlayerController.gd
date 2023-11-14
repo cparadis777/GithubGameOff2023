@@ -301,6 +301,7 @@ func _on_fast_punch_hurtbox_body_entered(body):
 func _on_hit(attackPacket):
 	if !iframes and (state_machine.state.name not in [ "Dying", "Dead"]):
 		health -= attackPacket.damage
+		Globals.player_stats["health"] = health
 		injured.emit(attackPacket)
 		$IFrames.start()
 		if attackPacket.knockback:
