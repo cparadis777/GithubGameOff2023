@@ -32,6 +32,10 @@ func enter(_msg := {}) -> void:
 	player.velocity.x = speed_multiplier * player.speed * direction 
 	started.emit() # so player can play animation
 
+	$UnstuckTimer.start()
+
+func exit():
+	$UnstuckTimer.stop()
 
 func physics_update(_delta: float) -> void:
 	# No further Horizontal decisions.
@@ -46,3 +50,11 @@ func physics_update(_delta: float) -> void:
 			state_machine.transition_to("Landing")
 		
 	
+
+
+func _on_unstuck_timer_timeout():
+	if state_machine.state == self:
+		# why are you still in this state after 3 seconds?
+		# player is probably trapped in a corner.
+		player.velocity = -player.velocity
+		state_machine.transition_to("Air", {"do_jump" = true})

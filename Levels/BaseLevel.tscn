@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://d236kkv4xp3qw"]
+[gd_scene load_steps=9 format=3 uid="uid://d236kkv4xp3qw"]
 
 [ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/Containers/BaseContainer.tscn" id="1_k16lk"]
 [ext_resource type="Script" path="res://Levels/BaseLevel.gd" id="1_m15gi"]
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="3_evdql"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="3_n7xin"]
 [ext_resource type="PackedScene" uid="uid://b75mqcyc3pmmw" path="res://Entities/Environment/switches/LevelDoor.tscn" id="4_embi4"]
+[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="6_xg2ok"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_pjkui"]
 a = Vector2(-192, -96)
@@ -16,7 +17,6 @@ b = Vector2(192, 96)
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_m15gi")
-exit_flags = 3
 
 [node name="BaseContainer" parent="." instance=ExtResource("1_k16lk")]
 
@@ -37,6 +37,14 @@ position = Vector2(0, -45)
 [node name="DownArrow" parent="BaseContainer" index="4"]
 position = Vector2(0, 45)
 
+[node name="Exterior" parent="BaseContainer" index="5"]
+visible = false
+
+[node name="NextLevelDoor" parent="BaseContainer" instance=ExtResource("4_embi4")]
+position = Vector2(173, 63)
+move_player = true
+location = 1
+
 [node name="LeftCollision" type="CollisionShape2D" parent="BaseContainer"]
 shape = SubResource("SegmentShape2D_pjkui")
 
@@ -46,7 +54,40 @@ shape = SubResource("SegmentShape2D_r5xtv")
 [node name="Player" parent="." instance=ExtResource("3_n7xin")]
 position = Vector2(-159, 88)
 
-[node name="NextLevelDoor" parent="." instance=ExtResource("4_embi4")]
-position = Vector2(163, 55)
+[node name="ExteriorTextures" type="Node2D" parent="."]
+
+[node name="ExteriorS" type="Sprite2D" parent="ExteriorTextures"]
+position = Vector2(0, 192)
+texture = ExtResource("6_xg2ok")
+
+[node name="ExteriorN" type="Sprite2D" parent="ExteriorTextures"]
+position = Vector2(0, -192)
+texture = ExtResource("6_xg2ok")
+
+[node name="ExteriorSE" type="Sprite2D" parent="ExteriorTextures"]
+position = Vector2(384, 192)
+texture = ExtResource("6_xg2ok")
+
+[node name="ExteriorE" type="Sprite2D" parent="ExteriorTextures"]
+position = Vector2(384, 0)
+texture = ExtResource("6_xg2ok")
+
+[node name="ExteriorNE" type="Sprite2D" parent="ExteriorTextures"]
+position = Vector2(384, -192)
+texture = ExtResource("6_xg2ok")
+
+[node name="ExteriorSW" type="Sprite2D" parent="ExteriorTextures"]
+position = Vector2(-384, 192)
+texture = ExtResource("6_xg2ok")
+
+[node name="ExteriorW" type="Sprite2D" parent="ExteriorTextures"]
+position = Vector2(-384, 0)
+texture = ExtResource("6_xg2ok")
+
+[node name="ExteriorNW" type="Sprite2D" parent="ExteriorTextures"]
+position = Vector2(-384, -192)
+texture = ExtResource("6_xg2ok")
+
+[connection signal="level_exited" from="BaseContainer/NextLevelDoor" to="." method="_on_next_level_door_level_exited"]
 
 [editable path="BaseContainer"]

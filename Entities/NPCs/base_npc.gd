@@ -3,14 +3,15 @@ extends CharacterBody2D
 
 @export var SPEED = 40.0
 @export var JUMP_VELOCITY = -100.0
+@export var base_damage = 10
 
 @export var health_max = 250.0
 var health = health_max
 
 @export var animation_player : Node
 
-enum States { RUNNING, JUMPING, KNOCKBACK, ATTACKING, DEAD }
-var State = States.RUNNING
+enum States { INITIALIZING, PAUSED, RUNNING, JUMPING, KNOCKBACK, ATTACKING, DEAD }
+var State = States.INITIALIZING
 var animations = ["run", "jump", "hurt", "attack", "die"]
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -27,6 +28,15 @@ func _ready():
 	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)
 
+
+func activate(difficulty : Globals.DifficultyScales):
+	set_difficulty(difficulty)
+	State = States.RUNNING
+	
+func set_difficulty(difficulty : Globals.DifficultyScales):
+	health_max += difficulty * 5.0
+	SPEED += difficulty/40 * 100
+	base_damage *= (1+float(difficulty)/20.0)
 
 func jump():
 	velocity.y = JUMP_VELOCITY

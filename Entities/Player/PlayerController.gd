@@ -64,7 +64,7 @@ func _ready():
 func flip_sprites():
 	if abs(velocity.x) > 0:
 		$Body.scale.x = sign(velocity.x) * original_body_scale.x
-		$StateMachine.scale.x = $Body.scale.x
+		state_machine.scale.x = $Body.scale.x
 
 func get_last_known_direction():
 	if $Body.scale.x > 0:
@@ -301,6 +301,7 @@ func _on_fast_punch_hurtbox_body_entered(body):
 func _on_hit(attackPacket):
 	if !iframes and (state_machine.state.name not in [ "Dying", "Dead"]):
 		health -= attackPacket.damage
+		Globals.player_stats["health"] = health
 		injured.emit(attackPacket)
 		$IFrames.start()
 		if attackPacket.knockback:

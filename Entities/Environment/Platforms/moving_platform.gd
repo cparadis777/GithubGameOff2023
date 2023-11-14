@@ -14,10 +14,12 @@ var velocity : Vector2 = Vector2.ZERO
 
 @export var show_piston : bool = true
 @export var show_cables : bool = true
+@export var autostart: bool = true
 
 var locations : PackedVector2Array = []
 var current_destination_index = 1
 var distance_tolerance = 5.0
+var switch_pressed := false
 
 enum States { MOVING, WAITING }
 var State = States.WAITING
@@ -41,6 +43,8 @@ func _ready():
 		start_moving()
 	elif get_node(trigger_node_path).get("pressed"):
 		start_moving()
+	else:
+		link(get_node(trigger_node_path))
 
 func link(triggerNode):
 	trigger_node = triggerNode
@@ -49,11 +53,10 @@ func _physics_process(_delta):
 	$StateLabel.text = States.keys()[State]
 	
 	if trigger_node != null:
-		if State == States.MOVING and !trigger_node.pressed:
+		if State == States.MOVING and (!trigger_node.pressed or !switch_pressed):
 			stop_moving()
-		elif State == States.WAITING and trigger_node.pressed:
+		elif State == States.WAITING and (trigger_node.pressed or switch_pressed):
 			start_moving()
-	
 
 func deprecated_alternate_movement(delta):
 	# setting position manually should work just as well as tweening, so long as it's in the physics process.
@@ -92,4 +95,6 @@ func stop_moving():
 	if tween.is_running():
 		tween.pause()
 
+func _on_switch_toggled():
+	switch_pressed = !switch_pressed
 

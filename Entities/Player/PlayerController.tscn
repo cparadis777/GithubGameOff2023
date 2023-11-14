@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=47 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -22,8 +22,8 @@
 [ext_resource type="Script" path="res://Entities/Player/Landing.gd" id="25_hj8m7"]
 [ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
 [ext_resource type="PackedScene" uid="uid://dxjihdq7d8mpk" path="res://Entities/Player/player_audio.tscn" id="25_x3gmp"]
+[ext_resource type="AnimationLibrary" uid="uid://cdw7kwxvck8tn" path="res://Entities/Player/PlayerAnimationLibrary.tres" id="26_6myd8"]
 [ext_resource type="Script" path="res://Entities/Player/Dying.gd" id="26_npw41"]
-[ext_resource type="PackedScene" uid="uid://dd2i4vug01jvn" path="res://Entities/Player/player_animations.tscn" id="26_usfop"]
 [ext_resource type="Script" path="res://Entities/Player/Dead.gd" id="27_0qqb8"]
 [ext_resource type="Script" path="res://Entities/Player/StrongPunch.gd" id="27_487ye"]
 [ext_resource type="Script" path="res://Entities/Player/FastPunch.gd" id="28_amcrx"]
@@ -121,6 +121,9 @@ size = Vector2(16, 15)
 [sub_resource type="AtlasTexture" id="AtlasTexture_o20hr"]
 atlas = ExtResource("4_gxpwb")
 region = Rect2(191, 193.5, 106, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46i3j"]
+size = Vector2(20, 38)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmdka"]
 radius = 23.0
@@ -364,11 +367,23 @@ script = ExtResource("23_r318r")
 [node name="DescendingKick" type="Node2D" parent="StateMachine"]
 script = ExtResource("16_7kpt4")
 
+[node name="UnstuckTimer" type="Timer" parent="StateMachine/DescendingKick"]
+wait_time = 3.0
+one_shot = true
+
 [node name="Landing" type="Node2D" parent="StateMachine"]
 script = ExtResource("25_hj8m7")
 
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("18_6dmrt")
+
+[node name="DashHurtBox" type="Area2D" parent="StateMachine/Dash"]
+collision_layer = 0
+collision_mask = 10
+
+[node name="DashCollisionShape" type="CollisionShape2D" parent="StateMachine/Dash/DashHurtBox"]
+position = Vector2(13, -19)
+shape = SubResource("RectangleShape2D_46i3j")
 
 [node name="Dying" type="Node2D" parent="StateMachine"]
 script = ExtResource("26_npw41")
@@ -429,6 +444,8 @@ disabled = true
 [node name="CPUParticles2D" type="CPUParticles2D" parent="StateMachine/StrongPunch"]
 visible = false
 position = Vector2(-15, -18)
+amount = 40
+lifetime = 0.5
 direction = Vector2(-1, 2.08165e-12)
 gravity = Vector2(2.08165e-12, 2.08165e-12)
 initial_velocity_max = 40.0
@@ -451,7 +468,10 @@ script = ExtResource("15_7astd")
 
 [node name="Audio" parent="." instance=ExtResource("25_x3gmp")]
 
-[node name="AnimationPlayer" parent="." instance=ExtResource("26_usfop")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": ExtResource("26_6myd8")
+}
 
 [node name="HUD" parent="." instance=ExtResource("14_fp8yf")]
 visible = false
@@ -467,6 +487,9 @@ shape = SubResource("RectangleShape2D_m8oiq")
 
 [connection signal="body_entered" from="Body/Actions/fast_punch/HurtBox" to="." method="_on_fast_punch_hurtbox_body_entered"]
 [connection signal="body_entered" from="Body/Actions/descending_kick/HurtBox" to="." method="_on_descending_kick_hurtbox_body_entered"]
+[connection signal="timeout" from="StateMachine/DescendingKick/UnstuckTimer" to="StateMachine/DescendingKick" method="_on_unstuck_timer_timeout"]
+[connection signal="body_entered" from="StateMachine/Dash/DashHurtBox" to="StateMachine/Dash" method="_on_dash_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/Dead/Timer" to="StateMachine/Dead" method="_on_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/StrongPunch/HurtBox" to="StateMachine/StrongPunch" method="_on_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/FastPunch/UnbrokenSequenceTimer" to="StateMachine/FastPunch" method="_on_unbroken_sequence_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

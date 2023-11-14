@@ -61,11 +61,6 @@ layout_mode = 2
 text = "Fight!"
 scene_path = "res://Levels/GeneratedPlayspace.tscn"
 
-[node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("2_30gk4")]
-position = Vector2(-64, -225)
-n_columns = 4
-drop_zone = NodePath("../DropPoints")
-
 [node name="DropPoints" type="Node2D" parent="."]
 position = Vector2(-65, -113)
 script = ExtResource("3_i3vix")
@@ -111,10 +106,11 @@ texture = ExtResource("4_bhv33")
 metadata/_edit_lock_ = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -116.0
-offset_top = -89.0
-offset_right = -9.0
-offset_bottom = -78.0
+z_index = 1
+offset_left = 135.0
+offset_top = -97.0
+offset_right = 242.0
+offset_bottom = -86.0
 rotation = -1.5708
 max_value = 1.0
 show_percentage = false
@@ -127,6 +123,11 @@ offset_top = -613.0
 offset_right = 686.0
 offset_bottom = 298.0
 color = Color(1, 1, 1, 0)
+
+[node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("2_30gk4")]
+position = Vector2(-64, -225)
+n_columns = 4
+drop_zone = NodePath("../DropPoints")
 
 [connection signal="pressed" from="HUD/HBoxContainer/QuitButton-ReturnToMenu" to="." method="_on_quit_button_return_to_menu_pressed"]
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
