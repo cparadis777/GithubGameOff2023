@@ -437,7 +437,6 @@ collision_mask = 10
 
 [node name="StrongCollisionShape" type="CollisionShape2D" parent="StateMachine/StrongPunch/HurtBox"]
 position = Vector2(-13, -4.26243)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ghqx3")
 disabled = true
 
