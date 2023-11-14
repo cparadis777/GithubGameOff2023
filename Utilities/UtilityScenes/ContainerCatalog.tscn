@@ -18,4 +18,16 @@ scene_path = "res://Levels/Containers/Container2.tscn"
 [node name="Container3" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 1
-scene_path = "res://Levels/Containers/Container2.tscn"
+container_exit_flags = 3
+scene_path = "res://Levels/Containers/Container3.tscn"
+
+[node name="Container4" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_exit_flags = 5
+scene_path = "res://Levels/Containers/Container4.tscn"
+
+[node name="Container5" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_type = 2
+container_exit_flags = 10
+scene_path = "res://Levels/Containers/Container5.tscn"
