@@ -27,18 +27,23 @@ func _process(_delta):
 func launch_attack():
 	$AttackDelay.set_wait_time(randf_range(0.1, 0.3))
 	$AttackDelay.start()
-
+	
 
 func execute_attack():
-	$AnimationPlayer.play("attack")
 
+	if npc.get("animation_player") and npc.animation_player.has_animation("attack"):
+		npc.animation_player.play("attack")
+	$AnimationPlayer.play("attack")
+			
+		
 func stop():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("RESET")
 	
 
 func _on_attack_delay_timeout():
-	execute_attack()
+	if npc.State in [npc.States.IDLE, npc.States.RUNNING]:
+		execute_attack()
 	
 func _on_attack_reload_timeout():
 	pass

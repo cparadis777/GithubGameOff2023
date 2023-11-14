@@ -21,7 +21,6 @@ func _ready():
 
 func choose_random_goal():
 	var dice_roll = randf()
-	var new_goal : Goals
 	if dice_roll < 0.1:
 		Goal = Goals.RELAX
 	elif dice_roll < 0.4:
