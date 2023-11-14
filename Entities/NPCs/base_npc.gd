@@ -95,9 +95,11 @@ func _on_hit(attackPacket : AttackPacket):
 			die()
 			return
 		elif attackPacket.knockback == true:
-			State = States.KNOCKBACK
+			State = States.KNOCKBACK # same as IFRAMES, plus movement.
 			var knockbackMultiplier = 1.25
 			velocity = attackPacket.impact_vector * attackPacket.knockback_speed * knockbackMultiplier
+		else:
+			State = States.IFRAMES
 		$IframesTimer.start()
 		$AnimationPlayer.play("hurt")
 			#$HurtEffect/Star.show()
