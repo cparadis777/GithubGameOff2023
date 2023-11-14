@@ -14,16 +14,17 @@ func scale_for_difficulty():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if $AttackDelay.is_stopped() and $AttackReload.is_stopped():
 		if $RayCast2D.is_colliding() and $RayCast2D.get_collider() == StageManager.current_player:
 			launch_attack()
-			
+
+
 func launch_attack():
 	$AttackDelay.set_wait_time(randf_range(0.1, 0.3))
 	$AttackDelay.start()
-	
-	
+
+
 func execute_attack():
 	$AnimationPlayer.play("attack")
 	
