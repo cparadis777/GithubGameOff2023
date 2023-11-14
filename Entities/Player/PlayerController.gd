@@ -64,7 +64,7 @@ func _ready():
 func flip_sprites():
 	if abs(velocity.x) > 0:
 		$Body.scale.x = sign(velocity.x) * original_body_scale.x
-		$StateMachine.scale.x = $Body.scale.x
+		state_machine.scale.x = $Body.scale.x
 
 func get_last_known_direction():
 	if $Body.scale.x > 0:
