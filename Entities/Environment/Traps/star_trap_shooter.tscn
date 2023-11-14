@@ -101,6 +101,33 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_mfrm1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_ip4xb"]
 resource_name = "shoot"
 length = 0.4
@@ -143,33 +170,6 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_mfrm1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"attack"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ttt3y"]
 _data = {
 "RESET": SubResource("Animation_mfrm1"),
@@ -177,6 +177,7 @@ _data = {
 }
 
 [node name="StarTrap-Shooter" type="AnimatableBody2D" groups=["Enemies"]]
+collision_layer = 2
 script = ExtResource("1_6i0da")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -211,5 +212,18 @@ offset_right = 25.0
 offset_bottom = -10.0
 theme_override_font_sizes/font_size = 10
 text = "state"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 64
+explosiveness = 0.5
+direction = Vector2(2.08165e-12, -1)
+spread = 180.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 120.0
+initial_velocity_max = 180.0
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+color = Color(1, 0.486275, 1, 1)
 
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]

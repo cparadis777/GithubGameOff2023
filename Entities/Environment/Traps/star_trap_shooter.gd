@@ -7,10 +7,14 @@ var previous_goal : Goals
 
 @export var SPEED : float = 100.0
 
+var health_max : float = 20
+var health = health_max
 
+signal hurt(attackPacket)
 
 func _ready():
 	$DecisionTimer.start()
+	$CPUParticles2D.emitting = false
 	
 
 
@@ -26,6 +30,7 @@ func choose_random_goal():
 		Goal = Goals.SHOOT_PLAYER
 
 func _on_decision_timer_timeout():
+		
 	$Behaviours/Attacks/ShootStars.stop_shooting() 
 
 	previous_goal = Goal
@@ -49,3 +54,14 @@ func _on_decision_timer_timeout():
 func _on_shot_requested():
 	$AnimationPlayer.play("shoot")
 	
+func die():
+	$Behaviours/Attacks/ShootStars.stop_shooting()
+	$CPUParticles2D.emitting = true
+	await get_tree().create_timer(0.8).timeout
+	queue_free()
+	
+func _on_hit(attackPacket):
+	health -= attackPacket.damage
+	hurt.emit(attackPacket)
+	if health <= 0:
+		die()
