@@ -1,8 +1,103 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5vova3vmv6p7"]
+[gd_scene load_steps=20 format=3 uid="uid://c5vova3vmv6p7"]
 
 [ext_resource type="Script" path="res://Entities/Environment/crane.gd" id="1_iyal4"]
 [ext_resource type="PackedScene" uid="uid://mq11awte3lc6" path="res://Entities/Environment/PlaceHolders/PlaceholderDroppableContainer.tscn" id="2_go6ni"]
+[ext_resource type="Texture2D" uid="uid://dcxyqxj0okyoe" path="res://art/props/crane_just_tress.png" id="4_58oyw"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="4_l15jl"]
+[ext_resource type="Texture2D" uid="uid://cucxmeo2p3j11" path="res://art/props/crane_just_crane.png" id="5_qrdko"]
+[ext_resource type="Texture2D" uid="uid://c2tkw8bry0p1n" path="res://art/props/crane_just_holder.png" id="5_xiuhn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2goie"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(0, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f342m"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(52, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unam5"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(104, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm660"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(156, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpm80"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(208, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8ys8"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(260, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cqqk"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(260, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgvk1"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(208, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x77ir"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(156, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyphp"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(104, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r25o2"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(52, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti7yp"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(0, 0, 52, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uctfk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2goie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f342m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unam5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm660")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpm80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8ys8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cqqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgvk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x77ir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyphp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r25o2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti7yp")
+}],
+"loop": false,
+"name": &"Close",
+"speed": 5.0
+}]
 
 [node name="crane" type="Node2D"]
 script = ExtResource("1_iyal4")
@@ -15,3 +110,24 @@ offset_top = 16.0
 offset_right = 152.0
 offset_bottom = 64.0
 theme = ExtResource("4_l15jl")
+
+[node name="CraneTruss" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(29, 45)
+texture = ExtResource("4_58oyw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(80, -24)
+texture = ExtResource("5_xiuhn")
+
+[node name="CraneJaw" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(24, -8)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_uctfk")
+animation = &"Close"
+frame = 11
+frame_progress = 1.0
+
+[connection signal="animation_finished" from="CraneJaw" to="." method="_on_crane_jaw_animation_finished"]
