@@ -8,16 +8,20 @@ var already_used_double_jump : bool = false
 signal started
 signal impacted
 signal landed
+signal hit
+
 var direction
 @export var dash_duration : float = 0.33
 @export var speed_multiplier : float = 2.75
 var dash_speed : float
 var timer
+var damage
 
 func _ready():
 	super()
 
 	await owner.ready
+	damage = player.damage_defaults[name]
 	dash_speed = player.speed * speed_multiplier
 
 	if player.has_method("_on_dash_started"):
@@ -56,3 +60,16 @@ func _on_timer_timeout():
 	player.velocity.x = 0.0
 	state_machine.transition_to("Air", { "dashed" : true })
 	
+
+
+func _on_dash_hurt_box_body_entered(body):
+	if state_machine.state == self:
+		if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
+			var attackPacket = AttackPacket.new()
+			attackPacket.damage = damage
+			attackPacket.originator = self
+			attackPacket.recipient = body
+			hit.connect(body._on_hit)
+			hit.emit(attackPacket)
+			hit.disconnect(body._on_hit)
+			

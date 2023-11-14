@@ -1,24 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=15 format=3 uid="uid://m3aj2pmakgat"]
 
-[ext_resource type="Script" path="res://Entities/NPCs/npc_01.gd" id="1_qkmle"]
-[ext_resource type="Texture2D" uid="uid://bi724p8u5kyfb" path="res://art/placeholder/EUC.png" id="1_x7p4c"]
-[ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_mgsqu"]
-[ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="3_naqaf"]
-[ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="4_tlhgp"]
-[ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="5_6txwc"]
+[ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
+[ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
+[ext_resource type="Texture2D" uid="uid://bi724p8u5kyfb" path="res://art/placeholder/EUC.png" id="3_6th61"]
+[ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="4_nvirp"]
+[ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="5_p2jwr"]
+[ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_x6jli"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hovi6"]
 radius = 20.5961
 height = 63.3727
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s8act"]
-streams_count = 3
-stream_0/stream = ExtResource("3_naqaf")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("4_tlhgp")
-stream_1/weight = 1.0
-stream_2/stream = ExtResource("5_6txwc")
-stream_2/weight = 1.0
 
 [sub_resource type="Animation" id="Animation_iaf2y"]
 length = 0.001
@@ -71,8 +62,17 @@ tracks/3/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_plb34"]
+resource_name = "run"
+
+[sub_resource type="Animation" id="Animation_io00w"]
+resource_name = "die"
+
+[sub_resource type="Animation" id="Animation_qhpe2"]
+resource_name = "attack"
+
 [sub_resource type="Animation" id="Animation_ft728"]
-resource_name = "hit"
+resource_name = "hurt"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -114,14 +114,26 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4p0tx"]
 _data = {
 "RESET": SubResource("Animation_iaf2y"),
-"hit": SubResource("Animation_ft728")
+"attack": SubResource("Animation_qhpe2"),
+"die": SubResource("Animation_io00w"),
+"hurt": SubResource("Animation_ft728"),
+"run": SubResource("Animation_plb34")
 }
 
-[node name="NPC_01" type="CharacterBody2D" groups=["Enemies"]]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s8act"]
+streams_count = 3
+stream_0/stream = ExtResource("4_nvirp")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_p2jwr")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_x6jli")
+stream_2/weight = 1.0
+
+[node name="BaseNPC" type="CharacterBody2D" groups=["Enemies"]]
 scale = Vector2(0.631187, 0.631187)
 collision_layer = 2
 collision_mask = 31
-script = ExtResource("1_qkmle")
+script = ExtResource("1_1uer3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.58432, -31.6863)
@@ -133,10 +145,31 @@ autostart = true
 [node name="Appearance" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Appearance"]
-material = ExtResource("2_mgsqu")
+material = ExtResource("2_7asby")
 position = Vector2(0, -33.2707)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_x7p4c")
+texture = ExtResource("3_6th61")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Appearance"]
+
+[node name="Behaviours" type="Node2D" parent="."]
+
+[node name="Sensors" type="Node2D" parent="Behaviours"]
+
+[node name="DecisionMaking" type="Node2D" parent="Behaviours"]
+
+[node name="Movement" type="Node2D" parent="Behaviours"]
+
+[node name="Attacks" type="Node2D" parent="Behaviours"]
+
+[node name="Defenses" type="Node2D" parent="Behaviours"]
+
+[node name="BasicHP" type="Node2D" parent="Behaviours/Defenses"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4p0tx")
+}
 
 [node name="IframesTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -154,11 +187,6 @@ polygon = PackedVector2Array(0, -53.8668, 6.33727, -11.0902, 49.1138, -22.1804, 
 [node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_s8act")
 bus = &"sfx"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_4p0tx")
-}
 
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]

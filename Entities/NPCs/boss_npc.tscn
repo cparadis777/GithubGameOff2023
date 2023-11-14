@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://4ubg2v861dlv"]
 
-[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="1_dhliq"]
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_dhliq"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_46dpl"]
 [ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="3_3i86w"]
 
@@ -11,7 +11,6 @@ shader_parameter/iframes = false
 shader_parameter/FlashColor = Color(1, 1, 1, 1)
 
 [node name="BossNPC" instance=ExtResource("1_dhliq")]
-health_max = 500.0
 
 [node name="Sprite2D" parent="Appearance" index="0"]
 material = SubResource("ShaderMaterial_qjb73")

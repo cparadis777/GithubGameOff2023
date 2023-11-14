@@ -71,12 +71,8 @@ func execute_somersault():
 
 
 func land_if_possible():
-	if player.is_on_floor():
-		landed.emit()
-		if is_equal_approx(player.velocity.x, 0.0):
-			state_machine.transition_to("Idle")
-		else:
-			state_machine.transition_to("Run")
+	if player.velocity.y >= 0 and player.is_on_floor():
+		state_machine.transition_to("Landing")
 
 func exit():
 	super()

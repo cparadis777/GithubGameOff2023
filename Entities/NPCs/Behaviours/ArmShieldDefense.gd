@@ -36,7 +36,7 @@ func _on_defend_timer_timeout():
 func _on_reload_timer_timeout():
 	pass
 
-func _on_hit(attackPacket : AttackPacket):
+func _on_hit(_attackPacket : AttackPacket):
 	$DefenseNoise.play()
 	$ShieldAura.show()
 	var timer = get_tree().create_timer(0.2)

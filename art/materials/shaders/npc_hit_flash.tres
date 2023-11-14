@@ -5,5 +5,5 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_toomh")
-shader_parameter/iframes = false
+shader_parameter/iframes = true
 shader_parameter/FlashColor = Color(1, 1, 1, 1)

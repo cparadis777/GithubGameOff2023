@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqqakuyl2wa2g"]
+
+[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_gusit"]
+[ext_resource type="PackedScene" uid="uid://fw4qtohyprb3" path="res://Levels/Tutorials/TutorialLevel_5.tscn" id="2_grqj8"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_p65xb"]
+[ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="3_mcvid"]
+[ext_resource type="Texture2D" uid="uid://3kfisyqqqjqc" path="res://art/placeholder/gamepad_button_left.png" id="4_5x4wx"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="4_qjlwe"]
+[ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="7_uighd"]
+
+[node name="BaseLevel" instance=ExtResource("1_gusit")]
+exit_flags = 1
+
+[node name="LeftArrow" parent="BaseContainer" index="1"]
+position = Vector2(106, -40)
+
+[node name="DownArrow" parent="BaseContainer" index="4"]
+position = Vector2(0, 42)
+
+[node name="Exterior" parent="BaseContainer" index="5"]
+visible = false
+
+[node name="Player" parent="." index="1"]
+position = Vector2(145, -43)
+
+[node name="NextLevelDoor" parent="." index="2"]
+position = Vector2(-172, 63)
+next_scene = ExtResource("2_grqj8")
+
+[node name="JumpThroughPlatform" parent="." index="3" instance=ExtResource("2_p65xb")]
+position = Vector2(108, -9)
+
+[node name="AttackDemo" parent="." index="4" instance=ExtResource("3_mcvid")]
+position = Vector2(132, 54)
+animation_name = "fast_punch"
+label_text = "\",\""
+button_texture = ExtResource("4_5x4wx")
+
+[node name="CyberRoninSprites" parent="AttackDemo" index="1"]
+animation = &"fast_punch"
+frame = 6
+frame_progress = 1.0
+flip_h = true
+
+[node name="ButtonSprite" parent="AttackDemo" index="3"]
+position = Vector2(-84, 19)
+texture = ExtResource("4_5x4wx")
+
+[node name="Obstacles" type="Node2D" parent="." index="5"]
+
+[node name="VendingMachine" parent="Obstacles" index="0" instance=ExtResource("4_qjlwe")]
+position = Vector2(-131, 96)
+
+[node name="TrashCan" parent="." index="6" instance=ExtResource("7_uighd")]
+position = Vector2(-187, 0.999996)
+rotation = 1.91288
+
+[editable path="BaseContainer"]
+[editable path="AttackDemo"]
