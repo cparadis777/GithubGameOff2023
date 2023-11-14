@@ -48,7 +48,9 @@ func allow_early_exit():
 	if cancel_frames_active:
 		if Input.is_action_just_pressed("jump"):
 			state_machine.transition_to("Air", {"do_jump" = true})
-		elif Input.is_action_just_pressed("strong_punch"):
+		# it felt weird starting a new strong punch during a strong punch charge,
+		# so we'll restrict it to after the punch is executed.
+		elif Input.is_action_just_pressed("strong_punch") and SubState in [SubStates.EXECUTING, SubStates.FINISHED]:
 			state_machine.transition_to("StrongPunch")
 		elif Input.is_action_just_pressed("fast_punch"):
 			state_machine.transition_to("FastPunch")

@@ -51,8 +51,10 @@ func check_for_jump_button_release():
 
 func check_for_attack_requests():
 	if Input.is_action_just_pressed("strong_punch"):
+		player.velocity.x = Input.get_axis("move_left", "move_right") * player.SPEED
 		state_machine.transition_to("DescendingKick")
 	elif Input.is_action_just_pressed("fast_punch"):
+		player.velocity.x = Input.get_axis("move_left", "move_right") * player.SPEED
 		state_machine.transition_to("Dash")
 
 
