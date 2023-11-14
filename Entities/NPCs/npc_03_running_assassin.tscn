@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://blh128dmuq6f7"]
+[gd_scene load_steps=13 format=3 uid="uid://blh128dmuq6f7"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_olg2y"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_4c1rq"]
 [ext_resource type="Texture2D" uid="uid://g5ofhu1d3h7y" path="res://art/placeholder/running_assassin.png" id="3_gwwjw"]
+[ext_resource type="PackedScene" uid="uid://0rp1m2y4oowa" path="res://Entities/NPCs/vfx/blood_smear.tscn" id="4_71odh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bo3ta"]
 resource_local_to_scene = true
@@ -60,23 +61,71 @@ tracks/3/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Appearance/Sprite2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Appearance/Sprite2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.08165e-12, -32)]
+}
 
-[sub_resource type="Animation" id="Animation_mbs8o"]
-resource_name = "run"
-length = 0.3
-loop_mode = 1
-step = 0.05
+[sub_resource type="Animation" id="Animation_dp3bv"]
+resource_name = "die"
+length = 0.67
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Appearance/Sprite2D:frame")
-tracks/0/interp = 0
+tracks/0/path = NodePath("Appearance/Sprite2D:rotation")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0, 1, 0]
+"values": [0.0, -2.54012, -2.18777]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Appearance/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(2.08165e-12, -32), Vector2(-1.58432, -15.8432), Vector2(1.58432, -9.5059)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Behaviours/Defenses/BloodSmear")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"activate"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_ft728"]
@@ -122,11 +171,26 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_30jep"]
 resource_name = "idle"
 
-[sub_resource type="Animation" id="Animation_dp3bv"]
-resource_name = "die"
-
 [sub_resource type="Animation" id="Animation_q5o4f"]
 resource_name = "jump"
+
+[sub_resource type="Animation" id="Animation_mbs8o"]
+resource_name = "run"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 1, 0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_47al2"]
 _data = {
@@ -147,8 +211,13 @@ scale = Vector2(1, 1)
 texture = ExtResource("3_gwwjw")
 hframes = 2
 
+[node name="BloodSmear" parent="Behaviours/Defenses" index="1" instance=ExtResource("4_71odh")]
+duration = 1.5
+
 [node name="AnimationPlayer" parent="." index="4"]
 autoplay = "run"
 libraries = {
 "": SubResource("AnimationLibrary_47al2")
 }
+
+[editable path="Behaviours/Defenses/BloodSmear"]

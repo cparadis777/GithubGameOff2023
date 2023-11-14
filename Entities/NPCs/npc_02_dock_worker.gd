@@ -158,12 +158,21 @@ func _on_hit(attackPacket : AttackPacket):
 			if attackPacket.knockback:
 				knockback(attackPacket.impact_vector)
 	elif State == States.DEFENDING:
-		attackPacket.damage_blocked = attackPacket.damage
-		# play a symbol clash noise or something.
-		# maybe knock back the player
-		$Behaviours/Defenses/ArmShieldDefense._on_hit(attackPacket)
+		attackPacket.damage_blocked = min(attackPacket.damage, 40)
 		hurt.emit(attackPacket)
-
+		if attackPacket.damage_blocked >= attackPacket.damage:
+			health -= attackPacket.damage - attackPacket.damage_blocked
+			# play a symbol clash noise or something.
+			# maybe knock back the player
+			$Behaviours/Defenses/ArmShieldDefense._on_hit(attackPacket)
+		else:
+			play_hurt_noise()
+			#$HurtFlash.show()
+			$AnimationPlayer.play("hurt")
+			initiate_iframes()
+			if attackPacket.knockback:
+				knockback(attackPacket.impact_vector)
+				
 func _on_decay_timer_timeout():
 	avatar_root.hide()
 	$BloodTimer.start()
