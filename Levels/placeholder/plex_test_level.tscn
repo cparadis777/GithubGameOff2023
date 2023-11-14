@@ -81,6 +81,7 @@ horizontal_alignment = 1
 
 [node name="Obstacle_02" parent="Obstacles" instance=ExtResource("4_4k4sl")]
 position = Vector2(-137, -10)
+collision_layer = 24
 
 [node name="Enemies" type="Node2D" parent="."]
 
