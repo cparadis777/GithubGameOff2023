@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="5_ww7q0"]
 [ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="7_e1fgr"]
 [ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="9_3vd6b"]
-[ext_resource type="PackedScene" uid="uid://b527h0udon0w5" path="res://Levels/placeholder/Level_01_Interior.tscn" id="9_cgfvo"]
+[ext_resource type="PackedScene" uid="uid://b527h0udon0w5" path="res://Levels/placeholder/plex_test_level.tscn" id="9_cgfvo"]
 [ext_resource type="PackedScene" uid="uid://bgc4ihpc28ck8" path="res://audio/AudioManager.tscn" id="11_fl0tt"]
 [ext_resource type="PackedScene" uid="uid://bdqawiqxlij23" path="res://Levels/placeholder/MockLevel.tscn" id="11_l5voa"]
 

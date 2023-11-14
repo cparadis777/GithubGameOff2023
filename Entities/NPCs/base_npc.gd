@@ -7,10 +7,11 @@ extends CharacterBody2D
 @export var health_max = 250.0
 var health = health_max
 
+@export var animation_player : Node
 
-enum States { ROLLING, JUMPING, KNOCKBACK, ATTACKING, DEAD }
-var State = States.ROLLING
-
+enum States { RUNNING, JUMPING, KNOCKBACK, ATTACKING, DEAD }
+var State = States.RUNNING
+var animations = ["run", "jump", "hurt", "attack", "die"]
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -19,6 +20,8 @@ signal hurt
 signal died
 
 func _ready():
+	if !animation_player:
+		animation_player = $AnimationPlayer
 	$AnimationPlayer.play("RESET")
 	velocity = Vector2.RIGHT * SPEED
 	hurt.connect(StageManager._on_damage_packet_processed)
@@ -30,12 +33,17 @@ func jump():
 
 
 func _physics_process(delta):
-	if State in [ States.ROLLING, States.JUMPING ]:
+	if State in [ States.RUNNING, States.JUMPING ]:
 		apply_gravity(delta)
 		move_and_slide()
+		update_animations()
 	elif State == States.KNOCKBACK:
 		move_and_slide()
 
+
+func update_animations():
+	if animation_player.current_animation == "":
+		animation_player.play(animations[State])
 
 func apply_gravity(delta):
 	if not is_on_floor():
@@ -43,7 +51,7 @@ func apply_gravity(delta):
 		
 
 func _on_timer_timeout():
-	if State in [ States.ROLLING ]:
+	if State in [ States.RUNNING ]:
 		velocity = -velocity.clamp(Vector2.LEFT * SPEED, Vector2.RIGHT * SPEED )
 		if abs(velocity.x) > 0:
 			$Appearance.scale.x = sign(velocity.x)
@@ -59,7 +67,7 @@ func die():
 	died.emit(name)
 
 func _on_hit(attackPacket : AttackPacket):
-	if State in [States.ROLLING, States.JUMPING]:
+	if State in [States.RUNNING, States.JUMPING]:
 		$HurtNoises.play()
 		health -= attackPacket.damage
 		if health <= 0:
@@ -70,7 +78,7 @@ func _on_hit(attackPacket : AttackPacket):
 			var knockbackMultiplier = 1.25
 			velocity = attackPacket.impact_vector * attackPacket.knockback_speed * knockbackMultiplier
 		$IframesTimer.start()
-		$AnimationPlayer.play("hit")
+		$AnimationPlayer.play("hurt")
 			#$HurtEffect/Star.show()
 		hurt.emit(attackPacket)
 
@@ -82,4 +90,4 @@ func _on_iframes_timer_timeout():
 		else:
 			velocity = Vector2.LEFT * SPEED
 
-		State = States.ROLLING
+		State = States.RUNNING

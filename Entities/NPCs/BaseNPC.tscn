@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=15 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
@@ -62,8 +62,17 @@ tracks/3/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_plb34"]
+resource_name = "run"
+
+[sub_resource type="Animation" id="Animation_io00w"]
+resource_name = "die"
+
+[sub_resource type="Animation" id="Animation_qhpe2"]
+resource_name = "attack"
+
 [sub_resource type="Animation" id="Animation_ft728"]
-resource_name = "hit"
+resource_name = "hurt"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -105,7 +114,10 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4p0tx"]
 _data = {
 "RESET": SubResource("Animation_iaf2y"),
-"hit": SubResource("Animation_ft728")
+"attack": SubResource("Animation_qhpe2"),
+"die": SubResource("Animation_io00w"),
+"hurt": SubResource("Animation_ft728"),
+"run": SubResource("Animation_plb34")
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s8act"]
