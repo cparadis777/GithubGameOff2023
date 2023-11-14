@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2c7l0vqc2yep"]
+[gd_scene load_steps=6 format=3 uid="uid://b2c7l0vqc2yep"]
 
 [ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_b3qkh"]
+[ext_resource type="PackedScene" uid="uid://bqqakuyl2wa2g" path="res://Levels/Tutorials/TutorialLevel_4.tscn" id="2_2joxt"]
 [ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="2_73pb8"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="4_85ikw"]
 [ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="4_fymxv"]
@@ -10,6 +11,12 @@ exit_flags = 8
 
 [node name="DownArrow" parent="BaseContainer" index="4"]
 position = Vector2(42, -48)
+
+[node name="NextLevelDoor" parent="BaseContainer" index="9"]
+position = Vector2(121, 77)
+rotation = 1.57079
+next_scene = ExtResource("2_2joxt")
+location = 2
 
 [node name="Player" parent="." index="1"]
 position = Vector2(-180, -13)

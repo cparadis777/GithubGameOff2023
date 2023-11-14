@@ -1,14 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b75mqcyc3pmmw"]
+[gd_scene load_steps=4 format=3 uid="uid://b75mqcyc3pmmw"]
 
 [ext_resource type="Script" path="res://Entities/Environment/switches/LevelDoor.gd" id="1_uedfe"]
 [ext_resource type="Texture2D" uid="uid://gjt4qop4npq3" path="res://art/placeholder/container-exit.png" id="2_sllgx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3jmv"]
 size = Vector2(38.5, 65)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_ou8v5"]
-a = Vector2(-19, 33)
-b = Vector2(76, 33)
 
 [node name="LevelDoor" type="Area2D"]
 script = ExtResource("1_uedfe")
@@ -29,11 +25,6 @@ offset_right = 9.0
 offset_bottom = -10.0
 text = "F"
 horizontal_alignment = 1
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("SegmentShape2D_ou8v5")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

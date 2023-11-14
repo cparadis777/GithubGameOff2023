@@ -26,12 +26,22 @@ func _process(_delta):
 	pass
 
 # enable or disable the collider walls
-func set_walls_disabled(state:bool) -> void:
-	$BaseContainer/BottomCollision.disabled = state
-	$BaseContainer/TopCollision.disabled = state
-	$BaseContainer/LeftCollision.disabled = state
-	$BaseContainer/RightCollision.disabled = state
-	
+func set_walls_disabled(state:bool, side = null) -> void:
+	match(side):
+		Utils.Directions.LEFT:
+			$BaseContainer/LeftCollision.disabled = state
+		Utils.Directions.RIGHT:
+			$BaseContainer/RightCollision.disabled = state
+		Utils.Directions.UP:
+			$BaseContainer/TopCollision.disabled = state
+		Utils.Directions.DOWN:
+			$BaseContainer/BottomCollision.disabled = state
+		_:
+			$BaseContainer/LeftCollision.disabled = state
+			$BaseContainer/RightCollision.disabled = state
+			$BaseContainer/TopCollision.disabled = state
+			$BaseContainer/BottomCollision.disabled = state
+			
 
-func _on_next_level_door_level_exited():
-	set_walls_disabled(true)
+func _on_next_level_door_level_exited(side):
+	set_walls_disabled(true, side)

@@ -7,6 +7,7 @@ extends Area2D
 # how long this side of the transition animation will take
 @export_range(0.0, 2.0, 0.1) var transition_seconds:float = 0.5
 @export var unlocked:bool = true;
+@export var move_player:bool = false;
 @export var location:Utils.Directions
 
 var player_near : bool = false
@@ -20,15 +21,10 @@ func _ready():
 	pass # Replace with function body.
 
 func exit_level():
-	print_debug("exit_level()")
-	# temporarily disable input and world physics, but next level must re-enable?
-	get_tree().get_root().set_process_input(false)
+	# print_debug("exit_level()")
 	
-	level_exited.emit()
-	StageManager.current_player.state_machine.transition_to("Enter", {"dir": location})
-	SceneTransition.change_scene(next_scene, wait_seconds)
-	await get_tree().create_timer(wait_seconds + transition_seconds).timeout
-	StageManager.current_player.state_machine.transition_to("Idle")
+	level_exited.emit(location)
+	SceneTransition.change_scene(next_scene, transition_seconds, wait_seconds)
 	
 
 # Should be done on load of a level
@@ -40,8 +36,17 @@ func _process(delta):
 	if Input.is_action_just_pressed("interact") and player_near and unlocked and !pressed:
 		pressed = true;
 		exit_level()
-	if pressed:
-		StageManager.current_player.velocity.x = StageManager.current_player.speed
+	if pressed && move_player:
+		match(location):
+			Utils.Directions.LEFT:
+				StageManager.current_player.velocity.x = -(StageManager.current_player.speed)
+			Utils.Directions.RIGHT:
+				StageManager.current_player.velocity.x = StageManager.current_player.speed
+			Utils.Directions.UP:
+				StageManager.current_player.velocity.y = -(StageManager.current_player.speed)
+			Utils.Directions.DOWN:
+				StageManager.current_player.velocity.y = StageManager.current_player.speed
+		
 
 func _on_body_entered(body):
 	if body == StageManager.current_player:

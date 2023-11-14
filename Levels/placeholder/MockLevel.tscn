@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_5mtnp"]
 [ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="3_8t4jp"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="4_vdqaf"]
-[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="5_kpchj"]
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="5_kpchj"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="5_ksw2d"]
 [ext_resource type="PackedScene" uid="uid://dm2tosesjfq22" path="res://Entities/Environment/destructible_wall.tscn" id="6_46m30"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="6_lue02"]
@@ -220,7 +220,7 @@ scale = Vector2(1, 0.7)
 
 [node name="NextLevelDoor" parent="." instance=ExtResource("14_eu3y3")]
 z_index = -1
-position = Vector2(493, -37)
+position = Vector2(1469, -416)
 next_scene = ExtResource("15_cefeg")
 wait_seconds = 0.5
 

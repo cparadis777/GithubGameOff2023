@@ -42,6 +42,8 @@ visible = false
 
 [node name="NextLevelDoor" parent="BaseContainer" instance=ExtResource("4_embi4")]
 position = Vector2(173, 63)
+move_player = true
+location = 1
 
 [node name="LeftCollision" type="CollisionShape2D" parent="BaseContainer"]
 shape = SubResource("SegmentShape2D_pjkui")

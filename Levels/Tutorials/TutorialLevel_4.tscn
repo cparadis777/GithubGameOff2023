@@ -17,15 +17,14 @@ position = Vector2(106, -40)
 [node name="DownArrow" parent="BaseContainer" index="4"]
 position = Vector2(0, 42)
 
-[node name="Exterior" parent="BaseContainer" index="5"]
-visible = false
+[node name="NextLevelDoor" parent="BaseContainer" index="9"]
+position = Vector2(-173, 63)
+rotation = -3.14159
+next_scene = ExtResource("2_grqj8")
+location = 3
 
 [node name="Player" parent="." index="1"]
-position = Vector2(145, -43)
-
-[node name="NextLevelDoor" parent="." index="2"]
-position = Vector2(-172, 63)
-next_scene = ExtResource("2_grqj8")
+position = Vector2(149, -42)
 
 [node name="JumpThroughPlatform" parent="." index="3" instance=ExtResource("2_p65xb")]
 position = Vector2(108, -9)
