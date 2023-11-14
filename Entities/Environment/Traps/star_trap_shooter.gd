@@ -21,7 +21,6 @@ func _ready():
 
 func choose_random_goal():
 	var dice_roll = randf()
-	var new_goal : Goals
 	if dice_roll < 0.1:
 		Goal = Goals.RELAX
 	elif dice_roll < 0.4:
@@ -55,7 +54,9 @@ func _on_shot_requested():
 	$AnimationPlayer.play("shoot")
 	
 func die():
+	
 	$Behaviours/Attacks/ShootStars.stop_shooting()
+	$CPUParticles2D.lifetime = 1.0
 	$CPUParticles2D.emitting = true
 	await get_tree().create_timer(0.8).timeout
 	queue_free()
@@ -65,3 +66,10 @@ func _on_hit(attackPacket):
 	hurt.emit(attackPacket)
 	if health <= 0:
 		die()
+	else:
+		$CPUParticles2D.lifetime = 0.33
+		$CPUParticles2D.emitting = true
+		$AnimatedSprite2D.material.set_shader_parameter("IFrames", true)
+		await get_tree().create_timer(0.2).timeout
+		$AnimatedSprite2D.material.set_shader_parameter("IFrames", false)
+		$CPUParticles2D.emitting = false

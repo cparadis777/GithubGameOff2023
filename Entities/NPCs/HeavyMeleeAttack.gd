@@ -39,7 +39,14 @@ func attack():
 			$RecoilTimer.start()
 		else:
 			$ReloadTimer.start()
-		
+
+func stop():
+	$HurtBox/CollisionPolygon2D.set_deferred("disabled", true)
+	$RecoilTimer.stop()
+	$ReloadTimer.stop()
+	current_attack_num = 0
+	
+
 func _on_reload_timer_timeout():
 	current_attack_num = 0
 	

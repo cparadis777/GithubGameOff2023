@@ -308,8 +308,9 @@ func _on_hit(attackPacket):
 		injured.emit(attackPacket)
 		$IFrames.start()
 		if attackPacket.knockback:
-			pass # TODO, implement knockback
-
+			velocity = attackPacket.impact_vector * attackPacket.knockback_speed
+			if "spikes" in attackPacket.originator.name.to_lower():
+				state_machine.transition_to("Air", {"do_jump": true})
 		if health <= 0:
 			print("health = " + str(health))
 			begin_dying()

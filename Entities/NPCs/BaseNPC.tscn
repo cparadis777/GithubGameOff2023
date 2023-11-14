@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=18 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
@@ -134,10 +134,12 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("6_x6jli")
 stream_2/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tblv3"]
+
 [node name="BaseNPC" type="CharacterBody2D" groups=["Enemies"]]
 scale = Vector2(0.631187, 0.631187)
 collision_layer = 2
-collision_mask = 31
+collision_mask = 23
 script = ExtResource("1_1uer3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -204,6 +206,9 @@ polygon = PackedVector2Array(0, -53.8668, 6.33727, -11.0902, 49.1138, -22.1804, 
 [node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_s8act")
 bus = &"sfx"
+
+[node name="AttackNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_tblv3")
 
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
 [connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]

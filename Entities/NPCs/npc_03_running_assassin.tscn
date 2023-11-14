@@ -1,15 +1,26 @@
-[gd_scene load_steps=14 format=3 uid="uid://blh128dmuq6f7"]
+[gd_scene load_steps=18 format=3 uid="uid://blh128dmuq6f7"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_olg2y"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_4c1rq"]
 [ext_resource type="Texture2D" uid="uid://g5ofhu1d3h7y" path="res://art/placeholder/running_assassin.png" id="3_gwwjw"]
 [ext_resource type="PackedScene" uid="uid://0rp1m2y4oowa" path="res://Entities/NPCs/vfx/blood_smear.tscn" id="4_71odh"]
+[ext_resource type="AudioStream" uid="uid://cfsablvhytn7g" path="res://audio/sfx/placeholder/karate_girl.wav" id="4_qrr87"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pfrcw"]
+radius = 12.6745
+height = 63.3727
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bo3ta"]
 resource_local_to_scene = true
 shader = ExtResource("2_4c1rq")
 shader_parameter/iframes = false
 shader_parameter/FlashColor = Color(1, 1, 1, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fkjsc"]
+streams_count = 1
+random_pitch = 1.25
+stream_0/stream = ExtResource("4_qrr87")
+stream_0/weight = 1.0
 
 [sub_resource type="Animation" id="Animation_iaf2y"]
 length = 0.001
@@ -85,9 +96,46 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(2.08165e-12, -32)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AttackNoises:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ktijg"]
 resource_name = "attack"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 0.85, 0.95, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 5, 4, 3, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackNoises:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_dp3bv"]
 resource_name = "die"
@@ -220,14 +268,28 @@ _data = {
 "run": SubResource("Animation_mbs8o")
 }
 
-[node name="RunningAssassin" instance=ExtResource("1_olg2y")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_70y7j"]
+streams_count = 1
+random_pitch = 1.01
+stream_0/stream = ExtResource("4_qrr87")
+stream_0/weight = 1.0
+
+[node name="RunningAssassin" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_olg2y")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, -31.6863)
+shape = SubResource("CapsuleShape2D_pfrcw")
 
 [node name="Sprite2D" parent="Appearance" index="0"]
 material = SubResource("ShaderMaterial_bo3ta")
 position = Vector2(2.08165e-12, -32)
 scale = Vector2(1, 1)
 texture = ExtResource("3_gwwjw")
-hframes = 3
+hframes = 6
+
+[node name="AttackNoise" parent="Behaviours/Attacks/SimpleMeleeAttack" index="5"]
+stream = SubResource("AudioStreamRandomizer_fkjsc")
 
 [node name="BloodSmear" parent="Behaviours/Defenses" index="1" instance=ExtResource("4_71odh")]
 
@@ -237,4 +299,9 @@ libraries = {
 "": SubResource("AnimationLibrary_47al2")
 }
 
+[node name="AttackNoises" parent="." index="8"]
+stream = SubResource("AudioStreamRandomizer_70y7j")
+volume_db = -9.0
+
+[editable path="Behaviours/Attacks/SimpleMeleeAttack"]
 [editable path="Behaviours/Defenses/BloodSmear"]
