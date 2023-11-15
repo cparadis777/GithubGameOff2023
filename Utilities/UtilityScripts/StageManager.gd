@@ -47,8 +47,7 @@ func popup_text(text, location : Vector2, color):
 	newPopup.popup(text, color)
 
 func _on_damage_packet_processed(attackPacket: AttackPacket):
-	# TODO: perhaps instead of the attacker sending the packet,
-	# the recipient should relay the packet AFTER they take off their armor
+	# the recipient forwards the packet to Stage Manager AFTER they fill in values for blocked damage
 	var location = attackPacket.recipient.global_position + Vector2(0,-40)
 	var color
 	if attackPacket.recipient == current_player:

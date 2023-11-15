@@ -104,6 +104,7 @@ position = Vector2(114, -42)
 scale = Vector2(0.941176, 1.04348)
 
 [node name="Exterior" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_xwopa")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]

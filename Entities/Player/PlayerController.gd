@@ -114,14 +114,14 @@ func reset_rotation():
 	animation_player.play("RESET")
 
 func initiate_debugging_protocol():
-	if Engine.time_scale == 1.0:
-		Engine.time_scale = 0.25
-	else:
-		Engine.time_scale = 1.0
-#	if get_viewport().get_camera_2d().zoom == Vector2(1,1):
-#		get_viewport().get_camera_2d().zoom = Vector2(0.25, 0.25)
+#	if Engine.time_scale == 1.0:
+#		Engine.time_scale = 0.25
 #	else:
-#		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
+#		Engine.time_scale = 1.0
+	if get_viewport().get_camera_2d().zoom == Vector2(1,1):
+		get_viewport().get_camera_2d().zoom = Vector2(0.25, 0.25)
+	else:
+		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
 
 
 
