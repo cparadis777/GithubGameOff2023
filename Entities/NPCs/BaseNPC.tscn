@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=18 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
 [ext_resource type="Texture2D" uid="uid://bi724p8u5kyfb" path="res://art/placeholder/EUC.png" id="3_6th61"]
+[ext_resource type="PackedScene" uid="uid://6xs2ww7uhsl5" path="res://Entities/NPCs/Behaviours/simple_melee_attack.tscn" id="4_50gad"]
 [ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="4_nvirp"]
 [ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="5_p2jwr"]
 [ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_x6jli"]
@@ -108,6 +109,9 @@ tracks/2/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_gsqip"]
+resource_name = "idle"
+
 [sub_resource type="Animation" id="Animation_plb34"]
 resource_name = "run"
 
@@ -117,6 +121,7 @@ _data = {
 "attack": SubResource("Animation_qhpe2"),
 "die": SubResource("Animation_io00w"),
 "hurt": SubResource("Animation_ft728"),
+"idle": SubResource("Animation_gsqip"),
 "run": SubResource("Animation_plb34")
 }
 
@@ -129,10 +134,12 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("6_x6jli")
 stream_2/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tblv3"]
+
 [node name="BaseNPC" type="CharacterBody2D" groups=["Enemies"]]
 scale = Vector2(0.631187, 0.631187)
 collision_layer = 2
-collision_mask = 31
+collision_mask = 23
 script = ExtResource("1_1uer3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -156,11 +163,23 @@ texture = ExtResource("3_6th61")
 
 [node name="Sensors" type="Node2D" parent="Behaviours"]
 
+[node name="ObstacleSensor" type="RayCast2D" parent="Behaviours/Sensors"]
+position = Vector2(4.75295, -12.6745)
+target_position = Vector2(32, 2.08165e-12)
+collision_mask = 16
+
+[node name="FloorSensor" type="RayCast2D" parent="Behaviours/Sensors"]
+position = Vector2(25.3491, -4.75295)
+target_position = Vector2(2.08165e-12, 16)
+collision_mask = 16
+
 [node name="DecisionMaking" type="Node2D" parent="Behaviours"]
 
 [node name="Movement" type="Node2D" parent="Behaviours"]
 
 [node name="Attacks" type="Node2D" parent="Behaviours"]
+
+[node name="SimpleMeleeAttack" parent="Behaviours/Attacks" instance=ExtResource("4_50gad")]
 
 [node name="Defenses" type="Node2D" parent="Behaviours"]
 
@@ -188,5 +207,8 @@ polygon = PackedVector2Array(0, -53.8668, 6.33727, -11.0902, 49.1138, -22.1804, 
 stream = SubResource("AudioStreamRandomizer_s8act")
 bus = &"sfx"
 
-[connection signal="timeout" from="DecisionTimer" to="." method="_on_timer_timeout"]
+[node name="AttackNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_tblv3")
+
+[connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
 [connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]

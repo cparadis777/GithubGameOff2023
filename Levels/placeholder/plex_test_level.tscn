@@ -1,9 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=23 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="4_4k4sl"]
+[ext_resource type="PackedScene" uid="uid://c5en3lqt0m2df" path="res://Entities/Environment/Traps/star_trap_shooter.tscn" id="4_myc4j"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="5_2wyyn"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="5_7y8lx"]
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_ap6lg"]
 [ext_resource type="PackedScene" uid="uid://4ubg2v861dlv" path="res://Entities/NPCs/boss_npc.tscn" id="6_t74po"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="7_53wf6"]
@@ -11,10 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="7_rrg24"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
 [ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="9_fc1mv"]
-[ext_resource type="PackedScene" uid="uid://dnsnay6jrr7ic" path="res://Entities/Environment/Lights/switched_blacklight_inverse.tscn" id="11_vsk2m"]
-[ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="11_wyb6i"]
-[ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="12_hiokx"]
-[ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="12_ujqxr"]
+[ext_resource type="PackedScene" uid="uid://bty5gh70uklnu" path="res://Entities/Environment/Lights/default_container_lighting.tscn" id="12_oo7j6"]
 [ext_resource type="PackedScene" uid="uid://bgc4ihpc28ck8" path="res://audio/AudioManager.tscn" id="15_7nkfj"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
@@ -46,15 +45,6 @@ height = 256
 fill_from = Vector2(0.486284, 1)
 fill_to = Vector2(0.511222, 0)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j7lsu"]
-polygon = PackedVector2Array(-315, 7, -313, -246, 313, -247, 318, 5, 344, 4, 336, -265, -339, -263, -336, 8)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tj7bk"]
-blend_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34npf"]
-light_mode = 1
-
 [node name="InteriorContainerLevelMockup01" type="Node2D"]
 script = ExtResource("1_foj8b")
 
@@ -81,6 +71,14 @@ horizontal_alignment = 1
 
 [node name="Obstacle_02" parent="Obstacles" instance=ExtResource("4_4k4sl")]
 position = Vector2(-137, -10)
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="StarTrap-Shooter" parent="Traps" instance=ExtResource("4_myc4j")]
+position = Vector2(-271, -163)
+
+[node name="TrapSpikes" parent="Traps" instance=ExtResource("5_7y8lx")]
+position = Vector2(-321, -80)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -218,63 +216,7 @@ position = Vector2(0, -129)
 texture = SubResource("GradientTexture2D_jycef")
 region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
 
-[node name="Lighting" type="Node2D" parent="."]
-
-[node name="CanvasModulate" type="CanvasModulate" parent="Lighting"]
-color = Color(0.25098, 0.286275, 0.345098, 1)
-
-[node name="InverseBlacklight" parent="Lighting" instance=ExtResource("11_vsk2m")]
-
-[node name="InverseBlacklight2" parent="Lighting" instance=ExtResource("11_vsk2m")]
-position = Vector2(-7, -77)
-
-[node name="InverseBlacklight3" parent="Lighting" instance=ExtResource("11_vsk2m")]
-position = Vector2(232, -164)
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
-occluder = SubResource("OccluderPolygon2D_j7lsu")
-
-[node name="NeonLight" type="Sprite2D" parent="Lighting"]
-material = SubResource("CanvasItemMaterial_tj7bk")
-position = Vector2(74, -228)
-scale = Vector2(5, 5)
-texture = ExtResource("11_wyb6i")
-
-[node name="Line2D" type="Line2D" parent="Lighting/NeonLight"]
-material = SubResource("CanvasItemMaterial_34npf")
-scale = Vector2(0.2, 0.2)
-points = PackedVector2Array(-48, 0, 53.9367, 0)
-width = 5.0
-default_color = Color(1, 0.129412, 1, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="NeonLight2" type="Sprite2D" parent="Lighting"]
-material = SubResource("CanvasItemMaterial_tj7bk")
-position = Vector2(-76, -227)
-scale = Vector2(5, 5)
-texture = ExtResource("11_wyb6i")
-
-[node name="Line2D" type="Line2D" parent="Lighting/NeonLight2"]
-material = SubResource("CanvasItemMaterial_34npf")
-scale = Vector2(0.2, 0.2)
-points = PackedVector2Array(-48, 0, 53.9367, 0)
-width = 5.0
-default_color = Color(1, 0.129412, 1, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="SwitchedLight" parent="Lighting" instance=ExtResource("12_hiokx")]
-visible = false
-energy = 1.2
-
-[node name="Switches" type="Node2D" parent="."]
-
-[node name="LightSwitch" parent="Switches" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("12_ujqxr")]
-position = Vector2(141, -1)
-linked_nodes = [NodePath("../../Lighting/InverseBlacklight"), NodePath("../../Lighting/InverseBlacklight2"), NodePath("../../Lighting/InverseBlacklight3"), NodePath("../../Lighting/SwitchedLight")]
+[node name="Lighting" parent="." instance=ExtResource("12_oo7j6")]
 
 [node name="AudioManager" parent="." instance=ExtResource("15_7nkfj")]
 

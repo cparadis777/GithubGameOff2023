@@ -48,11 +48,22 @@ func allow_early_exit():
 	if cancel_frames_active:
 		if Input.is_action_just_pressed("jump"):
 			state_machine.transition_to("Air", {"do_jump" = true})
-		elif Input.is_action_just_pressed("strong_punch"):
-			state_machine.transition_to("StrongPunch")
-		elif Input.is_action_just_pressed("fast_punch"):
-			state_machine.transition_to("FastPunch")
+		# it felt weird starting a new strong punch during a strong punch charge,
+		# so we'll restrict it to after the punch is executed.
+		elif SubState in [SubStates.EXECUTING, SubStates.FINISHED]:
+	
+			if Input.is_action_just_pressed("strong_punch"):
+				if player.is_on_floor():
+					state_machine.transition_to("StrongPunch")
+				else:
+					state_machine.transition_to("DescendingKick")
+			elif Input.is_action_just_pressed("fast_punch"):
+				if player.is_on_floor():
+					state_machine.transition_to("FastPunch")
+				else:
+					state_machine.transition_to("Dash")
 
+	
 func reset_vfx():
 	charge_vfx.lifetime = 0.5
 	charge_vfx.amount = 48
@@ -127,7 +138,7 @@ func exit():
 	SubState = SubStates.INITIALIZING
 	var col_shape = player.find_child("StrongCollisionShape")
 	if col_shape != null:
-		col_shape.disabled = true
+		col_shape.set_deferred("disabled", true)
 
 func _on_player_animation_finished(anim_name):
 	if anim_name == "strong_punch":

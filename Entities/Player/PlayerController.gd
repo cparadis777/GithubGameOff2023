@@ -27,9 +27,7 @@ var temporary_health_bonus = 0
 
 var iframes : bool = false
 
-# relocated to $state_machine node.. per https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
-#enum States { IDLE, RUNNING, JUMPING, ATTACKING }
-#var State = States.IDLE
+
 @onready var state_machine = $StateMachine
 
 var original_body_scale : Vector2
@@ -51,20 +49,23 @@ func _enter_tree():
 	
 
 func _ready():
-	$Body/Actions/fast_punch/HurtBox/CollisionShape2D.disabled = true
-	$ReferenceRunCycle.hide()
+	disable_all_hurtboxes()
 	hud.show()
 	injured.connect(hud._on_player_hit)
 	injured.connect(StageManager._on_damage_packet_processed)
-	#play_idle_animation()
 	original_body_scale = $Body/CyberRoninSprites.scale
 	original_sprite_position = $Body/CyberRoninSprites.position
-	
+
 
 func flip_sprites():
 	if abs(velocity.x) > 0:
 		$Body.scale.x = sign(velocity.x) * original_body_scale.x
 		state_machine.scale.x = $Body.scale.x
+
+
+func set_direction(dir : int):
+	$Body.scale.x = dir * original_body_scale.x
+
 
 func get_last_known_direction():
 	if $Body.scale.x > 0:
@@ -72,21 +73,17 @@ func get_last_known_direction():
 	else:
 		return -1
 
+
 func _physics_process(_delta):
 	flip_sprites()
 	$Debug.global_rotation = 0.0
-#	if Input.is_action_just_pressed("shoot"):
-#		spawn_bullet_toward_mouse()
 	if Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
-
 
 
 func play_run_animation():
 	if $AnimationPlayer.current_animation != "run":
 		$AnimationPlayer.play("run")
-	
-
 
 
 func play_jump_peak_animation():
@@ -111,14 +108,14 @@ func reset_rotation():
 	animation_player.play("RESET")
 
 func initiate_debugging_protocol():
-	if Engine.time_scale == 1.0:
-		Engine.time_scale = 0.25
-	else:
-		Engine.time_scale = 1.0
-#	if get_viewport().get_camera_2d().zoom == Vector2(1,1):
-#		get_viewport().get_camera_2d().zoom = Vector2(0.25, 0.25)
+#	if Engine.time_scale == 1.0:
+#		Engine.time_scale = 0.25
 #	else:
-#		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
+#		Engine.time_scale = 1.0
+	if get_viewport().get_camera_2d().zoom == Vector2(1,1):
+		get_viewport().get_camera_2d().zoom = Vector2(0.25, 0.25)
+	else:
+		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
 
 
 
@@ -134,6 +131,7 @@ func detect_jump_through_platform() -> StaticBody2D:
 			jump_through_platform_detected = candidate
 	return jump_through_platform_detected
 
+
 func detect_moving_platform() -> AnimatableBody2D:
 	var moving_platform_detected
 	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
@@ -141,7 +139,8 @@ func detect_moving_platform() -> AnimatableBody2D:
 		if candidate.is_in_group("MovingPlatforms") or candidate is AnimatableBody2D or "moving" in candidate.name.to_lower():
 			moving_platform_detected = candidate
 	return moving_platform_detected
-	
+
+
 func detect_npcs_underfoot():
 	var npcs_detected = []
 	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
@@ -150,6 +149,10 @@ func detect_npcs_underfoot():
 			npcs_detected.push_back(candidate)
 	return npcs_detected
 	
+
+
+
+
 
 
 #888888888888                                             88           88                                       
@@ -172,19 +175,15 @@ func _on_animation_player_animation_finished(anim_name):
 
 func _on_state_transitioned(_stateName):
 	disable_all_hurtboxes() # let animations turn them back on
-	#reset_sprite_position()
-	
-	
 	# see all incoming signals below.. from various states.
 
 
 func _on_jumped(): # from Air state
 	animation_player.play("jump_launch")
-	#$Body/CyberRoninSprites.play("jump_launch")
 
 func _on_peak_amplitude_reached(): # from Air state
 	play_jump_peak_animation()
-		
+
 func _on_double_jump_hover_initiated(): # from Air state
 	play_somersault_animation("initiate")
 
@@ -204,15 +203,14 @@ func _on_descending_kick_started():
 # should animation calls come from the State machine or the player?
 	if animation_player.has_animation("descending_kick"):
 		animation_player.play("descending_kick")
-		#$Body/CyberRoninSprites.play("descending_kick")
-
 
 
 func _on_dash_started():
 	if animation_player.has_animation("dash"):
 		animation_player.play("dash")
-#	$Body/CyberRoninSprites.play("dash")
-#	$Body/SpeedLines.play("default")
+
+
+
 
 
 #  ,ad8888ba,                                    88                                
@@ -242,7 +240,6 @@ func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 func disable_all_hurtboxes():
 	var hurtboxes = [ 
 		$Body/Actions/fast_punch/HurtBox/CollisionShape2D,
-		#$Body/Actions/strong_punch/HurtBox/StrongCollisionShape,
 		$Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D,
 	]
 
@@ -288,24 +285,19 @@ func _on_fast_punch_hurtbox_body_entered(body):
 			var uppercut = (last_fast_punch_animation == "fast_punch_3")
 			inflict_harm(body, 10, knockback_magnitude, uppercut)
 
-#
-#func _on_strong_punch_hurtbox_body_entered(body):
-#	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-#		if state_machine.state.name in ["StrongPunch", "Dash"]:
-#			var knockback_magnitude = 3.0
-#			var uppercut = false
-#			inflict_harm(body, knockback_magnitude, uppercut)
 
 
 #receive injury
 func _on_hit(attackPacket):
 	if !iframes and (state_machine.state.name not in [ "Dying", "Dead"]):
 		health -= attackPacket.damage
+		Globals.player_stats["health"] = health
 		injured.emit(attackPacket)
 		$IFrames.start()
 		if attackPacket.knockback:
-			pass # TODO, implement knockback
-
+			velocity = attackPacket.impact_vector * attackPacket.knockback_speed
+			if "spikes" in attackPacket.originator.name.to_lower():
+				state_machine.transition_to("Air", {"do_jump": true})
 		if health <= 0:
 			print("health = " + str(health))
 			begin_dying()
