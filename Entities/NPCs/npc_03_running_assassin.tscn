@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://blh128dmuq6f7"]
+[gd_scene load_steps=19 format=3 uid="uid://blh128dmuq6f7"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_olg2y"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_4c1rq"]
 [ext_resource type="Texture2D" uid="uid://g5ofhu1d3h7y" path="res://art/placeholder/running_assassin.png" id="3_gwwjw"]
 [ext_resource type="PackedScene" uid="uid://0rp1m2y4oowa" path="res://Entities/NPCs/vfx/blood_smear.tscn" id="4_71odh"]
+[ext_resource type="PackedScene" uid="uid://34h4gpptsyai" path="res://Entities/NPCs/Behaviours/flying_kick.tscn" id="4_cdrqc"]
 [ext_resource type="AudioStream" uid="uid://cfsablvhytn7g" path="res://audio/sfx/placeholder/karate_girl.wav" id="4_qrr87"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pfrcw"]
@@ -286,7 +287,11 @@ material = SubResource("ShaderMaterial_bo3ta")
 position = Vector2(2.08165e-12, -32)
 scale = Vector2(1, 1)
 texture = ExtResource("3_gwwjw")
-hframes = 6
+hframes = 8
+
+[node name="Jump" type="Node2D" parent="Behaviours/Movement" index="0"]
+
+[node name="FlyingKick" parent="Behaviours/Attacks" index="0" instance=ExtResource("4_cdrqc")]
 
 [node name="AttackNoise" parent="Behaviours/Attacks/SimpleMeleeAttack" index="5"]
 stream = SubResource("AudioStreamRandomizer_fkjsc")

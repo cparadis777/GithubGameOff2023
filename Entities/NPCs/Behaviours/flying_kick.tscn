@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://34h4gpptsyai"]
+
+[ext_resource type="Script" path="res://Entities/NPCs/Behaviours/flying_kick.gd" id="1_brn6b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1vq0a"]
+size = Vector2(35.3491, 22.6745)
+
+[node name="FlyingKick" type="Node2D"]
+script = ExtResource("1_brn6b")
+
+[node name="FlyingKickHurtBox" type="Area2D" parent="."]
+monitoring = false
+
+[node name="FlyingKickCollShape" type="CollisionShape2D" parent="FlyingKickHurtBox"]
+position = Vector2(30.3491, -33.5177)
+shape = SubResource("RectangleShape2D_1vq0a")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
