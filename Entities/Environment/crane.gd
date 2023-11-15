@@ -36,7 +36,7 @@ func _input(event):
 
 func select_random_container() -> StaticBody2D:
 	var new_container = containers.pick_random().instantiate()
-	new_container.get_node("Exterior").self_modulate = Utils.random_color()
+	#new_container.get_node("Exterior").self_modulate = Utils.random_color()
 	self.randomize_container_access(new_container)
 	return new_container
 

@@ -17,10 +17,7 @@ var entrances = {
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
-	if has_node("Exterior"):
-		$Exterior.show()
-		$Exterior.texture = exterior_texture
-
+	pass
 	#print("setting arrows")
 
 	#print("done setting arrows")
@@ -45,10 +42,10 @@ func _on_container_interior_body_entered(body:Node2D):
 func set_entrances(directions) -> void:
 
 	var entrance_arrows = {
-	Utils.Directions.LEFT: $LeftArrow,
-	Utils.Directions.UP: $UpArrow,
-	Utils.Directions.RIGHT: $RightArrow,
-	Utils.Directions.DOWN: $DownArrow,
+	Utils.Directions.LEFT: $LeftLine,
+	Utils.Directions.UP: $UpLine,
+	Utils.Directions.RIGHT: $RightLine,
+	Utils.Directions.DOWN: $DownLine,
 }
 
 	for entrance in entrance_arrows:
@@ -59,13 +56,13 @@ func set_entrances(directions) -> void:
 		entrance_arrows[direction].show()
 
 func hide_entrance(direction) -> void:
+	return
 	var entrance_arrows = {
-	Utils.Directions.LEFT: $LeftArrow,
-	Utils.Directions.UP: $UpArrow,
-	Utils.Directions.RIGHT: $RightArrow,
-	Utils.Directions.DOWN: $DownArrow,
-	}
-
+	Utils.Directions.LEFT: $LeftLine,
+	Utils.Directions.UP: $UpLine,
+	Utils.Directions.RIGHT: $RightLine,
+	Utils.Directions.DOWN: $DownLine,
+}
 	entrance_arrows[direction].hide()
 
 

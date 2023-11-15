@@ -1,20 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=11 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
 [ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="2_o08nb"]
 [ext_resource type="Script" path="res://Levels/DropPoints.gd" id="3_i3vix"]
 [ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="3_tcnfn"]
-[ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_bhv33"]
+[ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="4_unqhl"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
 [ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="8_18gwl"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wi8fu"]
-size = Vector2(16, 21.5)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_4sa48"]
-a = Vector2(104, 40)
-b = Vector2(-88, 40)
+[ext_resource type="Texture2D" uid="uid://c6hhruk5y7uvl" path="res://art/low_res_containers/shipping_container_generic-LOWRES.png" id="9_xttiv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f6bsu"]
 shader = ExtResource("2_o08nb")
@@ -62,6 +56,8 @@ layout_mode = 2
 text = "Fight!"
 scene_path = "res://Levels/GeneratedPlayspace.tscn"
 
+[node name="ParallaxBackground" parent="." instance=ExtResource("4_unqhl")]
+
 [node name="DropPoints" type="Node2D" parent="."]
 position = Vector2(-65, -113)
 script = ExtResource("3_i3vix")
@@ -73,38 +69,6 @@ container_height = 24
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -177)
-
-[node name="Ship" type="StaticBody2D" parent="."]
-position = Vector2(-1, -145)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
-position = Vector2(-96, 49.25)
-shape = SubResource("RectangleShape2D_wi8fu")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Ship"]
-position = Vector2(112, -8)
-shape = SubResource("RectangleShape2D_wi8fu")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ship"]
-shape = SubResource("SegmentShape2D_4sa48")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Ship"]
-position = Vector2(-96, 47.25)
-scale = Vector2(0.125, 0.136719)
-texture = ExtResource("4_bhv33")
-
-[node name="Sprite2D3" type="Sprite2D" parent="Ship"]
-position = Vector2(112, -6.00001)
-scale = Vector2(0.125, 0.90625)
-texture = ExtResource("4_bhv33")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D2" type="Sprite2D" parent="Ship"]
-position = Vector2(8, 47)
-scale = Vector2(1.625, 0.109375)
-texture = ExtResource("4_bhv33")
-metadata/_edit_lock_ = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 z_index = 1
@@ -150,6 +114,63 @@ container reflects
 the amount and difficulty of
 teamsters, thugs, and assassins
 contained within."
+
+[node name="Arena" type="Node2D" parent="."]
+
+[node name="Sprite2D11" type="Sprite2D" parent="Arena"]
+position = Vector2(-113, -113)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Arena"]
+position = Vector2(-17, -89)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Arena"]
+position = Vector2(-65, -89)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Arena"]
+position = Vector2(-113, -89)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Arena"]
+position = Vector2(31, -89)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Arena"]
+position = Vector2(79, -89)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Arena"]
+position = Vector2(127, -89)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Arena"]
+position = Vector2(127, -113)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Arena"]
+position = Vector2(127, -137)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Arena"]
+position = Vector2(127, -161)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Arena"]
+position = Vector2(127, -185)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xttiv")
 
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]

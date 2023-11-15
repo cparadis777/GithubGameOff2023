@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlyqwhewo8awt"]
+
+[ext_resource type="PackedScene" uid="uid://mq11awte3lc6" path="res://Entities/Droppable/PrototypeDroppableContainer.tscn" id="1_1rxyy"]
+[ext_resource type="Texture2D" uid="uid://doyx730cxnu5r" path="res://art/low_res_containers/shipping_container_bengal_security-LOWRES.png" id="2_0vi8r"]
+
+[node name="BaseContainer" instance=ExtResource("1_1rxyy")]
+
+[node name="Exterior" parent="." index="4"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_0vi8r")
