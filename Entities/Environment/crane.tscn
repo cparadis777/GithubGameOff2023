@@ -1,11 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5vova3vmv6p7"]
+[gd_scene load_steps=25 format=3 uid="uid://c5vova3vmv6p7"]
 
 [ext_resource type="Script" path="res://Entities/Environment/crane.gd" id="1_iyal4"]
-[ext_resource type="PackedScene" uid="uid://mq11awte3lc6" path="res://Entities/Environment/PlaceHolders/PlaceholderDroppableContainer.tscn" id="2_go6ni"]
+[ext_resource type="PackedScene" uid="uid://drrt45f45qnjy" path="res://Entities/Droppable/BlueDroppableContainer.tscn" id="2_rgicc"]
+[ext_resource type="PackedScene" uid="uid://dlyqwhewo8awt" path="res://Entities/Droppable/RedDroppableContainer.tscn" id="3_wwyy3"]
 [ext_resource type="Texture2D" uid="uid://dcxyqxj0okyoe" path="res://art/props/crane_just_tress.png" id="4_58oyw"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="4_l15jl"]
+[ext_resource type="PackedScene" uid="uid://cps4h2vpyvnre" path="res://Entities/Droppable/GreenDroppableContainer.tscn" id="4_r6wi7"]
+[ext_resource type="PackedScene" uid="uid://bbinheaic5qh4" path="res://Entities/Droppable/GreyDroppableContainer.tscn" id="5_4v4gy"]
 [ext_resource type="Texture2D" uid="uid://cucxmeo2p3j11" path="res://art/props/crane_just_crane.png" id="5_qrdko"]
 [ext_resource type="Texture2D" uid="uid://c2tkw8bry0p1n" path="res://art/props/crane_just_holder.png" id="5_xiuhn"]
+[ext_resource type="PackedScene" uid="uid://ekj2echyvjcm" path="res://Entities/Droppable/PurpleDroppableContainer.tscn" id="6_33pt5"]
+[ext_resource type="PackedScene" uid="uid://c46xev2xk4g62" path="res://Entities/Droppable/YellowDroppableContainer.tscn" id="7_7172x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2goie"]
 atlas = ExtResource("5_qrdko")
@@ -102,19 +107,21 @@ animations = [{
 [node name="crane" type="Node2D"]
 script = ExtResource("1_iyal4")
 n_columns = 5
-containers = Array[PackedScene]([ExtResource("2_go6ni")])
+containers = Array[PackedScene]([ExtResource("2_rgicc"), ExtResource("3_wwyy3"), ExtResource("4_r6wi7"), ExtResource("5_4v4gy"), ExtResource("6_33pt5"), ExtResource("7_7172x")])
 container_width = 48
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_top = 16.0
-offset_right = 152.0
-offset_bottom = 64.0
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 168.0
+offset_bottom = 96.0
 theme = ExtResource("4_l15jl")
 
 [node name="CraneTruss" type="Sprite2D" parent="."]
 z_index = 2
 position = Vector2(29, 45)
 texture = ExtResource("4_58oyw")
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

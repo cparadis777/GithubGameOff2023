@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://mq11awte3lc6"]
+
+[ext_resource type="Script" path="res://Entities/Droppable/DroppableContainer.gd" id="1_rwau2"]
+[ext_resource type="Texture2D" uid="uid://cb102o7cgap8t" path="res://art/placeholder/PlaceholderContainer.png" id="2_c68lr"]
+
+[node name="BaseContainer" type="StaticBody2D" groups=["containers"]]
+script = ExtResource("1_rwau2")
+
+[node name="Exterior" type="Sprite2D" parent="."]
+texture = ExtResource("2_c68lr")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 1)
+offset_left = -18.0
+offset_top = -11.0
+offset_right = 18.0
+offset_bottom = 12.0
+text = "(0,0)"
+
+[node name="LeftLine" type="Line2D" parent="."]
+points = PackedVector2Array(-24, 0, 0, 0)
+width = 2.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="UpLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, -12)
+width = 2.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="RightLine" type="Line2D" parent="."]
+points = PackedVector2Array(24, 0, 0, 0)
+width = 2.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="DownLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 12)
+width = 2.0
+default_color = Color(1, 0, 0, 1)
