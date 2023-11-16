@@ -41,7 +41,7 @@ func _ready():
 	if (enter_down):
 		directions.push_back(Utils.Directions.DOWN)
 		bottom_wall.disabled = true
-	set_entrances(directions)
+	# set_entrances(directions)
 
 func set_grid_position(coordinate:Vector2) -> void:
 	self.grid_position = coordinate
