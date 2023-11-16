@@ -140,3 +140,7 @@ func _on_decision_timer_timeout():
 				turn_around()
 		elif State == States.IDLE:
 			animation_player.play("idle")
+
+func _on_shot_requested():
+	if animation_player.has_animation("shoot"):
+		animation_player.play("shoot")

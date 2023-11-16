@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var base_damage : float = 5.0
+@export var enabled : bool = true
+
 var damage
 var npc
 
@@ -18,6 +20,9 @@ func scale_for_difficulty():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if !enabled:
+		return
+	
 	if npc.State in [npc.States.IDLE, npc.States.RUNNING]:
 		if $AttackDelay.is_stopped() and $AttackReload.is_stopped():
 			if $RayCast2D.is_colliding() and $RayCast2D.get_collider() == StageManager.current_player:

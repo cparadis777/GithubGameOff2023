@@ -4,6 +4,7 @@
 
 extends Node2D
 
+@export var enabled : bool = true
 @export var bullet_scene = preload("res://Entities/Projectiles/bullet_basic.tscn")
 
 enum States { INITIALIZING, PAUSED, READY, SHOOTING }
@@ -16,11 +17,18 @@ signal shot_requested()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$ReloadTimer.start()
+	
 	if owner.has_method("_on_shot_requested"):
 		shot_requested.connect(owner._on_shot_requested)
 	# temporary, until levels can activate props...
-	activate()
+	if enabled:
+		activate()
+
+
+func activate():
+	State = States.READY
+	$ReloadTimer.start()
+
 
 func activate_new_state(value):
 	if value == States.SHOOTING:
@@ -45,6 +53,7 @@ func stop():
 func shoot():
 	if State == States.SHOOTING:
 		shot_requested.emit()
+		# note: we're expecting the animation to call for launch_bullet()
 	
 func launch_bullet():
 	var newBullet = bullet_scene.instantiate()
@@ -63,8 +72,7 @@ func launch_bullet():
 
 
 
-func activate():
-	State = States.READY
+
 
 func _on_recoil_timer_timeout():
 	if State == States.SHOOTING:

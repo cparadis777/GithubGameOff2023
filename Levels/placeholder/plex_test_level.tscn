@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=24 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="7_rrg24"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
 [ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="9_fc1mv"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_44m5b"]
 [ext_resource type="PackedScene" uid="uid://bty5gh70uklnu" path="res://Entities/Environment/Lights/default_container_lighting.tscn" id="12_oo7j6"]
 [ext_resource type="PackedScene" uid="uid://bgc4ihpc28ck8" path="res://audio/AudioManager.tscn" id="15_7nkfj"]
 
@@ -93,6 +94,9 @@ position = Vector2(181, -168)
 
 [node name="RunningAssassin" parent="Enemies" instance=ExtResource("7_rrg24")]
 position = Vector2(-88, -1)
+
+[node name="ShootyNPC" parent="Enemies" instance=ExtResource("10_44m5b")]
+position = Vector2(169, -87)
 
 [node name="Platforms" type="Node2D" parent="."]
 
