@@ -23,9 +23,10 @@ func activate():
 
 func attempt_to_attack():
 	if $RecoilTimer.is_stopped() and $ReloadTimer.is_stopped():
-		var playerPos = StageManager.current_player.global_position
-		if global_position.distance_squared_to(playerPos) < melee_range * melee_range:
-			attack()
+		if StageManager.current_player != null:
+			var playerPos = StageManager.current_player.global_position
+			if global_position.distance_squared_to(playerPos) < melee_range * melee_range:
+				attack()
 
 func is_active():
 	return active
