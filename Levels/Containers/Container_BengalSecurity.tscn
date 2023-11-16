@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://biy12najt2tbe"]
 
-[ext_resource type="Script" path="res://Entities/Environment/Containers/CustomContainer.gd" id="1_nvyr8"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_q4r4m"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_sig7t"]
 [ext_resource type="Texture2D" uid="uid://c3kda4g5tnpbm" path="res://art/interiors/shipping_container_bengal_security_INTERIOR.png" id="3_5voqu"]
 [ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="4_2gf7b"]
@@ -25,8 +25,7 @@ b = Vector2(192, 96)
 size = Vector2(384, 192)
 
 [node name="BaseContainer" type="StaticBody2D"]
-script = ExtResource("1_nvyr8")
-exterior_texture = ExtResource("2_sig7t")
+script = ExtResource("1_q4r4m")
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4

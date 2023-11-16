@@ -1,10 +1,5 @@
 extends "res://Entities/Environment/Containers/BaseContainer.gd"
 
-@export var enter_left = false
-@export var enter_right = false
-@export var enter_up = false
-@export var enter_down = false
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
