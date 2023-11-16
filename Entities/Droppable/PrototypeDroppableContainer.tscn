@@ -1,13 +1,70 @@
-[gd_scene load_steps=3 format=3 uid="uid://mq11awte3lc6"]
+[gd_scene load_steps=11 format=3 uid="uid://mq11awte3lc6"]
 
 [ext_resource type="Script" path="res://Entities/Droppable/DroppableContainer.gd" id="1_rwau2"]
-[ext_resource type="Texture2D" uid="uid://cb102o7cgap8t" path="res://art/placeholder/PlaceholderContainer.png" id="2_c68lr"]
+[ext_resource type="Texture2D" uid="uid://bg37ae5f0jil0" path="res://art/low_res_containers/low_res_containers.png" id="2_0da3g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ejcc"]
+atlas = ExtResource("2_0da3g")
+region = Rect2(0, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvbkj"]
+atlas = ExtResource("2_0da3g")
+region = Rect2(48, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gag6l"]
+atlas = ExtResource("2_0da3g")
+region = Rect2(96, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhh3e"]
+atlas = ExtResource("2_0da3g")
+region = Rect2(144, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18t40"]
+atlas = ExtResource("2_0da3g")
+region = Rect2(192, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6vh8"]
+atlas = ExtResource("2_0da3g")
+region = Rect2(240, 0, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc3g0"]
+atlas = ExtResource("2_0da3g")
+region = Rect2(288, 0, 48, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rdl16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ejcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvbkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gag6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhh3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18t40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6vh8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc3g0")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="BaseContainer" type="StaticBody2D" groups=["containers"]]
 script = ExtResource("1_rwau2")
 
-[node name="Exterior" type="Sprite2D" parent="."]
-texture = ExtResource("2_c68lr")
+[node name="Exterior" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rdl16")
 
 [node name="Label" type="Label" parent="."]
 visible = false

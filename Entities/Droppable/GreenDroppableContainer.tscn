@@ -1,10 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cps4h2vpyvnre"]
+[gd_scene load_steps=2 format=3 uid="uid://cps4h2vpyvnre"]
 
 [ext_resource type="PackedScene" uid="uid://mq11awte3lc6" path="res://Entities/Droppable/PrototypeDroppableContainer.tscn" id="1_5824h"]
-[ext_resource type="Texture2D" uid="uid://c0ynrj56pkwp1" path="res://art/low_res_containers/shipping_container_ill_eagle-LOWRES.png" id="2_1xg2o"]
 
 [node name="BaseContainer" instance=ExtResource("1_5824h")]
 
-[node name="Exterior" parent="." index="4"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_1xg2o")
+[node name="Exterior" parent="." index="0"]
+frame = 4
