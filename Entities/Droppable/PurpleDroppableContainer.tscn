@@ -1,10 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ekj2echyvjcm"]
+[gd_scene load_steps=2 format=3 uid="uid://ekj2echyvjcm"]
 
 [ext_resource type="PackedScene" uid="uid://mq11awte3lc6" path="res://Entities/Droppable/PrototypeDroppableContainer.tscn" id="1_vw0nu"]
-[ext_resource type="Texture2D" uid="uid://mh71o686bbc5" path="res://art/low_res_containers/shipping_container_soyda-LOWRES.png" id="2_g1hde"]
 
 [node name="BaseContainer" instance=ExtResource("1_vw0nu")]
 
-[node name="Exterior" parent="." index="4"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_g1hde")
+[node name="Exterior" parent="." index="0"]
+frame = 6

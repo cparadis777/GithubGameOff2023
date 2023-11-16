@@ -57,22 +57,5 @@ func _on_container_interior_body_entered(body:Node2D):
 		print("Hidden outside container")
 		$Exterior.hide()
 
-func set_entrances(directions) -> void:
-
-	var entrance_arrows = {
-	Utils.Directions.LEFT: $LeftArrow,
-	Utils.Directions.UP: $UpArrow,
-	Utils.Directions.RIGHT: $RightArrow,
-	Utils.Directions.DOWN: $DownArrow,
-}
-
-	for entrance in entrance_arrows:
-		entrance_arrows[entrance].hide()
-	for direction in directions:
-		self.entrances[direction] = true
-		entrance_arrows[direction].show()
-
-func hide_entrance(direction) -> void:
-	return
 
 
