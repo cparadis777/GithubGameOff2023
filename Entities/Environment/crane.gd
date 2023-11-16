@@ -94,7 +94,13 @@ func move_done()->void:
 
 func randomize_container_access(container):
 	var sides = [Utils.Directions.LEFT, Utils.Directions.UP, Utils.Directions.RIGHT, Utils.Directions.DOWN]
-	container.set_entrances([sides.pick_random()])
+	var selected_sides = []
+	for side in sides:
+		if randf() > 0.5:
+			selected_sides.append(side)
+	if selected_sides.size() == 0:
+		selected_sides.append(sides.pick_random())
+	container.set_entrances(selected_sides)
 
 
 func _on_crane_jaw_animation_finished():
