@@ -4,15 +4,15 @@
 [ext_resource type="Script" path="res://Levels/ContainerGrid.gd" id="2_0shpo"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_5n0k1"]
 [ext_resource type="PackedScene" uid="uid://c2slp1rb0plu" path="res://Utilities/UtilityScenes/ContainerSlot.tscn" id="3_xh56m"]
-[ext_resource type="PackedScene" uid="uid://cecceqk8282a6" path="res://Entities/Environment/Containers/CustomContainer.tscn" id="4_460lr"]
 [ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_yhops"]
+[ext_resource type="PackedScene" uid="uid://b37u2ddd6pkmg" path="res://Entities/Environment/Containers/GreyContainers.tscn" id="7_4qdde"]
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="7_ifxbb"]
 
 [node name="GeneratedPlayspace" type="Node2D"]
 script = ExtResource("1_guo8s")
 
 [node name="Player" parent="." instance=ExtResource("2_5n0k1")]
-position = Vector2(281, 63)
+position = Vector2(-376, 60)
 
 [node name="ContainerGrid" type="Node2D" parent="."]
 script = ExtResource("2_0shpo")
@@ -31,10 +31,13 @@ position = Vector2(318, 126)
 enabled = false
 zoom = Vector2(0.1, 0.1)
 
-[node name="BaseContainer" parent="." instance=ExtResource("4_460lr")]
+[node name="EmptyContainer3" parent="." instance=ExtResource("7_4qdde")]
+position = Vector2(-384, 192)
+
+[node name="EmptyContainer2" parent="." instance=ExtResource("7_4qdde")]
 position = Vector2(0, 192)
 
-[node name="BaseContainer2" parent="." instance=ExtResource("4_460lr")]
+[node name="EmptyContainer" parent="." instance=ExtResource("7_4qdde")]
 position = Vector2(384, 192)
 
 [node name="CanvasModulate" parent="." instance=ExtResource("7_ifxbb")]
