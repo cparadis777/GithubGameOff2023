@@ -154,6 +154,7 @@ position = Vector2(98, 8)
 position = Vector2(2, -53)
 
 [node name="Exterior" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("4_47a7b")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]

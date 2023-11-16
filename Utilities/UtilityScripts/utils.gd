@@ -6,13 +6,13 @@ enum Directions {UP, RIGHT, DOWN, LEFT}
 
 func get_opposite_direction(direction:Utils.Directions) -> Utils.Directions:
 	match direction:
-		0:
+		Directions.UP:
 			return Utils.Directions.DOWN
-		1:
+		Directions.RIGHT:
 			return Utils.Directions.LEFT
-		2: 
+		Directions.DOWN: 
 			return Utils.Directions.UP
-		3: 
+		Directions.LEFT: 
 			return Utils.Directions.RIGHT
 		_:
 			return Utils.Directions.DOWN
