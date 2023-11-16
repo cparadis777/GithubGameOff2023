@@ -2,11 +2,14 @@ extends Node2D
 
 @export var base_damage : float = 5.0
 var damage
+var npc
 
 signal hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	await owner.ready
+	npc = owner
 	scale_for_difficulty()
 	
 func scale_for_difficulty():
@@ -14,21 +17,33 @@ func scale_for_difficulty():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if $AttackDelay.is_stopped() and $AttackReload.is_stopped():
-		if $RayCast2D.is_colliding() and $RayCast2D.get_collider() == StageManager.current_player:
-			launch_attack()
-			
+func _process(_delta):
+	if npc.State in [npc.States.IDLE, npc.States.RUNNING]:
+		if $AttackDelay.is_stopped() and $AttackReload.is_stopped():
+			if $RayCast2D.is_colliding() and $RayCast2D.get_collider() == StageManager.current_player:
+				launch_attack()
+
+
 func launch_attack():
 	$AttackDelay.set_wait_time(randf_range(0.1, 0.3))
 	$AttackDelay.start()
 	
-	
+
 func execute_attack():
+
+	if npc.get("animation_player") and npc.animation_player.has_animation("attack"):
+		npc.animation_player.play("attack")
 	$AnimationPlayer.play("attack")
+			
+		
+func stop():
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("RESET")
 	
+
 func _on_attack_delay_timeout():
-	execute_attack()
+	if npc.State in [npc.States.IDLE, npc.States.RUNNING]:
+		execute_attack()
 	
 func _on_attack_reload_timeout():
 	pass

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bydxa3wqsfedy"]
 
-[ext_resource type="Script" path="res://Entities/Environment/Containers/CustomContainer.gd" id="1_e6lbn"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_b4ta2"]
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="2_oroii"]
 [ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_iusf0"]
 [ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="4_1peri"]
@@ -25,7 +25,7 @@ b = Vector2(192, 96)
 size = Vector2(384, 192)
 
 [node name="BaseContainer" type="StaticBody2D"]
-script = ExtResource("1_e6lbn")
+script = ExtResource("1_b4ta2")
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
@@ -49,6 +49,7 @@ rotation = -1.5708
 texture = ExtResource("3_iusf0")
 
 [node name="Exterior" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("4_1peri")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]

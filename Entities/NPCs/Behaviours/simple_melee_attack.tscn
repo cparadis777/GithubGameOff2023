@@ -1,80 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://6xs2ww7uhsl5"]
+[gd_scene load_steps=8 format=3 uid="uid://6xs2ww7uhsl5"]
 
-[ext_resource type="Texture2D" uid="uid://cnaxu2cut8lyw" path="res://art/placeholder/boot.png" id="1_jbl4y"]
 [ext_resource type="Script" path="res://Entities/NPCs/Behaviours/simple_melee_attack.gd" id="1_n2f8j"]
 [ext_resource type="AudioStream" uid="uid://8hsfr4t6hs1u" path="res://audio/sfx/placeholder/heavy_attack_follow_through.wav" id="3_nxgo6"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rp55r"]
-
-[sub_resource type="Animation" id="Animation_ijt82"]
-resource_name = "attack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Boot:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Boot:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.5, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 1.59405, 1.59405, -1.21581, -1.21581, -1.21581, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Polygon2D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [false, true, true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Boot/MeleeCollisionArea:monitoring")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [false, true, true, false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AttackNoise:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uiwhd"]
+size = Vector2(13, 33)
 
 [sub_resource type="Animation" id="Animation_ua5in"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Boot:visible")
+tracks/0/path = NodePath("MeleeCollisionArea:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -86,50 +23,41 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Boot:rotation")
+tracks/1/path = NodePath("AttackNoise:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Polygon2D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Boot/MeleeCollisionArea:monitoring")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+
+[sub_resource type="Animation" id="Animation_ijt82"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeleeCollisionArea:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false]
+"values": [false, true, true, false]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AttackNoise:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackNoise:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p6ucv"]
@@ -151,26 +79,13 @@ script = ExtResource("1_n2f8j")
 position = Vector2(17.4275, -39.6079)
 target_position = Vector2(30, 2.08165e-12)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-visible = false
-position = Vector2(3, -35)
-rotation = -2.46991
-color = Color(0.792157, 1, 0.32549, 0.572549)
-offset = Vector2(-6.0073, 25.3722)
-polygon = PackedVector2Array(-27.3142, -38.7445, -19.1937, -48.9454, -7.87956, -56.0157, 8.84495, -59.6614, 25.3701, -51.6041, 29.5724, -42.475, 15.2639, -50.2382, 1.99563, -48.8407, -9.96991, -43.6614, -17.7963, -35.6771)
-
-[node name="Boot" type="Sprite2D" parent="."]
-visible = false
+[node name="MeleeCollisionArea" type="Area2D" parent="."]
 position = Vector2(0, -27)
-texture = ExtResource("1_jbl4y")
-offset = Vector2(0, 27)
-
-[node name="MeleeCollisionArea" type="Area2D" parent="Boot"]
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boot/MeleeCollisionArea"]
-position = Vector2(7, 27)
-shape = SubResource("CircleShape2D_rp55r")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeCollisionArea"]
+position = Vector2(18.5, -17.5)
+shape = SubResource("RectangleShape2D_uiwhd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -187,6 +102,6 @@ one_shot = true
 [node name="AttackNoise" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_1q54s")
 
-[connection signal="body_entered" from="Boot/MeleeCollisionArea" to="." method="_on_melee_collision_area_body_entered"]
+[connection signal="body_entered" from="MeleeCollisionArea" to="." method="_on_melee_collision_area_body_entered"]
 [connection signal="timeout" from="AttackDelay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="AttackReload" to="." method="_on_attack_reload_timeout"]

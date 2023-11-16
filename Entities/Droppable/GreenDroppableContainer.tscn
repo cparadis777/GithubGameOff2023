@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cps4h2vpyvnre"]
+
+[ext_resource type="PackedScene" uid="uid://mq11awte3lc6" path="res://Entities/Droppable/PrototypeDroppableContainer.tscn" id="1_5824h"]
+
+[node name="BaseContainer" instance=ExtResource("1_5824h")]
+
+[node name="Exterior" parent="." index="0"]
+frame = 4

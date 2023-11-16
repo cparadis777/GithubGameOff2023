@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://gtmk5sbwr3hj"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Traps/Behaviours/shoot_stars.gd" id="1_ebmhu"]
+
+[node name="ShootStars" type="Node2D"]
+script = ExtResource("1_ebmhu")
+
+[node name="RecoilTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="RecoilTimer" to="." method="_on_recoil_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

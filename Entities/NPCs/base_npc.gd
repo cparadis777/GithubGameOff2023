@@ -10,7 +10,7 @@ var health = health_max
 
 @export var animation_player : Node
 
-enum States { INITIALIZING, IDLE, PAUSED, RUNNING, JUMPING, KNOCKBACK, ATTACKING, DEAD }
+enum States { INITIALIZING, IDLE, PAUSED, RUNNING, JUMPING, KNOCKBACK, IFRAMES, ATTACKING, DEAD }
 var State = States.INITIALIZING
 var animations = ["run", "jump", "hurt", "attack", "die"]
 
@@ -89,22 +89,31 @@ func die():
 func _on_hit(attackPacket : AttackPacket):
 	if State in [States.RUNNING, States.JUMPING, States.IDLE]:
 		$HurtNoises.play()
+		reset_attacks()
 		health -= attackPacket.damage
 		if health <= 0:
 			die()
 			return
 		elif attackPacket.knockback == true:
-			State = States.KNOCKBACK
+			State = States.KNOCKBACK # same as IFRAMES, plus movement.
 			var knockbackMultiplier = 1.25
 			velocity = attackPacket.impact_vector * attackPacket.knockback_speed * knockbackMultiplier
+		else:
+			State = States.IFRAMES
 		$IframesTimer.start()
 		$AnimationPlayer.play("hurt")
 			#$HurtEffect/Star.show()
 		hurt.emit(attackPacket)
 
+func reset_attacks():
+	for attack in $Behaviours/Attacks.get_children():
+		if attack.has_method("stop"):
+			attack.stop()
+
 func _on_iframes_timer_timeout():
-	if State == States.KNOCKBACK:
+	if State in [States.KNOCKBACK, States.IFRAMES]:
 		$HurtEffect/Star.hide()
+		$Appearance/Sprite2D.material.set_shader_parameter("IFrames", false)
 		if velocity.x > 0:
 			velocity = Vector2.RIGHT * SPEED
 		else:

@@ -169,6 +169,7 @@ func _on_hit(attackPacket : AttackPacket):
 			play_hurt_noise()
 			#$HurtFlash.show()
 			$AnimationPlayer.play("hurt")
+			$Behaviours/Attacks/HeavyMeleeAttack.stop()
 			initiate_iframes()
 			if attackPacket.knockback:
 				knockback(attackPacket.impact_vector)

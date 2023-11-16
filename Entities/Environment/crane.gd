@@ -36,7 +36,7 @@ func _input(event):
 
 func select_random_container() -> StaticBody2D:
 	var new_container = containers.pick_random().instantiate()
-	new_container.get_node("Exterior").self_modulate = Utils.random_color()
+	#new_container.get_node("Exterior").self_modulate = Utils.random_color()
 	self.randomize_container_access(new_container)
 	return new_container
 
@@ -94,7 +94,13 @@ func move_done()->void:
 
 func randomize_container_access(container):
 	var sides = [Utils.Directions.LEFT, Utils.Directions.UP, Utils.Directions.RIGHT, Utils.Directions.DOWN]
-	container.set_entrances([sides.pick_random()])
+	var selected_sides = []
+	for side in sides:
+		if randf() > 0.5:
+			selected_sides.append(side)
+	if selected_sides.size() == 0:
+		selected_sides.append(sides.pick_random())
+	container.set_entrances(selected_sides)
 
 
 func _on_crane_jaw_animation_finished():

@@ -1,9 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=23 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="4_4k4sl"]
+[ext_resource type="PackedScene" uid="uid://c5en3lqt0m2df" path="res://Entities/Environment/Traps/star_trap_shooter.tscn" id="4_myc4j"]
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="5_2wyyn"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="5_7y8lx"]
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_ap6lg"]
 [ext_resource type="PackedScene" uid="uid://4ubg2v861dlv" path="res://Entities/NPCs/boss_npc.tscn" id="6_t74po"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="7_53wf6"]
@@ -69,6 +71,14 @@ horizontal_alignment = 1
 
 [node name="Obstacle_02" parent="Obstacles" instance=ExtResource("4_4k4sl")]
 position = Vector2(-137, -10)
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="StarTrap-Shooter" parent="Traps" instance=ExtResource("4_myc4j")]
+position = Vector2(-271, -163)
+
+[node name="TrapSpikes" parent="Traps" instance=ExtResource("5_7y8lx")]
+position = Vector2(-321, -80)
 
 [node name="Enemies" type="Node2D" parent="."]
 
