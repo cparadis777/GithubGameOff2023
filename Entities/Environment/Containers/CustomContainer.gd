@@ -28,7 +28,7 @@ func _ready():
 	if (enter_down):
 		directions.push_back(Utils.Directions.DOWN)
 		bottom_wall.disabled = true
-	set_entrances(directions)
+	#set_entrances(directions)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
