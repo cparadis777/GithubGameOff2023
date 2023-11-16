@@ -16,7 +16,7 @@ var move_time:float = 0.5
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.create_markers()
-	self.set_current_container(containers[0].instantiate())
+	self.set_current_container(select_random_container())
 	self.move_ready = true
 	$RichTextLabel.text = "%s kg" % self.current_container.weigth
 	$RichTextLabel2.text = "%s" % self.current_container.type
@@ -95,9 +95,13 @@ func refesh_container() -> void:
 func move_done()->void:
 	self.move_ready = true
 
-func randomize_container_access(container):
+func randomize_container_access(container) -> void:
 	var sides = [Utils.Directions.LEFT, Utils.Directions.UP, Utils.Directions.RIGHT, Utils.Directions.DOWN]
+
 	var selected_sides = []
+	selected_sides = sides
+	container.set_entrances(selected_sides)
+	return 
 	for side in sides:
 		if randf() > 0.5:
 			selected_sides.append(side)

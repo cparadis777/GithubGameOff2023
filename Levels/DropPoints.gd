@@ -1,7 +1,11 @@
 extends Grid
 
 
-@export var new_scale:float
+@export var entrance_coord:Vector2
+@export var exit_coord:Vector2
+@export var entrance_direction:Utils.Directions
+@export var exit_direction:Utils.Directions
+
 @onready var drop_point:PackedScene = preload("res://Utilities/UtilityScenes/DropPoint.tscn")
 
 var container_dropping
@@ -13,8 +17,6 @@ signal drop_over
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.container_height = round(self.container_height * new_scale)
-	self.container_width = round(self.container_width * new_scale)
 	self.generate_drop_points()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,12 +38,10 @@ func generate_drop_points() -> void:
 
 func add_container(container:StaticBody2D, grid_position:Vector2) -> bool:
 	var drop_point_to_use:Marker2D = self.get_drop_point(grid_position)
-	container.set_scale(Vector2(new_scale, new_scale))
 	if drop_point_to_use.set_container(container):
 		return true
 	return false
 	
-
 
 func place_container(container:StaticBody2D, column:int) -> bool:
 	var falling:bool = true
@@ -92,6 +92,7 @@ func drop_done()->void:
 	old_parent.remove_child(self.container_dropping)
 	self.drop_point_targeted.add_child(self.container_dropping)
 	self.container_dropping.position = (Vector2(0,0))
+	self.validate_level()
 	emit_signal("weight_added", self.container_dropping.weigth)
 	emit_signal("drop_over")
 
@@ -113,3 +114,62 @@ func export_data() -> Dictionary:
 		
 	data["containers"] = containers
 	return data
+
+
+func validate_level() -> bool:
+	var entrance_drop_point:DropPoint = self.get_drop_point(self.entrance_coord)
+	var exit_drop_point:DropPoint = self.get_drop_point(self.exit_coord)
+
+	if entrance_drop_point.container != null:
+		if entrance_drop_point.container.entrances[self.entrance_direction] == false:
+			return false
+	if exit_drop_point.container != null:
+		if exit_drop_point.container.entrances[self.exit_direction] == false:
+			return false
+	
+	if entrance_drop_point.container != null:
+		print("searching")
+		self.path_search()
+	return true
+
+
+func path_search() -> bool:
+	print("starting search")
+	var start:Vector2 = self.entrance_coord
+	var visited_nodes = {}
+	var visited_node_count = 0
+	
+	for coord in drop_points_dict:
+		visited_nodes[coord] = false
+
+	var queue:Array = [start]
+	visited_nodes[start] = true
+
+	while queue.size() != 0:
+		print(queue)
+		visited_node_count += 1
+		var node = queue.pop_front()
+		if node == self.exit_coord:
+			return true
+		var current_drop_point = self.drop_points_dict[node]
+		if current_drop_point.is_filled:
+			for direction in current_drop_point.neighbors:
+				if current_drop_point.container.entrances[direction]:
+					if current_drop_point.neighbors[direction] != null:
+						if current_drop_point.neighbors[direction].is_filled:
+							var neighbor_coord = current_drop_point.neighbors[direction].grid_position
+							if visited_nodes[neighbor_coord] != true:
+								visited_nodes[neighbor_coord] = true
+								queue.append(neighbor_coord)
+				
+	
+	print(visited_node_count)
+	return true
+
+
+func get_neighbors_coordinate(coordinate:Vector2) -> Array:
+	var neighbors = []
+	var directions = [Utils.Directions.LEFT, Utils.Directions.UP, Utils.Directions.RIGHT, Utils.Directions.DOWN]
+	for direction in directions:
+		neighbors.append(self.get_adjacent_coordinate(direction, coordinate))
+	return neighbors

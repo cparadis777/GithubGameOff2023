@@ -1,5 +1,7 @@
 extends Marker2D
 
+class_name DropPoint
+
 var grid_position:Vector2
 var is_filled:bool
 var container:StaticBody2D
@@ -7,7 +9,7 @@ var neighbors = {
 	Utils.Directions.LEFT:null,
 	Utils.Directions.UP:null,
 	Utils.Directions.RIGHT:null,
-	Utils.Directions.DOWN:null
+	Utils.Directions.DOWN:null,
 }
 
 # Called when the node enters the scene tree for the first time.
