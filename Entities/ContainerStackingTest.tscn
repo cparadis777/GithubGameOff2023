@@ -59,10 +59,10 @@ scene_path = "res://Levels/GeneratedPlayspace.tscn"
 [node name="ParallaxBackground" parent="." instance=ExtResource("4_unqhl")]
 
 [node name="DropPoints" type="Node2D" parent="."]
-position = Vector2(-65, -113)
+position = Vector2(-17, -113)
 script = ExtResource("3_i3vix")
 new_scale = 1.0
-n_horizontal = 4
+n_horizontal = 2
 n_vertical = 4
 container_width = 48
 container_height = 24
@@ -72,9 +72,9 @@ position = Vector2(0, -177)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 z_index = 1
-offset_left = 135.0
+offset_left = -113.0
 offset_top = -97.0
-offset_right = 242.0
+offset_right = -5.99999
 offset_bottom = -86.0
 rotation = -1.5708
 max_value = 1.0
@@ -90,8 +90,8 @@ offset_bottom = 298.0
 color = Color(1, 1, 1, 0)
 
 [node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("2_30gk4")]
-position = Vector2(-64, -225)
-n_columns = 4
+position = Vector2(-17, -225)
+n_columns = 2
 drop_zone = NodePath("../DropPoints")
 
 [node name="Instructions" type="Node2D" parent="."]
@@ -118,7 +118,7 @@ contained within."
 [node name="Arena" type="Node2D" parent="."]
 
 [node name="Sprite2D11" type="Sprite2D" parent="Arena"]
-position = Vector2(-113, -113)
+position = Vector2(-65, -113)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_xttiv")
 
@@ -132,11 +132,6 @@ position = Vector2(-65, -89)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_xttiv")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Arena"]
-position = Vector2(-113, -89)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
-
 [node name="Sprite2D4" type="Sprite2D" parent="Arena"]
 position = Vector2(31, -89)
 scale = Vector2(0.5, 0.5)
@@ -147,28 +142,23 @@ position = Vector2(79, -89)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_xttiv")
 
-[node name="Sprite2D6" type="Sprite2D" parent="Arena"]
-position = Vector2(127, -89)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
-
 [node name="Sprite2D7" type="Sprite2D" parent="Arena"]
-position = Vector2(127, -113)
+position = Vector2(79, -113)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_xttiv")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Arena"]
-position = Vector2(127, -137)
+position = Vector2(79, -137)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_xttiv")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Arena"]
-position = Vector2(127, -161)
+position = Vector2(79, -161)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_xttiv")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Arena"]
-position = Vector2(127, -185)
+position = Vector2(79, -185)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_xttiv")
 
