@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c001oq7jof7bq"]
+
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_58hki"]
+[ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_vhw04"]
+[ext_resource type="Texture2D" uid="uid://dreoea5dtg2tc" path="res://art/placeholder/police-robot.png" id="3_4on25"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nphfu"]
+resource_local_to_scene = true
+shader = ExtResource("2_vhw04")
+shader_parameter/iframes = false
+shader_parameter/FlashColor = Color(1, 1, 1, 1)
+
+[node name="ShootyNPC" instance=ExtResource("1_58hki")]
+
+[node name="Sprite2D" parent="Appearance" index="0"]
+material = SubResource("ShaderMaterial_nphfu")
+scale = Vector2(2, 2)
+texture = ExtResource("3_4on25")
+hframes = 4

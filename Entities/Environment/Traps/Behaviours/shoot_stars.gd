@@ -1,3 +1,7 @@
+## Reusable behaviour for shooting a projectile
+## Has it's own built in recoil and reload timers.
+## Just call start() and stop()
+
 extends Node2D
 
 @export var bullet_scene = preload("res://Entities/Projectiles/bullet_basic.tscn")
@@ -13,19 +17,20 @@ signal shot_requested()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$ReloadTimer.start()
-	shot_requested.connect(owner._on_shot_requested)
+	if owner.has_method("_on_shot_requested"):
+		shot_requested.connect(owner._on_shot_requested)
 	# temporary, until levels can activate props...
 	activate()
 
 func activate_new_state(value):
 	if value == States.SHOOTING:
 		if $RecoilTimer.is_stopped() and $ReloadTimer.is_stopped():
-			start_shooting()
+			start()
 		else:
 			$RecoildTimer.stop()
 			$ReloadTimer.stop()
 
-func start_shooting():
+func start():
 	State = States.SHOOTING
 	# locate the player and point near them.
 	var spread = 16
@@ -33,7 +38,7 @@ func start_shooting():
 	owner.look_at(StageManager.current_player.global_position + random_miss)
 	shoot()
 
-func stop_shooting():
+func stop():
 	State = States.PAUSED
 
 
