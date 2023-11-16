@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://dgcdudhh8dq0r"]
 
-[ext_resource type="Script" path="res://Entities/Environment/Containers/CustomContainer.gd" id="1_vjs6t"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_kuvv2"]
 [ext_resource type="Texture2D" uid="uid://c6vcgx3e3gafa" path="res://art/interiors/shipping_container_illeagle_INTERIOR.png" id="2_kvqud"]
 [ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_c1msu"]
 [ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="4_47a7b"]
@@ -35,7 +35,7 @@ b = Vector2(192, 96)
 size = Vector2(384, 192)
 
 [node name="BaseContainer" type="StaticBody2D"]
-script = ExtResource("1_vjs6t")
+script = ExtResource("1_kuvv2")
 enter_left = true
 enter_up = true
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://k5pcsml367wp"]
 
-[ext_resource type="Script" path="res://Entities/Environment/Containers/CustomContainer.gd" id="1_yfhnk"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_3spdi"]
 [ext_resource type="Texture2D" uid="uid://c6vcgx3e3gafa" path="res://art/interiors/shipping_container_illeagle_INTERIOR.png" id="2_prl53"]
 [ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_1s41d"]
 [ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="4_0p2dl"]
@@ -25,7 +25,7 @@ b = Vector2(192, 96)
 size = Vector2(384, 192)
 
 [node name="BaseContainer" type="StaticBody2D"]
-script = ExtResource("1_yfhnk")
+script = ExtResource("1_3spdi")
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
