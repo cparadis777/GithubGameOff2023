@@ -1,6 +1,9 @@
 extends StaticBody2D
 
-@export var exterior_texture:Texture2D
+@export var enter_left = false
+@export var enter_right = false
+@export var enter_up = false
+@export var enter_down = false
 
 var weigth:int = 100
 var grid_position:Vector2 = Vector2(100,100)
@@ -18,16 +21,31 @@ var entrances = {
 
 func _ready():
 	pass
-	#print("setting arrows")
-
-	#print("done setting arrows")
-
+	#$Exterior.show()
+	
+	var left_wall = $LeftCollision
+	var right_wall = $RightCollision
+	var top_wall = $TopCollision
+	var bottom_wall = $BottomCollision
+	var directions = []
+	if (enter_left):
+		directions.push_back(Utils.Directions.LEFT)
+		# disable wall for now
+		left_wall.disabled = true
+	if (enter_right):
+		directions.push_back(Utils.Directions.RIGHT)
+		right_wall.disabled = true
+	if (enter_up):
+		directions.push_back(Utils.Directions.UP)
+		top_wall.disabled = true
+	if (enter_down):
+		directions.push_back(Utils.Directions.DOWN)
+		bottom_wall.disabled = true
+	set_entrances(directions)
 
 func set_grid_position(coordinate:Vector2) -> void:
 	self.grid_position = coordinate
 	$Label.text = "%s" % coordinate
-
-
 
 func _on_container_interior_body_exited(body:Node2D):
 	if body.is_in_group("Player"):
@@ -42,14 +60,13 @@ func _on_container_interior_body_entered(body:Node2D):
 func set_entrances(directions) -> void:
 
 	var entrance_arrows = {
-	Utils.Directions.LEFT: $LeftLine,
-	Utils.Directions.UP: $UpLine,
-	Utils.Directions.RIGHT: $RightLine,
-	Utils.Directions.DOWN: $DownLine,
+	Utils.Directions.LEFT: $LeftArrow,
+	Utils.Directions.UP: $UpArrow,
+	Utils.Directions.RIGHT: $RightArrow,
+	Utils.Directions.DOWN: $DownArrow,
 }
 
 	for entrance in entrance_arrows:
-		#print("BaseContainer.gd: entrange = " + str(entrance))
 		entrance_arrows[entrance].hide()
 	for direction in directions:
 		self.entrances[direction] = true
