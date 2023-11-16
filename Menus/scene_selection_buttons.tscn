@@ -8,19 +8,21 @@
 [ext_resource type="PackedScene" uid="uid://dr840r1p2wh3c" path="res://Levels/Tutorials/TutorialLevel_1.tscn" id="6_rlsbl"]
 
 [node name="Buttons" type="GridContainer"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 52.0
-offset_top = -831.0
-offset_right = 257.0
-offset_bottom = -800.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.5
+offset_top = -15.5
+offset_right = 22.5
+offset_bottom = 15.5
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 columns = 2
 
 [node name="PlexTestButton" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "plex Test"
 script = ExtResource("1_a863l")
@@ -28,23 +30,26 @@ scene = ExtResource("2_pindx")
 
 [node name="ContainerStackingStartButton" type="Button" parent="."]
 layout_mode = 2
-text = "Ced Stacking"
+text = "Play!"
 script = ExtResource("1_a863l")
 scene = ExtResource("3_8qbco")
 
 [node name="LevelMockupButton" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "IanC Mock Level"
 script = ExtResource("1_a863l")
 scene = ExtResource("4_rdf1v")
 
 [node name="GuacLevel_2_Interior" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "Guac Level 2"
 script = ExtResource("1_a863l")
 scene = ExtResource("5_7bqgq")
 
 [node name="TutorialButton" type="Button" parent="."]
+visible = false
 layout_mode = 2
 text = "IanC tutorial"
 script = ExtResource("1_a863l")
