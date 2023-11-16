@@ -26,6 +26,7 @@ func set_container(new_container:StaticBody2D) -> bool:
 	if !self.is_filled:
 		self.container = new_container
 		self.is_filled = true
+		"""
 		container.set_grid_position(self.grid_position)
 		for direction in Utils.Directions.values():
 			var neighbor = self.neighbors[direction]
@@ -42,6 +43,7 @@ func set_container(new_container:StaticBody2D) -> bool:
 			self.container.hide_entrance(Utils.Directions.UP)
 		elif self.grid_position[1] == get_parent().n_vertical-1:
 			self.container.hide_entrance(Utils.Directions.DOWN)
+		"""
 
 		return true
 	else:
