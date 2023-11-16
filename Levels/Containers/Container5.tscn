@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dbfvdcaoychco"]
+[gd_scene load_steps=24 format=3 uid="uid://dbfvdcaoychco"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_phhsw"]
 [ext_resource type="Texture2D" uid="uid://ds5c6ostoi5d7" path="res://art/interiors/shipping_container_soyda_INTERIOR.png" id="2_kemym"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="11_a86hg"]
 [ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="12_4mjum"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="13_78or6"]
-[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="13_g5qcg"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0mkaq"]
 polygon = PackedVector2Array(-196, 3, -194, -192, 192, -190, 193, 4, 201, 5, 200, -196, -201, -202, -206, 2)
@@ -280,9 +279,6 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 shape = SubResource("RectangleShape2D_dnhqr")
-
-[node name="Player" parent="." instance=ExtResource("13_g5qcg")]
-position = Vector2(-8, 13)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
