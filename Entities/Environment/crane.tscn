@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Entities/Environment/crane.gd" id="1_iyal4"]
 [ext_resource type="PackedScene" uid="uid://drrt45f45qnjy" path="res://Entities/Droppable/BlueDroppableContainer.tscn" id="2_rgicc"]
 [ext_resource type="PackedScene" uid="uid://dlyqwhewo8awt" path="res://Entities/Droppable/RedDroppableContainer.tscn" id="3_wwyy3"]
-[ext_resource type="Texture2D" uid="uid://dcxyqxj0okyoe" path="res://art/props/crane_just_tress.png" id="4_58oyw"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="4_l15jl"]
 [ext_resource type="PackedScene" uid="uid://cps4h2vpyvnre" path="res://Entities/Droppable/GreenDroppableContainer.tscn" id="4_r6wi7"]
 [ext_resource type="PackedScene" uid="uid://bbinheaic5qh4" path="res://Entities/Droppable/GreyDroppableContainer.tscn" id="5_4v4gy"]
@@ -11,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c2tkw8bry0p1n" path="res://art/props/crane_just_holder.png" id="5_xiuhn"]
 [ext_resource type="PackedScene" uid="uid://ekj2echyvjcm" path="res://Entities/Droppable/PurpleDroppableContainer.tscn" id="6_33pt5"]
 [ext_resource type="PackedScene" uid="uid://c46xev2xk4g62" path="res://Entities/Droppable/YellowDroppableContainer.tscn" id="7_7172x"]
+[ext_resource type="Texture2D" uid="uid://b0yde4ayaofm0" path="res://art/props/lattice_320x180.png" id="9_ob7oa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2goie"]
 atlas = ExtResource("5_qrdko")
@@ -117,11 +117,17 @@ offset_right = 168.0
 offset_bottom = 96.0
 theme = ExtResource("4_l15jl")
 
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 16.0
+offset_top = -8.0
+offset_right = 168.0
+offset_bottom = 40.0
+theme = ExtResource("4_l15jl")
+
 [node name="CraneTruss" type="Sprite2D" parent="."]
 z_index = 2
-position = Vector2(29, 45)
-texture = ExtResource("4_58oyw")
-metadata/_edit_lock_ = true
+position = Vector2(17, 48)
+texture = ExtResource("9_ob7oa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -129,8 +135,8 @@ position = Vector2(80, -24)
 texture = ExtResource("5_xiuhn")
 
 [node name="CraneJaw" type="AnimatedSprite2D" parent="."]
-z_index = 1
-position = Vector2(24, -8)
+z_index = 3
+position = Vector2(24, -29)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_uctfk")
 animation = &"Close"

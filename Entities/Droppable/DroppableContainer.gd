@@ -2,7 +2,7 @@ extends StaticBody2D
 
 var weigth:int = 100
 var grid_position:Vector2 = Vector2(100,100)
-var type: ContainerProperties.container_type = ContainerProperties.container_type.BLUE
+@export var type: ContainerProperties.container_type = ContainerProperties.container_type.YELLOW
 
 var entrances = {
 	Utils.Directions.LEFT: false,
@@ -10,12 +10,6 @@ var entrances = {
 	Utils.Directions.RIGHT: false,
 	Utils.Directions.DOWN: false,
 }
-
-# entrance_arrows:Dictionary = {Utils.Directions.LEFT: null}
-# Called when the node enters the scene tree for the first time.
-
-func _ready():
-	pass
 
 
 func set_grid_position(coordinate:Vector2) -> void:
