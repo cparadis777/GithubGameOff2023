@@ -19,6 +19,7 @@ func _ready():
 	self.set_current_container(containers[0].instantiate())
 	self.move_ready = true
 	$RichTextLabel.text = "%s kg" % self.current_container.weigth
+	$RichTextLabel2.text = "%s" % self.current_container.type
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,6 +39,7 @@ func select_random_container() -> StaticBody2D:
 	var new_container = containers.pick_random().instantiate()
 	#new_container.get_node("Exterior").self_modulate = Utils.random_color()
 	self.randomize_container_access(new_container)
+	new_container.weigth = 100 * randf()
 	return new_container
 
 func set_current_container(container:StaticBody2D):
@@ -45,6 +47,7 @@ func set_current_container(container:StaticBody2D):
 	self.add_child(self.current_container)
 	self.current_container.position = markers[current_column].position
 	$CraneJaw.position[0] = markers[current_column].position[0]
+	$RichTextLabel2.text = "%s" % self.current_container.type
 
 func create_markers() -> void:
 	for i in range(n_columns):
@@ -101,7 +104,6 @@ func randomize_container_access(container):
 	if selected_sides.size() == 0:
 		selected_sides.append(sides.pick_random())
 	container.set_entrances(selected_sides)
-
 
 func _on_crane_jaw_animation_finished():
 	$CraneJaw.set_frame(0)

@@ -117,6 +117,13 @@ offset_right = 168.0
 offset_bottom = 96.0
 theme = ExtResource("4_l15jl")
 
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 16.0
+offset_top = -8.0
+offset_right = 168.0
+offset_bottom = 40.0
+theme = ExtResource("4_l15jl")
+
 [node name="CraneTruss" type="Sprite2D" parent="."]
 z_index = 2
 position = Vector2(29, 45)
