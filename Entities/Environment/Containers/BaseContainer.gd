@@ -5,48 +5,83 @@ extends StaticBody2D
 @export var enter_up = false
 @export var enter_down = false
 
+@export var doors_open = false
+@export var open_doors_with_switch = false
+
 var weigth:int = 100
 var grid_position:Vector2 = Vector2(100,100)
 var type: ContainerProperties.container_type = ContainerProperties.container_type.BLUE
 
-var entrances = {
+var has_entrance = {
 	Utils.Directions.LEFT: false,
 	Utils.Directions.UP: false,
 	Utils.Directions.RIGHT: false,
 	Utils.Directions.DOWN: false,
 }
 
+@onready var walls = {
+	Utils.Directions.LEFT: $LeftCollision,
+	Utils.Directions.UP: $TopCollision,
+	Utils.Directions.RIGHT: $RightCollision,
+	Utils.Directions.DOWN: $BottomCollision,
+}
+
+@onready var door_sprites = {
+	Utils.Directions.LEFT: $Openings/Left,
+	Utils.Directions.UP: $Openings/Up,
+	Utils.Directions.RIGHT: $Openings/Right,
+	Utils.Directions.DOWN: $Openings/Down,
+}
+
 # entrance_arrows:Dictionary = {Utils.Directions.LEFT: null}
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
-	pass
-	#$Exterior.show()
+	# $Exterior.visible = true;
 	
-	var left_wall = $LeftCollision
-	var right_wall = $RightCollision
-	var top_wall = $TopCollision
-	var bottom_wall = $BottomCollision
-	var directions = []
-	if (enter_left):
-		directions.push_back(Utils.Directions.LEFT)
-		# disable wall for now
-		left_wall.disabled = true
-	if (enter_right):
-		directions.push_back(Utils.Directions.RIGHT)
-		right_wall.disabled = true
-	if (enter_up):
-		directions.push_back(Utils.Directions.UP)
-		top_wall.disabled = true
-	if (enter_down):
-		directions.push_back(Utils.Directions.DOWN)
-		bottom_wall.disabled = true
-	# set_entrances(directions)
+	if enter_left:
+		has_entrance[Utils.Directions.LEFT] = true
+		# left_wall.disabled = true
+		$Openings/Left.visible = true;
+	if enter_right:
+		has_entrance[Utils.Directions.RIGHT] = true
+		# right_wall.disabled = true
+		$Openings/Right.visible = true;
+	if enter_up:
+		has_entrance[Utils.Directions.UP] = true
+		# top_wall.disabled = true
+		$Openings/Top.visible = true;
+	if enter_down:
+		has_entrance[Utils.Directions.DOWN] = true
+		# bottom_wall.disabled = true
+		$Openings/Bottom.visible = true;
+		
+	if doors_open:
+		open_all_doors()
+		
+func open_door(side:Utils.Directions):
+	# change the sprite?
+	# door_sprites[side]
+	if has_entrance[side]:
+		walls[side].disabled = true
 
-func set_grid_position(coordinate:Vector2) -> void:
-	self.grid_position = coordinate
-	$Label.text = "%s" % coordinate
+func open_all_doors():
+	# when room is completed, we can open all available doors
+	# we'll need some way to tell the adjacent containers to open their entrances
+	# maybe fire an event for the grid manager to catch and use coordinates to unlock
+	# adjacent doors
+	print("container beaten")
+	for side in has_entrance:
+		print(side)
+		if has_entrance[side]:
+			print(walls)
+			walls[side].disabled = true
+			
 
+func _on_switch_toggled(pressed):
+	if open_doors_with_switch:
+		open_all_doors()
+	
 func _on_container_interior_body_exited(body:Node2D):
 	if body.is_in_group("Player"):
 		print("Showing outside container")
