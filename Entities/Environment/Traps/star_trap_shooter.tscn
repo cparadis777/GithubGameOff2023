@@ -1,10 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://c5en3lqt0m2df"]
+[gd_scene load_steps=20 format=3 uid="uid://c5en3lqt0m2df"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Traps/star_trap_shooter.gd" id="1_6i0da"]
 [ext_resource type="Texture2D" uid="uid://c4mkrso2beskh" path="res://art/placeholder/star_trap.png" id="1_vmtbw"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_vuwjt"]
 [ext_resource type="PackedScene" uid="uid://gtmk5sbwr3hj" path="res://Entities/Environment/Traps/Behaviours/shoot_stars.tscn" id="3_m0oxd"]
-[ext_resource type="PackedScene" uid="uid://djnr2ahjg2mm1" path="res://Entities/Projectiles/bullet_basic.tscn" id="5_q4rpu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfoww"]
 
@@ -196,8 +195,6 @@ animation = &"attack"
 [node name="Attacks" type="Node2D" parent="Behaviours"]
 
 [node name="ShootStars" parent="Behaviours/Attacks" instance=ExtResource("3_m0oxd")]
-bullet_scene = ExtResource("5_q4rpu")
-shots_per_magazine = 3
 
 [node name="DecisionTimer" type="Timer" parent="."]
 wait_time = 8.0

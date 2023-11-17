@@ -164,6 +164,10 @@ hframes = 4
 [node name="SimpleMeleeAttack" parent="Behaviours/Attacks" index="0"]
 enabled = false
 
+[node name="SimpleShootAttack" parent="Behaviours/Attacks" index="1"]
+position = Vector2(23.7647, -39.6079)
+horizontal_only = true
+
 [node name="RecoilTimer" parent="Behaviours/Attacks/SimpleShootAttack" index="0"]
 wait_time = 0.5
 

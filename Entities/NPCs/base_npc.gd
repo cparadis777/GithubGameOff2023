@@ -31,16 +31,22 @@ func _ready():
 	died.connect(StageManager._on_NPC_died)
 
 	# temporary, until we get NPC spawning and activating
-	State = States.IDLE
+	activate(Globals.DifficultyScales.EASY)
 
 func activate(difficulty : Globals.DifficultyScales):
 	set_difficulty(difficulty)
-	State = States.RUNNING
+	activate_weapons()
+	State = States.IDLE
 	
 func set_difficulty(difficulty : Globals.DifficultyScales):
 	health_max += difficulty * 5.0
 	SPEED += float(difficulty)/40.0 * 100.0
 	base_damage *= (1+float(difficulty)/20.0)
+
+func activate_weapons():
+	for weapon in $Behaviours/Attacks.get_children():
+		if weapon.get("enabled") == true and weapon.has_method("start"):
+			weapon.start() # needed for basic shooting weapon
 
 func jump():
 	velocity.y = JUMP_VELOCITY
@@ -56,6 +62,8 @@ func _physics_process(delta):
 		
 	elif State == States.KNOCKBACK:
 		move_and_slide()
+
+	$Debug/StateLabel.text = States.keys()[State]
 
 func is_at_end_of_platform():
 		if is_on_floor() and !$Behaviours/Sensors/FloorSensor.is_colliding():
@@ -89,7 +97,7 @@ func die():
 func _on_hit(attackPacket : AttackPacket):
 	if State in [States.RUNNING, States.JUMPING, States.IDLE]:
 		$HurtNoises.play()
-		reset_attacks()
+		abort_attacks_in_progress()
 		health -= attackPacket.damage
 		if health <= 0:
 			die()
@@ -105,10 +113,15 @@ func _on_hit(attackPacket : AttackPacket):
 			#$HurtEffect/Star.show()
 		hurt.emit(attackPacket)
 
-func reset_attacks():
+func abort_attacks_in_progress():
 	for attack in $Behaviours/Attacks.get_children():
-		if attack.has_method("stop"):
+		if attack.get("enabled") == true and attack.has_method("stop"):
 			attack.stop()
+
+func resume_attacking():
+	for attack in $Behaviours/Attacks.get_children():
+		if attack.get("enabled") == true and attack.has_method("start"):
+			attack.start()
 
 func _on_iframes_timer_timeout():
 	if State in [States.KNOCKBACK, States.IFRAMES]:
@@ -120,7 +133,7 @@ func _on_iframes_timer_timeout():
 			velocity = Vector2.LEFT * SPEED
 
 		State = States.RUNNING
-
+		resume_attacking()
 
 func turn_around():
 	direction = -direction

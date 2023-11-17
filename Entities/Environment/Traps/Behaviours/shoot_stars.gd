@@ -62,7 +62,11 @@ func launch_bullet():
 	add_child(newBullet)
 	newBullet.rotation = owner.rotation
 	newBullet.global_position = global_position
-	newBullet.activate(owner.transform.x)
+	
+	if not horizontal_only:
+		newBullet.activate(owner.transform.x) # shoot in 360 degrees
+	else:
+		newBullet.activate(Vector2(owner.direction, 0)) # shoot left and right only
 	
 	if current_shot >= shots_per_magazine-1:
 		current_shot = 0

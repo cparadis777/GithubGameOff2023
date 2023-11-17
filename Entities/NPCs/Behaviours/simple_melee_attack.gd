@@ -6,6 +6,9 @@ extends Node2D
 var damage
 var npc
 
+enum States { INACTIVE, ACTIVE }
+var State = States.INACTIVE
+
 signal hit
 
 # Called when the node enters the scene tree for the first time.
@@ -20,7 +23,7 @@ func scale_for_difficulty():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if !enabled:
+	if !enabled or State == States.INACTIVE:
 		return
 	
 	if npc.State in [npc.States.IDLE, npc.States.RUNNING]:
@@ -40,10 +43,14 @@ func execute_attack():
 		npc.animation_player.play("attack")
 	$AnimationPlayer.play("attack")
 			
-		
+
+func start():
+	State = States.ACTIVE
+
 func stop():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("RESET")
+	
 	
 
 func _on_attack_delay_timeout():
