@@ -1,0 +1,139 @@
+[gd_scene load_steps=11 format=3 uid="uid://c1v061uxxpf6m"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_26d1r"]
+[ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_d8uoi"]
+[ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_pxj63"]
+[ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="4_ge3qy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
+size = Vector2(400, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8etye"]
+size = Vector2(82, 273)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_v1mhl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpblv"]
+size = Vector2(960, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5deis"]
+size = Vector2(82, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xia"]
+size = Vector2(796, 340)
+
+[node name="BaseContainer" type="StaticBody2D"]
+script = ExtResource("1_26d1r")
+enter_left = true
+enter_right = true
+
+[node name="Interior" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(0, -6.55651e-06)
+scale = Vector2(2, 2)
+texture = ExtResource("2_d8uoi")
+
+[node name="Arrows" type="Node2D" parent="."]
+visible = false
+
+[node name="LeftArrow" type="Sprite2D" parent="Arrows"]
+texture = ExtResource("3_pxj63")
+
+[node name="RightArrow" type="Sprite2D" parent="Arrows"]
+texture = ExtResource("3_pxj63")
+flip_h = true
+
+[node name="UpArrow" type="Sprite2D" parent="Arrows"]
+rotation = 1.57079
+texture = ExtResource("3_pxj63")
+
+[node name="DownArrow" type="Sprite2D" parent="Arrows"]
+rotation = -1.5708
+texture = ExtResource("3_pxj63")
+
+[node name="Openings" type="Node2D" parent="."]
+
+[node name="TopOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="TopCollisionA" type="CollisionShape2D" parent="Openings/TopOpening"]
+position = Vector2(-280, -206)
+shape = SubResource("RectangleShape2D_pjf8p")
+
+[node name="TopCollisionB" type="CollisionShape2D" parent="Openings/TopOpening"]
+position = Vector2(280, -206)
+shape = SubResource("RectangleShape2D_pjf8p")
+
+[node name="BottomOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="BotCollisionA" type="CollisionShape2D" parent="Openings/BottomOpening"]
+position = Vector2(-280, 204)
+shape = SubResource("RectangleShape2D_pjf8p")
+
+[node name="BotCollisionB" type="CollisionShape2D" parent="Openings/BottomOpening"]
+position = Vector2(280, 204)
+shape = SubResource("RectangleShape2D_pjf8p")
+
+[node name="LeftOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="LeftOpeningA" type="CollisionShape2D" parent="Openings/LeftOpening"]
+position = Vector2(-439, -104.5)
+shape = SubResource("RectangleShape2D_8etye")
+
+[node name="RightOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="RightOpeningA" type="CollisionShape2D" parent="Openings/RightOpening"]
+position = Vector2(440, -104.5)
+shape = SubResource("RectangleShape2D_8etye")
+
+[node name="Left" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(-398, 169)
+scale = Vector2(21, 138)
+texture = SubResource("PlaceholderTexture2D_v1mhl")
+
+[node name="Right" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(419, 169)
+scale = Vector2(21, 138)
+texture = SubResource("PlaceholderTexture2D_v1mhl")
+
+[node name="Bottom" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(79, 186)
+scale = Vector2(159, 17)
+texture = SubResource("PlaceholderTexture2D_v1mhl")
+
+[node name="Top" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(79, -170)
+scale = Vector2(159, 17)
+texture = SubResource("PlaceholderTexture2D_v1mhl")
+
+[node name="Exterior" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(4.72069e-05, -0.500001)
+scale = Vector2(2.5, 2.50521)
+texture = ExtResource("4_ge3qy")
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -206)
+shape = SubResource("RectangleShape2D_dpblv")
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 204)
+shape = SubResource("RectangleShape2D_dpblv")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-439, -1)
+shape = SubResource("RectangleShape2D_5deis")
+
+[node name="RightCollision" type="CollisionShape2D" parent="."]
+position = Vector2(439, -1)
+shape = SubResource("RectangleShape2D_5deis")
+
+[node name="ContainerInterior" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_m7xia")
