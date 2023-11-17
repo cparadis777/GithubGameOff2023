@@ -37,7 +37,7 @@ var has_entrance = {
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
-	# $Exterior.visible = true;
+	$Exterior.visible = true;
 	
 	if enter_left:
 		has_entrance[Utils.Directions.LEFT] = true

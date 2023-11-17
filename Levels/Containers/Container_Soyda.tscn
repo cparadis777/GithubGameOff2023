@@ -1,9 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3ey4e03ybqo8"]
+[gd_scene load_steps=13 format=3 uid="uid://b3ey4e03ybqo8"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_4rw4a"]
 [ext_resource type="Texture2D" uid="uid://ds5c6ostoi5d7" path="res://art/interiors/shipping_container_soyda_INTERIOR.png" id="2_848cq"]
 [ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_w1s0u"]
 [ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="4_mlcnl"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yiyli"]
+a = Vector2(-80, 0)
+b = Vector2(80, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6lm5y"]
+a = Vector2(0, 60)
+b = Vector2(0, -60)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wgig0"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
 a = Vector2(192, -96)
@@ -46,6 +56,64 @@ texture = ExtResource("3_w1s0u")
 [node name="DownArrow" type="Sprite2D" parent="."]
 rotation = -1.5708
 texture = ExtResource("3_w1s0u")
+
+[node name="Openings" type="Node2D" parent="."]
+
+[node name="TopOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="TopCollisionA" type="CollisionShape2D" parent="Openings/TopOpening"]
+position = Vector2(-112, -96)
+shape = SubResource("SegmentShape2D_yiyli")
+
+[node name="TopCollisionB" type="CollisionShape2D" parent="Openings/TopOpening"]
+position = Vector2(112, -96)
+shape = SubResource("SegmentShape2D_yiyli")
+
+[node name="BottomOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="BotCollisionA" type="CollisionShape2D" parent="Openings/BottomOpening"]
+position = Vector2(-112, 96)
+shape = SubResource("SegmentShape2D_yiyli")
+
+[node name="BotCollisionB" type="CollisionShape2D" parent="Openings/BottomOpening"]
+position = Vector2(112, 96)
+shape = SubResource("SegmentShape2D_yiyli")
+
+[node name="LeftOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="LeftOpeningA" type="CollisionShape2D" parent="Openings/LeftOpening"]
+position = Vector2(-192, -36)
+shape = SubResource("SegmentShape2D_6lm5y")
+
+[node name="RightOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="RightOpeningA" type="CollisionShape2D" parent="Openings/RightOpening"]
+position = Vector2(192, -36)
+shape = SubResource("SegmentShape2D_6lm5y")
+
+[node name="Left" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(-180, 95)
+scale = Vector2(21, 71)
+texture = SubResource("PlaceholderTexture2D_wgig0")
+
+[node name="Right" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(203, 95)
+scale = Vector2(21, 71)
+texture = SubResource("PlaceholderTexture2D_wgig0")
+
+[node name="Bottom" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(32, 105)
+scale = Vector2(64, 17)
+texture = SubResource("PlaceholderTexture2D_wgig0")
+
+[node name="Top" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(32, -87)
+scale = Vector2(64, 17)
+texture = SubResource("PlaceholderTexture2D_wgig0")
 
 [node name="Exterior" type="Sprite2D" parent="."]
 texture = ExtResource("4_mlcnl")

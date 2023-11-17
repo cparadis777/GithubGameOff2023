@@ -1,9 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://bydxa3wqsfedy"]
+[gd_scene load_steps=13 format=3 uid="uid://bydxa3wqsfedy"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_b4ta2"]
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="2_oroii"]
 [ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_iusf0"]
 [ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="4_1peri"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ghs1k"]
+a = Vector2(-80, 0)
+b = Vector2(80, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_nr0ll"]
+a = Vector2(0, 60)
+b = Vector2(0, -60)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8l0aj"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
 a = Vector2(192, -96)
@@ -26,6 +36,11 @@ size = Vector2(384, 192)
 
 [node name="BaseContainer" type="StaticBody2D"]
 script = ExtResource("1_b4ta2")
+enter_left = true
+enter_right = true
+enter_up = true
+enter_down = true
+doors_open = true
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
@@ -47,6 +62,64 @@ texture = ExtResource("3_iusf0")
 [node name="DownArrow" type="Sprite2D" parent="."]
 rotation = -1.5708
 texture = ExtResource("3_iusf0")
+
+[node name="Openings" type="Node2D" parent="."]
+
+[node name="TopOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="TopCollisionA" type="CollisionShape2D" parent="Openings/TopOpening"]
+position = Vector2(-112, -96)
+shape = SubResource("SegmentShape2D_ghs1k")
+
+[node name="TopCollisionB" type="CollisionShape2D" parent="Openings/TopOpening"]
+position = Vector2(112, -96)
+shape = SubResource("SegmentShape2D_ghs1k")
+
+[node name="BottomOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="BotCollisionA" type="CollisionShape2D" parent="Openings/BottomOpening"]
+position = Vector2(-112, 96)
+shape = SubResource("SegmentShape2D_ghs1k")
+
+[node name="BotCollisionB" type="CollisionShape2D" parent="Openings/BottomOpening"]
+position = Vector2(112, 96)
+shape = SubResource("SegmentShape2D_ghs1k")
+
+[node name="LeftOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="LeftOpeningA" type="CollisionShape2D" parent="Openings/LeftOpening"]
+position = Vector2(-192, -36)
+shape = SubResource("SegmentShape2D_nr0ll")
+
+[node name="RightOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="RightOpeningA" type="CollisionShape2D" parent="Openings/RightOpening"]
+position = Vector2(192, -36)
+shape = SubResource("SegmentShape2D_nr0ll")
+
+[node name="Left" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(-180, 95)
+scale = Vector2(21, 71)
+texture = SubResource("PlaceholderTexture2D_8l0aj")
+
+[node name="Right" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(203, 95)
+scale = Vector2(21, 71)
+texture = SubResource("PlaceholderTexture2D_8l0aj")
+
+[node name="Bottom" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(32, 105)
+scale = Vector2(64, 17)
+texture = SubResource("PlaceholderTexture2D_8l0aj")
+
+[node name="Top" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(32, -87)
+scale = Vector2(64, 17)
+texture = SubResource("PlaceholderTexture2D_8l0aj")
 
 [node name="Exterior" type="Sprite2D" parent="."]
 visible = false

@@ -1,9 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgk01ai7d526u"]
+[gd_scene load_steps=13 format=3 uid="uid://dgk01ai7d526u"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_xmhax"]
 [ext_resource type="Texture2D" uid="uid://dfmyplkep8trj" path="res://art/interiors/shipping_container_graffiti_INTERIOR.png" id="2_3c481"]
 [ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="3_srdw2"]
 [ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="4_k4yci"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_aj7bh"]
+a = Vector2(-80, 0)
+b = Vector2(80, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_bbld8"]
+a = Vector2(0, 60)
+b = Vector2(0, -60)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_81hj7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
 a = Vector2(192, -96)
@@ -13,16 +23,16 @@ b = Vector2(-192, -96)
 a = Vector2(-192, 96)
 b = Vector2(192, 96)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_twsxv"]
+a = Vector2(-192, -96)
+b = Vector2(-192, 95)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_bklqj"]
+a = Vector2(192, -96)
+b = Vector2(192, 96)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
 size = Vector2(384, 192)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y13hr"]
-size = Vector2(400, 70)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1dh6"]
-size = Vector2(82, 273)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_81hj7"]
 
 [node name="BaseContainer" type="StaticBody2D"]
 script = ExtResource("1_xmhax")
@@ -30,22 +40,6 @@ script = ExtResource("1_xmhax")
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
 texture = ExtResource("2_3c481")
-
-[node name="Exterior" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_srdw2")
-
-[node name="TopCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("SegmentShape2D_rgkd6")
-
-[node name="BottomCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("SegmentShape2D_pl5uy")
-
-[node name="ContainerInterior" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
-shape = SubResource("RectangleShape2D_dnhqr")
 
 [node name="Arrows" type="Node2D" parent="."]
 visible = false
@@ -70,58 +64,80 @@ texture = ExtResource("4_k4yci")
 [node name="TopOpening" type="StaticBody2D" parent="Openings"]
 
 [node name="TopCollisionA" type="CollisionShape2D" parent="Openings/TopOpening"]
-position = Vector2(-280, -206)
-shape = SubResource("RectangleShape2D_y13hr")
+position = Vector2(-112, -96)
+shape = SubResource("SegmentShape2D_aj7bh")
 
 [node name="TopCollisionB" type="CollisionShape2D" parent="Openings/TopOpening"]
-position = Vector2(280, -206)
-shape = SubResource("RectangleShape2D_y13hr")
+position = Vector2(112, -96)
+shape = SubResource("SegmentShape2D_aj7bh")
 
 [node name="BottomOpening" type="StaticBody2D" parent="Openings"]
 
 [node name="BotCollisionA" type="CollisionShape2D" parent="Openings/BottomOpening"]
-position = Vector2(-280, 204)
-shape = SubResource("RectangleShape2D_y13hr")
+position = Vector2(-112, 96)
+shape = SubResource("SegmentShape2D_aj7bh")
 
 [node name="BotCollisionB" type="CollisionShape2D" parent="Openings/BottomOpening"]
-position = Vector2(280, 204)
-shape = SubResource("RectangleShape2D_y13hr")
+position = Vector2(112, 96)
+shape = SubResource("SegmentShape2D_aj7bh")
 
 [node name="LeftOpening" type="StaticBody2D" parent="Openings"]
 
 [node name="LeftOpeningA" type="CollisionShape2D" parent="Openings/LeftOpening"]
-position = Vector2(-439, -104.5)
-shape = SubResource("RectangleShape2D_w1dh6")
+position = Vector2(-192, -36)
+shape = SubResource("SegmentShape2D_bbld8")
 
 [node name="RightOpening" type="StaticBody2D" parent="Openings"]
 
 [node name="RightOpeningA" type="CollisionShape2D" parent="Openings/RightOpening"]
-position = Vector2(440, -104.5)
-shape = SubResource("RectangleShape2D_w1dh6")
+position = Vector2(192, -36)
+shape = SubResource("SegmentShape2D_bbld8")
 
 [node name="Left" type="Sprite2D" parent="Openings"]
 visible = false
-position = Vector2(-398, 169)
-scale = Vector2(21, 138)
+position = Vector2(-180, 95)
+scale = Vector2(21, 71)
 texture = SubResource("PlaceholderTexture2D_81hj7")
 
 [node name="Right" type="Sprite2D" parent="Openings"]
 visible = false
-position = Vector2(419, 169)
-scale = Vector2(21, 138)
+position = Vector2(203, 95)
+scale = Vector2(21, 71)
 texture = SubResource("PlaceholderTexture2D_81hj7")
 
 [node name="Bottom" type="Sprite2D" parent="Openings"]
 visible = false
-position = Vector2(79, 186)
-scale = Vector2(159, 17)
+position = Vector2(32, 105)
+scale = Vector2(64, 17)
 texture = SubResource("PlaceholderTexture2D_81hj7")
 
 [node name="Top" type="Sprite2D" parent="Openings"]
 visible = false
-position = Vector2(79, -170)
-scale = Vector2(159, 17)
+position = Vector2(32, -87)
+scale = Vector2(64, 17)
 texture = SubResource("PlaceholderTexture2D_81hj7")
+
+[node name="Exterior" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_srdw2")
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_rgkd6")
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_pl5uy")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_twsxv")
+
+[node name="RightCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_bklqj")
+
+[node name="ContainerInterior" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
+shape = SubResource("RectangleShape2D_dnhqr")
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
