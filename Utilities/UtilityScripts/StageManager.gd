@@ -39,6 +39,19 @@ func set_playspace_parameters(data:Dictionary) -> void:
 	self.playspace_parameters = data
 	print(self.playspace_parameters)
 
+	#Form of playspace_parameters: 4-deep nested dictionary.
+	#{
+	#	shape: Vector2(n,m),
+	#	containers: {
+	#		Vector2(x,y): {
+	#			type: ContainerProperties.container_type, exits: {
+	#					Utils.Directions: bool
+	#			}
+	#		}	
+	#	}
+	#}
+
+
 
 func popup_text(text, location : Vector2, color):
 	var newPopup = preload("res://Entities/Environment/Popups/popup_numbers.tscn").instantiate()

@@ -6,6 +6,7 @@ extends Node2D
 
 @export var enabled : bool = true
 @export var bullet_scene = preload("res://Entities/Projectiles/bullet_basic.tscn")
+@export var horizontal_only : bool = false
 
 enum States { INITIALIZING, PAUSED, READY, SHOOTING }
 var State = States.INITIALIZING
@@ -43,7 +44,8 @@ func start():
 	# locate the player and point near them.
 	var spread = 16
 	var random_miss = Vector2(randf_range(-spread, spread), randf_range(-spread, spread))
-	owner.look_at(StageManager.current_player.global_position + random_miss)
+	if not horizontal_only:
+		owner.look_at(StageManager.current_player.global_position + random_miss)
 	shoot()
 
 func stop():

@@ -55,7 +55,7 @@ func _on_shot_requested():
 	
 func die():
 	
-	$Behaviours/Attacks/ShootStars.stop_shooting()
+	$Behaviours/Attacks/ShootStars.stop()
 	$CPUParticles2D.lifetime = 1.0
 	$CPUParticles2D.emitting = true
 	await get_tree().create_timer(0.8).timeout

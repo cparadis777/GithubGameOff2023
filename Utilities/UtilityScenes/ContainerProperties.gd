@@ -5,7 +5,7 @@ class_name ContainerData
 
 @export var container_type:ContainerProperties.container_type
 @export_flags("Left", "Right", "Up", "Down") var container_exit_flags:int = Utils.DirectionFlags.NIL
-@export var scene_path:String
+@export_multiline var scene_path:String
 
 var container_exits:Dictionary = {Utils.Directions.UP: false, Utils.Directions.RIGHT: false, Utils.Directions.DOWN: false, Utils.Directions.LEFT: false}
 
