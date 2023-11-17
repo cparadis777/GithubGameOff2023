@@ -76,10 +76,14 @@ func get_last_known_direction():
 
 func _physics_process(_delta):
 	flip_sprites()
-	$Debug.global_rotation = 0.0
+	$Debug.global_rotation = 0.0 # for the state label
 	if Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
-
+	elif Input.is_action_just_pressed("zoom_in"):
+		zoom_camera(-1)
+	elif Input.is_action_just_pressed("zoom_out"):
+		zoom_camera(1)
+	
 
 func play_run_animation():
 	if $AnimationPlayer.current_animation != "run":
@@ -108,16 +112,18 @@ func reset_rotation():
 	animation_player.play("RESET")
 
 func initiate_debugging_protocol():
-#	if Engine.time_scale == 1.0:
-#		Engine.time_scale = 0.25
-#	else:
-#		Engine.time_scale = 1.0
-	if get_viewport().get_camera_2d().zoom == Vector2(1,1):
-		get_viewport().get_camera_2d().zoom = Vector2(0.25, 0.25)
+	if Engine.time_scale == 1.0:
+		Engine.time_scale = 0.25
 	else:
-		get_viewport().get_camera_2d().zoom = Vector2(1, 1)
+		Engine.time_scale = 1.0
 
 
+func zoom_camera(direction : int):
+	#var camera = get_viewport().get_camera_2d()
+	var zoom_levels = [ Vector2(1.5, 1.5), Vector2(1.0,1.0), Vector2(0.75, 0.75), Vector2(0.5,0.5), Vector2(0.25, 0.25) ]
+	var zoom_index = (zoom_levels.find(camera.zoom) + direction)%zoom_levels.size()
+	camera.zoom = zoom_levels[zoom_index]
+	
 
 func reset_sprite_position():
 	$Body/CyberRoninSprites.position = original_sprite_position

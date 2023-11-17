@@ -30,13 +30,13 @@ func choose_random_goal():
 
 func _on_decision_timer_timeout():
 		
-	$Behaviours/Attacks/ShootStars.stop_shooting() 
+	$Behaviours/Attacks/ShootStars.stop() 
 
 	previous_goal = Goal
 	choose_random_goal()
 	
 	if Goal == Goals.SHOOT_PLAYER:
-		$Behaviours/Attacks/ShootStars.start_shooting()
+		$Behaviours/Attacks/ShootStars.start()
 	
 	elif Goal == Goals.RELOCATE:
 		# choose a location near the player and go there.
@@ -55,7 +55,7 @@ func _on_shot_requested():
 	
 func die():
 	
-	$Behaviours/Attacks/ShootStars.stop_shooting()
+	$Behaviours/Attacks/ShootStars.stop()
 	$CPUParticles2D.lifetime = 1.0
 	$CPUParticles2D.emitting = true
 	await get_tree().create_timer(0.8).timeout

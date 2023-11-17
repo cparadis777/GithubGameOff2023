@@ -276,6 +276,7 @@ stream_0/stream = ExtResource("4_qrr87")
 stream_0/weight = 1.0
 
 [node name="RunningAssassin" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_olg2y")]
+health_max = 75.0
 animation_player = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" parent="." index="0"]
@@ -295,6 +296,9 @@ hframes = 8
 
 [node name="AttackNoise" parent="Behaviours/Attacks/SimpleMeleeAttack" index="5"]
 stream = SubResource("AudioStreamRandomizer_fkjsc")
+
+[node name="SimpleShootAttack" parent="Behaviours/Attacks" index="2"]
+enabled = false
 
 [node name="BloodSmear" parent="Behaviours/Defenses" index="1" instance=ExtResource("4_71odh")]
 

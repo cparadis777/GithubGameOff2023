@@ -1,12 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=22 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
 [ext_resource type="Texture2D" uid="uid://bi724p8u5kyfb" path="res://art/placeholder/EUC.png" id="3_6th61"]
 [ext_resource type="PackedScene" uid="uid://6xs2ww7uhsl5" path="res://Entities/NPCs/Behaviours/simple_melee_attack.tscn" id="4_50gad"]
 [ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="4_nvirp"]
+[ext_resource type="PackedScene" uid="uid://gtmk5sbwr3hj" path="res://Entities/Environment/Traps/Behaviours/shoot_stars.tscn" id="5_68bjg"]
 [ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="5_p2jwr"]
 [ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_x6jli"]
+[ext_resource type="PackedScene" uid="uid://ca7vyxdwydm0c" path="res://Utilities/UtilityScenes/zero_rotation.tscn" id="9_4vev6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hovi6"]
 radius = 20.5961
@@ -136,6 +138,10 @@ stream_2/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tblv3"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8vdq8"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yhpji"]
+
 [node name="BaseNPC" type="CharacterBody2D" groups=["Enemies"]]
 scale = Vector2(0.631187, 0.631187)
 collision_layer = 2
@@ -147,7 +153,7 @@ position = Vector2(1.58432, -31.6863)
 shape = SubResource("CapsuleShape2D_hovi6")
 
 [node name="DecisionTimer" type="Timer" parent="."]
-autostart = true
+one_shot = true
 
 [node name="Appearance" type="Node2D" parent="."]
 
@@ -181,6 +187,8 @@ collision_mask = 16
 
 [node name="SimpleMeleeAttack" parent="Behaviours/Attacks" instance=ExtResource("4_50gad")]
 
+[node name="SimpleShootAttack" parent="Behaviours/Attacks" instance=ExtResource("5_68bjg")]
+
 [node name="Defenses" type="Node2D" parent="Behaviours"]
 
 [node name="BasicHP" type="Node2D" parent="Behaviours/Defenses"]
@@ -210,5 +218,22 @@ bus = &"sfx"
 [node name="AttackNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_tblv3")
 
+[node name="ShootNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_8vdq8")
+
+[node name="PowerUPNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_yhpji")
+
+[node name="Debug" parent="." instance=ExtResource("9_4vev6")]
+
+[node name="StateLabel" type="Label" parent="Debug"]
+offset_left = -15.8432
+offset_top = -77.6315
+offset_right = 24.1568
+offset_bottom = -54.6315
+theme_override_font_sizes/font_size = 12
+text = "state"
+
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]

@@ -16,3 +16,7 @@ shader_parameter/FlashColor = Color(1, 1, 1, 1)
 material = SubResource("ShaderMaterial_qjb73")
 scale = Vector2(1, 1)
 texture = ExtResource("3_3i86w")
+
+[node name="SimpleShootAttack" parent="Behaviours/Attacks" index="1"]
+enabled = false
+horizontal_only = true

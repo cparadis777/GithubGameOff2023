@@ -4,6 +4,7 @@ var original_position : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	await owner.ready
 	original_position = $FloorHeightMarker.global_position
 
 

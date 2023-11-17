@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca7vyxdwydm0c"]
+
+[ext_resource type="Script" path="res://Utilities/UtilityScenes/zero_rotation.gd" id="1_luu2i"]
+
+[node name="ZeroRotation" type="Node2D"]
+script = ExtResource("1_luu2i")

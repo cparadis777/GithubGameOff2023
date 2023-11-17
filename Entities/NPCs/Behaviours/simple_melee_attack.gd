@@ -1,8 +1,14 @@
 extends Node2D
 
 @export var base_damage : float = 5.0
+@export var enabled : bool = true
+@export var knockback_speed : float = 150
+
 var damage
 var npc
+
+enum States { INACTIVE, ACTIVE }
+var State = States.INACTIVE
 
 signal hit
 
@@ -18,6 +24,9 @@ func scale_for_difficulty():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if !enabled or State == States.INACTIVE:
+		return
+	
 	if npc.State in [npc.States.IDLE, npc.States.RUNNING]:
 		if $AttackDelay.is_stopped() and $AttackReload.is_stopped():
 			if $RayCast2D.is_colliding() and $RayCast2D.get_collider() == StageManager.current_player:
@@ -35,10 +44,14 @@ func execute_attack():
 		npc.animation_player.play("attack")
 	$AnimationPlayer.play("attack")
 			
-		
+
+func start():
+	State = States.ACTIVE
+
 func stop():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("RESET")
+	
 	
 
 func _on_attack_delay_timeout():
@@ -62,6 +75,7 @@ func inflict_harm(body):
 	attackPacket.impact_vector = owner.global_position.direction_to(body.global_position)
 	attackPacket.recipient = body
 	attackPacket.knockback = true
+	attackPacket.knockback_speed = knockback_speed
 	if body.has_method("_on_hit"):
 		hit.connect(body._on_hit)
 		hit.emit(attackPacket)

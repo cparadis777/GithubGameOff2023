@@ -58,6 +58,7 @@ func create_playspace(playspace_parameters:Dictionary = {}) -> void:
 	
 	for coordinate in containers:
 		var container_scene = load(containers[coordinate].scene_path)
+		# Note: The container scene_path originally comes from exported vars on nodes in ContainerCatalog.tscn
 		var container = container_scene.instantiate()
 		container_grid.set_container(container, coordinate)
 	

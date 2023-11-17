@@ -4,6 +4,7 @@ signal finished
 
 enum States { INACTIVE, ACTIVE }
 var State = States.INACTIVE
+@export var enabled : bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,10 +17,10 @@ func _process(_delta):
 	pass
 
 func start():
-	pass
+	State = States.ACTIVE
 	
 func stop():
-	pass
+	State = States.INACTIVE
 	
 func pause():
 	pass
