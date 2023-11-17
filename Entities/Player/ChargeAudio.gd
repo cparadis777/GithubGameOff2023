@@ -7,6 +7,7 @@ var max_charge : int = 2
 signal finished()
 
 func start():
+	charge_level = 0
 	$ChargeAudioSequence.play()
 	$Duration_Per_Level.start()
 
