@@ -2,6 +2,7 @@ extends Node2D
 
 @export var base_damage : float = 5.0
 @export var enabled : bool = true
+@export var knockback_speed : float = 150
 
 var damage
 var npc
@@ -74,6 +75,7 @@ func inflict_harm(body):
 	attackPacket.impact_vector = owner.global_position.direction_to(body.global_position)
 	attackPacket.recipient = body
 	attackPacket.knockback = true
+	attackPacket.knockback_speed = knockback_speed
 	if body.has_method("_on_hit"):
 		hit.connect(body._on_hit)
 		hit.emit(attackPacket)

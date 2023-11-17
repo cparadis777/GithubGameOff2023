@@ -7,6 +7,8 @@ extends Node2D
 @export var enabled : bool = true
 @export var bullet_scene = preload("res://Entities/Projectiles/bullet_basic.tscn")
 @export var horizontal_only : bool = false
+@export var bad_aim_distance : float = 16.0
+@export var bullet_jitter : float = 0.15
 
 enum States { INITIALIZING, PAUSED, READY, SHOOTING }
 var State = States.INITIALIZING
@@ -18,7 +20,7 @@ signal shot_requested()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	$CPUParticles2D.emitting = false
 	if owner.has_method("_on_shot_requested"):
 		shot_requested.connect(owner._on_shot_requested)
 	# temporary, until levels can activate props...
@@ -42,7 +44,7 @@ func activate_new_state(value):
 func start():
 	State = States.SHOOTING
 	# locate the player and point near them.
-	var spread = 16
+	var spread = bad_aim_distance
 	var random_miss = Vector2(randf_range(-spread, spread), randf_range(-spread, spread))
 	if not horizontal_only:
 		owner.look_at(StageManager.current_player.global_position + random_miss)
@@ -58,15 +60,16 @@ func shoot():
 		# note: we're expecting the animation to call for launch_bullet()
 	
 func launch_bullet():
+	$CPUParticles2D.emitting = false
 	var newBullet = bullet_scene.instantiate()
 	add_child(newBullet)
 	newBullet.rotation = owner.rotation
 	newBullet.global_position = global_position
-	
+	var jitter = randf_range(-bullet_jitter, bullet_jitter)
 	if not horizontal_only:
-		newBullet.activate(owner.transform.x) # shoot in 360 degrees
+		newBullet.activate(owner.transform.x.rotated(jitter)) # shoot in 360 degrees
 	else:
-		newBullet.activate(Vector2(owner.direction, 0)) # shoot left and right only
+		newBullet.activate(Vector2(owner.direction, 0).rotated(jitter)) # shoot left and right only
 	
 	if current_shot >= shots_per_magazine-1:
 		current_shot = 0
@@ -76,7 +79,8 @@ func launch_bullet():
 		$RecoilTimer.start()
 
 
-
+func charge_weapon():
+	$CPUParticles2D.emitting = true
 
 
 

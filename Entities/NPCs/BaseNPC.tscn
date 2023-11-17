@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=22 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
@@ -138,6 +138,10 @@ stream_2/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tblv3"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8vdq8"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yhpji"]
+
 [node name="BaseNPC" type="CharacterBody2D" groups=["Enemies"]]
 scale = Vector2(0.631187, 0.631187)
 collision_layer = 2
@@ -149,7 +153,7 @@ position = Vector2(1.58432, -31.6863)
 shape = SubResource("CapsuleShape2D_hovi6")
 
 [node name="DecisionTimer" type="Timer" parent="."]
-autostart = true
+one_shot = true
 
 [node name="Appearance" type="Node2D" parent="."]
 
@@ -214,6 +218,12 @@ bus = &"sfx"
 [node name="AttackNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_tblv3")
 
+[node name="ShootNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_8vdq8")
+
+[node name="PowerUPNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_yhpji")
+
 [node name="Debug" parent="." instance=ExtResource("9_4vev6")]
 
 [node name="StateLabel" type="Label" parent="Debug"]
@@ -225,4 +235,5 @@ theme_override_font_sizes/font_size = 12
 text = "state"
 
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]

@@ -10,9 +10,9 @@ var health = health_max
 
 @export var animation_player : Node
 
-enum States { INITIALIZING, IDLE, PAUSED, RUNNING, JUMPING, KNOCKBACK, IFRAMES, ATTACKING, DEAD }
+enum States { INITIALIZING, PAUSED, IDLE, RUNNING, JUMPING, KNOCKBACK, IFRAMES, ATTACKING, DEAD }
 var State = States.INITIALIZING
-var animations = ["run", "jump", "hurt", "attack", "die"]
+var animations = ["", "", "idle", "run", "jump", "hurt", "hurt", "attack", "die"]
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -38,6 +38,7 @@ func activate(difficulty : Globals.DifficultyScales):
 	activate_weapons()
 	State = States.IDLE
 	
+	
 func set_difficulty(difficulty : Globals.DifficultyScales):
 	health_max += difficulty * 5.0
 	SPEED += float(difficulty)/40.0 * 100.0
@@ -45,22 +46,25 @@ func set_difficulty(difficulty : Globals.DifficultyScales):
 
 func activate_weapons():
 	for weapon in $Behaviours/Attacks.get_children():
-		if weapon.get("enabled") == true and weapon.has_method("start"):
-			weapon.start() # needed for basic shooting weapon
+		if weapon.get("enabled") == true:
+			if weapon.has_method("activate"):
+				weapon.activate()
+			if weapon.has_method("start"):
+				weapon.start() # needed for basic shooting weapon
 
 func jump():
 	velocity.y = JUMP_VELOCITY
 
 
 func _physics_process(delta):
-	if State in [ States.RUNNING, States.JUMPING ]:
+	if State in [ States.RUNNING, States.JUMPING, States.IDLE, States.ATTACKING ]:
 		apply_gravity(delta)
 		move_and_slide()
 		update_animations()
 		if is_at_end_of_platform() or is_obstructed():
 			turn_around()
-		
-	elif State == States.KNOCKBACK:
+	elif State in [States.KNOCKBACK, States.IFRAMES]:
+		# no downward gravity during knockback.
 		move_and_slide()
 
 	$Debug/StateLabel.text = States.keys()[State]
@@ -76,7 +80,7 @@ func is_obstructed():
 	
 func update_animations():
 	if animation_player.current_animation == "":
-		if animation_player.has_animation(animations[State]):
+		if animations[State] != "" and animation_player.has_animation(animations[State]):
 			animation_player.play(animations[State])
 
 func apply_gravity(delta):
@@ -95,7 +99,7 @@ func die():
 	died.emit(name)
 
 func _on_hit(attackPacket : AttackPacket):
-	if State in [States.RUNNING, States.JUMPING, States.IDLE]:
+	if State in [States.RUNNING, States.JUMPING, States.IDLE, States.ATTACKING]:
 		$HurtNoises.play()
 		abort_attacks_in_progress()
 		health -= attackPacket.damage
@@ -136,24 +140,45 @@ func _on_iframes_timer_timeout():
 		resume_attacking()
 
 func turn_around():
+	
 	direction = -direction
 	if State == States.RUNNING:
 		velocity.x = SPEED * direction
-		velocity.x = clamp(velocity.x, -SPEED, SPEED )
+		#velocity.x = clamp(velocity.x, -SPEED, SPEED )
+	
 	$Appearance.scale.x = direction
 	$Behaviours.scale.x = direction
+
 	
 func _on_decision_timer_timeout():
+	choose_new_behaviour()
+
+func choose_new_behaviour():
 	if State in [ States.IDLE, States.RUNNING ]:
 		State = [States.IDLE, States.RUNNING].pick_random()
-
+		# don't need to set state to attacking. The attack behaviours will handle that
 		if State == States.RUNNING:
 			animation_player.play("run")
+			velocity.x = direction * SPEED
 			if randf()<0.33:
 				turn_around()
 		elif State == States.IDLE:
 			animation_player.play("idle")
+			velocity.x = 0
+		$DecisionTimer.start()
 
 func _on_shot_requested():
+	State = States.ATTACKING
+	velocity.x = 0
 	if animation_player.has_animation("shoot"):
 		animation_player.play("shoot")
+
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name in ["shoot", "attack"]:
+		State = States.IDLE
+		velocity.x = 0
+		$DecisionTimer.stop()
+		choose_new_behaviour()
+		

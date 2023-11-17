@@ -33,9 +33,10 @@ func _on_body_entered(body):
 		attackPacket.damage = damage
 		attackPacket.originator = self
 		attackPacket.recipient = body
-		attackPacket.impact_vector = velocity
+		attackPacket.impact_vector = velocity.normalized()
 		attackPacket.damage_type = Globals.DamageTypes.IMPACT
 		attackPacket.knockback = knockback
+		attackPacket.knockback_speed = 100.0
 		hit.emit(attackPacket)
 		call_deferred("queue_free")
 		

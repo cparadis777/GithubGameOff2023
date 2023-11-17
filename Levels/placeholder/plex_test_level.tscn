@@ -90,7 +90,7 @@ position = Vector2(91, 0)
 position = Vector2(-205, -12)
 
 [node name="BossNPC" parent="Enemies" instance=ExtResource("6_t74po")]
-position = Vector2(181, -168)
+position = Vector2(145, -170)
 
 [node name="RunningAssassin" parent="Enemies" instance=ExtResource("7_rrg24")]
 position = Vector2(-88, -1)
