@@ -39,6 +39,7 @@ shader_parameter/vignette_opacity = 0.5
 position = Vector2(1, 1)
 script = ExtResource("1_f2v7x")
 target_weight = 300
+scene_path = "res://Levels/GeneratedPlayspace.tscn"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 100
@@ -51,11 +52,19 @@ mouse_filter = 2
 
 [node name="QuitButton-ReturnToMenu" parent="HUD/HBoxContainer" instance=ExtResource("6_n282g")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="FightButton" parent="HUD/HBoxContainer" instance=ExtResource("3_tcnfn")]
 layout_mode = 2
+focus_mode = 0
 text = "Fight!"
-scene_path = "res://Levels/GeneratedPlayspace.tscn"
+script = null
+
+[node name="ResetButton" parent="HUD/HBoxContainer" instance=ExtResource("3_tcnfn")]
+layout_mode = 2
+focus_mode = 0
+text = "Reset!"
+script = null
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("4_unqhl")]
 
@@ -223,5 +232,8 @@ entrances = {
 [node name="TerminalContainer2" parent="." instance=ExtResource("9_d655n")]
 position = Vector2(-65, -113)
 
+[connection signal="pressed" from="HUD/HBoxContainer/FightButton" to="." method="_on_fight_button_pressed"]
+[connection signal="pressed" from="HUD/HBoxContainer/ResetButton" to="DropPoints" method="reset_dropped_containers"]
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
+[connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]
