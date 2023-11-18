@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1q3fb8qqqdck"]
+[gd_scene load_steps=4 format=3 uid="uid://d1q3fb8qqqdck"]
 
 [ext_resource type="PackedScene" uid="uid://c2kws1t2ce2kn" path="res://Levels/placeholder/plex_level_template.tscn" id="1_6pytm"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_2fexr"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_jjvli"]
 
 [node name="PlexTestEnvironment" type="Node2D"]
 
 [node name="InteriorContainerLevelMockup01" parent="." instance=ExtResource("1_6pytm")]
+
+[node name="JumpThroughPlatform" parent="InteriorContainerLevelMockup01" instance=ExtResource("2_jjvli")]
+position = Vector2(-1096, -92)
+
+[node name="JumpThroughPlatform2" parent="InteriorContainerLevelMockup01" instance=ExtResource("2_jjvli")]
+position = Vector2(-808, -94)
 
 [node name="InteriorContainerLevelMockup02" parent="." instance=ExtResource("1_6pytm")]
 position = Vector2(-984, -4)

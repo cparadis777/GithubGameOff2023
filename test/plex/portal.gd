@@ -10,7 +10,7 @@ var directions = {
 	"LEFT": Vector2.LEFT,
 }     
 
-var distance = 48
+var distance = 144
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,8 +21,12 @@ func _ready():
 
 
 func _on_area_2d_body_entered(body):
+	
 	if "player" in body.name.to_lower():
-		var tween = create_tween()
-		tween.tween_property(body, "global_position", $Destination.global_position, 1.0)
-		
+		if body.state_machine.state.name != "InTransit":
+			body._on_door_entered()
+			var tween = create_tween()
+			tween.tween_property(body, "global_position", $Destination.global_position, 2.0)
+			await tween.finished
+			body._on_door_exited()
 		

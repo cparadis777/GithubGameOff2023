@@ -320,4 +320,8 @@ func _on_iframes_finished():
 func _on_player_died():
 	animation_player.play("die")
 	
-	
+func _on_door_entered():
+	state_machine.transition_to("InTransit")
+
+func _on_door_exited():
+	state_machine.transition_to("Idle")

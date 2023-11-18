@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c2kws1t2ce2kn"]
+[gd_scene load_steps=21 format=3 uid="uid://c2kws1t2ce2kn"]
 
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="3_copbu"]
 [ext_resource type="PackedScene" uid="uid://dnsnay6jrr7ic" path="res://Entities/Environment/Lights/switched_blacklight_inverse.tscn" id="4_gq5iw"]
@@ -45,6 +45,9 @@ blend_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34npf"]
 light_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kw8pi"]
+size = Vector2(20, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7n80"]
 size = Vector2(64, 120)
@@ -238,17 +241,19 @@ linked_nodes = [NodePath("../../InverseBlacklight"), NodePath("../../InverseBlac
 position = Vector2(-434, 20)
 script = ExtResource("8_1uf80")
 
-[node name="Area2D" type="Area2D" parent="Exits/LEFT"]
-position = Vector2(23, -31)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/LEFT/Area2D"]
-position = Vector2(-23, -27)
-shape = SubResource("RectangleShape2D_q7n80")
-
 [node name="Door" type="Polygon2D" parent="Exits/LEFT"]
 position = Vector2(23, -31)
 color = Color(0.172549, 0.172549, 0.172549, 1)
 polygon = PackedVector2Array(-44, 52, -45, -102, -6, -133, -5, 8)
+
+[node name="Area2D" type="Area2D" parent="Exits/LEFT"]
+position = Vector2(23, -31)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/LEFT/Area2D"]
+position = Vector2(-26, -39)
+shape = SubResource("RectangleShape2D_kw8pi")
+one_way_collision_margin = 2.0
+debug_color = Color(0.890196, 0.254902, 0.509804, 0.72549)
 
 [node name="Destination" type="Marker2D" parent="Exits/LEFT"]
 position = Vector2(5, -11)
