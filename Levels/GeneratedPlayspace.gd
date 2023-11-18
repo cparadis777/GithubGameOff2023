@@ -5,6 +5,7 @@ extends Node2D
 
 func _ready():
 	self.create_playspace(StageManager.playspace_parameters)
+	$CanvasModulate.show()
 """
 	create_playspace({
 		"shape": Vector2(2,2),
