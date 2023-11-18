@@ -6,6 +6,7 @@ var Goal : Goals = Goals.RELAX
 var previous_goal : Goals
 
 @export var SPEED : float = 100.0
+@export var mobile : bool = true
 
 var health_max : float = 20
 var health = health_max
@@ -21,9 +22,15 @@ func _ready():
 
 func choose_random_goal():
 	var dice_roll = randf()
-	if dice_roll < 0.1:
+	var probabilities
+	if mobile:
+		probabilities = [0.3, 0.0, 0.7]
+	else:
+		probabilities = [0.3, 0.1, 0.6]
+	
+	if dice_roll < probabilities[0]:
 		Goal = Goals.RELAX
-	elif dice_roll < 0.4:
+	elif dice_roll < probabilities[0]+probabilities[1]:
 		Goal = Goals.RELOCATE
 	else:
 		Goal = Goals.SHOOT_PLAYER
@@ -38,14 +45,14 @@ func _on_decision_timer_timeout():
 	if Goal == Goals.SHOOT_PLAYER:
 		$Behaviours/Attacks/ShootStars.start()
 	
-	elif Goal == Goals.RELOCATE:
+	elif Goal == Goals.RELOCATE and mobile == true:
 		# choose a location near the player and go there.
 		var distance = randf_range(64.0, 128.0)
 		var angle = randf_range(-3.1415, 3.1415)
 		var random_location = StageManager.current_player.global_position + (Vector2.ONE * distance).rotated(angle)
 		var tween = create_tween()
 		tween.tween_property(self, "global_position", random_location, 2.0 )
-	
+		
 	$DecisionTimer.start()
 	$Debug.global_rotation = 0.0
 	$Debug/StateLabel.text = Goals.keys()[Goal]

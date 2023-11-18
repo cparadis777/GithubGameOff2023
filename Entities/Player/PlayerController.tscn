@@ -183,7 +183,6 @@ polygon = PackedVector2Array(-6, -18, -20, -29, -6, -28, 0, -45, 5, -30, 17, -30
 
 [node name="CyberRoninSprites" parent="Body" instance=ExtResource("5_tbet1")]
 animation = &"idle"
-frame_progress = 0.0
 
 [node name="SpeedLines" type="AnimatedSprite2D" parent="Body"]
 visible = false

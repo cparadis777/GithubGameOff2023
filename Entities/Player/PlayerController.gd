@@ -18,10 +18,10 @@ var health = health_max
 var temporary_health_bonus = 0
 
 @export var damage_defaults := {
-	"FastPunch":10,
-	"StrongPunch":20, # plus charge time
-	"DescendingKick":25,
-	"Dash":15
+	"FastPunch":50,
+	"StrongPunch":100, # plus charge time
+	"DescendingKick":150,
+	"Dash":125
 }
 
 

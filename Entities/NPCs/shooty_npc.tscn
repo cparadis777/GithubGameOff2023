@@ -278,7 +278,6 @@ stream_0/stream = ExtResource("6_qp67u")
 stream_0/weight = 1.0
 
 [node name="ShootyNPC" instance=ExtResource("1_58hki")]
-health_max = 50.0
 
 [node name="DecisionTimer" parent="." index="1"]
 wait_time = 3.0
