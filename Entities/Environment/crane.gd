@@ -34,6 +34,10 @@ func _input(event):
 			self.move_container(Utils.Directions.LEFT)
 		elif event.is_action_pressed("jump"):
 			self.place_container()
+		elif event.is_action_pressed("fast_punch"):
+			self.rotate_container("CCW")
+		elif event.is_action_pressed("strong_punch"):
+			self.rotate_container("CW")	
 
 func select_random_container() -> StaticBody2D:
 	var new_container = containers.pick_random().instantiate()
@@ -96,18 +100,31 @@ func move_done()->void:
 	self.move_ready = true
 
 func randomize_container_access(container) -> void:
-	var sides = [Utils.Directions.LEFT, Utils.Directions.UP, Utils.Directions.RIGHT, Utils.Directions.DOWN]
+	var sides = {
+		Utils.Directions.LEFT: false,
+		Utils.Directions.UP: false, 
+		Utils.Directions.RIGHT: false,
+		Utils.Directions.DOWN: false,
+	}
+	
+	for direction in sides:
+		if randf() >0.3:
+			sides[direction] = true
 
-	var selected_sides = []
-	selected_sides = sides
-	container.set_entrances(selected_sides)
-	return 
-	for side in sides:
-		if randf() > 0.5:
-			selected_sides.append(side)
-	if selected_sides.size() == 0:
-		selected_sides.append(sides.pick_random())
-	container.set_entrances(selected_sides)
+	container.set_entrances(sides)
+
+func rotate_container(rotation_direction:String) -> void:
+	var previous_exits:Dictionary = self.current_container.entrances
+	var new_exits:Dictionary = {Utils.Directions.UP: false, Utils.Directions.RIGHT: false, Utils.Directions.DOWN: false, Utils.Directions.LEFT: false}
+	for direction in previous_exits:
+		if rotation_direction == "CW":
+			new_exits[Utils.get_next_direction(direction)] = previous_exits[direction]
+		elif rotation_direction == "CCW":
+			new_exits[Utils.get_previous_direction(direction)] = previous_exits[direction]
+		else:
+			pass
+
+	self.current_container.set_entrances(new_exits)
 
 func _on_crane_jaw_animation_finished():
 	$CraneJaw.set_frame(0)
