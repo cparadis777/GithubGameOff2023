@@ -111,18 +111,17 @@ containers = Array[PackedScene]([ExtResource("2_rgicc"), ExtResource("3_wwyy3"),
 container_width = 48
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 16.0
-offset_top = 48.0
-offset_right = 168.0
-offset_bottom = 96.0
+offset_left = -64.0
+offset_top = -24.0
 theme = ExtResource("4_l15jl")
+scroll_active = false
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 16.0
-offset_top = -8.0
-offset_right = 168.0
-offset_bottom = 40.0
+visible = false
+offset_left = -56.0
+offset_bottom = 24.0
 theme = ExtResource("4_l15jl")
+scroll_active = false
 
 [node name="CraneTruss" type="Sprite2D" parent="."]
 z_index = 2

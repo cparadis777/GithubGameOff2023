@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=12 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="4_unqhl"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
 [ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="8_18gwl"]
-[ext_resource type="Texture2D" uid="uid://c6hhruk5y7uvl" path="res://art/low_res_containers/shipping_container_generic-LOWRES.png" id="9_xttiv"]
+[ext_resource type="PackedScene" uid="uid://diik2yboc0mbr" path="res://Entities/Droppable/TerminalContainer.tscn" id="9_d655n"]
+[ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="10_bp55l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f6bsu"]
 shader = ExtResource("2_o08nb")
@@ -71,6 +72,99 @@ container_height = 24
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -177)
+zoom = Vector2(2, 2)
+
+[node name="Arena" type="Node2D" parent="."]
+
+[node name="BaseContainer" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-17, -89)
+
+[node name="BaseContainer10" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-113, -137)
+
+[node name="BaseContainer9" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-113, -113)
+
+[node name="BaseContainer6" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-113, -89)
+
+[node name="BaseContainer7" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-65, -89)
+
+[node name="BaseContainer2" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(31, -89)
+
+[node name="BaseContainer3" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(79, -89)
+
+[node name="BaseContainer4" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(79, -113)
+
+[node name="BaseContainer5" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(79, -137)
+
+[node name="BaseContainer8" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(79, -161)
+
+[node name="BaseContainer12" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-113, -161)
+
+[node name="BaseContainer18" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-161, -137)
+
+[node name="BaseContainer19" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-161, -113)
+
+[node name="BaseContainer20" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-161, -89)
+
+[node name="BaseContainer21" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-161, -161)
+
+[node name="BaseContainer22" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-161, -185)
+
+[node name="BaseContainer11" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-113, -185)
+
+[node name="BaseContainer13" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(127, -137)
+
+[node name="BaseContainer14" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(127, -113)
+
+[node name="BaseContainer15" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(127, -89)
+
+[node name="BaseContainer16" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(127, -161)
+
+[node name="BaseContainer17" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(127, -185)
+
+[node name="EmptyContainer3" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-65, -137)
+
+[node name="EmptyContainer4" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-65, -161)
+
+[node name="EmptyContainer5" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-65, -185)
+
+[node name="BaseContainer23" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(175, -137)
+
+[node name="BaseContainer24" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(175, -113)
+
+[node name="BaseContainer25" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(175, -89)
+
+[node name="BaseContainer26" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(175, -161)
+
+[node name="BaseContainer27" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(175, -185)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 z_index = 1
@@ -117,52 +211,17 @@ the amount and difficulty of
 teamsters, thugs, and assassins
 contained within."
 
-[node name="Arena" type="Node2D" parent="."]
-
-[node name="Sprite2D11" type="Sprite2D" parent="Arena"]
-position = Vector2(-65, -113)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
-
-[node name="Sprite2D2" type="Sprite2D" parent="Arena"]
-position = Vector2(-17, -89)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
-
-[node name="Sprite2D" type="Sprite2D" parent="Arena"]
-position = Vector2(-65, -89)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
-
-[node name="Sprite2D4" type="Sprite2D" parent="Arena"]
-position = Vector2(31, -89)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
-
-[node name="Sprite2D5" type="Sprite2D" parent="Arena"]
-position = Vector2(79, -89)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
-
-[node name="Sprite2D7" type="Sprite2D" parent="Arena"]
-position = Vector2(79, -113)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
-
-[node name="Sprite2D8" type="Sprite2D" parent="Arena"]
-position = Vector2(79, -137)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
-
-[node name="Sprite2D9" type="Sprite2D" parent="Arena"]
-position = Vector2(79, -161)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
-
-[node name="Sprite2D10" type="Sprite2D" parent="Arena"]
+[node name="TerminalContainer" parent="." instance=ExtResource("9_d655n")]
 position = Vector2(79, -185)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_xttiv")
+entrances = {
+0: false,
+1: false,
+2: false,
+3: true
+}
+
+[node name="TerminalContainer2" parent="." instance=ExtResource("9_d655n")]
+position = Vector2(-65, -113)
 
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]

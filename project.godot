@@ -21,7 +21,7 @@ Globals="*res://Utilities/UtilityScripts/globals.gd"
 StageManager="*res://Utilities/UtilityScripts/StageManager.gd"
 Utils="*res://Utilities/UtilityScripts/utils.gd"
 SceneTransition="*res://Utilities/UtilityScenes/SceneTransition.tscn"
-ContainerProperties="*res://Utilities/UtilityScripts/ContainerProperties.gd"
+ContainerProperties="*res://Utilities/UtilityScripts/ContainerTypes.gd"
 ContainerCatalog="*res://Utilities/UtilityScenes/ContainerCatalog.tscn"
 
 [display]

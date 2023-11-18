@@ -6,13 +6,15 @@ var weigth:int = 100
 var grid_position:Vector2 = Vector2(100,100)
 @export var type: ContainerProperties.container_type = ContainerProperties.container_type.YELLOW
 
-var entrances = {
+@export var entrances = {
 	Utils.Directions.LEFT: false,
 	Utils.Directions.UP: false,
 	Utils.Directions.RIGHT: false,
 	Utils.Directions.DOWN: false,
 }
 
+func _ready():
+	self.set_entrances(self.entrances)
 
 func set_grid_position(coordinate:Vector2) -> void:
 	self.grid_position = coordinate

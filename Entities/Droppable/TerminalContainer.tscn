@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://diik2yboc0mbr"]
+
+[ext_resource type="PackedScene" uid="uid://mq11awte3lc6" path="res://Entities/Droppable/PrototypeDroppableContainer.tscn" id="1_5yvvf"]
+
+[node name="TerminalContainer" instance=ExtResource("1_5yvvf")]
+entrances = {
+0: false,
+1: true,
+2: false,
+3: false
+}
+
+[node name="Exterior" parent="." index="0"]
+modulate = Color(0, 0.643137, 0.317647, 1)
