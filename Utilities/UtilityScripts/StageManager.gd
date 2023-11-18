@@ -37,7 +37,6 @@ func end_game(status):
 
 func set_playspace_parameters(data:Dictionary) -> void:
 	self.playspace_parameters = data
-	print(self.playspace_parameters)
 
 	#Form of playspace_parameters: 4-deep nested dictionary.
 	#{

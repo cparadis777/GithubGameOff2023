@@ -18,6 +18,33 @@ func get_opposite_direction(direction:Utils.Directions) -> Utils.Directions:
 			return Utils.Directions.DOWN
 
 
+func get_next_direction(direction:Utils.Directions) -> Utils.Directions:
+	match direction:
+		Directions.UP:
+			return Utils.Directions.RIGHT
+		Directions.RIGHT:
+			return Utils.Directions.DOWN
+		Directions.DOWN:
+			return Utils.Directions.LEFT
+		Directions.LEFT:
+			return Utils.Directions.UP
+		_:
+			return Utils.Directions.DOWN
+
+func get_previous_direction(direction:Utils.Directions) -> Utils.Directions:
+	match direction:
+		Directions.UP:
+			return Utils.Directions.LEFT
+		Directions.RIGHT:
+			return Utils.Directions.UP
+		Directions.DOWN:
+			return Utils.Directions.RIGHT
+		Directions.LEFT:
+			return Utils.Directions.DOWN
+		_:
+			return Utils.Directions.DOWN
+
+
 func get_closest_node(nodeList : Array, location : Vector2):
 	if not nodeList is Array: # received a single object?
 		return nodeList

@@ -5,32 +5,8 @@ extends Node2D
 
 func _ready():
 	self.create_playspace(StageManager.playspace_parameters)
-"""
-	create_playspace({
-		"shape": Vector2(2,2),
-		"containers": {
-			Vector2(0,0): {
-				"type": ContainerProperties.container_type.BLUE,
-				"exits": {
-					Utils.Directions.UP: false,
-					Utils.Directions.RIGHT: false,
-					Utils.Directions.DOWN: false,
-					Utils.Directions.LEFT: false
-				}
-			},
-			Vector2(0,1): {
-				"type": ContainerProperties.container_type.BLUE,
-				"exits": {
-					Utils.Directions.UP: false,
-					Utils.Directions.RIGHT: false,
-					Utils.Directions.DOWN: false,
-					Utils.Directions.LEFT: false
-			}
-		}
-	}
-}
-)
-"""
+	$CanvasModulate.show()
+
 
 
 """

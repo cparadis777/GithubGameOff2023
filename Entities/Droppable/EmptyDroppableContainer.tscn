@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dixj38xxr3o83"]
+
+[ext_resource type="PackedScene" uid="uid://mq11awte3lc6" path="res://Entities/Droppable/PrototypeDroppableContainer.tscn" id="1_ashvo"]
+
+[node name="EmptyContainer" instance=ExtResource("1_ashvo")]
