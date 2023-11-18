@@ -429,7 +429,6 @@ horizontal_alignment = 1
 
 [node name="StrongPunch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("charge_vfx")]
 script = ExtResource("27_487ye")
-moving = true
 charge_vfx = NodePath("CPUParticles2D")
 
 [node name="HurtBox" type="Area2D" parent="StateMachine/StrongPunch"]
@@ -456,6 +455,7 @@ script = ExtResource("21_85smj")
 
 [node name="ChargeAudioSequence" type="AudioStreamPlayer2D" parent="StateMachine/StrongPunch/ChargeAudio"]
 stream = SubResource("AudioStreamRandomizer_10l48")
+bus = &"sfx"
 
 [node name="Duration_Per_Level" type="Timer" parent="StateMachine/StrongPunch/ChargeAudio"]
 wait_time = 1.5
