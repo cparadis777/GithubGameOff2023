@@ -28,6 +28,10 @@ func enter(_msg := {}) -> void:
 	$UnbrokenSequenceTimer.start(time_before_sequence_resets)
 	
 	
+func exit():
+	super()
+	$HurtBox/FastCollisionShape.disabled = true
+	
 func _on_player_animation_finished(anim_name):
 	if anim_name in sequence_animations:
 		if abs(Input.get_axis("move_left", "move_right")) > 0:
@@ -38,3 +42,13 @@ func _on_player_animation_finished(anim_name):
 
 func _on_unbroken_sequence_timer_timeout():
 	punch_num_in_sequence = 0
+
+
+func _on_hurt_box_body_entered(body):
+	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
+		if state_machine.state.name == "FastPunch":
+			var knockback_magnitude = punch_num_in_sequence
+			var uppercut = punch_num_in_sequence == 2
+			player.inflict_harm(body, 10, knockback_magnitude, uppercut)
+			$ImpactAudio.get_child(punch_num_in_sequence).play()
+

@@ -306,6 +306,7 @@ libraries = {
 
 [node name="ShootNoises" parent="." index="9"]
 stream = SubResource("AudioStreamRandomizer_knubt")
+volume_db = -6.0
 
 [node name="PowerUPNoises" parent="." index="10"]
 stream = SubResource("AudioStreamRandomizer_5k5lf")
