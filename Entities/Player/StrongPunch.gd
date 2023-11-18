@@ -132,6 +132,7 @@ func enter(_msg := {}) -> void:
 	
 func exit():
 	player.animation_player.stop()
+	$ChargeAudio.stop()
 	reset_vfx()
 	charge_vfx.hide()
 	moving = false
@@ -139,6 +140,7 @@ func exit():
 	var col_shape = player.find_child("StrongCollisionShape")
 	if col_shape != null:
 		col_shape.set_deferred("disabled", true)
+
 
 func _on_player_animation_finished(anim_name):
 	if anim_name == "strong_punch":
