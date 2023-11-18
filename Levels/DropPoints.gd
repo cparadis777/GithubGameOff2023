@@ -14,6 +14,7 @@ var drop_point_targeted
 
 signal weight_added(weight)
 signal drop_over
+signal weight_reset()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -120,6 +121,9 @@ func validate_level() -> bool:
 	var entrance_drop_point:DropPoint = self.get_drop_point(self.entrance_coord)
 	var exit_drop_point:DropPoint = self.get_drop_point(self.exit_coord)
 
+	if entrance_drop_point.container == null || exit_drop_point.container == null:
+		return false
+	
 	if entrance_drop_point.container != null:
 		if entrance_drop_point.container.entrances[self.entrance_direction] == false:
 			return false
@@ -128,13 +132,12 @@ func validate_level() -> bool:
 			return false
 	
 	if entrance_drop_point.container != null:
-		print("searching")
-		self.path_search()
+		return self.path_search()
+
 	return true
 
 
 func path_search() -> bool:
-	print("starting search")
 	var start:Vector2 = self.entrance_coord
 	var visited_nodes = {}
 	var visited_node_count = 0
@@ -146,25 +149,23 @@ func path_search() -> bool:
 	visited_nodes[start] = true
 
 	while queue.size() != 0:
-		print(queue)
 		visited_node_count += 1
 		var node = queue.pop_front()
 		if node == self.exit_coord:
 			return true
 		var current_drop_point = self.drop_points_dict[node]
-		if current_drop_point.is_filled:
-			for direction in current_drop_point.neighbors:
-				if current_drop_point.container.entrances[direction]:
-					if current_drop_point.neighbors[direction] != null:
-						if current_drop_point.neighbors[direction].is_filled:
-							var neighbor_coord = current_drop_point.neighbors[direction].grid_position
-							if visited_nodes[neighbor_coord] != true:
-								visited_nodes[neighbor_coord] = true
-								queue.append(neighbor_coord)
-				
-	
-	print(visited_node_count)
-	return true
+		if current_drop_point.is_filled: # Check if there is a container in the current slot
+			for direction in current_drop_point.neighbors: # Iterate over all the neighbor slot of the current slot
+				if current_drop_point.container.entrances[direction]: #Check if the current container has an exit towards the current direction
+					if current_drop_point.neighbors[direction] != null: #Check if the neighboring slot exists
+						if current_drop_point.neighbors[direction].is_filled: #Check if the neighboring slot has a container
+							var opposite_direction = Utils.get_opposite_direction(direction)
+							if current_drop_point.neighbors[direction].container.entrances[opposite_direction]: #Check if reciprocal entrance exists in neighbor
+								var neighbor_coord = current_drop_point.neighbors[direction].grid_position 
+								if visited_nodes[neighbor_coord] != true: #Check if we already visited that node
+									visited_nodes[neighbor_coord] = true #Mark that node as visited
+									queue.append(neighbor_coord) #Add that node to the queue
+	return false
 
 
 func get_neighbors_coordinate(coordinate:Vector2) -> Array:
@@ -173,3 +174,9 @@ func get_neighbors_coordinate(coordinate:Vector2) -> Array:
 	for direction in directions:
 		neighbors.append(self.get_adjacent_coordinate(direction, coordinate))
 	return neighbors
+
+
+func reset_dropped_containers()->void:
+	for coord in self.drop_points_dict:
+		drop_points_dict[coord].remove_container()
+	emit_signal("weight_reset")

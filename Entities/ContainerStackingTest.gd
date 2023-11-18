@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var target_weight:int
+@export var scene_path: String
 var current_weight:int
 
 
@@ -19,4 +20,15 @@ func add_weight(weight:int) -> void:
 
 
 func _on_fight_button_pressed():
-	StageManager.set_playspace_parameters($DropPoints.export_data())
+	if $DropPoints.validate_level():
+		StageManager.set_playspace_parameters($DropPoints.export_data())
+		if scene_path != "":
+			StageManager.change_scene_to(self.scene_path)
+		else:
+			printerr("ContainerStackingTest.gd config error: Needs a scene or scene_path parameter." + self.name)
+	else:
+		print("Invalid level")
+
+func _on_drop_points_weight_reset():
+	self.current_weight = 0
+	self.add_weight(0)

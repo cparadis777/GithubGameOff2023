@@ -12,6 +12,7 @@ func _ready():
 
 
 func _on_pressed():
+	
 	if scene != null:
 		StageManager.change_scene_to(scene)
 	elif scene_path != "":
