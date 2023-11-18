@@ -34,9 +34,9 @@ func _input(event):
 			self.move_container(Utils.Directions.LEFT)
 		elif event.is_action_pressed("jump"):
 			self.place_container()
-		elif event.is_action_pressed("fast_punch"):
+		elif event.is_action_pressed("rotate_left"):
 			self.rotate_container("CCW")
-		elif event.is_action_pressed("strong_punch"):
+		elif event.is_action_pressed("rotate_right"):
 			self.rotate_container("CW")	
 
 func select_random_container() -> StaticBody2D:
