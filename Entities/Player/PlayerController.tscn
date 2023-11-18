@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=52 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://bnnffyadkoygk" path="res://audio/sfx/placeholder/charge_tone_2_660Hz_wawah.wav" id="23_k62ij"]
 [ext_resource type="Script" path="res://Entities/Player/DoubleJump.gd" id="23_r318r"]
 [ext_resource type="AudioStream" uid="uid://c6ttahxndcq52" path="res://audio/sfx/placeholder/charge_tone3_880Hz_wawah.wav" id="24_4suah"]
+[ext_resource type="AudioStream" uid="uid://bvxslxhu2o73k" path="res://audio/sfx/placeholder/648959__ienba__heavy-book.wav" id="25_efqc2"]
 [ext_resource type="Script" path="res://Entities/Player/Landing.gd" id="25_hj8m7"]
 [ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
 [ext_resource type="PackedScene" uid="uid://dxjihdq7d8mpk" path="res://Entities/Player/player_audio.tscn" id="25_x3gmp"]
@@ -141,6 +142,11 @@ stream_1/stream = ExtResource("23_k62ij")
 stream_1/weight = 1.0
 stream_2/stream = ExtResource("24_4suah")
 stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xs8aj"]
+streams_count = 1
+stream_0/stream = ExtResource("25_efqc2")
+stream_0/weight = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8oiq"]
 size = Vector2(14, 14)
@@ -459,6 +465,9 @@ bus = &"sfx"
 [node name="Duration_Per_Level" type="Timer" parent="StateMachine/StrongPunch/ChargeAudio"]
 wait_time = 1.5
 one_shot = true
+
+[node name="ImpactAudio" type="AudioStreamPlayer2D" parent="StateMachine/StrongPunch"]
+stream = SubResource("AudioStreamRandomizer_xs8aj")
 
 [node name="FastPunch" type="Node2D" parent="StateMachine"]
 script = ExtResource("28_amcrx")

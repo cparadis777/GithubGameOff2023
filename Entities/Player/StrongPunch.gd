@@ -157,6 +157,7 @@ func _on_hurt_box_body_entered(body):
 			var actual_damage = floor(damage * charge_multiplier)
 			var knockback_magnitude = 3.0
 			var uppercut = false
-			
+			$ImpactAudio.play()
 			
 			player.inflict_harm(body, actual_damage, knockback_magnitude, uppercut)
+
