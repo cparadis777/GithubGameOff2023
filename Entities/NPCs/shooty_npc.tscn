@@ -278,7 +278,6 @@ stream_0/stream = ExtResource("6_qp67u")
 stream_0/weight = 1.0
 
 [node name="ShootyNPC" instance=ExtResource("1_58hki")]
-health_max = 50.0
 
 [node name="DecisionTimer" parent="." index="1"]
 wait_time = 3.0
@@ -295,6 +294,7 @@ enabled = false
 [node name="SimpleShootAttack" parent="Behaviours/Attacks" index="1"]
 position = Vector2(23.7648, -44.3609)
 horizontal_only = true
+bullet_jitter = 0.08
 
 [node name="RecoilTimer" parent="Behaviours/Attacks/SimpleShootAttack" index="0"]
 wait_time = 2.0

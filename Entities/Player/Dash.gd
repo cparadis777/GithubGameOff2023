@@ -15,7 +15,7 @@ var direction
 @export var speed_multiplier : float = 2.75
 var dash_speed : float
 var timer
-var damage
+var damage : float
 
 func _ready():
 	super()

@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY : float = -100.0
 @export var base_damage : float = 10
 
-@export var health_max = 250.0
+@export var health_max = 50.0
 var health = health_max
 
 @export var animation_player : Node

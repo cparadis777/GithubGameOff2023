@@ -9,6 +9,8 @@ extends Node2D
 @export var horizontal_only : bool = false
 @export var bad_aim_distance : float = 16.0
 @export var bullet_jitter : float = 0.15
+@export var free_rotate : bool = true
+
 
 enum States { INITIALIZING, PAUSED, READY, SHOOTING }
 var State = States.INITIALIZING
@@ -46,7 +48,7 @@ func start():
 	# locate the player and point near them.
 	var spread = bad_aim_distance
 	var random_miss = Vector2(randf_range(-spread, spread), randf_range(-spread, spread))
-	if not horizontal_only:
+	if free_rotate and not horizontal_only:
 		owner.look_at(StageManager.current_player.global_position + random_miss)
 	shoot()
 
@@ -66,10 +68,12 @@ func launch_bullet():
 	newBullet.rotation = owner.rotation
 	newBullet.global_position = global_position
 	var jitter = randf_range(-bullet_jitter, bullet_jitter)
-	if not horizontal_only:
-		newBullet.activate(owner.transform.x.rotated(jitter)) # shoot in 360 degrees
-	else:
+	
+	if horizontal_only:
 		newBullet.activate(Vector2(owner.direction, 0).rotated(jitter)) # shoot left and right only
+	else:
+		newBullet.activate(owner.transform.x.rotated(jitter)) # shoot in 360 degrees
+		
 	
 	if current_shot >= shots_per_magazine-1:
 		current_shot = 0
