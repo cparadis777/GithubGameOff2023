@@ -13,8 +13,9 @@ var directions = {
 
 var distance = 144
 @export var linked_portal : Node
+@export var tween_duration : float = 1.25
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	if directions.has(name):
 		$Destination.global_position = global_position + directions[name] * distance
@@ -32,7 +33,7 @@ func link_nearby_door():
 
 
 func _on_area_2d_body_entered(body):
-	if "player" in body.name.to_lower():
+	if "player" in body.name.to_lower() and body.state_machine.state.name != "InTransit":
 		$Area2D/DelayOpeningTimer.start()
 
 
@@ -56,7 +57,7 @@ func open_door():
 func transport_player(body):
 	body._on_door_entered()
 	var tween = create_tween()
-	tween.tween_property(body, "global_position", $Destination.global_position, 2.0)
+	tween.tween_property(body, "global_position", $Destination.global_position, tween_duration)
 	body_in_transit = body
 	tween.finished.connect(_on_tween_finished)
 

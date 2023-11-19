@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var num_objects : int = 6
+
 # note: order of exit flags must match the order in Utils.DirectionFlags
 @export_flags("LEFT", "RIGHT", "UP", "DOWN") var container_exit_flags:int = 15
 @onready var exits_container_node = $Exits
@@ -26,7 +28,7 @@ func remove_unneeded_doors():
 func spawn_random_shit():
 	var shitList = $RandomShitToSpawn.get_resource_list()
 	
-	for i in range(randi_range(3,10)):
+	for i in range(randi_range(int(0.5 * float(num_objects)), num_objects)):
 		var newThing = $RandomShitToSpawn.get_resource(shitList[randi()%shitList.size()])
 		var newThingScene = newThing.instantiate()
 		
