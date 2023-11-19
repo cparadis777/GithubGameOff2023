@@ -6,10 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="5_ka1gp"]
 [ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="6_vcyxu"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="7_o5mg4"]
-[ext_resource type="Script" path="res://test/plex/portal.gd" id="8_1uf80"]
 [ext_resource type="PackedScene" uid="uid://bveugr8fx87uv" path="res://Entities/Environment/portals/door_template.tscn" id="8_1ywrw"]
 [ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="9_bcimw"]
 [ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="10_1yvnt"]
+[ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="10_c55k5"]
+[ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="11_a137i"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="11_d7olt"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="11_px28m"]
 [ext_resource type="PackedScene" uid="uid://c5en3lqt0m2df" path="res://Entities/Environment/Traps/star_trap_shooter.tscn" id="12_7pwhs"]
@@ -52,9 +53,6 @@ blend_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34npf"]
 light_mode = 1
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a208w"]
-size = Vector2(228, 48)
 
 [node name="ShippingContainerRoom" type="Node2D"]
 script = ExtResource("1_hqjdj")
@@ -245,43 +243,11 @@ position = Vector2(-429, 9)
 [node name="RIGHT" parent="Exits" instance=ExtResource("9_bcimw")]
 position = Vector2(443, 9)
 
-[node name="UP" type="Node2D" parent="Exits"]
-position = Vector2(2, -320)
-script = ExtResource("8_1uf80")
+[node name="DOWN" parent="Exits" instance=ExtResource("10_c55k5")]
+position = Vector2(0, 22)
 
-[node name="Area2D" type="Area2D" parent="Exits/UP"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/UP/Area2D"]
-position = Vector2(-4, -26)
-shape = SubResource("RectangleShape2D_a208w")
-
-[node name="Hatch" type="Polygon2D" parent="Exits/UP"]
-color = Color(0.131379, 0.131379, 0.131379, 1)
-polygon = PackedVector2Array(-85, -5, -124, -45, 108, -45, 76, -5)
-
-[node name="Destination" type="Marker2D" parent="Exits/UP"]
-position = Vector2(-3, -23)
-
-[node name="DOWN" type="Node2D" parent="Exits"]
-position = Vector2(2, 2)
-script = ExtResource("8_1uf80")
-
-[node name="Area2D" type="Area2D" parent="Exits/DOWN"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Exits/DOWN/Area2D"]
-position = Vector2(-6, 25)
-shape = SubResource("RectangleShape2D_a208w")
-
-[node name="Hatch" type="Polygon2D" parent="Exits/DOWN"]
-scale = Vector2(1, -1)
-color = Color(0.131379, 0.131379, 0.131379, 1)
-polygon = PackedVector2Array(-85, -5, -124, -45, 108, -45, 76, -5)
-
-[node name="Destination" type="Marker2D" parent="Exits/DOWN"]
-position = Vector2(-7, 23)
+[node name="UP" parent="Exits" instance=ExtResource("11_a137i")]
+position = Vector2(-1, -346)
 
 [node name="RandomShitToSpawn" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("npc_03_running_assassin", "platform_jump_thru", "shooty_npc", "star_trap_shooter"), [ExtResource("10_1yvnt"), ExtResource("11_px28m"), ExtResource("11_d7olt"), ExtResource("12_7pwhs")]]
-
-[connection signal="body_entered" from="Exits/UP/Area2D" to="Exits/UP" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Exits/DOWN/Area2D" to="Exits/DOWN" method="_on_area_2d_body_entered"]
