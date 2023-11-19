@@ -213,16 +213,20 @@ polygon = PackedVector2Array(0, -53.8668, 6.33727, -11.0902, 49.1138, -22.1804, 
 
 [node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_s8act")
+max_distance = 350.0
 bus = &"sfx"
 
 [node name="AttackNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_tblv3")
+max_distance = 350.0
 
 [node name="ShootNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_8vdq8")
+max_distance = 350.0
 
 [node name="PowerUPNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_yhpji")
+max_distance = 350.0
 
 [node name="Debug" parent="." instance=ExtResource("9_4vev6")]
 
