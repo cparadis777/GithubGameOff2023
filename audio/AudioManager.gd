@@ -4,7 +4,7 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.stop_all_tracks()
-	self.play_track("Track1")
+	#self.play_track("Track1")
 
 
 
