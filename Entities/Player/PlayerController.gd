@@ -245,7 +245,7 @@ func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 
 func disable_all_hurtboxes():
 	var hurtboxes = [ 
-		$Body/Actions/fast_punch/HurtBox/CollisionShape2D,
+		#$Body/Actions/fast_punch/HurtBox/CollisionShape2D,
 		$Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D,
 	]
 
@@ -283,13 +283,6 @@ func _on_descending_kick_hurtbox_body_entered(body):
 			velocity.y = - 1.25 * JUMP_VELOCITY
 			state_machine.transition_to("Air", {"do_jump" = true})
 
-func _on_fast_punch_hurtbox_body_entered(body):
-	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		if state_machine.state.name == "FastPunch":
-			var punch_animations = ["fast_punch_1", "fast_punch_2", "fast_punch_3"]
-			var knockback_magnitude = punch_animations.find(last_fast_punch_animation)
-			var uppercut = (last_fast_punch_animation == "fast_punch_3")
-			inflict_harm(body, 10, knockback_magnitude, uppercut)
 
 
 
@@ -327,4 +320,8 @@ func _on_iframes_finished():
 func _on_player_died():
 	animation_player.play("die")
 	
-	
+func _on_door_entered():
+	state_machine.transition_to("InTransit")
+
+func _on_door_exited():
+	state_machine.transition_to("Idle")

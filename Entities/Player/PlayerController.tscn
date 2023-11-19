@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=55 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://b5kqk4ulv38a2" path="res://art/player/speed_lines.png" id="4_nhl25"]
 [ext_resource type="PackedScene" uid="uid://bxyn1mq357nt6" path="res://Entities/Player/cyber_ronin_sprites.tscn" id="5_tbet1"]
 [ext_resource type="Script" path="res://Utilities/UtilityScripts/StateMachine.gd" id="10_6ualt"]
-[ext_resource type="Texture2D" uid="uid://bcegm346f4cwp" path="res://art/placeholder/glove.png" id="11_1m3yk"]
 [ext_resource type="Script" path="res://Entities/Player/Idle.gd" id="11_jtylp"]
 [ext_resource type="Script" path="res://Entities/Player/Run.gd" id="12_oq1kf"]
 [ext_resource type="Script" path="res://Entities/Player/Air.gd" id="13_a17mm"]
@@ -21,11 +20,13 @@
 [ext_resource type="AudioStream" uid="uid://bnnffyadkoygk" path="res://audio/sfx/placeholder/charge_tone_2_660Hz_wawah.wav" id="23_k62ij"]
 [ext_resource type="Script" path="res://Entities/Player/DoubleJump.gd" id="23_r318r"]
 [ext_resource type="AudioStream" uid="uid://c6ttahxndcq52" path="res://audio/sfx/placeholder/charge_tone3_880Hz_wawah.wav" id="24_4suah"]
+[ext_resource type="AudioStream" uid="uid://bvxslxhu2o73k" path="res://audio/sfx/placeholder/648959__ienba__heavy-book.wav" id="25_efqc2"]
 [ext_resource type="Script" path="res://Entities/Player/Landing.gd" id="25_hj8m7"]
 [ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
 [ext_resource type="PackedScene" uid="uid://dxjihdq7d8mpk" path="res://Entities/Player/player_audio.tscn" id="25_x3gmp"]
 [ext_resource type="AnimationLibrary" uid="uid://cdw7kwxvck8tn" path="res://Entities/Player/PlayerAnimationLibrary.tres" id="26_6myd8"]
 [ext_resource type="Script" path="res://Entities/Player/Dying.gd" id="26_npw41"]
+[ext_resource type="Script" path="res://Entities/Player/InTransit.gd" id="26_teftq"]
 [ext_resource type="Script" path="res://Entities/Player/Dead.gd" id="27_0qqb8"]
 [ext_resource type="Script" path="res://Entities/Player/StrongPunch.gd" id="27_487ye"]
 [ext_resource type="Script" path="res://Entities/Player/FastPunch.gd" id="28_amcrx"]
@@ -114,9 +115,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8hms"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_is7h8"]
-size = Vector2(27, 32)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ucv"]
 size = Vector2(16, 15)
 
@@ -141,6 +139,29 @@ stream_1/stream = ExtResource("23_k62ij")
 stream_1/weight = 1.0
 stream_2/stream = ExtResource("24_4suah")
 stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xs8aj"]
+streams_count = 1
+stream_0/stream = ExtResource("25_efqc2")
+stream_0/weight = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_is7h8"]
+size = Vector2(27, 32)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xkxws"]
+streams_count = 1
+stream_0/stream = ExtResource("25_efqc2")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7jb3f"]
+streams_count = 1
+stream_0/stream = ExtResource("25_efqc2")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_px4x1"]
+streams_count = 1
+stream_0/stream = ExtResource("25_efqc2")
+stream_0/weight = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8oiq"]
 size = Vector2(14, 14)
@@ -201,25 +222,6 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_a8hms")
 
 [node name="Actions" type="Node2D" parent="Body"]
-
-[node name="fast_punch" type="Node2D" parent="Body/Actions"]
-
-[node name="HurtBox" type="Area2D" parent="Body/Actions/fast_punch"]
-position = Vector2(44, -23)
-collision_layer = 0
-collision_mask = 10
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Actions/fast_punch/HurtBox"]
-position = Vector2(-23.5, 1)
-shape = SubResource("RectangleShape2D_is7h8")
-disabled = true
-
-[node name="tempVisualizer" type="Sprite2D" parent="Body/Actions/fast_punch"]
-visible = false
-position = Vector2(25.5157, -48.9052)
-rotation = -0.0265049
-scale = Vector2(0.582148, 0.582148)
-texture = ExtResource("11_1m3yk")
 
 [node name="descending_kick" type="Node2D" parent="Body/Actions"]
 
@@ -460,11 +462,41 @@ bus = &"sfx"
 wait_time = 1.5
 one_shot = true
 
+[node name="ImpactAudio" type="AudioStreamPlayer2D" parent="StateMachine/StrongPunch"]
+stream = SubResource("AudioStreamRandomizer_xs8aj")
+
 [node name="FastPunch" type="Node2D" parent="StateMachine"]
 script = ExtResource("28_amcrx")
 
 [node name="UnbrokenSequenceTimer" type="Timer" parent="StateMachine/FastPunch"]
 one_shot = true
+
+[node name="HurtBox" type="Area2D" parent="StateMachine/FastPunch"]
+position = Vector2(44, -23)
+collision_layer = 0
+collision_mask = 10
+
+[node name="FastCollisionShape" type="CollisionShape2D" parent="StateMachine/FastPunch/HurtBox"]
+position = Vector2(-23.5, 1)
+shape = SubResource("RectangleShape2D_is7h8")
+disabled = true
+
+[node name="ImpactAudio" type="Node2D" parent="StateMachine/FastPunch"]
+
+[node name="Punch1Audio" type="AudioStreamPlayer2D" parent="StateMachine/FastPunch/ImpactAudio"]
+stream = SubResource("AudioStreamRandomizer_xkxws")
+volume_db = 5.0
+
+[node name="Punch2Audio" type="AudioStreamPlayer2D" parent="StateMachine/FastPunch/ImpactAudio"]
+stream = SubResource("AudioStreamRandomizer_7jb3f")
+volume_db = 9.0
+
+[node name="Punch3Audio" type="AudioStreamPlayer2D" parent="StateMachine/FastPunch/ImpactAudio"]
+stream = SubResource("AudioStreamRandomizer_px4x1")
+volume_db = 12.0
+
+[node name="InTransit" type="Node2D" parent="StateMachine"]
+script = ExtResource("26_teftq")
 
 [node name="Debug" type="Node2D" parent="."]
 position = Vector2(-15, -56)
@@ -495,7 +527,6 @@ collision_mask = 10
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_m8oiq")
 
-[connection signal="body_entered" from="Body/Actions/fast_punch/HurtBox" to="." method="_on_fast_punch_hurtbox_body_entered"]
 [connection signal="body_entered" from="Body/Actions/descending_kick/HurtBox" to="." method="_on_descending_kick_hurtbox_body_entered"]
 [connection signal="timeout" from="StateMachine/DescendingKick/UnstuckTimer" to="StateMachine/DescendingKick" method="_on_unstuck_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/Dash/DashHurtBox" to="StateMachine/Dash" method="_on_dash_hurt_box_body_entered"]
@@ -503,4 +534,5 @@ shape = SubResource("RectangleShape2D_m8oiq")
 [connection signal="body_entered" from="StateMachine/StrongPunch/HurtBox" to="StateMachine/StrongPunch" method="_on_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/StrongPunch/ChargeAudio/Duration_Per_Level" to="StateMachine/StrongPunch/ChargeAudio" method="_on_duration_per_level_timeout"]
 [connection signal="timeout" from="StateMachine/FastPunch/UnbrokenSequenceTimer" to="StateMachine/FastPunch" method="_on_unbroken_sequence_timer_timeout"]
+[connection signal="body_entered" from="StateMachine/FastPunch/HurtBox" to="StateMachine/FastPunch" method="_on_hurt_box_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

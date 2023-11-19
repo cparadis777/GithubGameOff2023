@@ -12,6 +12,8 @@ var interval_between_polls : int = 200 #msec
 var final_charge_duration : int
 var damage
 
+var this_punch_already_landed : bool = false
+
 @export var moving : bool = false
 @export var cancel_frames_active: bool = false
 
@@ -111,6 +113,7 @@ func hold_for_key_release():
 	
 
 func enter(_msg := {}) -> void:
+	this_punch_already_landed = false
 	final_charge_duration = 0
 	time_of_entry = Time.get_ticks_msec()
 	started.emit() # to the player
@@ -157,6 +160,9 @@ func _on_hurt_box_body_entered(body):
 			var actual_damage = floor(damage * charge_multiplier)
 			var knockback_magnitude = 3.0
 			var uppercut = false
-			
+			if not this_punch_already_landed:
+				$ImpactAudio.play()
+				this_punch_already_landed = true
 			
 			player.inflict_harm(body, actual_damage, knockback_magnitude, uppercut)
+
