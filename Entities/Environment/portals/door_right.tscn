@@ -7,6 +7,7 @@
 [node name="DoorSprite" parent="." index="2"]
 position = Vector2(-11, -37)
 flip_h = true
+hframes = 17
 
 [node name="CollisionShape2D" parent="paired_door_detector" index="0"]
 position = Vector2(77, 1)

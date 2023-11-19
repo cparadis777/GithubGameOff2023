@@ -152,9 +152,6 @@ script = ExtResource("1_1uer3")
 position = Vector2(1.58432, -31.6863)
 shape = SubResource("CapsuleShape2D_hovi6")
 
-[node name="DecisionTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Appearance" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Appearance"]
@@ -180,6 +177,9 @@ target_position = Vector2(2.08165e-12, 16)
 collision_mask = 16
 
 [node name="DecisionMaking" type="Node2D" parent="Behaviours"]
+
+[node name="DecisionTimer" type="Timer" parent="Behaviours/DecisionMaking"]
+one_shot = true
 
 [node name="Movement" type="Node2D" parent="Behaviours"]
 
@@ -240,6 +240,6 @@ offset_bottom = -54.6315
 theme_override_font_sizes/font_size = 12
 text = "state"
 
-[connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
+[connection signal="timeout" from="Behaviours/DecisionMaking/DecisionTimer" to="." method="_on_decision_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]
