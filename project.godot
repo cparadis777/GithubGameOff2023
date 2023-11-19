@@ -23,6 +23,7 @@ Utils="*res://Utilities/UtilityScripts/utils.gd"
 SceneTransition="*res://Utilities/UtilityScenes/SceneTransition.tscn"
 ContainerProperties="*res://Utilities/UtilityScripts/ContainerTypes.gd"
 ContainerCatalog="*res://Utilities/UtilityScenes/ContainerCatalog.tscn"
+AudioManager="*res://audio/AudioManager.tscn"
 
 [display]
 
