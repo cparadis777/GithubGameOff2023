@@ -464,7 +464,6 @@ one_shot = true
 
 [node name="ImpactAudio" type="AudioStreamPlayer2D" parent="StateMachine/StrongPunch"]
 stream = SubResource("AudioStreamRandomizer_xs8aj")
-volume_db = 15.0
 
 [node name="FastPunch" type="Node2D" parent="StateMachine"]
 script = ExtResource("28_amcrx")
