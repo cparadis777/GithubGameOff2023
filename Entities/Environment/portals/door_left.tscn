@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmex243kki4q7"]
+
+[ext_resource type="PackedScene" uid="uid://bveugr8fx87uv" path="res://Entities/Environment/portals/door_template.tscn" id="1_653s4"]
+
+[node name="DOOR_LEFT" instance=ExtResource("1_653s4")]
