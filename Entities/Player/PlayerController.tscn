@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=55 format=3 uid="uid://bs3xmnbwmhy8h"]
-=======
-[gd_scene load_steps=57 format=3 uid="uid://bs3xmnbwmhy8h"]
->>>>>>> Stashed changes
+[gd_scene load_steps=58 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -30,11 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://dxjihdq7d8mpk" path="res://Entities/Player/player_audio.tscn" id="25_x3gmp"]
 [ext_resource type="AnimationLibrary" uid="uid://cdw7kwxvck8tn" path="res://Entities/Player/PlayerAnimationLibrary.tres" id="26_6myd8"]
 [ext_resource type="Script" path="res://Entities/Player/Dying.gd" id="26_npw41"]
-<<<<<<< Updated upstream
-[ext_resource type="Script" path="res://Entities/Player/InTransit.gd" id="26_teftq"]
-=======
 [ext_resource type="AudioStream" uid="uid://dnxtipx2g0662" path="res://audio/sfx/player_sfx/player_punch1.mp3" id="26_s0xam"]
->>>>>>> Stashed changes
+[ext_resource type="Script" path="res://Entities/Player/InTransit.gd" id="26_teftq"]
 [ext_resource type="Script" path="res://Entities/Player/Dead.gd" id="27_0qqb8"]
 [ext_resource type="Script" path="res://Entities/Player/StrongPunch.gd" id="27_487ye"]
 [ext_resource type="AudioStream" uid="uid://gnqxeny4xp4r" path="res://audio/sfx/player_sfx/player_punch2.mp3" id="27_sll0y"]
