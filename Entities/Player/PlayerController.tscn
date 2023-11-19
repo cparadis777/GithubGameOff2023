@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=58 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -16,20 +16,23 @@
 [ext_resource type="Script" path="res://Entities/Player/DescendingKick.gd" id="16_7kpt4"]
 [ext_resource type="Script" path="res://Entities/Player/Dash.gd" id="18_6dmrt"]
 [ext_resource type="Script" path="res://Entities/Player/ChargeAudio.gd" id="21_85smj"]
-[ext_resource type="AudioStream" uid="uid://c8tkcpb4g40o2" path="res://audio/sfx/placeholder/charge_tone_1_440Hz_wawah.wav" id="22_7si64"]
-[ext_resource type="AudioStream" uid="uid://bnnffyadkoygk" path="res://audio/sfx/placeholder/charge_tone_2_660Hz_wawah.wav" id="23_k62ij"]
+[ext_resource type="AudioStream" uid="uid://biyotkto23day" path="res://audio/sfx/player_sfx/hold_strgpunch.ogg" id="21_ttxvf"]
+[ext_resource type="AudioStream" uid="uid://cj8ty13udphta" path="res://audio/sfx/player_sfx/hold_strgpunch2.ogg" id="22_n1umw"]
 [ext_resource type="Script" path="res://Entities/Player/DoubleJump.gd" id="23_r318r"]
-[ext_resource type="AudioStream" uid="uid://c6ttahxndcq52" path="res://audio/sfx/placeholder/charge_tone3_880Hz_wawah.wav" id="24_4suah"]
-[ext_resource type="AudioStream" uid="uid://bvxslxhu2o73k" path="res://audio/sfx/placeholder/648959__ienba__heavy-book.wav" id="25_efqc2"]
+[ext_resource type="AudioStream" uid="uid://6sfgfl8wk6bm" path="res://audio/sfx/player_sfx/hold_strgpunch_3.ogg" id="23_w2jbr"]
+[ext_resource type="AudioStream" uid="uid://ddnyec60dy814" path="res://audio/sfx/player_sfx/player_bigpunch_impact.mp3" id="24_ctvvk"]
 [ext_resource type="Script" path="res://Entities/Player/Landing.gd" id="25_hj8m7"]
 [ext_resource type="Script" path="res://Entities/Player/IFrames.gd" id="25_hry2y"]
 [ext_resource type="PackedScene" uid="uid://dxjihdq7d8mpk" path="res://Entities/Player/player_audio.tscn" id="25_x3gmp"]
 [ext_resource type="AnimationLibrary" uid="uid://cdw7kwxvck8tn" path="res://Entities/Player/PlayerAnimationLibrary.tres" id="26_6myd8"]
 [ext_resource type="Script" path="res://Entities/Player/Dying.gd" id="26_npw41"]
+[ext_resource type="AudioStream" uid="uid://dnxtipx2g0662" path="res://audio/sfx/player_sfx/player_punch1.mp3" id="26_s0xam"]
 [ext_resource type="Script" path="res://Entities/Player/InTransit.gd" id="26_teftq"]
 [ext_resource type="Script" path="res://Entities/Player/Dead.gd" id="27_0qqb8"]
 [ext_resource type="Script" path="res://Entities/Player/StrongPunch.gd" id="27_487ye"]
+[ext_resource type="AudioStream" uid="uid://gnqxeny4xp4r" path="res://audio/sfx/player_sfx/player_punch2.mp3" id="27_sll0y"]
 [ext_resource type="Script" path="res://Entities/Player/FastPunch.gd" id="28_amcrx"]
+[ext_resource type="AudioStream" uid="uid://53nu3fgsjlc7" path="res://audio/sfx/player_sfx/player_punch3_uppercut.mp3" id="28_n44v8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 7.0
@@ -133,16 +136,16 @@ streams_count = 3
 playback_mode = 2
 random_pitch = 1.0
 random_volume_offset_db = 0.0
-stream_0/stream = ExtResource("22_7si64")
+stream_0/stream = ExtResource("21_ttxvf")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("23_k62ij")
+stream_1/stream = ExtResource("22_n1umw")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("24_4suah")
+stream_2/stream = ExtResource("23_w2jbr")
 stream_2/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xs8aj"]
 streams_count = 1
-stream_0/stream = ExtResource("25_efqc2")
+stream_0/stream = ExtResource("24_ctvvk")
 stream_0/weight = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7h8"]
@@ -150,17 +153,17 @@ size = Vector2(27, 32)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xkxws"]
 streams_count = 1
-stream_0/stream = ExtResource("25_efqc2")
+stream_0/stream = ExtResource("26_s0xam")
 stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7jb3f"]
 streams_count = 1
-stream_0/stream = ExtResource("25_efqc2")
+stream_0/stream = ExtResource("27_sll0y")
 stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_px4x1"]
 streams_count = 1
-stream_0/stream = ExtResource("25_efqc2")
+stream_0/stream = ExtResource("28_n44v8")
 stream_0/weight = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8oiq"]
