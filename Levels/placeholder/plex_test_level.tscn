@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=26 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="9_fc1mv"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_44m5b"]
 [ext_resource type="PackedScene" uid="uid://bty5gh70uklnu" path="res://Entities/Environment/Lights/default_container_lighting.tscn" id="12_oo7j6"]
-[ext_resource type="PackedScene" uid="uid://bgc4ihpc28ck8" path="res://audio/AudioManager.tscn" id="15_7nkfj"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
 offsets = PackedFloat32Array(0, 0.301818, 0.829091)
@@ -258,8 +257,6 @@ texture = SubResource("GradientTexture2D_jycef")
 region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
 
 [node name="Lighting" parent="." instance=ExtResource("12_oo7j6")]
-
-[node name="AudioManager" parent="." instance=ExtResource("15_7nkfj")]
 
 [node name="Exits" type="Node2D" parent="."]
 
