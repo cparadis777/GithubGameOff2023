@@ -9,40 +9,92 @@ var messages = [
 	You get overworked...
 	and you're underpaid...",
 	"Huh? 
-	What's that?", 
-	"What do you mean by: 
-	''Make him taste my finger salad''
-	? ? ?",
-	"Well...
-	Whatever you do I'm here to help!
-	As your trusty AI, as always!",
-	"Let me know what you thought of
-	this little test here! :D"
+	What's that?
+	'Make him taste my finger salad'?",
+	"Well...I'm not sure I understand
+	what you exactly meant but...
+	Whatever you do I'm here to help!",
+	"Alright let us 
+	get down to business...",
+	"You're starting here...",
+	"And you want to go there!",
+	"Let's use the containers so that
+	you can build a path towards 
+	accomplishing your objective!",
+	 "Use the levers [A] and [D] to move 
+	containers left and right!",
+	"The [,] button allows you to 
+	rotate the containers and [SPACE]
+	opens the crane claw!",
+	"Why do you want to rotate them?",
+	"Well, look over there!",
+	"According to my data,
+	all container doors don't align.
+	So you better place them 
+	in the right orientation!",
+	"Oh, also, if you ever mess up
+	the containers placement
+	or orientation...",
+	"Just ask me to RESET and I'll try
+	to clean up your clutter
+	without compromising you...",
+	"well...
 	
-	]
+	hopefully!",
+	"I'll see you later to
+	give you some basic explanation
+	on fighting to increase your
+	chances of survival!",
+	"Good luck, and see 
+	you very soon!"
+]
 
 var typing_speed = 0.075
-var read_time = 2
 var current_message = 0
 var display = ""
 var current_character = 0
+var done_talking = false
 
 func _ready():
-	start_dialogue()
-func start_dialogue():
+	$Label.hide()
+	$SpaceBar_UI.hide()
+	$Muse_AI.play("idle")
+	$AnimationPlayer.play("hello")
+	$spawn_timer.start()
 	var current_message = 0
 	var display = ""
 	var current_character = 0
+	done_talking = false
+func start_dialogue():
 	$Text_Bubble.play("default")
 	$Muse_AI.play("speaking")
+	$Label.show()
+	$Text_Bubble.show()
 	$next_char.set_wait_time(typing_speed)
 	$next_char.start()
 	
+func _process(delta):
+	if Input.is_action_just_pressed("jump"):
+		go_next_message()
 func stop_dialogue():
 	queue_free()
 	
+func go_next_message():
+	if (current_message == len(messages) - 1):
+		$spawn_timer.start()
+		done_talking = true
+		$AnimationPlayer.play("byebye")
+	else:
+		
+		current_message += 1
+		display = ""
+		current_character = 0
+		$next_char.start()
+		$Muse_AI.play("speaking")
+		$SpaceBar_UI.hide	()
+	
 func _on_next_char_timeout():
-	if (current_character < len(messages[current_message])):
+	if (current_character < len(messages[current_message])) && !done_talking:
 		var next_char = messages[current_message][current_character]
 		display += next_char
 		
@@ -52,18 +104,14 @@ func _on_next_char_timeout():
 		
 	else:
 		$next_char.stop()
-		$next_message.one_shot = true
-		$next_message.set_wait_time(read_time)
-		$next_message.start()
 		$Muse_AI.play("idle")
-		
-func _on_next_message_timeout():
-	if (current_message == len(messages) - 1):
-		
+		$SpaceBar_UI.show()
+	
+
+
+func _on_spawn_timer_timeout():
+	if !done_talking:
+		start_dialogue()
+	elif done_talking:
 		stop_dialogue()
-	else:
-		current_message += 1
-		display = ""
-		current_character = 0
-		$next_char.start()
-		$Muse_AI.play("speaking")
+		
