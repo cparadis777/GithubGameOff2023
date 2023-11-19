@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dagki3jiubn80"]
 
 [ext_resource type="Script" path="res://art/background/parallax_background.gd" id="1_atib1"]
-[ext_resource type="Texture2D" uid="uid://cu38dj0rtvnpb" path="res://art/background/background-base.png" id="2_hd6an"]
+[ext_resource type="Texture2D" uid="uid://dgxtephsvaqsu" path="res://art/background/parallax-city-scape.png" id="2_j8vx5"]
 [ext_resource type="Texture2D" uid="uid://dr0aib0uwgp4i" path="res://art/background/clouds.png" id="3_doa8s"]
 [ext_resource type="Texture2D" uid="uid://ngg04tcbpoq3" path="res://art/background/buildings_far.png" id="4_uawcl"]
 [ext_resource type="Texture2D" uid="uid://bvakv7o6o4ili" path="res://art/background/gradient.png" id="5_oo1ab"]
@@ -13,12 +13,12 @@ scroll_offset = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_atib1")
 
 [node name="Background-base" type="Sprite2D" parent="."]
-position = Vector2(160, 90)
-texture = ExtResource("2_hd6an")
-region_enabled = true
-region_rect = Rect2(-4096, 2.08165e-12, 8192, 180)
+position = Vector2(320, 180)
+texture = ExtResource("2_j8vx5")
+region_rect = Rect2(-4096, 2.08165e-12, 8192, 360)
 
 [node name="Clouds" type="ParallaxLayer" parent="."]
+visible = false
 motion_scale = Vector2(0.001, 0.001)
 
 [node name="Background-2" type="Sprite2D" parent="Clouds"]
@@ -26,9 +26,10 @@ texture_repeat = 2
 position = Vector2(160, 90)
 texture = ExtResource("3_doa8s")
 region_enabled = true
-region_rect = Rect2(-4092, 2.08165e-12, 8196, 180)
+region_rect = Rect2(-4092, 2.08165e-12, 8196, 360)
 
 [node name="BuildingsFar" type="ParallaxLayer" parent="."]
+visible = false
 motion_scale = Vector2(0.1, 0.1)
 
 [node name="Background-2" type="Sprite2D" parent="BuildingsFar"]
@@ -39,12 +40,14 @@ region_enabled = true
 region_rect = Rect2(4096, 2.08165e-12, 8192, 180)
 
 [node name="Gradient" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(160, 90)
 texture = ExtResource("5_oo1ab")
 region_enabled = true
 region_rect = Rect2(-4096, 2.08165e-12, 8192, 180)
 
 [node name="BuildsingsNear" type="ParallaxLayer" parent="."]
+visible = false
 motion_scale = Vector2(0.3, 0.3)
 
 [node name="Background-1" type="Sprite2D" parent="BuildsingsNear"]
@@ -55,6 +58,7 @@ region_enabled = true
 region_rect = Rect2(-4096, 2.08165e-12, 8192, 180)
 
 [node name="Steam" type="ParallaxLayer" parent="."]
+visible = false
 motion_scale = Vector2(0.5, 0.5)
 
 [node name="Background-1" type="Sprite2D" parent="Steam"]
