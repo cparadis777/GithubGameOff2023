@@ -34,5 +34,5 @@ func spawn_random_shit():
 		
 		add_child(newThingScene)
 		newThingScene.global_position = global_position
-		newThingScene.position += Vector2(randi_range(-300, 300), randi_range(-256,0))
+		newThingScene.position += Vector2(randi_range(-300, 300), randi_range(-228,32))
 		

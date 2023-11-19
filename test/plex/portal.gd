@@ -39,14 +39,20 @@ func _on_area_2d_body_entered(body):
 
 func _on_delay_opening_timer_timeout():
 	# player still present after a short interval.
+	if player_still_present():
+		open_door()
+		if linked_portal != null and is_instance_valid(linked_portal) and linked_portal.has_method("open_door"):
+			linked_portal.open_door()
+		await get_tree().create_timer(0.8).timeout
+		if player_still_present():
+			transport_player(StageManager.current_player)
+
+
+func player_still_present():
 	if $Area2D.get_overlapping_bodies().has(StageManager.current_player):
 		var body = StageManager.current_player
 		if body.state_machine.state.name != "InTransit":
-			open_door()
-			if linked_portal != null and is_instance_valid(linked_portal) and linked_portal.has_method("open_door"):
-				linked_portal.open_door()
-			await get_tree().create_timer(1.5).timeout
-			transport_player(body)
+			return true
 
 
 func open_door():
