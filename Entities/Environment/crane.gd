@@ -106,10 +106,18 @@ func randomize_container_access(container) -> void:
 		Utils.Directions.RIGHT: false,
 		Utils.Directions.DOWN: false,
 	}
-	
-	for direction in sides:
-		if randf() >0.3:
-			sides[direction] = true
+	var sides_list = sides.keys()
+
+	var guaranteed_number_of_exits = 2
+	for i in range(guaranteed_number_of_exits):
+		var side = sides_list.pick_random()
+		sides_list.erase(side)
+		sides[side] = true
+	for i in range(4-guaranteed_number_of_exits):
+		if randf() > 0.5:
+			var side = sides_list.pick_random()
+			sides_list.erase(side)
+			sides[side] = true
 
 	container.set_entrances(sides)
 
