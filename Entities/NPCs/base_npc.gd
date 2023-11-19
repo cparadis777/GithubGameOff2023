@@ -37,7 +37,7 @@ func activate(difficulty : Globals.DifficultyScales):
 	set_difficulty(difficulty)
 	activate_weapons()
 	State = States.IDLE
-	
+	$Behaviours/DecisionMaking/DecisionTimer.start()
 	
 func set_difficulty(difficulty : Globals.DifficultyScales):
 	health_max += difficulty * 5.0
@@ -149,7 +149,7 @@ func turn_around():
 	$Appearance.scale.x = direction
 	$Behaviours.scale.x = direction
 
-	
+
 func _on_decision_timer_timeout():
 	choose_new_behaviour()
 
@@ -165,7 +165,7 @@ func choose_new_behaviour():
 		elif State == States.IDLE:
 			animation_player.play("idle")
 			velocity.x = 0
-		$DecisionTimer.start()
+		$Behaviours/DecisionMaking/DecisionTimer.start()
 
 func _on_shot_requested():
 	State = States.ATTACKING

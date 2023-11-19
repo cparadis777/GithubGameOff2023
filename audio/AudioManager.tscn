@@ -1,12 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgc4ihpc28ck8"]
+[gd_scene load_steps=7 format=3 uid="uid://bgc4ihpc28ck8"]
 
 [ext_resource type="Script" path="res://audio/AudioManager.gd" id="1_uk81m"]
-[ext_resource type="AudioStream" uid="uid://byylqg2qwyinq" path="res://audio/music/ManifestViolenceProject_MainTheme.mp3" id="2_yamve"]
+[ext_resource type="AudioStream" uid="uid://765736xedns2" path="res://audio/music/DockSeaAmbient.mp3" id="2_ycqnk"]
+[ext_resource type="AudioStream" uid="uid://bfar145c3w8vv" path="res://audio/music/ManifestViolence_FightingTheme.mp3" id="3_bas8w"]
+[ext_resource type="AudioStream" uid="uid://pfye08klrtwf" path="res://audio/music/ManifestViolence_CreditsTheme.mp3" id="4_fou8o"]
+[ext_resource type="AudioStream" uid="uid://bcblgmagijw6w" path="res://audio/music/ManifestViolence_CraneLevelTheme.mp3" id="5_fxdsj"]
+[ext_resource type="AudioStream" uid="uid://b6io2ow3lui7r" path="res://audio/music/ManifestViolence_MainMenuTheme.mp3" id="6_inaag"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_uk81m")
 
-[node name="Track1" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_yamve")
+[node name="CraneLevelAmbiance" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ycqnk")
+volume_db = -8.32
+autoplay = true
+
+[node name="FightingTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bas8w")
+volume_db = -8.32
+autoplay = true
+
+[node name="CreditsTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fou8o")
+volume_db = -8.32
+autoplay = true
+
+[node name="CraneLevelTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fxdsj")
+volume_db = -8.32
+autoplay = true
+
+[node name="MainMenuTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_inaag")
 volume_db = -8.32
 autoplay = true
