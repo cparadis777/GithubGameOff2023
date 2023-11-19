@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1q3fb8qqqdck"]
+[gd_scene load_steps=6 format=3 uid="uid://d1q3fb8qqqdck"]
 
 [ext_resource type="PackedScene" uid="uid://c2kws1t2ce2kn" path="res://Levels/placeholder/plex_level_template.tscn" id="1_6pytm"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_2fexr"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_jjvli"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="3_e1qx5"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xg1ps"]
 
@@ -40,6 +41,15 @@ position = Vector2(-978, -932)
 [node name="InteriorContainerLevelMockup08" parent="." instance=ExtResource("1_6pytm")]
 position = Vector2(2, -926)
 
+[node name="MovingPlatform" parent="InteriorContainerLevelMockup08" instance=ExtResource("3_e1qx5")]
+position = Vector2(-3, -161)
+
+[node name="Location2" parent="InteriorContainerLevelMockup08/MovingPlatform/PositionMarkers" index="0"]
+position = Vector2(0, -96)
+
+[node name="FloorHeightMarker" parent="InteriorContainerLevelMockup08/MovingPlatform/Piston" index="0"]
+position = Vector2(-3, 178)
+
 [node name="InteriorContainerLevelMockup09" parent="." instance=ExtResource("1_6pytm")]
 position = Vector2(986, -926)
 
@@ -53,10 +63,12 @@ position = Vector2(4, -1396)
 position = Vector2(988, -1396)
 
 [node name="Player" parent="." instance=ExtResource("2_2fexr")]
-position = Vector2(-1314, -68)
+position = Vector2(-316, -996)
 
 [node name="WorldFloor" type="StaticBody2D" parent="."]
 position = Vector2(-8, 58)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldFloor"]
 shape = SubResource("WorldBoundaryShape2D_xg1ps")
+
+[editable path="InteriorContainerLevelMockup08/MovingPlatform"]

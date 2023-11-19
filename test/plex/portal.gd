@@ -33,6 +33,13 @@ func link_nearby_door():
 
 func _on_area_2d_body_entered(body):
 	if "player" in body.name.to_lower():
+		$Area2D/DelayOpeningTimer.start()
+
+
+func _on_delay_opening_timer_timeout():
+	# player still present after a short interval.
+	if $Area2D.get_overlapping_bodies().has(StageManager.current_player):
+		var body = StageManager.current_player
 		if body.state_machine.state.name != "InTransit":
 			open_door()
 			if linked_portal != null and is_instance_valid(linked_portal) and linked_portal.has_method("open_door"):
@@ -60,8 +67,9 @@ func close_door():
 
 
 func _on_tween_finished():
-	body_in_transit._on_door_exited()
-	body_in_transit = null
-	close_door()
-	if linked_portal != null and is_instance_valid(linked_portal) and linked_portal.has_method("close_door"):
-		linked_portal.close_door()
+	if body_in_transit != null and is_instance_valid(body_in_transit):
+		body_in_transit._on_door_exited()
+		body_in_transit = null
+		close_door()
+		if linked_portal != null and is_instance_valid(linked_portal) and linked_portal.has_method("close_door"):
+			linked_portal.close_door()

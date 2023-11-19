@@ -279,9 +279,6 @@ stream_0/weight = 1.0
 
 [node name="ShootyNPC" instance=ExtResource("1_58hki")]
 
-[node name="DecisionTimer" parent="." index="1"]
-wait_time = 3.0
-
 [node name="Sprite2D" parent="Appearance" index="0"]
 material = SubResource("ShaderMaterial_nphfu")
 scale = Vector2(2, 2)
@@ -293,22 +290,22 @@ enabled = false
 
 [node name="SimpleShootAttack" parent="Behaviours/Attacks" index="1"]
 position = Vector2(23.7648, -44.3609)
-horizontal_only = true
+enabled = true
 bullet_jitter = 0.08
 
 [node name="RecoilTimer" parent="Behaviours/Attacks/SimpleShootAttack" index="0"]
 wait_time = 2.0
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_nglo5")
 }
 
-[node name="ShootNoises" parent="." index="9"]
+[node name="ShootNoises" parent="." index="8"]
 stream = SubResource("AudioStreamRandomizer_knubt")
 volume_db = -6.0
 
-[node name="PowerUPNoises" parent="." index="10"]
+[node name="PowerUPNoises" parent="." index="9"]
 stream = SubResource("AudioStreamRandomizer_5k5lf")
 volume_db = -7.0
 

@@ -25,6 +25,9 @@ func _process(delta):
 func _on_timer_timeout():
 	queue_free()
 
+func explode():
+	if $AnimationPlayer.has_animation("explode"):
+		$AnimationPlayer.play("explode")
 
 func _on_body_entered(body):
 	if body.has_method("_on_hit"):
@@ -39,4 +42,6 @@ func _on_body_entered(body):
 		attackPacket.knockback_speed = 100.0
 		hit.emit(attackPacket)
 		call_deferred("queue_free")
-		
+	else:
+		explode()
+
