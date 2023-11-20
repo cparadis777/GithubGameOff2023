@@ -21,34 +21,18 @@ script = ExtResource("1_m15gi")
 [node name="BaseContainer" parent="." instance=ExtResource("1_k16lk")]
 
 [node name="Interior" parent="BaseContainer" index="0"]
-rotation = 0.0
 scale = Vector2(2, 2)
 texture = ExtResource("3_evdql")
-
-[node name="LeftArrow" parent="BaseContainer" index="1"]
-position = Vector2(-45, 0)
-
-[node name="RightArrow" parent="BaseContainer" index="2"]
-position = Vector2(45, 0)
-
-[node name="UpArrow" parent="BaseContainer" index="3"]
-position = Vector2(0, -45)
-
-[node name="DownArrow" parent="BaseContainer" index="4"]
-position = Vector2(0, 45)
-
-[node name="Exterior" parent="BaseContainer" index="5"]
-visible = false
 
 [node name="NextLevelDoor" parent="BaseContainer" instance=ExtResource("4_embi4")]
 position = Vector2(173, 63)
 move_player = true
 location = 1
 
-[node name="LeftCollision" type="CollisionShape2D" parent="BaseContainer"]
+[node name="LeftCollision2" type="CollisionShape2D" parent="BaseContainer"]
 shape = SubResource("SegmentShape2D_pjkui")
 
-[node name="RightCollision" type="CollisionShape2D" parent="BaseContainer"]
+[node name="RightCollision2" type="CollisionShape2D" parent="BaseContainer"]
 shape = SubResource("SegmentShape2D_r5xtv")
 
 [node name="Player" parent="." instance=ExtResource("3_n7xin")]
