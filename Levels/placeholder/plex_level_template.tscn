@@ -48,7 +48,7 @@ fill_from = Vector2(0.486284, 1)
 fill_to = Vector2(0.511222, 0)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j7lsu"]
-polygon = PackedVector2Array(-315, 7, -313, -246, 313, -247, 318, 5, 344, 4, 336, -265, -339, -263, -336, 8)
+polygon = PackedVector2Array(-320, 50.6667, -318.667, -266, 317.333, -267.333, 320.667, 49.3333, 336.667, 47.3333, 336.667, -282, -338, -284, -336.667, 50.6667)
 
 [node name="ShippingContainerRoom" type="Node2D"]
 script = ExtResource("1_hqjdj")

@@ -35,7 +35,7 @@ text = "Health"
 [node name="HealthIcons" type="GridContainer" parent="Control/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-columns = 5
+columns = 10
 
 [node name="Heart" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
 layout_mode = 2
@@ -50,6 +50,21 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Heart5" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+layout_mode = 2
+
+[node name="Heart6" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+layout_mode = 2
+
+[node name="Heart7" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+layout_mode = 2
+
+[node name="Heart8" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+layout_mode = 2
+
+[node name="Heart9" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+layout_mode = 2
+
+[node name="Heart10" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
 layout_mode = 2
 
 [node name="QuitButton-ReturnToMenu" parent="Control/HBoxContainer" instance=ExtResource("3_ueh2v")]
