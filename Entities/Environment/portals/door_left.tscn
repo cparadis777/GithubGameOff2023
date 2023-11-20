@@ -2,4 +2,4 @@
 
 [ext_resource type="PackedScene" uid="uid://bveugr8fx87uv" path="res://Entities/Environment/portals/door_template.tscn" id="1_653s4"]
 
-[node name="DOOR_LEFT" instance=ExtResource("1_653s4")]
+[node name="LEFT" instance=ExtResource("1_653s4")]

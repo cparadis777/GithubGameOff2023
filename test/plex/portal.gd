@@ -14,6 +14,7 @@ var directions = {
 var distance = 144
 @export var linked_portal : Node
 @export var tween_duration : float = 1.25
+@export var locked = false
 
 
 func _ready():
@@ -33,7 +34,7 @@ func link_nearby_door():
 
 
 func _on_area_2d_body_entered(body):
-	if "player" in body.name.to_lower() and body.state_machine.state.name != "InTransit":
+	if "player" in body.name.to_lower() and body.state_machine.state.name != "InTransit" and !locked:
 		$Area2D/DelayOpeningTimer.start()
 
 

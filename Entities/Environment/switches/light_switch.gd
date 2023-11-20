@@ -8,11 +8,18 @@ signal toggled(pressed)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	link_nodes()
+	
+	
+func link_nodes():
 	for linked_node in linked_nodes:
 		if linked_node != null and is_instance_valid(linked_node):
 			if linked_node.has_method("_on_switch_toggled"):
 				toggled.connect(linked_node._on_switch_toggled)
-
+			if linked_node.has_method("_on_linked"):
+				linked_node._on_linked(self)
+				
+				
 func toggle_switch():
 	var rotations = [ -PI/4.0, PI/4.0 ]
 	var colors = [ Color.RED, Color.CORNFLOWER_BLUE ]
