@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://b7lbhsnpyax66"]
+[gd_scene load_steps=57 format=3 uid="uid://b7lbhsnpyax66"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/npc_02_dock_worker.gd" id="1_513fr"]
 [ext_resource type="Texture2D" uid="uid://b6746tmm6cqyw" path="res://art/Enemies/Cyber-Dock-Worker/cyber-dock-worker_attack.png" id="2_bprfk"]
@@ -76,6 +76,10 @@ region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bus0d"]
 atlas = ExtResource("2_bprfk")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ftd2"]
+atlas = ExtResource("4_b1df5")
 region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jcwpw"]
@@ -195,6 +199,14 @@ animations = [{
 "loop": false,
 "name": &"defend",
 "speed": 105.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ftd2")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -531,6 +543,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sprites/cyber_dock_worker_sprites:animation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"die"]
+}
 
 [sub_resource type="Animation" id="Animation_c1mdp"]
 resource_name = "hurt"
@@ -760,7 +784,6 @@ polygon = PackedVector2Array(25, -6, 14, -4, 4, -1, -11, -3, -18, -5, -35, -2, -
 position = Vector2(36, 0)
 sprite_frames = SubResource("SpriteFrames_7erld")
 animation = &"idle"
-autoplay = "walk"
 frame = 7
 offset = Vector2(-3.75001, -63.7501)
 

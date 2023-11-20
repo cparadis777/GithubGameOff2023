@@ -126,7 +126,9 @@ func begin_dying():
 
 func begin_decaying():
 	State = States.DEAD
+	#$AnimationPlayer.play("die")
 	$DecayTimer.start()
+	
 
 
 func initiate_iframes():

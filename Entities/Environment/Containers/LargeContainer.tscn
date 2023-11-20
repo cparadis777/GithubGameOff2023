@@ -1,9 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1v061uxxpf6m"]
+[gd_scene load_steps=15 format=3 uid="uid://c1v061uxxpf6m"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_26d1r"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_d8uoi"]
 [ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_pxj63"]
 [ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="4_ge3qy"]
+[ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="4_rpji1"]
+[ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="5_ttncq"]
+[ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="6_jq33i"]
+[ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="7_17qf5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -26,6 +30,8 @@ size = Vector2(796, 340)
 script = ExtResource("1_26d1r")
 enter_left = true
 enter_right = true
+enter_up = true
+enter_down = true
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
@@ -108,6 +114,20 @@ visible = false
 position = Vector2(79, -170)
 scale = Vector2(159, 17)
 texture = SubResource("PlaceholderTexture2D_v1mhl")
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="LEFT" parent="Doors" instance=ExtResource("4_rpji1")]
+position = Vector2(-398, 169)
+
+[node name="RIGHT" parent="Doors" instance=ExtResource("5_ttncq")]
+position = Vector2(398, 169)
+
+[node name="UP" parent="Doors" instance=ExtResource("6_jq33i")]
+position = Vector2(0, -171)
+
+[node name="DOWN" parent="Doors" instance=ExtResource("7_17qf5")]
+position = Vector2(0, 169)
 
 [node name="Exterior" type="Sprite2D" parent="."]
 visible = false
