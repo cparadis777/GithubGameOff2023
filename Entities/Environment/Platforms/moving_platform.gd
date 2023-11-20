@@ -30,6 +30,10 @@ var tween_duration = 5.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super()
+	
+	await get_tree().create_timer(0.5).timeout
+	# wait for global position to be set by instantiator
+	
 	for locationMarker in $PositionMarkers.get_children():
 		locations.push_back(locationMarker.global_position)
 	locations.push_back(self.global_position) # make ours go last, so there's no long delay for the tween

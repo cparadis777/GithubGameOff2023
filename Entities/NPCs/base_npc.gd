@@ -19,6 +19,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var direction : int = 1
 
+@onready var decision_timer : Timer = $Behaviours/DecisionMaking/DecisionTimer
+
 signal hurt
 signal died
 
@@ -37,7 +39,7 @@ func activate(difficulty : Globals.DifficultyScales):
 	set_difficulty(difficulty)
 	activate_weapons()
 	State = States.IDLE
-	
+	decision_timer.start()
 	
 func set_difficulty(difficulty : Globals.DifficultyScales):
 	health_max += difficulty * 5.0
@@ -94,7 +96,7 @@ func die():
 	var tween = create_tween()
 	tween.parallel().tween_property(self, "rotation", PI * 0.5, 0.33)
 	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
-	$DecisionTimer.stop()
+	decision_timer.stop()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	died.emit(name)
 
@@ -149,7 +151,7 @@ func turn_around():
 	$Appearance.scale.x = direction
 	$Behaviours.scale.x = direction
 
-	
+
 func _on_decision_timer_timeout():
 	choose_new_behaviour()
 
@@ -165,7 +167,7 @@ func choose_new_behaviour():
 		elif State == States.IDLE:
 			animation_player.play("idle")
 			velocity.x = 0
-		$DecisionTimer.start()
+		decision_timer.start()
 
 func _on_shot_requested():
 	State = States.ATTACKING
@@ -179,6 +181,6 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name in ["shoot", "attack"]:
 		State = States.IDLE
 		velocity.x = 0
-		$DecisionTimer.stop()
+		decision_timer.stop()
 		choose_new_behaviour()
 		

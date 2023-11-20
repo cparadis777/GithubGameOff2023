@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://b7lbhsnpyax66"]
+[gd_scene load_steps=56 format=3 uid="uid://b7lbhsnpyax66"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/npc_02_dock_worker.gd" id="1_513fr"]
 [ext_resource type="Texture2D" uid="uid://b6746tmm6cqyw" path="res://art/Enemies/Cyber-Dock-Worker/cyber-dock-worker_attack.png" id="2_bprfk"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bj856ahcwhooj" path="res://art/Enemies/Cyber-Dock-Worker/cyber-dock-worker_idle.png" id="4_b1df5"]
 [ext_resource type="Texture2D" uid="uid://bsgyd5cohss47" path="res://art/decals/alert.png" id="4_iy3h1"]
 [ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="4_iy4en"]
+[ext_resource type="Texture2D" uid="uid://bfcaxn06b2j8q" path="res://art/Enemies/Cyber-Dock-Worker/cyber-dock-worker_run.png" id="5_ekkud"]
 [ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="5_fls2h"]
 [ext_resource type="AudioStream" uid="uid://3fgiln43r0y0" path="res://audio/sfx/placeholder/alert.wav" id="5_ksjfc"]
 [ext_resource type="AudioStream" uid="uid://bvxslxhu2o73k" path="res://audio/sfx/placeholder/648959__ienba__heavy-book.wav" id="5_t3spr"]
@@ -109,17 +110,29 @@ region = Rect2(768, 0, 128, 128)
 atlas = ExtResource("4_b1df5")
 region = Rect2(896, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mx3sr"]
-atlas = ExtResource("4_b1df5")
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfb1y"]
+atlas = ExtResource("5_ekkud")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n8y06"]
-atlas = ExtResource("4_b1df5")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c4vm"]
+atlas = ExtResource("5_ekkud")
 region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d2m40"]
-atlas = ExtResource("4_b1df5")
+[sub_resource type="AtlasTexture" id="AtlasTexture_285dd"]
+atlas = ExtResource("5_ekkud")
 region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrlv"]
+atlas = ExtResource("5_ekkud")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd3o7"]
+atlas = ExtResource("5_ekkud")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b0po"]
+atlas = ExtResource("5_ekkud")
+region = Rect2(640, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7erld"]
 animations = [{
@@ -214,13 +227,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mx3sr")
+"texture": SubResource("AtlasTexture_nfb1y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n8y06")
+"texture": SubResource("AtlasTexture_5c4vm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d2m40")
+"texture": SubResource("AtlasTexture_285dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrlv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd3o7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b0po")
 }],
 "loop": true,
 "name": &"walk",
@@ -671,50 +693,40 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/cyber_dock_worker_sprites:position")
+tracks/0/path = NodePath("Sprites/cyber_dock_worker_sprites:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(35, 1), Vector2(35, -3), Vector2(35, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/cyber_dock_worker_sprites:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0872665, 0.0, -0.0872665, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/cyber_dock_worker_sprites:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"walk"]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Behaviours/Attacks/HeavyMeleeAttack/HurtBox/CollisionPolygon2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Behaviours/Attacks/HeavyMeleeAttack/HurtBox/CollisionPolygon2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/cyber_dock_worker_sprites")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6d053"]

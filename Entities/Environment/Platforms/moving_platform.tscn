@@ -27,6 +27,8 @@ collision_layer = 24
 collision_mask = 27
 physics_material_override = SubResource("PhysicsMaterial_bk0vk")
 script = ExtResource("1_ugeys")
+show_piston = false
+show_cables = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 8)

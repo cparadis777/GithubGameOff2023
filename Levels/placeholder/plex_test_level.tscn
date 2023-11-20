@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=26 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="9_fc1mv"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_44m5b"]
 [ext_resource type="PackedScene" uid="uid://bty5gh70uklnu" path="res://Entities/Environment/Lights/default_container_lighting.tscn" id="12_oo7j6"]
-[ext_resource type="PackedScene" uid="uid://bgc4ihpc28ck8" path="res://audio/AudioManager.tscn" id="15_7nkfj"]
+[ext_resource type="PackedScene" uid="uid://bveugr8fx87uv" path="res://Entities/Environment/portals/door_template.tscn" id="17_pv8u4"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
 offsets = PackedFloat32Array(0, 0.301818, 0.829091)
@@ -46,9 +46,6 @@ width = 640
 height = 256
 fill_from = Vector2(0.486284, 1)
 fill_to = Vector2(0.511222, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7n80"]
-size = Vector2(64, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a208w"]
 size = Vector2(228, 48)
@@ -259,38 +256,17 @@ region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
 
 [node name="Lighting" parent="." instance=ExtResource("12_oo7j6")]
 
-[node name="AudioManager" parent="." instance=ExtResource("15_7nkfj")]
-
 [node name="Exits" type="Node2D" parent="."]
 
-[node name="LEFT" type="Node2D" parent="Exits"]
+[node name="LEFT" parent="Exits" instance=ExtResource("17_pv8u4")]
+position = Vector2(-423, 9)
 
-[node name="Area2D" type="Area2D" parent="Exits/LEFT"]
-position = Vector2(-435, 23)
+[node name="RIGHT" parent="Exits" instance=ExtResource("17_pv8u4")]
+position = Vector2(445, 7)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/LEFT/Area2D"]
-position = Vector2(-7, -65)
-shape = SubResource("RectangleShape2D_q7n80")
-
-[node name="Door" type="Polygon2D" parent="Exits/LEFT"]
-position = Vector2(-416, 0)
-color = Color(0.172549, 0.172549, 0.172549, 1)
-polygon = PackedVector2Array(-44, 52, -45, -102, -6, -133, -5, 8)
-
-[node name="RIGHT" type="Node2D" parent="Exits"]
-position = Vector2(421, 1)
-
-[node name="Area2D" type="Area2D" parent="Exits/RIGHT"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Exits/RIGHT/Area2D"]
-position = Vector2(27, -36)
-shape = SubResource("RectangleShape2D_q7n80")
-
-[node name="Door2" type="Polygon2D" parent="Exits/RIGHT"]
-rotation = 3.14159
-scale = Vector2(1, -1)
-color = Color(0.172549, 0.172549, 0.172549, 1)
-polygon = PackedVector2Array(-44, 52, -45, -102, -6, -133, -5, 8)
+[node name="DoorSprite" parent="Exits/RIGHT" index="2"]
+position = Vector2(-11, -29)
+flip_h = true
 
 [node name="UP" type="Node2D" parent="Exits"]
 position = Vector2(2, -320)
@@ -320,3 +296,4 @@ color = Color(0.131379, 0.131379, 0.131379, 1)
 polygon = PackedVector2Array(-85, -5, -124, -45, 108, -45, 76, -5)
 
 [editable path="Platforms/MovingPlatform"]
+[editable path="Exits/RIGHT"]

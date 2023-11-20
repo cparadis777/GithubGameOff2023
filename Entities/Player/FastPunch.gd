@@ -30,7 +30,7 @@ func enter(_msg := {}) -> void:
 	
 func exit():
 	super()
-	$HurtBox/FastCollisionShape.disabled = true
+	$HurtBox/FastCollisionShape.set_deferred("disabled", true)
 	
 func _on_player_animation_finished(anim_name):
 	if anim_name in sequence_animations:

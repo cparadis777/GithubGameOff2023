@@ -1,12 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=14 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
 [ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="2_asvyr"]
 [ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="3_n5ip3"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
-[ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="5_ww7q0"]
-[ext_resource type="PackedScene" uid="uid://bgc4ihpc28ck8" path="res://audio/AudioManager.tscn" id="11_fl0tt"]
+[ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="6_4yala"]
 [ext_resource type="PackedScene" uid="uid://dttldmdwah7bk" path="res://Menus/scene_selection_buttons.tscn" id="11_wktol"]
 
 [sub_resource type="Gradient" id="Gradient_1fdak"]
@@ -444,9 +443,9 @@ autowrap_mode = 2
 [node name="Slide3" type="Node2D" parent="."]
 
 [node name="Boss" type="Sprite2D" parent="Slide3"]
-position = Vector2(240, -655)
+position = Vector2(195, -653)
 scale = Vector2(2, 2)
-texture = ExtResource("5_ww7q0")
+texture = ExtResource("6_4yala")
 
 [node name="Label" type="Label" parent="Slide3"]
 offset_left = 42.0
@@ -518,7 +517,5 @@ text = "...esc to skip"
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Press any key..."
-
-[node name="AudioManager" parent="." instance=ExtResource("11_fl0tt")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
