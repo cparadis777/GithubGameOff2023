@@ -26,11 +26,11 @@ var has_entrance = {
 	Utils.Directions.DOWN: $BottomCollision,
 }
 
-@onready var door_sprites = {
-	Utils.Directions.LEFT: $Openings/Left,
-	Utils.Directions.UP: $Openings/Up,
-	Utils.Directions.RIGHT: $Openings/Right,
-	Utils.Directions.DOWN: $Openings/Down,
+@onready var doors = {
+	Utils.Directions.LEFT: $Doors/LEFT,
+	Utils.Directions.UP: $Doors/UP,
+	Utils.Directions.RIGHT: $Doors/RIGHT,
+	Utils.Directions.DOWN: $Doors/DOWN,
 }
 
 # entrance_arrows:Dictionary = {Utils.Directions.LEFT: null}
@@ -64,6 +64,9 @@ func open_door(side:Utils.Directions):
 	# door_sprites[side]
 	if has_entrance[side]:
 		walls[side].disabled = true
+		if has_node("Doors"):
+				doors[side].locked = false
+				pass
 
 func open_all_doors():
 	# when room is completed, we can open all available doors
@@ -72,10 +75,11 @@ func open_all_doors():
 	# adjacent doors
 	print("container beaten")
 	for side in has_entrance:
-		print(side)
 		if has_entrance[side]:
-			print(walls)
 			walls[side].disabled = true
+			if has_node("Doors"):
+				doors[side].locked = false
+				pass
 			
 
 func _on_switch_toggled(pressed):

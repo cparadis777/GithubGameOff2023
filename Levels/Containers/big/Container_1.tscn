@@ -15,8 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="11_7thc7"]
 
 [node name="BaseContainer" instance=ExtResource("1_41hb8")]
-enter_up = true
-enter_down = true
 
 [node name="Interior" parent="." index="0"]
 texture = ExtResource("2_id1wg")

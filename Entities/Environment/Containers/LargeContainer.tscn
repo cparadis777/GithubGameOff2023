@@ -30,6 +30,8 @@ size = Vector2(796, 340)
 script = ExtResource("1_26d1r")
 enter_left = true
 enter_right = true
+enter_up = true
+enter_down = true
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
