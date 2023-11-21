@@ -9,27 +9,11 @@ debug_mode = true
 
 [node name="Container1" type="Node" parent="."]
 script = ExtResource("2_5buau")
+container_type = 5
 container_exit_flags = 15
-scene_path = "res://Levels/Containers/Container1.tscn"
+scene_path = "res://Levels/Containers/big/Container_1.tscn"
 
 [node name="Container2" type="Node" parent="."]
 script = ExtResource("2_5buau")
-container_exit_flags = 15
-scene_path = "res://Levels/Containers/Container2.tscn"
-
-[node name="Container3" type="Node" parent="."]
-script = ExtResource("2_5buau")
-container_type = 1
-container_exit_flags = 3
-scene_path = "res://Levels/Containers/Container3.tscn"
-
-[node name="Container4" type="Node" parent="."]
-script = ExtResource("2_5buau")
 container_exit_flags = 5
-scene_path = "res://Levels/Containers/Container4.tscn"
-
-[node name="Container5" type="Node" parent="."]
-script = ExtResource("2_5buau")
-container_type = 2
-container_exit_flags = 10
-scene_path = "res://Levels/Containers/Container5.tscn"
+scene_path = "res://Levels/Containers/big/Container_2.tscn"

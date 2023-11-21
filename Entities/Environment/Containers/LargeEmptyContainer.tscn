@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqe41rrauj6by"]
+
+[ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="8_jt1gw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpblv"]
+size = Vector2(960, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5deis"]
+size = Vector2(82, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xia"]
+size = Vector2(796, 340)
+
+[node name="EmptyContainer" type="StaticBody2D"]
+
+[node name="Exterior" type="Sprite2D" parent="."]
+position = Vector2(4.72069e-05, -0.500001)
+scale = Vector2(2.5, 2.50521)
+texture = ExtResource("8_jt1gw")
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -206)
+shape = SubResource("RectangleShape2D_dpblv")
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 204)
+shape = SubResource("RectangleShape2D_dpblv")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-439, -1)
+shape = SubResource("RectangleShape2D_5deis")
+
+[node name="RightCollision" type="CollisionShape2D" parent="."]
+position = Vector2(439, -1)
+shape = SubResource("RectangleShape2D_5deis")
+
+[node name="ContainerInterior" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_m7xia")
+
+[connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
+[connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

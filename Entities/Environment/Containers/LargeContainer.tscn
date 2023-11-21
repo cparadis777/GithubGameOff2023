@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1v061uxxpf6m"]
+[gd_scene load_steps=14 format=3 uid="uid://c1v061uxxpf6m"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_26d1r"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_d8uoi"]
-[ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_pxj63"]
 [ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="4_ge3qy"]
 [ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="4_rpji1"]
 [ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="5_ttncq"]
@@ -28,34 +27,12 @@ size = Vector2(796, 340)
 
 [node name="BaseContainer" type="StaticBody2D"]
 script = ExtResource("1_26d1r")
-enter_left = true
-enter_right = true
-enter_up = true
-enter_down = true
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
 position = Vector2(0, -6.55651e-06)
 scale = Vector2(2, 2)
 texture = ExtResource("2_d8uoi")
-
-[node name="Arrows" type="Node2D" parent="."]
-visible = false
-
-[node name="LeftArrow" type="Sprite2D" parent="Arrows"]
-texture = ExtResource("3_pxj63")
-
-[node name="RightArrow" type="Sprite2D" parent="Arrows"]
-texture = ExtResource("3_pxj63")
-flip_h = true
-
-[node name="UpArrow" type="Sprite2D" parent="Arrows"]
-rotation = 1.57079
-texture = ExtResource("3_pxj63")
-
-[node name="DownArrow" type="Sprite2D" parent="Arrows"]
-rotation = -1.5708
-texture = ExtResource("3_pxj63")
 
 [node name="Openings" type="Node2D" parent="."]
 
@@ -115,18 +92,26 @@ position = Vector2(79, -170)
 scale = Vector2(159, 17)
 texture = SubResource("PlaceholderTexture2D_v1mhl")
 
-[node name="Doors" type="Node2D" parent="."]
+[node name="Exits" type="Node2D" parent="."]
 
-[node name="LEFT" parent="Doors" instance=ExtResource("4_rpji1")]
+[node name="LEFT" parent="Exits" instance=ExtResource("4_rpji1")]
+visible = false
+z_index = -1
 position = Vector2(-398, 169)
 
-[node name="RIGHT" parent="Doors" instance=ExtResource("5_ttncq")]
+[node name="RIGHT" parent="Exits" instance=ExtResource("5_ttncq")]
+visible = false
+z_index = -1
 position = Vector2(398, 169)
 
-[node name="UP" parent="Doors" instance=ExtResource("6_jq33i")]
+[node name="UP" parent="Exits" instance=ExtResource("6_jq33i")]
+visible = false
+z_index = -1
 position = Vector2(0, -171)
 
-[node name="DOWN" parent="Doors" instance=ExtResource("7_17qf5")]
+[node name="DOWN" parent="Exits" instance=ExtResource("7_17qf5")]
+visible = false
+z_index = -1
 position = Vector2(0, 169)
 
 [node name="Exterior" type="Sprite2D" parent="."]
@@ -157,3 +142,6 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
+
+[connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
+[connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

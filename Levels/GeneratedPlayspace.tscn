@@ -5,21 +5,21 @@
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_5n0k1"]
 [ext_resource type="PackedScene" uid="uid://c2slp1rb0plu" path="res://Utilities/UtilityScenes/ContainerSlot.tscn" id="3_xh56m"]
 [ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_yhops"]
-[ext_resource type="PackedScene" uid="uid://b37u2ddd6pkmg" path="res://Entities/Environment/Containers/GreyContainers.tscn" id="7_4qdde"]
+[ext_resource type="PackedScene" uid="uid://dqe41rrauj6by" path="res://Entities/Environment/Containers/LargeEmptyContainer.tscn" id="6_n8nav"]
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="7_ifxbb"]
-[ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/Containers/BaseContainer.tscn" id="8_uakkj"]
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="9_nkiwv"]
 
 [node name="GeneratedPlayspace" type="Node2D"]
 script = ExtResource("1_guo8s")
 
 [node name="Player" parent="." instance=ExtResource("2_5n0k1")]
-position = Vector2(-376, 60)
+position = Vector2(-625, 149)
 
 [node name="ContainerGrid" type="Node2D" parent="."]
 script = ExtResource("2_0shpo")
 containerSlotScene = ExtResource("3_xh56m")
-container_width = 384
-container_height = 192
+container_width = 960
+container_height = 480
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ContainerGrid"]
@@ -32,28 +32,31 @@ position = Vector2(318, 126)
 enabled = false
 zoom = Vector2(0.1, 0.1)
 
-[node name="EmptyContainer4" parent="." instance=ExtResource("7_4qdde")]
-position = Vector2(-768, 0)
+[node name="EmptyContainer2" parent="." instance=ExtResource("6_n8nav")]
+position = Vector2(0, 481)
 
-[node name="EmptyContainer3" parent="." instance=ExtResource("7_4qdde")]
-position = Vector2(-384, 192)
+[node name="EmptyContainer5" parent="." instance=ExtResource("6_n8nav")]
+position = Vector2(-960, 481)
 
-[node name="EmptyContainer2" parent="." instance=ExtResource("7_4qdde")]
-position = Vector2(0, 192)
+[node name="EmptyContainer3" parent="." instance=ExtResource("6_n8nav")]
+position = Vector2(960, 481)
 
-[node name="EmptyContainer6" parent="." instance=ExtResource("7_4qdde")]
-position = Vector2(768, -192)
+[node name="EmptyContainer4" parent="." instance=ExtResource("6_n8nav")]
+position = Vector2(1921, 480)
 
-[node name="EmptyContainer5" parent="." instance=ExtResource("7_4qdde")]
-position = Vector2(768, 0)
+[node name="EmptyContainer6" parent="." instance=ExtResource("6_n8nav")]
+position = Vector2(1921, -1)
 
-[node name="EmptyContainer" parent="." instance=ExtResource("7_4qdde")]
-position = Vector2(384, 192)
+[node name="EmptyContainer7" parent="." instance=ExtResource("6_n8nav")]
+position = Vector2(1921, -483)
+
+[node name="EmptyContainer8" parent="." instance=ExtResource("6_n8nav")]
+position = Vector2(1921, -962)
 
 [node name="CanvasModulate" parent="." instance=ExtResource("7_ifxbb")]
 visible = false
 
-[node name="BaseContainer" parent="." instance=ExtResource("8_uakkj")]
-position = Vector2(-384, 0)
-enter_right = true
-doors_open = true
+[node name="StartContainer" parent="." instance=ExtResource("9_nkiwv")]
+position = Vector2(-960, 0)
+container_exit_flags = 2
+show_exterior_on_start = false

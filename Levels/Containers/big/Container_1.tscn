@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://81l71vr0sqf2"]
+[gd_scene load_steps=13 format=3 uid="uid://81l71vr0sqf2"]
 
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_41hb8"]
 [ext_resource type="Texture2D" uid="uid://ckyyijor2rr67" path="res://art/interiors/shipping_container_soyda_INTERIOR_ORTHOGRAPHIC.png" id="2_id1wg"]
-[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="3_e0ckx"]
 [ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="3_ikmi4"]
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="4_7t46s"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="4_620bv"]
@@ -19,7 +18,7 @@
 [node name="Interior" parent="." index="0"]
 texture = ExtResource("2_id1wg")
 
-[node name="Platforms" type="Node2D" parent="." index="4"]
+[node name="Platforms" type="Node2D" parent="." index="3"]
 
 [node name="JumpThroughPlatform" parent="Platforms" index="0" instance=ExtResource("4_620bv")]
 position = Vector2(-232, 64)
@@ -39,7 +38,7 @@ position = Vector2(252, 64)
 [node name="JumpThroughPlatform6" parent="Platforms" index="5" instance=ExtResource("4_620bv")]
 position = Vector2(251, -78)
 
-[node name="Obstacles" type="Node2D" parent="." index="5"]
+[node name="Obstacles" type="Node2D" parent="." index="4"]
 
 [node name="VendingMachine" parent="Obstacles" index="0" instance=ExtResource("11_7thc7")]
 position = Vector2(116, 169)
@@ -109,7 +108,7 @@ position = Vector2(-278, 48)
 [node name="SoydaBox3" parent="Obstacles/BoxStack5" index="2" instance=ExtResource("6_03v6r")]
 position = Vector2(-280, 36)
 
-[node name="Lighting" type="Node2D" parent="." index="6"]
+[node name="Lighting" type="Node2D" parent="." index="5"]
 
 [node name="CanvasModulate" parent="Lighting" index="0" instance=ExtResource("4_7t46s")]
 
@@ -131,7 +130,7 @@ scale = Vector2(1.64063, 1.30729)
 position = Vector2(-231, 58)
 scale = Vector2(1.64063, 1.30729)
 
-[node name="Enemies" type="Node2D" parent="." index="7"]
+[node name="Enemies" type="Node2D" parent="." index="6"]
 
 [node name="RunningAssassin" parent="Enemies" index="0" instance=ExtResource("7_nwxtu")]
 position = Vector2(-247, 166)
@@ -148,27 +147,7 @@ position = Vector2(-237, -84)
 [node name="ShootyNPC" parent="Enemies" index="4" instance=ExtResource("9_tfg1t")]
 position = Vector2(251, -79)
 
-[node name="Enemies2" type="Node2D" parent="." index="8"]
-
-[node name="RunningAssassin" parent="Enemies2" index="0" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_nwxtu")]
-position = Vector2(-247, 166)
-animation_player = NodePath("../../Enemies/RunningAssassin/AnimationPlayer")
-
-[node name="NPC_02_DockWorker" parent="Enemies2" index="1" instance=ExtResource("8_ec66x")]
-position = Vector2(264, 169)
-
-[node name="RunningAssassin2" parent="Enemies2" index="2" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_nwxtu")]
-position = Vector2(250, 60)
-animation_player = NodePath("../../Enemies/RunningAssassin2/AnimationPlayer")
-
-[node name="RunningAssassin3" parent="Enemies2" index="3" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_nwxtu")]
-position = Vector2(-237, -84)
-animation_player = NodePath("../../Enemies/RunningAssassin3/AnimationPlayer")
-
-[node name="ShootyNPC" parent="Enemies2" index="4" instance=ExtResource("9_tfg1t")]
-position = Vector2(251, -79)
-
-[node name="EnemySpawnPoints" type="Node2D" parent="." index="9"]
+[node name="EnemySpawnPoints" type="Node2D" parent="." index="7"]
 
 [node name="Point0" type="Marker2D" parent="EnemySpawnPoints" index="0"]
 position = Vector2(-247, 169)
@@ -182,7 +161,5 @@ position = Vector2(252, -79)
 [node name="Point3" type="Marker2D" parent="EnemySpawnPoints" index="3"]
 position = Vector2(264, 168)
 
-[node name="Player" parent="." index="10" instance=ExtResource("3_e0ckx")]
-
-[node name="Exterior" parent="." index="11"]
+[node name="Exterior" parent="." index="8"]
 texture = ExtResource("3_ikmi4")

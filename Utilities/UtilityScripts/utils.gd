@@ -4,6 +4,19 @@ enum DirectionFlags {NIL = 0, LEFT = 1, RIGHT = 2, UP = 4, DOWN = 8}
 
 enum Directions {UP, RIGHT, DOWN, LEFT}
 
+func flag_to_direction(flag:Utils.DirectionFlags) -> Utils.Directions:
+	match flag:
+		DirectionFlags.LEFT:
+			return Utils.Directions.LEFT
+		DirectionFlags.RIGHT:
+			return Utils.Directions.RIGHT
+		DirectionFlags.UP:
+			return Utils.Directions.UP
+		DirectionFlags.DOWN:
+			return Utils.Directions.DOWN
+		_:
+			return Utils.Directions.DOWN
+
 func get_opposite_direction(direction:Utils.Directions) -> Utils.Directions:
 	match direction:
 		Directions.UP:

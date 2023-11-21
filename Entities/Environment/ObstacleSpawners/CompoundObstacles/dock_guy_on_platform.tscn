@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj18qabpjb2wu"]
+
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="1_3iljd"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="2_gws68"]
+
+[node name="DockGuyOnPlatform" type="Node2D"]
+
+[node name="JumpThroughPlatform" parent="." instance=ExtResource("1_3iljd")]
+
+[node name="NPC_02_DockWorker" parent="." instance=ExtResource("2_gws68")]

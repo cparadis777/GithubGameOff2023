@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1q3fb8qqqdck"]
+[gd_scene load_steps=7 format=3 uid="uid://d1q3fb8qqqdck"]
 
 [ext_resource type="PackedScene" uid="uid://c2kws1t2ce2kn" path="res://Levels/placeholder/plex_level_template.tscn" id="1_6pytm"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_2fexr"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_jjvli"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="3_e1qx5"]
+[ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="5_bajk6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xg1ps"]
 
@@ -70,5 +71,8 @@ position = Vector2(-8, 58)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldFloor"]
 shape = SubResource("WorldBoundaryShape2D_xg1ps")
+
+[node name="CanvasModulate" parent="." instance=ExtResource("5_bajk6")]
+visible = false
 
 [editable path="InteriorContainerLevelMockup08/MovingPlatform"]

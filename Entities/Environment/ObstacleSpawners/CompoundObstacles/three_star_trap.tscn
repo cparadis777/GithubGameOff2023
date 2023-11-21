@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1gw2o1d85wpr"]
+
+[ext_resource type="PackedScene" uid="uid://ctu2u7uxqhbyo" path="res://Entities/Environment/Traps/static_trap_shooter.tscn" id="1_dxrp3"]
+[ext_resource type="PackedScene" uid="uid://cmpouufnlcxkn" path="res://Entities/Environment/Platforms/basic_platform.tscn" id="2_iqg53"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="3_lgy6f"]
+
+[node name="StarTrap" type="Node2D"]
+
+[node name="Static_Trap_Shooter" parent="." instance=ExtResource("1_dxrp3")]
+position = Vector2(-39, -82)
+rotation = 1.5708
+
+[node name="Static_Trap_Shooter2" parent="." instance=ExtResource("1_dxrp3")]
+position = Vector2(0, -82)
+rotation = 1.5708
+
+[node name="Static_Trap_Shooter3" parent="." instance=ExtResource("1_dxrp3")]
+position = Vector2(43, -82)
+rotation = 1.5708
+
+[node name="BasicPlatform" parent="." instance=ExtResource("2_iqg53")]
+position = Vector2(3, -101)
+
+[node name="TrapSpikes" parent="." instance=ExtResource("3_lgy6f")]
+position = Vector2(0, -112)
