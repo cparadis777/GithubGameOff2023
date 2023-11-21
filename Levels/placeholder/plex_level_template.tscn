@@ -1,8 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://c2kws1t2ce2kn"]
+[gd_scene load_steps=31 format=3 uid="uid://c2kws1t2ce2kn"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/plex_level_template.gd" id="1_hqjdj"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_p47sb"]
-[ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="3_copbu"]
 [ext_resource type="PackedScene" uid="uid://dnsnay6jrr7ic" path="res://Entities/Environment/Lights/switched_blacklight_inverse.tscn" id="4_gq5iw"]
 [ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="6_vcyxu"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="7_o5mg4"]
@@ -14,9 +13,15 @@
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="11_d7olt"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="11_px28m"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="12_fga5v"]
+[ext_resource type="Script" path="res://Levels/placeholder/ChallengeSpawningLogic.gd" id="12_ors2s"]
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="13_532g6"]
 [ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="14_ga6dq"]
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="14_m08jb"]
+[ext_resource type="PackedScene" uid="uid://btwdkp7lrbg0d" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/assassin_on_platform.tscn" id="14_xeouk"]
+[ext_resource type="PackedScene" uid="uid://cj18qabpjb2wu" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/dock_guy_on_platform.tscn" id="15_7sv6p"]
+[ext_resource type="PackedScene" uid="uid://ddkm7lpck4cwy" path="res://Entities/Environment/ObstacleSpawners/ObstacleSpawner.tscn" id="16_6dyb6"]
+[ext_resource type="PackedScene" uid="uid://b1gw2o1d85wpr" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/three_star_trap.tscn" id="18_q0bre"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="22_a3eh0"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
 offsets = PackedFloat32Array(0, 0.301818, 0.829091)
@@ -48,7 +53,7 @@ fill_from = Vector2(0.486284, 1)
 fill_to = Vector2(0.511222, 0)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j7lsu"]
-polygon = PackedVector2Array(-315, 7, -313, -246, 313, -247, 318, 5, 344, 4, 336, -265, -339, -263, -336, 8)
+polygon = PackedVector2Array(-320, 50.6667, -318.667, -266, 317.333, -267.333, 320.667, 49.3333, 336.667, 47.3333, 336.667, -282, -338, -284, -336.667, 50.6667)
 
 [node name="ShippingContainerRoom" type="Node2D"]
 script = ExtResource("1_hqjdj")
@@ -190,9 +195,6 @@ region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
 [node name="Lighting" type="Node2D" parent="."]
 scale = Vector2(1.5, 1.5)
 
-[node name="CanvasModulate" parent="Lighting" instance=ExtResource("3_copbu")]
-visible = false
-
 [node name="InverseBlacklight" parent="Lighting" instance=ExtResource("4_gq5iw")]
 
 [node name="InverseBlacklight2" parent="Lighting" instance=ExtResource("4_gq5iw")]
@@ -206,7 +208,9 @@ occluder = SubResource("OccluderPolygon2D_j7lsu")
 
 [node name="SwitchedLight" parent="Lighting" instance=ExtResource("6_vcyxu")]
 visible = false
-energy = 1.2
+position = Vector2(0, -96.6667)
+energy = 0.75
+max_distance = 400.0
 
 [node name="Switches" type="Node2D" parent="Lighting"]
 
@@ -234,5 +238,26 @@ position = Vector2(0, 22)
 [node name="UP" parent="Exits" instance=ExtResource("11_a137i")]
 position = Vector2(-1, -346)
 
-[node name="RandomShitToSpawn" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("moving_platform", "npc_02_dock_worker", "npc_03_running_assassin", "npc_03_running_assassin 2", "platform_jump_thru", "platform_jump_thru 2", "platform_jump_thru 3", "platform_jump_thru 4", "shooty_npc"), [ExtResource("12_fga5v"), ExtResource("13_532g6"), ExtResource("14_ga6dq"), ExtResource("14_ga6dq"), ExtResource("11_px28m"), ExtResource("11_px28m"), ExtResource("11_px28m"), ExtResource("11_px28m"), ExtResource("11_d7olt")]]
+[node name="SpawningLogic" type="Node2D" parent="."]
+script = ExtResource("12_ors2s")
+
+[node name="Platforms" parent="SpawningLogic" instance=ExtResource("16_6dyb6")]
+position = Vector2(-348, -254)
+
+[node name="SpawnList" parent="SpawningLogic/Platforms" index="0"]
+resources = [PackedStringArray("assassin_on_platform", "dock_guy_on_platform", "moving_platform", "platform_jump_thru", "three_star_trap"), [ExtResource("14_xeouk"), ExtResource("15_7sv6p"), ExtResource("12_fga5v"), ExtResource("11_px28m"), ExtResource("18_q0bre")]]
+
+[node name="SpawnZone" parent="SpawningLogic/Platforms" index="1"]
+offset_bottom = 205.0
+
+[node name="Floor" parent="SpawningLogic" instance=ExtResource("16_6dyb6")]
+position = Vector2(-343, 2)
+
+[node name="SpawnList" parent="SpawningLogic/Floor" index="0"]
+resources = [PackedStringArray("npc_02_dock_worker", "npc_03_running_assassin", "shooty_npc", "trap_spikes"), [ExtResource("13_532g6"), ExtResource("14_ga6dq"), ExtResource("11_d7olt"), ExtResource("22_a3eh0")]]
+
+[node name="SpawnZone" parent="SpawningLogic/Floor" index="1"]
+offset_bottom = 15.0
+
+[editable path="SpawningLogic/Platforms"]
+[editable path="SpawningLogic/Floor"]

@@ -29,6 +29,8 @@ enum DamageTypes { WEAK_MELEE, STRONG_MELEE, IMPACT, PIERCE, FIRE, POISON, ELECT
 var difficulty : DifficultyScales = DifficultyScales.TRIVIAL
 
 
-var player_stats = {}
+var player_stats = {
+	"max_health" : 50 # 1 heart = 10 points
+}
 
 

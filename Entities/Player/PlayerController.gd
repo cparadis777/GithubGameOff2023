@@ -13,7 +13,7 @@ var speed = SPEED # for state machine
 @onready var hud = $HUD
 @onready var animation_player = $AnimationPlayer
 
-@export var health_max = 30.0 # 10 per heart
+var health_max = Globals.player_stats["max_health"]
 var health = health_max
 var temporary_health_bonus = 0
 
