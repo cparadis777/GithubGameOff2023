@@ -109,7 +109,9 @@ func check_drop_possible(column:int) -> bool:
 
 func export_data() -> Dictionary:
 	var data = {}
-	
+
+	self.check_unneeded_exits()
+
 	data["shape"] = Vector2(self.n_horizontal, self.n_vertical)
 	var containers = {}
 	for coordinate in self.drop_points_dict:
@@ -185,3 +187,29 @@ func reset_dropped_containers()->void:
 	for coord in self.drop_points_dict:
 		drop_points_dict[coord].remove_container()
 	emit_signal("weight_reset")
+
+func check_unneeded_exits() ->void:
+	for coord in self.drop_points_dict:
+		var current_drop_point:DropPoint = self.drop_points_dict[coord]
+		for direction in current_drop_point.neighbors:
+			if current_drop_point.is_filled:
+				if current_drop_point.neighbors[direction] == null:
+					if current_drop_point.container.entrances[direction]:
+						current_drop_point.container.entrances[direction] = false
+						print("Removed %s from %s" % [Utils.Directions.keys()[direction], coord])
+				elif current_drop_point.neighbors[direction].is_filled == false:
+					if current_drop_point.container.entrances[direction]:
+						current_drop_point.container.entrances[direction] = false
+						print("Removed %s from %s" % [Utils.Directions.keys()[direction], coord])
+				elif current_drop_point.neighbors[direction].container.entrances[Utils.get_opposite_direction(direction)] == false:
+					if current_drop_point.container.entrances[direction]:
+						current_drop_point.container.entrances[direction] = false
+						print("Removed %s from %s" % [Utils.Directions.keys()[direction], coord])
+		if coord == self.entrance_coord:
+			current_drop_point.container.entrances[self.entrance_direction] = true
+			print("Added back %s to %s" % [Utils.Directions.keys()[self.entrance_direction], coord])
+		if coord == self.exit_coord:
+			current_drop_point.container.entrances[self.exit_direction] = true 
+			print("Added back %s to %s" % [Utils.Directions.keys()[self.exit_direction], coord])
+		
+		print(current_drop_point.container.entrances)
