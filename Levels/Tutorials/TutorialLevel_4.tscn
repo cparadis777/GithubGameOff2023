@@ -11,12 +11,6 @@
 [node name="BaseLevel" instance=ExtResource("1_gusit")]
 exit_flags = 1
 
-[node name="LeftArrow" parent="BaseContainer" index="1"]
-position = Vector2(106, -40)
-
-[node name="DownArrow" parent="BaseContainer" index="4"]
-position = Vector2(0, 42)
-
 [node name="NextLevelDoor" parent="BaseContainer" index="9"]
 position = Vector2(-173, 63)
 rotation = -3.14159
@@ -32,7 +26,7 @@ position = Vector2(108, -9)
 [node name="AttackDemo" parent="." index="4" instance=ExtResource("3_mcvid")]
 position = Vector2(132, 54)
 animation_name = "fast_punch"
-label_text = "\",\""
+label_text = "[,], [.]"
 button_texture = ExtResource("4_5x4wx")
 
 [node name="CyberRoninSprites" parent="AttackDemo" index="1"]
