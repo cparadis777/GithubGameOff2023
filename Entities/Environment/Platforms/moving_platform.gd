@@ -31,7 +31,7 @@ var tween_duration = 5.0
 func _ready():
 	super()
 	
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(1.0).timeout
 	# wait for global position to be set by instantiator
 	
 	for locationMarker in $PositionMarkers.get_children():

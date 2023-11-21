@@ -140,8 +140,8 @@ func resume_attacking():
 
 func _on_iframes_timer_timeout():
 	if State in [States.KNOCKBACK, States.IFRAMES]:
-		$HurtEffect/Star.hide()
-		$Appearance/Sprite2D.material.set_shader_parameter("IFrames", false)
+		#$HurtEffect/Star.hide()
+		#$Appearance/Sprite2D.material.set_shader_parameter("IFrames", false)
 		if velocity.x > 0:
 			velocity = Vector2.RIGHT * SPEED
 		else:

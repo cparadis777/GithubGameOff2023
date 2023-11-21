@@ -45,8 +45,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _enter_tree():
-	StageManager.current_player = self
-	
+	if StageManager.current_player == null:
+		StageManager.current_player = self
+		$Lookahead/Camera2D.make_current()
+	else:
+		printerr("Too many player controllers already. Queuing_free.")
+		printerr("But first. I'm in this node: " + owner.name)
+		call_deferred("queue_free")
 
 func _ready():
 	disable_all_hurtboxes()
@@ -116,7 +121,9 @@ func initiate_debugging_protocol():
 		Engine.time_scale = 0.25
 	else:
 		Engine.time_scale = 1.0
-
+	print("Player detected")
+	print("nodes in group Player: " + str(get_tree().get_nodes_in_group("Player")))
+	
 
 func zoom_camera(direction : int):
 	#var camera = get_viewport().get_camera_2d()

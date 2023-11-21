@@ -26,6 +26,8 @@ size = Vector2(82, 480)
 size = Vector2(796, 340)
 
 [node name="BaseContainer" type="StaticBody2D"]
+collision_layer = 24
+collision_mask = 7
 script = ExtResource("1_26d1r")
 
 [node name="Interior" type="Sprite2D" parent="."]
@@ -37,6 +39,8 @@ texture = ExtResource("2_d8uoi")
 [node name="Openings" type="Node2D" parent="."]
 
 [node name="TopOpening" type="StaticBody2D" parent="Openings"]
+collision_layer = 24
+collision_mask = 7
 
 [node name="TopCollisionA" type="CollisionShape2D" parent="Openings/TopOpening"]
 position = Vector2(-280, -206)
@@ -47,6 +51,8 @@ position = Vector2(280, -206)
 shape = SubResource("RectangleShape2D_pjf8p")
 
 [node name="BottomOpening" type="StaticBody2D" parent="Openings"]
+collision_layer = 24
+collision_mask = 7
 
 [node name="BotCollisionA" type="CollisionShape2D" parent="Openings/BottomOpening"]
 position = Vector2(-280, 204)
@@ -57,12 +63,16 @@ position = Vector2(280, 204)
 shape = SubResource("RectangleShape2D_pjf8p")
 
 [node name="LeftOpening" type="StaticBody2D" parent="Openings"]
+collision_layer = 24
+collision_mask = 7
 
 [node name="LeftOpeningA" type="CollisionShape2D" parent="Openings/LeftOpening"]
 position = Vector2(-439, -104.5)
 shape = SubResource("RectangleShape2D_8etye")
 
 [node name="RightOpening" type="StaticBody2D" parent="Openings"]
+collision_layer = 24
+collision_mask = 7
 
 [node name="RightOpeningA" type="CollisionShape2D" parent="Openings/RightOpening"]
 position = Vector2(440, -104.5)

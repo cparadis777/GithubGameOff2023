@@ -207,7 +207,7 @@ visible = false
 z_index = 1
 position = Vector2(-9, -1)
 next_slide = NodePath("../placement")
-info_text = "Use W,D or Left,Right to move crane.
+info_text = "Use A,D or Left,Right to move crane.
 Q,E or <,> to rotate container exits.
 Press space to drop Container."
 
@@ -217,8 +217,7 @@ z_index = 1
 position = Vector2(-9, -1)
 info_text = "Place containers 
 to create a contiguous path 
-from Start to Finish
-(Arrow keys or WASD to move, space to drop.)"
+from Start to Finish."
 
 [node name="StartLabel" type="Label" parent="Instructions"]
 offset_left = -124.0
