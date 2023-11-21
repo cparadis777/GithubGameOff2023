@@ -25,6 +25,7 @@ enum DifficultyScales {
 
 enum Graphics { LOW, HIGH }
 enum DamageTypes { WEAK_MELEE, STRONG_MELEE, IMPACT, PIERCE, FIRE, POISON, ELECTRICAL, BLEED }
+enum PickupTypes { HEALTH, DAMAGE, SPEED, JUMP }
 
 var difficulty : DifficultyScales = DifficultyScales.TRIVIAL
 

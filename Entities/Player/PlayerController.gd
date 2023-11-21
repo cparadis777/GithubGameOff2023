@@ -332,3 +332,18 @@ func _on_door_entered():
 
 func _on_door_exited():
 	state_machine.transition_to("Idle")
+
+
+func _pickable_picked_up(pickup_type):
+	match pickup_type:
+		Globals.PickupTypes.HEALTH:
+			health += 50
+			health = clamp(health, 0, health_max)
+			hud._on_player_picked_up_health()
+		Globals.PickupTypes.DAMAGE:
+			for damage_type in damage_defaults.keys():
+				damage_defaults[damage_type] *= 1.25
+		Globals.PickupTypes.SPEED:
+			SPEED += 50
+		Globals.PickupTypes.JUMP:
+			JUMP_VELOCITY += 50
