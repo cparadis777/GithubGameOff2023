@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bvvhm16letvuh" path="res://art/portals/hatch.png" id="2_uq66r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_11x22"]
-size = Vector2(112, 20)
+size = Vector2(112, 96)
 
 [sub_resource type="Animation" id="Animation_51060"]
 length = 0.001
@@ -150,7 +150,7 @@ size = Vector2(20, 144)
 [node name="UP" instance=ExtResource("1_cr4dc")]
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2(-25.5, 32)
+position = Vector2(-25.5, 70)
 shape = SubResource("RectangleShape2D_11x22")
 
 [node name="DoorSprite" parent="." index="2"]
