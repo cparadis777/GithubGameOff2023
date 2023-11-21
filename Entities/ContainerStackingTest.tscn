@@ -202,23 +202,39 @@ drop_zone = NodePath("../DropPoints")
 [node name="Instructions" type="Node2D" parent="."]
 position = Vector2(0, -177)
 
-[node name="placement" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("8_18gwl")]
+[node name="controls" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("8_18gwl")]
 visible = false
+z_index = 1
 position = Vector2(-9, -1)
-next_slide = NodePath("../weight")
+next_slide = NodePath("../placement")
+info_text = "Use W,D or Left,Right to move crane.
+Q,E or <,> to rotate container exits.
+Press space to drop Container."
+
+[node name="placement" parent="Instructions" instance=ExtResource("8_18gwl")]
+visible = false
+z_index = 1
+position = Vector2(-9, -1)
 info_text = "Place containers 
 to create a contiguous path 
-from Start (A) to Finish (B)
+from Start to Finish
 (Arrow keys or WASD to move, space to drop.)"
 
-[node name="weight" parent="Instructions" instance=ExtResource("8_18gwl")]
-visible = false
-position = Vector2(-9, -1)
-info_text = "The weight of each shipping
-container reflects 
-the amount and difficulty of
-teamsters, thugs, and assassins
-contained within."
+[node name="StartLabel" type="Label" parent="Instructions"]
+offset_left = -124.0
+offset_top = 53.0
+offset_right = -84.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 14
+text = "Start"
+
+[node name="FinishLabel" type="Label" parent="Instructions"]
+offset_left = 107.0
+offset_top = -18.0
+offset_right = 153.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 14
+text = "Finish"
 
 [node name="TerminalContainer" parent="." instance=ExtResource("9_d655n")]
 position = Vector2(79, -185)
