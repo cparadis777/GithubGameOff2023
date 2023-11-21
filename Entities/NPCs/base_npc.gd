@@ -90,12 +90,21 @@ func apply_gravity(delta):
 		velocity.y += gravity * delta
 		
 
-
-func die():
-	State = States.DEAD
+func play_death_tween_if_needed():
 	var tween = create_tween()
 	tween.parallel().tween_property(self, "rotation", PI * 0.5, 0.33)
 	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
+
+func die():
+	State = States.DEAD
+	if has_node("AnimationPlayer"):
+		if $AnimationPlayer.has_animation("die"):
+			$AnimationPlayer.stop()
+			$AnimationPlayer.play("die")
+		else:
+			play_death_tween_if_needed()
+	else:
+		play_death_tween_if_needed()
 	decision_timer.stop()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	died.emit(name)
