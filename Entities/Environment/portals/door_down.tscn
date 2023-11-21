@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="1_mipd1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nn0an"]
-size = Vector2(112, 63)
+size = Vector2(112, 56)
 
 [sub_resource type="Animation" id="Animation_51060"]
 length = 0.001
@@ -146,7 +146,7 @@ _data = {
 [node name="DOWN" instance=ExtResource("1_mipd1")]
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2(-27, 51.5)
+position = Vector2(-27, 14)
 shape = SubResource("RectangleShape2D_nn0an")
 
 [node name="DoorSprite" parent="." index="2"]
