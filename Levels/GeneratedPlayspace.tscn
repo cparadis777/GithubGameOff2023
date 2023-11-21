@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bj3d6rfcnc2am"]
+[gd_scene load_steps=10 format=3 uid="uid://bj3d6rfcnc2am"]
 
 [ext_resource type="Script" path="res://Levels/GeneratedPlayspace.gd" id="1_guo8s"]
 [ext_resource type="Script" path="res://Levels/ContainerGrid.gd" id="2_0shpo"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dqe41rrauj6by" path="res://Entities/Environment/Containers/LargeEmptyContainer.tscn" id="6_n8nav"]
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="7_ifxbb"]
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="9_nkiwv"]
+[ext_resource type="PackedScene" uid="uid://dhxm77joahdfb" path="res://Entities/Environment/Containers/special/terminal_container.tscn" id="9_rtv3m"]
 
 [node name="GeneratedPlayspace" type="Node2D"]
 script = ExtResource("1_guo8s")
@@ -60,5 +61,9 @@ visible = false
 position = Vector2(-960, 0)
 container_exit_flags = 2
 show_exterior_on_start = false
+
+[node name="TerminalContainer" parent="." instance=ExtResource("9_rtv3m")]
+position = Vector2(1923, -1448)
+container_exit_flags = 1
 
 [editable path="StartContainer"]
