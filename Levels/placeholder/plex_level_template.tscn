@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c2kws1t2ce2kn"]
+[gd_scene load_steps=32 format=3 uid="uid://c2kws1t2ce2kn"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/plex_level_template.gd" id="1_hqjdj"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_p47sb"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cj18qabpjb2wu" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/dock_guy_on_platform.tscn" id="15_7sv6p"]
 [ext_resource type="PackedScene" uid="uid://ddkm7lpck4cwy" path="res://Entities/Environment/ObstacleSpawners/ObstacleSpawner.tscn" id="16_6dyb6"]
 [ext_resource type="PackedScene" uid="uid://b1gw2o1d85wpr" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/three_star_trap.tscn" id="18_q0bre"]
+[ext_resource type="PackedScene" uid="uid://biegidqhn52kc" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/shooty_guy_on_platform.tscn" id="21_q0qhx"]
 [ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="22_a3eh0"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
@@ -254,7 +255,7 @@ offset_bottom = 205.0
 position = Vector2(-343, 2)
 
 [node name="SpawnList" parent="SpawningLogic/Floor" index="0"]
-resources = [PackedStringArray("npc_02_dock_worker", "npc_03_running_assassin", "shooty_npc", "trap_spikes"), [ExtResource("13_532g6"), ExtResource("14_ga6dq"), ExtResource("11_d7olt"), ExtResource("22_a3eh0")]]
+resources = [PackedStringArray("npc_02_dock_worker", "npc_03_running_assassin", "shooty_guy_on_platform", "shooty_npc", "trap_spikes"), [ExtResource("13_532g6"), ExtResource("14_ga6dq"), ExtResource("21_q0qhx"), ExtResource("11_d7olt"), ExtResource("22_a3eh0")]]
 
 [node name="SpawnZone" parent="SpawningLogic/Floor" index="1"]
 offset_bottom = 15.0
