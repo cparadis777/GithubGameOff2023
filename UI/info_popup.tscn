@@ -1,29 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmx61qarjfirk"]
+[gd_scene load_steps=5 format=3 uid="uid://cmx61qarjfirk"]
 
 [ext_resource type="Script" path="res://UI/info_popup.gd" id="1_0spvx"]
+[ext_resource type="Texture2D" uid="uid://f1pea0026o0o" path="res://art/UI/9patch.png" id="2_t5r7d"]
+[ext_resource type="Texture2D" uid="uid://c2mq8r0dhjp8w" path="res://art/UI/x.png" id="3_ey6r6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d6y45"]
 
 [node name="InfoPopup" type="Node2D"]
 script = ExtResource("1_0spvx")
 
-[node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(250, 80)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -16.0
-offset_right = 20.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
-layout_mode = 1
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -67.0
+offset_right = 120.0
+offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
@@ -31,22 +24,60 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
 layout_mode = 2
+texture = ExtResource("2_t5r7d")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
+[node name="ClosePanelButton" type="Button" parent="MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = 18.0
+grow_horizontal = 0
 size_flags_horizontal = 8
+theme_override_colors/icon_normal_color = Color(0, 0.462745, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0.243137, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0.701961, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_d6y45")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d6y45")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_d6y45")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_d6y45")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_d6y45")
+icon = ExtResource("3_ey6r6")
 
-[node name="ClosePanelButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "x"
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -49.5
+offset_right = 98.0
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/NinePatchRect/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0.701961, 0, 1)
 theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/ClosePanelButton" to="." method="_on_close_panel_button_pressed"]
+[connection signal="pressed" from="MarginContainer/NinePatchRect/ClosePanelButton" to="." method="_on_close_panel_button_pressed"]
