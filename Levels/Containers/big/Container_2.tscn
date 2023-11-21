@@ -16,50 +16,50 @@
 
 [node name="BaseContainer" instance=ExtResource("1_p7dnn")]
 
-[node name="Platforms" type="Node2D" parent="." index="4"]
+[node name="Platforms" type="Node2D" parent="." index="3"]
 
 [node name="JumpThroughPlatform" parent="Platforms" index="0" instance=ExtResource("2_syv6k")]
-position = Vector2(-216, 103)
+position = Vector2(-215, 90)
 
 [node name="JumpThroughPlatform2" parent="Platforms" index="1" instance=ExtResource("2_syv6k")]
-position = Vector2(-285, -1)
+position = Vector2(-287, -16)
 
 [node name="JumpThroughPlatform3" parent="Platforms" index="2" instance=ExtResource("2_syv6k")]
-position = Vector2(-119, -1)
+position = Vector2(-121, -16)
 
 [node name="JumpThroughPlatform5" parent="Platforms" index="3" instance=ExtResource("2_syv6k")]
 position = Vector2(214, -1)
 
 [node name="JumpThroughPlatform4" parent="Platforms" index="4" instance=ExtResource("2_syv6k")]
-position = Vector2(0, -103)
+position = Vector2(0, -119)
 
 [node name="MovingPlatform" parent="Platforms" index="5" instance=ExtResource("10_qfiey")]
 position = Vector2(87, 137)
 
-[node name="Obstacles" type="Node2D" parent="." index="5"]
+[node name="Obstacles" type="Node2D" parent="." index="4"]
 
 [node name="VendingMachine" parent="Obstacles" index="0" instance=ExtResource("3_rqonx")]
-position = Vector2(-166, -1)
+position = Vector2(-168, -16)
 
 [node name="VendingMachine2" parent="Obstacles" index="1" instance=ExtResource("3_rqonx")]
 position = Vector2(234, 168)
 
 [node name="SoydaBox" parent="Obstacles" index="2" instance=ExtResource("13_e4q5p")]
-position = Vector2(-195, -3)
+position = Vector2(-197, -18)
 
 [node name="SoydaBox2" parent="Obstacles" index="3" instance=ExtResource("13_e4q5p")]
-position = Vector2(-196, -14)
+position = Vector2(-198, -29)
 
 [node name="SoydaBox3" parent="Obstacles" index="4" instance=ExtResource("13_e4q5p")]
-position = Vector2(-194, -25)
+position = Vector2(-196, -40)
 
 [node name="TrashCan" parent="Obstacles" index="5" instance=ExtResource("14_a7hhv")]
 position = Vector2(246, -1)
 
-[node name="Lighting" type="Node2D" parent="." index="6"]
+[node name="Lighting" type="Node2D" parent="." index="5"]
 
 [node name="SwitchedBlacklightInversePointlight" parent="Lighting" index="0" instance=ExtResource("3_f6ih4")]
-position = Vector2(-217, 101)
+position = Vector2(-214, 78)
 
 [node name="SwitchedBlacklightInversePointlight4" parent="Lighting" index="1" instance=ExtResource("3_f6ih4")]
 position = Vector2(207, -28)
@@ -70,16 +70,16 @@ position = Vector2(1, -21)
 [node name="SwitchedBlacklightInversePointlight3" parent="Lighting" index="3" instance=ExtResource("3_f6ih4")]
 position = Vector2(235, 137)
 
-[node name="Enemies" type="Node2D" parent="." index="7"]
+[node name="Enemies" type="Node2D" parent="." index="6"]
 
 [node name="ShootyNPC" parent="Enemies" index="0" instance=ExtResource("5_kykin")]
-position = Vector2(-283, -4)
+position = Vector2(-285, -19)
 
 [node name="ShootyNPC2" parent="Enemies" index="1" instance=ExtResource("5_kykin")]
-position = Vector2(-88, -3)
+position = Vector2(-90, -18)
 
 [node name="RunningAssassin" parent="Enemies" index="2" instance=ExtResource("7_2rajp")]
-position = Vector2(-216, 97)
+position = Vector2(-215, 84)
 
 [node name="RunningAssassin2" parent="Enemies" index="3" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_2rajp")]
 position = Vector2(167, 164)
@@ -92,9 +92,9 @@ animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 [node name="NPC_02_DockWorker" parent="Enemies" index="5" instance=ExtResource("12_pvej1")]
 position = Vector2(158, -4)
 
-[node name="EnemySpawnPoints" type="Node2D" parent="." index="8"]
+[node name="EnemySpawnPoints" type="Node2D" parent="." index="7"]
 
-[node name="Traps" type="Node2D" parent="." index="9"]
+[node name="Traps" type="Node2D" parent="." index="8"]
 
 [node name="StarTrap-Shooter" parent="Traps" index="0" instance=ExtResource("4_6jjch")]
 position = Vector2(1, -20)
@@ -106,12 +106,12 @@ position = Vector2(-138, 161)
 position = Vector2(-287, 160)
 
 [node name="TrapSpikes3" parent="Traps" index="3" instance=ExtResource("5_8168g")]
-position = Vector2(-51, -79)
+position = Vector2(-51, -95)
 rotation = 3.14159
 
 [node name="TrapSpikes4" parent="Traps" index="4" instance=ExtResource("5_8168g")]
-position = Vector2(49, -79)
+position = Vector2(49, -95)
 rotation = 3.14159
 
-[node name="Exterior" parent="." index="10"]
+[node name="Exterior" parent="." index="9"]
 texture = ExtResource("2_eoye4")
