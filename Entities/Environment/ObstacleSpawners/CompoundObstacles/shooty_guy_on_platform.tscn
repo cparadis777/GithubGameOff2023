@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://biegidqhn52kc"]
+
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="1_smond"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="2_ks3ve"]
+
+[node name="ShootyGuyOnPlatform" type="Node2D"]
+
+[node name="ShootyNPC" parent="." instance=ExtResource("1_smond")]
+
+[node name="MovingPlatform" parent="." instance=ExtResource("2_ks3ve")]
+scale = Vector2(0.631187, 0.631187)
+
+[node name="Location2" parent="MovingPlatform/PositionMarkers" index="0"]
+position = Vector2(-1.58432, -228.142)
+
+[editable path="MovingPlatform"]
