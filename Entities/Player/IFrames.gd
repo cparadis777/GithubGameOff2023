@@ -4,7 +4,7 @@ extends Node2D
 var iframes_timer : Timer
 signal started
 signal finished
-@export var iframes_duration : float = 0.2
+@export var iframes_duration : float = 0.4
 
 @onready var active: bool:
 	get:
