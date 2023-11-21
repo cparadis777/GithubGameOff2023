@@ -11,7 +11,7 @@ var directions = {
 	"LEFT": Vector2.LEFT,
 }     
 
-var distance = 144
+var distance = 196
 @export var linked_portal : Node
 @export var tween_duration : float = 1.25
 @export var locked = false
