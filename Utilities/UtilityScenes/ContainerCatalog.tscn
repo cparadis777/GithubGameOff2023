@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://mk0polehyr7k"]
+[gd_scene load_steps=7 format=3 uid="uid://mk0polehyr7k"]
 
 [ext_resource type="Script" path="res://Utilities/UtilityScenes/ContainerCatalog.gd" id="1_b372s"]
 [ext_resource type="Script" path="res://Utilities/UtilityScenes/ContainerProperties.gd" id="2_5buau"]
+[ext_resource type="PackedScene" uid="uid://81l71vr0sqf2" path="res://Levels/Containers/big/Container_1.tscn" id="3_bhmu2"]
+[ext_resource type="PackedScene" uid="uid://bcwwg0f3h5ib1" path="res://Levels/Containers/big/Container_2.tscn" id="4_8x4k3"]
+[ext_resource type="PackedScene" uid="uid://dt181ly2upt1t" path="res://Entities/Environment/Containers/Guac/LargeContainer2.tscn" id="5_npi2v"]
+[ext_resource type="PackedScene" uid="uid://n1c6uj18b3nd" path="res://Entities/Environment/Containers/Guac/LargeContainer3.tscn" id="6_jiaum"]
 
 [node name="ContainerCatalog" type="Node"]
 script = ExtResource("1_b372s")
@@ -11,19 +15,19 @@ debug_mode = true
 script = ExtResource("2_5buau")
 container_type = 5
 container_exit_flags = 15
-scene_path = "res://Levels/Containers/big/Container_1.tscn"
+packed_scene = ExtResource("3_bhmu2")
 
 [node name="Container2" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
-scene_path = "res://Levels/Containers/big/Container_2.tscn"
+packed_scene = ExtResource("4_8x4k3")
 
 [node name="GuacContainer" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
-scene_path = "res://Entities/Environment/Containers/Guac/LargeContainer2.tscn"
+packed_scene = ExtResource("5_npi2v")
 
 [node name="GuacContainer2" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
-scene_path = "res://Entities/Environment/Containers/Guac/LargeContainer3.tscn"
+packed_scene = ExtResource("6_jiaum")

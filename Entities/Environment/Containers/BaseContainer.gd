@@ -52,7 +52,7 @@ func _ready():
 	if doors_unlocked:
 		open_all_doors()
 		
-	await get_tree().create_timer(1.2)
+	await get_tree().create_timer(1.2).timeout
 	if StageManager.current_player == null:
 		spawn_player_for_testing()
 		

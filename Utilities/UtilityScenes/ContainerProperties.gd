@@ -5,7 +5,8 @@ class_name ContainerData
 
 @export var container_type:ContainerProperties.container_type
 @export_flags("Left", "Right", "Up", "Down") var container_exit_flags:int = Utils.DirectionFlags.NIL
-@export_multiline var scene_path:String
+@export_multiline var scene_path:String = ""
+@export var packed_scene : PackedScene
 
 var container_exits:Dictionary = {Utils.Directions.UP: false, Utils.Directions.RIGHT: false, Utils.Directions.DOWN: false, Utils.Directions.LEFT: false}
 
@@ -29,3 +30,11 @@ func match_exits(exits:Dictionary) -> bool:
 
 func match_type(type:ContainerProperties.container_type) -> bool:
 	return type == self.container_type
+
+func generate_fight_scene():
+	if packed_scene != null:
+		return packed_scene.instantiate()
+	elif scene_path != "":
+		return load(scene_path).instantiate()
+	else:
+		printerr("ContainerProperties for " + self.name + " needs a scene path or packed scene.")
