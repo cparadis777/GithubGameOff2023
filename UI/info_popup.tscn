@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://UI/info_popup.gd" id="1_0spvx"]
 [ext_resource type="Texture2D" uid="uid://f1pea0026o0o" path="res://art/UI/9patch.png" id="2_t5r7d"]
-[ext_resource type="Texture2D" uid="uid://c2mq8r0dhjp8w" path="res://art/UI/x.png" id="3_ey6r6"]
+[ext_resource type="Texture2D" uid="uid://cg3ltdy4a4pau" path="res://art/UI/arrow.png" id="3_twn83"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d6y45"]
 
@@ -34,14 +34,17 @@ patch_margin_bottom = 6
 
 [node name="ClosePanelButton" type="Button" parent="MarginContainer/NinePatchRect"]
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = -18.0
-offset_top = 7.0
+offset_top = -16.0
 offset_right = -7.0
-offset_bottom = 18.0
+offset_bottom = -5.0
 grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 8
 theme_override_colors/icon_normal_color = Color(0, 0.462745, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0.243137, 0, 1)
@@ -51,7 +54,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_d6y45")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_d6y45")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_d6y45")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_d6y45")
-icon = ExtResource("3_ey6r6")
+icon = ExtResource("3_twn83")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect"]
 layout_mode = 1
