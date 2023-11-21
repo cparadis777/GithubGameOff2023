@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://n1c6uj18b3nd"]
+[gd_scene load_steps=18 format=3 uid="uid://n1c6uj18b3nd"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_wu8vm"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_laaik"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://cmpouufnlcxkn" path="res://Entities/Environment/Platforms/basic_platform.tscn" id="9_c26n4"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="9_tygo5"]
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="10_16thc"]
-[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="10_hs2qa"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="12_7l7dw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
@@ -30,7 +29,7 @@ size = Vector2(82, 480)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xia"]
 size = Vector2(796, 340)
 
-[node name="BaseContainer" type="StaticBody2D"]
+[node name="BaseContainer2" type="StaticBody2D"]
 script = ExtResource("1_wu8vm")
 
 [node name="Interior" type="Sprite2D" parent="."]
@@ -143,9 +142,6 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
-
-[node name="Player" parent="." instance=ExtResource("10_hs2qa")]
-position = Vector2(3, 40)
 
 [node name="BasicPlatform" parent="." instance=ExtResource("9_c26n4")]
 position = Vector2(0, 50)
