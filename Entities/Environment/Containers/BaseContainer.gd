@@ -62,6 +62,7 @@ func remove_unneeded_doors():
 			if Utils.DirectionFlags[exit.name] & container_exit_flags:
 				has_entrance[Utils.flag_to_direction(Utils.DirectionFlags[exit.name])] = true;
 				exit.visible = true
+				# print("has exit: %s" % exit.name)
 			else:
 				exit.queue_free()
 		
@@ -76,7 +77,7 @@ func open_all_doors():
 	# we'll need some way to tell the adjacent containers to open their entrances
 	# maybe fire an event for the grid manager to catch and use coordinates to unlock
 	# adjacent doors
-	print("container beaten")
+	# print("container beaten")
 	for side in has_entrance:
 		doors[side].locked = false
 			
@@ -87,12 +88,12 @@ func _on_switch_toggled(pressed):
 	
 func _on_container_interior_body_exited(body:Node2D):
 	if body.is_in_group("Player"):
-		print("Showing outside container")
+		# print("Showing outside container")
 		$Exterior.show()
 
 func _on_container_interior_body_entered(body:Node2D):
 	if body.is_in_group("Player"):
-		print("Hidden outside container")
+		# print("Hidden outside container")
 		$Exterior.hide()
 
 

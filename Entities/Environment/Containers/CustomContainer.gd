@@ -1,5 +1,5 @@
 extends "res://Entities/Environment/Containers/BaseContainer.gd"
-
+## DEPRECATED ##
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

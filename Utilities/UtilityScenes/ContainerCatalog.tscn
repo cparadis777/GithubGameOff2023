@@ -15,5 +15,5 @@ scene_path = "res://Levels/Containers/big/Container_1.tscn"
 
 [node name="Container2" type="Node" parent="."]
 script = ExtResource("2_5buau")
-container_exit_flags = 5
+container_exit_flags = 15
 scene_path = "res://Levels/Containers/big/Container_2.tscn"

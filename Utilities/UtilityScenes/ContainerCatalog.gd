@@ -17,7 +17,9 @@ func generate_playspace(playspace_parameters:Dictionary) -> Dictionary:
 		var chosen_container:ContainerData = valid_containers.pick_random()
 		
 		var container_instance = load(chosen_container.scene_path).instantiate()
-		container_instance.container_exit_flags = chosen_container.container_exit_flags
+		
+		container_instance.container_exit_flags = Utils.directions_to_flags(exits)
+
 		playspace[coordinate] = container_instance
 
 	return playspace

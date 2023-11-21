@@ -95,22 +95,18 @@ texture = SubResource("PlaceholderTexture2D_v1mhl")
 [node name="Exits" type="Node2D" parent="."]
 
 [node name="LEFT" parent="Exits" instance=ExtResource("4_rpji1")]
-visible = false
 z_index = -1
 position = Vector2(-398, 169)
 
 [node name="RIGHT" parent="Exits" instance=ExtResource("5_ttncq")]
-visible = false
 z_index = -1
 position = Vector2(398, 169)
 
 [node name="UP" parent="Exits" instance=ExtResource("6_jq33i")]
-visible = false
 z_index = -1
 position = Vector2(0, -171)
 
 [node name="DOWN" parent="Exits" instance=ExtResource("7_17qf5")]
-visible = false
 z_index = -1
 position = Vector2(0, 169)
 
