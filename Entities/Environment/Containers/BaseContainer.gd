@@ -54,16 +54,16 @@ func _ready():
 
 func remove_unneeded_doors():
 	if container_exit_flags < 15:
-		print("found a container to check.")
+		#print("found a container to check.")
 
-	for exit in exits_container_node.get_children():
-		# bitwise comparison math based on the name of the exit
-		# exits must be named LEFT, RIGHT, UP, or DOWN for this to work
-		if Utils.DirectionFlags[exit.name] & container_exit_flags:
-			has_entrance[Utils.flag_to_direction(Utils.DirectionFlags[exit.name])] = true;
-			exit.visible = true
-		else:
-			exit.queue_free()
+		for exit in exits_container_node.get_children():
+			# bitwise comparison math based on the name of the exit
+			# exits must be named LEFT, RIGHT, UP, or DOWN for this to work
+			if Utils.DirectionFlags[exit.name] & container_exit_flags:
+				has_entrance[Utils.flag_to_direction(Utils.DirectionFlags[exit.name])] = true;
+				exit.visible = true
+			else:
+				exit.queue_free()
 		
 func open_door(side:Utils.Directions):
 	# change the sprite?
