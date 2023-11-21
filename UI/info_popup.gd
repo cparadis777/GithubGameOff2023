@@ -5,7 +5,7 @@ extends Node2D
 @export_multiline var info_text : String :
 	set(value):
 		info_text = value
-		$Panel/MarginContainer/VBoxContainer/Label.text = value
+		$MarginContainer/NinePatchRect/MarginContainer/CenterContainer/Label.text = value
 	get:
 		return info_text
 
@@ -13,7 +13,7 @@ var original_scale : Vector2
 
 func _ready():
 	if Engine.is_editor_hint():
-		$Panel/MarginContainer/VBoxContainer/Label.text = info_text
+		$MarginContainer/NinePatchRect/MarginContainer/CenterContainer/Label.text = info_text
 	else:
 		original_scale = scale
 		hide()
