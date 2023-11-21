@@ -84,7 +84,7 @@ func open_all_doors():
 			get_node(doors[side]).locked = false
 			
 
-func _on_switch_toggled(pressed):
+func _on_switch_toggled(_pressed):
 	if open_doors_with_switch:
 		open_all_doors()
 	

@@ -26,7 +26,7 @@ func _process(_delta):
 func _unhandled_input(event):
 	listen_for_next_slide_keys(event)
 
-func listen_for_next_slide_keys(event):
+func listen_for_next_slide_keys(_event):
 	if visible:
 		var actions_to_hide = ["ui_cancel", "jump", "move_left", "move_right"]
 		for action in actions_to_hide:

@@ -60,3 +60,5 @@ visible = false
 position = Vector2(-960, 0)
 container_exit_flags = 2
 show_exterior_on_start = false
+
+[editable path="StartContainer"]
