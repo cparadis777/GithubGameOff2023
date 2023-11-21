@@ -51,6 +51,18 @@ func _ready():
 	
 	if doors_unlocked:
 		open_all_doors()
+		
+	await get_tree().create_timer(1.2)
+	if StageManager.current_player == null:
+		spawn_player_for_testing()
+		
+func spawn_player_for_testing():
+	print(self.name + ": No player detected, generating player scene. BaseContainer.gda")
+	var player_scene_path = "res://Entities/Player/PlayerController.tscn"
+	var player_node = load(player_scene_path).instantiate()
+	add_child(player_node)
+	player_node.position = Vector2(-350, 150)
+
 
 func remove_unneeded_doors():
 	if container_exit_flags < 15:

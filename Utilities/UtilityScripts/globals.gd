@@ -30,7 +30,7 @@ var difficulty : DifficultyScales = DifficultyScales.TRIVIAL
 
 
 var player_stats = {
-	"max_health" : 50 # 1 heart = 10 points
+	"max_health" : 100, # 1 heart = 10 points
 }
 
 

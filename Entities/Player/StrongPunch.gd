@@ -134,7 +134,7 @@ func enter(_msg := {}) -> void:
 	
 	
 func exit():
-	player.animation_player.stop()
+	player.animation_player.call_deferred("stop")
 	$ChargeAudio.stop()
 	reset_vfx()
 	charge_vfx.hide()
