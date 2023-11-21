@@ -1,0 +1,188 @@
+[gd_scene load_steps=20 format=3 uid="uid://dt181ly2upt1t"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_o8gtw"]
+[ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_0qmc8"]
+[ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_u3v6o"]
+[ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_tccdy"]
+[ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="5_q1cg3"]
+[ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="6_tghpn"]
+[ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="7_cc2ux"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_ywibr"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="9_u18y4"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="10_s5arr"]
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="11_7dwax"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="12_xjc8u"]
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="13_3q8nu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
+size = Vector2(400, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8etye"]
+size = Vector2(82, 273)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_v1mhl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpblv"]
+size = Vector2(960, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5deis"]
+size = Vector2(82, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xia"]
+size = Vector2(796, 340)
+
+[node name="BaseContainer" type="StaticBody2D"]
+script = ExtResource("1_o8gtw")
+
+[node name="Interior" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(0, -6.55651e-06)
+scale = Vector2(2, 2)
+texture = ExtResource("2_0qmc8")
+
+[node name="Openings" type="Node2D" parent="."]
+
+[node name="TopOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="TopCollisionA" type="CollisionShape2D" parent="Openings/TopOpening"]
+position = Vector2(-280, -206)
+shape = SubResource("RectangleShape2D_pjf8p")
+
+[node name="TopCollisionB" type="CollisionShape2D" parent="Openings/TopOpening"]
+position = Vector2(280, -206)
+shape = SubResource("RectangleShape2D_pjf8p")
+
+[node name="BottomOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="BotCollisionA" type="CollisionShape2D" parent="Openings/BottomOpening"]
+position = Vector2(-280, 204)
+shape = SubResource("RectangleShape2D_pjf8p")
+
+[node name="BotCollisionB" type="CollisionShape2D" parent="Openings/BottomOpening"]
+position = Vector2(280, 204)
+shape = SubResource("RectangleShape2D_pjf8p")
+
+[node name="LeftOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="LeftOpeningA" type="CollisionShape2D" parent="Openings/LeftOpening"]
+position = Vector2(-439, -104.5)
+shape = SubResource("RectangleShape2D_8etye")
+
+[node name="RightOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="RightOpeningA" type="CollisionShape2D" parent="Openings/RightOpening"]
+position = Vector2(440, -104.5)
+shape = SubResource("RectangleShape2D_8etye")
+
+[node name="Left" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(-398, 169)
+scale = Vector2(21, 138)
+texture = SubResource("PlaceholderTexture2D_v1mhl")
+
+[node name="Right" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(419, 169)
+scale = Vector2(21, 138)
+texture = SubResource("PlaceholderTexture2D_v1mhl")
+
+[node name="Bottom" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(79, 186)
+scale = Vector2(159, 17)
+texture = SubResource("PlaceholderTexture2D_v1mhl")
+
+[node name="Top" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(79, -170)
+scale = Vector2(159, 17)
+texture = SubResource("PlaceholderTexture2D_v1mhl")
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="LEFT" parent="Exits" instance=ExtResource("3_u3v6o")]
+z_index = -1
+position = Vector2(-398, 169)
+
+[node name="RIGHT" parent="Exits" instance=ExtResource("4_tccdy")]
+z_index = -1
+position = Vector2(398, 169)
+
+[node name="UP" parent="Exits" instance=ExtResource("5_q1cg3")]
+z_index = -1
+position = Vector2(0, -171)
+
+[node name="DOWN" parent="Exits" instance=ExtResource("6_tghpn")]
+z_index = -1
+position = Vector2(0, 169)
+
+[node name="Exterior" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(4.72069e-05, -0.500001)
+scale = Vector2(2.5, 2.50521)
+texture = ExtResource("7_cc2ux")
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -206)
+shape = SubResource("RectangleShape2D_dpblv")
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 204)
+shape = SubResource("RectangleShape2D_dpblv")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-439, -1)
+shape = SubResource("RectangleShape2D_5deis")
+
+[node name="RightCollision" type="CollisionShape2D" parent="."]
+position = Vector2(439, -1)
+shape = SubResource("RectangleShape2D_5deis")
+
+[node name="ContainerInterior" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_m7xia")
+
+[node name="JumpThroughPlatform" parent="." instance=ExtResource("8_ywibr")]
+position = Vector2(-315, -46)
+
+[node name="JumpThroughPlatform2" parent="." instance=ExtResource("8_ywibr")]
+position = Vector2(315, -4)
+
+[node name="JumpThroughPlatform5" parent="." instance=ExtResource("8_ywibr")]
+position = Vector2(315, -95)
+
+[node name="JumpThroughPlatform6" parent="." instance=ExtResource("8_ywibr")]
+position = Vector2(151, -95)
+
+[node name="JumpThroughPlatform7" parent="." instance=ExtResource("8_ywibr")]
+position = Vector2(-14, -95)
+
+[node name="JumpThroughPlatform3" parent="." instance=ExtResource("8_ywibr")]
+position = Vector2(-315, 59)
+
+[node name="JumpThroughPlatform4" parent="." instance=ExtResource("8_ywibr")]
+position = Vector2(-149, 59)
+
+[node name="MovingPlatform" parent="." instance=ExtResource("9_u18y4")]
+position = Vector2(127, 114)
+
+[node name="Player" parent="." instance=ExtResource("10_s5arr")]
+position = Vector2(-284, 161)
+
+[node name="RunningAssassin" parent="." instance=ExtResource("11_7dwax")]
+position = Vector2(328, -95)
+
+[node name="ShootyNPC" parent="." instance=ExtResource("12_xjc8u")]
+position = Vector2(-345, 60)
+
+[node name="ShootyNPC2" parent="." instance=ExtResource("12_xjc8u")]
+position = Vector2(127, 109)
+
+[node name="BaseNPC2" parent="." instance=ExtResource("13_3q8nu")]
+position = Vector2(-360, -49)
+
+[connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
+[connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
