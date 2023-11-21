@@ -17,3 +17,13 @@ scene_path = "res://Levels/Containers/big/Container_1.tscn"
 script = ExtResource("2_5buau")
 container_exit_flags = 15
 scene_path = "res://Levels/Containers/big/Container_2.tscn"
+
+[node name="GuacContainer" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_exit_flags = 15
+scene_path = "res://Entities/Environment/Containers/Guac/LargeContainer2.tscn"
+
+[node name="GuacContainer2" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_exit_flags = 15
+scene_path = "res://Entities/Environment/Containers/Guac/LargeContainer3.tscn"
