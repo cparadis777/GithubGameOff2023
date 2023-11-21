@@ -47,7 +47,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _enter_tree():
 	if StageManager.current_player == null:
 		StageManager.current_player = self
-		$Lookahead/Camera2D.make_current()
+		#$Lookahead/Camera2D.make_current()
 	else:
 		printerr("Too many player controllers already. Queuing_free.")
 		printerr("But first. I'm in this node: " + owner.name)
