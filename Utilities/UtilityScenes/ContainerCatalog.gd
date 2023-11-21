@@ -15,8 +15,10 @@ func generate_playspace(playspace_parameters:Dictionary) -> Dictionary:
 		if valid_containers.size() == 0:
 			push_error("No container respects criterions")
 		var chosen_container:ContainerData = valid_containers.pick_random()
-
-		playspace[coordinate] = chosen_container
+		
+		var container_instance = load(chosen_container.scene_path).instantiate()
+		container_instance.container_exit_flags = chosen_container.container_exit_flags
+		playspace[coordinate] = container_instance
 
 	return playspace
 
@@ -27,5 +29,4 @@ func get_valid_containers(type:ContainerProperties.container_type, exits:Diction
 		if container.match_type(type) or self.debug_mode:
 			if container.match_exits(exits) or self.debug_mode:
 				valid_containers.append(container)
-	print(valid_containers)
 	return valid_containers
