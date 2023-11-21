@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddkm7lpck4cwy"]
+
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="1_5c011"]
+[ext_resource type="Script" path="res://Entities/Environment/ObstacleSpawners/ObstacleSpawner.gd" id="1_lhvoj"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_268b7"]
+
+[node name="Obstacles" type="Node2D"]
+script = ExtResource("1_lhvoj")
+
+[node name="SpawnList" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("moving_platform", "platform_jump_thru", "platform_jump_thru 2", "platform_jump_thru 3", "platform_jump_thru 4"), [ExtResource("1_5c011"), ExtResource("2_268b7"), ExtResource("2_268b7"), ExtResource("2_268b7"), ExtResource("2_268b7")]]
+
+[node name="SpawnZone" type="ReferenceRect" parent="."]
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 704.0
+offset_bottom = 45.0
