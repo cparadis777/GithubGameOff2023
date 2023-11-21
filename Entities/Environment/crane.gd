@@ -66,7 +66,7 @@ func move_container(direction:Utils.Directions) -> void:
 			1:
 				if current_column < n_columns - 1:
 					self.move_ready = false
-					self.current_column += 1
+					self.current_column += 1	
 					var tween = get_tree().create_tween().set_parallel(true)
 					tween.finished.connect(move_done)
 					tween.tween_property(self.current_container, "position", self.markers[self.current_column].position, self.move_time)

@@ -56,10 +56,10 @@ func place_container(container:StaticBody2D, column:int) -> bool:
 	
 	var drop_point_to_use:Marker2D = self.get_drop_point(position_to_place)
 	var tween = get_tree().create_tween()
+	tween.finished.connect(drop_done)
 	# v = d/t -> t = d/v
 	var tween_time = container.global_position.distance_to(drop_point_to_use.global_position)/100
 	tween.tween_property(container, "global_position", drop_point_to_use.global_position, tween_time).set_trans(tween.TRANS_QUAD).set_ease(tween.EASE_IN)
-	tween.tween_callback(drop_done)
 	drop_point_to_use.set_container(container)
 	self.container_dropping = container
 	self.drop_point_targeted = drop_point_to_use
@@ -88,14 +88,19 @@ func check_under(coordinate:Vector2) -> bool:
 		return true
 	return false
 
-func drop_done()->void:
+func drop_done() -> void:
 	var old_parent = self.container_dropping.get_parent()
 	old_parent.remove_child(self.container_dropping)
 	self.drop_point_targeted.add_child(self.container_dropping)
 	self.container_dropping.position = (Vector2(0,0))
 	self.validate_level()
+	var tween = get_tree().create_tween()
+	tween.tween_property(container_dropping, "position", Vector2(0, -5), 0.2).set_ease(tween.EASE_OUT)
+	tween.tween_property(container_dropping, "position", Vector2(0,0), 0.1)
+
 	emit_signal("weight_added", self.container_dropping.weigth)
 	emit_signal("drop_over")
+
 
 
 func check_drop_possible(column:int) -> bool:
