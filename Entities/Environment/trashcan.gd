@@ -4,6 +4,7 @@ var kicked = false
 
 @export var soda_can : PackedScene = preload("res://Entities/Environment/Kickables/soda_can.tscn")
 @export var max_hits = 2
+@export var chance_to_spawn_health = 1.0
 var hits = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -34,9 +35,18 @@ func die():
 	await get_tree().create_timer(0.5).timeout
 	queue_free()
 
+func spawn_health_pickup():
+	var health_pickup = preload("res://Entities/Environment/Pickables/health_pickable.tscn").instantiate()
+	add_sibling(health_pickup)
+	health_pickup.global_position = global_position
+	health_pickup.position += Vector2.ONE.rotated(randf()*TAU) * 3.0
+	
+
 func _on_hit(attackPacket : AttackPacket):
 	if !kicked:
 		spawn_soda_cans(attackPacket.impact_vector)
+		if randf() <= chance_to_spawn_health:
+			spawn_health_pickup()
 		
 	freeze = false
 	var knockbackMultiplier = 1.5
