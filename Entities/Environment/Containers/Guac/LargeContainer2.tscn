@@ -31,6 +31,8 @@ size = Vector2(82, 480)
 size = Vector2(796, 340)
 
 [node name="BaseContainer" type="StaticBody2D"]
+collision_layer = 24
+collision_mask = 7
 script = ExtResource("1_o8gtw")
 
 [node name="Interior" type="Sprite2D" parent="."]
