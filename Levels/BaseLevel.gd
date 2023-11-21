@@ -17,7 +17,8 @@ func _ready():
 		directions.push_back(Utils.Directions.UP)
 	if (exit_flags & Utils.DirectionFlags.DOWN):
 		directions.push_back(Utils.Directions.DOWN)
-	$BaseContainer.set_entrances(directions)
+	if has_node("BaseContainer") and $BaseContainer.has_method("set_entrances"):
+		$BaseContainer.set_entrances(directions)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

@@ -99,6 +99,6 @@ func stop_moving():
 	if tween.is_running():
 		tween.pause()
 
-func _on_switch_toggled():
+func _on_switch_toggled(_pressed):
 	switch_pressed = !switch_pressed
 

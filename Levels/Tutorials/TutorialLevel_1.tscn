@@ -7,9 +7,6 @@
 [node name="BaseLevel" instance=ExtResource("1_p2ip4")]
 exit_flags = 2
 
-[node name="RightArrow" parent="BaseContainer" index="2"]
-position = Vector2(0, 65)
-
 [node name="NextLevelDoor" parent="BaseContainer" index="9"]
 next_scene = ExtResource("2_jo36j")
 

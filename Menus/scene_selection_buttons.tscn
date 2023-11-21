@@ -19,12 +19,6 @@ offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ContainerStackingStartButton" type="Button" parent="."]
-layout_mode = 2
-text = "Play!"
-script = ExtResource("1_a863l")
-scene = ExtResource("3_8qbco")
-
 [node name="LevelMockupButton" type="Button" parent="."]
 visible = false
 layout_mode = 2
@@ -41,6 +35,12 @@ scene = ExtResource("5_7bqgq")
 
 [node name="TutorialButton" type="Button" parent="."]
 layout_mode = 2
-text = "Tutorial"
+text = "Play"
 script = ExtResource("1_a863l")
 scene = ExtResource("6_rlsbl")
+
+[node name="ContainerStackingStartButton" type="Button" parent="."]
+layout_mode = 2
+text = "Skip Tutorial"
+script = ExtResource("1_a863l")
+scene = ExtResource("3_8qbco")
