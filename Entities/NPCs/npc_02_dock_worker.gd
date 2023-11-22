@@ -47,7 +47,6 @@ func _ready():
 		avatar_root = $PaperDoll.scale
 	original_doll_scale = avatar_root.scale
 	
-	State = States.ALERT
 	$HurtFlash.hide()
 
 	$DecisionTimer.start()
@@ -56,10 +55,8 @@ func _ready():
 
 
 func activate():
-	# consider putting the DecisionTimer start in here.
-	# that will let levels spawn without paused NPCs
-	pass
-	
+	State = States.ALERT
+
 
 func _physics_process(delta):
 	if State == States.ALERT:
