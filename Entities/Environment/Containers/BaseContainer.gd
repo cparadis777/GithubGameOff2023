@@ -8,6 +8,8 @@ extends StaticBody2D
 @export var open_doors_with_switch = false
 @export var show_exterior_on_start = true
 
+@export var num_generated_objects:int = 0
+
 var weigth:int = 100
 var grid_position:Vector2 = Vector2(100,100)
 var type: ContainerProperties.container_type = ContainerProperties.container_type.BLUE
@@ -46,8 +48,10 @@ func _ready():
 		exits_container_node = $Exits
 	else:
 		print_debug("using deprecated BaseContainer. Use res://Entities/Environment/Containers/LargeContainer.tscn instead")
-	
 	remove_unneeded_doors()
+	
+	if (has_node("SpawningLogic")):
+		$SpawningLogic.spawn_random_shit(num_generated_objects)
 	
 	if doors_unlocked:
 		open_all_doors()

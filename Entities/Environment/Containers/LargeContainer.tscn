@@ -122,6 +122,7 @@ position = Vector2(0, 169)
 
 [node name="Exterior" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 position = Vector2(4.72069e-05, -0.500001)
 scale = Vector2(2.5, 2.50521)
 texture = ExtResource("4_ge3qy")
