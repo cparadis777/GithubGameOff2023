@@ -65,7 +65,9 @@ func drop_down(platform):
 	if platform.has_method("allow_player_to_pass"):
 		platform.allow_player_to_pass()
 		state_machine.transition_to("Air", {do_drop = true})
-		
+	elif platform.owner.has_method("allow_player_to_pass"): # moving platform
+		platform.owner.allow_player_to_pass()
+		state_machine.transition_to("Air", {do_drop = true})
 
 	
 
