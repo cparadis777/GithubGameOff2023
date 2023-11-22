@@ -45,6 +45,7 @@ position = Vector2(-57, 93)
 [node name="MovingGirder" parent="." index="3" instance=ExtResource("6_dn4kt")]
 position = Vector2(10, 87)
 trigger_node_path = NodePath("../Switch")
+autostart = false
 
 [node name="JumpThroughPlatform" parent="." index="5" instance=ExtResource("2_y80d6")]
 position = Vector2(-107, -44)

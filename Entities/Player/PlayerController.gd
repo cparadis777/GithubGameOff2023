@@ -145,7 +145,7 @@ func detect_jump_through_platform() -> StaticBody2D:
 	return jump_through_platform_detected
 
 
-func detect_moving_platform() -> AnimatableBody2D:
+func detect_moving_platform() -> StaticBody2D:
 	var moving_platform_detected
 	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
 	for candidate in candidate_bodies:
@@ -239,7 +239,7 @@ func _on_dash_started():
 func fast_punch(anim_name): # comes from $StateMachine/FastPunch
 	if state_machine.state.name == "FastPunch":
 		# play 3 animation sequence.
-		if not "punch" in animation_player.current_animation:
+		if not "fast_punch" in animation_player.current_animation:
 			last_fast_punch_animation = anim_name
 			animation_player.play(anim_name)
 			#$Body/CyberRoninSprites.play("fast_punch")
@@ -295,7 +295,7 @@ func _on_descending_kick_hurtbox_body_entered(body):
 
 #receive injury
 func _on_hit(attackPacket):
-	if !iframes and (state_machine.state.name not in [ "Dying", "Dead", "InTransit"]):
+	if !iframes and (state_machine.state.name not in [ "Dying", "Dead", "InTransit", "Dash", "DescendingKick"]):
 		
 		health -= attackPacket.damage
 		Globals.player_stats["health"] = health

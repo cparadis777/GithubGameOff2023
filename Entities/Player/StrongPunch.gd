@@ -134,7 +134,8 @@ func enter(_msg := {}) -> void:
 	
 	
 func exit():
-	player.animation_player.call_deferred("stop")
+	# chasing bug 139 https://github.com/cparadis777/GithubGameOff2023/issues/139
+	#player.animation_player.call_deferred("stop")
 	$ChargeAudio.stop()
 	reset_vfx()
 	charge_vfx.hide()

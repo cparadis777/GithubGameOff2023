@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cqe4xsra6b78j" path="res://audio/sfx/placeholder/sensor.wav" id="5_28n03"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kw8pi"]
-size = Vector2(20, 105)
+size = Vector2(50, 105)
 
 [sub_resource type="Animation" id="Animation_51060"]
 length = 0.001
@@ -224,7 +224,7 @@ position = Vector2(5, -11)
 [node name="DoorSprite" type="Sprite2D" parent="."]
 position = Vector2(1, -37)
 texture = ExtResource("2_14m57")
-hframes = 17
+hframes = 26
 
 [node name="Scanner" type="Sprite2D" parent="DoorSprite"]
 visible = false

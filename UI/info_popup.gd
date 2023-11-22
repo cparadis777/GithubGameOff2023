@@ -9,6 +9,9 @@ extends Node2D
 	get:
 		return info_text
 
+signal finished
+
+
 var original_scale : Vector2
 
 func _ready():
@@ -32,6 +35,7 @@ func listen_for_next_slide_keys(_event):
 		for action in actions_to_hide:
 			if Input.is_action_just_pressed(action):
 				hide()
+				finished.emit()
 				get_viewport().set_input_as_handled()
 				if next_slide != null:
 					next_slide.show()
@@ -44,6 +48,7 @@ func popup():
 	tween.tween_property(self, "scale", original_scale, 0.33)
 
 func _on_close_panel_button_pressed():
+	finished.emit()
 	hide()
 	if next_slide:
 		next_slide.show()
