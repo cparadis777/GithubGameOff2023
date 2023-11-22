@@ -1,17 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://dt181ly2upt1t"]
+[gd_scene load_steps=19 format=3 uid="uid://bqpc5e3t3s7f"]
 
-[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_o8gtw"]
-[ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_0qmc8"]
-[ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_u3v6o"]
-[ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_tccdy"]
-[ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="5_q1cg3"]
-[ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="6_tghpn"]
-[ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="7_cc2ux"]
-[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_ywibr"]
-[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="9_u18y4"]
-[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="11_7dwax"]
-[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="12_xjc8u"]
-[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="13_3q8nu"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_0kc34"]
+[ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_ntdlo"]
+[ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_46044"]
+[ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_prfh5"]
+[ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="5_66pqb"]
+[ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="6_ra1y8"]
+[ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="7_xommo"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="9_bccnw"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="11_ptdey"]
+[ext_resource type="PackedScene" uid="uid://b1gw2o1d85wpr" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/three_star_trap.tscn" id="12_8op0j"]
+[ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="12_e4gig"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="12_sh8xs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -30,16 +30,16 @@ size = Vector2(82, 480)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xia"]
 size = Vector2(796, 340)
 
-[node name="BaseContainer" type="StaticBody2D"]
+[node name="BaseContainer2" type="StaticBody2D"]
 collision_layer = 24
 collision_mask = 7
-script = ExtResource("1_o8gtw")
+script = ExtResource("1_0kc34")
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
 position = Vector2(0, -6.55651e-06)
 scale = Vector2(2, 2)
-texture = ExtResource("2_0qmc8")
+texture = ExtResource("2_ntdlo")
 
 [node name="Openings" type="Node2D" parent="."]
 
@@ -101,19 +101,19 @@ texture = SubResource("PlaceholderTexture2D_v1mhl")
 
 [node name="Exits" type="Node2D" parent="."]
 
-[node name="LEFT" parent="Exits" instance=ExtResource("3_u3v6o")]
+[node name="LEFT" parent="Exits" instance=ExtResource("3_46044")]
 z_index = -1
 position = Vector2(-398, 169)
 
-[node name="RIGHT" parent="Exits" instance=ExtResource("4_tccdy")]
+[node name="RIGHT" parent="Exits" instance=ExtResource("4_prfh5")]
 z_index = -1
 position = Vector2(398, 169)
 
-[node name="UP" parent="Exits" instance=ExtResource("5_q1cg3")]
+[node name="UP" parent="Exits" instance=ExtResource("5_66pqb")]
 z_index = -1
 position = Vector2(0, -171)
 
-[node name="DOWN" parent="Exits" instance=ExtResource("6_tghpn")]
+[node name="DOWN" parent="Exits" instance=ExtResource("6_ra1y8")]
 z_index = -1
 position = Vector2(0, 169)
 
@@ -121,7 +121,7 @@ position = Vector2(0, 169)
 visible = false
 position = Vector2(4.72069e-05, -0.500001)
 scale = Vector2(2.5, 2.50521)
-texture = ExtResource("7_cc2ux")
+texture = ExtResource("7_xommo")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -206)
@@ -146,41 +146,53 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
 
-[node name="JumpThroughPlatform" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(-315, -46)
+[node name="TrapSpikes2" parent="." instance=ExtResource("9_bccnw")]
+position = Vector2(-188, 160)
 
-[node name="JumpThroughPlatform2" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(315, -4)
+[node name="TrapSpikes7" parent="." instance=ExtResource("9_bccnw")]
+position = Vector2(-252, 160)
 
-[node name="JumpThroughPlatform5" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(315, -95)
+[node name="TrapSpikes4" parent="." instance=ExtResource("9_bccnw")]
+position = Vector2(-124, 161)
 
-[node name="JumpThroughPlatform6" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(151, -95)
+[node name="TrapSpikes3" parent="." instance=ExtResource("9_bccnw")]
+position = Vector2(171, 161)
 
-[node name="JumpThroughPlatform7" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(-14, -95)
+[node name="TrapSpikes6" parent="." instance=ExtResource("9_bccnw")]
+position = Vector2(108, 162)
 
-[node name="JumpThroughPlatform3" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(-315, 59)
+[node name="TrapSpikes5" parent="." instance=ExtResource("9_bccnw")]
+position = Vector2(236, 161)
 
-[node name="JumpThroughPlatform4" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(-149, 59)
+[node name="NPC_02_DockWorker" parent="." instance=ExtResource("11_ptdey")]
+position = Vector2(-4, 26)
 
-[node name="MovingPlatform" parent="." instance=ExtResource("9_u18y4")]
-position = Vector2(127, 114)
+[node name="TrashCan" parent="." instance=ExtResource("12_e4gig")]
+position = Vector2(-119, 26)
 
-[node name="RunningAssassin" parent="." instance=ExtResource("11_7dwax")]
-position = Vector2(328, -95)
+[node name="TrashCan2" parent="." instance=ExtResource("12_e4gig")]
+position = Vector2(79, 27)
 
-[node name="ShootyNPC" parent="." instance=ExtResource("12_xjc8u")]
-position = Vector2(-345, 60)
+[node name="JumpThroughPlatform" parent="." instance=ExtResource("12_sh8xs")]
+position = Vector2(-294, 80)
 
-[node name="ShootyNPC2" parent="." instance=ExtResource("12_xjc8u")]
-position = Vector2(127, 109)
+[node name="JumpThroughPlatform3" parent="." instance=ExtResource("12_sh8xs")]
+position = Vector2(-88, 27)
 
-[node name="BaseNPC2" parent="." instance=ExtResource("13_3q8nu")]
-position = Vector2(-360, -49)
+[node name="JumpThroughPlatform4" parent="." instance=ExtResource("12_sh8xs")]
+position = Vector2(-88, 27)
+
+[node name="JumpThroughPlatform5" parent="." instance=ExtResource("12_sh8xs")]
+position = Vector2(76, 27)
+
+[node name="JumpThroughPlatform2" parent="." instance=ExtResource("12_sh8xs")]
+position = Vector2(282, 80)
+
+[node name="StarTrap" parent="." instance=ExtResource("12_8op0j")]
+position = Vector2(-310, -50)
+
+[node name="StarTrap2" parent="." instance=ExtResource("12_8op0j")]
+position = Vector2(304, -50)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
