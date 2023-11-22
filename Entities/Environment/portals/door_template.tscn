@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bveugr8fx87uv"]
+[gd_scene load_steps=14 format=3 uid="uid://bveugr8fx87uv"]
 
 [ext_resource type="Script" path="res://test/plex/portal.gd" id="1_oyk0q"]
 [ext_resource type="Texture2D" uid="uid://dxi2dk16rwlnk" path="res://art/portals/side_door.png" id="2_14m57"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bn3e5vn4c0tp6" path="res://art/placeholder/door_identity_scanner.png" id="3_mdixo"]
 [ext_resource type="AudioStream" uid="uid://c4gbrca6v7x73" path="res://audio/sfx/placeholder/door_close.wav" id="4_dymyq"]
 [ext_resource type="AudioStream" uid="uid://cqe4xsra6b78j" path="res://audio/sfx/placeholder/sensor.wav" id="5_28n03"]
+[ext_resource type="AudioStream" uid="uid://dqloi1ogce5yt" path="res://audio/sfx/placeholder/locked.wav" id="7_nc6u8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kw8pi"]
 size = Vector2(50, 105)
@@ -252,6 +253,9 @@ bus = &"sfx"
 stream = ExtResource("5_28n03")
 pitch_scale = 1.25
 bus = &"sfx"
+
+[node name="LockedNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_nc6u8")
 
 [node name="paired_door_detector" type="Area2D" parent="."]
 position = Vector2(7, -37)

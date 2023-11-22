@@ -163,3 +163,6 @@ position = Vector2(264, 168)
 
 [node name="Exterior" parent="." index="8"]
 texture = ExtResource("3_ikmi4")
+
+[node name="ContainerInterior" parent="." index="13"]
+visible = true

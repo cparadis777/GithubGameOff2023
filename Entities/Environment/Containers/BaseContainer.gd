@@ -61,12 +61,24 @@ func _ready():
 	if StageManager.current_player == null:
 		spawn_player_for_testing()
 		
+		
+		
 func spawn_player_for_testing():
 	print(self.name + ": No player detected, generating player scene. BaseContainer.gda")
 	var player_scene_path = "res://Entities/Player/PlayerController.tscn"
 	var player_node = load(player_scene_path).instantiate()
 	add_child(player_node)
 	player_node.position = Vector2(-350, 150)
+
+func setup_backup_enemy_check():
+	var timer = Timer.new()
+	timer.name = "EnemyCheckTimer"
+	timer.set_wait_time(1.0)
+	add_child(timer)
+	timer.timeout.connect(self.safety_check_to_unlock_empty_rooms)
+	timer.start()
+
+
 
 func remove_unneeded_doors():
 	if container_exit_flags < 15:
@@ -94,6 +106,9 @@ func set_all_doors_locked(locked):
 		if has_node(doors[side]):
 			get_node(doors[side]).locked = locked	
 
+func unlock_all_doors():
+	set_all_doors_locked(false)
+
 func _on_switch_toggled(_pressed):
 	if unlock_with_switch:
 		set_all_doors_locked(false)
@@ -105,6 +120,30 @@ func _on_NPC_died(_name):
 		print("container beaten")
 		set_all_doors_locked(false)
 
+
+func safety_check_to_unlock_empty_rooms(): # from EnemyTimer.timeout, created in setup_backup_enemy_check()
+	# for NPCs which don't inherit BaseNPC
+	var local_enemies = get_local_enemies()
+	if local_enemies.size() == 0 and unlock_on_enemies_defeated:
+		unlock_all_doors()
+		if has_node("EnemyCheckTimer"):
+			$EnemyCheckTimer.stop()
+
+func activate_npcs():
+	for npc in get_local_enemies():
+		if npc.has_method("activate"):
+			npc.activate()
+		else:
+			printerr("npc has no activate method: ", npc.name)
+
+func get_local_enemies():
+	var enemies = get_tree().get_nodes_in_group("Enemies")
+	var local_enemies = []
+	for enemy in enemies:
+		if self.is_ancestor_of(enemy):
+			local_enemies.push_back(enemy)
+	return local_enemies
+
 func _on_container_interior_body_exited(body:Node2D):
 	if body.is_in_group("Player"):
 		# print("Showing outside container")
@@ -114,6 +153,8 @@ func _on_container_interior_body_entered(body:Node2D):
 	if body.is_in_group("Player"):
 		# print("Hidden outside container")
 		$Exterior.hide()
+		activate_npcs()
+		setup_backup_enemy_check()
 
 
 

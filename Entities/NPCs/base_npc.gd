@@ -36,11 +36,11 @@ func _ready():
 	if (owner and owner.has_method("_on_NPC_died")):
 		owner.num_enemies += 1
 		died.connect(owner._on_NPC_died)
-	# temporary, until we get NPC spawning and activating
-	activate(Globals.DifficultyScales.EASY)
-
-func activate(difficulty : Globals.DifficultyScales):
-	set_difficulty(difficulty)
+	
+	
+	
+func activate():
+	set_difficulty(Globals.difficulty)
 	activate_weapons()
 	State = States.IDLE
 	decision_timer.start()

@@ -14,10 +14,12 @@ var health = health_max
 signal hurt(attackPacket)
 
 func _ready():
-	$DecisionTimer.start()
 	$CPUParticles2D.emitting = false
 	
 
+func activate(): # from BaseContainer _on_body_entered
+	$DecisionTimer.start()
+	
 
 
 func choose_random_goal():

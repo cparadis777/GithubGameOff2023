@@ -23,7 +23,12 @@ func _ready():
 
 	await get_tree().create_timer(0.5).timeout
 	link_nearby_door()
-	
+
+func _unhandled_input(event):
+	if event.is_action_pressed("interact") and player_present():
+		interact()
+		get_viewport().set_input_as_handled()
+
 func link_nearby_door():
 	if has_node("paired_door_detector"):
 		var possible_matching_doors = $paired_door_detector.get_overlapping_areas()
@@ -85,3 +90,11 @@ func _on_tween_finished():
 		close_door()
 		if linked_portal != null and is_instance_valid(linked_portal) and linked_portal.has_method("close_door"):
 			linked_portal.close_door()
+
+func interact():
+	if !locked:
+		$Area2D/DelayOpeningTimer.stop()
+		_on_delay_opening_timer_timeout()
+	else:
+		$LockedNoise.play()
+		
