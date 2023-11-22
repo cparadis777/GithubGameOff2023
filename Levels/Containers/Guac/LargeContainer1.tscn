@@ -192,10 +192,10 @@ position = Vector2(76, 27)
 position = Vector2(282, 80)
 
 [node name="StarTrap" parent="." instance=ExtResource("12_8op0j")]
-position = Vector2(-310, -50)
+position = Vector2(-310, -20)
 
 [node name="StarTrap2" parent="." instance=ExtResource("12_8op0j")]
-position = Vector2(304, -50)
+position = Vector2(304, -20)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
