@@ -295,7 +295,7 @@ func _on_descending_kick_hurtbox_body_entered(body):
 
 #receive injury
 func _on_hit(attackPacket):
-	if !iframes and (state_machine.state.name not in [ "Dying", "Dead", "InTransit"]):
+	if !iframes and (state_machine.state.name not in [ "Dying", "Dead", "InTransit", "Dash", "DescendingKick"]):
 		
 		health -= attackPacket.damage
 		Globals.player_stats["health"] = health

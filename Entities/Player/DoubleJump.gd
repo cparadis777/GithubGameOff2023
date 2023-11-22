@@ -28,10 +28,16 @@ func _ready():
 
 func physics_update(delta):
 	apply_gravity(delta)
+	allow_player_to_change_direction_midair()
 	check_for_attack_requests()
 	#check_for_jump_button_release()
 	player.move_and_slide()
 	land_if_possible()
+
+func allow_player_to_change_direction_midair():
+	# Horizontal movement.
+	var input_direction_x = Input.get_axis("move_left", "move_right")
+	player.velocity.x = player.speed * input_direction_x
 
 func apply_gravity(delta):
 	if SubState in [ SubStates.HOVERING, SubStates.SOMERSAULTING]:
