@@ -9,7 +9,7 @@ extends Node2D
 @export var trigger_node_path : NodePath
 var trigger_node
 
-@export var speed = 20.0
+@export var speed = 50.0
 #var velocity : Vector2 = Vector2.ZERO
 
 @export var show_piston : bool = true
@@ -26,8 +26,11 @@ var switch_pressed := false
 enum States { MOVING, WAITING }
 var State = States.WAITING
 
+enum modes { TWEEN, POSITION }
+@export var mode = modes.TWEEN
+
 var tween : Tween
-var tween_duration = 5.0
+@export var tween_duration = 5.0
 
 var velocity
 
@@ -48,7 +51,8 @@ func _ready():
 	$Piston.visible = show_piston
 	$CraneCables.visible = show_cables
 	
-	#setup_tween()
+	if mode == modes.TWEEN:
+		setup_tween()
 
 	if trigger_node_path.is_empty() or autostart:
 		start_moving()
@@ -79,7 +83,8 @@ func _physics_process(delta):
 			start_moving()
 
 	if State == States.MOVING:
-		move_toward_next_location(delta)
+		if mode == modes.POSITION:
+			move_toward_next_location(delta)
 
 func move_toward_next_location(delta):
 	# setting position manually should work just as well as tweening, so long as it's in the physics process.
@@ -103,7 +108,7 @@ func get_next_destination():
 func setup_tween():
 	tween = create_tween()
 	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	tween.set_loops()
+	tween.set_loops().set_parallel(false)
 	for location in locations:
 		tween.tween_property(self, "global_position", location, tween_duration)
 	tween.pause()
@@ -111,13 +116,15 @@ func setup_tween():
 	
 func start_moving():
 	State = States.MOVING
-#	if !tween.is_running():
-#		tween.play()
+	if mode == modes.TWEEN:
+		if !tween.is_running():
+			tween.play()
 
 func stop_moving():
 	State = States.WAITING
-#	if tween.is_running():
-#		tween.pause()
+	if mode == modes.TWEEN:
+		if tween.is_running():
+			tween.pause()
 
 func _on_switch_toggled(_pressed):
 	switch_pressed = !switch_pressed

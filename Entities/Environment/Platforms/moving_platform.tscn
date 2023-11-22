@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c17sncorbfoal"]
+[gd_scene load_steps=9 format=3 uid="uid://c17sncorbfoal"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Platforms/moving_platform.gd" id="1_ugeys"]
 [ext_resource type="Texture2D" uid="uid://da8cl0iqiax6a" path="res://art/props/orange_beam.png" id="2_1kjgr"]
 [ext_resource type="Script" path="res://Entities/Environment/Platforms/Piston.gd" id="3_7xl24"]
 [ext_resource type="Script" path="res://Entities/Environment/Platforms/Cables.gd" id="4_2go6s"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lqtjd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjuhk"]
 size = Vector2(56, 16)
@@ -28,7 +30,7 @@ show_cables = false
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="." groups=["JumpThroughPlatforms", "MovingPlatforms"]]
 collision_layer = 24
 collision_mask = 7
-sync_to_physics = false
+physics_material_override = SubResource("PhysicsMaterial_lqtjd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 position = Vector2(2.08165e-12, 8)

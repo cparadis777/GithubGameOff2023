@@ -1447,10 +1447,10 @@ tracks/9/path = NodePath("Audio/AttackNoises:playing")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0.35),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.35, 0.8),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, false]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -1459,10 +1459,10 @@ tracks/10/path = NodePath("Audio/HeavyWoosh:playing")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0.35),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.35, 0.8),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, false]
 }
 tracks/11/type = "value"
 tracks/11/imported = false

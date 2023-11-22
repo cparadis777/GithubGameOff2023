@@ -239,7 +239,7 @@ func _on_dash_started():
 func fast_punch(anim_name): # comes from $StateMachine/FastPunch
 	if state_machine.state.name == "FastPunch":
 		# play 3 animation sequence.
-		if not "punch" in animation_player.current_animation:
+		if not "fast_punch" in animation_player.current_animation:
 			last_fast_punch_animation = anim_name
 			animation_player.play(anim_name)
 			#$Body/CyberRoninSprites.play("fast_punch")

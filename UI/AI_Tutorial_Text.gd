@@ -87,7 +87,7 @@ func start_dialogue():
 	$next_char.set_wait_time(typing_speed)
 	$next_char.start()
 	
-func _process(delta):
+func _process(_delta):
 	if visible and Input.is_action_just_pressed("jump"):
 		if current_character < len(messages[current_message]):
 			show_entire_message()
