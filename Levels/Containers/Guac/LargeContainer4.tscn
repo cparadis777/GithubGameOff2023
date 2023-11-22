@@ -1,17 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://dt181ly2upt1t"]
+[gd_scene load_steps=18 format=3 uid="uid://b0pdl3tlo5xbs"]
 
-[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_o8gtw"]
-[ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_0qmc8"]
-[ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_u3v6o"]
-[ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_tccdy"]
-[ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="5_q1cg3"]
-[ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="6_tghpn"]
-[ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="7_cc2ux"]
-[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_ywibr"]
-[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="9_u18y4"]
-[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="11_7dwax"]
-[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="12_xjc8u"]
-[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="13_3q8nu"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_at00n"]
+[ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_yn05a"]
+[ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_3k56c"]
+[ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_0mnlq"]
+[ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="5_37egh"]
+[ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="6_5iont"]
+[ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="7_7q80c"]
+[ext_resource type="PackedScene" uid="uid://cmpouufnlcxkn" path="res://Entities/Environment/Platforms/basic_platform.tscn" id="8_w7efc"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="9_3h2nx"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_25gqt"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="11_a2x7r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -30,16 +29,16 @@ size = Vector2(82, 480)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xia"]
 size = Vector2(796, 340)
 
-[node name="BaseContainer" type="StaticBody2D"]
+[node name="BaseContainer2" type="StaticBody2D"]
 collision_layer = 24
 collision_mask = 7
-script = ExtResource("1_o8gtw")
+script = ExtResource("1_at00n")
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
 position = Vector2(0, -6.55651e-06)
 scale = Vector2(2, 2)
-texture = ExtResource("2_0qmc8")
+texture = ExtResource("2_yn05a")
 
 [node name="Openings" type="Node2D" parent="."]
 
@@ -101,19 +100,19 @@ texture = SubResource("PlaceholderTexture2D_v1mhl")
 
 [node name="Exits" type="Node2D" parent="."]
 
-[node name="LEFT" parent="Exits" instance=ExtResource("3_u3v6o")]
+[node name="LEFT" parent="Exits" instance=ExtResource("3_3k56c")]
 z_index = -1
 position = Vector2(-398, 169)
 
-[node name="RIGHT" parent="Exits" instance=ExtResource("4_tccdy")]
+[node name="RIGHT" parent="Exits" instance=ExtResource("4_0mnlq")]
 z_index = -1
 position = Vector2(398, 169)
 
-[node name="UP" parent="Exits" instance=ExtResource("5_q1cg3")]
+[node name="UP" parent="Exits" instance=ExtResource("5_37egh")]
 z_index = -1
 position = Vector2(0, -171)
 
-[node name="DOWN" parent="Exits" instance=ExtResource("6_tghpn")]
+[node name="DOWN" parent="Exits" instance=ExtResource("6_5iont")]
 z_index = -1
 position = Vector2(0, 169)
 
@@ -121,7 +120,7 @@ position = Vector2(0, 169)
 visible = false
 position = Vector2(4.72069e-05, -0.500001)
 scale = Vector2(2.5, 2.50521)
-texture = ExtResource("7_cc2ux")
+texture = ExtResource("7_7q80c")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -206)
@@ -146,41 +145,68 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
 
-[node name="JumpThroughPlatform" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(-315, -46)
+[node name="MovingPlatform" parent="." instance=ExtResource("11_a2x7r")]
+position = Vector2(-258, 98)
+show_piston = true
+tween_duration = 3.0
 
-[node name="JumpThroughPlatform2" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(315, -4)
+[node name="MovingPlatform6" parent="." instance=ExtResource("11_a2x7r")]
+position = Vector2(-334, 0)
 
-[node name="JumpThroughPlatform5" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(315, -95)
+[node name="MovingPlatform2" parent="." instance=ExtResource("11_a2x7r")]
+position = Vector2(-109, 98)
+tween_duration = 4.0
 
-[node name="JumpThroughPlatform6" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(151, -95)
+[node name="MovingPlatform5" parent="." instance=ExtResource("11_a2x7r")]
+position = Vector2(-179, 25)
 
-[node name="JumpThroughPlatform7" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(-14, -95)
+[node name="MovingPlatform3" parent="." instance=ExtResource("11_a2x7r")]
+position = Vector2(-1, 4)
 
-[node name="JumpThroughPlatform3" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(-315, 59)
+[node name="MovingPlatform4" parent="." instance=ExtResource("11_a2x7r")]
+position = Vector2(-1, 4)
 
-[node name="JumpThroughPlatform4" parent="." instance=ExtResource("8_ywibr")]
-position = Vector2(-149, 59)
+[node name="TrapSpikes" parent="." instance=ExtResource("9_3h2nx")]
+position = Vector2(-300, 161)
 
-[node name="MovingPlatform" parent="." instance=ExtResource("9_u18y4")]
-position = Vector2(127, 114)
+[node name="TrapSpikes2" parent="." instance=ExtResource("9_3h2nx")]
+position = Vector2(-236, 161)
 
-[node name="RunningAssassin" parent="." instance=ExtResource("11_7dwax")]
-position = Vector2(328, -95)
+[node name="TrapSpikes4" parent="." instance=ExtResource("9_3h2nx")]
+position = Vector2(-173, 161)
 
-[node name="ShootyNPC" parent="." instance=ExtResource("12_xjc8u")]
-position = Vector2(-345, 60)
+[node name="TrapSpikes3" parent="." instance=ExtResource("9_3h2nx")]
+position = Vector2(160, 161)
 
-[node name="ShootyNPC2" parent="." instance=ExtResource("12_xjc8u")]
-position = Vector2(127, 109)
+[node name="TrapSpikes5" parent="." instance=ExtResource("9_3h2nx")]
+position = Vector2(224, 161)
 
-[node name="BaseNPC2" parent="." instance=ExtResource("13_3q8nu")]
-position = Vector2(-360, -49)
+[node name="TrapSpikes6" parent="." instance=ExtResource("9_3h2nx")]
+position = Vector2(287, 161)
+
+[node name="ShootyNPC" parent="." instance=ExtResource("10_25gqt")]
+position = Vector2(-336, -4)
+
+[node name="ShootyNPC2" parent="." instance=ExtResource("10_25gqt")]
+position = Vector2(-178, 24)
+
+[node name="ShootyNPC3" parent="." instance=ExtResource("10_25gqt")]
+position = Vector2(305, -79)
+
+[node name="MovingPlatform7" parent="." instance=ExtResource("11_a2x7r")]
+position = Vector2(117, 104)
+tween_duration = 4.0
+
+[node name="MovingPlatform9" parent="." instance=ExtResource("11_a2x7r")]
+position = Vector2(266, 104)
+show_piston = true
+tween_duration = 3.0
+
+[node name="MovingPlatform11" parent="." instance=ExtResource("11_a2x7r")]
+position = Vector2(196, 10)
+
+[node name="BasicPlatform" parent="." instance=ExtResource("8_w7efc")]
+position = Vector2(306, -73)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

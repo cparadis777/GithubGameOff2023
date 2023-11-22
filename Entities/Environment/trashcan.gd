@@ -37,7 +37,7 @@ func die():
 
 func spawn_health_pickup():
 	var health_pickup = preload("res://Entities/Environment/Pickables/health_pickable.tscn").instantiate()
-	add_sibling(health_pickup)
+	call_deferred("add_sibling", health_pickup)
 	health_pickup.global_position = global_position
 	health_pickup.position += Vector2.ONE.rotated(randf()*TAU) * 3.0
 	

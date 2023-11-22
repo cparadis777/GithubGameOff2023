@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://djhryfybg5d4e"]
+
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_00cru"]
+[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_rdnkm"]
+
+[node name="BaseContainer" instance=ExtResource("1_00cru")]
+
+[node name="Exterior" parent="." index="3"]
+visible = true
+texture = ExtResource("2_rdnkm")

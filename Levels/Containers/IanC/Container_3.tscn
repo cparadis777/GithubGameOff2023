@@ -1,0 +1,49 @@
+[gd_scene load_steps=15 format=3 uid="uid://brq0phdu6dm3j"]
+
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_p1blx"]
+[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_c3yes"]
+[ext_resource type="Script" path="res://Levels/placeholder/ChallengeSpawningLogic.gd" id="2_eey8x"]
+[ext_resource type="PackedScene" uid="uid://ddkm7lpck4cwy" path="res://Entities/Environment/ObstacleSpawners/ObstacleSpawner.tscn" id="3_06o56"]
+[ext_resource type="PackedScene" uid="uid://btwdkp7lrbg0d" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/assassin_on_platform.tscn" id="4_gtsx1"]
+[ext_resource type="PackedScene" uid="uid://cj18qabpjb2wu" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/dock_guy_on_platform.tscn" id="5_qj7ew"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="6_8tapn"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="7_va5xi"]
+[ext_resource type="PackedScene" uid="uid://b1gw2o1d85wpr" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/three_star_trap.tscn" id="8_qqtd3"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="9_retip"]
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="10_wllnc"]
+[ext_resource type="PackedScene" uid="uid://biegidqhn52kc" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/shooty_guy_on_platform.tscn" id="11_cfb0o"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="12_8ypmm"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="13_2ckg4"]
+
+[node name="BaseContainer" instance=ExtResource("1_p1blx")]
+
+[node name="SpawningLogic" type="Node2D" parent="." index="2"]
+position = Vector2(0, 152)
+script = ExtResource("2_eey8x")
+
+[node name="Platforms" parent="SpawningLogic" index="0" instance=ExtResource("3_06o56")]
+position = Vector2(-348, -254)
+
+[node name="SpawnList" parent="SpawningLogic/Platforms" index="0"]
+resources = [PackedStringArray("assassin_on_platform", "dock_guy_on_platform", "moving_platform", "platform_jump_thru", "three_star_trap"), [ExtResource("4_gtsx1"), ExtResource("5_qj7ew"), ExtResource("6_8tapn"), ExtResource("7_va5xi"), ExtResource("8_qqtd3")]]
+
+[node name="SpawnZone" parent="SpawningLogic/Platforms" index="1"]
+offset_bottom = 205.0
+
+[node name="Floor" parent="SpawningLogic" index="1" instance=ExtResource("3_06o56")]
+position = Vector2(-343, 2)
+
+[node name="SpawnList" parent="SpawningLogic/Floor" index="0"]
+resources = [PackedStringArray("npc_02_dock_worker", "npc_03_running_assassin", "shooty_guy_on_platform", "shooty_npc", "trap_spikes"), [ExtResource("9_retip"), ExtResource("10_wllnc"), ExtResource("11_cfb0o"), ExtResource("12_8ypmm"), ExtResource("13_2ckg4")]]
+
+[node name="SpawnZone" parent="SpawningLogic/Floor" index="1"]
+offset_bottom = 15.0
+
+[node name="Exterior" parent="." index="4"]
+texture = ExtResource("2_c3yes")
+
+[node name="RunningAssassin" parent="." index="10" instance=ExtResource("10_wllnc")]
+position = Vector2(-139, 162)
+
+[editable path="SpawningLogic/Platforms"]
+[editable path="SpawningLogic/Floor"]

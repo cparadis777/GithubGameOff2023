@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Entities/Environment/Platforms/Piston.gd" id="3_7xl24"]
 [ext_resource type="Script" path="res://Entities/Environment/Platforms/Cables.gd" id="4_2go6s"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bk0vk"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lqtjd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjuhk"]
 size = Vector2(56, 16)
@@ -22,25 +22,28 @@ fill_from = Vector2(0.434211, 0.700658)
 fill_to = Vector2(0.519737, 0.394737)
 repeat = 1
 
-[node name="MovingPlatform" type="AnimatableBody2D" groups=["JumpThroughPlatforms", "MovingPlatforms"]]
-collision_layer = 24
-collision_mask = 27
-physics_material_override = SubResource("PhysicsMaterial_bk0vk")
+[node name="MovingPlatform" type="Node2D"]
 script = ExtResource("1_ugeys")
 show_piston = false
 show_cables = false
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." groups=["JumpThroughPlatforms", "MovingPlatforms"]]
+collision_layer = 24
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_lqtjd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(2.08165e-12, 8)
+shape = SubResource("RectangleShape2D_bjuhk")
+one_way_collision = true
+one_way_collision_margin = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
 position = Vector2(0, 8)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_1kjgr")
 region_enabled = true
 region_rect = Rect2(80, 2.08165e-12, 112, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.08165e-12, 8)
-shape = SubResource("RectangleShape2D_bjuhk")
-one_way_collision = true
 
 [node name="StateLabel" type="Label" parent="."]
 visible = false

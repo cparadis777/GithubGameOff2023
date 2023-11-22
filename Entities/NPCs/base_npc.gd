@@ -31,7 +31,11 @@ func _ready():
 	velocity = Vector2.RIGHT * SPEED
 	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)
-
+	
+	#var owner = get_owner()
+	if (owner and owner.has_method("_on_NPC_died")):
+		owner.num_enemies += 1
+		died.connect(owner._on_NPC_died)
 	# temporary, until we get NPC spawning and activating
 	activate(Globals.DifficultyScales.EASY)
 
