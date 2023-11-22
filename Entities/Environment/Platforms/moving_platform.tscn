@@ -22,7 +22,7 @@ fill_from = Vector2(0.434211, 0.700658)
 fill_to = Vector2(0.519737, 0.394737)
 repeat = 1
 
-[node name="MovingPlatform" type="AnimatableBody2D" groups=["JumpThroughPlatforms", "MovingPlatforms"]]
+[node name="MovingPlatform" type="StaticBody2D" groups=["JumpThroughPlatforms", "MovingPlatforms"]]
 collision_layer = 24
 collision_mask = 27
 physics_material_override = SubResource("PhysicsMaterial_bk0vk")

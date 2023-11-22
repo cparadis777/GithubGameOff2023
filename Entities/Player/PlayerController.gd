@@ -145,7 +145,7 @@ func detect_jump_through_platform() -> StaticBody2D:
 	return jump_through_platform_detected
 
 
-func detect_moving_platform() -> AnimatableBody2D:
+func detect_moving_platform() -> StaticBody2D:
 	var moving_platform_detected
 	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
 	for candidate in candidate_bodies:

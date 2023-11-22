@@ -41,9 +41,9 @@ func _ready():
 	$Piston.visible = show_piston
 	$CraneCables.visible = show_cables
 	
-	setup_tween()
+	#setup_tween()
 
-	if trigger_node_path.is_empty():
+	if trigger_node_path.is_empty() or autostart:
 		start_moving()
 	elif get_node(trigger_node_path).get("pressed"):
 		start_moving()
@@ -53,7 +53,7 @@ func _ready():
 func link(triggerNode):
 	trigger_node = triggerNode
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	$StateLabel.text = States.keys()[State]
 	
 	if trigger_node != null:
@@ -62,7 +62,10 @@ func _physics_process(_delta):
 		elif State == States.WAITING and (trigger_node.pressed or switch_pressed):
 			start_moving()
 
-func deprecated_alternate_movement(delta):
+	if State == States.MOVING:
+		move_toward_next_location(delta)
+
+func move_toward_next_location(delta):
 	# setting position manually should work just as well as tweening, so long as it's in the physics process.
 	if State == States.MOVING:
 		velocity = global_position.direction_to(locations[current_destination_index]) * speed
@@ -91,13 +94,13 @@ func setup_tween():
 	
 func start_moving():
 	State = States.MOVING
-	if !tween.is_running():
-		tween.play()
+#	if !tween.is_running():
+#		tween.play()
 
 func stop_moving():
 	State = States.WAITING
-	if tween.is_running():
-		tween.pause()
+#	if tween.is_running():
+#		tween.pause()
 
 func _on_switch_toggled(_pressed):
 	switch_pressed = !switch_pressed
