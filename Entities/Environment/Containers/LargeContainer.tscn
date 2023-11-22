@@ -107,18 +107,22 @@ texture = SubResource("PlaceholderTexture2D_v1mhl")
 [node name="LEFT" parent="Exits" instance=ExtResource("4_rpji1")]
 z_index = -1
 position = Vector2(-398, 169)
+locked = true
 
 [node name="RIGHT" parent="Exits" instance=ExtResource("5_ttncq")]
 z_index = -1
 position = Vector2(398, 169)
+locked = true
 
 [node name="UP" parent="Exits" instance=ExtResource("6_jq33i")]
 z_index = -1
 position = Vector2(0, -171)
+locked = true
 
 [node name="DOWN" parent="Exits" instance=ExtResource("7_17qf5")]
 z_index = -1
 position = Vector2(0, 169)
+locked = true
 
 [node name="Exterior" type="Sprite2D" parent="."]
 visible = false

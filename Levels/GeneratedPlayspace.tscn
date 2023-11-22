@@ -60,6 +60,7 @@ visible = false
 [node name="StartContainer" parent="." instance=ExtResource("9_nkiwv")]
 position = Vector2(-960, 0)
 container_exit_flags = 2
+doors_unlocked = true
 show_exterior_on_start = false
 
 [node name="TerminalContainer" parent="." instance=ExtResource("9_rtv3m")]
