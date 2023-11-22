@@ -17,16 +17,21 @@ var move_time:float = 0.5
 func _ready():
 	self.create_markers()
 	self.set_current_container(select_random_container())
-	self.move_ready = true
+	#self.move_ready = true
 	$RichTextLabel.text = "%s kg" % self.current_container.weigth
 	$RichTextLabel2.text = "%s" % self.current_container.type
 
+func activate():
+	self.move_ready = true
+
+func deactivate():
+	self.move_ready = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
-func _input(event):
+func _unhandled_input(event):
 	if self.move_ready:
 		if event.is_action_pressed("move_right"):
 			self.move_container(Utils.Directions.RIGHT)

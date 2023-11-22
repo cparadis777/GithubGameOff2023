@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=13 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="4_unqhl"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
 [ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="8_18gwl"]
+[ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="9_0cocc"]
 [ext_resource type="PackedScene" uid="uid://diik2yboc0mbr" path="res://Entities/Droppable/TerminalContainer.tscn" id="9_d655n"]
 [ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="10_bp55l"]
 
@@ -202,6 +203,14 @@ drop_zone = NodePath("../DropPoints")
 [node name="Instructions" type="Node2D" parent="."]
 position = Vector2(0, -177)
 
+[node name="Tutorial_AI" parent="Instructions" instance=ExtResource("9_0cocc")]
+position = Vector2(-139, 80)
+scale = Vector2(0.5, 0.5)
+override_text = "Stack Containers to make a 
+continuous path from
+ start to finish.;Use WASD, QE, and space
+w to drop ccontainers."
+
 [node name="controls" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("8_18gwl")]
 visible = false
 z_index = 1
@@ -252,3 +261,5 @@ position = Vector2(-65, -113)
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
 [connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]
+[connection signal="finished" from="Instructions/Tutorial_AI" to="." method="_on_tutorial_ai_finished"]
+[connection signal="finished" from="Instructions/placement" to="." method="_on_placement_instructions_finished"]

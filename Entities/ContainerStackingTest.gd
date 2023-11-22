@@ -13,7 +13,8 @@ func _ready():
 		fight_button.pressed.connect(_on_fight_button_pressed)
 
 	await get_tree().create_timer(0.25).timeout
-	$Instructions/controls.popup()
+	#$Instructions/controls.popup()
+	$"Instructions/Tutorial_AI".show()
 
 func add_weight(weight:int) -> void:
 	self.current_weight += weight
@@ -21,9 +22,25 @@ func add_weight(weight:int) -> void:
 	$ProgressBar.value = new_percentage
 
 func _unhandled_input(event):
+	press_escape_to_show_or_hide_tutorial(event)
+
+func press_escape_to_show_or_hide_tutorial(event):
 	if event.is_action_pressed("ui_cancel"):
-		if not $Instructions/controls.visible:
-			$Instructions/controls.visible = true
+		if has_node("Instructions/Tutorial_AI"):
+			var tutorial = get_node("Instructions/Tutorial_AI")
+			if tutorial != null and is_instance_valid(tutorial):
+				if tutorial.visible:
+					tutorial.stop_dialogue()
+					get_viewport().set_input_as_handled()
+	
+		else: # tutorial bot disappeared
+			if not $Instructions/controls.visible:
+				$Instructions/controls.visible = true
+				$crane.deactivate()
+			else:
+				$Instructions/controls.visible = false
+				$crane.activate()
+				
 
 func _on_fight_button_pressed():
 	if $DropPoints.validate_level():
@@ -39,3 +56,11 @@ func _on_drop_points_weight_reset():
 	self.current_weight = 0
 	self.add_weight(0)
 
+
+
+func _on_tutorial_ai_finished():
+	$crane.activate()
+
+
+func _on_placement_instructions_finished():
+	$crane.activate()

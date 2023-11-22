@@ -360,82 +360,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="Animation" id="Animation_xoxmg"]
-resource_name = "hello"
-length = 1.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Muse_AI:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [&"idle", &"idle"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hello_SFX:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Muse_AI:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Label:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.7, 0.9),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Text_Bubble:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.7, 0.9),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Text_Bubble:animation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [&"default", &"default"]
-}
-
 [sub_resource type="Animation" id="Animation_lxojj"]
 resource_name = "byebye"
 length = 1.1
@@ -524,19 +448,92 @@ tracks/6/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_xoxmg"]
+resource_name = "hello"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Muse_AI:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"idle", &"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hello_SFX:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Muse_AI:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Text_Bubble:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Text_Bubble:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"default", &"default"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sdbu8"]
 _data = {
 "byebye": SubResource("Animation_lxojj"),
 "hello": SubResource("Animation_xoxmg")
 }
 
-[node name="Tutorial AI" type="Node2D"]
-position = Vector2(4, -18)
-
-[node name="AI_Tutorial_Text" type="Node" parent="."]
+[node name="AI_Tutorial_Text" type="Node2D"]
 script = ExtResource("4_kj0ql")
 
-[node name="Muse_AI" type="AnimatedSprite2D" parent="AI_Tutorial_Text"]
+[node name="Muse_AI" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.7, 0.7, 0.7, 0.7)
 position = Vector2(0, -33)
 scale = Vector2(1.2, 1.2)
@@ -544,13 +541,13 @@ sprite_frames = SubResource("SpriteFrames_jtqaj")
 animation = &"idle"
 frame_progress = 0.0319443
 
-[node name="Text_Bubble" type="AnimatedSprite2D" parent="AI_Tutorial_Text"]
+[node name="Text_Bubble" type="AnimatedSprite2D" parent="."]
 position = Vector2(107, -153)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0teyj")
 frame_progress = 0.0290046
 
-[node name="Label" type="Label" parent="AI_Tutorial_Text"]
+[node name="Label" type="Label" parent="."]
 self_modulate = Color(0.835294, 0.537255, 0.647059, 1)
 offset_left = 19.0
 offset_top = -217.0
@@ -563,37 +560,33 @@ theme_override_fonts/font = SubResource("SystemFont_v3t4e")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="spawn_timer" type="Timer" parent="AI_Tutorial_Text"]
+[node name="spawn_timer" type="Timer" parent="."]
 wait_time = 1.1
 
-[node name="next_char" type="Timer" parent="AI_Tutorial_Text"]
+[node name="next_char" type="Timer" parent="."]
 
-[node name="AI_Speech_SFX" type="AudioStreamPlayer2D" parent="AI_Tutorial_Text"]
+[node name="AI_Speech_SFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_bxtt3")
 volume_db = -2.0
 
-[node name="SpaceBar_UI" type="AnimatedSprite2D" parent="AI_Tutorial_Text"]
+[node name="SpaceBar_UI" type="AnimatedSprite2D" parent="."]
 position = Vector2(109, -149)
 sprite_frames = SubResource("SpriteFrames_jlrnc")
 autoplay = "default"
 frame_progress = 0.401337
 
-[node name="Hello_SFX" type="AudioStreamPlayer2D" parent="AI_Tutorial_Text"]
+[node name="Hello_SFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_kxbkt")
 volume_db = -3.0
 
-[node name="Bye_SFX" type="AudioStreamPlayer2D" parent="AI_Tutorial_Text"]
+[node name="Bye_SFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_6iwrm")
 volume_db = -3.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AI_Tutorial_Text"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_sdbu8")
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -68)
-offset = Vector2(66.595, 0)
-
-[connection signal="timeout" from="AI_Tutorial_Text/spawn_timer" to="AI_Tutorial_Text" method="_on_spawn_timer_timeout"]
-[connection signal="timeout" from="AI_Tutorial_Text/next_char" to="AI_Tutorial_Text" method="_on_next_char_timeout"]
+[connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="next_char" to="." method="_on_next_char_timeout"]
