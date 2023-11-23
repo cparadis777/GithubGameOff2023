@@ -147,7 +147,9 @@ func play_hurt_noise():
 	$HurtNoises.play()
 
 func knockback(knockbackVector):
-	var magnitude = 66.0 # two thirds as much as a regular NPC
+	var magnitude = 1.0 # two thirds as much as a regular NPC
+	if State in [States.DEFENDING]:
+		magnitude = 0.25
 	velocity = knockbackVector * magnitude
 
 
@@ -164,7 +166,7 @@ func _on_hit(attackPacket : AttackPacket):
 			$AnimationPlayer.play("hurt")
 			initiate_iframes()
 			if attackPacket.knockback:
-				knockback(attackPacket.impact_vector)
+				knockback(attackPacket.impact_vector * attackPacket.knockback_speed)
 	elif State == States.DEFENDING:
 		attackPacket.damage_blocked = min(attackPacket.damage, 40)
 		hurt.emit(attackPacket)
@@ -173,6 +175,7 @@ func _on_hit(attackPacket : AttackPacket):
 			# play a symbol clash noise or something.
 			# maybe knock back the player
 			$Behaviours/Defenses/ArmShieldDefense._on_hit(attackPacket)
+
 		else:
 			play_hurt_noise()
 			#$HurtFlash.show()

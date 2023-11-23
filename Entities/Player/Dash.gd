@@ -73,7 +73,7 @@ func _on_dash_hurt_box_body_entered(body):
 			attackPacket.damage = damage
 			attackPacket.originator = self
 			attackPacket.recipient = body
-			attackPacket.impact_vector = player.velocity
+			attackPacket.impact_vector = player.velocity.normalized() + Vector2.UP * 0.5
 			attackPacket.knockback = true
 			attackPacket.knockback_speed = 150.0
 			hit.connect(body._on_hit)

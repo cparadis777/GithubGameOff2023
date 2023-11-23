@@ -148,6 +148,7 @@ func validate_level() -> bool:
 func path_search() -> bool:
 	var start:Vector2 = self.entrance_coord
 	var visited_nodes = {}
+	@warning_ignore("unused_variable")
 	var visited_node_count = 0
 	
 	for coord in drop_points_dict:
