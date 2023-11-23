@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bveugr8fx87uv"]
+[gd_scene load_steps=16 format=3 uid="uid://bveugr8fx87uv"]
 
 [ext_resource type="Script" path="res://test/plex/portal.gd" id="1_oyk0q"]
 [ext_resource type="Texture2D" uid="uid://dxi2dk16rwlnk" path="res://art/portals/side_door.png" id="2_14m57"]
 [ext_resource type="AudioStream" uid="uid://dh6ehyay258vr" path="res://audio/sfx/placeholder/garage_door.wav" id="3_c3y55"]
 [ext_resource type="Texture2D" uid="uid://bn3e5vn4c0tp6" path="res://art/placeholder/door_identity_scanner.png" id="3_mdixo"]
 [ext_resource type="AudioStream" uid="uid://c4gbrca6v7x73" path="res://audio/sfx/placeholder/door_close.wav" id="4_dymyq"]
+[ext_resource type="Texture2D" uid="uid://cctrsqvqmyj6c" path="res://art/portals/side_door_hologram.png" id="4_wbd06"]
 [ext_resource type="AudioStream" uid="uid://cqe4xsra6b78j" path="res://audio/sfx/placeholder/sensor.wav" id="5_28n03"]
 [ext_resource type="AudioStream" uid="uid://dqloi1ogce5yt" path="res://audio/sfx/placeholder/locked.wav" id="7_nc6u8"]
 
@@ -84,6 +85,42 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DoorSprite/LockedHologram:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("DoorSprite/LockedHologram:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("LockedNoise:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_aormd"]
@@ -190,10 +227,62 @@ tracks/4/keys = {
 "values": [0, 7]
 }
 
+[sub_resource type="Animation" id="Animation_f7pyj"]
+resource_name = "locked"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DoorSprite/LockedHologram:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DoorSprite/LockedHologram:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [5, 0, 0, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LockedNoise:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6a57p"]
 _data = {
 "RESET": SubResource("Animation_51060"),
 "close": SubResource("Animation_aormd"),
+"locked": SubResource("Animation_f7pyj"),
 "open": SubResource("Animation_hnbxg")
 }
 
@@ -235,6 +324,12 @@ texture = ExtResource("3_mdixo")
 offset = Vector2(14, 12)
 hframes = 4
 vframes = 2
+
+[node name="LockedHologram" type="Sprite2D" parent="DoorSprite"]
+visible = false
+texture = ExtResource("4_wbd06")
+hframes = 9
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
