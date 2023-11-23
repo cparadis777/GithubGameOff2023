@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://yccanqnov1ry"]
+
+[ext_resource type="Texture2D" uid="uid://67m50eh8jeq1" path="res://art/materials/shaders/2DOmniLight.png" id="1_xlktt"]
+[ext_resource type="Script" path="res://Entities/Environment/Lights/switched_light.gd" id="2_n43yx"]
+
+[node name="PointLight2D" type="PointLight2D"]
+texture = ExtResource("1_xlktt")
+texture_scale = 5.0
+script = ExtResource("2_n43yx")

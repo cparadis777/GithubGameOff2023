@@ -61,6 +61,9 @@ func _ready():
 	if StageManager.current_player == null:
 		spawn_player_for_testing()
 		
+	if has_node("ContainerInterior"):
+		$ContainerInterior.show() # so level designers can hide the collision shape, but it'll work in-game
+		
 		
 		
 func spawn_player_for_testing():
@@ -69,6 +72,13 @@ func spawn_player_for_testing():
 	var player_node = load(player_scene_path).instantiate()
 	add_child(player_node)
 	player_node.position = Vector2(-350, 150)
+
+	spawn_canvas_modulate_for_better_lighting()
+	
+func spawn_canvas_modulate_for_better_lighting():
+	
+	var canvasModulateScene = load("res://Entities/Environment/Lights/base_canvas_modulate.tscn").instantiate()
+	add_child(canvasModulateScene)
 
 func setup_backup_enemy_check():
 	var timer = Timer.new()
