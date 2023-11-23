@@ -467,6 +467,7 @@ one_shot = true
 
 [node name="ImpactAudio" type="AudioStreamPlayer2D" parent="StateMachine/StrongPunch"]
 stream = SubResource("AudioStreamRandomizer_xs8aj")
+bus = &"sfx"
 
 [node name="FastPunch" type="Node2D" parent="StateMachine"]
 script = ExtResource("28_amcrx")
@@ -489,14 +490,17 @@ disabled = true
 [node name="Punch1Audio" type="AudioStreamPlayer2D" parent="StateMachine/FastPunch/ImpactAudio"]
 stream = SubResource("AudioStreamRandomizer_xkxws")
 volume_db = 5.0
+bus = &"sfx"
 
 [node name="Punch2Audio" type="AudioStreamPlayer2D" parent="StateMachine/FastPunch/ImpactAudio"]
 stream = SubResource("AudioStreamRandomizer_7jb3f")
 volume_db = 9.0
+bus = &"sfx"
 
 [node name="Punch3Audio" type="AudioStreamPlayer2D" parent="StateMachine/FastPunch/ImpactAudio"]
 stream = SubResource("AudioStreamRandomizer_px4x1")
 volume_db = 12.0
+bus = &"sfx"
 
 [node name="InTransit" type="Node2D" parent="StateMachine"]
 script = ExtResource("26_teftq")

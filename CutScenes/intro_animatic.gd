@@ -5,7 +5,7 @@ var started = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	AudioManager.play_track("MainMenuTheme")
 
 func _input(event):
 	if not started:

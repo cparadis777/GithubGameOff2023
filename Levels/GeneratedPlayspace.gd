@@ -7,7 +7,7 @@ func _ready():
 	self.create_playspace(StageManager.playspace_parameters)
 	
 	#$CanvasModulate.show() # is it better without lighting?
-
+	AudioManager.play_track("FightingTheme")
 
 
 """

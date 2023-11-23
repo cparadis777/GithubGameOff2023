@@ -225,14 +225,17 @@ bus = &"sfx"
 [node name="AttackNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_tblv3")
 max_distance = 350.0
+bus = &"sfx"
 
 [node name="ShootNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_8vdq8")
 max_distance = 350.0
+bus = &"sfx"
 
 [node name="PowerUPNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_yhpji")
 max_distance = 350.0
+bus = &"sfx"
 
 [node name="Debug" parent="." instance=ExtResource("9_4vev6")]
 

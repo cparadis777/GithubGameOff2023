@@ -17,6 +17,8 @@ func _ready():
 	#$Instructions/controls.popup()
 	$"Instructions/Tutorial_AI".show()
 	$HUD/WarningPopup.hide()
+	
+	AudioManager.play_track("CraneLevelTheme")
 
 func add_weight(weight:int) -> void:
 	self.current_weight += weight

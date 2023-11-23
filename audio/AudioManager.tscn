@@ -14,23 +14,28 @@ script = ExtResource("1_uk81m")
 stream = ExtResource("2_ycqnk")
 volume_db = -8.32
 autoplay = true
+bus = &"music"
 
 [node name="FightingTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_bas8w")
 volume_db = -8.32
 autoplay = true
+bus = &"music"
 
 [node name="CreditsTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_fou8o")
 volume_db = -8.32
 autoplay = true
+bus = &"music"
 
 [node name="CraneLevelTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_fxdsj")
 volume_db = -8.32
 autoplay = true
+bus = &"music"
 
 [node name="MainMenuTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_inaag")
 volume_db = -8.32
 autoplay = true
+bus = &"music"
