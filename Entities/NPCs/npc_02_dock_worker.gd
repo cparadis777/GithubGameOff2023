@@ -33,6 +33,8 @@ var State :States = States.INITIALIZING :
 		return State
 
 signal hurt(attackPacket)
+signal died(name)
+
 
 var previous_state : States
 
@@ -52,9 +54,14 @@ func _ready():
 	$DecisionTimer.start()
 
 	hurt.connect(StageManager._on_damage_packet_processed)
+	died.connect(StageManager._on_NPC_died)
 
+	if (owner and owner.has_method("_on_NPC_died")):
+		owner.num_enemies += 1
+		died.connect(owner._on_NPC_died)
 
 func activate():
+
 	State = States.ALERT
 
 
@@ -118,6 +125,7 @@ func update_animations():
 			$AnimationPlayer.play("walk")
 
 func begin_dying():
+	died.emit(name)
 	print("dockworker dying")
 	State = States.DYING
 	$AnimationPlayer.play("die")
@@ -149,9 +157,8 @@ func _on_hit(attackPacket : AttackPacket):
 
 		health -= attackPacket.damage
 		hurt.emit(attackPacket)
-		if health <= 0:
-			begin_dying()
-		else:
+
+		if health > 0:
 			play_hurt_noise()
 			#$HurtFlash.show()
 			$AnimationPlayer.play("hurt")
@@ -174,7 +181,10 @@ func _on_hit(attackPacket : AttackPacket):
 			initiate_iframes()
 			if attackPacket.knockback:
 				knockback(attackPacket.impact_vector)
-				
+	if health <= 0 and State not in [States.DYING, States.DEAD]:
+		begin_dying()
+
+
 func _on_decay_timer_timeout():
 	avatar_root.hide()
 	$BloodTimer.start()

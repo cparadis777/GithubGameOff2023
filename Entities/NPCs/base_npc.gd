@@ -22,7 +22,7 @@ var direction : int = 1
 @onready var decision_timer : Timer = $Behaviours/DecisionMaking/DecisionTimer
 
 signal hurt
-signal died
+signal died(name)
 
 func _ready():
 	if !animation_player:
