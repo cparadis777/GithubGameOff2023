@@ -39,7 +39,7 @@ resources = [PackedStringArray("npc_02_dock_worker", "npc_03_running_assassin", 
 [node name="SpawnZone" parent="SpawningLogic/Floor" index="1"]
 offset_bottom = 15.0
 
-[node name="Exterior" parent="." index="4"]
+[node name="Exterior" parent="." index="5"]
 texture = ExtResource("2_c3yes")
 
 [node name="RunningAssassin" parent="." index="10" instance=ExtResource("10_wllnc")]
