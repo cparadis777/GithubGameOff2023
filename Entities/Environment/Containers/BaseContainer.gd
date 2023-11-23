@@ -123,26 +123,33 @@ func _on_NPC_died(_name):
 
 func safety_check_to_unlock_empty_rooms(): # from EnemyTimer.timeout, created in setup_backup_enemy_check()
 	# for NPCs which don't inherit BaseNPC
-	var local_enemies = get_local_enemies()
+	var local_enemies = get_local_entities("Enemies")
 	if local_enemies.size() == 0 and unlock_on_enemies_defeated:
 		unlock_all_doors()
 		if has_node("EnemyCheckTimer"):
 			$EnemyCheckTimer.stop()
 
 func activate_npcs():
-	for npc in get_local_enemies():
+	for npc in get_local_entities("Enemies"):
 		if npc.has_method("activate"):
 			npc.activate()
 		else:
 			printerr("npc has no activate method: ", npc.name)
 
-func get_local_enemies():
-	var enemies = get_tree().get_nodes_in_group("Enemies")
-	var local_enemies = []
-	for enemy in enemies:
-		if self.is_ancestor_of(enemy):
-			local_enemies.push_back(enemy)
-	return local_enemies
+func activate_moving_platforms():
+	for platform in get_local_entities("MovingPlatforms"):
+		if platform.owner.has_method("activate"):
+			platform.owner.activate()
+		else:
+			printerr("platform has no activate method: ", platform.name)
+
+func get_local_entities(group_name):
+	var entities = get_tree().get_nodes_in_group(group_name)
+	var local_entities = []
+	for entity in entities:
+		if self.is_ancestor_of(entity):
+			local_entities.push_back(entity)
+	return local_entities
 
 func _on_container_interior_body_exited(body:Node2D):
 	if body.is_in_group("Player"):
@@ -154,6 +161,7 @@ func _on_container_interior_body_entered(body:Node2D):
 		# print("Hidden outside container")
 		$Exterior.hide()
 		activate_npcs()
+		activate_moving_platforms()
 		setup_backup_enemy_check()
 
 

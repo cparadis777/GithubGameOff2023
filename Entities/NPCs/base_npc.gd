@@ -81,7 +81,8 @@ func sync_to_moving_platform(_delta):
 	if sensor.is_colliding():
 		var thing_underfoot = sensor.get_collider()
 		if is_on_floor() and thing_underfoot.is_in_group("MovingPlatforms"):
-			velocity.y = thing_underfoot.owner.velocity.y
+			if thing_underfoot.owner.get("velocity") != null:
+				velocity.y = thing_underfoot.owner.velocity.y
 			
 			
 func is_at_end_of_platform():

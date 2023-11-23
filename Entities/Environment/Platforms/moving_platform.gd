@@ -26,13 +26,15 @@ var switch_pressed := false
 enum States { MOVING, WAITING }
 var State = States.WAITING
 
+var room_active : bool = false
+
 enum modes { TWEEN, POSITION }
 @export var mode = modes.POSITION # NPCs trying to match velocity will only work in POSITION mode
 
 var tween : Tween
 @export var tween_duration = 5.0
 
-var velocity
+var velocity = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,6 +63,8 @@ func _ready():
 	else:
 		link(get_node(trigger_node_path))
 
+func activate():
+	room_active = true
 
 func hack_workaround_for_starting_position_bug():
 	# weird bug in animatable body nodes.. they don't seem to respect their parent's transform on instantiation
@@ -75,6 +79,9 @@ func link(triggerNode):
 
 func _physics_process(delta):
 	$StateLabel.text = States.keys()[State]
+
+	if !room_active:
+		return
 	
 	if trigger_node != null:
 		if State == States.MOVING and (!trigger_node.pressed or !switch_pressed):

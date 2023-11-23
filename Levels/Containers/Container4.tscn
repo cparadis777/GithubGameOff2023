@@ -46,9 +46,6 @@ size = Vector2(384, 192)
 
 [node name="BaseContainer" type="StaticBody2D"]
 script = ExtResource("1_kuvv2")
-enter_left = true
-enter_up = true
-doors_open = true
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
