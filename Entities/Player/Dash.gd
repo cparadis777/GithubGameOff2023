@@ -43,8 +43,12 @@ func enter(_msg := {}) -> void:
 #		player.reset_rotation()
 	
 	player.velocity.x = dash_speed * direction
-	
+	$DashHurtBox/DashCollisionShape.disabled = false
 	started.emit() # so player can play animation
+
+func exit():
+	super()
+	$DashHurtBox/DashCollisionShape.disabled = true
 
 
 func physics_update(_delta: float) -> void:

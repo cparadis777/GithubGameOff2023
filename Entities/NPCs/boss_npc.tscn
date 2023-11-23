@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://4ubg2v861dlv"]
+[gd_scene load_steps=6 format=3 uid="uid://4ubg2v861dlv"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_dhliq"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_46dpl"]
-[ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="3_3i86w"]
+[ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="3_mxgy3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qjb73"]
 resource_local_to_scene = true
@@ -10,13 +10,20 @@ shader = ExtResource("2_46dpl")
 shader_parameter/iframes = false
 shader_parameter/FlashColor = Color(1, 1, 1, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shbba"]
+size = Vector2(27.6079, 59.4157)
+
 [node name="BossNPC" instance=ExtResource("1_dhliq")]
 
 [node name="Sprite2D" parent="Appearance" index="0"]
 material = SubResource("ShaderMaterial_qjb73")
+position = Vector2(20.5961, -60.204)
 scale = Vector2(1, 1)
-texture = ExtResource("3_3i86w")
+texture = ExtResource("3_mxgy3")
+offset = Vector2(-34.855, 14.2588)
 
-[node name="SimpleShootAttack" parent="Behaviours/Attacks" index="1"]
-enabled = false
-horizontal_only = true
+[node name="CollisionShape2D" parent="Behaviours/Attacks/SimpleMeleeAttack/MeleeCollisionArea" index="0"]
+position = Vector2(25.804, -4.29216)
+shape = SubResource("RectangleShape2D_shbba")
+
+[editable path="Behaviours/Attacks/SimpleMeleeAttack"]
