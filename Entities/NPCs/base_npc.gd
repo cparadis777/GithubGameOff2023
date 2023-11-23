@@ -113,7 +113,7 @@ func die():
 	State = States.DEAD
 	if has_node("AnimationPlayer"):
 		if $AnimationPlayer.has_animation("die"):
-			$AnimationPlayer.stop()
+			#$AnimationPlayer.stop()
 			$AnimationPlayer.play("die")
 		else:
 			play_death_tween_if_needed()
@@ -146,6 +146,7 @@ func abort_attacks_in_progress():
 	for attack in $Behaviours/Attacks.get_children():
 		if attack.get("enabled") == true and attack.has_method("stop"):
 			attack.stop()
+	
 
 func resume_attacking():
 	for attack in $Behaviours/Attacks.get_children():
@@ -162,6 +163,7 @@ func _on_iframes_timer_timeout():
 			velocity = Vector2.LEFT * SPEED
 
 		State = States.RUNNING
+		$AnimationPlayer.play("RESET")
 		resume_attacking()
 
 func turn_around():

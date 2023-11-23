@@ -56,17 +56,15 @@ mouse_filter = 2
 layout_mode = 2
 focus_mode = 0
 
-[node name="FightButton" parent="HUD/HBoxContainer" instance=ExtResource("3_tcnfn")]
-layout_mode = 2
-focus_mode = 0
-text = "Fight!"
-script = null
-
 [node name="ResetButton" parent="HUD/HBoxContainer" instance=ExtResource("3_tcnfn")]
 layout_mode = 2
 focus_mode = 0
 text = "Reset!"
 script = null
+
+[node name="FightButton" type="Button" parent="HUD/HBoxContainer"]
+layout_mode = 2
+text = "Fight!"
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("4_unqhl")]
 
@@ -260,8 +258,8 @@ entrances = {
 [node name="TerminalContainer2" parent="." instance=ExtResource("9_d655n")]
 position = Vector2(-65, -113)
 
-[connection signal="pressed" from="HUD/HBoxContainer/FightButton" to="." method="_on_fight_button_pressed"]
 [connection signal="pressed" from="HUD/HBoxContainer/ResetButton" to="DropPoints" method="reset_dropped_containers"]
+[connection signal="pressed" from="HUD/HBoxContainer/FightButton" to="." method="_on_fight_button_pressed"]
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
 [connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]

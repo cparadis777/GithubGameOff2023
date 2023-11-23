@@ -93,6 +93,9 @@ func _process(_delta):
 			show_entire_message()
 		else:
 			go_next_message()
+	if visible and Input.is_action_just_pressed("ui_cancel"):
+		done_talking = true
+		$AnimationPlayer.play("byebye")
 
 func show_entire_message():
 	current_character = len(messages[current_message])
