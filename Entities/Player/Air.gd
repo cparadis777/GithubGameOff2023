@@ -38,13 +38,14 @@ func enter(msg := {}) -> void:
 
 # Note: Not the same as built in function physics_process!
 func physics_update(delta: float) -> void:
+	land_if_possible() # must be after move_and_slide
+
 	allow_player_to_change_direction_midair()
 	apply_gravity(delta)
 	end_jump_early_if_player_releases_button()
 	check_for_double_jump_requests()
 	check_for_attack_requests()
 	player.move_and_slide()
-	land_if_possible() # must be after move_and_slide
 	
 
 func check_for_double_jump_requests():
@@ -69,7 +70,11 @@ func allow_player_to_change_direction_midair():
 	
 func land_if_possible():
 	if player.velocity.y >= 0 and player.is_on_floor():
-		state_machine.transition_to("Landing")
+		var moving_platform = player.detect_moving_platform()
+		if moving_platform == null:
+			state_machine.transition_to("Landing")
+		else:
+			state_machine.transition_to("Idle")
 
 
 func apply_gravity(delta):

@@ -176,6 +176,10 @@ position = Vector2(25.3491, -4.75295)
 target_position = Vector2(2.08165e-12, 16)
 collision_mask = 16
 
+[node name="MovingPlatformSensor" type="RayCast2D" parent="Behaviours/Sensors"]
+target_position = Vector2(2.08165e-12, 16)
+collision_mask = 16
+
 [node name="DecisionMaking" type="Node2D" parent="Behaviours"]
 
 [node name="DecisionTimer" type="Timer" parent="Behaviours/DecisionMaking"]

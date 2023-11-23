@@ -65,6 +65,7 @@ func jump():
 func _physics_process(delta):
 	if State in [ States.RUNNING, States.JUMPING, States.IDLE, States.ATTACKING ]:
 		apply_gravity(delta)
+		sync_to_moving_platform(delta)
 		move_and_slide()
 		update_animations()
 		if is_at_end_of_platform() or is_obstructed():
@@ -75,6 +76,14 @@ func _physics_process(delta):
 
 	$Debug/StateLabel.text = States.keys()[State]
 
+func sync_to_moving_platform(_delta):
+	var sensor : RayCast2D = $Behaviours/Sensors/MovingPlatformSensor
+	if sensor.is_colliding():
+		var thing_underfoot = sensor.get_collider()
+		if is_on_floor() and thing_underfoot.is_in_group("MovingPlatforms"):
+			velocity.y = thing_underfoot.owner.velocity.y
+			
+			
 func is_at_end_of_platform():
 		if is_on_floor() and !$Behaviours/Sensors/FloorSensor.is_colliding():
 			return true

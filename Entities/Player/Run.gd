@@ -13,13 +13,13 @@ func _ready():
 func enter(_msg := {}) -> void:
 	running_started.emit()
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	# Notice how we have some code duplication between states. That's inherent to the pattern,
 	# although in production, your states will tend to be more complex and duplicate code
 	# much more rare.
 
 	var input_direction_x: float = Input.get_axis("move_left", "move_right")
-
+	var moving_platform = player.detect_moving_platform()
 
 	if Input.is_action_just_pressed("jump"):
 		state_machine.transition_to("Air", {do_jump = true})
@@ -33,18 +33,20 @@ func physics_update(delta: float) -> void:
 	elif Input.is_action_just_pressed("fast_punch"):
 		state_machine.transition_to("FastPunch")
 		return
-	elif not player.is_on_floor():
+	elif not player.is_on_floor() and moving_platform == null:
 		state_machine.transition_to("Air")
 		return
 
 	else:
 		player.velocity.x = player.speed * input_direction_x
-		player.velocity.y += player.gravity * delta
+		#player.velocity.y += player.gravity * delta # the player is already on the floor
+		if moving_platform != null:
+			player.velocity.y = moving_platform.owner.velocity.y
 		var collision_detected = player.move_and_slide()
 		if collision_detected:
 			var collision : KinematicCollision2D = player.get_last_slide_collision()
 			attempt_to_push(collision)
-		player.get_platform_velocity()
+		
 
 
 

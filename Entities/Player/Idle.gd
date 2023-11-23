@@ -19,6 +19,8 @@ func enter(_msg := {}) -> void:
 
 func physics_update(_delta: float) -> void:
 	
+	var moving_platform = player.detect_moving_platform()
+	
 #	if not player.is_on_floor():
 #		state_machine.transition_to("Air")
 #		return
@@ -44,15 +46,14 @@ func physics_update(_delta: float) -> void:
 			else:
 				duck()
 
-	elif player.detect_moving_platform() != null:
+	elif moving_platform != null:
+		player.velocity.y = moving_platform.owner.velocity.y
 		player.move_and_slide()
 	
 	else:
 		player.move_and_slide()
-		if not player.is_on_floor():
+		if moving_platform == null and player.is_on_floor() == false:
 			state_machine.transition_to("Air")
-#	else: # make sure player sprite is snapped to pixels
-#		player.global_position = floor(player.global_position)
 
 
 

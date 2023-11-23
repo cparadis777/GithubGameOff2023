@@ -27,7 +27,7 @@ enum States { MOVING, WAITING }
 var State = States.WAITING
 
 enum modes { TWEEN, POSITION }
-@export var mode = modes.TWEEN
+@export var mode = modes.POSITION # NPCs trying to match velocity will only work in POSITION mode
 
 var tween : Tween
 @export var tween_duration = 5.0

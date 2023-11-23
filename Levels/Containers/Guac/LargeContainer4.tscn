@@ -147,11 +147,15 @@ shape = SubResource("RectangleShape2D_m7xia")
 
 [node name="MovingPlatform" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-258, 98)
+speed = 80.0
 show_piston = true
 tween_duration = 3.0
 
 [node name="MovingPlatform6" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-334, 0)
+
+[node name="Location2" parent="MovingPlatform6/PositionMarkers" index="0"]
+position = Vector2(0, -107)
 
 [node name="MovingPlatform2" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-109, 98)
@@ -159,6 +163,9 @@ tween_duration = 4.0
 
 [node name="MovingPlatform5" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-179, 25)
+
+[node name="Location2" parent="MovingPlatform5/PositionMarkers" index="0"]
+position = Vector2(0, -126)
 
 [node name="MovingPlatform3" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-1, 4)
@@ -185,16 +192,17 @@ position = Vector2(224, 161)
 position = Vector2(287, 161)
 
 [node name="ShootyNPC" parent="." instance=ExtResource("10_25gqt")]
-position = Vector2(-336, -4)
+position = Vector2(-336, -16)
 
 [node name="ShootyNPC2" parent="." instance=ExtResource("10_25gqt")]
-position = Vector2(-178, 24)
+position = Vector2(-178, 11)
 
 [node name="ShootyNPC3" parent="." instance=ExtResource("10_25gqt")]
 position = Vector2(305, -79)
 
 [node name="MovingPlatform7" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(117, 104)
+speed = 80.0
 tween_duration = 4.0
 
 [node name="MovingPlatform9" parent="." instance=ExtResource("11_a2x7r")]
@@ -205,8 +213,15 @@ tween_duration = 3.0
 [node name="MovingPlatform11" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(196, 10)
 
+[node name="Location2" parent="MovingPlatform11/PositionMarkers" index="0"]
+position = Vector2(0, -115)
+
 [node name="BasicPlatform" parent="." instance=ExtResource("8_w7efc")]
 position = Vector2(306, -73)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
+
+[editable path="MovingPlatform6"]
+[editable path="MovingPlatform5"]
+[editable path="MovingPlatform11"]
