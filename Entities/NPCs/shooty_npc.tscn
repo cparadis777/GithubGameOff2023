@@ -1,11 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://c001oq7jof7bq"]
+[gd_scene load_steps=32 format=3 uid="uid://c001oq7jof7bq"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_58hki"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_vhw04"]
 [ext_resource type="Texture2D" uid="uid://dreoea5dtg2tc" path="res://art/placeholder/police-robot.png" id="3_4on25"]
 [ext_resource type="Texture2D" uid="uid://cyc0ulu4kftau" path="res://art/Enemies/Cyber-Droid/droid-shooter-idle.png" id="4_60g6j"]
-[ext_resource type="Texture2D" uid="uid://5fxe6rhu6r3g" path="res://art/Enemies/Cyber-Droid/droid-shooter-death-placeholder.png" id="4_ftqxq"]
 [ext_resource type="AudioStream" uid="uid://sbi5ot63ajcw" path="res://audio/sfx/placeholder/laserShoot.wav" id="4_puj3x"]
+[ext_resource type="Texture2D" uid="uid://b3k1rwmtbee8n" path="res://art/Enemies/Cyber-Droid/explosion.png" id="4_wlkl5"]
 [ext_resource type="AudioStream" uid="uid://cf0f0edqsiv82" path="res://audio/sfx/placeholder/laserShoot2.wav" id="5_g8u11"]
 [ext_resource type="AudioStream" uid="uid://u7gx17pydv6x" path="res://audio/sfx/player_sfx/powerUp.wav" id="6_qp67u"]
 
@@ -15,17 +15,29 @@ shader = ExtResource("2_vhw04")
 shader_parameter/iframes = false
 shader_parameter/FlashColor = Color(1, 1, 1, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e6xlf"]
-atlas = ExtResource("4_ftqxq")
-region = Rect2(0, 0, 90, 87)
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4ug7"]
+atlas = ExtResource("4_wlkl5")
+region = Rect2(0, 0, 90, 92)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rjpof"]
-atlas = ExtResource("4_ftqxq")
-region = Rect2(90, 0, 90, 87)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfl34"]
+atlas = ExtResource("4_wlkl5")
+region = Rect2(90, 0, 90, 92)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i0pyi"]
-atlas = ExtResource("4_ftqxq")
-region = Rect2(180, 0, 90, 87)
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8l68"]
+atlas = ExtResource("4_wlkl5")
+region = Rect2(180, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mmfr"]
+atlas = ExtResource("4_wlkl5")
+region = Rect2(270, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfxqt"]
+atlas = ExtResource("4_wlkl5")
+region = Rect2(360, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4732i"]
+atlas = ExtResource("4_wlkl5")
+region = Rect2(450, 0, 90, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e8pex"]
 atlas = ExtResource("4_60g6j")
@@ -51,13 +63,22 @@ region = Rect2(360, 0, 90, 92)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e6xlf")
+"texture": SubResource("AtlasTexture_h4ug7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rjpof")
+"texture": SubResource("AtlasTexture_vfl34")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i0pyi")
+"texture": SubResource("AtlasTexture_b8l68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mmfr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfxqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4732i")
 }],
 "loop": true,
 "name": &"die",
@@ -212,6 +233,7 @@ resource_name = "attack"
 
 [sub_resource type="Animation" id="Animation_io00w"]
 resource_name = "die"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -243,10 +265,10 @@ tracks/2/path = NodePath("Appearance/AnimatedSprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0, 2]
+"values": [0, 5]
 }
 
 [sub_resource type="Animation" id="Animation_ft728"]
@@ -445,6 +467,7 @@ stream_0/stream = ExtResource("6_qp67u")
 stream_0/weight = 1.0
 
 [node name="ShootyNPC" instance=ExtResource("1_58hki")]
+scale = Vector2(1, 1)
 
 [node name="Sprite2D" parent="Appearance" index="0"]
 visible = false
