@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://c001oq7jof7bq"]
+[gd_scene load_steps=25 format=3 uid="uid://c001oq7jof7bq"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_58hki"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_vhw04"]
 [ext_resource type="Texture2D" uid="uid://dreoea5dtg2tc" path="res://art/placeholder/police-robot.png" id="3_4on25"]
 [ext_resource type="AudioStream" uid="uid://sbi5ot63ajcw" path="res://audio/sfx/placeholder/laserShoot.wav" id="4_puj3x"]
+[ext_resource type="Texture2D" uid="uid://dcxmnmh55n80e" path="res://art/Enemies/Cyber-Droid/droid-shooter-idle.png" id="4_qr3q3"]
 [ext_resource type="AudioStream" uid="uid://cf0f0edqsiv82" path="res://audio/sfx/placeholder/laserShoot2.wav" id="5_g8u11"]
 [ext_resource type="AudioStream" uid="uid://u7gx17pydv6x" path="res://audio/sfx/player_sfx/powerUp.wav" id="6_qp67u"]
 
@@ -12,6 +13,49 @@ resource_local_to_scene = true
 shader = ExtResource("2_vhw04")
 shader_parameter/iframes = false
 shader_parameter/FlashColor = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv23u"]
+atlas = ExtResource("4_qr3q3")
+region = Rect2(0, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhvf3"]
+atlas = ExtResource("4_qr3q3")
+region = Rect2(90, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnrvd"]
+atlas = ExtResource("4_qr3q3")
+region = Rect2(180, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fii7s"]
+atlas = ExtResource("4_qr3q3")
+region = Rect2(270, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv8by"]
+atlas = ExtResource("4_qr3q3")
+region = Rect2(360, 0, 90, 92)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wvh4t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv23u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhvf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnrvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fii7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv8by")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
 
 [sub_resource type="Animation" id="Animation_iaf2y"]
 length = 0.001
@@ -364,12 +408,19 @@ stream_0/weight = 1.0
 [node name="ShootyNPC" instance=ExtResource("1_58hki")]
 
 [node name="Sprite2D" parent="Appearance" index="0"]
+visible = false
 material = SubResource("ShaderMaterial_nphfu")
 position = Vector2(0, 0)
 scale = Vector2(2, 2)
 texture = ExtResource("3_4on25")
 offset = Vector2(0, -15.8432)
 hframes = 4
+
+[node name="AnimatedSprite2D" parent="Appearance" index="1"]
+position = Vector2(-1.58432, -39.6079)
+sprite_frames = SubResource("SpriteFrames_wvh4t")
+animation = &"idle"
+frame_progress = 0.470326
 
 [node name="SimpleMeleeAttack" parent="Behaviours/Attacks" index="0"]
 enabled = false
