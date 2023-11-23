@@ -96,5 +96,6 @@ func interact():
 		$Area2D/DelayOpeningTimer.stop()
 		_on_delay_opening_timer_timeout()
 	else:
-		$AnimationPlayer.play("locked")
+		if $AnimationPlayer.has_animation("locked"):
+			$AnimationPlayer.play("locked")
 		

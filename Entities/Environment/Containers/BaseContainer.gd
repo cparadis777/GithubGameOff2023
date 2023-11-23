@@ -64,7 +64,11 @@ func _ready():
 	if has_node("ContainerInterior"):
 		$ContainerInterior.show() # so level designers can hide the collision shape, but it'll work in-game
 		
-		
+func _unhandled_input(event):
+	if event.is_action_pressed("unlock_doors_cheat"):
+		if $ContainerInterior.get_overlapping_bodies().has(get_tree().get_first_node_in_group("Player")):
+			unlock_all_doors()
+			get_viewport().set_input_as_handled()
 		
 func spawn_player_for_testing():
 	print(self.name + ": No player detected, generating player scene. BaseContainer.gda")
@@ -73,9 +77,11 @@ func spawn_player_for_testing():
 	add_child(player_node)
 	player_node.position = Vector2(-350, 150)
 
-	spawn_canvas_modulate_for_better_lighting()
+	#spawn_canvas_modulate_for_better_lighting()
+	
 	
 func spawn_canvas_modulate_for_better_lighting():
+	# maybe better without the lighting?
 	
 	var canvasModulateScene = load("res://Entities/Environment/Lights/base_canvas_modulate.tscn").instantiate()
 	add_child(canvasModulateScene)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://b4h8trxb28bud"]
+[gd_scene load_steps=22 format=3 uid="uid://b4h8trxb28bud"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_jtbjr"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_d8uup"]
+[ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_jb18l"]
 [ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_t5kge"]
 [ext_resource type="PackedScene" uid="uid://yccanqnov1ry" path="res://Entities/Environment/Lights/point_light_2d.tscn" id="4_33vq5"]
 [ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_s5xdt"]
@@ -43,6 +44,8 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
+
+[node name="DarkeningLayer" parent="." instance=ExtResource("2_jb18l")]
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4

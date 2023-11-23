@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://dt181ly2upt1t"]
+[gd_scene load_steps=20 format=3 uid="uid://dt181ly2upt1t"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_jly3a"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_8e5ns"]
+[ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_8w7k1"]
 [ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_ktgrr"]
 [ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_k87s3"]
 [ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="5_4w7bu"]
@@ -34,6 +35,9 @@ size = Vector2(796, 340)
 collision_layer = 24
 collision_mask = 7
 script = ExtResource("1_jly3a")
+
+[node name="DarkeningLayer" parent="." instance=ExtResource("2_8w7k1")]
+position = Vector2(0, -6.55651e-06)
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4

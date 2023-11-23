@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://c8qshoquywcr3"]
+[gd_scene load_steps=19 format=3 uid="uid://c8qshoquywcr3"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_rtxks"]
+[ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_1dccq"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_0133q"]
 [ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_gl13u"]
 [ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_urxe2"]
@@ -33,6 +34,8 @@ size = Vector2(796, 340)
 collision_layer = 24
 collision_mask = 7
 script = ExtResource("1_rtxks")
+
+[node name="DarkeningLayer" parent="." instance=ExtResource("2_1dccq")]
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
@@ -145,47 +148,53 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
 
-[node name="TrapSpikes" parent="." instance=ExtResource("9_je7k7")]
+[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_lklqy")
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="TrapSpikes" parent="Traps" instance=ExtResource("9_je7k7")]
 position = Vector2(-258, 79)
 
-[node name="TrapSpikes2" parent="." instance=ExtResource("9_je7k7")]
+[node name="TrapSpikes2" parent="Traps" instance=ExtResource("9_je7k7")]
 position = Vector2(-194, 79)
 
-[node name="TrapSpikes4" parent="." instance=ExtResource("9_je7k7")]
+[node name="TrapSpikes4" parent="Traps" instance=ExtResource("9_je7k7")]
 position = Vector2(258, 78)
 
-[node name="TrapSpikes3" parent="." instance=ExtResource("9_je7k7")]
+[node name="TrapSpikes3" parent="Traps" instance=ExtResource("9_je7k7")]
 position = Vector2(-12, 76)
 
-[node name="TrapSpikes5" parent="." instance=ExtResource("9_je7k7")]
+[node name="TrapSpikes5" parent="Traps" instance=ExtResource("9_je7k7")]
 position = Vector2(195, 78)
 
-[node name="MovingPlatform" parent="." instance=ExtResource("8_78j8k")]
-position = Vector2(-106, 68)
+[node name="Enemies" type="Node2D" parent="."]
 
-[node name="MovingPlatform2" parent="." instance=ExtResource("8_78j8k")]
-position = Vector2(102, 68)
-
-[node name="MovingPlatform3" parent="." instance=ExtResource("8_78j8k")]
-position = Vector2(-5, 9)
-
-[node name="RunningAssassin" parent="." instance=ExtResource("10_bekvs")]
+[node name="RunningAssassin" parent="Enemies" instance=ExtResource("10_bekvs")]
 position = Vector2(-200, 164)
 
-[node name="RunningAssassin2" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("10_bekvs")]
+[node name="RunningAssassin2" parent="Enemies" node_paths=PackedStringArray("animation_player") instance=ExtResource("10_bekvs")]
 position = Vector2(-109, 163)
 animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 
-[node name="RunningAssassin3" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("10_bekvs")]
+[node name="RunningAssassin3" parent="Enemies" node_paths=PackedStringArray("animation_player") instance=ExtResource("10_bekvs")]
 position = Vector2(149, 164)
 animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 
-[node name="RunningAssassin4" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("10_bekvs")]
+[node name="RunningAssassin4" parent="Enemies" node_paths=PackedStringArray("animation_player") instance=ExtResource("10_bekvs")]
 position = Vector2(240, 163)
 animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 
-[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_lklqy")
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="MovingPlatform" parent="Platforms" instance=ExtResource("8_78j8k")]
+position = Vector2(-106, 68)
+
+[node name="MovingPlatform2" parent="Platforms" instance=ExtResource("8_78j8k")]
+position = Vector2(102, 68)
+
+[node name="MovingPlatform3" parent="Platforms" instance=ExtResource("8_78j8k")]
+position = Vector2(-5, 9)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

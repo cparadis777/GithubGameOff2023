@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://bqpc5e3t3s7f"]
+[gd_scene load_steps=21 format=3 uid="uid://bqpc5e3t3s7f"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_0kc34"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_ntdlo"]
+[ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_w7aoc"]
 [ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_46044"]
 [ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_prfh5"]
 [ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="5_66pqb"]
@@ -35,6 +36,8 @@ size = Vector2(796, 340)
 collision_layer = 24
 collision_mask = 7
 script = ExtResource("1_0kc34")
+
+[node name="DarkeningLayer" parent="." instance=ExtResource("2_w7aoc")]
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
@@ -147,59 +150,65 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
 
-[node name="TrapSpikes2" parent="." instance=ExtResource("9_bccnw")]
-position = Vector2(-188, 160)
-
-[node name="TrapSpikes7" parent="." instance=ExtResource("9_bccnw")]
-position = Vector2(-252, 160)
-
-[node name="TrapSpikes4" parent="." instance=ExtResource("9_bccnw")]
-position = Vector2(-124, 161)
-
-[node name="TrapSpikes3" parent="." instance=ExtResource("9_bccnw")]
-position = Vector2(171, 161)
-
-[node name="TrapSpikes6" parent="." instance=ExtResource("9_bccnw")]
-position = Vector2(108, 162)
-
-[node name="TrapSpikes5" parent="." instance=ExtResource("9_bccnw")]
-position = Vector2(236, 161)
-
-[node name="NPC_02_DockWorker" parent="." instance=ExtResource("11_ptdey")]
-position = Vector2(-4, 26)
-
 [node name="TrashCan" parent="." instance=ExtResource("12_e4gig")]
 position = Vector2(-119, 26)
 
 [node name="TrashCan2" parent="." instance=ExtResource("12_e4gig")]
 position = Vector2(79, 27)
 
-[node name="JumpThroughPlatform" parent="." instance=ExtResource("12_sh8xs")]
-position = Vector2(-294, 80)
-
-[node name="JumpThroughPlatform3" parent="." instance=ExtResource("12_sh8xs")]
-position = Vector2(-88, 27)
-
-[node name="JumpThroughPlatform4" parent="." instance=ExtResource("12_sh8xs")]
-position = Vector2(-88, 27)
-
-[node name="JumpThroughPlatform6" parent="." instance=ExtResource("12_sh8xs")]
-position = Vector2(1, -72)
-
-[node name="JumpThroughPlatform5" parent="." instance=ExtResource("12_sh8xs")]
-position = Vector2(76, 27)
-
-[node name="JumpThroughPlatform2" parent="." instance=ExtResource("12_sh8xs")]
-position = Vector2(282, 80)
-
-[node name="StarTrap" parent="." instance=ExtResource("12_8op0j")]
-position = Vector2(-310, -20)
-
-[node name="StarTrap2" parent="." instance=ExtResource("12_8op0j")]
-position = Vector2(304, -20)
-
 [node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_4bm7l")
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="StarTrap" parent="Traps" instance=ExtResource("12_8op0j")]
+position = Vector2(-310, -20)
+
+[node name="StarTrap2" parent="Traps" instance=ExtResource("12_8op0j")]
+position = Vector2(304, -20)
+
+[node name="TrapSpikes2" parent="Traps" instance=ExtResource("9_bccnw")]
+position = Vector2(-188, 160)
+
+[node name="TrapSpikes7" parent="Traps" instance=ExtResource("9_bccnw")]
+position = Vector2(-252, 160)
+
+[node name="TrapSpikes4" parent="Traps" instance=ExtResource("9_bccnw")]
+position = Vector2(-124, 161)
+
+[node name="TrapSpikes3" parent="Traps" instance=ExtResource("9_bccnw")]
+position = Vector2(171, 161)
+
+[node name="TrapSpikes6" parent="Traps" instance=ExtResource("9_bccnw")]
+position = Vector2(108, 162)
+
+[node name="TrapSpikes5" parent="Traps" instance=ExtResource("9_bccnw")]
+position = Vector2(236, 161)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("12_sh8xs")]
+position = Vector2(-294, 80)
+
+[node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("12_sh8xs")]
+position = Vector2(-88, 27)
+
+[node name="JumpThroughPlatform4" parent="Platforms" instance=ExtResource("12_sh8xs")]
+position = Vector2(-88, 27)
+
+[node name="JumpThroughPlatform6" parent="Platforms" instance=ExtResource("12_sh8xs")]
+position = Vector2(1, -72)
+
+[node name="JumpThroughPlatform5" parent="Platforms" instance=ExtResource("12_sh8xs")]
+position = Vector2(76, 27)
+
+[node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("12_sh8xs")]
+position = Vector2(282, 80)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="NPC_02_DockWorker" parent="Enemies" instance=ExtResource("11_ptdey")]
+position = Vector2(-4, 26)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1v061uxxpf6m"]
+[gd_scene load_steps=16 format=3 uid="uid://c1v061uxxpf6m"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_26d1r"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_d8uoi"]
+[ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="3_yxup1"]
 [ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="4_ge3qy"]
 [ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="4_rpji1"]
 [ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="5_ttncq"]
@@ -36,6 +37,8 @@ z_index = -4
 position = Vector2(0, -6.55651e-06)
 scale = Vector2(2, 2)
 texture = ExtResource("2_d8uoi")
+
+[node name="DarkeningLayer" parent="." instance=ExtResource("3_yxup1")]
 
 [node name="Openings" type="Node2D" parent="."]
 
@@ -127,6 +130,7 @@ locked = true
 
 [node name="Exterior" type="Sprite2D" parent="."]
 visible = false
+light_mask = 0
 z_index = 1
 position = Vector2(4.72069e-05, -0.500001)
 scale = Vector2(2.5, 2.50521)
@@ -157,6 +161,12 @@ shape = SubResource("RectangleShape2D_m7xia")
 
 [node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_7l2ol")
+
+[node name="_Traps" type="Node2D" parent="."]
+
+[node name="_Enemies" type="Node2D" parent="."]
+
+[node name="_Platforms" type="Node2D" parent="."]
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

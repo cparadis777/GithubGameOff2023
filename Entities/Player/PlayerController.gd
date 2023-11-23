@@ -124,6 +124,15 @@ func initiate_debugging_protocol():
 	print("Player detected")
 	print("nodes in group Player: " + str(get_tree().get_nodes_in_group("Player")))
 	
+	print("Canvas Nodes:")
+	var canvas_modulate_nodes = get_tree().get_root().find_children("anvas")
+	print(canvas_modulate_nodes)
+
+	print("World Nodes:")
+	var world_nodes = get_tree().get_root().find_children("orld")
+	print(world_nodes)
+
+	
 
 func zoom_camera(direction : int):
 	#var camera = get_viewport().get_camera_2d()

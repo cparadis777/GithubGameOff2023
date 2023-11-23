@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bj3d6rfcnc2am"]
+[gd_scene load_steps=14 format=3 uid="uid://bj3d6rfcnc2am"]
 
 [ext_resource type="Script" path="res://Levels/GeneratedPlayspace.gd" id="1_guo8s"]
 [ext_resource type="Script" path="res://Levels/ContainerGrid.gd" id="2_0shpo"]
@@ -15,6 +15,11 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d5jlm"]
 blend_mode = 1
 light_mode = 1
+
+[sub_resource type="Environment" id="Environment_j2q28"]
+background_mode = 3
+ambient_light_energy = 0.2
+glow_enabled = true
 
 [node name="GeneratedPlayspace" type="Node2D"]
 script = ExtResource("1_guo8s")
@@ -60,9 +65,6 @@ position = Vector2(1921, -483)
 [node name="EmptyContainer8" parent="." instance=ExtResource("6_n8nav")]
 position = Vector2(1921, -962)
 
-[node name="CanvasModulate" parent="." instance=ExtResource("7_ifxbb")]
-visible = false
-
 [node name="StartContainer" parent="." instance=ExtResource("9_nkiwv")]
 position = Vector2(-960, 0)
 container_exit_flags = 2
@@ -100,6 +102,12 @@ z_index = -1
 material = SubResource("CanvasItemMaterial_d5jlm")
 color = Color(0.47451, 0.345098, 0.537255, 1)
 polygon = PackedVector2Array(-794, 30, -691, 30, -690, -23, -614, 69, -693, 138, -693, 90, -795, 89)
+
+[node name="CanvasModulate" parent="." instance=ExtResource("7_ifxbb")]
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j2q28")
 
 [connection signal="finished" from="AI_Tutorial_Text" to="BigArrow" method="show"]
 
