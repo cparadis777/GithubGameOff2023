@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c1v061uxxpf6m"]
+[gd_scene load_steps=15 format=3 uid="uid://c1v061uxxpf6m"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_26d1r"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_d8uoi"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="5_ttncq"]
 [ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="6_jq33i"]
 [ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="7_17qf5"]
+[ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="8_7l2ol"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -153,6 +154,9 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
+
+[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_7l2ol")
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

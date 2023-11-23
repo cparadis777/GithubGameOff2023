@@ -102,23 +102,30 @@ func open_door(side:Utils.Directions):
 			get_node(doors[side]).locked = false
 
 func set_all_doors_locked(locked):
+	if locked == false:
+		doors_unlocked = true
 	for side in has_entrance:
 		if has_node(doors[side]):
 			get_node(doors[side]).locked = locked	
 
 func unlock_all_doors():
-	set_all_doors_locked(false)
+	if !doors_unlocked:
+		set_all_doors_locked(false)
+		if has_node("OpeningDoorsVoice"):
+			$OpeningDoorsVoice.play()
+		else:
+			printerr(self.name, " has no OpeningDoorsVoice node.")
 
 func _on_switch_toggled(_pressed):
 	if unlock_with_switch:
-		set_all_doors_locked(false)
+		unlock_all_doors()
 	
 func _on_NPC_died(_name):
 	num_enemies -= 1;
 	print("enemies left: %d" % num_enemies)
 	if (unlock_on_enemies_defeated and num_enemies <= 0):
 		print("container beaten")
-		set_all_doors_locked(false)
+		unlock_all_doors()
 
 
 func safety_check_to_unlock_empty_rooms(): # from EnemyTimer.timeout, created in setup_backup_enemy_check()

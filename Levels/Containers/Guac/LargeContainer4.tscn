@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b0pdl3tlo5xbs"]
+[gd_scene load_steps=19 format=3 uid="uid://b0pdl3tlo5xbs"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_at00n"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_yn05a"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="9_3h2nx"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_25gqt"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="11_a2x7r"]
+[ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="12_j1ldf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -218,6 +219,9 @@ position = Vector2(0, -115)
 
 [node name="BasicPlatform" parent="." instance=ExtResource("8_w7efc")]
 position = Vector2(306, -73)
+
+[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_j1ldf")
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
