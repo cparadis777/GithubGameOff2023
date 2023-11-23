@@ -89,6 +89,7 @@ func check_under(coordinate:Vector2) -> bool:
 	return false
 
 func drop_done() -> void:
+	$BangNoise.play()
 	var old_parent = self.container_dropping.get_parent()
 	old_parent.remove_child(self.container_dropping)
 	self.drop_point_targeted.add_child(self.container_dropping)

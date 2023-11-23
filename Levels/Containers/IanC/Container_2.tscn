@@ -98,6 +98,7 @@ position = Vector2(175, -4)
 
 [node name="StarTrap-Shooter" parent="Traps" index="0" instance=ExtResource("4_6jjch")]
 position = Vector2(1, -20)
+sync_to_physics = false
 
 [node name="TrapSpikes2" parent="Traps" index="1" instance=ExtResource("5_8168g")]
 position = Vector2(-138, 163)

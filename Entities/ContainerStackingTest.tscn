@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=14 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="3_tcnfn"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="4_unqhl"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
+[ext_resource type="AudioStream" uid="uid://ddnyec60dy814" path="res://audio/sfx/player_sfx/player_bigpunch_impact.mp3" id="6_qcju0"]
 [ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="8_18gwl"]
 [ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="9_0cocc"]
 [ext_resource type="PackedScene" uid="uid://diik2yboc0mbr" path="res://Entities/Droppable/TerminalContainer.tscn" id="9_d655n"]
@@ -79,6 +80,9 @@ n_horizontal = 2
 n_vertical = 4
 container_width = 48
 container_height = 24
+
+[node name="BangNoise" type="AudioStreamPlayer" parent="DropPoints"]
+stream = ExtResource("6_qcju0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -177)
