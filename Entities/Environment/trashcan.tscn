@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1g47w7bhxbg3"]
+[gd_scene load_steps=11 format=3 uid="uid://b2g1ag8e5bgkg"]
 
 [ext_resource type="Script" path="res://Entities/Environment/trashcan.gd" id="1_6hnh1"]
 [ext_resource type="Texture2D" uid="uid://cmmdpoq1x6uav" path="res://art/props/tall_crate.png" id="2_v3y8r"]
@@ -44,6 +44,7 @@ offset = Vector2(-0.28656, -14.6351)
 [node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_xbvcy")
 volume_db = -9.0
+bus = &"sfx"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -30)

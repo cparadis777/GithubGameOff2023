@@ -1,0 +1,264 @@
+[gd_scene load_steps=32 format=3 uid="uid://c2kws1t2ce2kn"]
+
+[ext_resource type="Script" path="res://Levels/placeholder/plex_level_template.gd" id="1_hqjdj"]
+[ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_p47sb"]
+[ext_resource type="PackedScene" uid="uid://dnsnay6jrr7ic" path="res://Entities/Environment/Lights/switched_blacklight_inverse.tscn" id="4_gq5iw"]
+[ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="6_vcyxu"]
+[ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="7_o5mg4"]
+[ext_resource type="PackedScene" uid="uid://bp3hllbhu1duj" path="res://Entities/Environment/Lights/neon_light.tscn" id="7_oawhv"]
+[ext_resource type="PackedScene" uid="uid://bveugr8fx87uv" path="res://Entities/Environment/portals/door_template.tscn" id="8_1ywrw"]
+[ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="9_bcimw"]
+[ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="10_c55k5"]
+[ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="11_a137i"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="11_d7olt"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="11_px28m"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="12_fga5v"]
+[ext_resource type="Script" path="res://Levels/placeholder/ChallengeSpawningLogic.gd" id="12_ors2s"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="13_532g6"]
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="14_ga6dq"]
+[ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="14_m08jb"]
+[ext_resource type="PackedScene" uid="uid://btwdkp7lrbg0d" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/assassin_on_platform.tscn" id="14_xeouk"]
+[ext_resource type="PackedScene" uid="uid://cj18qabpjb2wu" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/dock_guy_on_platform.tscn" id="15_7sv6p"]
+[ext_resource type="PackedScene" uid="uid://ddkm7lpck4cwy" path="res://Entities/Environment/ObstacleSpawners/ObstacleSpawner.tscn" id="16_6dyb6"]
+[ext_resource type="PackedScene" uid="uid://b1gw2o1d85wpr" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/three_star_trap.tscn" id="18_q0bre"]
+[ext_resource type="PackedScene" uid="uid://biegidqhn52kc" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/shooty_guy_on_platform.tscn" id="21_q0qhx"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="22_a3eh0"]
+
+[sub_resource type="Gradient" id="Gradient_m6aon"]
+offsets = PackedFloat32Array(0, 0.301818, 0.829091)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yknl7"]
+gradient = SubResource("Gradient_m6aon")
+width = 16
+height = 180
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgn8w"]
+size = Vector2(16, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tgv5"]
+size = Vector2(13, 680)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sjdu5"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_vgmee"]
+offsets = PackedFloat32Array(0, 0.506211)
+colors = PackedColorArray(0, 0, 0, 0.666667, 0.321569, 0.447059, 0.478431, 0.666667)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jycef"]
+gradient = SubResource("Gradient_vgmee")
+width = 640
+height = 256
+fill_from = Vector2(0.486284, 1)
+fill_to = Vector2(0.511222, 0)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j7lsu"]
+polygon = PackedVector2Array(-320, 50.6667, -318.667, -266, 317.333, -267.333, 320.667, 49.3333, 336.667, 47.3333, 336.667, -282, -338, -284, -336.667, 50.6667)
+
+[node name="ShippingContainerRoom" type="Node2D"]
+script = ExtResource("1_hqjdj")
+
+[node name="CameraTarget" type="Marker2D" parent="."]
+position = Vector2(0, -77)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Walls" type="Node2D" parent="."]
+scale = Vector2(1.33, 1.33)
+
+[node name="LEFT" type="StaticBody2D" parent="Walls"]
+position = Vector2(-313, 2.08165e-12)
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/LEFT"]
+visible = false
+position = Vector2(0, -1)
+scale = Vector2(1, 1.28)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(1, -90)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LEFT"]
+position = Vector2(-18.5789, -118.045)
+shape = SubResource("RectangleShape2D_dgn8w")
+
+[node name="IsoWallPolygon" type="Polygon2D" parent="Walls/LEFT"]
+visible = false
+polygon = PackedVector2Array(0.218048, -0.75188, -38.1278, 42.8571, -38.8797, -285.714, -0.533844, -244.361)
+
+[node name="RIGHT" type="StaticBody2D" parent="Walls"]
+position = Vector2(317, 2.08165e-12)
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/RIGHT"]
+visible = false
+position = Vector2(-2, -6)
+scale = Vector2(1, 1.32)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(0, -86)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RIGHT"]
+position = Vector2(18.3383, -118.797)
+shape = SubResource("RectangleShape2D_dgn8w")
+
+[node name="IsoWallPoly" type="Polygon2D" parent="Walls/RIGHT"]
+visible = false
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(0.218048, -0.75188, -38.1278, 42.8571, -38.8797, -285.714, -0.533844, -244.361)
+
+[node name="UP" type="StaticBody2D" parent="Walls"]
+position = Vector2(-313, -245)
+rotation = 1.5708
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/UP"]
+visible = false
+position = Vector2(3.20056, -1.73215)
+scale = Vector2(1, 3.48358)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(-1.20056, -90.1335)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/UP"]
+position = Vector2(-15.1515, -313)
+shape = SubResource("RectangleShape2D_5tgv5")
+
+[node name="IsoCelingPoly" type="Polygon2D" parent="Walls/UP"]
+visible = false
+color = Color(0.52549, 0.52549, 0.52549, 1)
+polygon = PackedVector2Array(2.14285, 0.533813, -37.7066, 39.6317, -39.9648, -668.639, 1.3887, -631.045)
+
+[node name="DOWN" type="StaticBody2D" parent="Walls" groups=["Floors"]]
+position = Vector2(-313, 6)
+rotation = 1.5708
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/DOWN"]
+visible = false
+position = Vector2(3.20056, -1.73215)
+scale = Vector2(1, 3.48358)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(-1.20056, -90.1335)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DOWN"]
+position = Vector2(15.0515, -313)
+shape = SubResource("RectangleShape2D_5tgv5")
+
+[node name="Line2D" type="Line2D" parent="Walls/DOWN"]
+position = Vector2(-4.99999, 2.00003)
+points = PackedVector2Array(0, 0, 2.08165e-12, -640)
+width = 1.0
+
+[node name="IsoCelingPoly2" type="Polygon2D" parent="Walls/DOWN"]
+visible = false
+position = Vector2(-0.0150375, 0.218018)
+scale = Vector2(-1, 1)
+color = Color(0.52549, 0.52549, 0.52549, 1)
+polygon = PackedVector2Array(2.14285, 0.533813, -37.7066, 39.6317, -39.9648, -668.639, 1.3887, -631.045)
+
+[node name="BG_With_Walls" type="Sprite2D" parent="."]
+z_index = -20
+position = Vector2(0, -166)
+scale = Vector2(2, 2)
+texture = ExtResource("2_p47sb")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -10
+texture_repeat = 2
+position = Vector2(0.999998, -160)
+scale = Vector2(3.25, 3.25)
+texture = ExtResource("14_m08jb")
+region_enabled = true
+region_rect = Rect2(-196, 2.08165e-12, 256, 96)
+
+[node name="Hints" type="Node2D" parent="Background"]
+position = Vector2(-0.333333, 32.3333)
+scale = Vector2(0.333333, 0.333333)
+
+[node name="FakeAO" type="Sprite2D" parent="."]
+visible = false
+z_index = -100
+material = SubResource("CanvasItemMaterial_sjdu5")
+position = Vector2(-1, -156)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("GradientTexture2D_jycef")
+region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
+
+[node name="Lighting" type="Node2D" parent="."]
+scale = Vector2(1.5, 1.5)
+
+[node name="InverseBlacklight" parent="Lighting" instance=ExtResource("4_gq5iw")]
+
+[node name="InverseBlacklight2" parent="Lighting" instance=ExtResource("4_gq5iw")]
+position = Vector2(-7, -77)
+
+[node name="InverseBlacklight3" parent="Lighting" instance=ExtResource("4_gq5iw")]
+position = Vector2(232, -164)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Lighting"]
+occluder = SubResource("OccluderPolygon2D_j7lsu")
+
+[node name="SwitchedLight" parent="Lighting" instance=ExtResource("6_vcyxu")]
+visible = false
+position = Vector2(0, -96.6667)
+energy = 0.75
+max_distance = 400.0
+
+[node name="Switches" type="Node2D" parent="Lighting"]
+
+[node name="LightSwitch" parent="Lighting/Switches" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("7_o5mg4")]
+position = Vector2(141.333, 18)
+linked_nodes = [NodePath("../../InverseBlacklight"), NodePath("../../InverseBlacklight2"), NodePath("../../InverseBlacklight3"), NodePath("../../SwitchedLight"), NodePath("../../NeonLight"), NodePath("../../NeonLight2")]
+
+[node name="NeonLight" parent="Lighting" instance=ExtResource("7_oawhv")]
+position = Vector2(-156.667, -229.333)
+
+[node name="NeonLight2" parent="Lighting" instance=ExtResource("7_oawhv")]
+position = Vector2(146.667, -228.667)
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="LEFT" parent="Exits" instance=ExtResource("8_1ywrw")]
+position = Vector2(-429, 9)
+
+[node name="RIGHT" parent="Exits" instance=ExtResource("9_bcimw")]
+position = Vector2(443, 9)
+
+[node name="DOWN" parent="Exits" instance=ExtResource("10_c55k5")]
+position = Vector2(0, 22)
+
+[node name="UP" parent="Exits" instance=ExtResource("11_a137i")]
+position = Vector2(-1, -346)
+
+[node name="SpawningLogic" type="Node2D" parent="."]
+script = ExtResource("12_ors2s")
+
+[node name="Platforms" parent="SpawningLogic" instance=ExtResource("16_6dyb6")]
+position = Vector2(-348, -254)
+
+[node name="SpawnList" parent="SpawningLogic/Platforms" index="0"]
+resources = [PackedStringArray("assassin_on_platform", "dock_guy_on_platform", "moving_platform", "platform_jump_thru", "three_star_trap"), [ExtResource("14_xeouk"), ExtResource("15_7sv6p"), ExtResource("12_fga5v"), ExtResource("11_px28m"), ExtResource("18_q0bre")]]
+
+[node name="SpawnZone" parent="SpawningLogic/Platforms" index="1"]
+offset_bottom = 205.0
+
+[node name="Floor" parent="SpawningLogic" instance=ExtResource("16_6dyb6")]
+position = Vector2(-343, 2)
+
+[node name="SpawnList" parent="SpawningLogic/Floor" index="0"]
+resources = [PackedStringArray("npc_02_dock_worker", "npc_03_running_assassin", "shooty_guy_on_platform", "shooty_npc", "trap_spikes"), [ExtResource("13_532g6"), ExtResource("14_ga6dq"), ExtResource("21_q0qhx"), ExtResource("11_d7olt"), ExtResource("22_a3eh0")]]
+
+[node name="SpawnZone" parent="SpawningLogic/Floor" index="1"]
+offset_bottom = 15.0
+
+[editable path="SpawningLogic/Platforms"]
+[editable path="SpawningLogic/Floor"]

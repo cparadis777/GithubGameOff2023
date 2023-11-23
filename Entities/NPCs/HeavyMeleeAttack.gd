@@ -23,9 +23,10 @@ func activate():
 
 func attempt_to_attack():
 	if $RecoilTimer.is_stopped() and $ReloadTimer.is_stopped():
-		var playerPos = StageManager.current_player.global_position
-		if global_position.distance_squared_to(playerPos) < melee_range * melee_range:
-			attack()
+		if StageManager.current_player != null:
+			var playerPos = StageManager.current_player.global_position
+			if global_position.distance_squared_to(playerPos) < melee_range * melee_range:
+				attack()
 
 func is_active():
 	return active
@@ -39,7 +40,14 @@ func attack():
 			$RecoilTimer.start()
 		else:
 			$ReloadTimer.start()
-		
+
+func stop():
+	$HurtBox/CollisionPolygon2D.set_deferred("disabled", true)
+	$RecoilTimer.stop()
+	$ReloadTimer.stop()
+	current_attack_num = 0
+	
+
 func _on_reload_timer_timeout():
 	current_attack_num = 0
 	
@@ -50,6 +58,11 @@ func _on_recoil_timer_timeout():
 func _on_hurt_box_body_entered(body):
 	if body == StageManager.current_player or body.is_in_group("Player") or "player" in body.name.to_lower():
 		if body.has_method("_on_hit"):
-			var impactVector = global_position.direction_to(body.global_position)
-			var damageType = Globals.DamageTypes.IMPACT
-			body._on_hit(damage, impactVector, damageType, inflict_knockback)
+			var attackPacket = AttackPacket.new()
+			attackPacket.originator = self
+			attackPacket.recipient = body
+			attackPacket.damage_type = Globals.DamageTypes.IMPACT
+			attackPacket.impact_vector = global_position.direction_to(body.global_position)
+			attackPacket.damage_type = Globals.DamageTypes.IMPACT
+			
+			body._on_hit(attackPacket)

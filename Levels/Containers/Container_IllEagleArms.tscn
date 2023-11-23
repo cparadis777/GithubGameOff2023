@@ -1,0 +1,139 @@
+[gd_scene load_steps=13 format=3 uid="uid://k5pcsml367wp"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_3spdi"]
+[ext_resource type="Texture2D" uid="uid://c6vcgx3e3gafa" path="res://art/interiors/shipping_container_illeagle_INTERIOR.png" id="2_prl53"]
+[ext_resource type="Texture2D" uid="uid://cuaoirlldti38" path="res://art/placeholder/Arrow.png" id="3_1s41d"]
+[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="4_0p2dl"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_njctw"]
+a = Vector2(-80, 0)
+b = Vector2(80, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ndul0"]
+a = Vector2(0, 60)
+b = Vector2(0, -60)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g2til"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rgkd6"]
+a = Vector2(192, -96)
+b = Vector2(-192, -96)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pl5uy"]
+a = Vector2(-192, 96)
+b = Vector2(192, 96)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6s04m"]
+a = Vector2(-192, -96)
+b = Vector2(-192, 95)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_v22jh"]
+a = Vector2(192, -96)
+b = Vector2(192, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhqr"]
+size = Vector2(384, 192)
+
+[node name="BaseContainer" type="StaticBody2D"]
+script = ExtResource("1_3spdi")
+
+[node name="Interior" type="Sprite2D" parent="."]
+z_index = -4
+texture = ExtResource("2_prl53")
+region_rect = Rect2(-441, -223.5, 785, 424.5)
+
+[node name="LeftArrow" type="Sprite2D" parent="."]
+texture = ExtResource("3_1s41d")
+
+[node name="RightArrow" type="Sprite2D" parent="."]
+texture = ExtResource("3_1s41d")
+flip_h = true
+
+[node name="UpArrow" type="Sprite2D" parent="."]
+rotation = 1.57079
+texture = ExtResource("3_1s41d")
+
+[node name="DownArrow" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("3_1s41d")
+
+[node name="Openings" type="Node2D" parent="."]
+
+[node name="TopOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="TopCollisionA" type="CollisionShape2D" parent="Openings/TopOpening"]
+position = Vector2(-112, -96)
+shape = SubResource("SegmentShape2D_njctw")
+
+[node name="TopCollisionB" type="CollisionShape2D" parent="Openings/TopOpening"]
+position = Vector2(112, -96)
+shape = SubResource("SegmentShape2D_njctw")
+
+[node name="BottomOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="BotCollisionA" type="CollisionShape2D" parent="Openings/BottomOpening"]
+position = Vector2(-112, 96)
+shape = SubResource("SegmentShape2D_njctw")
+
+[node name="BotCollisionB" type="CollisionShape2D" parent="Openings/BottomOpening"]
+position = Vector2(112, 96)
+shape = SubResource("SegmentShape2D_njctw")
+
+[node name="LeftOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="LeftOpeningA" type="CollisionShape2D" parent="Openings/LeftOpening"]
+position = Vector2(-192, -36)
+shape = SubResource("SegmentShape2D_ndul0")
+
+[node name="RightOpening" type="StaticBody2D" parent="Openings"]
+
+[node name="RightOpeningA" type="CollisionShape2D" parent="Openings/RightOpening"]
+position = Vector2(192, -36)
+shape = SubResource("SegmentShape2D_ndul0")
+
+[node name="Left" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(-180, 95)
+scale = Vector2(21, 71)
+texture = SubResource("PlaceholderTexture2D_g2til")
+
+[node name="Right" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(203, 95)
+scale = Vector2(21, 71)
+texture = SubResource("PlaceholderTexture2D_g2til")
+
+[node name="Bottom" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(32, 105)
+scale = Vector2(64, 17)
+texture = SubResource("PlaceholderTexture2D_g2til")
+
+[node name="Top" type="Sprite2D" parent="Openings"]
+visible = false
+position = Vector2(32, -87)
+scale = Vector2(64, 17)
+texture = SubResource("PlaceholderTexture2D_g2til")
+
+[node name="Exterior" type="Sprite2D" parent="."]
+texture = ExtResource("4_0p2dl")
+
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_rgkd6")
+
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_pl5uy")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_6s04m")
+
+[node name="RightCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_v22jh")
+
+[node name="ContainerInterior" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
+shape = SubResource("RectangleShape2D_dnhqr")
+
+[connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
+[connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

@@ -5,6 +5,7 @@ var player
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = owner
+	await owner.ready
 	$PauseMenu.hide()
 	update_health_display(player.health)
 	
@@ -22,10 +23,11 @@ func update_health_display(health_remaining : float):
 
 
 
-func _on_player_hit():
+func _on_player_hit(_attackPacket):
 	update_health_display(player.health)
 	
-
+func _on_player_picked_up_health():
+	update_health_display(player.health)
 
 
 

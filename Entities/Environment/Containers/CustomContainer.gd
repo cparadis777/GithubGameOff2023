@@ -1,10 +1,5 @@
 extends "res://Entities/Environment/Containers/BaseContainer.gd"
-
-@export var enter_left = false
-@export var enter_right = false
-@export var enter_up = false
-@export var enter_down = false
-
+## DEPRECATED ##
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,7 +23,7 @@ func _ready():
 	if (enter_down):
 		directions.push_back(Utils.Directions.DOWN)
 		bottom_wall.disabled = true
-	set_entrances(directions)
+	#set_entrances(directions)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

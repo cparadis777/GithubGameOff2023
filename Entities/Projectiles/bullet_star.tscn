@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbq3h2r3bdrcg"]
+
+[ext_resource type="PackedScene" uid="uid://djnr2ahjg2mm1" path="res://Entities/Projectiles/bullet_basic.tscn" id="1_tajrn"]
+
+[node name="BulletStar" instance=ExtResource("1_tajrn")]
+collision_layer = 4
+damage_type = 6

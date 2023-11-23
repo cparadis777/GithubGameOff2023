@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://btwdkp7lrbg0d"]
+
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="1_lewe4"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_q56ur"]
+
+[node name="AssassinOnPlatform" type="Node2D"]
+
+[node name="RunningAssassin" parent="." instance=ExtResource("1_lewe4")]
+
+[node name="JumpThroughPlatform" parent="." instance=ExtResource("2_q56ur")]
+scale = Vector2(0.631187, 0.631187)

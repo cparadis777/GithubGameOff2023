@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1q3fb8qqqdck"]
+
+[ext_resource type="PackedScene" uid="uid://c2kws1t2ce2kn" path="res://Levels/placeholder/plex_level_template.tscn" id="1_6pytm"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_2fexr"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_jjvli"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="3_e1qx5"]
+[ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="5_bajk6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xg1ps"]
+
+[node name="PlexTestEnvironment" type="Node2D"]
+
+[node name="InteriorContainerLevelMockup01" parent="." instance=ExtResource("1_6pytm")]
+container_exit_flags = 7
+
+[node name="JumpThroughPlatform" parent="InteriorContainerLevelMockup01" instance=ExtResource("2_jjvli")]
+position = Vector2(-1096, -92)
+
+[node name="JumpThroughPlatform2" parent="InteriorContainerLevelMockup01" instance=ExtResource("2_jjvli")]
+position = Vector2(-808, -94)
+
+[node name="InteriorContainerLevelMockup02" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(-984, -4)
+container_exit_flags = 6
+
+[node name="InteriorContainerLevelMockup03" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(994, 2)
+container_exit_flags = 5
+
+[node name="InteriorContainerLevelMockup04" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(-984, -470)
+
+[node name="InteriorContainerLevelMockup05" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(-4, -464)
+
+[node name="InteriorContainerLevelMockup06" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(980, -464)
+
+[node name="InteriorContainerLevelMockup07" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(-978, -932)
+
+[node name="InteriorContainerLevelMockup08" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(2, -926)
+
+[node name="MovingPlatform" parent="InteriorContainerLevelMockup08" instance=ExtResource("3_e1qx5")]
+position = Vector2(-3, -161)
+
+[node name="Location2" parent="InteriorContainerLevelMockup08/MovingPlatform/PositionMarkers" index="0"]
+position = Vector2(0, -96)
+
+[node name="FloorHeightMarker" parent="InteriorContainerLevelMockup08/MovingPlatform/Piston" index="0"]
+position = Vector2(-3, 178)
+
+[node name="InteriorContainerLevelMockup09" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(986, -926)
+
+[node name="InteriorContainerLevelMockup10" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(-976, -1402)
+
+[node name="InteriorContainerLevelMockup11" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(4, -1396)
+
+[node name="InteriorContainerLevelMockup12" parent="." instance=ExtResource("1_6pytm")]
+position = Vector2(988, -1396)
+
+[node name="Player" parent="." instance=ExtResource("2_2fexr")]
+position = Vector2(-316, -996)
+
+[node name="WorldFloor" type="StaticBody2D" parent="."]
+position = Vector2(-8, 58)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldFloor"]
+shape = SubResource("WorldBoundaryShape2D_xg1ps")
+
+[node name="CanvasModulate" parent="." instance=ExtResource("5_bajk6")]
+visible = false
+
+[editable path="InteriorContainerLevelMockup08/MovingPlatform"]

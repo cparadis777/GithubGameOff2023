@@ -2,7 +2,9 @@ extends Area2D
 
 @export var speed = 150.0
 @export var velocity : Vector2
-
+@export var damage : float = 5.0
+@export var knockback : bool = true
+@export var damage_type : Globals.DamageTypes
 signal hit
 
 # Called when the node enters the scene tree for the first time.
@@ -11,25 +13,35 @@ func _ready():
 	
 func activate(travelVector):
 	velocity = (travelVector * speed)
-
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if velocity != null:
-		position += velocity * delta
+		global_position += velocity * delta
 
 
 func _on_timer_timeout():
 	queue_free()
 
+func explode():
+	if $AnimationPlayer.has_animation("explode"):
+		$AnimationPlayer.play("explode")
 
 func _on_body_entered(body):
 	if body.has_method("_on_hit"):
 		hit.connect(body._on_hit)
-		var damage = 10
-		var impactVector = velocity
-		var damageType = Globals.DamageTypes.IMPACT
-		var knockback = false
-		hit.emit(damage, impactVector, damageType, knockback)
-		queue_free()
+		var attackPacket = AttackPacket.new()
+		attackPacket.damage = damage
+		attackPacket.originator = self
+		attackPacket.recipient = body
+		attackPacket.impact_vector = velocity.normalized()
+		attackPacket.damage_type = Globals.DamageTypes.IMPACT
+		attackPacket.knockback = knockback
+		attackPacket.knockback_speed = 100.0
+		hit.emit(attackPacket)
+		call_deferred("queue_free")
+	else:
+		explode()
+

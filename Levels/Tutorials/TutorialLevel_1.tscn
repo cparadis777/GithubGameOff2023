@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dr840r1p2wh3c"]
+
+[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_p2ip4"]
+[ext_resource type="PackedScene" uid="uid://3hmjsshx00lt" path="res://Levels/Tutorials/TutorialLevel_2.tscn" id="2_jo36j"]
+[ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="2_s1744"]
+[ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="4_tsn3v"]
+
+[node name="BaseLevel" instance=ExtResource("1_p2ip4")]
+exit_flags = 2
+
+[node name="NextLevelDoor" parent="BaseContainer" index="9"]
+next_scene = ExtResource("2_jo36j")
+
+[node name="RunDemo" parent="BaseContainer" index="11" instance=ExtResource("2_s1744")]
+position = Vector2(-44, 21)
+animation_name = "run"
+label_text = "A             D
+<-            ->"
+
+[node name="Label" parent="BaseContainer/RunDemo" index="2"]
+metadata/_edit_use_anchors_ = true
+
+[node name="AI_Tutorial_Text" parent="." index="3" instance=ExtResource("4_tsn3v")]
+position = Vector2(-266, 115)
+override_text = "At EvilCorp, we pride ourselves
+on workplace safety.;
+Please run through this short 
+refresher course to demonstrate 
+your compliance."
+
+[editable path="BaseContainer"]
+[editable path="BaseContainer/RunDemo"]

@@ -1,13 +1,37 @@
 extends Node
 
-enum Difficulties { EASY, MEDIUM, HARD }
-enum Graphics { LOW, HIGH }
-enum DamageTypes { IMPACT, PIERCE, FIRE, POISON, ELECTRICAL, BLEED }
+enum DifficultyScales {
+	TRIVIAL,
+	SIMPLE,
+	BABY,
+	EASY,
+	MODERATE,
+	AVERAGE,
+	CHALLENGING,
+	TOUGH,
+	HARD,
+	DEMANDING,
+	INTENSE,
+	FORMIDABLE,
+	STRENUOUS,
+	ARDUOUS,
+	RIGOROUS,
+	BRUTAL,
+	HARROWING,
+	HERCULEAN,
+	INSANE,
+	HARDCORE
+}
 
-var user_prefs = {
-	"difficulty" : Difficulties.MEDIUM,
-	"graphics" : Graphics.HIGH,
-	
+enum Graphics { LOW, HIGH }
+enum DamageTypes { WEAK_MELEE, STRONG_MELEE, IMPACT, PIERCE, FIRE, POISON, ELECTRICAL, BLEED }
+enum PickupTypes { HEALTH, DAMAGE, SPEED, JUMP }
+
+var difficulty : DifficultyScales = DifficultyScales.TRIVIAL
+
+
+var player_stats = {
+	"max_health" : 100, # 1 heart = 10 points
 }
 
 

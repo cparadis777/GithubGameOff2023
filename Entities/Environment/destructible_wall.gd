@@ -18,9 +18,9 @@ func demolish(impactVector):
 		$WallSprite.hide()
 	$DemolitionNoises.play()
 
-func _on_hit(_damage, impactVector, damageType, knockback):
-	if damageType == Globals.DamageTypes.IMPACT and knockback == true:
-		demolish(impactVector)
+func _on_hit(attackPacket : AttackPacket):
+	if attackPacket.damage_type == Globals.DamageTypes.IMPACT and attackPacket.knockback == true:
+		demolish(attackPacket.impact_vector)
 
 
 func _on_demolition_noises_finished():

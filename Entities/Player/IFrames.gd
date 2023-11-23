@@ -4,6 +4,7 @@ extends Node2D
 var iframes_timer : Timer
 signal started
 signal finished
+@export var iframes_duration : float = 0.4
 
 @onready var active: bool:
 	get:
@@ -16,7 +17,7 @@ func _ready():
 	
 	iframes_timer = Timer.new()
 	iframes_timer.one_shot = true
-	iframes_timer.set_wait_time(0.5)
+	iframes_timer.set_wait_time(iframes_duration)
 	iframes_timer.timeout.connect(_on_iframes_timer_timeout)
 	
 	started.connect(owner._on_iframes_started)

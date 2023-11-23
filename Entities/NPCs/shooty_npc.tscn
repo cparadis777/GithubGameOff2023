@@ -1,0 +1,449 @@
+[gd_scene load_steps=25 format=3 uid="uid://c001oq7jof7bq"]
+
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_58hki"]
+[ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_vhw04"]
+[ext_resource type="Texture2D" uid="uid://dreoea5dtg2tc" path="res://art/placeholder/police-robot.png" id="3_4on25"]
+[ext_resource type="Texture2D" uid="uid://cyc0ulu4kftau" path="res://art/Enemies/Cyber-Droid/droid-shooter-idle.png" id="4_60g6j"]
+[ext_resource type="AudioStream" uid="uid://sbi5ot63ajcw" path="res://audio/sfx/placeholder/laserShoot.wav" id="4_puj3x"]
+[ext_resource type="AudioStream" uid="uid://cf0f0edqsiv82" path="res://audio/sfx/placeholder/laserShoot2.wav" id="5_g8u11"]
+[ext_resource type="AudioStream" uid="uid://u7gx17pydv6x" path="res://audio/sfx/player_sfx/powerUp.wav" id="6_qp67u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nphfu"]
+resource_local_to_scene = true
+shader = ExtResource("2_vhw04")
+shader_parameter/iframes = false
+shader_parameter/FlashColor = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8pex"]
+atlas = ExtResource("4_60g6j")
+region = Rect2(0, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w05o3"]
+atlas = ExtResource("4_60g6j")
+region = Rect2(90, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sn63"]
+atlas = ExtResource("4_60g6j")
+region = Rect2(180, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhiqd"]
+atlas = ExtResource("4_60g6j")
+region = Rect2(270, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bol3r"]
+atlas = ExtResource("4_60g6j")
+region = Rect2(360, 0, 90, 92)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0bkw0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8pex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w05o3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sn63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhiqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bol3r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_iaf2y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:material:shader_parameter/iframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtNoises:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Appearance/Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PowerUPNoises:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PowerUPNoises:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-7.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ShootNoises:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Appearance/Sprite2D:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Appearance/Sprite2D:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Behaviours/Attacks/SimpleShootAttack/CPUParticles2D:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qhpe2"]
+resource_name = "attack"
+
+[sub_resource type="Animation" id="Animation_io00w"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.37457]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Appearance/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(30.102, -4.75295)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Appearance/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Behaviours/Attacks/SimpleShootAttack/CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ft728"]
+resource_name = "hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:material:shader_parameter/iframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtNoises:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gsqip"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 2]
+}
+
+[sub_resource type="Animation" id="Animation_plb34"]
+resource_name = "run"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_v80fv"]
+resource_name = "shoot"
+length = 1.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 3, 2]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Behaviours/Attacks/SimpleShootAttack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.7, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"charge_weapon"
+}, {
+"args": [],
+"method": &"launch_bullet"
+}, {
+"args": [],
+"method": &"launch_bullet"
+}, {
+"args": [],
+"method": &"launch_bullet"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PowerUPNoises:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PowerUPNoises:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-7.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ShootNoises:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7, 1, 1.3, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nglo5"]
+_data = {
+"RESET": SubResource("Animation_iaf2y"),
+"attack": SubResource("Animation_qhpe2"),
+"die": SubResource("Animation_io00w"),
+"hurt": SubResource("Animation_ft728"),
+"idle": SubResource("Animation_gsqip"),
+"run": SubResource("Animation_plb34"),
+"shoot": SubResource("Animation_v80fv")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_knubt"]
+streams_count = 2
+stream_0/stream = ExtResource("4_puj3x")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_g8u11")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5k5lf"]
+streams_count = 1
+stream_0/stream = ExtResource("6_qp67u")
+stream_0/weight = 1.0
+
+[node name="ShootyNPC" instance=ExtResource("1_58hki")]
+
+[node name="Sprite2D" parent="Appearance" index="0"]
+visible = false
+material = SubResource("ShaderMaterial_nphfu")
+position = Vector2(0, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("3_4on25")
+offset = Vector2(0, -15.8432)
+hframes = 4
+
+[node name="AnimatedSprite2D" parent="Appearance" index="1"]
+position = Vector2(-1.58432, -36.4393)
+sprite_frames = SubResource("SpriteFrames_0bkw0")
+animation = &"idle"
+frame_progress = 0.247018
+
+[node name="SimpleMeleeAttack" parent="Behaviours/Attacks" index="0"]
+enabled = false
+
+[node name="SimpleShootAttack" parent="Behaviours/Attacks" index="1"]
+position = Vector2(23.7648, -44.3609)
+enabled = true
+bullet_jitter = 0.03
+
+[node name="RecoilTimer" parent="Behaviours/Attacks/SimpleShootAttack" index="0"]
+wait_time = 2.0
+
+[node name="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_nglo5")
+}
+
+[node name="ShootNoises" parent="." index="8"]
+stream = SubResource("AudioStreamRandomizer_knubt")
+volume_db = -6.0
+
+[node name="PowerUPNoises" parent="." index="9"]
+stream = SubResource("AudioStreamRandomizer_5k5lf")
+volume_db = -7.0
+
+[editable path="Behaviours/Attacks/SimpleShootAttack"]

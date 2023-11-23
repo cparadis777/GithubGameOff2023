@@ -1,0 +1,124 @@
+[gd_scene load_steps=14 format=3 uid="uid://ci2y2jwgnuun5"]
+
+[ext_resource type="Script" path="res://Levels/BossFight/BossFight.gd" id="1_h8arg"]
+[ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="2_46bxb"]
+[ext_resource type="Texture2D" uid="uid://dcxyqxj0okyoe" path="res://art/props/crane_just_tress.png" id="3_2dpkd"]
+[ext_resource type="PackedScene" uid="uid://bf8v31laj6ova" path="res://Entities/Environment/BossBattle/BossBattleCraneJaws.tscn" id="4_e0e5y"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="5_e40gm"]
+[ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="6_14wbh"]
+[ext_resource type="PackedScene" uid="uid://cl2upfk7iu6os" path="res://Entities/Environment/BossBattle/falling_boss_container.tscn" id="7_f3s0p"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="8_c4bua"]
+[ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="9_tjew5"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5qk3d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eynyb"]
+atlas = ExtResource("3_2dpkd")
+region = Rect2(354.185, 57.7037, 29.3333, 102.815)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18qvh"]
+atlas = ExtResource("2_46bxb")
+region = Rect2(0, 0, 134, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_funp7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18qvh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BossFight" type="Node2D"]
+script = ExtResource("1_h8arg")
+
+[node name="DesignNotes" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="DesignNotes"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "This is the final fight against the boss.
+It should be a tall space, where the boss
+throws down shipping containers onto
+the player.
+
+Containers telegraph their landing site 
+with a big shadow and some warnings, 
+so the player can avoid them.
+
+Doors should lock and reinforce 
+with steel when the player enters."
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+
+[node name="Floor" type="StaticBody2D" parent="Walls"]
+position = Vector2(274, 361)
+collision_layer = 24
+collision_mask = 31
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Floor"]
+shape = SubResource("WorldBoundaryShape2D_5qk3d")
+
+[node name="Crane" type="Node2D" parent="."]
+
+[node name="Truss" type="Sprite2D" parent="Crane"]
+position = Vector2(253, -433)
+scale = Vector2(2, 2)
+texture = ExtResource("3_2dpkd")
+
+[node name="Post" type="Sprite2D" parent="Crane"]
+texture_repeat = 2
+position = Vector2(609, -153)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_eynyb")
+region_rect = Rect2(24.4033, -86.626, 4.14815, 217.481)
+
+[node name="Post2" type="Sprite2D" parent="Crane"]
+texture_repeat = 2
+position = Vector2(609, 49)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_eynyb")
+region_rect = Rect2(24.4033, -86.626, 4.14815, 217.481)
+
+[node name="Post3" type="Sprite2D" parent="Crane"]
+texture_repeat = 2
+position = Vector2(609, 257)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_eynyb")
+region_rect = Rect2(24.4033, -86.626, 4.14815, 217.481)
+
+[node name="Jaws" parent="Crane" instance=ExtResource("4_e0e5y")]
+position = Vector2(143, -432)
+
+[node name="Boss" type="CharacterBody2D" parent="Crane/Jaws"]
+position = Vector2(296, -66)
+
+[node name="BossSprite" type="AnimatedSprite2D" parent="Crane/Jaws/Boss"]
+sprite_frames = SubResource("SpriteFrames_funp7")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("5_e40gm")]
+position = Vector2(445, -451)
+
+[node name="Switch" parent="Platforms" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("6_14wbh")]
+position = Vector2(395, -451)
+linked_nodes = [null]
+
+[node name="ShippingContainers" type="Node2D" parent="."]
+
+[node name="FallingBossContainer" parent="ShippingContainers" instance=ExtResource("7_f3s0p")]
+collision_layer = 8
+collision_mask = 9
+
+[node name="Player" parent="." instance=ExtResource("8_c4bua")]
+position = Vector2(459, 344)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("9_tjew5")]
+follow_viewport_enabled = true

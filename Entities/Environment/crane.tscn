@@ -1,17 +1,145 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5vova3vmv6p7"]
+[gd_scene load_steps=25 format=3 uid="uid://c5vova3vmv6p7"]
 
 [ext_resource type="Script" path="res://Entities/Environment/crane.gd" id="1_iyal4"]
-[ext_resource type="PackedScene" uid="uid://mq11awte3lc6" path="res://Entities/Environment/PlaceHolders/PlaceholderDroppableContainer.tscn" id="2_go6ni"]
+[ext_resource type="PackedScene" uid="uid://drrt45f45qnjy" path="res://Entities/Droppable/BlueDroppableContainer.tscn" id="2_rgicc"]
+[ext_resource type="PackedScene" uid="uid://dlyqwhewo8awt" path="res://Entities/Droppable/RedDroppableContainer.tscn" id="3_wwyy3"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="4_l15jl"]
+[ext_resource type="PackedScene" uid="uid://cps4h2vpyvnre" path="res://Entities/Droppable/GreenDroppableContainer.tscn" id="4_r6wi7"]
+[ext_resource type="PackedScene" uid="uid://bbinheaic5qh4" path="res://Entities/Droppable/GreyDroppableContainer.tscn" id="5_4v4gy"]
+[ext_resource type="Texture2D" uid="uid://cucxmeo2p3j11" path="res://art/props/crane_just_crane.png" id="5_qrdko"]
+[ext_resource type="Texture2D" uid="uid://c2tkw8bry0p1n" path="res://art/props/crane_just_holder.png" id="5_xiuhn"]
+[ext_resource type="PackedScene" uid="uid://ekj2echyvjcm" path="res://Entities/Droppable/PurpleDroppableContainer.tscn" id="6_33pt5"]
+[ext_resource type="PackedScene" uid="uid://c46xev2xk4g62" path="res://Entities/Droppable/YellowDroppableContainer.tscn" id="7_7172x"]
+[ext_resource type="Texture2D" uid="uid://b0yde4ayaofm0" path="res://art/props/lattice_320x180.png" id="9_ob7oa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2goie"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(0, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f342m"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(52, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unam5"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(104, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm660"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(156, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpm80"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(208, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8ys8"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(260, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cqqk"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(260, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgvk1"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(208, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x77ir"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(156, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyphp"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(104, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r25o2"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(52, 0, 52, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti7yp"]
+atlas = ExtResource("5_qrdko")
+region = Rect2(0, 0, 52, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uctfk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2goie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f342m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unam5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm660")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpm80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8ys8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cqqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgvk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x77ir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyphp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r25o2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti7yp")
+}],
+"loop": false,
+"name": &"Close",
+"speed": 5.0
+}]
 
 [node name="crane" type="Node2D"]
 script = ExtResource("1_iyal4")
 n_columns = 5
-containers = Array[PackedScene]([ExtResource("2_go6ni")])
+containers = Array[PackedScene]([ExtResource("2_rgicc"), ExtResource("3_wwyy3"), ExtResource("4_r6wi7"), ExtResource("5_4v4gy"), ExtResource("6_33pt5"), ExtResource("7_7172x")])
 container_width = 48
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_top = 16.0
-offset_right = 152.0
-offset_bottom = 64.0
+offset_left = -64.0
+offset_top = -24.0
 theme = ExtResource("4_l15jl")
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -56.0
+offset_bottom = 24.0
+theme = ExtResource("4_l15jl")
+scroll_active = false
+
+[node name="CraneTruss" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(17, 48)
+texture = ExtResource("9_ob7oa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(80, -24)
+texture = ExtResource("5_xiuhn")
+
+[node name="CraneJaw" type="AnimatedSprite2D" parent="."]
+z_index = 3
+position = Vector2(24, -29)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_uctfk")
+animation = &"Close"
+frame = 11
+frame_progress = 1.0
+
+[connection signal="animation_finished" from="CraneJaw" to="." method="_on_crane_jaw_animation_finished"]

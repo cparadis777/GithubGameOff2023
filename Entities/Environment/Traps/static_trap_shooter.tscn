@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctu2u7uxqhbyo"]
+
+[ext_resource type="PackedScene" uid="uid://c5en3lqt0m2df" path="res://Entities/Environment/Traps/star_trap_shooter.tscn" id="1_btsuc"]
+[ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_o1dlp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_27vaw"]
+resource_local_to_scene = true
+shader = ExtResource("2_o1dlp")
+shader_parameter/iframes = false
+shader_parameter/FlashColor = Color(1, 1, 1, 1)
+
+[node name="Static_Trap_Shooter" instance=ExtResource("1_btsuc")]
+mobile = false
+
+[node name="Polygon2D" type="Polygon2D" parent="." index="0"]
+color = Color(0.780392, 0.541176, 0.815686, 1)
+polygon = PackedVector2Array(1, -6, 26, -6, 26, -14, 38, 0, 26, 12, 26, 6, 1, 6)
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_27vaw")
+
+[node name="ShootStars" parent="Behaviours/Attacks" index="0"]
+bullet_jitter = 2.08165e-12
+free_rotate = false

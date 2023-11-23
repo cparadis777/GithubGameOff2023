@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr840r1p2wh3c"]
+
+[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_hoo44"]
+[ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="2_owabt"]
+
+[node name="BaseLevel" instance=ExtResource("1_hoo44")]
+
+[node name="Demo" parent="BaseContainer" index="11" instance=ExtResource("2_owabt")]
+position = Vector2(13, -1)
+
+[editable path="BaseContainer"]

@@ -4,7 +4,7 @@ extends PlayerState
 var already_used_double_jump : bool = false
 var already_used_dash : bool = false
 var already_signalled_peak_amplitude : bool = false
-
+var involuntary_jump : bool = false
 
 signal jumped
 signal peak_amplitude_reached
@@ -22,9 +22,13 @@ func _ready():
 
 # If we get a message asking us to jump, we jump.
 func enter(msg := {}) -> void:
+	involuntary_jump = msg.has("involuntary")
+	
 	if msg.has("do_jump"): # up from the ground
 		already_signalled_peak_amplitude = false
 		player.velocity.y = -player.JUMP_VELOCITY
+		if involuntary_jump:
+			player.velocity.y *= 0.5
 		jumped.emit()
 	elif msg.has("do_drop"): # down from a platform
 		player.velocity.y = 0.5 * player.JUMP_VELOCITY
@@ -40,8 +44,8 @@ func physics_update(delta: float) -> void:
 	check_for_double_jump_requests()
 	check_for_attack_requests()
 	player.move_and_slide()
-	land_if_possible()
-
+	land_if_possible() # must be after move_and_slide
+	
 
 func check_for_double_jump_requests():
 	if not already_used_double_jump and Input.is_action_just_pressed("jump"):
@@ -62,8 +66,9 @@ func allow_player_to_change_direction_midair():
 	player.velocity.x = player.speed * input_direction_x
 
 
+	
 func land_if_possible():
-	if player.is_on_floor():
+	if player.velocity.y >= 0 and player.is_on_floor():
 		state_machine.transition_to("Landing")
 
 
@@ -80,8 +85,9 @@ func apply_gravity(delta):
 
 
 func end_jump_early_if_player_releases_button():
-	if player.velocity.y < 0 and !already_used_double_jump: # going up:
-		if !Input.is_action_pressed("jump"):
-			player.velocity.y = 0
+	if !involuntary_jump:
+		if player.velocity.y < 0 and !already_used_double_jump: # going up:
+			if !Input.is_action_pressed("jump"):
+				player.velocity.y = 0
 			
 

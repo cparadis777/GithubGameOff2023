@@ -1,0 +1,245 @@
+[gd_scene load_steps=22 format=3 uid="uid://m3aj2pmakgat"]
+
+[ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
+[ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
+[ext_resource type="Texture2D" uid="uid://bi724p8u5kyfb" path="res://art/placeholder/EUC.png" id="3_6th61"]
+[ext_resource type="PackedScene" uid="uid://6xs2ww7uhsl5" path="res://Entities/NPCs/Behaviours/simple_melee_attack.tscn" id="4_50gad"]
+[ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="4_nvirp"]
+[ext_resource type="PackedScene" uid="uid://gtmk5sbwr3hj" path="res://Entities/Environment/Traps/Behaviours/shoot_stars.tscn" id="5_68bjg"]
+[ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="5_p2jwr"]
+[ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_x6jli"]
+[ext_resource type="PackedScene" uid="uid://ca7vyxdwydm0c" path="res://Utilities/UtilityScenes/zero_rotation.tscn" id="9_4vev6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hovi6"]
+radius = 20.5961
+height = 63.3727
+
+[sub_resource type="Animation" id="Animation_iaf2y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:material:shader_parameter/iframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtNoises:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Appearance/Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qhpe2"]
+resource_name = "attack"
+
+[sub_resource type="Animation" id="Animation_io00w"]
+resource_name = "die"
+
+[sub_resource type="Animation" id="Animation_ft728"]
+resource_name = "hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:material:shader_parameter/iframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtNoises:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gsqip"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_plb34"]
+resource_name = "run"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4p0tx"]
+_data = {
+"RESET": SubResource("Animation_iaf2y"),
+"attack": SubResource("Animation_qhpe2"),
+"die": SubResource("Animation_io00w"),
+"hurt": SubResource("Animation_ft728"),
+"idle": SubResource("Animation_gsqip"),
+"run": SubResource("Animation_plb34")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s8act"]
+streams_count = 3
+stream_0/stream = ExtResource("4_nvirp")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_p2jwr")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_x6jli")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tblv3"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8vdq8"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yhpji"]
+
+[node name="BaseNPC" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(0.631187, 0.631187)
+collision_layer = 2
+collision_mask = 23
+script = ExtResource("1_1uer3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.58432, -31.6863)
+shape = SubResource("CapsuleShape2D_hovi6")
+
+[node name="Appearance" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Appearance"]
+material = ExtResource("2_7asby")
+position = Vector2(0, -33.2707)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_6th61")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Appearance"]
+
+[node name="Behaviours" type="Node2D" parent="."]
+
+[node name="Sensors" type="Node2D" parent="Behaviours"]
+
+[node name="ObstacleSensor" type="RayCast2D" parent="Behaviours/Sensors"]
+position = Vector2(4.75295, -12.6745)
+target_position = Vector2(32, 2.08165e-12)
+collision_mask = 16
+
+[node name="FloorSensor" type="RayCast2D" parent="Behaviours/Sensors"]
+position = Vector2(25.3491, -4.75295)
+target_position = Vector2(2.08165e-12, 16)
+collision_mask = 16
+
+[node name="DecisionMaking" type="Node2D" parent="Behaviours"]
+
+[node name="DecisionTimer" type="Timer" parent="Behaviours/DecisionMaking"]
+one_shot = true
+
+[node name="Movement" type="Node2D" parent="Behaviours"]
+
+[node name="Attacks" type="Node2D" parent="Behaviours"]
+
+[node name="SimpleMeleeAttack" parent="Behaviours/Attacks" instance=ExtResource("4_50gad")]
+
+[node name="SimpleShootAttack" parent="Behaviours/Attacks" instance=ExtResource("5_68bjg")]
+enabled = false
+horizontal_only = true
+
+[node name="Defenses" type="Node2D" parent="Behaviours"]
+
+[node name="BasicHP" type="Node2D" parent="Behaviours/Defenses"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4p0tx")
+}
+
+[node name="IframesTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="HurtEffect" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -45.9452)
+scale = Vector2(0.33, 0.33)
+
+[node name="Star" type="Polygon2D" parent="HurtEffect"]
+color = Color(1, 1, 0.25098, 1)
+polygon = PackedVector2Array(0, -53.8668, 6.33727, -11.0902, 49.1138, -22.1804, 9.5059, 7.92158, 31.6863, 47.5295, 0, 19.0118, -39.6079, 44.3609, -11.0902, 7.92158, -52.2824, -19.0118, -11.0902, -12.6745)
+
+[node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_s8act")
+max_distance = 350.0
+bus = &"sfx"
+
+[node name="AttackNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_tblv3")
+max_distance = 350.0
+
+[node name="ShootNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_8vdq8")
+max_distance = 350.0
+
+[node name="PowerUPNoises" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_yhpji")
+max_distance = 350.0
+
+[node name="Debug" parent="." instance=ExtResource("9_4vev6")]
+
+[node name="StateLabel" type="Label" parent="Debug"]
+offset_left = -15.8432
+offset_top = -77.6315
+offset_right = 24.1568
+offset_bottom = -54.6315
+theme_override_font_sizes/font_size = 12
+text = "state"
+
+[connection signal="timeout" from="Behaviours/DecisionMaking/DecisionTimer" to="." method="_on_decision_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="IframesTimer" to="." method="_on_iframes_timer_timeout"]

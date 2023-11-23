@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmpkd2pey17ux"]
+
+[ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_s7b31"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_eixiq"]
+[ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="3_wa5mp"]
+[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="4_45q0i"]
+[ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="5_igc1i"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="7_5w2h5"]
+
+[sub_resource type="Environment" id="Environment_4a7ri"]
+ambient_light_energy = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hc0h"]
+size = Vector2(192, 381)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftdoq"]
+size = Vector2(390, 191)
+
+[node name="Placeholder2DScene" type="Node2D"]
+script = ExtResource("1_s7b31")
+
+[node name="Player" parent="." instance=ExtResource("2_eixiq")]
+position = Vector2(59, -202)
+
+[node name="EndlessFloor" parent="." instance=ExtResource("3_wa5mp")]
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle_01" parent="Obstacles" instance=ExtResource("4_45q0i")]
+
+[node name="Obstacle_02" parent="Obstacles" instance=ExtResource("4_45q0i")]
+position = Vector2(-137, -10)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4a7ri")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-129, -193)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_2hc0h")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+rotation = 1.5708
+texture = ExtResource("5_igc1i")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(157, -99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-3, 0.5)
+shape = SubResource("RectangleShape2D_ftdoq")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+texture = ExtResource("5_igc1i")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("7_5w2h5")]
+position = Vector2(274, -235)

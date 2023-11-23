@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmpouufnlcxkn"]
+[gd_scene load_steps=7 format=3 uid="uid://cmpouufnlcxkn"]
 
 [ext_resource type="Material" uid="uid://cw3xoarxkm7x8" path="res://art/materials/pixelify_material.tres" id="1_0til8"]
+[ext_resource type="Script" path="res://Entities/Environment/Platforms/platform_jump_thru.gd" id="1_ktnbu"]
 
 [sub_resource type="Gradient" id="Gradient_dvayo"]
 offsets = PackedFloat32Array(0, 0.892216)
@@ -15,13 +16,14 @@ height = 16
 color_ramp = SubResource("Gradient_dvayo")
 noise = SubResource("FastNoiseLite_tk4jt")
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_l4eng"]
-a = Vector2(-90, 2.08165e-12)
-b = Vector2(90, 2.08165e-12)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_1tea0"]
+a = Vector2(-83, 0)
+b = Vector2(83, 0)
 
-[node name="BasicPlatform" type="StaticBody2D"]
+[node name="BasicPlatform" type="StaticBody2D" groups=["JumpThroughPlatforms"]]
 collision_layer = 24
 collision_mask = 3
+script = ExtResource("1_ktnbu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("1_0til8")
@@ -29,5 +31,8 @@ scale = Vector2(1, 0.5)
 texture = SubResource("NoiseTexture2D_njy88")
 
 [node name="SolidTopCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
-shape = SubResource("SegmentShape2D_l4eng")
+position = Vector2(0, 1)
+shape = SubResource("SegmentShape2D_1tea0")
+one_way_collision = true
+one_way_collision_margin = 8.0
+debug_color = Color(0.756863, 0.352941, 0.741176, 0.733333)

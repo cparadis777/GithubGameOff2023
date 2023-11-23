@@ -1,0 +1,113 @@
+[gd_scene load_steps=14 format=3 uid="uid://bcwwg0f3h5ib1"]
+
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_p7dnn"]
+[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_eoye4"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_syv6k"]
+[ext_resource type="PackedScene" uid="uid://dnsnay6jrr7ic" path="res://Entities/Environment/Lights/switched_blacklight_inverse.tscn" id="3_f6ih4"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="3_rqonx"]
+[ext_resource type="PackedScene" uid="uid://c5en3lqt0m2df" path="res://Entities/Environment/Traps/star_trap_shooter.tscn" id="4_6jjch"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="5_8168g"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="5_kykin"]
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="7_2rajp"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="10_qfiey"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="12_pvej1"]
+[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="13_e4q5p"]
+[ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="14_a7hhv"]
+
+[node name="BaseContainer" instance=ExtResource("1_p7dnn")]
+
+[node name="Platforms" type="Node2D" parent="." index="3"]
+
+[node name="JumpThroughPlatform" parent="Platforms" index="0" instance=ExtResource("2_syv6k")]
+position = Vector2(-215, 90)
+
+[node name="JumpThroughPlatform2" parent="Platforms" index="1" instance=ExtResource("2_syv6k")]
+position = Vector2(-287, -16)
+
+[node name="JumpThroughPlatform3" parent="Platforms" index="2" instance=ExtResource("2_syv6k")]
+position = Vector2(-121, -16)
+
+[node name="JumpThroughPlatform5" parent="Platforms" index="3" instance=ExtResource("2_syv6k")]
+position = Vector2(141, -2)
+
+[node name="JumpThroughPlatform4" parent="Platforms" index="4" instance=ExtResource("2_syv6k")]
+position = Vector2(-1, -133)
+
+[node name="MovingPlatform" parent="Platforms" index="5" instance=ExtResource("10_qfiey")]
+position = Vector2(87, 137)
+
+[node name="Obstacles" type="Node2D" parent="." index="4"]
+
+[node name="VendingMachine" parent="Obstacles" index="0" instance=ExtResource("3_rqonx")]
+position = Vector2(-168, -16)
+
+[node name="VendingMachine2" parent="Obstacles" index="1" instance=ExtResource("3_rqonx")]
+position = Vector2(234, 168)
+
+[node name="SoydaBox" parent="Obstacles" index="2" instance=ExtResource("13_e4q5p")]
+position = Vector2(-197, -18)
+
+[node name="SoydaBox2" parent="Obstacles" index="3" instance=ExtResource("13_e4q5p")]
+position = Vector2(-198, -29)
+
+[node name="SoydaBox3" parent="Obstacles" index="4" instance=ExtResource("13_e4q5p")]
+position = Vector2(-196, -40)
+
+[node name="TrashCan" parent="Obstacles" index="5" instance=ExtResource("14_a7hhv")]
+position = Vector2(104, -2)
+
+[node name="Lighting" type="Node2D" parent="." index="5"]
+
+[node name="SwitchedBlacklightInversePointlight" parent="Lighting" index="0" instance=ExtResource("3_f6ih4")]
+position = Vector2(-214, 78)
+
+[node name="SwitchedBlacklightInversePointlight4" parent="Lighting" index="1" instance=ExtResource("3_f6ih4")]
+position = Vector2(207, -28)
+
+[node name="SwitchedBlacklightInversePointlight2" parent="Lighting" index="2" instance=ExtResource("3_f6ih4")]
+position = Vector2(1, -21)
+
+[node name="SwitchedBlacklightInversePointlight3" parent="Lighting" index="3" instance=ExtResource("3_f6ih4")]
+position = Vector2(235, 137)
+
+[node name="Enemies" type="Node2D" parent="." index="6"]
+
+[node name="ShootyNPC" parent="Enemies" index="0" instance=ExtResource("5_kykin")]
+position = Vector2(-285, -19)
+
+[node name="ShootyNPC2" parent="Enemies" index="1" instance=ExtResource("5_kykin")]
+position = Vector2(-90, -18)
+
+[node name="RunningAssassin" parent="Enemies" index="2" instance=ExtResource("7_2rajp")]
+position = Vector2(-215, 84)
+
+[node name="RunningAssassin2" parent="Enemies" index="3" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_2rajp")]
+position = Vector2(167, 164)
+animation_player = NodePath("../RunningAssassin/AnimationPlayer")
+
+[node name="RunningAssassin3" parent="Enemies" index="4" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_2rajp")]
+position = Vector2(290, 167)
+animation_player = NodePath("../RunningAssassin/AnimationPlayer")
+
+[node name="NPC_02_DockWorker" parent="Enemies" index="5" instance=ExtResource("12_pvej1")]
+position = Vector2(175, -4)
+
+[node name="EnemySpawnPoints" type="Node2D" parent="." index="7"]
+
+[node name="Traps" type="Node2D" parent="." index="8"]
+
+[node name="StarTrap-Shooter" parent="Traps" index="0" instance=ExtResource("4_6jjch")]
+position = Vector2(1, -20)
+
+[node name="TrapSpikes2" parent="Traps" index="1" instance=ExtResource("5_8168g")]
+position = Vector2(-138, 163)
+
+[node name="TrapSpikes" parent="Traps" index="2" instance=ExtResource("5_8168g")]
+position = Vector2(-287, 163)
+
+[node name="TrapSpikes3" parent="Traps" index="3" instance=ExtResource("5_8168g")]
+position = Vector2(-54, -110)
+rotation = 3.14159
+
+[node name="Exterior" parent="." index="9"]
+texture = ExtResource("2_eoye4")

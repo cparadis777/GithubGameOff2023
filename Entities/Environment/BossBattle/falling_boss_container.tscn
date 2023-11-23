@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl2upfk7iu6os"]
+
+[ext_resource type="Texture2D" uid="uid://bg37ae5f0jil0" path="res://art/low_res_containers/low_res_containers.png" id="1_3nate"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gyq4"]
+size = Vector2(241, 119)
+
+[node name="FallingBossContainer" type="RigidBody2D"]
+position = Vector2(445, -373)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_3gyq4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(5, 5)
+texture = ExtResource("1_3nate")
+hframes = 7
+frame = 5

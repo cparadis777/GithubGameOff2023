@@ -28,10 +28,16 @@ func _ready():
 
 func physics_update(delta):
 	apply_gravity(delta)
+	allow_player_to_change_direction_midair()
 	check_for_attack_requests()
 	#check_for_jump_button_release()
 	player.move_and_slide()
 	land_if_possible()
+
+func allow_player_to_change_direction_midair():
+	# Horizontal movement.
+	var input_direction_x = Input.get_axis("move_left", "move_right")
+	player.velocity.x = player.speed * input_direction_x
 
 func apply_gravity(delta):
 	if SubState in [ SubStates.HOVERING, SubStates.SOMERSAULTING]:
@@ -51,8 +57,12 @@ func check_for_jump_button_release():
 
 func check_for_attack_requests():
 	if Input.is_action_just_pressed("strong_punch"):
+		player.velocity.x = Input.get_axis("move_left", "move_right") * player.SPEED
+		player.set_direction(sign(player.velocity.x))
 		state_machine.transition_to("DescendingKick")
 	elif Input.is_action_just_pressed("fast_punch"):
+		player.velocity.x = Input.get_axis("move_left", "move_right") * player.SPEED
+		player.set_direction(sign(player.velocity.x))
 		state_machine.transition_to("Dash")
 
 
@@ -71,12 +81,8 @@ func execute_somersault():
 
 
 func land_if_possible():
-	if player.is_on_floor():
-		landed.emit()
-		if is_equal_approx(player.velocity.x, 0.0):
-			state_machine.transition_to("Idle")
-		else:
-			state_machine.transition_to("Run")
+	if player.velocity.y >= 0 and player.is_on_floor():
+		state_machine.transition_to("Landing")
 
 func exit():
 	super()

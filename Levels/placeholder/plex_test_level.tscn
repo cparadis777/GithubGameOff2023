@@ -1,0 +1,303 @@
+[gd_scene load_steps=27 format=3 uid="uid://b527h0udon0w5"]
+
+[ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
+[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="4_4k4sl"]
+[ext_resource type="PackedScene" uid="uid://c5en3lqt0m2df" path="res://Entities/Environment/Traps/star_trap_shooter.tscn" id="4_myc4j"]
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="5_2wyyn"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="5_7y8lx"]
+[ext_resource type="PackedScene" uid="uid://ctu2u7uxqhbyo" path="res://Entities/Environment/Traps/static_trap_shooter.tscn" id="6_68jt0"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_ap6lg"]
+[ext_resource type="PackedScene" uid="uid://4ubg2v861dlv" path="res://Entities/NPCs/boss_npc.tscn" id="6_t74po"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="7_53wf6"]
+[ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="7_gq8f5"]
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="7_rrg24"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_q88vj"]
+[ext_resource type="Texture2D" uid="uid://ctcqwgt273480" path="res://art/placeholder/cyber_button_01_normal.png" id="9_fc1mv"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_44m5b"]
+[ext_resource type="PackedScene" uid="uid://bty5gh70uklnu" path="res://Entities/Environment/Lights/default_container_lighting.tscn" id="12_oo7j6"]
+[ext_resource type="PackedScene" uid="uid://bveugr8fx87uv" path="res://Entities/Environment/portals/door_template.tscn" id="17_pv8u4"]
+[ext_resource type="PackedScene" uid="uid://dc4sfj0m5h44l" path="res://Entities/Environment/Pickables/health_pickable.tscn" id="18_axqsf"]
+
+[sub_resource type="Gradient" id="Gradient_m6aon"]
+offsets = PackedFloat32Array(0, 0.301818, 0.829091)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yknl7"]
+gradient = SubResource("Gradient_m6aon")
+width = 16
+height = 180
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgn8w"]
+size = Vector2(16, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tgv5"]
+size = Vector2(13, 680)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sjdu5"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_vgmee"]
+offsets = PackedFloat32Array(0, 0.506211)
+colors = PackedColorArray(0, 0, 0, 0.666667, 0.321569, 0.447059, 0.478431, 0.666667)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jycef"]
+gradient = SubResource("Gradient_vgmee")
+width = 640
+height = 256
+fill_from = Vector2(0.486284, 1)
+fill_to = Vector2(0.511222, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a208w"]
+size = Vector2(228, 48)
+
+[node name="InteriorContainerLevelMockup01" type="Node2D"]
+script = ExtResource("1_foj8b")
+
+[node name="CameraTarget" type="Marker2D" parent="."]
+position = Vector2(0, -77)
+
+[node name="Player" parent="." instance=ExtResource("2_u6p87")]
+position = Vector2(1, -30)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle_01" parent="Obstacles" instance=ExtResource("4_4k4sl")]
+position = Vector2(250, -3)
+
+[node name="Label" type="Label" parent="Obstacles/Obstacle_01"]
+offset_left = -14.0
+offset_top = -27.0
+offset_right = 46.0
+offset_bottom = 25.0
+scale = Vector2(0.774249, 0.774249)
+text = "Kick 
+Me"
+horizontal_alignment = 1
+
+[node name="Obstacle_02" parent="Obstacles" instance=ExtResource("4_4k4sl")]
+position = Vector2(-137, -10)
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="StarTrap-Shooter" parent="Traps" instance=ExtResource("4_myc4j")]
+position = Vector2(-271, -163)
+
+[node name="TrapSpikes" parent="Traps" instance=ExtResource("5_7y8lx")]
+position = Vector2(-321, -80)
+
+[node name="Static_Trap_Shooter" parent="Traps" instance=ExtResource("6_68jt0")]
+position = Vector2(282, -292)
+rotation = 1.57079
+
+[node name="Static_Trap_Shooter2" parent="Traps" instance=ExtResource("6_68jt0")]
+position = Vector2(328, -293)
+rotation = 1.57079
+
+[node name="Static_Trap_Shooter3" parent="Traps" instance=ExtResource("6_68jt0")]
+position = Vector2(377, -293)
+rotation = 1.57079
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="NPC_01" parent="Enemies" instance=ExtResource("5_2wyyn")]
+position = Vector2(91, 0)
+
+[node name="NPC_02_DockWorker" parent="Enemies" instance=ExtResource("6_ap6lg")]
+position = Vector2(-205, -12)
+
+[node name="BossNPC" parent="Enemies" instance=ExtResource("6_t74po")]
+position = Vector2(145, -170)
+
+[node name="RunningAssassin" parent="Enemies" instance=ExtResource("7_rrg24")]
+position = Vector2(-88, -1)
+
+[node name="ShootyNPC" parent="Enemies" instance=ExtResource("10_44m5b")]
+position = Vector2(169, -87)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("8_q88vj")]
+position = Vector2(201, -87)
+
+[node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("8_q88vj")]
+position = Vector2(135, -161)
+
+[node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("8_q88vj")]
+position = Vector2(-206, -88)
+
+[node name="MovingPlatform" parent="Platforms" instance=ExtResource("7_53wf6")]
+position = Vector2(84, -41)
+
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform/Piston" index="0"]
+position = Vector2(0, 41)
+
+[node name="Walls" type="Node2D" parent="."]
+z_index = -50
+scale = Vector2(1.33, 1.33)
+
+[node name="LEFT" type="StaticBody2D" parent="Walls"]
+position = Vector2(-313, 2.08165e-12)
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/LEFT"]
+position = Vector2(0, -1)
+scale = Vector2(1, 1.28)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(1, -90)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LEFT"]
+position = Vector2(-18.5789, -118.045)
+shape = SubResource("RectangleShape2D_dgn8w")
+
+[node name="IsoWallPolygon" type="Polygon2D" parent="Walls/LEFT"]
+polygon = PackedVector2Array(0.218048, -0.75188, -38.1278, 42.8571, -38.8797, -285.714, -0.533844, -244.361)
+
+[node name="RIGHT" type="StaticBody2D" parent="Walls"]
+position = Vector2(317, 2.08165e-12)
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/RIGHT"]
+position = Vector2(-2, -6)
+scale = Vector2(1, 1.32)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(0, -86)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RIGHT"]
+position = Vector2(18.3383, -118.797)
+shape = SubResource("RectangleShape2D_dgn8w")
+
+[node name="IsoWallPoly" type="Polygon2D" parent="Walls/RIGHT"]
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(0.218048, -0.75188, -38.1278, 42.8571, -38.8797, -285.714, -0.533844, -244.361)
+
+[node name="UP" type="StaticBody2D" parent="Walls"]
+position = Vector2(-313, -245)
+rotation = 1.5708
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/UP"]
+position = Vector2(3.20056, -1.73215)
+scale = Vector2(1, 3.48358)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(-1.20056, -90.1335)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/UP"]
+position = Vector2(-15.1515, -313)
+shape = SubResource("RectangleShape2D_5tgv5")
+
+[node name="IsoCelingPoly" type="Polygon2D" parent="Walls/UP"]
+color = Color(0.52549, 0.52549, 0.52549, 1)
+polygon = PackedVector2Array(2.14285, 0.533813, -37.7066, 39.6317, -39.9648, -668.639, 1.3887, -631.045)
+
+[node name="DOWN" type="StaticBody2D" parent="Walls" groups=["Floors"]]
+position = Vector2(-313, 6)
+rotation = 1.5708
+collision_layer = 24
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/DOWN"]
+position = Vector2(3.20056, -1.73215)
+scale = Vector2(1, 3.48358)
+texture = SubResource("GradientTexture2D_yknl7")
+offset = Vector2(-1.20056, -90.1335)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DOWN"]
+position = Vector2(15.0515, -313)
+shape = SubResource("RectangleShape2D_5tgv5")
+
+[node name="Line2D" type="Line2D" parent="Walls/DOWN"]
+position = Vector2(-4.99999, 2.00003)
+points = PackedVector2Array(0, 0, 2.08165e-12, -640)
+width = 1.0
+
+[node name="IsoCelingPoly2" type="Polygon2D" parent="Walls/DOWN"]
+position = Vector2(-0.0150375, 0.218018)
+scale = Vector2(-1, 1)
+color = Color(0.52549, 0.52549, 0.52549, 1)
+polygon = PackedVector2Array(2.14285, 0.533813, -37.7066, 39.6317, -39.9648, -668.639, 1.3887, -631.045)
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -100
+texture_repeat = 2
+position = Vector2(1, -96)
+scale = Vector2(3, 3)
+texture = ExtResource("7_gq8f5")
+region_enabled = true
+region_rect = Rect2(-196, 2.08165e-12, 256, 96)
+
+[node name="Hints" type="Node2D" parent="Background"]
+position = Vector2(-0.333333, 32.3333)
+scale = Vector2(0.333333, 0.333333)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/Hints"]
+position = Vector2(3, -94)
+scale = Vector2(0.393339, 0.393339)
+texture = ExtResource("9_fc1mv")
+
+[node name="Label" type="Label" parent="Background/Hints/Sprite2D"]
+offset_left = -91.5241
+offset_top = -27.9657
+offset_right = 55.4759
+offset_bottom = 24.0343
+scale = Vector2(1.2316, 1.2316)
+text = "A,D, space to move
+<,> to fight"
+
+[node name="FakeAO" type="Sprite2D" parent="."]
+visible = false
+z_index = -100
+material = SubResource("CanvasItemMaterial_sjdu5")
+position = Vector2(0, -129)
+texture = SubResource("GradientTexture2D_jycef")
+region_rect = Rect2(-104.034, -69.562, 374.625, 475.875)
+
+[node name="Lighting" parent="." instance=ExtResource("12_oo7j6")]
+
+[node name="Exits" type="Node2D" parent="."]
+
+[node name="LEFT" parent="Exits" instance=ExtResource("17_pv8u4")]
+position = Vector2(-423, 9)
+
+[node name="RIGHT" parent="Exits" instance=ExtResource("17_pv8u4")]
+position = Vector2(445, 7)
+
+[node name="DoorSprite" parent="Exits/RIGHT" index="2"]
+position = Vector2(-11, -29)
+flip_h = true
+
+[node name="UP" type="Node2D" parent="Exits"]
+position = Vector2(2, -320)
+
+[node name="Area2D" type="Area2D" parent="Exits/UP"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/UP/Area2D"]
+position = Vector2(-4, -26)
+shape = SubResource("RectangleShape2D_a208w")
+
+[node name="Hatch" type="Polygon2D" parent="Exits/UP"]
+color = Color(0.131379, 0.131379, 0.131379, 1)
+polygon = PackedVector2Array(-85, -5, -124, -45, 108, -45, 76, -5)
+
+[node name="DOWN" type="Node2D" parent="Exits"]
+position = Vector2(2, 2)
+
+[node name="Area2D" type="Area2D" parent="Exits/DOWN"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Exits/DOWN/Area2D"]
+position = Vector2(-6, 25)
+shape = SubResource("RectangleShape2D_a208w")
+
+[node name="Hatch" type="Polygon2D" parent="Exits/DOWN"]
+scale = Vector2(1, -1)
+color = Color(0.131379, 0.131379, 0.131379, 1)
+polygon = PackedVector2Array(-85, -5, -124, -45, 108, -45, 76, -5)
+
+[node name="HealthPickable" parent="." instance=ExtResource("18_axqsf")]
+position = Vector2(132, -103)
+
+[editable path="Platforms/MovingPlatform"]
+[editable path="Exits/RIGHT"]
