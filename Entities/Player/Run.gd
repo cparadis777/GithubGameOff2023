@@ -41,7 +41,8 @@ func physics_update(_delta: float) -> void:
 		player.velocity.x = player.speed * input_direction_x
 		#player.velocity.y += player.gravity * delta # the player is already on the floor
 		if moving_platform != null:
-			player.velocity.y = moving_platform.owner.velocity.y
+			if moving_platform.owner.get("velocity") != null:
+				player.velocity.y = moving_platform.owner.velocity.y
 		var collision_detected = player.move_and_slide()
 		if collision_detected:
 			var collision : KinematicCollision2D = player.get_last_slide_collision()

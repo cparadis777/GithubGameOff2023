@@ -18,8 +18,7 @@ func _ready():
 	
 
 func activate(): # from BaseContainer _on_body_entered
-	$DecisionTimer.start()
-	
+	_on_decision_timer_timeout() # get started immediately
 
 
 func choose_random_goal():

@@ -25,6 +25,7 @@ position = Vector2(59, -11)
 position = Vector2(-107, -11)
 
 [node name="FallDemo" parent="." index="5" instance=ExtResource("2_73pb8")]
+z_index = -1
 position = Vector2(-14, -63)
 animation_name = "land"
 label_text = "S"

@@ -48,7 +48,7 @@ func enter(_msg := {}) -> void:
 
 func exit():
 	super()
-	$DashHurtBox/DashCollisionShape.disabled = true
+	$DashHurtBox/DashCollisionShape.set_deferred("disabled", true)
 
 
 func physics_update(_delta: float) -> void:
@@ -73,9 +73,13 @@ func _on_dash_hurt_box_body_entered(body):
 			attackPacket.damage = damage
 			attackPacket.originator = self
 			attackPacket.recipient = body
+			attackPacket.impact_vector = player.velocity
 			attackPacket.knockback = true
 			attackPacket.knockback_speed = 150.0
 			hit.connect(body._on_hit)
 			hit.emit(attackPacket)
 			hit.disconnect(body._on_hit)
+			player.velocity = -player.velocity
+			state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
 			
+

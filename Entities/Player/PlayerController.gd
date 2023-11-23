@@ -68,8 +68,8 @@ func flip_sprites():
 		state_machine.scale.x = $Body.scale.x
 
 
-func set_direction(dir : int):
-	$Body.scale.x = dir * original_body_scale.x
+#func set_direction(dir : int):
+#	$Body.scale.x = dir * original_body_scale.x
 
 
 func get_last_known_direction():
@@ -149,7 +149,7 @@ func detect_moving_platform() -> StaticBody2D:
 	var moving_platform_detected
 	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
 	for candidate in candidate_bodies:
-		if candidate.is_in_group("MovingPlatforms") or candidate is AnimatableBody2D or "moving" in candidate.name.to_lower():
+		if candidate.is_in_group("MovingPlatforms"):
 			moving_platform_detected = candidate
 	return moving_platform_detected
 

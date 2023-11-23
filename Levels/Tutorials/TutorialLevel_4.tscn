@@ -24,6 +24,7 @@ position = Vector2(149, -42)
 position = Vector2(108, -9)
 
 [node name="AttackDemo" parent="." index="4" instance=ExtResource("3_mcvid")]
+z_index = -1
 position = Vector2(132, 54)
 animation_name = "fast_punch"
 label_text = "[,], [.]"
