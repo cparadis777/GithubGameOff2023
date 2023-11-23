@@ -1,10 +1,12 @@
-[gd_scene load_steps=114 format=3 uid="uid://bxyn1mq357nt6"]
+[gd_scene load_steps=120 format=3 uid="uid://bxyn1mq357nt6"]
 
 [ext_resource type="Shader" path="res://Entities/Player/cyber_ronin_sprites.gdshader" id="1_uj8kt"]
 [ext_resource type="Texture2D" uid="uid://dmuqf453q41ks" path="res://art/player/cyber-ronin_dash.png" id="2_islpf"]
 [ext_resource type="Texture2D" uid="uid://0tmrv4c2srvf" path="res://art/player/cyber-ronin_descending_kick.png" id="3_qvoy6"]
+[ext_resource type="Texture2D" uid="uid://bsco0vdu116nu" path="res://art/player/cyber-ronin-death.png" id="4_crb6h"]
 [ext_resource type="Texture2D" uid="uid://c3o30r2iupugf" path="res://art/player/cyber-ronin_double_jump.png" id="4_ovc6f"]
 [ext_resource type="Texture2D" uid="uid://b7a4g8mvnt6if" path="res://art/player/cyber-ronin_idle.png" id="5_h3mhb"]
+[ext_resource type="Texture2D" uid="uid://x20mmvnpip5j" path="res://art/player/cyber-ronin-hurt.png" id="6_cv1i0"]
 [ext_resource type="Texture2D" uid="uid://c2to5ges8gscf" path="res://art/player/cyber-ronin_3_hit_combo.png" id="7_4yg22"]
 [ext_resource type="Texture2D" uid="uid://bh3kj8hhfrjiw" path="res://art/player/cyber-ronin_jump.png" id="8_mci08"]
 [ext_resource type="Texture2D" uid="uid://o8avnxyy8l88" path="res://art/player/cyber-ronin_run.png" id="9_bpjqb"]
@@ -102,6 +104,18 @@ region = Rect2(460, 0, 115, 64)
 atlas = ExtResource("2_islpf")
 region = Rect2(575, 0, 115, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae6ej"]
+atlas = ExtResource("4_crb6h")
+region = Rect2(0, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2eyoy"]
+atlas = ExtResource("4_crb6h")
+region = Rect2(115, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwoyf"]
+atlas = ExtResource("4_crb6h")
+region = Rect2(230, 0, 115, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_42gkf"]
 atlas = ExtResource("3_qvoy6")
 region = Rect2(0, 0, 115, 64)
@@ -153,6 +167,10 @@ region = Rect2(1035, 0, 115, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_0j7j4"]
 atlas = ExtResource("10_jw2d4")
 region = Rect2(1150, 0, 115, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53p1f"]
+atlas = ExtResource("6_cv1i0")
+region = Rect2(0, 0, 115, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ae5lj"]
 atlas = ExtResource("5_h3mhb")
@@ -510,6 +528,20 @@ animations = [{
 "name": &"dash",
 "speed": 5.0
 }, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae6ej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2eyoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwoyf")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [],
 "loop": true,
 "name": &"default",
@@ -567,6 +599,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"fully_charged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53p1f")
+}],
+"loop": true,
+"name": &"hurt",
 "speed": 5.0
 }, {
 "frames": [{
@@ -820,5 +860,4 @@ animations = [{
 material = SubResource("ShaderMaterial_7ukrf")
 position = Vector2(18, -31)
 sprite_frames = SubResource("SpriteFrames_adh0r")
-animation = &"idle"
-frame_progress = 0.538964
+animation = &"death"
