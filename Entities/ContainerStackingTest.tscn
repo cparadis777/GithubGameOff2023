@@ -213,7 +213,7 @@ scale = Vector2(0.5, 0.5)
 override_text = "Stack Containers to make a 
 continuous path from
  start to finish.;Use WASD, QE, and space
-w to drop containers."
+to drop containers."
 
 [node name="controls" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("8_18gwl")]
 visible = false
