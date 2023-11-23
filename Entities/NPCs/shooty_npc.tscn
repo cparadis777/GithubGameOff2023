@@ -456,7 +456,7 @@ offset = Vector2(0, -15.8432)
 hframes = 4
 
 [node name="AnimatedSprite2D" parent="Appearance" index="1"]
-position = Vector2(-1.58432, -36.4393)
+position = Vector2(3.16863, -36.4393)
 sprite_frames = SubResource("SpriteFrames_0bkw0")
 animation = &"idle"
 
