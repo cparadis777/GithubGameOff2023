@@ -60,7 +60,7 @@ func _ready():
 	injured.connect(StageManager._on_damage_packet_processed)
 	original_body_scale = $Body/CyberRoninSprites.scale
 	original_sprite_position = $Body/CyberRoninSprites.position
-
+	$AnimationPlayer.play("RESET")
 
 func flip_sprites():
 	if abs(velocity.x) > 0:
@@ -304,7 +304,7 @@ func _on_hit(attackPacket):
 		if attackPacket.knockback:
 			velocity = attackPacket.impact_vector * attackPacket.knockback_speed
 			if "spikes" in attackPacket.originator.name.to_lower():
-				state_machine.transition_to("Air", {"do_jump": true})
+				state_machine.transition_to("Air", {"do_jump": true, "involuntary": true})
 		if health <= 0:
 			print("health = " + str(health))
 			begin_dying()

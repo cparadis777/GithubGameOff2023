@@ -100,10 +100,10 @@ position = Vector2(175, -4)
 position = Vector2(1, -20)
 
 [node name="TrapSpikes2" parent="Traps" index="1" instance=ExtResource("5_8168g")]
-position = Vector2(-138, 161)
+position = Vector2(-138, 163)
 
 [node name="TrapSpikes" parent="Traps" index="2" instance=ExtResource("5_8168g")]
-position = Vector2(-287, 160)
+position = Vector2(-287, 163)
 
 [node name="TrapSpikes3" parent="Traps" index="3" instance=ExtResource("5_8168g")]
 position = Vector2(-54, -110)
