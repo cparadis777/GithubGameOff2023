@@ -14,12 +14,23 @@ var directions = {
 var distance = 196
 @export var linked_portal : Node
 @export var tween_duration : float = 1.25
-@export var locked = false
+@export var locked = false:
+	set(value):
+		locked = value
+		if name == "RIGHT" or name == "LEFT":
+			if value:
+				$DoorSprite.frame = 0
+			else:
+				$DoorSprite.frame = 17
 
 
 func _ready():
 	if directions.has(name):
 		$Destination.global_position = global_position + directions[name] * distance
+	
+	if name == "RIGHT" or name == "LEFT":
+		if !locked:
+			$DoorSprite.frame = 17
 
 	await get_tree().create_timer(0.5).timeout
 	link_nearby_door()
@@ -36,7 +47,6 @@ func link_nearby_door():
 			if candidate.get_parent().has_method("open_door") and candidate.get_parent() != self:
 				linked_portal = candidate.owner
 				
-
 
 func _on_area_2d_body_entered(body):
 	if "player" in body.name.to_lower() and body.state_machine.state.name != "InTransit" and !locked:
@@ -80,7 +90,10 @@ func transport_player(body):
 
 func close_door():
 	if has_node("AnimationPlayer"):
-		$AnimationPlayer.play("close")
+		if (locked):
+			$AnimationPlayer.play("close")
+		else:
+			$AnimationPlayer.play("close_unlocked")
 
 
 func _on_tween_finished():

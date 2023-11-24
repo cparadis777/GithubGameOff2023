@@ -110,5 +110,5 @@ position = Vector2(-287, 163)
 position = Vector2(-54, -110)
 rotation = 3.14159
 
-[node name="Exterior" parent="." index="9"]
+[node name="Exterior" parent="." index="10"]
 texture = ExtResource("2_eoye4")
