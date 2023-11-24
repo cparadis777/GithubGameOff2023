@@ -27,7 +27,7 @@ signal died(name)
 func _ready():
 	if !animation_player:
 		animation_player = $AnimationPlayer
-	$AnimationPlayer.play("RESET")
+	#$AnimationPlayer.play("RESET")
 	velocity = Vector2.RIGHT * SPEED
 	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)
@@ -199,6 +199,7 @@ func _on_shot_requested():
 	velocity.x = 0
 	if animation_player.has_animation("shoot"):
 		animation_player.play("shoot")
+		# note: the shoot animation needs to call launch_bullet() on the simple shooter node.
 
 
 

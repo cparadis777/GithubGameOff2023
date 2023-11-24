@@ -163,7 +163,7 @@ position = Vector2(-194, 79)
 position = Vector2(258, 78)
 
 [node name="TrapSpikes3" parent="Traps" instance=ExtResource("9_je7k7")]
-position = Vector2(-12, 76)
+position = Vector2(-4, 53)
 
 [node name="TrapSpikes5" parent="Traps" instance=ExtResource("9_je7k7")]
 position = Vector2(195, 78)

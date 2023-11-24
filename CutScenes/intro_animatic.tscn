@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=15 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="3_n5ip3"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
 [ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="6_4yala"]
+[ext_resource type="FontFile" uid="uid://danlaalj0k3dj" path="res://UI/Themes/fonts/Saira/Saira-BoldItalic.ttf" id="8_5k53j"]
 [ext_resource type="PackedScene" uid="uid://dttldmdwah7bk" path="res://Menus/scene_selection_buttons.tscn" id="11_wktol"]
 
 [sub_resource type="Gradient" id="Gradient_1fdak"]
@@ -185,6 +186,18 @@ tracks/12/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("ManifestViolence:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_sqojr"]
 resource_name = "intro_animatic"
@@ -344,6 +357,18 @@ tracks/12/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("ManifestViolence:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_23747"]
@@ -509,16 +534,28 @@ libraries = {
 anchor_mode = 0
 
 [node name="escToSkipLabel" type="Label" parent="Camera2D"]
-offset_left = 10.0
-offset_top = 163.0
-offset_right = 104.0
-offset_bottom = 189.0
+offset_left = 257.5
+offset_top = 162.5
+offset_right = 351.5
+offset_bottom = 188.5
 scale = Vector2(0.643808, 0.643808)
 text = "...esc to skip"
 
 [node name="PressAnyKeyLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 1.0
+offset_top = 155.5
+offset_right = 120.0
+offset_bottom = 181.5
 text = "Press any key..."
+
+[node name="ManifestViolence" type="Label" parent="."]
+offset_left = 15.0
+offset_top = 91.0
+offset_right = 293.0
+offset_bottom = 133.0
+rotation = -0.241822
+theme_override_fonts/font = ExtResource("8_5k53j")
+theme_override_font_sizes/font_size = 32
+text = "Manifest Violence"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

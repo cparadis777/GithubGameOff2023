@@ -50,6 +50,8 @@ func _on_fight_button_pressed():
 	if $DropPoints.validate_level() or ignore_invalid_path:
 		StageManager.set_playspace_parameters($DropPoints.export_data())
 		if scene_path != "":
+			$AnimationPlayer.play("zoom_in")
+			await $AnimationPlayer.animation_finished
 			StageManager.change_scene_to(self.scene_path)
 		else:
 			printerr("ContainerStackingTest.gd config error: Needs a scene or scene_path parameter." + self.name)

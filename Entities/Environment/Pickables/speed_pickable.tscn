@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://mqmo6st0myyc"]
+
+[ext_resource type="PackedScene" uid="uid://bng5gkkfxrli5" path="res://Entities/Environment/Pickables/base_pickable.tscn" id="1_vw43u"]
+[ext_resource type="Texture2D" uid="uid://bxp2nsrmcx2j" path="res://art/pickups/speed-pickup.png" id="2_ilyy3"]
+
+[node name="SpeedPickable" instance=ExtResource("1_vw43u")]
+pickup_type = 2
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_ilyy3")

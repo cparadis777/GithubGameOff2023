@@ -4,7 +4,10 @@ var kicked = false
 
 @export var soda_can : PackedScene = preload("res://Entities/Environment/Kickables/soda_can.tscn")
 @export var max_hits = 2
-@export var chance_to_spawn_health = 1.0
+@export var chance_to_spawn_health = 0.7
+@export var chance_to_spawn_damage = 0.1
+@export var chance_to_spawn_speed = 0.1
+@export var chance_to_spawn_jump = 0.1
 var hits = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -35,18 +38,38 @@ func die():
 	await get_tree().create_timer(0.5).timeout
 	queue_free()
 
-func spawn_health_pickup():
-	var health_pickup = preload("res://Entities/Environment/Pickables/health_pickable.tscn").instantiate()
-	call_deferred("add_sibling", health_pickup)
-	health_pickup.global_position = global_position
-	health_pickup.position += Vector2.ONE.rotated(randf()*TAU) * 3.0
+func spawn_pickup(pickupType : Globals.PickupTypes):
+	var pickup_scene
+	match pickupType:
+		Globals.PickupTypes.HEALTH:
+			pickup_scene = preload("res://Entities/Environment/Pickables/health_pickable.tscn")
+		Globals.PickupTypes.DAMAGE:
+			pickup_scene = preload("res://Entities/Environment/Pickables/damage_pickable.tscn")
+		Globals.PickupTypes.SPEED:
+			pickup_scene = preload("res://Entities/Environment/Pickables/speed_pickable.tscn")
+		Globals.PickupTypes.JUMP:
+			pickup_scene = preload("res://Entities/Environment/Pickables/jump_pickable.tscn")
+	var pickup = pickup_scene.instantiate()
+	
+	call_deferred("add_sibling", pickup)
+	pickup.global_position = global_position
+	pickup.position += Vector2.ONE.rotated(randf()*TAU) * 3.0
 	
 
 func _on_hit(attackPacket : AttackPacket):
 	if !kicked:
 		spawn_soda_cans(attackPacket.impact_vector)
 		if randf() <= chance_to_spawn_health:
-			spawn_health_pickup()
+			spawn_pickup(Globals.PickupTypes.HEALTH)
+		if randf() <= chance_to_spawn_damage:
+			spawn_pickup(Globals.PickupTypes.DAMAGE)
+		if randf() <= chance_to_spawn_speed:
+			spawn_pickup(Globals.PickupTypes.SPEED)
+		if randf() <= chance_to_spawn_jump:
+			spawn_pickup(Globals.PickupTypes.JUMP)
+
+
+
 		
 	freeze = false
 	var knockbackMultiplier = 1.5

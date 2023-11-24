@@ -10,7 +10,7 @@ func harm(body):
 	attackPacket.recipient = body
 	attackPacket.impact_vector = Vector2(sign(body.velocity.x), -1.0) * 10.0
 	attackPacket.knockback = true
-	attackPacket.knockback_speed = 200.0
+	attackPacket.knockback_speed = 50.0
 	hit.connect(body._on_hit)
 	hit.emit(attackPacket)
 	hit.disconnect(body._on_hit)
