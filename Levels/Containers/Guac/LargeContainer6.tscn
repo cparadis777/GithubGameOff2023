@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b4h8trxb28bud"]
+[gd_scene load_steps=23 format=3 uid="uid://b4h8trxb28bud"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_jtbjr"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_d8uup"]
@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="7_204tu"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_mo2fd"]
 [ext_resource type="PackedScene" uid="uid://b4gqq4lgb1gnc" path="res://Entities/Environment/wall.tscn" id="9_jv3j8"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="10_5yrfe"]
 [ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="10_eps0n"]
-[ext_resource type="Texture2D" uid="uid://brpnbwebteufp" path="res://Entities/Environment/Traps/Spikes.png" id="11_6yi7s"]
 [ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="13_7ilto"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="14_r0v0q"]
 
@@ -32,6 +32,9 @@ size = Vector2(960, 70)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5deis"]
 size = Vector2(82, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tebx"]
+size = Vector2(3, 11)
 
 [node name="BaseContainer2" type="StaticBody2D"]
 collision_layer = 24
@@ -179,27 +182,55 @@ position = Vector2(349, -30)
 
 [node name="Traps" type="Node2D" parent="."]
 
-[node name="Spikes" type="Sprite2D" parent="Traps"]
-position = Vector2(-130, 53)
-texture = ExtResource("11_6yi7s")
-
-[node name="Spikes2" type="Sprite2D" parent="Traps"]
-position = Vector2(135, 53)
-texture = ExtResource("11_6yi7s")
-
-[node name="Spikes3" type="Sprite2D" parent="Traps"]
-position = Vector2(200, 53)
-texture = ExtResource("11_6yi7s")
-
-[node name="Spikes4" type="Sprite2D" parent="Traps"]
-position = Vector2(265, 53)
-texture = ExtResource("11_6yi7s")
-
 [node name="Wall" parent="Traps" instance=ExtResource("9_jv3j8")]
 position = Vector2(-86, 178)
 
 [node name="Wall2" parent="Traps" instance=ExtResource("9_jv3j8")]
 position = Vector2(86, 178)
+
+[node name="TrapSpikes" parent="Traps" instance=ExtResource("10_5yrfe")]
+position = Vector2(-135, 58)
+
+[node name="TrapSpikes2" parent="Traps" instance=ExtResource("10_5yrfe")]
+position = Vector2(133, 58)
+
+[node name="TrapSpikes3" parent="Traps" instance=ExtResource("10_5yrfe")]
+position = Vector2(197, 58)
+
+[node name="TrapSpikes4" parent="Traps" instance=ExtResource("10_5yrfe")]
+position = Vector2(261, 58)
+
+[node name="stub_npc_blocker" type="StaticBody2D" parent="Traps"]
+position = Vector2(98, 61)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Traps/stub_npc_blocker"]
+shape = SubResource("RectangleShape2D_3tebx")
+
+[node name="stub_npc_blocker2" type="StaticBody2D" parent="Traps"]
+position = Vector2(296, 60)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Traps/stub_npc_blocker2"]
+shape = SubResource("RectangleShape2D_3tebx")
+
+[node name="stub_npc_blocker3" type="StaticBody2D" parent="Traps"]
+position = Vector2(-101, 60)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Traps/stub_npc_blocker3"]
+shape = SubResource("RectangleShape2D_3tebx")
+
+[node name="stub_npc_blocker4" type="StaticBody2D" parent="Traps"]
+position = Vector2(-170, 60)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Traps/stub_npc_blocker4"]
+shape = SubResource("RectangleShape2D_3tebx")
 
 [node name="Enemies" type="Node2D" parent="."]
 
