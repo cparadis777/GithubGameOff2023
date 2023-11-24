@@ -27,7 +27,7 @@ signal died(name)
 func _ready():
 	if !animation_player:
 		animation_player = $AnimationPlayer
-	$AnimationPlayer.play("RESET")
+	#$AnimationPlayer.play("RESET")
 	velocity = Vector2.RIGHT * SPEED
 	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)

@@ -232,7 +232,7 @@ stream = SubResource("AudioStreamRandomizer_fkjsc")
 [node name="BloodSmear" parent="Behaviours/Defenses" index="1" instance=ExtResource("4_71odh")]
 
 [node name="AnimationPlayer" parent="." index="3"]
-autoplay = "run"
+autoplay = "RESET"
 libraries = {
 "": ExtResource("10_gkhcl")
 }

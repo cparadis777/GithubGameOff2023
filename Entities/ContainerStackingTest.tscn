@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=17 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
@@ -37,6 +37,91 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
+[sub_resource type="Animation" id="Animation_iohgr"]
+resource_name = "zoom_in"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(8, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-64, 64)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -177)]
+}
+
+[sub_resource type="Animation" id="Animation_5g3e2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -177)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1u85b"]
+_data = {
+"RESET": SubResource("Animation_5g3e2"),
+"zoom_in": SubResource("Animation_iohgr")
+}
+
 [node name="ContainerStackingTest" type="Node2D"]
 position = Vector2(1, 1)
 script = ExtResource("1_f2v7x")
@@ -64,6 +149,7 @@ script = null
 
 [node name="FightButton" type="Button" parent="HUD/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "Fight!"
 
 [node name="WarningPopup" type="PopupPanel" parent="HUD"]
@@ -76,8 +162,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 360.0
-offset_bottom = 221.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -118,6 +204,7 @@ stream = ExtResource("6_qcju0")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -177)
 zoom = Vector2(2, 2)
+position_smoothing_enabled = true
 
 [node name="Arena" type="Node2D" parent="."]
 
@@ -290,6 +377,11 @@ entrances = {
 
 [node name="TerminalContainer2" parent="." instance=ExtResource("9_d655n")]
 position = Vector2(-65, -113)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1u85b")
+}
 
 [connection signal="pressed" from="HUD/HBoxContainer/ResetButton" to="DropPoints" method="reset_dropped_containers"]
 [connection signal="pressed" from="HUD/HBoxContainer/FightButton" to="." method="_on_fight_button_pressed"]
