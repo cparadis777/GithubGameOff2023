@@ -38,9 +38,12 @@ var velocity = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	%Piston.hide()
+	%CraneCables.hide()
+	
 	setup_timer()
 	
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.33).timeout
 	# wait for global position to be set by instantiator
 
 	hack_workaround_for_starting_position_bug()
@@ -50,11 +53,8 @@ func _ready():
 		locations.push_back(locationMarker.global_position)
 	locations.push_back(self.global_position) # make ours go last, so there's no long delay for the tween
 
-#	$Piston.visible = show_piston
-#	$CraneCables.visible = show_cables
-	$Piston.visible = false # bug in cables and pistons.. they go to global origin instead of local relative origin
-	$CraneCables.visible = false
-
+	%Piston.visible = show_piston
+	%CraneCables.visible = show_cables
 
 	
 	if mode == modes.TWEEN:

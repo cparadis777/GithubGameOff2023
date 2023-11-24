@@ -12,4 +12,4 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if visible and original_position != null:
-		$Line2D.points = [ to_local(original_position), to_local(owner.global_position)+Vector2.DOWN*16 ]
+		$Line2D.points = [ Vector2.ZERO, original_position - owner.platform.global_position+(Vector2.DOWN*16) ]

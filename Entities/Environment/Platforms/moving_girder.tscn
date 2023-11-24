@@ -5,11 +5,12 @@
 
 [node name="MovingGirder" instance=ExtResource("1_acrfe")]
 script = ExtResource("2_sdcjl")
+show_piston = false
 
 [node name="StateLabel" parent="." index="1"]
 visible = true
 
-[node name="Cables" type="Node2D" parent="." index="4"]
+[node name="Cables" type="Node2D" parent="." index="3"]
 
 [node name="Cable" type="Line2D" parent="Cables" index="0"]
 top_level = true
