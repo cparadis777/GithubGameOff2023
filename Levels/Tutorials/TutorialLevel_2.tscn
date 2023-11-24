@@ -9,9 +9,6 @@
 [node name="BaseLevel" instance=ExtResource("1_ftyqr")]
 exit_flags = 2
 
-[node name="RightArrow" parent="BaseContainer" index="2"]
-position = Vector2(0, -42)
-
 [node name="NextLevelDoor" parent="BaseContainer" index="9"]
 position = Vector2(173, -43)
 next_scene = ExtResource("2_c7ax0")
@@ -19,7 +16,7 @@ next_scene = ExtResource("2_c7ax0")
 [node name="JumpDemo" parent="BaseContainer" index="11" instance=ExtResource("2_x0nsj")]
 position = Vector2(-56, 2)
 animation_name = "jump_peak"
-label_text = " "
+label_text = " [space]"
 button_texture = ExtResource("3_4y1op")
 
 [node name="Player" parent="." index="1"]

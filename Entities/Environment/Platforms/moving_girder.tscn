@@ -1,26 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://daqb2qqfyv1v5"]
+[gd_scene load_steps=3 format=3 uid="uid://daqb2qqfyv1v5"]
 
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="1_acrfe"]
 [ext_resource type="Script" path="res://Entities/Environment/Platforms/moving_girder.gd" id="2_sdcjl"]
-[ext_resource type="Texture2D" uid="uid://b2vr6i8p7i7ka" path="res://art/props/orange_beam.png" id="2_syj78"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pyf5v"]
-size = Vector2(54, 16)
 
 [node name="MovingGirder" instance=ExtResource("1_acrfe")]
 script = ExtResource("2_sdcjl")
+show_piston = false
 
-[node name="Sprite2D" parent="." index="0"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_syj78")
-region_enabled = true
-region_rect = Rect2(26.6042, -0.322308, 108.618, 32.6186)
+[node name="StateLabel" parent="." index="1"]
+visible = true
 
-[node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 0)
-shape = SubResource("RectangleShape2D_pyf5v")
-
-[node name="Cables" type="Node2D" parent="." index="4"]
+[node name="Cables" type="Node2D" parent="." index="3"]
 
 [node name="Cable" type="Line2D" parent="Cables" index="0"]
 top_level = true

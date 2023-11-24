@@ -45,17 +45,22 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _enter_tree():
-	StageManager.current_player = self
-	
+	if StageManager.current_player == null:
+		StageManager.current_player = self
+		#$Lookahead/Camera2D.make_current()
+	else:
+		printerr("Too many player controllers already. Queuing_free.")
+		printerr("But first. I'm in this node: " + owner.name)
+		call_deferred("queue_free")
 
 func _ready():
-	disable_all_hurtboxes()
+	
 	hud.show()
 	injured.connect(hud._on_player_hit)
 	injured.connect(StageManager._on_damage_packet_processed)
 	original_body_scale = $Body/CyberRoninSprites.scale
 	original_sprite_position = $Body/CyberRoninSprites.position
-
+	$AnimationPlayer.play("RESET")
 
 func flip_sprites():
 	if abs(velocity.x) > 0:
@@ -63,8 +68,6 @@ func flip_sprites():
 		state_machine.scale.x = $Body.scale.x
 
 
-func set_direction(dir : int):
-	$Body.scale.x = dir * original_body_scale.x
 
 
 func get_last_known_direction():
@@ -116,7 +119,18 @@ func initiate_debugging_protocol():
 		Engine.time_scale = 0.25
 	else:
 		Engine.time_scale = 1.0
+	print("Player detected")
+	print("nodes in group Player: " + str(get_tree().get_nodes_in_group("Player")))
+	
+	print("Canvas Nodes:")
+	var canvas_modulate_nodes = get_tree().get_root().find_children("anvas")
+	print(canvas_modulate_nodes)
 
+	print("World Nodes:")
+	var world_nodes = get_tree().get_root().find_children("orld")
+	print(world_nodes)
+
+	
 
 func zoom_camera(direction : int):
 	#var camera = get_viewport().get_camera_2d()
@@ -138,11 +152,11 @@ func detect_jump_through_platform() -> StaticBody2D:
 	return jump_through_platform_detected
 
 
-func detect_moving_platform() -> AnimatableBody2D:
+func detect_moving_platform() -> StaticBody2D:
 	var moving_platform_detected
 	var candidate_bodies = $PlatformDetector.get_overlapping_bodies()
 	for candidate in candidate_bodies:
-		if candidate.is_in_group("MovingPlatforms") or candidate is AnimatableBody2D or "moving" in candidate.name.to_lower():
+		if candidate.is_in_group("MovingPlatforms"):
 			moving_platform_detected = candidate
 	return moving_platform_detected
 
@@ -180,8 +194,7 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_state_transitioned(_stateName):
-	disable_all_hurtboxes() # let animations turn them back on
-	# see all incoming signals below.. from various states.
+	pass # see incoming signals below, from various states.
 
 
 func _on_jumped(): # from Air state
@@ -232,7 +245,7 @@ func _on_dash_started():
 func fast_punch(anim_name): # comes from $StateMachine/FastPunch
 	if state_machine.state.name == "FastPunch":
 		# play 3 animation sequence.
-		if not "punch" in animation_player.current_animation:
+		if not "fast_punch" in animation_player.current_animation:
 			last_fast_punch_animation = anim_name
 			animation_player.play(anim_name)
 			#$Body/CyberRoninSprites.play("fast_punch")
@@ -241,16 +254,6 @@ func fast_punch(anim_name): # comes from $StateMachine/FastPunch
 func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 	animation_player.play("strong_punch")
 		
-
-
-func disable_all_hurtboxes():
-	var hurtboxes = [ 
-		#$Body/Actions/fast_punch/HurtBox/CollisionShape2D,
-		$Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D,
-	]
-
-	for hurtbox in hurtboxes:
-		hurtbox.set_deferred("disabled", true)
 
 
 func inflict_harm(body, damage: float = 10.0, knockback_magnitude : float = 1.0, uppercut: bool = false):
@@ -275,20 +278,13 @@ func inflict_harm(body, damage: float = 10.0, knockback_magnitude : float = 1.0,
 	# StageManager also gets a copy of the attackPacket
 	
 
-func _on_descending_kick_hurtbox_body_entered(body):
-	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		if state_machine.state.name == "DescendingKick":
-			inflict_harm(body, 20, true, false)
-			velocity.x = -velocity.x
-			velocity.y = - 1.25 * JUMP_VELOCITY
-			state_machine.transition_to("Air", {"do_jump" = true})
 
 
 
 
 #receive injury
 func _on_hit(attackPacket):
-	if !iframes and (state_machine.state.name not in [ "Dying", "Dead", "InTransit"]):
+	if !iframes and (state_machine.state.name not in [ "Dying", "Dead", "InTransit", "Dash", "DescendingKick"]):
 		
 		health -= attackPacket.damage
 		Globals.player_stats["health"] = health
@@ -297,7 +293,7 @@ func _on_hit(attackPacket):
 		if attackPacket.knockback:
 			velocity = attackPacket.impact_vector * attackPacket.knockback_speed
 			if "spikes" in attackPacket.originator.name.to_lower():
-				state_machine.transition_to("Air", {"do_jump": true})
+				state_machine.transition_to("Air", {"do_jump": true, "involuntary": true})
 		if health <= 0:
 			print("health = " + str(health))
 			begin_dying()
@@ -325,3 +321,18 @@ func _on_door_entered():
 
 func _on_door_exited():
 	state_machine.transition_to("Idle")
+
+
+func _pickable_picked_up(pickup_type):
+	match pickup_type:
+		Globals.PickupTypes.HEALTH:
+			health += 50
+			health = clamp(health, 0, health_max)
+			hud._on_player_picked_up_health()
+		Globals.PickupTypes.DAMAGE:
+			for damage_type in damage_defaults.keys():
+				damage_defaults[damage_type] *= 1.25
+		Globals.PickupTypes.SPEED:
+			SPEED += 50
+		Globals.PickupTypes.JUMP:
+			JUMP_VELOCITY += 50

@@ -4,6 +4,27 @@ enum DirectionFlags {NIL = 0, LEFT = 1, RIGHT = 2, UP = 4, DOWN = 8}
 
 enum Directions {UP, RIGHT, DOWN, LEFT}
 
+func directions_to_flags(directions:Dictionary) -> DirectionFlags:
+	var flags := DirectionFlags.NIL
+	for dir in directions:
+		if dir is Utils.Directions && directions[dir]:
+			match dir:
+				Directions.UP:
+					@warning_ignore("int_as_enum_without_cast")
+					flags |= DirectionFlags.UP
+				Directions.RIGHT:
+					@warning_ignore("int_as_enum_without_cast")
+					flags |= DirectionFlags.RIGHT
+				Directions.DOWN: 
+					@warning_ignore("int_as_enum_without_cast")
+					flags |= DirectionFlags.DOWN
+				Directions.LEFT: 
+					@warning_ignore("int_as_enum_without_cast")
+					flags |= DirectionFlags.LEFT
+				_:
+					pass
+	return flags
+
 func flag_to_direction(flag:Utils.DirectionFlags) -> Utils.Directions:
 	match flag:
 		DirectionFlags.LEFT:

@@ -12,13 +12,17 @@ var health_max : float = 20
 var health = health_max
 
 signal hurt(attackPacket)
+signal died(name)
 
 func _ready():
-	$DecisionTimer.start()
 	$CPUParticles2D.emitting = false
 	
 
-
+func activate(): # from BaseContainer _on_body_entered
+	_on_decision_timer_timeout() # get started immediately
+	died.connect(StageManager._on_NPC_died)
+	if owner and owner.has_method("_on_NPC_died"):
+		died.connect(owner._on_NPC_died)
 
 func choose_random_goal():
 	var dice_roll = randf()
@@ -65,6 +69,7 @@ func die():
 	$Behaviours/Attacks/ShootStars.stop()
 	$CPUParticles2D.lifetime = 1.0
 	$CPUParticles2D.emitting = true
+	died.emit(name)
 	await get_tree().create_timer(0.8).timeout
 	queue_free()
 	

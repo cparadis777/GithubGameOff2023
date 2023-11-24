@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dh3odxs6vlefi"]
+
+[ext_resource type="PackedScene" uid="uid://djnr2ahjg2mm1" path="res://Entities/Projectiles/bullet_basic.tscn" id="1_jvptl"]
+[ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="2_nu1ca"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdl8y"]
+atlas = ExtResource("2_nu1ca")
+region = Rect2(0, 0, 384, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_krmud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdl8y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7s56"]
+size = Vector2(126, 61)
+
+[node name="BulletBasic" instance=ExtResource("1_jvptl")]
+collision_mask = 1
+damage = 25.0
+affected_by_gravity = true
+extra_initial_velocity = Vector2(100, -300)
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(0.33, 0.33)
+sprite_frames = SubResource("SpriteFrames_krmud")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_w7s56")

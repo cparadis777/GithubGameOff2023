@@ -2,10 +2,10 @@ extends CharacterBody2D
 
 
 @export var SPEED : float = 40.0
-@export var JUMP_VELOCITY : float = -100.0
+@export var JUMP_VELOCITY : float = -150.0
 @export var base_damage : float = 10
 
-@export var health_max = 50.0
+@export var health_max = 100.0
 var health = health_max
 
 @export var animation_player : Node
@@ -22,21 +22,25 @@ var direction : int = 1
 @onready var decision_timer : Timer = $Behaviours/DecisionMaking/DecisionTimer
 
 signal hurt
-signal died
+signal died(name)
 
 func _ready():
 	if !animation_player:
 		animation_player = $AnimationPlayer
-	$AnimationPlayer.play("RESET")
+	#$AnimationPlayer.play("RESET")
 	velocity = Vector2.RIGHT * SPEED
 	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)
-
-	# temporary, until we get NPC spawning and activating
-	activate(Globals.DifficultyScales.EASY)
-
-func activate(difficulty : Globals.DifficultyScales):
-	set_difficulty(difficulty)
+	
+	#var owner = get_owner()
+	if (owner and owner.has_method("_on_NPC_died")):
+		owner.num_enemies += 1
+		died.connect(owner._on_NPC_died)
+	
+	
+	
+func activate():
+	set_difficulty(Globals.difficulty)
 	activate_weapons()
 	State = States.IDLE
 	decision_timer.start()
@@ -61,16 +65,29 @@ func jump():
 func _physics_process(delta):
 	if State in [ States.RUNNING, States.JUMPING, States.IDLE, States.ATTACKING ]:
 		apply_gravity(delta)
+		sync_to_moving_platform(delta)
 		move_and_slide()
 		update_animations()
-		if is_at_end_of_platform() or is_obstructed():
+		if is_on_top_of_player():
+			jump()
+		elif is_at_end_of_platform() or is_obstructed():
 			turn_around()
+		
 	elif State in [States.KNOCKBACK, States.IFRAMES]:
 		# no downward gravity during knockback.
 		move_and_slide()
 
 	$Debug/StateLabel.text = States.keys()[State]
 
+func sync_to_moving_platform(_delta):
+	var sensor : RayCast2D = $Behaviours/Sensors/MovingPlatformSensor
+	if sensor.is_colliding():
+		var thing_underfoot = sensor.get_collider()
+		if is_on_floor() and thing_underfoot.is_in_group("MovingPlatforms"):
+			if thing_underfoot.owner.get("velocity") != null:
+				velocity.y = thing_underfoot.owner.velocity.y
+			
+			
 func is_at_end_of_platform():
 		if is_on_floor() and !$Behaviours/Sensors/FloorSensor.is_colliding():
 			return true
@@ -79,7 +96,12 @@ func is_obstructed():
 	if $Behaviours/Sensors/ObstacleSensor.is_colliding():
 		return true
 	
-	
+func is_on_top_of_player():
+	var area : Area2D = $Behaviours/Sensors/PlayerSensor
+	if area.get_overlapping_bodies().has(get_tree().get_first_node_in_group("Player")):
+		return true
+
+
 func update_animations():
 	if animation_player.current_animation == "":
 		if animations[State] != "" and animation_player.has_animation(animations[State]):
@@ -90,12 +112,21 @@ func apply_gravity(delta):
 		velocity.y += gravity * delta
 		
 
-
-func die():
-	State = States.DEAD
+func play_death_tween_if_needed():
 	var tween = create_tween()
 	tween.parallel().tween_property(self, "rotation", PI * 0.5, 0.33)
 	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
+
+func die():
+	State = States.DEAD
+	if has_node("AnimationPlayer"):
+		if $AnimationPlayer.has_animation("die"):
+			#$AnimationPlayer.stop()
+			$AnimationPlayer.play("die")
+		else:
+			play_death_tween_if_needed()
+	else:
+		play_death_tween_if_needed()
 	decision_timer.stop()
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	died.emit(name)
@@ -105,24 +136,25 @@ func _on_hit(attackPacket : AttackPacket):
 		$HurtNoises.play()
 		abort_attacks_in_progress()
 		health -= attackPacket.damage
-		if health <= 0:
-			die()
-			return
-		elif attackPacket.knockback == true:
+		# if health <= 0, they'll die after they return from iframes.
+		
+		if attackPacket.knockback == true:
 			State = States.KNOCKBACK # same as IFRAMES, plus movement.
 			var knockbackMultiplier = 1.25
 			velocity = attackPacket.impact_vector * attackPacket.knockback_speed * knockbackMultiplier
-		else:
+		else: # no knockback
 			State = States.IFRAMES
 		$IframesTimer.start()
 		$AnimationPlayer.play("hurt")
 			#$HurtEffect/Star.show()
 		hurt.emit(attackPacket)
 
+
 func abort_attacks_in_progress():
 	for attack in $Behaviours/Attacks.get_children():
 		if attack.get("enabled") == true and attack.has_method("stop"):
 			attack.stop()
+	
 
 func resume_attacking():
 	for attack in $Behaviours/Attacks.get_children():
@@ -130,15 +162,19 @@ func resume_attacking():
 			attack.start()
 
 func _on_iframes_timer_timeout():
+	if health <= 0:
+		die()
+		
 	if State in [States.KNOCKBACK, States.IFRAMES]:
-		$HurtEffect/Star.hide()
-		$Appearance/Sprite2D.material.set_shader_parameter("IFrames", false)
+		#$HurtEffect/Star.hide()
+		#$Appearance/Sprite2D.material.set_shader_parameter("IFrames", false)
 		if velocity.x > 0:
 			velocity = Vector2.RIGHT * SPEED
 		else:
 			velocity = Vector2.LEFT * SPEED
 
 		State = States.RUNNING
+		$AnimationPlayer.play("RESET")
 		resume_attacking()
 
 func turn_around():
@@ -174,6 +210,7 @@ func _on_shot_requested():
 	velocity.x = 0
 	if animation_player.has_animation("shoot"):
 		animation_player.play("shoot")
+		# note: the shoot animation needs to call launch_bullet() on the simple shooter node.
 
 
 

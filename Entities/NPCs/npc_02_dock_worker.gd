@@ -4,6 +4,7 @@
 
 extends CharacterBody2D
 
+@export var damage_to_block : float = 80
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -14,7 +15,7 @@ var last_known_direction : int = 1
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@export var health_max = 200
+@export var health_max = 250
 @onready var health = health_max
 
 @onready var animation_player = $AnimationPlayer
@@ -25,6 +26,7 @@ enum Goals { ATTACK, DEFEND } # add RELAX, RELOCATE later.
 var current_goal = Goals.ATTACK
 
 enum States { INITIALIZING, PAUSED, IDLE, ALERT, IFRAMES, DEFENDING, DYING, DEAD }
+var animations = ["", "", "idle", "walk", "hurt", "defend", "die", ""]
 var State :States = States.INITIALIZING :
 	set(value):
 		previous_state = State
@@ -33,6 +35,8 @@ var State :States = States.INITIALIZING :
 		return State
 
 signal hurt(attackPacket)
+signal died(name)
+
 
 var previous_state : States
 
@@ -47,19 +51,21 @@ func _ready():
 		avatar_root = $PaperDoll.scale
 	original_doll_scale = avatar_root.scale
 	
-	State = States.ALERT
 	$HurtFlash.hide()
 
 	$DecisionTimer.start()
 
 	hurt.connect(StageManager._on_damage_packet_processed)
+	died.connect(StageManager._on_NPC_died)
 
+	if (owner and owner.has_method("_on_NPC_died")):
+		owner.num_enemies += 1
+		died.connect(owner._on_NPC_died)
 
 func activate():
-	# consider putting the DecisionTimer start in here.
-	# that will let levels spawn without paused NPCs
-	pass
-	
+
+	State = States.ALERT
+
 
 func _physics_process(delta):
 	if State == States.ALERT:
@@ -96,7 +102,9 @@ func apply_gravity(delta):
 		velocity.y += gravity * delta
 
 func point_at_player():
-		
+	if player == null:
+		player = get_tree().get_nodes_in_group("Player")[0]
+	
 	if global_position.x < player.global_position.x:
 		velocity.x = abs(velocity.x) * 1
 	else:
@@ -119,6 +127,7 @@ func update_animations():
 			$AnimationPlayer.play("walk")
 
 func begin_dying():
+	died.emit(name)
 	print("dockworker dying")
 	State = States.DYING
 	$AnimationPlayer.play("die")
@@ -136,46 +145,45 @@ func initiate_iframes():
 	State = States.IFRAMES
 	$IFramesTimer.start()
 
-func play_hurt_noise():
-	$HurtNoises.play()
+#func play_hurt_noise():
+#	$HurtNoises.play()
 
 func knockback(knockbackVector):
-	var magnitude = 66.0 # two thirds as much as a regular NPC
+	var magnitude = 1.0 # two thirds as much as a regular NPC
+	if State in [States.DEFENDING]:
+		magnitude = 0.25
 	velocity = knockbackVector * magnitude
 
 
 	
 func _on_hit(attackPacket : AttackPacket):
-	if State in [ States.IDLE, States.ALERT ]:
+	if State in [ States.IDLE, States.ALERT ]: # no defensive block
 
 		health -= attackPacket.damage
 		hurt.emit(attackPacket)
-		if health <= 0:
-			begin_dying()
-		else:
-			play_hurt_noise()
-			#$HurtFlash.show()
-			$AnimationPlayer.play("hurt")
-			initiate_iframes()
-			if attackPacket.knockback:
-				knockback(attackPacket.impact_vector)
-	elif State == States.DEFENDING:
-		attackPacket.damage_blocked = min(attackPacket.damage, 40)
+
+		$AnimationPlayer.play("hurt")
+		initiate_iframes()
+		if attackPacket.knockback:
+			knockback(attackPacket.impact_vector * attackPacket.knockback_speed)
+	
+	elif State == States.DEFENDING: # remove some damage from the attack
+		attackPacket.damage_blocked = min(attackPacket.damage, damage_to_block)
 		hurt.emit(attackPacket)
+		
 		if attackPacket.damage_blocked >= attackPacket.damage:
-			health -= attackPacket.damage - attackPacket.damage_blocked
-			# play a symbol clash noise or something.
-			# maybe knock back the player
+			# no health reduction
 			$Behaviours/Defenses/ArmShieldDefense._on_hit(attackPacket)
-		else:
-			play_hurt_noise()
-			#$HurtFlash.show()
+
+		else: # some damage got through
+			health -= (attackPacket.damage - attackPacket.damage_blocked)
 			$AnimationPlayer.play("hurt")
 			$Behaviours/Attacks/HeavyMeleeAttack.stop()
 			initiate_iframes()
 			if attackPacket.knockback:
 				knockback(attackPacket.impact_vector)
-				
+
+
 func _on_decay_timer_timeout():
 	avatar_root.hide()
 	$BloodTimer.start()
@@ -195,6 +203,8 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_i_frames_timer_timeout():
 	State = previous_state
 	$HurtFlash.hide()
+	if health <= 0:
+		begin_dying()
 
 
 

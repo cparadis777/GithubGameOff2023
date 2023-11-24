@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dttldmdwah7bk"]
+[gd_scene load_steps=6 format=3 uid="uid://dttldmdwah7bk"]
 
 [ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="1_a863l"]
-[ext_resource type="PackedScene" uid="uid://b527h0udon0w5" path="res://Levels/placeholder/plex_test_level.tscn" id="2_pindx"]
 [ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="3_8qbco"]
 [ext_resource type="PackedScene" uid="uid://bdqawiqxlij23" path="res://Levels/placeholder/MockLevel.tscn" id="4_rdf1v"]
 [ext_resource type="PackedScene" uid="uid://bpcm0ph14ms2a" path="res://Levels/placeholder/Level_02_Interior.tscn" id="5_7bqgq"]
@@ -19,20 +18,6 @@ offset_right = 22.5
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-columns = 2
-
-[node name="PlexTestButton" type="Button" parent="."]
-visible = false
-layout_mode = 2
-text = "plex Test"
-script = ExtResource("1_a863l")
-scene = ExtResource("2_pindx")
-
-[node name="ContainerStackingStartButton" type="Button" parent="."]
-layout_mode = 2
-text = "Play!"
-script = ExtResource("1_a863l")
-scene = ExtResource("3_8qbco")
 
 [node name="LevelMockupButton" type="Button" parent="."]
 visible = false
@@ -49,8 +34,13 @@ script = ExtResource("1_a863l")
 scene = ExtResource("5_7bqgq")
 
 [node name="TutorialButton" type="Button" parent="."]
-visible = false
 layout_mode = 2
-text = "IanC tutorial"
+text = "Play"
 script = ExtResource("1_a863l")
 scene = ExtResource("6_rlsbl")
+
+[node name="ContainerStackingStartButton" type="Button" parent="."]
+layout_mode = 2
+text = "Skip Tutorial"
+script = ExtResource("1_a863l")
+scene = ExtResource("3_8qbco")

@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://81l71vr0sqf2"]
+[gd_scene load_steps=12 format=3 uid="uid://81l71vr0sqf2"]
 
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_41hb8"]
 [ext_resource type="Texture2D" uid="uid://ckyyijor2rr67" path="res://art/interiors/shipping_container_soyda_INTERIOR_ORTHOGRAPHIC.png" id="2_id1wg"]
 [ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="3_ikmi4"]
-[ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="4_7t46s"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="4_620bv"]
 [ext_resource type="PackedScene" uid="uid://bp3hllbhu1duj" path="res://Entities/Environment/Lights/neon_light.tscn" id="5_jb7wt"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="6_03v6r"]
@@ -110,23 +109,21 @@ position = Vector2(-280, 36)
 
 [node name="Lighting" type="Node2D" parent="." index="5"]
 
-[node name="CanvasModulate" parent="Lighting" index="0" instance=ExtResource("4_7t46s")]
-
-[node name="NeonLight" parent="Lighting" index="1" instance=ExtResource("5_jb7wt")]
+[node name="NeonLight" parent="Lighting" index="0" instance=ExtResource("5_jb7wt")]
 position = Vector2(-243, -173)
 
-[node name="NeonLight2" parent="Lighting" index="2" instance=ExtResource("5_jb7wt")]
+[node name="NeonLight2" parent="Lighting" index="1" instance=ExtResource("5_jb7wt")]
 position = Vector2(257, -173)
 
-[node name="SwitchedBlacklightInversePointlight" parent="Lighting" index="3" instance=ExtResource("6_cn0un")]
+[node name="SwitchedBlacklightInversePointlight" parent="Lighting" index="2" instance=ExtResource("6_cn0un")]
 position = Vector2(250, 61)
 scale = Vector2(1.64063, 1.30729)
 
-[node name="SwitchedBlacklightInversePointlight3" parent="Lighting" index="4" instance=ExtResource("6_cn0un")]
+[node name="SwitchedBlacklightInversePointlight3" parent="Lighting" index="3" instance=ExtResource("6_cn0un")]
 position = Vector2(1.00002, -58)
 scale = Vector2(1.64063, 1.30729)
 
-[node name="SwitchedBlacklightInversePointlight2" parent="Lighting" index="5" instance=ExtResource("6_cn0un")]
+[node name="SwitchedBlacklightInversePointlight2" parent="Lighting" index="4" instance=ExtResource("6_cn0un")]
 position = Vector2(-231, 58)
 scale = Vector2(1.64063, 1.30729)
 
@@ -161,5 +158,8 @@ position = Vector2(252, -79)
 [node name="Point3" type="Marker2D" parent="EnemySpawnPoints" index="3"]
 position = Vector2(264, 168)
 
-[node name="Exterior" parent="." index="8"]
+[node name="Exterior" parent="." index="9"]
 texture = ExtResource("3_ikmi4")
+
+[node name="ContainerInterior" parent="." index="14"]
+visible = true

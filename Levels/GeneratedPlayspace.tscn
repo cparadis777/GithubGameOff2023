@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bj3d6rfcnc2am"]
+[gd_scene load_steps=15 format=3 uid="uid://bj3d6rfcnc2am"]
 
 [ext_resource type="Script" path="res://Levels/GeneratedPlayspace.gd" id="1_guo8s"]
 [ext_resource type="Script" path="res://Levels/ContainerGrid.gd" id="2_0shpo"]
@@ -8,6 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://dqe41rrauj6by" path="res://Entities/Environment/Containers/LargeEmptyContainer.tscn" id="6_n8nav"]
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="7_ifxbb"]
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="9_nkiwv"]
+[ext_resource type="PackedScene" uid="uid://dhxm77joahdfb" path="res://Entities/Environment/Containers/special/terminal_container.tscn" id="9_rtv3m"]
+[ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="10_gr7p4"]
+[ext_resource type="Texture2D" uid="uid://67m50eh8jeq1" path="res://art/materials/shaders/2DOmniLight.png" id="11_8chyq"]
+[ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="12_1uwdy"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d5jlm"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Environment" id="Environment_j2q28"]
+background_mode = 3
+ambient_light_energy = 0.2
+glow_enabled = true
 
 [node name="GeneratedPlayspace" type="Node2D"]
 script = ExtResource("1_guo8s")
@@ -53,10 +66,52 @@ position = Vector2(1921, -483)
 [node name="EmptyContainer8" parent="." instance=ExtResource("6_n8nav")]
 position = Vector2(1921, -962)
 
-[node name="CanvasModulate" parent="." instance=ExtResource("7_ifxbb")]
-visible = false
-
 [node name="StartContainer" parent="." instance=ExtResource("9_nkiwv")]
 position = Vector2(-960, 0)
 container_exit_flags = 2
+doors_unlocked = true
 show_exterior_on_start = false
+
+[node name="TerminalContainer" parent="." instance=ExtResource("9_rtv3m")]
+position = Vector2(1921, -1443)
+container_exit_flags = 1
+
+[node name="AI_Tutorial_Text" parent="." instance=ExtResource("10_gr7p4")]
+light_mask = 2
+position = Vector2(-785, 184)
+override_text = "The boss is currently
+on the bridge,
+operating the crane.;
+He left strict instructions
+not to be disturbed.;
+Doors will remain locked
+so long as employees
+remain in any given room.
+"
+
+[node name="PointLight2D" type="PointLight2D" parent="AI_Tutorial_Text"]
+light_mask = 2
+visibility_layer = 0
+position = Vector2(70, -125)
+color = Color(0.839216, 0.564706, 0.803922, 1)
+texture = ExtResource("11_8chyq")
+texture_scale = 5.0
+
+[node name="BigArrow" type="Polygon2D" parent="."]
+visible = false
+z_index = -1
+material = SubResource("CanvasItemMaterial_d5jlm")
+color = Color(0.47451, 0.345098, 0.537255, 1)
+polygon = PackedVector2Array(-794, 30, -691, 30, -690, -23, -614, 69, -693, 138, -693, 90, -795, 89)
+
+[node name="CanvasModulate" parent="." instance=ExtResource("7_ifxbb")]
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j2q28")
+
+[node name="ParallaxBackground2" parent="." instance=ExtResource("12_1uwdy")]
+
+[connection signal="finished" from="AI_Tutorial_Text" to="BigArrow" method="show"]
+
+[editable path="StartContainer"]

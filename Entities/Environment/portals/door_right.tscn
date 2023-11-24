@@ -4,9 +4,16 @@
 
 [node name="RIGHT" instance=ExtResource("1_3n0hx")]
 
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-46, -4.5)
+
 [node name="DoorSprite" parent="." index="2"]
 position = Vector2(-11, -37)
 flip_h = true
+
+[node name="Scanner" parent="DoorSprite" index="0"]
+rotation = -0.329655
+scale = Vector2(-2.5, 2.5)
 
 [node name="CollisionShape2D" parent="paired_door_detector" index="0"]
 position = Vector2(77, 1)

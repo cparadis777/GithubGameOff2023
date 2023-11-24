@@ -1,5 +1,8 @@
-extends Node
+extends Node2D
  
+@export_multiline var override_text = "" ## separate "slides" with semi-colons (;)
+
+
 var messages = [
 	"Hello User! 
 	Muse AI here: at your service!
@@ -55,17 +58,28 @@ var display = ""
 var current_character = 0
 var done_talking = false
 
+signal finished
+
 func _ready():
+	if override_text != "":
+		messages = override_text.split(";")
 	$Label.hide()
 	$SpaceBar_UI.hide()
 	$Muse_AI.play("idle")
 	$AnimationPlayer.play("hello")
 	$spawn_timer.start()
-	var current_message = 0
-	var display = ""
-	var current_character = 0
-	done_talking = false
+#	var current_message = 0
+#	var display = ""
+#	var current_character = 0
+#	done_talking = false
+
+func reset_dialogue():
+	current_message = 0
+	display = ""
+	current_character = 0
+	
 func start_dialogue():
+	show()
 	$Text_Bubble.play("default")
 	$Muse_AI.play("speaking")
 	$Label.show()
@@ -73,10 +87,23 @@ func start_dialogue():
 	$next_char.set_wait_time(typing_speed)
 	$next_char.start()
 	
-func _process(delta):
-	if Input.is_action_just_pressed("jump"):
-		go_next_message()
+func _process(_delta):
+	if visible and Input.is_action_just_pressed("jump"):
+		if current_character < len(messages[current_message]):
+			show_entire_message()
+		else:
+			go_next_message()
+	if visible and Input.is_action_just_pressed("ui_cancel"):
+		done_talking = true
+		$AnimationPlayer.play("byebye")
+
+func show_entire_message():
+	current_character = len(messages[current_message])
+	display = messages[current_message]
+	$Label.text = display
+	
 func stop_dialogue():
+	finished.emit()
 	queue_free()
 	
 func go_next_message():
@@ -114,4 +141,5 @@ func _on_spawn_timer_timeout():
 		start_dialogue()
 	elif done_talking:
 		stop_dialogue()
+		
 		

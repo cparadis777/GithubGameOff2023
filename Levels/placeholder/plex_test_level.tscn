@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b527h0udon0w5"]
+[gd_scene load_steps=27 format=3 uid="uid://b527h0udon0w5"]
 
 [ext_resource type="Script" path="res://Levels/placeholder/level_01.gd" id="1_foj8b"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_u6p87"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_44m5b"]
 [ext_resource type="PackedScene" uid="uid://bty5gh70uklnu" path="res://Entities/Environment/Lights/default_container_lighting.tscn" id="12_oo7j6"]
 [ext_resource type="PackedScene" uid="uid://bveugr8fx87uv" path="res://Entities/Environment/portals/door_template.tscn" id="17_pv8u4"]
+[ext_resource type="PackedScene" uid="uid://dc4sfj0m5h44l" path="res://Entities/Environment/Pickables/health_pickable.tscn" id="18_axqsf"]
 
 [sub_resource type="Gradient" id="Gradient_m6aon"]
 offsets = PackedFloat32Array(0, 0.301818, 0.829091)
@@ -294,6 +295,9 @@ shape = SubResource("RectangleShape2D_a208w")
 scale = Vector2(1, -1)
 color = Color(0.131379, 0.131379, 0.131379, 1)
 polygon = PackedVector2Array(-85, -5, -124, -45, 108, -45, 76, -5)
+
+[node name="HealthPickable" parent="." instance=ExtResource("18_axqsf")]
+position = Vector2(132, -103)
 
 [editable path="Platforms/MovingPlatform"]
 [editable path="Exits/RIGHT"]

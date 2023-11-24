@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://bty5gh70uklnu"]
+[gd_scene load_steps=8 format=3 uid="uid://bty5gh70uklnu"]
 
-[ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="1_i61i2"]
 [ext_resource type="PackedScene" uid="uid://dnsnay6jrr7ic" path="res://Entities/Environment/Lights/switched_blacklight_inverse.tscn" id="2_akv4m"]
 [ext_resource type="Texture2D" uid="uid://losqfok5ku04" path="res://art/materials/shaders/2DNeonLight.png" id="3_12bab"]
 [ext_resource type="PackedScene" uid="uid://dalx4u4rteba3" path="res://Entities/Environment/Lights/switched_light.tscn" id="4_3ss08"]
@@ -16,8 +15,6 @@ blend_mode = 1
 light_mode = 1
 
 [node name="Lighting" type="Node2D"]
-
-[node name="CanvasModulate" parent="." instance=ExtResource("1_i61i2")]
 
 [node name="InverseBlacklight" parent="." instance=ExtResource("2_akv4m")]
 

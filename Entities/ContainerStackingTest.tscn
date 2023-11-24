@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=17 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="3_tcnfn"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="4_unqhl"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
+[ext_resource type="AudioStream" uid="uid://ddnyec60dy814" path="res://audio/sfx/player_sfx/player_bigpunch_impact.mp3" id="6_qcju0"]
 [ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="8_18gwl"]
+[ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="9_0cocc"]
 [ext_resource type="PackedScene" uid="uid://diik2yboc0mbr" path="res://Entities/Droppable/TerminalContainer.tscn" id="9_d655n"]
 [ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="10_bp55l"]
 
@@ -35,6 +37,91 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
+[sub_resource type="Animation" id="Animation_iohgr"]
+resource_name = "zoom_in"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(8, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-64, 64)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -177)]
+}
+
+[sub_resource type="Animation" id="Animation_5g3e2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -177)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1u85b"]
+_data = {
+"RESET": SubResource("Animation_5g3e2"),
+"zoom_in": SubResource("Animation_iohgr")
+}
+
 [node name="ContainerStackingTest" type="Node2D"]
 position = Vector2(1, 1)
 script = ExtResource("1_f2v7x")
@@ -54,17 +141,49 @@ mouse_filter = 2
 layout_mode = 2
 focus_mode = 0
 
-[node name="FightButton" parent="HUD/HBoxContainer" instance=ExtResource("3_tcnfn")]
-layout_mode = 2
-focus_mode = 0
-text = "Fight!"
-script = null
-
 [node name="ResetButton" parent="HUD/HBoxContainer" instance=ExtResource("3_tcnfn")]
 layout_mode = 2
 focus_mode = 0
 text = "Reset!"
 script = null
+
+[node name="FightButton" type="Button" parent="HUD/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Fight!"
+
+[node name="WarningPopup" type="PopupPanel" parent="HUD"]
+initial_position = 1
+size = Vector2i(364, 173)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/WarningPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HUD/WarningPopup/VBoxContainer"]
+layout_mode = 2
+text = "With this stack of shipping containers, you don't have a valid path to the bridge.
+You won't be able to reach the boss to enact your revenge. 
+Are you sure?"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/WarningPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Retry" type="Button" parent="HUD/WarningPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "No. Let me fix the stack."
+
+[node name="Confirm" type="Button" parent="HUD/WarningPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Yes. Fight Anyways."
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("4_unqhl")]
 
@@ -79,9 +198,13 @@ n_vertical = 4
 container_width = 48
 container_height = 24
 
+[node name="BangNoise" type="AudioStreamPlayer" parent="DropPoints"]
+stream = ExtResource("6_qcju0")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -177)
 zoom = Vector2(2, 2)
+position_smoothing_enabled = true
 
 [node name="Arena" type="Node2D" parent="."]
 
@@ -202,23 +325,46 @@ drop_zone = NodePath("../DropPoints")
 [node name="Instructions" type="Node2D" parent="."]
 position = Vector2(0, -177)
 
-[node name="placement" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("8_18gwl")]
+[node name="Tutorial_AI" parent="Instructions" instance=ExtResource("9_0cocc")]
+position = Vector2(-139, 80)
+scale = Vector2(0.5, 0.5)
+override_text = "Stack Containers to make a 
+continuous path from
+ start to finish.;Use WASD, QE, and space
+to drop containers."
+
+[node name="controls" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("8_18gwl")]
 visible = false
+z_index = 1
 position = Vector2(-9, -1)
-next_slide = NodePath("../weight")
+next_slide = NodePath("../placement")
+info_text = "Use A,D or Left,Right to move crane.
+Q,E or <,> to rotate container exits.
+Press space to drop Container."
+
+[node name="placement" parent="Instructions" instance=ExtResource("8_18gwl")]
+visible = false
+z_index = 1
+position = Vector2(-9, -1)
 info_text = "Place containers 
 to create a contiguous path 
-from Start (A) to Finish (B)
-(Arrow keys or WASD to move, space to drop.)"
+from Start to Finish."
 
-[node name="weight" parent="Instructions" instance=ExtResource("8_18gwl")]
-visible = false
-position = Vector2(-9, -1)
-info_text = "The weight of each shipping
-container reflects 
-the amount and difficulty of
-teamsters, thugs, and assassins
-contained within."
+[node name="StartLabel" type="Label" parent="Instructions"]
+offset_left = -124.0
+offset_top = 53.0
+offset_right = -84.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 14
+text = "Start"
+
+[node name="FinishLabel" type="Label" parent="Instructions"]
+offset_left = 107.0
+offset_top = -18.0
+offset_right = 153.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 14
+text = "Finish"
 
 [node name="TerminalContainer" parent="." instance=ExtResource("9_d655n")]
 position = Vector2(79, -185)
@@ -232,8 +378,17 @@ entrances = {
 [node name="TerminalContainer2" parent="." instance=ExtResource("9_d655n")]
 position = Vector2(-65, -113)
 
-[connection signal="pressed" from="HUD/HBoxContainer/FightButton" to="." method="_on_fight_button_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1u85b")
+}
+
 [connection signal="pressed" from="HUD/HBoxContainer/ResetButton" to="DropPoints" method="reset_dropped_containers"]
+[connection signal="pressed" from="HUD/HBoxContainer/FightButton" to="." method="_on_fight_button_pressed"]
+[connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Retry" to="HUD/WarningPopup" method="hide"]
+[connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
 [connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]
+[connection signal="finished" from="Instructions/Tutorial_AI" to="." method="_on_tutorial_ai_finished"]
+[connection signal="finished" from="Instructions/placement" to="." method="_on_placement_instructions_finished"]

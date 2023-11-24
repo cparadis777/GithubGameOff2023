@@ -7,6 +7,7 @@ func _ready():
 
 func _physics_process(delta):
 	super(delta) # is this needed in _process()?
-	for cable in $Cables.get_children():
-		cable.points = [global_position, locations[0]] # local coordinates
-	
+#	for cable in $Cables.get_children():
+#		if locations.size() > 0:
+#			cable.points = [global_position, locations[0]] # local coordinates
+#

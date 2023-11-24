@@ -89,6 +89,7 @@ func check_under(coordinate:Vector2) -> bool:
 	return false
 
 func drop_done() -> void:
+	$BangNoise.play()
 	var old_parent = self.container_dropping.get_parent()
 	old_parent.remove_child(self.container_dropping)
 	self.drop_point_targeted.add_child(self.container_dropping)
@@ -147,6 +148,7 @@ func validate_level() -> bool:
 func path_search() -> bool:
 	var start:Vector2 = self.entrance_coord
 	var visited_nodes = {}
+	@warning_ignore("unused_variable")
 	var visited_node_count = 0
 	
 	for coord in drop_points_dict:
@@ -212,4 +214,4 @@ func check_unneeded_exits() ->void:
 			current_drop_point.container.entrances[self.exit_direction] = true 
 			print("Added back %s to %s" % [Utils.Directions.keys()[self.exit_direction], coord])
 		
-		print(current_drop_point.container.entrances)
+		# print(current_drop_point.container.entrances)

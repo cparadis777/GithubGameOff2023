@@ -139,5 +139,7 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 shape = SubResource("RectangleShape2D_dnhqr")
 
+[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
+
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

@@ -28,10 +28,10 @@ position = Vector2(-287, -16)
 position = Vector2(-121, -16)
 
 [node name="JumpThroughPlatform5" parent="Platforms" index="3" instance=ExtResource("2_syv6k")]
-position = Vector2(214, -1)
+position = Vector2(141, -2)
 
 [node name="JumpThroughPlatform4" parent="Platforms" index="4" instance=ExtResource("2_syv6k")]
-position = Vector2(0, -119)
+position = Vector2(-1, -133)
 
 [node name="MovingPlatform" parent="Platforms" index="5" instance=ExtResource("10_qfiey")]
 position = Vector2(87, 137)
@@ -54,7 +54,7 @@ position = Vector2(-198, -29)
 position = Vector2(-196, -40)
 
 [node name="TrashCan" parent="Obstacles" index="5" instance=ExtResource("14_a7hhv")]
-position = Vector2(246, -1)
+position = Vector2(104, -2)
 
 [node name="Lighting" type="Node2D" parent="." index="5"]
 
@@ -90,7 +90,7 @@ position = Vector2(290, 167)
 animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 
 [node name="NPC_02_DockWorker" parent="Enemies" index="5" instance=ExtResource("12_pvej1")]
-position = Vector2(158, -4)
+position = Vector2(175, -4)
 
 [node name="EnemySpawnPoints" type="Node2D" parent="." index="7"]
 
@@ -98,20 +98,17 @@ position = Vector2(158, -4)
 
 [node name="StarTrap-Shooter" parent="Traps" index="0" instance=ExtResource("4_6jjch")]
 position = Vector2(1, -20)
+sync_to_physics = false
 
 [node name="TrapSpikes2" parent="Traps" index="1" instance=ExtResource("5_8168g")]
-position = Vector2(-138, 161)
+position = Vector2(-138, 163)
 
 [node name="TrapSpikes" parent="Traps" index="2" instance=ExtResource("5_8168g")]
-position = Vector2(-287, 160)
+position = Vector2(-287, 163)
 
 [node name="TrapSpikes3" parent="Traps" index="3" instance=ExtResource("5_8168g")]
-position = Vector2(-51, -95)
+position = Vector2(-54, -110)
 rotation = 3.14159
 
-[node name="TrapSpikes4" parent="Traps" index="4" instance=ExtResource("5_8168g")]
-position = Vector2(49, -95)
-rotation = 3.14159
-
-[node name="Exterior" parent="." index="9"]
+[node name="Exterior" parent="." index="10"]
 texture = ExtResource("2_eoye4")

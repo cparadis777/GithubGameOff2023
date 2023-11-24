@@ -49,7 +49,7 @@ func physics_update(_delta: float) -> void:
 		else:
 			state_machine.transition_to("Landing")
 		
-	
+
 
 
 func _on_unstuck_timer_timeout():
@@ -58,3 +58,13 @@ func _on_unstuck_timer_timeout():
 		# player is probably trapped in a corner.
 		player.velocity = -player.velocity
 		state_machine.transition_to("Air", {"do_jump" = true})
+
+
+func _on_hurt_box_body_entered(body):
+	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
+		if state_machine.state.name == "DescendingKick":
+			player.inflict_harm(body, player.damage_defaults["DescendingKick"], true, false)
+			player.velocity.x = -player.velocity.x
+			player.velocity.y = - 1.25 * player.JUMP_VELOCITY
+			state_machine.transition_to("Air", {"do_jump" = true})
+	

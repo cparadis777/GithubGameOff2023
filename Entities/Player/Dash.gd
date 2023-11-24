@@ -43,8 +43,12 @@ func enter(_msg := {}) -> void:
 #		player.reset_rotation()
 	
 	player.velocity.x = dash_speed * direction
-	
+	$DashHurtBox/DashCollisionShape.disabled = false
 	started.emit() # so player can play animation
+
+func exit():
+	super()
+	$DashHurtBox/DashCollisionShape.set_deferred("disabled", true)
 
 
 func physics_update(_delta: float) -> void:
@@ -66,12 +70,16 @@ func _on_dash_hurt_box_body_entered(body):
 	if state_machine.state == self:
 		if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 			var attackPacket = AttackPacket.new()
-			attackPacket.damage = damage
+			attackPacket.damage = player.damage_defaults[name]
 			attackPacket.originator = self
 			attackPacket.recipient = body
+			attackPacket.impact_vector = player.velocity.normalized() + Vector2.UP * 0.5
 			attackPacket.knockback = true
 			attackPacket.knockback_speed = 150.0
 			hit.connect(body._on_hit)
 			hit.emit(attackPacket)
 			hit.disconnect(body._on_hit)
+			player.velocity = -player.velocity
+			state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
 			
+
