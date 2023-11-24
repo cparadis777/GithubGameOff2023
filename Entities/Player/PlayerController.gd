@@ -54,7 +54,7 @@ func _enter_tree():
 		call_deferred("queue_free")
 
 func _ready():
-	disable_all_hurtboxes()
+	
 	hud.show()
 	injured.connect(hud._on_player_hit)
 	injured.connect(StageManager._on_damage_packet_processed)
@@ -68,8 +68,6 @@ func flip_sprites():
 		state_machine.scale.x = $Body.scale.x
 
 
-#func set_direction(dir : int):
-#	$Body.scale.x = dir * original_body_scale.x
 
 
 func get_last_known_direction():
@@ -196,8 +194,7 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_state_transitioned(_stateName):
-	disable_all_hurtboxes() # let animations turn them back on
-	# see all incoming signals below.. from various states.
+	pass # see incoming signals below, from various states.
 
 
 func _on_jumped(): # from Air state
@@ -259,16 +256,6 @@ func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 		
 
 
-func disable_all_hurtboxes():
-	var hurtboxes = [ 
-		#$Body/Actions/fast_punch/HurtBox/CollisionShape2D,
-		$Body/Actions/descending_kick/HurtBox/DescendingKickCollisionShape2D,
-	]
-
-	for hurtbox in hurtboxes:
-		hurtbox.set_deferred("disabled", true)
-
-
 func inflict_harm(body, damage: float = 10.0, knockback_magnitude : float = 1.0, uppercut: bool = false):
 	var attackPacket = AttackPacket.new()
 	attackPacket.recipient = body
@@ -291,13 +278,6 @@ func inflict_harm(body, damage: float = 10.0, knockback_magnitude : float = 1.0,
 	# StageManager also gets a copy of the attackPacket
 	
 
-func _on_descending_kick_hurtbox_body_entered(body):
-	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
-		if state_machine.state.name == "DescendingKick":
-			inflict_harm(body, 20, true, false)
-			velocity.x = -velocity.x
-			velocity.y = - 1.25 * JUMP_VELOCITY
-			state_machine.transition_to("Air", {"do_jump" = true})
 
 
 

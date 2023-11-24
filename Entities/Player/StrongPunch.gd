@@ -158,7 +158,7 @@ func _on_hurt_box_body_entered(body):
 	if state_machine.state == self:
 		if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 			var charge_multiplier = clampf(float(final_charge_duration) / 500.0, 1.0, 3.5)
-			var actual_damage = floor(damage * charge_multiplier)
+			var actual_damage = floor(player.damage_defaults[name] * charge_multiplier)
 			var knockback_magnitude = 3.0
 			var uppercut = false
 			if not this_punch_already_landed:

@@ -118,12 +118,12 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8hms"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ucv"]
-size = Vector2(16, 15)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_o20hr"]
 atlas = ExtResource("4_gxpwb")
 region = Rect2(191, 193.5, 106, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ucv"]
+size = Vector2(16, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_46i3j"]
 size = Vector2(20, 38)
@@ -227,15 +227,6 @@ shape = SubResource("RectangleShape2D_a8hms")
 [node name="Actions" type="Node2D" parent="Body"]
 
 [node name="descending_kick" type="Node2D" parent="Body/Actions"]
-
-[node name="HurtBox" type="Area2D" parent="Body/Actions/descending_kick"]
-collision_layer = 0
-collision_mask = 10
-
-[node name="DescendingKickCollisionShape2D" type="CollisionShape2D" parent="Body/Actions/descending_kick/HurtBox"]
-position = Vector2(7, -6.5)
-shape = SubResource("RectangleShape2D_k6ucv")
-disabled = true
 
 [node name="Torso" type="Node2D" parent="Body"]
 visible = false
@@ -375,6 +366,15 @@ script = ExtResource("16_7kpt4")
 [node name="UnstuckTimer" type="Timer" parent="StateMachine/DescendingKick"]
 wait_time = 3.0
 one_shot = true
+
+[node name="HurtBox" type="Area2D" parent="StateMachine/DescendingKick"]
+collision_layer = 0
+collision_mask = 10
+
+[node name="DescendingKickCollisionShape2D" type="CollisionShape2D" parent="StateMachine/DescendingKick/HurtBox"]
+position = Vector2(7, -6.5)
+shape = SubResource("RectangleShape2D_k6ucv")
+disabled = true
 
 [node name="Landing" type="Node2D" parent="StateMachine"]
 script = ExtResource("25_hj8m7")
@@ -534,8 +534,8 @@ collision_mask = 10
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_m8oiq")
 
-[connection signal="body_entered" from="Body/Actions/descending_kick/HurtBox" to="." method="_on_descending_kick_hurtbox_body_entered"]
 [connection signal="timeout" from="StateMachine/DescendingKick/UnstuckTimer" to="StateMachine/DescendingKick" method="_on_unstuck_timer_timeout"]
+[connection signal="body_entered" from="StateMachine/DescendingKick/HurtBox" to="StateMachine/DescendingKick" method="_on_hurt_box_body_entered"]
 [connection signal="body_entered" from="StateMachine/Dash/DashHurtBox" to="StateMachine/Dash" method="_on_dash_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/Dead/Timer" to="StateMachine/Dead" method="_on_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/StrongPunch/HurtBox" to="StateMachine/StrongPunch" method="_on_hurt_box_body_entered"]

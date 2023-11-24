@@ -25,6 +25,7 @@ enum Goals { ATTACK, DEFEND } # add RELAX, RELOCATE later.
 var current_goal = Goals.ATTACK
 
 enum States { INITIALIZING, PAUSED, IDLE, ALERT, IFRAMES, DEFENDING, DYING, DEAD }
+var animations = ["", "", "idle", "walk", "hurt", "defend", "die", ""]
 var State :States = States.INITIALIZING :
 	set(value):
 		previous_state = State

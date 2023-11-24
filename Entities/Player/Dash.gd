@@ -70,7 +70,7 @@ func _on_dash_hurt_box_body_entered(body):
 	if state_machine.state == self:
 		if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 			var attackPacket = AttackPacket.new()
-			attackPacket.damage = damage
+			attackPacket.damage = player.damage_defaults[name]
 			attackPacket.originator = self
 			attackPacket.recipient = body
 			attackPacket.impact_vector = player.velocity.normalized() + Vector2.UP * 0.5
