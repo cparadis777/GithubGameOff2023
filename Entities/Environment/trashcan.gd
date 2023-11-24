@@ -4,16 +4,34 @@ var kicked = false
 
 @export var soda_can : PackedScene = preload("res://Entities/Environment/Kickables/soda_can.tscn")
 @export var max_hits = 2
-@export var chance_to_spawn_health = 0.7
-@export var chance_to_spawn_damage = 0.1
-@export var chance_to_spawn_speed = 0.1
-@export var chance_to_spawn_jump = 0.1
+
+var original_position : Vector2
+
+@export var spawn_probabilities = {
+	Globals.PickupTypes.HEALTH : 0.5,
+	Globals.PickupTypes.DAMAGE : 0.2,
+	Globals.PickupTypes.JUMP : 0.2,
+	Globals.PickupTypes.SPEED : 0.2,
+}
+
+@export var pickup_scenes = {
+	Globals.PickupTypes.HEALTH : preload("res://Entities/Environment/Pickables/health_pickable.tscn"),
+	Globals.PickupTypes.DAMAGE : preload("res://Entities/Environment/Pickables/damage_pickable.tscn"),
+	Globals.PickupTypes.JUMP : preload("res://Entities/Environment/Pickables/jump_pickable.tscn"),
+	Globals.PickupTypes.SPEED : preload("res://Entities/Environment/Pickables/speed_pickable.tscn"),
+}
+
 var hits = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for crack in $DamageSprites.get_children():
 		crack.hide()
+	await get_tree().create_timer(0.3).timeout
+	original_position = get_global_position()
+	
+	
+
 
 func spawn_soda_cans(impactVector):
 	for i in range(randi_range(3,7)):
@@ -38,20 +56,20 @@ func die():
 	await get_tree().create_timer(0.5).timeout
 	queue_free()
 
-func spawn_pickup(pickupType : Globals.PickupTypes):
+func spawn_random_pickup():
 	var pickup_scene
-	match pickupType:
-		Globals.PickupTypes.HEALTH:
-			pickup_scene = preload("res://Entities/Environment/Pickables/health_pickable.tscn")
-		Globals.PickupTypes.DAMAGE:
-			pickup_scene = preload("res://Entities/Environment/Pickables/damage_pickable.tscn")
-		Globals.PickupTypes.SPEED:
-			pickup_scene = preload("res://Entities/Environment/Pickables/speed_pickable.tscn")
-		Globals.PickupTypes.JUMP:
-			pickup_scene = preload("res://Entities/Environment/Pickables/jump_pickable.tscn")
+	var running_chance : float = 0.0
+	var dice_roll : float = randf()
+	for type in spawn_probabilities.keys():
+		running_chance += spawn_probabilities[type]
+		if dice_roll < running_chance:
+			pickup_scene = pickup_scenes[type]
+			dice_roll = 100.0 # so no one else can get it.
+	
 	var pickup = pickup_scene.instantiate()
 	
 	call_deferred("add_sibling", pickup)
+	await pickup.ready
 	pickup.global_position = global_position
 	pickup.position += Vector2.ONE.rotated(randf()*TAU) * 3.0
 	
@@ -59,23 +77,13 @@ func spawn_pickup(pickupType : Globals.PickupTypes):
 func _on_hit(attackPacket : AttackPacket):
 	if !kicked:
 		spawn_soda_cans(attackPacket.impact_vector)
-		if randf() <= chance_to_spawn_health:
-			spawn_pickup(Globals.PickupTypes.HEALTH)
-		if randf() <= chance_to_spawn_damage:
-			spawn_pickup(Globals.PickupTypes.DAMAGE)
-		if randf() <= chance_to_spawn_speed:
-			spawn_pickup(Globals.PickupTypes.SPEED)
-		if randf() <= chance_to_spawn_jump:
-			spawn_pickup(Globals.PickupTypes.JUMP)
+		spawn_random_pickup()
+		kicked = true
 
-
-
-		
-	freeze = false
+	freeze = false # act as a rigid body, not a static body
 	var knockbackMultiplier = 1.5
 	$HurtNoises.play()
 	apply_central_impulse( (attackPacket.impact_vector + Vector2.UP) * attackPacket.knockback_speed * knockbackMultiplier)
-	kicked = true
 	hits += 1
 	spawn_cracks()
 	if hits > max_hits:

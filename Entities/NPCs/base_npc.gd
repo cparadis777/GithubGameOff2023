@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY : float = -150.0
 @export var base_damage : float = 10
 
-@export var health_max = 50.0
+@export var health_max = 100.0
 var health = health_max
 
 @export var animation_player : Node
@@ -136,19 +136,19 @@ func _on_hit(attackPacket : AttackPacket):
 		$HurtNoises.play()
 		abort_attacks_in_progress()
 		health -= attackPacket.damage
-		if health <= 0:
-			die()
-			return
-		elif attackPacket.knockback == true:
+		# if health <= 0, they'll die after they return from iframes.
+		
+		if attackPacket.knockback == true:
 			State = States.KNOCKBACK # same as IFRAMES, plus movement.
 			var knockbackMultiplier = 1.25
 			velocity = attackPacket.impact_vector * attackPacket.knockback_speed * knockbackMultiplier
-		else:
+		else: # no knockback
 			State = States.IFRAMES
 		$IframesTimer.start()
 		$AnimationPlayer.play("hurt")
 			#$HurtEffect/Star.show()
 		hurt.emit(attackPacket)
+
 
 func abort_attacks_in_progress():
 	for attack in $Behaviours/Attacks.get_children():
@@ -162,6 +162,9 @@ func resume_attacking():
 			attack.start()
 
 func _on_iframes_timer_timeout():
+	if health <= 0:
+		die()
+		
 	if State in [States.KNOCKBACK, States.IFRAMES]:
 		#$HurtEffect/Star.hide()
 		#$Appearance/Sprite2D.material.set_shader_parameter("IFrames", false)

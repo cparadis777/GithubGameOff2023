@@ -49,6 +49,6 @@ func _on_hurt_box_body_entered(body):
 		if state_machine.state.name == "FastPunch":
 			var knockback_magnitude = punch_num_in_sequence
 			var uppercut = punch_num_in_sequence == 2
-			player.inflict_harm(body, 10, knockback_magnitude, uppercut)
+			player.inflict_harm(body, player.damage_defaults["FastPunch"], knockback_magnitude, uppercut)
 			$ImpactAudio.get_child(punch_num_in_sequence).play()
 

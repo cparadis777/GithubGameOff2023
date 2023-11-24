@@ -4,6 +4,7 @@
 
 extends CharacterBody2D
 
+@export var damage_to_block : float = 80
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -14,7 +15,7 @@ var last_known_direction : int = 1
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@export var health_max = 200
+@export var health_max = 250
 @onready var health = health_max
 
 @onready var animation_player = $AnimationPlayer
@@ -144,8 +145,8 @@ func initiate_iframes():
 	State = States.IFRAMES
 	$IFramesTimer.start()
 
-func play_hurt_noise():
-	$HurtNoises.play()
+#func play_hurt_noise():
+#	$HurtNoises.play()
 
 func knockback(knockbackVector):
 	var magnitude = 1.0 # two thirds as much as a regular NPC
@@ -156,37 +157,31 @@ func knockback(knockbackVector):
 
 	
 func _on_hit(attackPacket : AttackPacket):
-	if State in [ States.IDLE, States.ALERT ]:
+	if State in [ States.IDLE, States.ALERT ]: # no defensive block
 
 		health -= attackPacket.damage
 		hurt.emit(attackPacket)
 
-		if health > 0:
-			play_hurt_noise()
-			#$HurtFlash.show()
-			$AnimationPlayer.play("hurt")
-			initiate_iframes()
-			if attackPacket.knockback:
-				knockback(attackPacket.impact_vector * attackPacket.knockback_speed)
-	elif State == States.DEFENDING:
-		attackPacket.damage_blocked = min(attackPacket.damage, 40)
+		$AnimationPlayer.play("hurt")
+		initiate_iframes()
+		if attackPacket.knockback:
+			knockback(attackPacket.impact_vector * attackPacket.knockback_speed)
+	
+	elif State == States.DEFENDING: # remove some damage from the attack
+		attackPacket.damage_blocked = min(attackPacket.damage, damage_to_block)
 		hurt.emit(attackPacket)
+		
 		if attackPacket.damage_blocked >= attackPacket.damage:
-			health -= attackPacket.damage - attackPacket.damage_blocked
-			# play a symbol clash noise or something.
-			# maybe knock back the player
+			# no health reduction
 			$Behaviours/Defenses/ArmShieldDefense._on_hit(attackPacket)
 
-		else:
-			play_hurt_noise()
-			#$HurtFlash.show()
+		else: # some damage got through
+			health -= (attackPacket.damage - attackPacket.damage_blocked)
 			$AnimationPlayer.play("hurt")
 			$Behaviours/Attacks/HeavyMeleeAttack.stop()
 			initiate_iframes()
 			if attackPacket.knockback:
 				knockback(attackPacket.impact_vector)
-	if health <= 0 and State not in [States.DYING, States.DEAD]:
-		begin_dying()
 
 
 func _on_decay_timer_timeout():
@@ -208,6 +203,8 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_i_frames_timer_timeout():
 	State = previous_state
 	$HurtFlash.hide()
+	if health <= 0:
+		begin_dying()
 
 
 

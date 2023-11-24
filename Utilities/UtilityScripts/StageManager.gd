@@ -66,4 +66,6 @@ func _on_damage_packet_processed(attackPacket: AttackPacket):
 		color = Color.DARK_RED
 	else:
 		color = Color.BLUE_VIOLET
-	popup_text(attackPacket.damage - attackPacket.damage_blocked, location, color)
+	var damage_to_display = attackPacket.damage - attackPacket.damage_blocked
+	
+	popup_text(str(damage_to_display).pad_decimals(0), location, color)

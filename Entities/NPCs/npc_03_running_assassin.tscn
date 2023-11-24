@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://blh128dmuq6f7"]
+[gd_scene load_steps=42 format=3 uid="uid://blh128dmuq6f7"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_olg2y"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_4c1rq"]
@@ -68,6 +68,26 @@ region = Rect2(1280, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2v0c6"]
 atlas = ExtResource("4_o7lo3")
 region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0rm8"]
+atlas = ExtResource("4_o7lo3")
+region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_neiuq"]
+atlas = ExtResource("4_o7lo3")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkyk5"]
+atlas = ExtResource("4_o7lo3")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg7mt"]
+atlas = ExtResource("4_o7lo3")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwls1"]
+atlas = ExtResource("4_o7lo3")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ni13h"]
 atlas = ExtResource("5_vkotl")
@@ -150,6 +170,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_x0rm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_neiuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkyk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg7mt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwls1")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ni13h")
 }],
 "loop": true,
@@ -199,7 +239,6 @@ stream_0/stream = ExtResource("4_qrr87")
 stream_0/weight = 1.0
 
 [node name="RunningAssassin" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_olg2y")]
-health_max = 75.0
 animation_player = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" parent="." index="0"]
@@ -240,6 +279,9 @@ libraries = {
 [node name="AttackNoises" parent="." index="7"]
 stream = SubResource("AudioStreamRandomizer_70y7j")
 volume_db = -9.0
+
+[node name="Debug" parent="." index="10"]
+visible = false
 
 [editable path="Behaviours/Attacks/SimpleMeleeAttack"]
 [editable path="Behaviours/Defenses/BloodSmear"]

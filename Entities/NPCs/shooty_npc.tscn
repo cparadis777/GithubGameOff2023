@@ -507,4 +507,7 @@ volume_db = -6.0
 stream = SubResource("AudioStreamRandomizer_5k5lf")
 volume_db = -7.0
 
+[node name="Debug" parent="." index="10"]
+visible = false
+
 [editable path="Behaviours/Attacks/SimpleShootAttack"]

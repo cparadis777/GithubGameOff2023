@@ -506,6 +506,7 @@ bus = &"sfx"
 script = ExtResource("26_teftq")
 
 [node name="Debug" type="Node2D" parent="."]
+visible = false
 position = Vector2(-15, -56)
 
 [node name="StateLabel" type="Label" parent="Debug"]
