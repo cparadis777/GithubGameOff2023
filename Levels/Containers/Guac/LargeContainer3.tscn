@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://n1c6uj18b3nd"]
+[gd_scene load_steps=21 format=3 uid="uid://n1c6uj18b3nd"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_7jfrn"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_phhx6"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_fjh47"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="11_vp46x"]
 [ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="12_h6r82"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="12_i80vu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -149,32 +150,41 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
 
-[node name="BasicPlatform" parent="." instance=ExtResource("8_1imke")]
-position = Vector2(0, 50)
-
-[node name="BasicPlatform2" parent="." instance=ExtResource("8_1imke")]
-position = Vector2(-180, 50)
-
-[node name="BasicPlatform3" parent="." instance=ExtResource("8_1imke")]
-position = Vector2(180, 50)
-
-[node name="BasicPlatform4" parent="." instance=ExtResource("8_1imke")]
-position = Vector2(180, 50)
-
-[node name="NPC_02_DockWorker" parent="." instance=ExtResource("9_63oho")]
-position = Vector2(-240, 45)
-
-[node name="NPC_02_DockWorker2" parent="." instance=ExtResource("9_63oho")]
-position = Vector2(199, 45)
-
-[node name="ShootyNPC" parent="." instance=ExtResource("10_fjh47")]
-position = Vector2(-113, 171)
-
-[node name="MovingPlatform" parent="." instance=ExtResource("11_vp46x")]
-position = Vector2(0, -10)
-
 [node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_h6r82")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="BasicPlatform" parent="Platforms" instance=ExtResource("8_1imke")]
+position = Vector2(0, 50)
+
+[node name="BasicPlatform2" parent="Platforms" instance=ExtResource("8_1imke")]
+position = Vector2(-180, 50)
+
+[node name="BasicPlatform3" parent="Platforms" instance=ExtResource("8_1imke")]
+position = Vector2(180, 50)
+
+[node name="BasicPlatform4" parent="Platforms" instance=ExtResource("8_1imke")]
+position = Vector2(180, 50)
+
+[node name="MovingPlatform" parent="Platforms" instance=ExtResource("11_vp46x")]
+position = Vector2(0, -10)
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="VendingMachine" parent="Props" instance=ExtResource("12_i80vu")]
+position = Vector2(175, 168)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="NPC_02_DockWorker" parent="Enemies" instance=ExtResource("9_63oho")]
+position = Vector2(-240, 45)
+
+[node name="NPC_02_DockWorker2" parent="Enemies" instance=ExtResource("9_63oho")]
+position = Vector2(199, 45)
+
+[node name="ShootyNPC" parent="Enemies" instance=ExtResource("10_fjh47")]
+position = Vector2(-113, 171)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

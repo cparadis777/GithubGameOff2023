@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3dcv0s26jnfm"]
+
+[ext_resource type="PackedScene" uid="uid://bng5gkkfxrli5" path="res://Entities/Environment/Pickables/base_pickable.tscn" id="1_puyce"]
+[ext_resource type="Texture2D" uid="uid://bte3vdsntt4qf" path="res://art/pickups/damage-pickup.png" id="2_p0akf"]
+
+[node name="DamagePickable" instance=ExtResource("1_puyce")]
+pickup_type = 1
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_p0akf")
