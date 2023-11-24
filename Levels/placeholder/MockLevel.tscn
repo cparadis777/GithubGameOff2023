@@ -39,35 +39,24 @@ position = Vector2(369, -8)
 
 [node name="BaseContainer" parent="Containers" instance=ExtResource("8_vkcjm")]
 position = Vector2(528, -96)
-enter_left = true
-enter_right = true
 
 [node name="BaseContainer2" parent="Containers" instance=ExtResource("8_vkcjm")]
 position = Vector2(912, -96)
-enter_left = true
-enter_up = true
 
 [node name="BaseContainer3" parent="Containers" instance=ExtResource("8_vkcjm")]
 position = Vector2(912, -288)
-enter_up = true
-enter_down = true
 
 [node name="BaseContainer4" parent="Containers" instance=ExtResource("8_vkcjm")]
 position = Vector2(912, -478)
-enter_right = true
-enter_down = true
 
 [node name="BaseContainer5" parent="Containers" instance=ExtResource("8_vkcjm")]
 position = Vector2(1296, -96)
-enter_up = true
-enter_down = true
 
 [node name="BaseContainer6" parent="Containers" instance=ExtResource("8_vkcjm")]
 position = Vector2(1297, -288)
 
 [node name="BaseContainer7" parent="Containers" instance=ExtResource("8_vkcjm")]
 position = Vector2(1296, -478)
-enter_left = true
 
 [node name="Obstacles" type="Node2D" parent="."]
 z_index = -1
@@ -194,10 +183,8 @@ scale = Vector2(0.875, 1)
 
 [node name="MovingPlatform2" parent="Platforms" instance=ExtResource("5_ksw2d")]
 position = Vector2(1167.42, -470.862)
-show_piston = false
-show_cables = false
 
-[node name="StateLabel" parent="Platforms/MovingPlatform2" index="2"]
+[node name="StateLabel" parent="Platforms/MovingPlatform2" index="1"]
 metadata/_edit_use_anchors_ = true
 
 [node name="Location2" parent="Platforms/MovingPlatform2/PositionMarkers" index="0"]

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c1abay8tiljxi" path="res://Entities/Environment/endless_floor_placeholder.tscn" id="4_qmj6i"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="5_0mas4"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="8_fvpf3"]
-[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/npc_01.tscn" id="8_gaicn"]
+[ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="8_gaicn"]
 [ext_resource type="PackedScene" uid="uid://bp5bfgn3sxr7f" path="res://Entities/Environment/Containers/BlueContainer.tscn" id="8_qyowk"]
 
 [sub_resource type="Environment" id="Environment_4a7ri"]
