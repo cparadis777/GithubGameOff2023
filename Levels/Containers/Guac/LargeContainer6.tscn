@@ -239,6 +239,7 @@ linked_nodes = [NodePath("../PointLight2D"), NodePath("../PointLight2D2")]
 [node name="Exterior" type="Sprite2D" parent="."]
 visible = false
 light_mask = 0
+z_index = 1
 position = Vector2(4.72069e-05, -0.500001)
 scale = Vector2(2.5, 2.50521)
 texture = ExtResource("7_204tu")
