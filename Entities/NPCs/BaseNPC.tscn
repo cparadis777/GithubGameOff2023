@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=23 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
@@ -13,6 +13,9 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hovi6"]
 radius = 20.5961
 height = 63.3727
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plfk8"]
+size = Vector2(38.0236, 10)
 
 [sub_resource type="Animation" id="Animation_iaf2y"]
 length = 0.001
@@ -179,6 +182,13 @@ collision_mask = 16
 [node name="MovingPlatformSensor" type="RayCast2D" parent="Behaviours/Sensors"]
 target_position = Vector2(2.08165e-12, 16)
 collision_mask = 16
+
+[node name="PlayerSensor" type="Area2D" parent="Behaviours/Sensors"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Behaviours/Sensors/PlayerSensor"]
+position = Vector2(1.58432, 5)
+shape = SubResource("RectangleShape2D_plfk8")
 
 [node name="DecisionMaking" type="Node2D" parent="Behaviours"]
 

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 @export var SPEED : float = 40.0
-@export var JUMP_VELOCITY : float = -100.0
+@export var JUMP_VELOCITY : float = -150.0
 @export var base_damage : float = 10
 
 @export var health_max = 50.0
@@ -68,8 +68,11 @@ func _physics_process(delta):
 		sync_to_moving_platform(delta)
 		move_and_slide()
 		update_animations()
-		if is_at_end_of_platform() or is_obstructed():
+		if is_on_top_of_player():
+			jump()
+		elif is_at_end_of_platform() or is_obstructed():
 			turn_around()
+		
 	elif State in [States.KNOCKBACK, States.IFRAMES]:
 		# no downward gravity during knockback.
 		move_and_slide()
@@ -93,7 +96,12 @@ func is_obstructed():
 	if $Behaviours/Sensors/ObstacleSensor.is_colliding():
 		return true
 	
-	
+func is_on_top_of_player():
+	var area : Area2D = $Behaviours/Sensors/PlayerSensor
+	if area.get_overlapping_bodies().has(get_tree().get_first_node_in_group("Player")):
+		return true
+
+
 func update_animations():
 	if animation_player.current_animation == "":
 		if animations[State] != "" and animation_player.has_animation(animations[State]):
