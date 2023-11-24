@@ -199,6 +199,7 @@ func _on_shot_requested():
 	velocity.x = 0
 	if animation_player.has_animation("shoot"):
 		animation_player.play("shoot")
+		# note: the shoot animation needs to call launch_bullet() on the simple shooter node.
 
 
 
