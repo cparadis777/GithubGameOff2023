@@ -153,14 +153,9 @@ func die():
 	stop_all_timers()
 
 func stop_all_timers():
-	print("Timers = ")
-	print(find_children("", "Timer"))
-	$Behaviours/DecisionMaking/DecisionTimer.stop()
-	$Behaviours/Attacks/SimpleMeleeAttack/AttackDelay.stop()
-	$Behaviours/Attacks/SimpleMeleeAttack/AttackReload.stop()
-	$Behaviours/Attacks/SimpleShootAttack/RecoilTimer.stop()
-	$Behaviours/Attacks/SimpleShootAttack/ReloadTimer.stop()
-	$IframesTimer.stop()
+	var timers = find_children("", "Timer")
+	for timer in timers:
+		timer.stop()
 
 func play_death_animation():
 	if has_node("AnimationPlayer") and $AnimationPlayer.has_animation("die"):
