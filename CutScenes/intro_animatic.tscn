@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=22 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
 [ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="6_4yala"]
 [ext_resource type="FontFile" uid="uid://danlaalj0k3dj" path="res://UI/Themes/fonts/Saira/Saira-BoldItalic.ttf" id="8_5k53j"]
+[ext_resource type="Texture2D" uid="uid://uurcp3ihfr4i" path="res://art/UI/Title/today-he-dies.png" id="9_g2bo7"]
+[ext_resource type="Texture2D" uid="uid://uy6fad2k4nb3" path="res://art/UI/Title/in.png" id="10_x82pu"]
+[ext_resource type="Texture2D" uid="uid://bwnbumcecneus" path="res://art/UI/Title/manifest-violence-animated.png" id="11_qmvf4"]
 [ext_resource type="PackedScene" uid="uid://dttldmdwah7bk" path="res://Menus/scene_selection_buttons.tscn" id="11_wktol"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pos6s"]
@@ -19,6 +22,35 @@ expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 shadow_size = 5
 shadow_offset = Vector2(2, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chbwq"]
+atlas = ExtResource("11_qmvf4")
+region = Rect2(0, 0, 318, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1amt"]
+atlas = ExtResource("11_qmvf4")
+region = Rect2(318, 0, 318, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1dp2"]
+atlas = ExtResource("11_qmvf4")
+region = Rect2(636, 0, 318, 172)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nr6j4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chbwq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1amt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1dp2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_m453i"]
 length = 0.001
@@ -480,39 +512,32 @@ text = "This is my Boss"
 [node name="Slide4-TitleMenu" type="Node2D" parent="."]
 visible = false
 
-[node name="ThreatLabel" type="Label" parent="Slide4-TitleMenu"]
-offset_left = 71.0
-offset_top = -972.0
-offset_right = 188.0
-offset_bottom = -946.0
-scale = Vector2(1.56431, 1.56431)
-text = "Today he dies!"
-horizontal_alignment = 1
+[node name="ThreatLabel" type="TextureRect" parent="Slide4-TitleMenu"]
+offset_left = 52.5
+offset_top = -969.5
+offset_right = 264.5
+offset_bottom = -941.5
+texture = ExtResource("9_g2bo7")
 
-[node name="in" type="Label" parent="Slide4-TitleMenu"]
+[node name="in" type="TextureRect" parent="Slide4-TitleMenu"]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 60.0
-offset_top = -938.0
-offset_right = 177.0
-offset_bottom = -912.0
+offset_left = 139.0
+offset_top = -936.5
+offset_right = 170.0
+offset_bottom = -908.5
 grow_horizontal = 2
-scale = Vector2(1.56431, 1.56431)
-text = "in"
-horizontal_alignment = 1
+texture = ExtResource("10_x82pu")
 
-[node name="ManifestLabel" type="Label" parent="Slide4-TitleMenu"]
+[node name="ManifestLabel" type="AnimatedSprite2D" parent="Slide4-TitleMenu"]
 self_modulate = Color(1, 1, 1, 0)
-offset_left = 36.0
-offset_top = -908.0
-offset_right = 187.0
-offset_bottom = -882.0
-scale = Vector2(1.67911, 1.67911)
-text = "Manifest Violence"
-horizontal_alignment = 1
+position = Vector2(161.5, -884)
+sprite_frames = SubResource("SpriteFrames_nr6j4")
+autoplay = "default"
+frame_progress = 0.383309
 
 [node name="Buttons" parent="Slide4-TitleMenu" instance=ExtResource("11_wktol")]
 offset_left = 133.0
