@@ -18,6 +18,11 @@ var animations = ["", "", "idle", "run", "jump", "hurt", "hurt", "attack", "die"
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var direction : int = 1
+var decision_wait_time = 1.0 # seconds
+
+var player
+
+
 
 @onready var decision_timer : Timer = $Behaviours/DecisionMaking/DecisionTimer
 
@@ -37,6 +42,7 @@ func _ready():
 		owner.num_enemies += 1
 		died.connect(owner._on_NPC_died)
 	
+	player = StageManager.current_player
 	
 	
 func activate():
@@ -71,7 +77,7 @@ func _physics_process(delta):
 		update_animations()
 		if is_on_top_of_player():
 			jump()
-		elif is_at_end_of_platform() or is_obstructed():
+		elif is_on_floor() and is_at_end_of_platform() or is_obstructed():
 			turn_around()
 		
 	elif State in [States.KNOCKBACK, States.IFRAMES]:
@@ -211,18 +217,47 @@ func _on_decision_timer_timeout():
 		choose_new_behaviour()
 
 func choose_new_behaviour():
+	# run back and forth, but favour running toward the player
+	select_random_state()
+
+	# don't need to set state to attacking. The attack behaviours will handle that
+	if State == States.RUNNING:
+		select_random_direction()
+		animation_player.play("run")
+		velocity.x = direction * SPEED
+
+	elif State == States.IDLE:
+		animation_player.play("idle")
+		velocity.x = 0
+
+	decision_timer.set_wait_time(decision_wait_time * randf_range(0.8, 1.25))
+	decision_timer.start()
+
+
+func select_random_state():
+	
 	if State in [ States.IDLE, States.RUNNING ]:
-		State = [States.IDLE, States.RUNNING].pick_random()
-		# don't need to set state to attacking. The attack behaviours will handle that
-		if State == States.RUNNING:
-			animation_player.play("run")
-			velocity.x = direction * SPEED
-			if randf()<0.33:
-				turn_around()
-		elif State == States.IDLE:
-			animation_player.play("idle")
-			velocity.x = 0
-		decision_timer.start()
+		var contender_states = [ States.IDLE, States.RUNNING ]
+		var probabilities = [ 0.1, 0.9 ]
+		var dice_roll = randf()
+		var cumulative_chance = 0.0
+		for i in range(contender_states.size()):
+			cumulative_chance += probabilities[i]
+			if dice_roll < cumulative_chance:
+				State = contender_states[i]
+				dice_roll = 100.0 # so it won't trigger subsequent states
+
+func select_random_direction():
+	
+	var chance_to_turn_around
+	var dir_to_player = sign(global_position.direction_to(player.global_position).x)
+	if dir_to_player == direction: # already going the correct way
+		chance_to_turn_around = 0.15
+	else: # facing the wrong way
+		chance_to_turn_around = 0.66
+	if randf() < chance_to_turn_around:
+		turn_around()
+
 
 func _on_shot_requested():
 	if State not in [States.DYING, States.DEAD]:

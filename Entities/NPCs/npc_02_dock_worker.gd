@@ -113,7 +113,7 @@ func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-func sync_to_moving_platforms(delta):
+func sync_to_moving_platforms(_delta):
 	var sensor : RayCast2D = $Behaviours/Movement/WalkTowardPlayer/PlatformSensor
 	if sensor.is_colliding():
 		var thing_underfoot = sensor.get_collider()

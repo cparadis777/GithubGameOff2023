@@ -86,6 +86,6 @@ func inflict_harm(body):
 		printerr("simple_melee_attack tried to connect, but the recipient has no _on_hit method. " + owner.name + " , " + body.name)
 
 func _on_melee_collision_area_body_entered(body):
-	if owner.state not in [ owner.States.DYING, owner.States.DEAD ]:
+	if owner.State not in [ owner.States.DYING, owner.States.DEAD ]:
 		if is_enemy(body):
 			inflict_harm(body)

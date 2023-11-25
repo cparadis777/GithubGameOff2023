@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=57 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -31,6 +31,8 @@
 [ext_resource type="AudioStream" uid="uid://gnqxeny4xp4r" path="res://audio/sfx/player_sfx/player_punch2.mp3" id="27_sll0y"]
 [ext_resource type="Script" path="res://Entities/Player/FastPunch.gd" id="28_amcrx"]
 [ext_resource type="AudioStream" uid="uid://53nu3fgsjlc7" path="res://audio/sfx/player_sfx/player_punch3_uppercut.mp3" id="28_n44v8"]
+[ext_resource type="Script" path="res://Entities/Player/Duck.gd" id="28_qvkao"]
+[ext_resource type="Script" path="res://Entities/Player/WallHang.gd" id="29_71l80"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 7.0
@@ -183,8 +185,6 @@ drag_top_margin = 0.2
 drag_right_margin = 0.2
 drag_bottom_margin = 0.2
 
-[node name="Sprite2D" type="Sprite2D" parent="Lookahead"]
-
 [node name="MovementCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -19)
 shape = SubResource("CapsuleShape2D_ghh7o")
@@ -236,6 +236,7 @@ script = ExtResource("23_r318r")
 
 [node name="DescendingKick" type="Node2D" parent="StateMachine"]
 script = ExtResource("16_7kpt4")
+speed_multiplier = 3.25
 
 [node name="UnstuckTimer" type="Timer" parent="StateMachine/DescendingKick"]
 wait_time = 3.0
@@ -250,11 +251,16 @@ position = Vector2(7, -6.5)
 shape = SubResource("RectangleShape2D_k6ucv")
 disabled = true
 
+[node name="DescendingKickTimer" type="Timer" parent="StateMachine/DescendingKick"]
+wait_time = 0.33
+
 [node name="Landing" type="Node2D" parent="StateMachine"]
 script = ExtResource("25_hj8m7")
 
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("18_6dmrt")
+dash_duration = 0.3
+speed_multiplier = 3.25
 
 [node name="DashHurtBox" type="Area2D" parent="StateMachine/Dash"]
 collision_layer = 0
@@ -379,6 +385,12 @@ bus = &"sfx"
 [node name="InTransit" type="Node2D" parent="StateMachine"]
 script = ExtResource("26_teftq")
 
+[node name="Duck" type="Node2D" parent="StateMachine"]
+script = ExtResource("28_qvkao")
+
+[node name="WallHang" type="Node2D" parent="StateMachine"]
+script = ExtResource("29_71l80")
+
 [node name="Debug" type="Node2D" parent="."]
 visible = false
 position = Vector2(-15, -56)
@@ -411,6 +423,7 @@ shape = SubResource("RectangleShape2D_m8oiq")
 
 [connection signal="timeout" from="StateMachine/DescendingKick/UnstuckTimer" to="StateMachine/DescendingKick" method="_on_unstuck_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/DescendingKick/HurtBox" to="StateMachine/DescendingKick" method="_on_hurt_box_body_entered"]
+[connection signal="timeout" from="StateMachine/DescendingKick/DescendingKickTimer" to="StateMachine/DescendingKick" method="_on_descending_kick_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/Dash/DashHurtBox" to="StateMachine/Dash" method="_on_dash_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/Dead/Timer" to="StateMachine/Dead" method="_on_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/StrongPunch/HurtBox" to="StateMachine/StrongPunch" method="_on_hurt_box_body_entered"]

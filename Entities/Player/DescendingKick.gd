@@ -34,6 +34,7 @@ func enter(_msg := {}) -> void:
 	started.emit() # so player can play animation
 
 	$UnstuckTimer.start()
+	$DescendingKickTimer.start()
 
 func exit():
 	$UnstuckTimer.stop()
@@ -44,6 +45,8 @@ func physics_update(_delta: float) -> void:
 	
 	# Landing.
 	if player.is_on_floor():
+		$DescendingKickTimer.stop()
+		$UnstuckTimer.stop()
 		if player.detect_npcs_underfoot().size() > 0:
 			player.velocity.x = -player.velocity.x
 			state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
@@ -79,3 +82,9 @@ func _on_hurt_box_body_entered(body):
 			player.velocity.y = - 1.25 * player.JUMP_VELOCITY
 			state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
 
+
+
+func _on_descending_kick_timer_timeout():
+	if state_machine.state == self:
+		state_machine.transition_to("Air")
+		# You might need to pass an argument that says already kicked or something.. to prevent chain maneuver abuse.

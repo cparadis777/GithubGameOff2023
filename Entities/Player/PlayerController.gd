@@ -96,8 +96,11 @@ func play_run_animation():
 func play_jump_peak_animation():
 	# wait for a signal from Air state
 	# includes frames for falling.
-	$Body/CyberRoninSprites.play("jump_peak")
+	$AnimationPlayer.play("jump_peak")
+	#$Body/CyberRoninSprites.play("jump_peak")
 
+func play_fall_animation():
+	$AnimationPlayer.play("fall")
 
 func play_idle_animation():
 	if $AnimationPlayer.current_animation != "idle":
@@ -202,6 +205,9 @@ func _on_jumped(): # from Air state
 
 func _on_peak_amplitude_reached(): # from Air state
 	play_jump_peak_animation()
+
+func _on_started_fall_descent():
+	play_fall_animation()
 
 func _on_double_jump_hover_initiated(): # from Air state
 	play_somersault_animation("initiate")

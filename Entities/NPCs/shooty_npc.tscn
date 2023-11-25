@@ -468,6 +468,7 @@ stream_0/weight = 1.0
 
 [node name="ShootyNPC" instance=ExtResource("1_58hki")]
 scale = Vector2(1, 1)
+SPEED = 80.0
 
 [node name="Sprite2D" parent="Appearance" index="0"]
 visible = false
