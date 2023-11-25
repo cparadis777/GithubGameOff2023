@@ -71,9 +71,7 @@ func jump():
 
 
 func _physics_process(delta):
-	if State == States.ATTACKING:
-		animation_player.play("attack")
-	elif State in [ States.RUNNING, States.JUMPING, States.IDLE ]:
+	if State in [ States.RUNNING, States.JUMPING, States.IDLE, States.ATTACKING ]:
 		apply_gravity(delta)
 		sync_to_moving_platform(delta)
 		move_and_slide() # modifies velocity
