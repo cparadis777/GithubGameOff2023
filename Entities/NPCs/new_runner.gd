@@ -31,6 +31,7 @@ func _ready():
 	
 	hurt.connect(StageManager._on_damage_packet_processed)
 	
+	await get_tree().create_timer(1.0).timeout
 	if StageManager.current_level == null:
 		activate()
 		
@@ -119,6 +120,7 @@ func _on_state_changed(new_state):
 		States.ATTACKING:
 			$AnimationPlayer.play("attack")
 		States.DEAD:
+			$DecisionTimer.stop()
 			velocity.x = 0
 			$AnimationPlayer.play("die")
 	$StateLabel.text = States.keys()[State]

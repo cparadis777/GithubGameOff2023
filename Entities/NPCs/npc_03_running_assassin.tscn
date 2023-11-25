@@ -674,7 +674,6 @@ hframes = 8
 frame = 2
 
 [node name="AnimatedSprite2D" parent="Appearance" index="1"]
-z_index = 1
 material = SubResource("ShaderMaterial_bo3ta")
 position = Vector2(0, -3.8147e-06)
 sprite_frames = SubResource("SpriteFrames_bcuiu")
