@@ -1,9 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://b4h8trxb28bud"]
+[gd_scene load_steps=25 format=3 uid="uid://b4h8trxb28bud"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_jtbjr"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_d8uup"]
+[ext_resource type="Texture2D" uid="uid://s3yj6hwc0vmp" path="res://art/decals/bg decals/graffiti_1.png" id="2_j2ptv"]
 [ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_jb18l"]
 [ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_t5kge"]
+[ext_resource type="Texture2D" uid="uid://c3be27uty47r" path="res://art/decals/bg decals/graffiti_2.png" id="3_tdl77"]
 [ext_resource type="PackedScene" uid="uid://yccanqnov1ry" path="res://Entities/Environment/Lights/point_light_2d.tscn" id="4_33vq5"]
 [ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_s5xdt"]
 [ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="5_pcnp8"]
@@ -47,6 +49,21 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
+
+[node name="Decorations" type="Node2D" parent="."]
+z_index = -3
+
+[node name="graffiti" type="Sprite2D" parent="Decorations"]
+position = Vector2(237, -87)
+texture = ExtResource("2_j2ptv")
+
+[node name="graffiti2" type="Sprite2D" parent="Decorations"]
+position = Vector2(-334, 28)
+texture = ExtResource("3_tdl77")
+
+[node name="graffiti3" type="Sprite2D" parent="Decorations"]
+position = Vector2(-255, -59)
+texture = ExtResource("3_tdl77")
 
 [node name="DarkeningLayer" parent="." instance=ExtResource("2_jb18l")]
 
@@ -248,9 +265,6 @@ animation_player = NodePath("../RunningAssassin2/AnimationPlayer")
 [node name="RunningAssassin" parent="Enemies" instance=ExtResource("10_eps0n")]
 position = Vector2(-259, 59)
 
-[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_7ilto")
-
 [node name="Lighting" type="Node2D" parent="."]
 
 [node name="PointLight2D" parent="Lighting" instance=ExtResource("4_33vq5")]
@@ -274,6 +288,9 @@ z_index = 1
 position = Vector2(4.72069e-05, -0.500001)
 scale = Vector2(2.5, 2.50521)
 texture = ExtResource("7_204tu")
+
+[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_7ilto")
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
