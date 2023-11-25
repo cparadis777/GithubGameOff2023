@@ -211,6 +211,7 @@ frame = 9
 offset = Vector2(-15.7046, 1.14441e-05)
 
 [node name="PushBox" type="AnimatableBody2D" parent="Body"]
+visible = false
 position = Vector2(24, -18)
 collision_layer = 0
 collision_mask = 0

@@ -23,12 +23,17 @@ var floor_last_frame : bool = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 signal hurt(attackPacket)
+signal hit(attackPacket) # ie: hit someone else
+
 
 func _ready():
 	randomize()
 	
+	hurt.connect(StageManager._on_damage_packet_processed)
+	
 	if StageManager.current_level == null:
 		activate()
+		
 
 func activate():
 	State = States.RUNNING
@@ -123,5 +128,19 @@ func _on_hit(attackPacket):
 	if State != States.DEAD:
 		$AnimationPlayer.play("hurt")
 		health -= attackPacket.damage
+		hurt.emit(attackPacket)
 		
-		
+
+
+func _on_hurtbox_body_entered(body):
+	if body == StageManager.current_player:
+		var attackPacket : AttackPacket = AttackPacket.new()
+		attackPacket.originator = self
+		attackPacket.recipient = body
+		attackPacket.impact_vector = global_position.direction_to(body.global_position)
+		attackPacket.knockback = true
+		attackPacket.knockback_speed = 100.0
+		hit.connect(body._on_hit)
+		hit.emit(attackPacket)
+		hit.disconnect(body._on_hit)
+	
