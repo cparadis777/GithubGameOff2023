@@ -12,7 +12,7 @@ var health = health_max
 
 enum States { INITIALIZING, PAUSED, IDLE, RUNNING, JUMPING, KNOCKBACK, IFRAMES, ATTACKING, DYING, DEAD }
 var State = States.INITIALIZING
-var animations = ["", "", "idle", "run", "jump", "hurt", "hurt", "attack", "die"]
+var animations = ["", "", "idle", "run", "jump", "hurt", "hurt", "attack", "die", ""]
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -20,7 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : int = 1
 var decision_wait_time = 1.0 # seconds
 
-var player
+
 
 
 
@@ -33,7 +33,7 @@ func _ready():
 	if !animation_player:
 		animation_player = $AnimationPlayer
 	#$AnimationPlayer.play("RESET")
-	velocity = Vector2.RIGHT * SPEED
+	velocity = Vector2.ZERO
 	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)
 	
@@ -42,14 +42,15 @@ func _ready():
 		owner.num_enemies += 1
 		died.connect(owner._on_NPC_died)
 	
-	player = StageManager.current_player
+	
 	
 	
 func activate():
 	if State == States.INITIALIZING: # ie: not DEAD (don't revive cleared enemies)
 		set_difficulty(Globals.difficulty)
 		activate_weapons()
-		State = States.IDLE
+		State = States.RUNNING
+		$AnimationPlayer.play("run")
 		decision_timer.start()
 	
 func set_difficulty(difficulty : Globals.DifficultyScales):
@@ -73,7 +74,7 @@ func _physics_process(delta):
 	if State in [ States.RUNNING, States.JUMPING, States.IDLE, States.ATTACKING ]:
 		apply_gravity(delta)
 		sync_to_moving_platform(delta)
-		move_and_slide()
+		move_and_slide() # modifies velocity
 		update_animations()
 		if is_on_top_of_player():
 			jump()
@@ -83,6 +84,7 @@ func _physics_process(delta):
 	elif State in [States.KNOCKBACK, States.IFRAMES]:
 		# no downward gravity during knockback.
 		move_and_slide()
+		
 
 	elif State in [States.DYING, States.DEAD]:
 		# don't hover in space after dying
@@ -119,9 +121,17 @@ func is_on_top_of_player():
 
 
 func update_animations():
-	if animation_player.current_animation == "":
-		if animations[State] != "" and animation_player.has_animation(animations[State]):
-			animation_player.play(animations[State])
+	return # this'll throw an error. Good.it's for testing
+	
+	if State in [States.RUNNING] and abs(velocity.x) < 0.1:
+		animation_player.play("idle")
+	elif State in [States.RUNNING] and abs(velocity.x) >= 0.1:
+		if animation_player.current_animation != "run":
+			animation_player.play("run")
+	
+#	if animation_player.current_animation == "":
+#		if animations[State] != "" and animation_player.has_animation(animations[State]):
+#			animation_player.play(animations[State])
 
 func apply_gravity(delta):
 	if not is_on_floor():
@@ -134,6 +144,7 @@ func play_death_tween_if_needed():
 	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
 
 func die():
+	$AnimationPlayer.stop()
 	State = States.DEAD
 	play_death_animation() # should include audio
 	#decision_timer.stop()
@@ -143,6 +154,8 @@ func die():
 	stop_all_timers()
 
 func stop_all_timers():
+	print("Timers = ")
+	print(find_children("", "Timer"))
 	$Behaviours/DecisionMaking/DecisionTimer.stop()
 	$Behaviours/Attacks/SimpleMeleeAttack/AttackDelay.stop()
 	$Behaviours/Attacks/SimpleMeleeAttack/AttackReload.stop()
@@ -197,6 +210,7 @@ func resume_attacking():
 				attack.start()
 
 func _on_iframes_timer_timeout():
+	$AnimationPlayer.play("RESET")
 	if State in [States.DYING, States.DEAD]:
 		return
 		
@@ -207,14 +221,15 @@ func _on_iframes_timer_timeout():
 	elif State in [States.KNOCKBACK, States.IFRAMES]:
 		#$HurtEffect/Star.hide()
 		#$Appearance/Sprite2D.material.set_shader_parameter("IFrames", false)
-		if velocity.x > 0:
-			velocity = Vector2.RIGHT * SPEED
-		else:
-			velocity = Vector2.LEFT * SPEED
-
-		State = States.RUNNING
-		$AnimationPlayer.play("RESET")
+#		if velocity.x > 0:
+#			velocity = Vector2.RIGHT * SPEED
+#		else:
+#			velocity = Vector2.LEFT * SPEED
+#
+#		State = States.RUNNING
+#		$AnimationPlayer.play("run")
 		resume_attacking()
+		choose_new_behaviour()
 
 func turn_around():
 	
@@ -228,44 +243,47 @@ func turn_around():
 
 
 func _on_decision_timer_timeout():
-	if State not in [ States.DYING, States.DEAD ]:
+	if State in [ States.IDLE, States.RUNNING ]:
 		choose_new_behaviour()
+	elif State in [ States.ATTACKING ]:
+		decision_timer.start()
 
 func choose_new_behaviour():
-	# run back and forth, but favour running toward the player
-	select_random_state()
+	if State in [ States.DYING, States.DEAD ]:
+		return
+	
+	else:
+		# run back and forth, but favour running toward the player
+		State = select_random_state()
 
-	# don't need to set state to attacking. The attack behaviours will handle that
-	if State == States.RUNNING:
-		select_random_direction()
-		animation_player.play("run")
-		velocity.x = direction * SPEED
+		# don't need to set state to attacking. The attack behaviours will handle that
+		if State == States.RUNNING:
+			animation_player.play("run")
+			select_random_direction()
+			velocity.x = direction * SPEED
 
-	elif State == States.IDLE:
-		animation_player.play("idle")
-		velocity.x = 0
+		elif State == States.IDLE:
+			animation_player.play("idle")
+			velocity.x = 0
 
-	decision_timer.set_wait_time(decision_wait_time * randf_range(0.8, 1.25))
-	decision_timer.start()
+		decision_timer.set_wait_time(decision_wait_time * randf_range(0.8, 1.25))
+		decision_timer.start()
 
 
 func select_random_state():
-	
+	var new_state : States
 	if State in [ States.IDLE, States.RUNNING ]:
-		var contender_states = [ States.IDLE, States.RUNNING ]
-		var probabilities = [ 0.1, 0.9 ]
 		var dice_roll = randf()
-		var cumulative_chance = 0.0
-		for i in range(contender_states.size()):
-			cumulative_chance += probabilities[i]
-			if dice_roll < cumulative_chance:
-				State = contender_states[i]
-				dice_roll = 100.0 # so it won't trigger subsequent states
-
+		if dice_roll < 0.1:
+			new_state = States.IDLE
+		else:
+			new_state = States.RUNNING
+	return new_state
+	
 func select_random_direction():
 	
 	var chance_to_turn_around
-	var dir_to_player = sign(global_position.direction_to(player.global_position).x)
+	var dir_to_player = sign(global_position.direction_to(get_tree().get_first_node_in_group("Player").global_position).x)
 	if dir_to_player == direction: # already going the correct way
 		chance_to_turn_around = 0.15
 	else: # facing the wrong way
@@ -288,9 +306,20 @@ func _on_animation_player_animation_finished(anim_name):
 	if State in [ States.DYING, States.DEAD ]:
 		return
 	
-	elif anim_name in ["shoot", "attack"]:
+	elif anim_name in ["shoot"]:
 		State = States.IDLE
+		$AnimationPlayer.play("idle")
 		velocity.x = 0
 		decision_timer.stop()
 		choose_new_behaviour()
-		
+
+func _on_melee_attack_started():
+	State = States.ATTACKING
+	animation_player.stop()
+	animation_player.play("attack")
+	decision_timer.stop()
+	
+func _on_melee_attack_finished():
+	State = States.IDLE
+	choose_new_behaviour()
+	
