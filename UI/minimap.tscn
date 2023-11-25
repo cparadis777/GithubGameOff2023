@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo7y10tb180dl"]
+
+[ext_resource type="Texture2D" uid="uid://bg37ae5f0jil0" path="res://art/low_res_containers/low_res_containers.png" id="1_iqsea"]
+[ext_resource type="Script" path="res://UI/minimap.gd" id="1_xough"]
+[ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="3_p2rge"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ed7yr"]
+atlas = ExtResource("3_p2rge")
+region = Rect2(22.9918, 23.8272, 15.0123, 14.2222)
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+custom_minimum_size = Vector2(64, 64)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+script = ExtResource("1_xough")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(64, 64)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport"]
+
+[node name="ContainerSpriteTemplates" type="Node2D" parent="SubViewport"]
+visible = false
+
+[node name="ContainerSpriteTemplate" type="Sprite2D" parent="SubViewport/ContainerSpriteTemplates"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_iqsea")
+hframes = 7
+
+[node name="Rooms" type="Node2D" parent="SubViewport"]
+
+[node name="RobotHead" type="Sprite2D" parent="SubViewport"]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_ed7yr")
+
+[node name="Timer" type="Timer" parent="SubViewport"]
+
+[connection signal="timeout" from="SubViewport/Timer" to="." method="_on_timer_timeout"]
