@@ -250,7 +250,8 @@ shape = SubResource("CapsuleShape2D_pfrcw")
 [node name="Sprite2D" parent="Appearance" index="0"]
 visible = false
 material = SubResource("ShaderMaterial_bo3ta")
-position = Vector2(2.08165e-12, -32)
+position = Vector2(1.58432, -9.5059)
+rotation = -2.18777
 scale = Vector2(1, 1)
 texture = ExtResource("3_gwwjw")
 hframes = 8

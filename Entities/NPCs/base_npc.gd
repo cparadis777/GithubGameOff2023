@@ -136,10 +136,19 @@ func play_death_tween_if_needed():
 func die():
 	State = States.DEAD
 	play_death_animation() # should include audio
-	decision_timer.stop()
+	#decision_timer.stop()
 	abort_attacks_in_progress()
 	disable_collision_layers_and_masks()
 	died.emit(name)
+	stop_all_timers()
+
+func stop_all_timers():
+	$Behaviours/DecisionMaking/DecisionTimer.stop()
+	$Behaviours/Attacks/SimpleMeleeAttack/AttackDelay.stop()
+	$Behaviours/Attacks/SimpleMeleeAttack/AttackReload.stop()
+	$Behaviours/Attacks/SimpleShootAttack/RecoilTimer.stop()
+	$Behaviours/Attacks/SimpleShootAttack/ReloadTimer.stop()
+	$IframesTimer.stop()
 
 func play_death_animation():
 	if has_node("AnimationPlayer") and $AnimationPlayer.has_animation("die"):
@@ -155,7 +164,9 @@ func disable_collision_layers_and_masks():
 
 
 func _on_hit(attackPacket : AttackPacket):
-	if State in [States.RUNNING, States.JUMPING, States.IDLE, States.ATTACKING]:
+	if State in [ States.DYING, States.DEAD ]:
+		return
+	elif State in [States.RUNNING, States.JUMPING, States.IDLE, States.ATTACKING]:
 		$HurtNoises.play()
 		abort_attacks_in_progress()
 		health -= attackPacket.damage
@@ -180,12 +191,16 @@ func abort_attacks_in_progress():
 	
 
 func resume_attacking():
-	for attack in $Behaviours/Attacks.get_children():
-		if attack.get("enabled") == true and attack.has_method("start"):
-			attack.start()
+	if State not in [ States.DYING, States.DEAD ]:
+		for attack in $Behaviours/Attacks.get_children():
+			if attack.get("enabled") == true and attack.has_method("start"):
+				attack.start()
 
 func _on_iframes_timer_timeout():
-	if health <= 0:
+	if State in [States.DYING, States.DEAD]:
+		return
+		
+	elif health <= 0:
 		die()
 		return
 		
@@ -270,10 +285,12 @@ func _on_shot_requested():
 
 
 func _on_animation_player_animation_finished(anim_name):
-	if State not in [ States.DYING, States.DEAD ]:
-		if anim_name in ["shoot", "attack"]:
-			State = States.IDLE
-			velocity.x = 0
-			decision_timer.stop()
-			choose_new_behaviour()
+	if State in [ States.DYING, States.DEAD ]:
+		return
+	
+	elif anim_name in ["shoot", "attack"]:
+		State = States.IDLE
+		velocity.x = 0
+		decision_timer.stop()
+		choose_new_behaviour()
 		

@@ -74,7 +74,14 @@ func set_difficulty(difficulty : Globals.DifficultyScales):
 	base_damage *= (1+float(difficulty)/20.0)
 
 func _physics_process(delta):
-	if State == States.ALERT:
+	if State in [ States.DYING, States.DEAD]:
+		velocity.x = 0
+		apply_gravity(delta)
+		sync_to_moving_platforms(delta)
+		move_and_slide()
+		return
+		
+	elif State == States.ALERT:
 		if current_goal == Goals.ATTACK:
 			for attack in $Behaviours/Attacks.get_children():
 				if attack.has_method("is_active") and attack.is_active():
@@ -99,10 +106,7 @@ func _physics_process(delta):
 	elif State == States.DEFENDING:
 		point_at_player()
 		flip_sprites()
-	elif State in [ States.DYING, States.DEAD]:
-		velocity.x = 0
-		apply_gravity(delta)
-		move_and_slide()
+
 	
 	if velocity.x != 0:
 		last_known_direction = sign(velocity.x)
@@ -112,6 +116,8 @@ func apply_gravity(delta):
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	else:
+		velocity.y = 0 # could impede jumping ability
 	
 func sync_to_moving_platforms(_delta):
 	var sensor : RayCast2D = $Behaviours/Movement/WalkTowardPlayer/PlatformSensor
@@ -149,14 +155,18 @@ func update_animations():
 			$AnimationPlayer.play("walk")
 
 func begin_dying():
+	State = States.DYING
 	died.emit(name)
 	print("dockworker dying")
-	State = States.DYING
 	$AnimationPlayer.play("die")
 	#$HitBox.set_deferred("disabled", true)
 	set_collision_layer_value(2, false)
-	set_collision_mask_value(1, false)
-	#set_collision_mask_value(4, false)
+	
+	set_collision_mask_value(1, false) # player
+	set_collision_mask_value(2, false) # other NPCs
+	$DecisionTimer.stop()
+	$IFramesTimer.stop()
+	
 
 func begin_decaying():
 	State = States.DEAD
@@ -182,7 +192,10 @@ func knockback(knockbackVector):
 
 	
 func _on_hit(attackPacket : AttackPacket):
-	if State in [ States.IDLE, States.ALERT ]: # no defensive block
+	if State in [States.DYING, States.DEAD]:
+		return
+		
+	elif State in [ States.IDLE, States.ALERT ]: # no defensive block
 
 		health -= attackPacket.damage
 		hurt.emit(attackPacket)
@@ -226,12 +239,14 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_i_frames_timer_timeout():
-	State = previous_state
-	$HurtFlash.hide()
-	if health <= 0:
-		begin_dying()
+	if State not in [States.DYING, States.DEAD]:
+		State = previous_state
+		$HurtFlash.hide()
+		if health <= 0:
+			begin_dying()
 
 
 
 func _on_decision_timer_timeout():
-	current_goal = Goals.values().pick_random()
+	if State not in [ States.DYING, States.DEAD ]:
+		current_goal = Goals.values().pick_random()
