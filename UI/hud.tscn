@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://djciwn4x702tr"]
+[gd_scene load_steps=7 format=3 uid="uid://djciwn4x702tr"]
 
 [ext_resource type="Script" path="res://UI/hud.gd" id="1_6dq2i"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="2_3esp5"]
 [ext_resource type="PackedScene" uid="uid://c50xhy0kffvss" path="res://UI/UI_heart.tscn" id="3_8whcm"]
 [ext_resource type="PackedScene" uid="uid://cdwi4w5rusxt5" path="res://UI/in_game_pause_menu.tscn" id="3_jpu2h"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="3_ueh2v"]
+[ext_resource type="PackedScene" uid="uid://bo7y10tb180dl" path="res://UI/minimap.tscn" id="5_vg5dj"]
 
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3
@@ -12,11 +13,9 @@ script = ExtResource("1_6dq2i")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme = ExtResource("2_3esp5")
@@ -25,7 +24,7 @@ theme = ExtResource("2_3esp5")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 31.0
+offset_bottom = 64.0
 grow_horizontal = 2
 
 [node name="HealthLabel" type="Label" parent="Control/HBoxContainer"]
@@ -68,7 +67,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="QuitButton-ReturnToMenu" parent="Control/HBoxContainer" instance=ExtResource("3_ueh2v")]
+visible = false
 layout_mode = 2
+
+[node name="minimap" parent="Control/HBoxContainer" instance=ExtResource("5_vg5dj")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
 
 [node name="PauseMenu" parent="." instance=ExtResource("3_jpu2h")]
 visible = false
