@@ -71,7 +71,9 @@ func jump():
 
 
 func _physics_process(delta):
-	if State in [ States.RUNNING, States.JUMPING, States.IDLE, States.ATTACKING ]:
+	if State == States.ATTACKING:
+		animation_player.play("attack")
+	elif State in [ States.RUNNING, States.JUMPING, States.IDLE ]:
 		apply_gravity(delta)
 		sync_to_moving_platform(delta)
 		move_and_slide() # modifies velocity
@@ -121,7 +123,6 @@ func is_on_top_of_player():
 
 
 func update_animations():
-	return # this'll throw an error. Good.it's for testing
 	
 	if State in [States.RUNNING] and abs(velocity.x) < 0.1:
 		animation_player.play("idle")
@@ -218,18 +219,9 @@ func _on_iframes_timer_timeout():
 		die()
 		return
 		
-	elif State in [States.KNOCKBACK, States.IFRAMES]:
-		#$HurtEffect/Star.hide()
-		#$Appearance/Sprite2D.material.set_shader_parameter("IFrames", false)
-#		if velocity.x > 0:
-#			velocity = Vector2.RIGHT * SPEED
-#		else:
-#			velocity = Vector2.LEFT * SPEED
-#
-#		State = States.RUNNING
-#		$AnimationPlayer.play("run")
-		resume_attacking()
+	else:
 		choose_new_behaviour()
+		resume_attacking()
 
 func turn_around():
 	
@@ -254,9 +246,10 @@ func choose_new_behaviour():
 	
 	else:
 		# run back and forth, but favour running toward the player
-		State = select_random_state()
+		
+		#State = select_random_state()
+		State = States.RUNNING
 
-		# don't need to set state to attacking. The attack behaviours will handle that
 		if State == States.RUNNING:
 			animation_player.play("run")
 			select_random_direction()
@@ -272,7 +265,7 @@ func choose_new_behaviour():
 
 func select_random_state():
 	var new_state : States
-	if State in [ States.IDLE, States.RUNNING ]:
+	if State in [ States.IDLE, States.RUNNING, States.ATTACKING, States.IFRAMES, States.KNOCKBACK ]:
 		var dice_roll = randf()
 		if dice_roll < 0.1:
 			new_state = States.IDLE
@@ -316,10 +309,15 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_melee_attack_started():
 	State = States.ATTACKING
 	animation_player.stop()
-	animation_player.play("attack")
+	animation_player.call_deferred("play", "attack")
 	decision_timer.stop()
 	
 func _on_melee_attack_finished():
 	State = States.IDLE
 	choose_new_behaviour()
 	
+
+
+func _on_animation_player_animation_changed(old_name, new_name):
+	if old_name == "attack":
+		print("BaseNPC. Animation changed: ", old_name, ", ", new_name)

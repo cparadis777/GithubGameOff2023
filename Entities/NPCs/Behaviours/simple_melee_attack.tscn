@@ -80,6 +80,5 @@ stream = SubResource("AudioStreamRandomizer_1q54s")
 bus = &"sfx"
 
 [connection signal="body_entered" from="MeleeCollisionArea" to="." method="_on_melee_collision_area_body_entered"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="AttackDelay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="AttackReload" to="." method="_on_attack_reload_timeout"]

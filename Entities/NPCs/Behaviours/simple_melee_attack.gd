@@ -45,7 +45,8 @@ func launch_attack():
 
 func execute_attack():
 	started.emit() # make the NPC play their own animation
-	$AnimationPlayer.play("attack")
+	$AttackReload.start()
+	#$AnimationPlayer.play("attack")
 			
 
 func start():
@@ -64,7 +65,7 @@ func _on_attack_delay_timeout():
 		execute_attack()
 	
 func _on_attack_reload_timeout():
-	pass
+	finished.emit()
 	
 
 func is_enemy(body):
@@ -94,6 +95,6 @@ func _on_melee_collision_area_body_entered(body):
 			inflict_harm(body)
 
 
-func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "attack":
-		finished.emit()
+#func _on_animation_player_animation_finished(anim_name):
+#	if anim_name == "attack":
+#		finished.emit()
