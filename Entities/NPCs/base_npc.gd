@@ -131,6 +131,7 @@ func die():
 	State = States.DEAD
 	play_death_animation() # should include audio
 	decision_timer.stop()
+	abort_attacks_in_progress()
 	disable_collision_layers_and_masks()
 	died.emit(name)
 
@@ -180,8 +181,9 @@ func resume_attacking():
 func _on_iframes_timer_timeout():
 	if health <= 0:
 		die()
+		return
 		
-	if State in [States.KNOCKBACK, States.IFRAMES]:
+	elif State in [States.KNOCKBACK, States.IFRAMES]:
 		#$HurtEffect/Star.hide()
 		#$Appearance/Sprite2D.material.set_shader_parameter("IFrames", false)
 		if velocity.x > 0:
@@ -205,7 +207,8 @@ func turn_around():
 
 
 func _on_decision_timer_timeout():
-	choose_new_behaviour()
+	if State not in [ States.DYING, States.DEAD ]:
+		choose_new_behaviour()
 
 func choose_new_behaviour():
 	if State in [ States.IDLE, States.RUNNING ]:
@@ -222,18 +225,20 @@ func choose_new_behaviour():
 		decision_timer.start()
 
 func _on_shot_requested():
-	State = States.ATTACKING
-	velocity.x = 0
-	if animation_player.has_animation("shoot"):
-		animation_player.play("shoot")
-		# note: the shoot animation needs to call launch_bullet() on the simple shooter node.
+	if State not in [States.DYING, States.DEAD]:
+		State = States.ATTACKING
+		velocity.x = 0
+		if animation_player.has_animation("shoot"):
+			animation_player.play("shoot")
+			# note: the shoot animation needs to call launch_bullet() on the simple shooter node.
 
 
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name in ["shoot", "attack"]:
-		State = States.IDLE
-		velocity.x = 0
-		decision_timer.stop()
-		choose_new_behaviour()
+	if State not in [ States.DYING, States.DEAD ]:
+		if anim_name in ["shoot", "attack"]:
+			State = States.IDLE
+			velocity.x = 0
+			decision_timer.stop()
+			choose_new_behaviour()
 		
