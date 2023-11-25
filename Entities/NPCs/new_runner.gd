@@ -5,7 +5,8 @@ var health = health_max
 var base_damage = 10
 
 var SPEED = 100.0
-const JUMP_VELOCITY = -400.0
+var JUMP_VELOCITY = -400.0
+var kick_speed_multiplier = 3.0
 
 enum States { INITIALIZING, RUNNING, JUMPING, ATTACKING, IFRAMES, DEAD }
 var State : States = States.INITIALIZING:
@@ -34,7 +35,7 @@ func _ready():
 	await get_tree().create_timer(1.0).timeout
 	if StageManager.current_level == null:
 		activate()
-		
+	$AnimationPlayer.play("RESET")
 
 func activate():
 	State = States.RUNNING
@@ -48,14 +49,15 @@ func set_difficulty(difficulty : Globals.DifficultyScales):
 func _physics_process(delta):
 	apply_gravity(delta)
 
-	if direction != 0:
-		velocity.x = direction * SPEED
-		$AnimatedSprite2D.scale.x = direction
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	if State == States.RUNNING:
+		if direction != 0:
+			velocity.x = direction * SPEED
+			$AnimatedSprite2D.scale.x = direction
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	if State == States.ATTACKING:
-		velocity.x *= 3.0
+	elif State == States.ATTACKING:
+		velocity.x = direction * SPEED * kick_speed_multiplier
 
 	move_and_slide()
 
@@ -81,7 +83,11 @@ func turn_around():
 	direction *= -1
 
 func _on_decision_timer_timeout():
-	if State == States.RUNNING:
+	if State in [ States.DEAD]:
+		velocity.x = 0
+		return
+		
+	elif State == States.RUNNING:
 		var player = get_tree().get_first_node_in_group("Player")
 		if player != null:
 			var dir_to_player
@@ -123,13 +129,16 @@ func _on_state_changed(new_state):
 			$DecisionTimer.stop()
 			velocity.x = 0
 			$AnimationPlayer.play("die")
+		States.IFRAMES:
+			pass
 	$StateLabel.text = States.keys()[State]
 	
 	
-func _on_hit(attackPacket):
-	if State != States.DEAD:
+func _on_hit(attackPacket : AttackPacket):
+	if State not in [ States.DEAD, States.IFRAMES ]:
 		$AnimationPlayer.play("hurt")
 		health -= attackPacket.damage
+		#velocity = attackPacket.impact_vector * attackPacket.knockback_speed
 		hurt.emit(attackPacket)
 		
 
