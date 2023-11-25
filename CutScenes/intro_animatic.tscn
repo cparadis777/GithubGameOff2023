@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=24 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
@@ -11,8 +11,10 @@
 [ext_resource type="FontFile" uid="uid://danlaalj0k3dj" path="res://UI/Themes/fonts/Saira/Saira-BoldItalic.ttf" id="8_5k53j"]
 [ext_resource type="Texture2D" uid="uid://uurcp3ihfr4i" path="res://art/UI/Title/today-he-dies.png" id="9_g2bo7"]
 [ext_resource type="Texture2D" uid="uid://uy6fad2k4nb3" path="res://art/UI/Title/in.png" id="10_x82pu"]
+[ext_resource type="Texture2D" uid="uid://b6ktq6moexioo" path="res://art/UI/Title/panel.png" id="11_nf0qc"]
 [ext_resource type="Texture2D" uid="uid://bwnbumcecneus" path="res://art/UI/Title/manifest-violence-animated.png" id="11_qmvf4"]
-[ext_resource type="PackedScene" uid="uid://dttldmdwah7bk" path="res://Menus/scene_selection_buttons.tscn" id="11_wktol"]
+[ext_resource type="PackedScene" uid="uid://dm0h5iyg1t6xj" path="res://UI/Title/start-button.tscn" id="12_73lfk"]
+[ext_resource type="PackedScene" uid="uid://dwd8f536qu5go" path="res://UI/Title/skip_tutorial_button.tscn" id="13_66hro"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pos6s"]
 bg_color = Color(0, 0, 0, 1)
@@ -514,9 +516,9 @@ visible = false
 
 [node name="ThreatLabel" type="TextureRect" parent="Slide4-TitleMenu"]
 offset_left = 52.5
-offset_top = -969.5
+offset_top = -976.0
 offset_right = 264.5
-offset_bottom = -941.5
+offset_bottom = -948.0
 texture = ExtResource("9_g2bo7")
 
 [node name="in" type="TextureRect" parent="Slide4-TitleMenu"]
@@ -526,26 +528,37 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 139.0
-offset_top = -936.5
+offset_top = -947.0
 offset_right = 170.0
-offset_bottom = -908.5
+offset_bottom = -919.0
 grow_horizontal = 2
 texture = ExtResource("10_x82pu")
 
+[node name="Control-Panel" type="Node2D" parent="Slide4-TitleMenu"]
+position = Vector2(5, 0)
+
+[node name="Panel" type="Sprite2D" parent="Slide4-TitleMenu/Control-Panel"]
+position = Vector2(155.5, -846)
+texture = ExtResource("11_nf0qc")
+
+[node name="TutorialButton" parent="Slide4-TitleMenu/Control-Panel" instance=ExtResource("12_73lfk")]
+offset_left = 34.5
+offset_top = -860.5
+offset_right = 107.5
+offset_bottom = -829.5
+
+[node name="SkipTutorialButton" parent="Slide4-TitleMenu/Control-Panel" instance=ExtResource("13_66hro")]
+offset_left = 170.5
+offset_top = -869.5
+offset_right = 272.5
+offset_bottom = -822.5
+
 [node name="ManifestLabel" type="AnimatedSprite2D" parent="Slide4-TitleMenu"]
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(161.5, -884)
+position = Vector2(160.5, -904.5)
 sprite_frames = SubResource("SpriteFrames_nr6j4")
 autoplay = "default"
-frame_progress = 0.383309
-
-[node name="Buttons" parent="Slide4-TitleMenu" instance=ExtResource("11_wktol")]
-offset_left = 133.0
-offset_top = -858.0
-offset_right = 178.0
-offset_bottom = -827.0
-theme_override_constants/h_separation = 16
-columns = 2
+frame_progress = 0.635124
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
