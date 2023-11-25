@@ -6,18 +6,21 @@ var damage
 
 @export var time_before_sequence_resets : float = 2.0
 
+signal hit
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super()
 	await owner.ready 
-	damage = player.damage_defaults[name]
+	damage = Globals.player_damage_defaults[name]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_update(delta):
 	move_forward(delta)
 	
 func move_forward(_delta):
-	player.velocity.x = player.SPEED * 0.33 * player.get_last_known_direction()
+	player.velocity.x = Globals.player_stats["speed"] * 0.33 * player.get_last_known_direction()
 	player.move_and_slide()
 	
 
@@ -47,8 +50,16 @@ func _on_unbroken_sequence_timer_timeout():
 func _on_hurt_box_body_entered(body):
 	if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 		if state_machine.state.name == "FastPunch":
-			var knockback_magnitude = punch_num_in_sequence
-			var uppercut = punch_num_in_sequence == 2
-			player.inflict_harm(body, player.damage_defaults["FastPunch"], knockback_magnitude, uppercut)
 			$ImpactAudio.get_child(punch_num_in_sequence).play()
-
+			
+			var attackPacket = AttackPacket.new()
+			attackPacket.damage = Globals.player_damage_defaults[name] * Globals.player_stats["damage_multiplier"]
+			attackPacket.originator = self
+			attackPacket.recipient = body
+			attackPacket.impact_vector = Vector2(player.get_last_known_direction(), -2 * punch_num_in_sequence )
+			attackPacket.knockback = true
+			attackPacket.knockback_speed = 25 * punch_num_in_sequence
+			hit.connect(body._on_hit)
+			hit.emit(attackPacket)
+			hit.disconnect(body._on_hit)
+			

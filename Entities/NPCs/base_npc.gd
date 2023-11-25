@@ -10,7 +10,7 @@ var health = health_max
 
 @export var animation_player : Node
 
-enum States { INITIALIZING, PAUSED, IDLE, RUNNING, JUMPING, KNOCKBACK, IFRAMES, ATTACKING, DEAD }
+enum States { INITIALIZING, PAUSED, IDLE, RUNNING, JUMPING, KNOCKBACK, IFRAMES, ATTACKING, DYING, DEAD }
 var State = States.INITIALIZING
 var animations = ["", "", "idle", "run", "jump", "hurt", "hurt", "attack", "die"]
 
@@ -77,6 +77,15 @@ func _physics_process(delta):
 		# no downward gravity during knockback.
 		move_and_slide()
 
+	elif State in [States.DYING, States.DEAD]:
+		# don't hover in space after dying
+		if is_on_floor():
+			velocity = Vector2.ZERO
+		else:
+			apply_gravity(delta)
+			sync_to_moving_platform(delta)
+			move_and_slide()
+		
 	$Debug/StateLabel.text = States.keys()[State]
 
 func sync_to_moving_platform(_delta):
@@ -119,17 +128,23 @@ func play_death_tween_if_needed():
 
 func die():
 	State = States.DEAD
-	if has_node("AnimationPlayer"):
-		if $AnimationPlayer.has_animation("die"):
-			#$AnimationPlayer.stop()
-			$AnimationPlayer.play("die")
-		else:
-			play_death_tween_if_needed()
+	play_death_animation() # should include audio
+	decision_timer.stop()
+	disable_collision_layers_and_masks()
+	died.emit(name)
+
+func play_death_animation():
+	if has_node("AnimationPlayer") and $AnimationPlayer.has_animation("die"):
+		$AnimationPlayer.play("die")
 	else:
 		play_death_tween_if_needed()
-	decision_timer.stop()
-	$CollisionShape2D.call_deferred("set_disabled", true)
-	died.emit(name)
+
+
+func disable_collision_layers_and_masks():
+	set_collision_layer_value(2, false)
+	for layer in [1, 2, 3]:
+		set_collision_mask_value(layer, false)
+
 
 func _on_hit(attackPacket : AttackPacket):
 	if State in [States.RUNNING, States.JUMPING, States.IDLE, States.ATTACKING]:

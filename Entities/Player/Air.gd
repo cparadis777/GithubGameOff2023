@@ -64,7 +64,7 @@ func check_for_attack_requests():
 func allow_player_to_change_direction_midair():
 	# Horizontal movement.
 	var input_direction_x = Input.get_axis("move_left", "move_right")
-	player.velocity.x = player.speed * input_direction_x
+	player.velocity.x = Globals.player_stats["speed"] * input_direction_x
 
 
 	
