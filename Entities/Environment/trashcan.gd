@@ -40,8 +40,8 @@ func spawn_soda_cans(impactVector):
 		var jitter = 0.3 # radians
 		var bounce_vector = impactVector.normalized().rotated(randf_range(-jitter, jitter))
 		call_deferred("add_sibling", new_soda_can)
-		new_soda_can.global_position = self.global_position - bounce_vector * distance
 		await new_soda_can.ready
+		new_soda_can.global_position = self.global_position - bounce_vector * distance
 		new_soda_can.apply_central_impulse(bounce_vector)
 
 func spawn_cracks():
