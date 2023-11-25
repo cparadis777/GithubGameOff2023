@@ -1419,7 +1419,7 @@ tracks/0/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.35, 0.75),
+"times": PackedFloat32Array(0, 0.5, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -1431,10 +1431,10 @@ tracks/1/path = NodePath("Body/CyberRoninSprites:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.35, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.4, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [&"charge_start", &"charge", &"fully_charged", &"charged_punch"]
+"values": [&"charge_start", &"charge", &"fully_charged", &"charged_punch", &"idle"]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1443,10 +1443,10 @@ tracks/2/path = NodePath("Body/CyberRoninSprites:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.45, 0.5, 0.8, 0.85, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(18, -31), Vector2(2.08165e-12, -31), Vector2(2.08165e-12, -31), Vector2(18, -31)]
+"values": [Vector2(18, -31), Vector2(22, -31), Vector2(22, -31), Vector2(23, -31), Vector2(-30, -32), Vector2(-30, -31), Vector2(-29, -32), Vector2(18, -31)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1601,12 +1601,9 @@ tracks/15/path = NodePath("Body/CyberRoninSprites")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.35, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
-"args": [&"", 1.0, false],
-"method": &"play"
-}, {
 "args": [&"", 1.0, false],
 "method": &"play"
 }, {
@@ -1633,6 +1630,30 @@ tracks/16/keys = {
 "args": [],
 "method": &"stop"
 }]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Body/CyberRoninSprites:frame")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0.4, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 6]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("StateMachine/StrongPunch:stepping_back")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [resource]

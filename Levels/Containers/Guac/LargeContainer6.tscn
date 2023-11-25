@@ -202,9 +202,13 @@ position = Vector2(349, -30)
 
 [node name="IndestructibleWall" parent="Traps" instance=ExtResource("9_jv3j8")]
 position = Vector2(-86, 178)
+collision_layer = 24
+collision_mask = 7
 
 [node name="IndestructibleWall2" parent="Traps" instance=ExtResource("9_jv3j8")]
 position = Vector2(86, 178)
+collision_layer = 24
+collision_mask = 7
 
 [node name="TrapSpikes" parent="Traps" instance=ExtResource("10_5yrfe")]
 position = Vector2(-135, 58)

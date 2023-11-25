@@ -71,8 +71,7 @@ func orient_sprites_to_velocity():
 func face(dir):
 	$Body.scale.x = dir * original_body_scale.x
 	state_machine.scale.x = dir
-
-
+	
 func get_last_known_direction():
 	if $Body.scale.x > 0:
 		return 1
@@ -81,7 +80,8 @@ func get_last_known_direction():
 
 
 func _physics_process(_delta):
-	orient_sprites_to_velocity()
+	if state_machine.state.name != "StrongPunch":
+		orient_sprites_to_velocity()
 	$Debug.global_rotation = 0.0 # for the state label
 	if Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
@@ -200,7 +200,7 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_state_transitioned(_stateName):
-	pass # see incoming signals below, from various states.
+	reset_sprite_position()
 
 
 func _on_jumped(): # from Air state
@@ -293,8 +293,15 @@ func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 
 #receive injury
 func _on_hit(attackPacket):
-	if !iframes and (state_machine.state.name not in [ "Dying", "Dead", "InTransit", "Dash", "DescendingKick"]):
-		
+	if ( # a whole litany of exceptions
+			iframes == true
+			or state_machine.state.name in ["Dying", "Dead", "InTransit", "Dash", "DescendingKick"]
+			or state_machine.state.name == "StrongPunch" and state_machine.state.stepping_back == true
+			or state_machine.state.name == "StrongPunch" and state_machine.state.moving == true
+		):
+			return
+	
+	else:
 		health -= attackPacket.damage
 		Globals.player_stats["health"] = health
 		injured.emit(attackPacket)

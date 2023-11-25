@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=56 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -116,8 +116,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8hms"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ucv"]
 size = Vector2(16, 15)
 
@@ -125,7 +123,7 @@ size = Vector2(16, 15)
 size = Vector2(20, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghqx3"]
-size = Vector2(46, 37.4751)
+size = Vector2(59, 37.4751)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_10l48"]
 streams_count = 3
@@ -209,15 +207,6 @@ scale = Vector2(2, 1)
 sprite_frames = SubResource("SpriteFrames_3ov6f")
 frame = 9
 offset = Vector2(-15.7046, 1.14441e-05)
-
-[node name="PushBox" type="AnimatableBody2D" parent="Body"]
-visible = false
-position = Vector2(24, -18)
-collision_layer = 0
-collision_mask = 0
-
-[node name="PushBoxColShape" type="CollisionShape2D" parent="Body/PushBox"]
-shape = SubResource("RectangleShape2D_a8hms")
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("10_6ualt")
@@ -314,6 +303,7 @@ horizontal_alignment = 1
 
 [node name="StrongPunch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("charge_vfx")]
 script = ExtResource("27_487ye")
+stepping_back = true
 charge_vfx = NodePath("CPUParticles2D")
 
 [node name="HurtBox" type="Area2D" parent="StateMachine/StrongPunch"]
@@ -322,7 +312,7 @@ collision_layer = 0
 collision_mask = 10
 
 [node name="StrongCollisionShape" type="CollisionShape2D" parent="StateMachine/StrongPunch/HurtBox"]
-position = Vector2(-13, -4.26243)
+position = Vector2(-6.5, -4.26243)
 shape = SubResource("RectangleShape2D_ghqx3")
 disabled = true
 

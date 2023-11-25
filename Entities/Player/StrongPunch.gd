@@ -6,6 +6,7 @@ enum SubStates { INITIALIZING, CHARGING, EXECUTING, FINISHED }
 var SubState = SubStates.INITIALIZING
 
 var time_of_entry : int # msec
+var punch_direction : int
 var last_polling_time : int = time_of_entry
 var interval_between_polls : int = 200 #msec
 
@@ -14,6 +15,7 @@ var damage
 
 var this_punch_already_landed : bool = false
 
+@export var stepping_back : bool = false
 @export var moving : bool = false
 @export var cancel_frames_active: bool = false
 
@@ -32,7 +34,8 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_update(delta):
-	
+	if SubState == SubStates.CHARGING and stepping_back:
+		move_backward(delta)
 	if SubState == SubStates.CHARGING:
 		var current_time = Time.get_ticks_msec()
 		if current_time > last_polling_time + interval_between_polls:
@@ -90,9 +93,12 @@ func amplify_vfx(delta):
 		
 	#charge_vfx.amount += int(25.0 * delta)
 		
-	
+func move_backward(_delta):
+	player.velocity.x = Globals.player_stats["speed"] * -2.25 * punch_direction
+	player.move_and_slide()
+		
 func move_forward(_delta):
-	player.velocity.x = Globals.player_stats["speed"] * 1.25 * player.get_last_known_direction()
+	player.velocity.x = Globals.player_stats["speed"] * 3.25 * punch_direction
 	player.move_and_slide()
 
 # moved to property track in animation player
@@ -116,6 +122,7 @@ func hold_for_key_release():
 	
 
 func enter(_msg := {}) -> void:
+	punch_direction = player.get_last_known_direction()
 	this_punch_already_landed = false
 	final_charge_duration = 0
 	time_of_entry = Time.get_ticks_msec()
