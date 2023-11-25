@@ -11,8 +11,9 @@ var kick_speed_multiplier = 3.0
 enum States { INITIALIZING, RUNNING, JUMPING, ATTACKING, IFRAMES, DEAD }
 var State : States = States.INITIALIZING:
 	set(value):
+		previous_state = State
 		State = value
-		_on_state_changed(State, value)
+		_on_state_changed(previous_state, value)
 	get:
 		return State
 var previous_state : States
@@ -124,10 +125,10 @@ func disable_hurtbox():
 func hide_hurtflash():
 	$AnimatedSprite2D.material.set_shader_parameter("iframes", false)
 	
-func _on_state_changed(previous_state, new_state):
-	if previous_state == States.ATTACKING:
+func _on_state_changed(prev_state, new_state):
+	if prev_state == States.ATTACKING:
 		disable_hurtbox()
-	elif previous_state == States.IFRAMES:
+	elif prev_state == States.IFRAMES:
 		hide_hurtflash()
 		
 	match new_state:

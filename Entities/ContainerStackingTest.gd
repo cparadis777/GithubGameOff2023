@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var target_weight:int
-@export var scene_path: String
+@export var scene_path: String # GeneratedPlayspace.tscn
 var current_weight:int
 var ignore_invalid_path : bool = false
 

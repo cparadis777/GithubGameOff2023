@@ -25,7 +25,8 @@ func _on_NPC_died(npc_name):
 		end_game("win")
 
 func _on_player_dead_and_buried():
-	end_game("lose")
+	#end_game("lose") # seems a bit harsh
+	reset_playspace()
 	
 func end_game(status):
 	match status:
@@ -34,7 +35,14 @@ func end_game(status):
 		"lose":
 			change_scene_to(player_dead_scene)
 
-
+func reset_playspace():
+#	if get_tree().get_root().has_node("GeneratedPlayspace"):
+#		var playspace = get_tree().get_root().get_node("GeneratedPlayspace")
+#		playspace.reset()
+	
+	change_scene_to("res://Levels/GeneratedPlayspace.tscn")
+		
+	
 func set_playspace_parameters(data:Dictionary) -> void:
 	self.playspace_parameters = data
 
