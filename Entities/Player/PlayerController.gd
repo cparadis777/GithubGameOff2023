@@ -62,12 +62,15 @@ func _ready():
 	original_sprite_position = $Body/CyberRoninSprites.position
 	$AnimationPlayer.play("RESET")
 
-func flip_sprites():
+func orient_sprites_to_velocity():
 	if abs(velocity.x) > 0:
-		$Body.scale.x = sign(velocity.x) * original_body_scale.x
-		state_machine.scale.x = $Body.scale.x
+		face(sign(velocity.x))
+#		$Body.scale.x = sign(velocity.x) * original_body_scale.x
+#		state_machine.scale.x = $Body.scale.x
 
-
+func face(dir):
+	$Body.scale.x = dir * original_body_scale.x
+	state_machine.scale.x = dir
 
 
 func get_last_known_direction():
@@ -78,7 +81,7 @@ func get_last_known_direction():
 
 
 func _physics_process(_delta):
-	flip_sprites()
+	orient_sprites_to_velocity()
 	$Debug.global_rotation = 0.0 # for the state label
 	if Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()

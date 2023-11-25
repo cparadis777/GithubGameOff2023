@@ -59,7 +59,8 @@ func _on_hurt_box_body_entered(body):
 			attackPacket.impact_vector = Vector2(player.get_last_known_direction(), -2 * punch_num_in_sequence )
 			attackPacket.knockback = true
 			attackPacket.knockback_speed = 25 * punch_num_in_sequence
-			hit.connect(body._on_hit)
-			hit.emit(attackPacket)
-			hit.disconnect(body._on_hit)
+			if body.has_method("_on_hit"):
+				hit.connect(body._on_hit)
+				hit.emit(attackPacket)
+				hit.disconnect(body._on_hit)
 			

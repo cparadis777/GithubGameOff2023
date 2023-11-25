@@ -200,10 +200,10 @@ position = Vector2(349, -30)
 
 [node name="Traps" type="Node2D" parent="."]
 
-[node name="Wall" parent="Traps" instance=ExtResource("9_jv3j8")]
+[node name="IndestructibleWall" parent="Traps" instance=ExtResource("9_jv3j8")]
 position = Vector2(-86, 178)
 
-[node name="Wall2" parent="Traps" instance=ExtResource("9_jv3j8")]
+[node name="IndestructibleWall2" parent="Traps" instance=ExtResource("9_jv3j8")]
 position = Vector2(86, 178)
 
 [node name="TrapSpikes" parent="Traps" instance=ExtResource("10_5yrfe")]

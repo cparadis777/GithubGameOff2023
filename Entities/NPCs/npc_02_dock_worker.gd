@@ -67,6 +67,7 @@ func activate():
 	if State == States.INITIALIZING:
 		State = States.ALERT
 		set_difficulty(Globals.difficulty)
+		$DecisionTimer.start()
 
 func set_difficulty(difficulty : Globals.DifficultyScales):
 	health_max += difficulty * 5.0
@@ -155,9 +156,9 @@ func update_animations():
 			$AnimationPlayer.play("walk")
 
 func begin_dying():
+	disable_all_timers()
 	State = States.DYING
 	died.emit(name)
-	print("dockworker dying")
 	$AnimationPlayer.play("die")
 	#$HitBox.set_deferred("disabled", true)
 	set_collision_layer_value(2, false)
@@ -165,7 +166,7 @@ func begin_dying():
 	set_collision_mask_value(1, false) # player
 	set_collision_mask_value(2, false) # other NPCs
 	
-	disable_all_timers()
+	
 
 func disable_all_timers():
 	var timers = find_children("", "Timer")
@@ -207,9 +208,9 @@ func _on_hit(attackPacket : AttackPacket):
 		hurt.emit(attackPacket)
 
 		$AnimationPlayer.play("hurt")
-		initiate_iframes()
 		if attackPacket.knockback:
 			knockback(attackPacket.impact_vector * attackPacket.knockback_speed)
+		initiate_iframes() # after knockback
 	
 	elif State == States.DEFENDING: # remove some damage from the attack
 		attackPacket.damage_blocked = min(attackPacket.damage, damage_to_block)
@@ -223,9 +224,9 @@ func _on_hit(attackPacket : AttackPacket):
 			health -= (attackPacket.damage - attackPacket.damage_blocked)
 			$AnimationPlayer.play("hurt")
 			$Behaviours/Attacks/HeavyMeleeAttack.stop()
-			initiate_iframes()
 			if attackPacket.knockback:
 				knockback(attackPacket.impact_vector)
+			initiate_iframes() # after knockback
 
 
 func _on_decay_timer_timeout():
@@ -245,9 +246,10 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_i_frames_timer_timeout():
+	assert(State == States.IFRAMES, "dock worker iframes timeout but State != iframes")
 	if State not in [States.DYING, States.DEAD]:
 		$HurtFlash.hide()
-		if health <= 0:
+		if health <= 0.0:
 			begin_dying()
 		else:
 			State = previous_state
@@ -255,5 +257,6 @@ func _on_i_frames_timer_timeout():
 
 
 func _on_decision_timer_timeout():
-	if State not in [ States.DYING, States.DEAD ]:
+	if State not in [ States.DYING, States.DEAD, States.IFRAMES ]:
 		current_goal = Goals.values().pick_random()
+		$DecisionTimer.start()
