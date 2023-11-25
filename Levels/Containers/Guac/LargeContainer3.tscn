@@ -166,11 +166,11 @@ position = Vector2(-180, 50)
 [node name="BasicPlatform3" parent="Platforms" instance=ExtResource("8_1imke")]
 position = Vector2(180, 50)
 
-[node name="BasicPlatform4" parent="Platforms" instance=ExtResource("8_1imke")]
-position = Vector2(180, 50)
-
 [node name="MovingPlatform" parent="Platforms" instance=ExtResource("11_vp46x")]
 position = Vector2(0, -10)
+
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform/AnimatableBody2D/Piston" index="0"]
+position = Vector2(0, 45)
 
 [node name="Props" type="Node2D" parent="."]
 
@@ -190,3 +190,5 @@ position = Vector2(-113, 171)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
+
+[editable path="Platforms/MovingPlatform"]

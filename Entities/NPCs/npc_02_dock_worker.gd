@@ -164,8 +164,14 @@ func begin_dying():
 	
 	set_collision_mask_value(1, false) # player
 	set_collision_mask_value(2, false) # other NPCs
-	$DecisionTimer.stop()
-	$IFramesTimer.stop()
+	
+	disable_all_timers()
+
+func disable_all_timers():
+	var timers = find_children("", "Timer")
+	for timer in timers:
+		timer.stop()
+	
 	
 
 func begin_decaying():
@@ -240,11 +246,12 @@ func _on_animation_player_animation_finished(anim_name):
 
 func _on_i_frames_timer_timeout():
 	if State not in [States.DYING, States.DEAD]:
-		State = previous_state
 		$HurtFlash.hide()
 		if health <= 0:
 			begin_dying()
-
+		else:
+			State = previous_state
+		
 
 
 func _on_decision_timer_timeout():

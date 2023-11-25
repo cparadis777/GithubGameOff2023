@@ -12,7 +12,7 @@ enum States { INITIALIZING, RUNNING, JUMPING, ATTACKING, IFRAMES, DEAD }
 var State : States = States.INITIALIZING:
 	set(value):
 		State = value
-		_on_state_changed(value)
+		_on_state_changed(State, value)
 	get:
 		return State
 var previous_state : States
@@ -118,8 +118,18 @@ func _on_animation_player_animation_finished(anim_name):
 			else:
 				State = States.RUNNING
 		
+func disable_hurtbox():
+	$AnimatedSprite2D/Hurtbox.monitoring = false
+
+func hide_hurtflash():
+	$AnimatedSprite2D.material.set_shader_parameter("iframes", false)
+	
+func _on_state_changed(previous_state, new_state):
+	if previous_state == States.ATTACKING:
+		disable_hurtbox()
+	elif previous_state == States.IFRAMES:
+		hide_hurtflash()
 		
-func _on_state_changed(new_state):
 	match new_state:
 		States.RUNNING:
 			$AnimationPlayer.play("run")
