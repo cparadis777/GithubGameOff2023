@@ -110,16 +110,20 @@ bus = &"sfx"
 [node name="FootstepNoises" type="AudioStreamPlayer2D" parent="."]
 visible = false
 stream = SubResource("AudioStreamRandomizer_jxgbf")
+bus = &"sfx"
 
 [node name="DoubleJump" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_itygw")
+bus = &"sfx"
 
 [node name="JumpNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_itygw")
 pitch_scale = 0.86
+bus = &"sfx"
 
 [node name="LandingNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_h82r8")
+bus = &"sfx"
 
 [node name="AttackNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_0mkmi")
@@ -130,17 +134,21 @@ bus = &"sfx"
 stream = ExtResource("15_qocfp")
 volume_db = -8.0
 pitch_scale = 1.25
+bus = &"sfx"
 
 [node name="Windup_Weak" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_ntyix")
 volume_db = -8.0
 pitch_scale = 1.25
+bus = &"sfx"
 
 [node name="FollowThrough" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_4o1xj")
 volume_db = 3.0
 pitch_scale = 1.25
+bus = &"sfx"
 
 [node name="WhipCrack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_dsasc")
 pitch_scale = 0.67
+bus = &"sfx"
