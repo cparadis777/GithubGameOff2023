@@ -6,8 +6,9 @@ extends CharacterBody2D
 
 @export var damage_to_block : float = 80
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+var SPEED = 300.0
+var JUMP_VELOCITY = -400.0
+var base_damage = 10
 
 var original_doll_scale : Vector2
 var last_known_direction : int = 1
@@ -63,9 +64,14 @@ func _ready():
 		died.connect(owner._on_NPC_died)
 
 func activate():
+	if State == States.INITIALIZING:
+		State = States.ALERT
+		set_difficulty(Globals.difficulty)
 
-	State = States.ALERT
-
+func set_difficulty(difficulty : Globals.DifficultyScales):
+	health_max += difficulty * 5.0
+	SPEED += float(difficulty)/40.0 * 100.0
+	base_damage *= (1+float(difficulty)/20.0)
 
 func _physics_process(delta):
 	if State == States.ALERT:

@@ -154,6 +154,7 @@ shape = SubResource("RectangleShape2D_m7xia")
 
 [node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_5ykac")
+bus = &"sfx"
 
 [node name="Platforms" type="Node2D" parent="."]
 

@@ -39,13 +39,13 @@ func _process(_delta):
 	if pressed && move_player:
 		match(location):
 			Utils.Directions.LEFT:
-				StageManager.current_player.velocity.x = -(StageManager.current_player.speed)
+				StageManager.current_player.velocity.x = -(Globals.player_stats["speed"])
 			Utils.Directions.RIGHT:
-				StageManager.current_player.velocity.x = StageManager.current_player.speed
+				StageManager.current_player.velocity.x = Globals.player_stats["speed"]
 			Utils.Directions.UP:
-				StageManager.current_player.velocity.y = -(StageManager.current_player.speed)
+				StageManager.current_player.velocity.y = -(Globals.player_stats["speed"])
 			Utils.Directions.DOWN:
-				StageManager.current_player.velocity.y = StageManager.current_player.speed
+				StageManager.current_player.velocity.y = Globals.player_stats["speed"]
 		
 
 func _on_body_entered(body):

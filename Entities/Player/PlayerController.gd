@@ -5,9 +5,9 @@
 extends CharacterBody2D
 
 
-@export var SPEED = 150.0
-var speed = SPEED # for state machine
-@export var JUMP_VELOCITY = 375.0
+var SPEED = Globals.player_stats["speed"]
+#var speed = SPEED # for state machine
+var JUMP_VELOCITY = Globals.player_stats["jump_velocity"]
 
 @onready var camera = $Lookahead/Camera2D
 @onready var hud = $HUD
@@ -17,12 +17,12 @@ var health_max = Globals.player_stats["max_health"]
 var health = health_max
 var temporary_health_bonus = 0
 
-@export var damage_defaults := {
-	"FastPunch":50,
-	"StrongPunch":100, # plus charge time
-	"DescendingKick":150,
-	"Dash":125
-}
+#@export var damage_defaults := {
+#	"FastPunch":50,
+#	"StrongPunch":100, # plus charge time
+#	"DescendingKick":150,
+#	"Dash":30 # dash was OP, becaus it offers useful mobility and damage
+#}
 
 
 var iframes : bool = false
@@ -255,25 +255,25 @@ func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 	animation_player.play("strong_punch")
 		
 
-
-func inflict_harm(body, damage: float = 10.0, knockback_magnitude : float = 1.0, uppercut: bool = false):
-	var attackPacket = AttackPacket.new()
-	attackPacket.recipient = body
-	attackPacket.damage = damage
-	attackPacket.impact_vector = self.global_position.direction_to(body.global_position)
-	# impactVector is normalized.. so we need knockback_magnitude to amplify it.
-	var up_force = 1.5
-	if uppercut: 
-		attackPacket.impact_vector += Vector2.UP * up_force
-	attackPacket.impact_vector *= knockback_magnitude
-	#var damageType = Globals.DamageTypes.IMPACT
-	attackPacket.knockback = (knockback_magnitude > 0.9)
-	attackPacket.damage_type = Globals.DamageTypes.IMPACT
-	
-	if body.has_method("_on_hit"):
-		hit.connect(body._on_hit)
-		hit.emit(attackPacket)
-		hit.disconnect(body._on_hit)
+# moved to attack States
+#func inflict_harm(body, damage: float = 10.0, knockback_magnitude : float = 1.0, uppercut: bool = false):
+#	var attackPacket = AttackPacket.new()
+#	attackPacket.recipient = body
+#	attackPacket.damage = damage
+#	attackPacket.impact_vector = self.global_position.direction_to(body.global_position)
+#	# impactVector is normalized.. so we need knockback_magnitude to amplify it.
+#	var up_force = 1.5
+#	if uppercut: 
+#		attackPacket.impact_vector += Vector2.UP * up_force
+#	attackPacket.impact_vector *= knockback_magnitude
+#	#var damageType = Globals.DamageTypes.IMPACT
+#	attackPacket.knockback = (knockback_magnitude > 0.9)
+#	attackPacket.damage_type = Globals.DamageTypes.IMPACT
+#
+#	if body.has_method("_on_hit"):
+#		hit.connect(body._on_hit)
+#		hit.emit(attackPacket)
+#		hit.disconnect(body._on_hit)
 
 	# StageManager also gets a copy of the attackPacket
 	
@@ -326,13 +326,22 @@ func _on_door_exited():
 func _pickable_picked_up(pickup_type):
 	match pickup_type:
 		Globals.PickupTypes.HEALTH:
-			health += 50
-			health = clamp(health, 0, health_max)
+			if Globals.player_stats["max_health"] < Globals.max_stats_upper_limits["health"]:
+				Globals.player_stats["max_health"] += 10
+			if health < Globals.player_stats["max_health"]:
+				health += 10
 			hud._on_player_picked_up_health()
 		Globals.PickupTypes.DAMAGE:
-			for damage_type in damage_defaults.keys():
-				damage_defaults[damage_type] *= 1.25
+			# this could get out of control, but it's fine for now
+			if Globals.player_stats["damage_multiplier"] < Globals.max_stats_upper_limits["damage_multiplier"]:
+				Globals.player_stats["damage_multiplier"] *= 1.25
+#				for damage_type in Globals.player_damage_defaults.keys():
+#					Globals.player_damage_defaults[damage_type] *= 1.25
 		Globals.PickupTypes.SPEED:
-			SPEED += 50
+			if Globals.player_stats["speed"] < Globals.max_stats_upper_limits["speed"]:
+				Globals.player_stats["speed"] += 50
+				SPEED = Globals.player_stats["speed"]
 		Globals.PickupTypes.JUMP:
-			JUMP_VELOCITY += 50
+			if Globals.player_stats["jump_velocity"] < Globals.max_stats_upper_limits["jump_velocity"]:
+				Globals.player_stats["jump_velocity"] += 50
+				JUMP_VELOCITY = Globals.player_stats["jump_velocity"]

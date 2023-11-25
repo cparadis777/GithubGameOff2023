@@ -150,6 +150,7 @@ shape = SubResource("RectangleShape2D_m7xia")
 
 [node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_lklqy")
+bus = &"sfx"
 
 [node name="Traps" type="Node2D" parent="."]
 
@@ -190,11 +191,24 @@ animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 [node name="MovingPlatform" parent="Platforms" instance=ExtResource("8_78j8k")]
 position = Vector2(-106, 68)
 
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform/AnimatableBody2D/Piston" index="0"]
+position = Vector2(2.08165e-12, 76)
+
 [node name="MovingPlatform2" parent="Platforms" instance=ExtResource("8_78j8k")]
 position = Vector2(102, 68)
+
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform2/AnimatableBody2D/Piston" index="0"]
+position = Vector2(2.08165e-12, 76)
 
 [node name="MovingPlatform3" parent="Platforms" instance=ExtResource("8_78j8k")]
 position = Vector2(-5, 9)
 
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform3/AnimatableBody2D/Piston" index="0"]
+position = Vector2(0, 32)
+
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
+
+[editable path="Platforms/MovingPlatform"]
+[editable path="Platforms/MovingPlatform2"]
+[editable path="Platforms/MovingPlatform3"]
