@@ -291,6 +291,7 @@ texture = ExtResource("7_204tu")
 
 [node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_7ilto")
+bus = &"sfx"
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

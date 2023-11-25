@@ -159,6 +159,7 @@ position = Vector2(79, 27)
 
 [node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_4bm7l")
+bus = &"sfx"
 
 [node name="Traps" type="Node2D" parent="."]
 
