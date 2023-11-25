@@ -40,10 +40,11 @@ func _ready():
 	
 	
 func activate():
-	set_difficulty(Globals.difficulty)
-	activate_weapons()
-	State = States.IDLE
-	decision_timer.start()
+	if State == States.INITIALIZING: # ie: not DEAD (don't revive cleared enemies)
+		set_difficulty(Globals.difficulty)
+		activate_weapons()
+		State = States.IDLE
+		decision_timer.start()
 	
 func set_difficulty(difficulty : Globals.DifficultyScales):
 	health_max += difficulty * 5.0
