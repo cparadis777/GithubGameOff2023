@@ -20,7 +20,6 @@ func _ready():
 
 func activate(): # from BaseContainer _on_body_entered
 	_on_decision_timer_timeout() # get started immediately
-	died.connect(StageManager._on_NPC_died)
 	if owner and owner.has_method("_on_NPC_died"):
 		died.connect(owner._on_NPC_died)
 

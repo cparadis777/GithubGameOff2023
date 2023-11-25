@@ -86,9 +86,11 @@ func _physics_process(delta):
 			
 		for movement in $Behaviours/Movement.get_children():
 			if movement.is_active():
-				velocity += movement.get_movement_vector(delta)
+				if $Behaviours/Movement/WalkTowardPlayer/CliffSensor.is_colliding():
+					velocity += movement.get_movement_vector(delta)
 		update_animations()
 		apply_gravity(delta)
+		sync_to_moving_platforms(delta)
 		move_and_slide()
 	elif State in [States.IDLE, States.IFRAMES]:
 		# no new horizontal movement
@@ -97,7 +99,11 @@ func _physics_process(delta):
 	elif State == States.DEFENDING:
 		point_at_player()
 		flip_sprites()
-
+	elif State in [ States.DYING, States.DEAD]:
+		velocity.x = 0
+		apply_gravity(delta)
+		move_and_slide()
+	
 	if velocity.x != 0:
 		last_known_direction = sign(velocity.x)
 
@@ -106,7 +112,17 @@ func apply_gravity(delta):
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
+	
+func sync_to_moving_platforms(delta):
+	var sensor : RayCast2D = $Behaviours/Movement/WalkTowardPlayer/PlatformSensor
+	if sensor.is_colliding():
+		var thing_underfoot = sensor.get_collider()
+		if is_on_floor() and thing_underfoot.is_in_group("MovingPlatforms"):
+			if thing_underfoot.owner.get("velocity") != null:
+				velocity.y = thing_underfoot.owner.velocity.y
+			
+	
+	
 func point_at_player():
 	if player == null:
 		player = get_tree().get_nodes_in_group("Player")[0]
@@ -137,7 +153,10 @@ func begin_dying():
 	print("dockworker dying")
 	State = States.DYING
 	$AnimationPlayer.play("die")
-	$HitBox.set_deferred("disabled", true)
+	#$HitBox.set_deferred("disabled", true)
+	set_collision_layer_value(2, false)
+	set_collision_mask_value(1, false)
+	#set_collision_mask_value(4, false)
 
 func begin_decaying():
 	State = States.DEAD
