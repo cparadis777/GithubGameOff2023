@@ -331,7 +331,7 @@ tracks/5/path = NodePath("Slide4-TitleMenu:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 8.1),
+"times": PackedFloat32Array(0, 8.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -343,7 +343,7 @@ tracks/6/path = NodePath("Slide4-TitleMenu/ManifestLabel:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(6.2, 8.6, 9.2, 9.8),
+"times": PackedFloat32Array(6.2, 9.3, 9.9, 10.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -355,7 +355,7 @@ tracks/7/path = NodePath("Slide4-TitleMenu/in:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(7.9, 8.7),
+"times": PackedFloat32Array(8.6, 9.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -367,7 +367,7 @@ tracks/8/path = NodePath("Slide4-TitleMenu/in:self_modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(8.7, 9.2),
+"times": PackedFloat32Array(9.4, 9.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -486,7 +486,7 @@ position = Vector2(181.5, -818.5)
 texture = ExtResource("2_ans8i")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(159, -308)
+position = Vector2(306, -330)
 texture = ExtResource("3_cu010")
 
 [node name="Slide1-Me" type="Node2D" parent="."]
