@@ -77,20 +77,21 @@ func turn_around():
 func _on_decision_timer_timeout():
 	if State == States.RUNNING:
 		var player = get_tree().get_first_node_in_group("Player")
-		var dir_to_player
-		if player.global_position.x > global_position.x:
-			dir_to_player = 1
-		else:
-			dir_to_player = -1
-		if direction != dir_to_player and randf() < 0.85:
-			turn_around()
-		elif direction == dir_to_player and randf() < 0.75:
-			if randf() < 0.8:
-				attack()
-			else: # 0.2
+		if player != null:
+			var dir_to_player
+			if player.global_position.x > global_position.x:
+				dir_to_player = 1
+			else:
+				dir_to_player = -1
+			if direction != dir_to_player and randf() < 0.85:
 				turn_around()
-		elif randf() < 0.5:
-			jump()
+			elif direction == dir_to_player and randf() < 0.75:
+				if randf() < 0.8:
+					attack()
+				else: # 0.2
+					turn_around()
+			elif randf() < 0.5:
+				jump()
 	$DecisionTimer.start()
 
 	
