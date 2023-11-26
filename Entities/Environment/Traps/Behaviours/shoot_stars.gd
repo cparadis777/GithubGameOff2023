@@ -64,6 +64,7 @@ func shoot():
 func launch_bullet():
 	$CPUParticles2D.emitting = false
 	var newBullet = bullet_scene.instantiate()
+	newBullet.damage = owner.base_damage
 	add_child(newBullet)
 	newBullet.rotation = owner.rotation
 	newBullet.global_position = global_position

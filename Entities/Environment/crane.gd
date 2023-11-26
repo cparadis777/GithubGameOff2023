@@ -20,7 +20,7 @@ func _ready():
 	#self.move_ready = true
 	%WeightLabel.text = "%s,000 kg" % self.current_container.weight
 	%TypeLabel.text = "%s" % self.current_container.type
-	%DifficultyLabel.text = "Difficulty: " + Globals.DifficultyScales.keys()[Globals.difficulty]
+	
 
 func activate():
 	self.move_ready = true

@@ -69,7 +69,7 @@ func _physics_process(delta):
 	
 	move_and_slide() # all states
 
-func detect_obstacles_and_cliffs(delta):
+func detect_obstacles_and_cliffs(_delta):
 	if State == States.DEAD:
 		return
 		
@@ -83,7 +83,7 @@ func detect_obstacles_and_cliffs(delta):
 				else:
 					jump()
 
-func sync_motion_to_platforms(delta):
+func sync_motion_to_platforms(_delta):
 	var potential_platform = $Sensors/PlatformDetector.get_collider()
 	if potential_platform != null and potential_platform.is_in_group("MovingPlatforms"):
 		if potential_platform.owner.get("velocity"):
@@ -106,7 +106,7 @@ func jump():
 	State = States.JUMPING
 
 func idle():
-	State == States.IDLE
+	State = States.IDLE
 	
 	
 func attack():

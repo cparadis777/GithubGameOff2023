@@ -32,9 +32,10 @@ hframes = 7
 [node name="Rooms" type="Node2D" parent="SubViewport"]
 
 [node name="RobotHead" type="Sprite2D" parent="SubViewport"]
+z_index = 1
 scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_ed7yr")
 
-[node name="Timer" type="Timer" parent="SubViewport"]
+[node name="MapRefreshTimer" type="Timer" parent="SubViewport"]
 
-[connection signal="timeout" from="SubViewport/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SubViewport/MapRefreshTimer" to="." method="_on_timer_timeout"]

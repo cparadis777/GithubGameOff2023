@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c5vova3vmv6p7"]
+[gd_scene load_steps=27 format=3 uid="uid://c5vova3vmv6p7"]
 
 [ext_resource type="Script" path="res://Entities/Environment/crane.gd" id="1_iyal4"]
 [ext_resource type="PackedScene" uid="uid://drrt45f45qnjy" path="res://Entities/Droppable/BlueDroppableContainer.tscn" id="2_rgicc"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ekj2echyvjcm" path="res://Entities/Droppable/PurpleDroppableContainer.tscn" id="6_33pt5"]
 [ext_resource type="PackedScene" uid="uid://c46xev2xk4g62" path="res://Entities/Droppable/YellowDroppableContainer.tscn" id="7_7172x"]
 [ext_resource type="Texture2D" uid="uid://b0yde4ayaofm0" path="res://art/props/lattice_320x180.png" id="9_ob7oa"]
+[ext_resource type="PackedScene" uid="uid://cu7af7a6swpqy" path="res://UI/difficulty_adjuster.tscn" id="12_pw8pi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2goie"]
 atlas = ExtResource("5_qrdko")
@@ -185,10 +186,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "Days Since Last Accident: 0"
 
-[node name="DifficultyLabel" type="Label" parent="ScaleSign/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="Difficulty" parent="ScaleSign/MarginContainer/VBoxContainer" instance=ExtResource("12_pw8pi")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "Difficulty: Trivial"
 
 [connection signal="animation_finished" from="CraneJaw" to="." method="_on_crane_jaw_animation_finished"]

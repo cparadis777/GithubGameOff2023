@@ -9,7 +9,7 @@ func _ready():
 
 	await get_tree().create_timer(1.5).timeout
 	create_map()
-
+	$SubViewport/MapRefreshTimer.start()
 
 func create_map():
 	if !get_tree().get_root().has_node("GeneratedPlayspace"):

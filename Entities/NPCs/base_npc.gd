@@ -54,7 +54,7 @@ func activate():
 		decision_timer.start()
 	
 func set_difficulty(difficulty : Globals.DifficultyScales):
-	health_max += difficulty * 5.0
+	health_max += difficulty * 10.0
 	SPEED += float(difficulty)/40.0 * 100.0
 	base_damage *= (1+float(difficulty)/20.0)
 
