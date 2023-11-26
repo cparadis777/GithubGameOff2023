@@ -8,6 +8,7 @@ size = Vector2(30, 42)
 
 [node name="TerminalToCrane" type="Area2D"]
 script = ExtResource("1_woshn")
+next_scene_path = "reres://Levels/StackingLevels/StackingLevel2.tscn"
 
 [node name="ComputerConsoleSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_mbslt")

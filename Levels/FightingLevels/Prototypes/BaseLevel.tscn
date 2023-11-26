@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://d236kkv4xp3qw"]
 
-[ext_resource type="Script" path="res://Levels/FightingLevels/BaseLevel.gd" id="1_xwwkw"]
+[ext_resource type="Script" path="res://Levels/FightingLevels/Prototypes/BaseLevel.gd" id="1_xwwkw"]
 [ext_resource type="PackedScene" uid="uid://dgk01ai7d526u" path="res://Entities/Environment/Containers/BaseContainer.tscn" id="2_ufa55"]
 [ext_resource type="Texture2D" uid="uid://2h76ithyfnim" path="res://art/interiors/shipping_container_ice_and_freezy_INTERIOR.png" id="3_4odgg"]
 [ext_resource type="PackedScene" uid="uid://b75mqcyc3pmmw" path="res://Entities/Environment/switches/LevelDoor.tscn" id="4_mto5p"]

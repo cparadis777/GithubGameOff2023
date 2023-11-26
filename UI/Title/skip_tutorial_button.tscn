@@ -3,10 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://brt18imoa6r85" path="res://art/UI/Title/skip-tutorial-button-open.png" id="1_g3rqg"]
 [ext_resource type="Texture2D" uid="uid://dsxbejhpr0ulg" path="res://art/UI/Title/skip-tutorial-button-closed.png" id="2_pnkx5"]
 [ext_resource type="Script" path="res://Menus/SkipTutorialButton.gd" id="3_buhgq"]
-[ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="4_uircr"]
+[ext_resource type="PackedScene" uid="uid://cp8svlwjp0ifm" path="res://Levels/StackingLevels/StackingLevel1.tscn" id="4_clyo4"]
 
 [node name="SkipTutorialButton" type="TextureButton"]
 texture_normal = ExtResource("1_g3rqg")
 texture_pressed = ExtResource("2_pnkx5")
 script = ExtResource("3_buhgq")
-scene = ExtResource("4_uircr")
+scene = ExtResource("4_clyo4")

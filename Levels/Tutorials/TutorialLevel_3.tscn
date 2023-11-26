@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://b2c7l0vqc2yep"]
 
-[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/FightingLevels/BaseLevel.tscn" id="1_b3qkh"]
+[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/FightingLevels/Prototypes/BaseLevel.tscn" id="1_b3qkh"]
 [ext_resource type="PackedScene" uid="uid://bqqakuyl2wa2g" path="res://Levels/Tutorials/TutorialLevel_4.tscn" id="2_2joxt"]
 [ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="2_73pb8"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="3_g6ph8"]
