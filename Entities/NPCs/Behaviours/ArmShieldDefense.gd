@@ -19,14 +19,14 @@ func is_active():
 	return (State == States.ACTIVE)
 
 func attempt_to_defend():
-	if npc.State in [npc.States.DYING, npc.States.DEAD]:
+	if npc.State in [npc.States.DYING, npc.States.DEAD, npc.States.IFRAMES]:
 		return
 	
 	elif $ReloadTimer.is_stopped() and $DefendTimer.is_stopped():
 		initiate_shield_arm_defense()
 		
 func initiate_shield_arm_defense():
-	if npc.State in [npc.States.DYING, npc.States.DEAD]:
+	if npc.State in [npc.States.DYING, npc.States.DEAD, npc.States.IFRAMES]:
 		return
 		
 	else:
@@ -36,7 +36,7 @@ func initiate_shield_arm_defense():
 
 
 func _on_defend_timer_timeout():
-	if npc.State in [npc.States.DYING, npc.States.DEAD]:
+	if npc.State in [npc.States.DYING, npc.States.DEAD, npc.States.IFRAMES]:
 		return
 	else:
 		npc.State = npc.States.ALERT
@@ -46,7 +46,7 @@ func _on_reload_timer_timeout():
 	pass
 
 func _on_hit(_attackPacket : AttackPacket):
-	if npc.State in [npc.States.DYING, npc.States.DEAD]:
+	if npc.State in [npc.States.DYING, npc.States.DEAD, npc.States.IFRAMES]:
 		return
 	else:
 		$DefenseNoise.play()

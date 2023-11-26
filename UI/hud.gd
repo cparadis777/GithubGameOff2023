@@ -25,6 +25,8 @@ func update_health_display(health_remaining : float):
 
 func _on_player_hit(_attackPacket):
 	update_health_display(player.health)
+	if _attackPacket.damage > 5:
+		$AnimationPlayer.play("big_hit")
 	
 func _on_player_picked_up_health():
 	update_health_display(player.health)
