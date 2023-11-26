@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b1gw2o1d85wpr" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/three_star_trap.tscn" id="12_8op0j"]
 [ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="12_e4gig"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="12_sh8xs"]
-[ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="13_4bm7l"]
+[ext_resource type="PackedScene" uid="uid://cxtontreijkdo" path="res://Entities/Environment/portals/opening_doors_voice.tscn" id="14_2qx3x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -157,10 +157,6 @@ position = Vector2(-119, 26)
 [node name="TrashCan2" parent="." instance=ExtResource("12_e4gig")]
 position = Vector2(79, 27)
 
-[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_4bm7l")
-bus = &"sfx"
-
 [node name="Traps" type="Node2D" parent="."]
 
 [node name="StarTrap" parent="Traps" instance=ExtResource("12_8op0j")]
@@ -208,6 +204,8 @@ position = Vector2(282, 80)
 
 [node name="NPC_02_DockWorker" parent="Enemies" instance=ExtResource("11_ptdey")]
 position = Vector2(-4, 26)
+
+[node name="OpeningDoorsVoice" parent="." instance=ExtResource("14_2qx3x")]
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

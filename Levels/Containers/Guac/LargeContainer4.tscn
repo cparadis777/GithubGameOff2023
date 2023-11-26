@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_25gqt"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="11_a2x7r"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="12_i7lm2"]
-[ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="12_j1ldf"]
+[ext_resource type="PackedScene" uid="uid://cxtontreijkdo" path="res://Entities/Environment/portals/opening_doors_voice.tscn" id="14_fxcop"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -151,15 +151,10 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
 
-[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_j1ldf")
-bus = &"sfx"
-
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="MovingPlatform7" parent="Platforms" instance=ExtResource("11_a2x7r")]
 position = Vector2(117, 104)
-speed = 80.0
 tween_duration = 4.0
 
 [node name="FloorHeightMarker" parent="Platforms/MovingPlatform7/AnimatableBody2D/Piston" index="0"]
@@ -192,7 +187,6 @@ position = Vector2(0, -115)
 
 [node name="MovingPlatform" parent="Platforms" instance=ExtResource("11_a2x7r")]
 position = Vector2(-258, 98)
-speed = 80.0
 tween_duration = 3.0
 
 [node name="FloorHeightMarker" parent="Platforms/MovingPlatform/AnimatableBody2D/Piston" index="0"]
@@ -281,6 +275,8 @@ position = Vector2(224, 161)
 
 [node name="TrapSpikes6" parent="Traps" instance=ExtResource("9_3h2nx")]
 position = Vector2(287, 161)
+
+[node name="OpeningDoorsVoice" parent="." instance=ExtResource("14_fxcop")]
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
