@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=25 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ckpwl45q4au14" path="res://art/background/title-sequence-background.png" id="3_cu010"]
 [ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="3_n5ip3"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
+[ext_resource type="Texture2D" uid="uid://bya7ftvd8l5sk" path="res://art/UI/Title/ship.png" id="5_lhuvj"]
 [ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="6_4yala"]
 [ext_resource type="FontFile" uid="uid://danlaalj0k3dj" path="res://UI/Themes/fonts/Saira/Saira-BoldItalic.ttf" id="8_5k53j"]
 [ext_resource type="Texture2D" uid="uid://uurcp3ihfr4i" path="res://art/UI/Title/today-he-dies.png" id="9_g2bo7"]
@@ -494,7 +495,7 @@ visible = false
 modulate = Color(1, 1, 1, 0)
 
 [node name="PlayerSprite" type="Sprite2D" parent="Slide1-Me"]
-position = Vector2(69, 91)
+position = Vector2(69, 67.5)
 texture = ExtResource("1_xlbbx")
 
 [node name="ThisIsMeLabel" type="Label" parent="Slide1-Me"]
@@ -507,11 +508,13 @@ text = "This is Me."
 [node name="Slide2-Workplace" type="Node2D" parent="."]
 visible = false
 
-[node name="Ship" type="Polygon2D" parent="Slide2-Workplace"]
-color = Color(0.392157, 0.498039, 0.309804, 1)
-polygon = PackedVector2Array(172, 120, 47, 120, 27, 83, 10, 83, 43, 164, 82, 200, 149, 234, 499, 231, 497, 119)
+[node name="Ship" type="Sprite2D" parent="Slide2-Workplace"]
+position = Vector2(258, 160)
+scale = Vector2(2, 2)
+texture = ExtResource("5_lhuvj")
 
 [node name="Evil Corp" type="Label" parent="Slide2-Workplace/Ship"]
+visible = false
 offset_left = 215.0
 offset_top = 122.0
 offset_right = 316.0
@@ -521,6 +524,7 @@ theme_override_font_sizes/font_size = 24
 text = "Evil Corp"
 
 [node name="MegaShip" type="Label" parent="Slide2-Workplace/Ship"]
+visible = false
 offset_left = 160.0
 offset_top = 154.0
 offset_right = 365.0
