@@ -19,6 +19,8 @@ func _ready():
 	$HUD/WarningPopup.hide()
 	
 	AudioManager.play_track("CraneLevelTheme")
+	$DockSeaAmbient.play()
+
 
 func add_weight(weight:int) -> void:
 	self.current_weight += weight

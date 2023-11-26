@@ -36,14 +36,18 @@ func _unhandled_input(event):
 	if self.move_ready:
 		if event.is_action_pressed("move_right"):
 			self.move_container(Utils.Directions.RIGHT)
+			$CraneSounds/Move.play()
 		elif event.is_action_pressed("move_left"):
 			self.move_container(Utils.Directions.LEFT)
+			$CraneSounds/Move.play()
 		elif event.is_action_pressed("jump"):
 			self.place_container()
 		elif event.is_action_pressed("rotate_left"):
 			self.rotate_container("CCW")
+			$CraneSounds/Rotate.play()
 		elif event.is_action_pressed("rotate_right"):
 			self.rotate_container("CW")	
+			$CraneSounds/Rotate.play()
 
 func select_random_container() -> StaticBody2D:
 	var new_container = containers.pick_random().instantiate()
@@ -92,6 +96,7 @@ func move_container(direction:Utils.Directions) -> void:
 		
 func place_container() -> void:
 	if drop_zone.check_drop_possible(self.current_column):
+		$CraneSounds/Drop.play()
 		self.move_ready = false
 		drop_zone.place_container(self.current_container, current_column)
 		self.current_container = null
