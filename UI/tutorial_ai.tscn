@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://brk3y7g5v8vof" path="res://art/tutorial AI/AI_speaking_anim.png" id="2_2ibxv"]
 [ext_resource type="Texture2D" uid="uid://jlxsc2b0wcmd" path="res://art/tutorial AI/AI_active_text_bubble.png" id="3_yhvd1"]
 [ext_resource type="Script" path="res://UI/AI_Tutorial_Text.gd" id="4_kj0ql"]
-[ext_resource type="AudioStream" uid="uid://dqgvlt0t1dms4" path="res://audio/sfx/TutorialAIVoice/a.ogg" id="5_14dik"]
-[ext_resource type="AudioStream" uid="uid://dqfhefete4m1n" path="res://audio/sfx/TutorialAIVoice/e.ogg" id="6_asr5m"]
-[ext_resource type="AudioStream" uid="uid://d2x7io7xxsmso" path="res://audio/sfx/TutorialAIVoice/i.mp3" id="7_kot6g"]
-[ext_resource type="AudioStream" uid="uid://b8axfkxilde2f" path="res://audio/sfx/TutorialAIVoice/o.ogg" id="8_v5hu4"]
-[ext_resource type="AudioStream" uid="uid://veae0p8uivbr" path="res://audio/sfx/TutorialAIVoice/u.ogg" id="9_1y1x8"]
+[ext_resource type="AudioStream" uid="uid://cp4n4kiexukkf" path="res://audio/sfx/TutorialAIVoice/a.ogg" id="5_14dik"]
+[ext_resource type="AudioStream" uid="uid://ol20qylxu68n" path="res://audio/sfx/TutorialAIVoice/e.ogg" id="6_asr5m"]
+[ext_resource type="AudioStream" uid="uid://c7i3urmyo61y4" path="res://audio/sfx/TutorialAIVoice/i.ogg" id="7_p0ijc"]
+[ext_resource type="AudioStream" uid="uid://ds3r4ul7gtspp" path="res://audio/sfx/TutorialAIVoice/o.ogg" id="8_v5hu4"]
+[ext_resource type="AudioStream" uid="uid://cmbh1de3sgx2s" path="res://audio/sfx/TutorialAIVoice/u.ogg" id="9_1y1x8"]
 [ext_resource type="Texture2D" uid="uid://88k7hg2ped8n" path="res://art/tutorial AI/UI_Press_Space.png" id="10_ine3b"]
 [ext_resource type="AudioStream" uid="uid://cdau67bfetmjk" path="res://audio/sfx/TutorialAIVoice/hello.ogg" id="11_kxbkt"]
 [ext_resource type="AudioStream" uid="uid://dqyqqw34hqrt0" path="res://audio/sfx/TutorialAIVoice/byebye.ogg" id="12_6iwrm"]
@@ -296,7 +296,7 @@ stream_0/stream = ExtResource("5_14dik")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("6_asr5m")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("7_kot6g")
+stream_2/stream = ExtResource("7_p0ijc")
 stream_2/weight = 1.0
 stream_3/stream = ExtResource("8_v5hu4")
 stream_3/weight = 1.0
@@ -536,7 +536,7 @@ script = ExtResource("4_kj0ql")
 [node name="Muse_AI" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.7, 0.7, 0.7, 0.7)
 position = Vector2(0, -33)
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_jtqaj")
 animation = &"idle"
 frame_progress = 0.0319443
@@ -549,14 +549,15 @@ frame_progress = 0.0290046
 
 [node name="Label" type="Label" parent="."]
 self_modulate = Color(0.835294, 0.537255, 0.647059, 1)
+texture_filter = 1
 offset_left = 19.0
 offset_top = -217.0
-offset_right = 288.0
-offset_bottom = -113.0
-scale = Vector2(0.665, 0.665)
+offset_right = 195.475
+offset_bottom = -152.88
 size_flags_stretch_ratio = 1.05
 theme = SubResource("Theme_4cug2")
 theme_override_fonts/font = SubResource("SystemFont_v3t4e")
+theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -567,7 +568,7 @@ wait_time = 1.1
 
 [node name="AI_Speech_SFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_bxtt3")
-volume_db = -2.0
+volume_db = 2.0
 
 [node name="SpaceBar_UI" type="AnimatedSprite2D" parent="."]
 position = Vector2(109, -149)
