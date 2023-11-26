@@ -207,6 +207,7 @@ libraries = {
 }
 
 [node name="Debug" type="Node2D" parent="."]
+visible = false
 script = ExtResource("5_3wawd")
 
 [node name="StateLabel" type="Label" parent="Debug"]

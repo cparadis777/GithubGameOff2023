@@ -79,24 +79,17 @@ position = Vector2(-285, -19)
 [node name="ShootyNPC2" parent="Enemies" index="1" instance=ExtResource("5_kykin")]
 position = Vector2(-90, -18)
 
-[node name="RunningAssassin" parent="Enemies" index="2" instance=ExtResource("7_2rajp")]
-position = Vector2(-215, 84)
-
-[node name="RunningAssassin2" parent="Enemies" index="3" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_2rajp")]
+[node name="RunningAssassin2" parent="Enemies" index="2" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_2rajp")]
 position = Vector2(167, 164)
-animation_player = NodePath("../RunningAssassin/AnimationPlayer")
+animation_player = NodePath("")
 
-[node name="RunningAssassin3" parent="Enemies" index="4" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_2rajp")]
-position = Vector2(290, 167)
-animation_player = NodePath("../RunningAssassin/AnimationPlayer")
-
-[node name="NPC_02_DockWorker" parent="Enemies" index="5" instance=ExtResource("12_pvej1")]
+[node name="NPC_02_DockWorker" parent="Enemies" index="3" instance=ExtResource("12_pvej1")]
 position = Vector2(175, -4)
 
-[node name="NewRunner" parent="Enemies" index="6" instance=ExtResource("11_so1os")]
+[node name="NewRunner" parent="Enemies" index="4" instance=ExtResource("11_so1os")]
 position = Vector2(-177, 92)
 
-[node name="NewRunner2" parent="Enemies" index="7" instance=ExtResource("11_so1os")]
+[node name="NewRunner2" parent="Enemies" index="5" instance=ExtResource("11_so1os")]
 position = Vector2(141, 170)
 
 [node name="EnemySpawnPoints" type="Node2D" parent="." index="7"]

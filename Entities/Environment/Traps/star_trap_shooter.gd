@@ -19,7 +19,9 @@ signal died(name)
 func _ready():
 	$CPUParticles2D.emitting = false
 	set_difficulty(Globals.difficulty)
-
+	if has_node("Arrow"):
+		$Arrow.hide()
+		
 func set_difficulty(difficulty : Globals.DifficultyScales):
 	health_max += difficulty * 10.0
 	SPEED += float(difficulty)/40.0 * 100.0

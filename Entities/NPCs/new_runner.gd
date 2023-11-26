@@ -33,9 +33,9 @@ func _ready():
 	
 	hurt.connect(StageManager._on_damage_packet_processed)
 	
-	await get_tree().create_timer(1.0).timeout
-	if StageManager.current_level == null:
-		activate()
+#	await get_tree().create_timer(1.0).timeout
+#	if StageManager.current_level == null:
+#		activate()
 	$AnimationPlayer.play("RESET")
 
 func activate():
