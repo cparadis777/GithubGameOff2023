@@ -188,7 +188,7 @@ func _on_state_changed(prev_state, new_state):
 	
 	
 func _on_hit(attackPacket : AttackPacket):
-	if State not in [ States.DEAD, States.IFRAMES ]:
+	if State not in [ States.INITIALIZING, States.DEAD, States.IFRAMES ]:
 		$AnimationPlayer.play("hurt")
 		health -= attackPacket.damage
 		#velocity = attackPacket.impact_vector * attackPacket.knockback_speed
