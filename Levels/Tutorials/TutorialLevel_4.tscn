@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bqqakuyl2wa2g"]
 
-[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_gusit"]
+[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/FightingLevels/BaseLevel.tscn" id="1_gusit"]
 [ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="2_f55js"]
 [ext_resource type="PackedScene" uid="uid://fw4qtohyprb3" path="res://Levels/Tutorials/TutorialLevel_5.tscn" id="2_grqj8"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_p65xb"]
