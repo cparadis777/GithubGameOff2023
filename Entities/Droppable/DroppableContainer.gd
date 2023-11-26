@@ -2,7 +2,7 @@ extends StaticBody2D
 
 class_name DroppableContainer
 
-var weigth:int = 100
+var weight:int = 100
 var grid_position:Vector2 = Vector2(100,100)
 @export var type: ContainerProperties.container_type = ContainerProperties.container_type.YELLOW
 

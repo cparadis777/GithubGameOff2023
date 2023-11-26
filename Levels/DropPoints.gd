@@ -13,6 +13,7 @@ var drop_points_dict:Dictionary
 var drop_point_targeted
 
 signal weight_added(weight)
+signal drop_started
 signal drop_over
 signal weight_reset()
 
@@ -45,6 +46,7 @@ func add_container(container:StaticBody2D, grid_position:Vector2) -> bool:
 	
 
 func place_container(container:StaticBody2D, column:int) -> bool:
+	drop_started.emit()
 	var falling:bool = true
 	var current_position = Vector2(column, self.n_vertical-1)
 	var position_to_place = current_position
@@ -99,7 +101,7 @@ func drop_done() -> void:
 	tween.tween_property(container_dropping, "position", Vector2(0, -5), 0.2).set_ease(tween.EASE_OUT)
 	tween.tween_property(container_dropping, "position", Vector2(0,0), 0.1)
 
-	emit_signal("weight_added", self.container_dropping.weigth)
+	emit_signal("weight_added", self.container_dropping.weight)
 	emit_signal("drop_over")
 
 

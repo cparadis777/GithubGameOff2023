@@ -1,23 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=24 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
+[ext_resource type="Texture2D" uid="uid://dgxtephsvaqsu" path="res://art/background/parallax-city-scape.png" id="2_ans8i"]
 [ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="2_asvyr"]
+[ext_resource type="Texture2D" uid="uid://ckpwl45q4au14" path="res://art/background/title-sequence-background.png" id="3_cu010"]
 [ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="3_n5ip3"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="4_dco4t"]
 [ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="6_4yala"]
 [ext_resource type="FontFile" uid="uid://danlaalj0k3dj" path="res://UI/Themes/fonts/Saira/Saira-BoldItalic.ttf" id="8_5k53j"]
-[ext_resource type="PackedScene" uid="uid://dttldmdwah7bk" path="res://Menus/scene_selection_buttons.tscn" id="11_wktol"]
-
-[sub_resource type="Gradient" id="Gradient_1fdak"]
-colors = PackedColorArray(0, 0, 0, 1, 0.234514, 0.154286, 0.209769, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_pkyp2"]
-gradient = SubResource("Gradient_1fdak")
-width = 320
-height = 1344
-fill_from = Vector2(0.528678, 1)
-fill_to = Vector2(0.538653, 0)
+[ext_resource type="Texture2D" uid="uid://uurcp3ihfr4i" path="res://art/UI/Title/today-he-dies.png" id="9_g2bo7"]
+[ext_resource type="Texture2D" uid="uid://uy6fad2k4nb3" path="res://art/UI/Title/in.png" id="10_x82pu"]
+[ext_resource type="Texture2D" uid="uid://b6ktq6moexioo" path="res://art/UI/Title/panel.png" id="11_nf0qc"]
+[ext_resource type="Texture2D" uid="uid://bwnbumcecneus" path="res://art/UI/Title/manifest-violence-animated.png" id="11_qmvf4"]
+[ext_resource type="PackedScene" uid="uid://dm0h5iyg1t6xj" path="res://UI/Title/start-button.tscn" id="12_73lfk"]
+[ext_resource type="PackedScene" uid="uid://dwd8f536qu5go" path="res://UI/Title/skip_tutorial_button.tscn" id="13_66hro"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pos6s"]
 bg_color = Color(0, 0, 0, 1)
@@ -27,6 +24,35 @@ expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 shadow_size = 5
 shadow_offset = Vector2(2, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chbwq"]
+atlas = ExtResource("11_qmvf4")
+region = Rect2(0, 0, 318, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1amt"]
+atlas = ExtResource("11_qmvf4")
+region = Rect2(318, 0, 318, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1dp2"]
+atlas = ExtResource("11_qmvf4")
+region = Rect2(636, 0, 318, 172)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nr6j4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chbwq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1amt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1dp2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_m453i"]
 length = 0.001
@@ -198,10 +224,46 @@ tracks/13/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Slide4-TitleMenu/Control-Panel/Panel:self_modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Slide4-TitleMenu/Control-Panel/TutorialButton:self_modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Slide4-TitleMenu/Control-Panel/SkipTutorialButton:self_modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_sqojr"]
 resource_name = "intro_animatic"
-length = 10.0
+length = 12.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -269,7 +331,7 @@ tracks/5/path = NodePath("Slide4-TitleMenu:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 8.1),
+"times": PackedFloat32Array(0, 8.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -281,7 +343,7 @@ tracks/6/path = NodePath("Slide4-TitleMenu/ManifestLabel:self_modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(6.2, 8.6, 9.2, 9.8),
+"times": PackedFloat32Array(6.2, 9.3, 9.9, 10.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -293,7 +355,7 @@ tracks/7/path = NodePath("Slide4-TitleMenu/in:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(7.9, 8.7),
+"times": PackedFloat32Array(8.6, 9.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -305,7 +367,7 @@ tracks/8/path = NodePath("Slide4-TitleMenu/in:self_modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(8.7, 9.2),
+"times": PackedFloat32Array(9.4, 9.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -370,6 +432,42 @@ tracks/13/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Slide4-TitleMenu/Control-Panel/Panel:self_modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(11.1, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Slide4-TitleMenu/Control-Panel/TutorialButton:self_modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(11.1, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Slide4-TitleMenu/Control-Panel/SkipTutorialButton:self_modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(11.1, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_23747"]
 _data = {
@@ -380,10 +478,16 @@ _data = {
 [node name="IntroAnimatic" type="Node2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_642u7")
+metadata/_edit_vertical_guides_ = []
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(181.5, -818.5)
+texture = ExtResource("2_ans8i")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(159, -308)
-texture = SubResource("GradientTexture2D_pkyp2")
+position = Vector2(306, -330)
+texture = ExtResource("3_cu010")
 
 [node name="Slide1-Me" type="Node2D" parent="."]
 visible = false
@@ -469,8 +573,8 @@ autowrap_mode = 2
 [node name="Slide3" type="Node2D" parent="."]
 
 [node name="Boss" type="Sprite2D" parent="Slide3"]
-position = Vector2(195, -653)
-scale = Vector2(2, 2)
+position = Vector2(170.5, -666)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("6_4yala")
 
 [node name="Label" type="Label" parent="Slide3"]
@@ -483,47 +587,58 @@ text = "This is my Boss"
 [node name="Slide4-TitleMenu" type="Node2D" parent="."]
 visible = false
 
-[node name="ThreatLabel" type="Label" parent="Slide4-TitleMenu"]
-offset_left = 71.0
-offset_top = -972.0
-offset_right = 188.0
-offset_bottom = -946.0
-scale = Vector2(1.56431, 1.56431)
-text = "Today he dies!"
-horizontal_alignment = 1
+[node name="ThreatLabel" type="TextureRect" parent="Slide4-TitleMenu"]
+offset_left = 52.5
+offset_top = -977.5
+offset_right = 264.5
+offset_bottom = -949.5
+texture = ExtResource("9_g2bo7")
 
-[node name="in" type="Label" parent="Slide4-TitleMenu"]
+[node name="in" type="TextureRect" parent="Slide4-TitleMenu"]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 60.0
-offset_top = -938.0
-offset_right = 177.0
-offset_bottom = -912.0
+offset_left = 152.0
+offset_top = -948.5
+offset_right = 183.0
+offset_bottom = -920.5
 grow_horizontal = 2
-scale = Vector2(1.56431, 1.56431)
-text = "in"
-horizontal_alignment = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_x82pu")
 
-[node name="ManifestLabel" type="Label" parent="Slide4-TitleMenu"]
+[node name="Control-Panel" type="Node2D" parent="Slide4-TitleMenu"]
 self_modulate = Color(1, 1, 1, 0)
-offset_left = 36.0
-offset_top = -908.0
-offset_right = 187.0
-offset_bottom = -882.0
-scale = Vector2(1.67911, 1.67911)
-text = "Manifest Violence"
-horizontal_alignment = 1
+position = Vector2(9, -5)
 
-[node name="Buttons" parent="Slide4-TitleMenu" instance=ExtResource("11_wktol")]
-offset_left = 133.0
-offset_top = -858.0
-offset_right = 178.0
-offset_bottom = -827.0
-theme_override_constants/h_separation = 16
-columns = 2
+[node name="Panel" type="Sprite2D" parent="Slide4-TitleMenu/Control-Panel"]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(155.5, -846)
+texture = ExtResource("11_nf0qc")
+
+[node name="TutorialButton" parent="Slide4-TitleMenu/Control-Panel" instance=ExtResource("12_73lfk")]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 54.0
+offset_top = -860.5
+offset_right = 127.0
+offset_bottom = -829.5
+focus_neighbor_right = NodePath("../SkipTutorialButton")
+
+[node name="SkipTutorialButton" parent="Slide4-TitleMenu/Control-Panel" instance=ExtResource("13_66hro")]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 150.5
+offset_top = -869.999
+offset_right = 252.5
+offset_bottom = -822.999
+focus_neighbor_left = NodePath("../TutorialButton")
+
+[node name="ManifestLabel" type="AnimatedSprite2D" parent="Slide4-TitleMenu"]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(160.5, -921)
+sprite_frames = SubResource("SpriteFrames_nr6j4")
+autoplay = "default"
+frame_progress = 0.635124
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

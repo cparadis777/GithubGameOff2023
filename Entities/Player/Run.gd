@@ -38,7 +38,7 @@ func physics_update(_delta: float) -> void:
 		return
 
 	else:
-		player.velocity.x = player.speed * input_direction_x
+		player.velocity.x = Globals.player_stats["speed"] * input_direction_x
 		#player.velocity.y += player.gravity * delta # the player is already on the floor
 		if moving_platform != null:
 			if moving_platform.owner.get("velocity") != null:

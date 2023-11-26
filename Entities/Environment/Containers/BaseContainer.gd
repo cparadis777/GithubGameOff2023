@@ -11,7 +11,7 @@ extends StaticBody2D
 
 @export var num_generated_objects:int = 0
 
-var weigth:int = 100
+var weight:int = 100
 var grid_position:Vector2 = Vector2(100,100)
 var type: ContainerProperties.container_type = ContainerProperties.container_type.BLUE
 var num_enemies = 0

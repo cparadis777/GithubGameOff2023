@@ -10,7 +10,7 @@ extends Node2D
 @export var bad_aim_distance : float = 16.0
 @export var bullet_jitter : float = 0.15
 @export var free_rotate : bool = true
-
+@export var reload_time : float = 2.5
 
 enum States { INITIALIZING, PAUSED, READY, SHOOTING }
 var State = States.INITIALIZING
@@ -64,6 +64,7 @@ func shoot():
 func launch_bullet():
 	$CPUParticles2D.emitting = false
 	var newBullet = bullet_scene.instantiate()
+	newBullet.damage = owner.base_damage
 	add_child(newBullet)
 	newBullet.rotation = owner.rotation
 	newBullet.global_position = global_position
@@ -77,7 +78,12 @@ func launch_bullet():
 	
 	if current_shot >= shots_per_magazine-1:
 		current_shot = 0
-		$ReloadTimer.start()
+		
+		if randf() > 0.1: # once in a while, just keep shooting.. mix it up so we're not so predictable
+			$ReloadTimer.set_wait_time(reload_time * randf_range(0.8, 1.25))
+			$ReloadTimer.start()
+		else: 
+			_on_reload_timer_timeout() 
 	else:
 		current_shot += 1
 		$RecoilTimer.start()

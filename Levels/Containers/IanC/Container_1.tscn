@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://81l71vr0sqf2"]
+[gd_scene load_steps=13 format=3 uid="uid://81l71vr0sqf2"]
 
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_41hb8"]
 [ext_resource type="Texture2D" uid="uid://ckyyijor2rr67" path="res://art/interiors/shipping_container_soyda_INTERIOR_ORTHOGRAPHIC.png" id="2_id1wg"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="8_ec66x"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="9_tfg1t"]
 [ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="11_7thc7"]
+[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="11_sfrnw"]
 
 [node name="BaseContainer" instance=ExtResource("1_41hb8")]
 
@@ -130,7 +131,7 @@ scale = Vector2(1.64063, 1.30729)
 [node name="Enemies" type="Node2D" parent="." index="6"]
 
 [node name="RunningAssassin" parent="Enemies" index="0" instance=ExtResource("7_nwxtu")]
-position = Vector2(-247, 166)
+position = Vector2(56, -6)
 
 [node name="NPC_02_DockWorker" parent="Enemies" index="1" instance=ExtResource("8_ec66x")]
 position = Vector2(264, 169)
@@ -143,6 +144,12 @@ position = Vector2(-237, -84)
 
 [node name="ShootyNPC" parent="Enemies" index="4" instance=ExtResource("9_tfg1t")]
 position = Vector2(251, -79)
+
+[node name="NewRunner" parent="Enemies" index="5" instance=ExtResource("11_sfrnw")]
+position = Vector2(-281, -79)
+
+[node name="NewRunner2" parent="Enemies" index="6" instance=ExtResource("11_sfrnw")]
+position = Vector2(-203, 63)
 
 [node name="EnemySpawnPoints" type="Node2D" parent="." index="7"]
 

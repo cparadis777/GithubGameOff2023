@@ -12,7 +12,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if State != States.ALERT:
+	if owner.State in [ owner.States.DYING, owner.States.DEAD]:
+		return
+	
+	elif State != States.ALERT:
 		if PlayerDetector.is_colliding():
 			if PlayerDetector.get_collider() == StageManager.current_player:
 				_on_player_detected()

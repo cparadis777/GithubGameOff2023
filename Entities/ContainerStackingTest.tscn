@@ -1,17 +1,26 @@
-[gd_scene load_steps=17 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=23 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
 [ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="2_o08nb"]
+[ext_resource type="Texture2D" uid="uid://bchnf4aqjpah4" path="res://art/UI/quit-button.png" id="3_bjj0v"]
 [ext_resource type="Script" path="res://Levels/DropPoints.gd" id="3_i3vix"]
 [ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="3_tcnfn"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="4_unqhl"]
+[ext_resource type="Texture2D" uid="uid://csox7vcjw1kao" path="res://art/UI/reset-button.png" id="5_5s2ms"]
+[ext_resource type="Texture2D" uid="uid://bjavw36yhsh82" path="res://art/UI/fight-button.png" id="6_k85s3"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
 [ext_resource type="AudioStream" uid="uid://ddnyec60dy814" path="res://audio/sfx/player_sfx/player_bigpunch_impact.mp3" id="6_qcju0"]
 [ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="8_18gwl"]
 [ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="9_0cocc"]
 [ext_resource type="PackedScene" uid="uid://diik2yboc0mbr" path="res://Entities/Droppable/TerminalContainer.tscn" id="9_d655n"]
 [ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="10_bp55l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lheh3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ecph7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f5lp8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f6bsu"]
 shader = ExtResource("2_o08nb")
@@ -36,6 +45,45 @@ shader_parameter/warp_amount = 0.192
 shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="Animation" id="Animation_5g3e2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -177)]
+}
 
 [sub_resource type="Animation" id="Animation_iohgr"]
 resource_name = "zoom_in"
@@ -77,45 +125,6 @@ tracks/2/keys = {
 "values": [Vector2(0, -177)]
 }
 
-[sub_resource type="Animation" id="Animation_5g3e2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera2D:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, 2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera2D:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Camera2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -177)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1u85b"]
 _data = {
 "RESET": SubResource("Animation_5g3e2"),
@@ -140,17 +149,47 @@ mouse_filter = 2
 [node name="QuitButton-ReturnToMenu" parent="HUD/HBoxContainer" instance=ExtResource("6_n282g")]
 layout_mode = 2
 focus_mode = 0
+theme_override_colors/icon_normal_color = Color(0.698039, 0.698039, 0.698039, 1)
+theme_override_colors/icon_pressed_color = Color(0.355314, 0.355314, 0.355313, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/icon_max_width = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lheh3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_lheh3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lheh3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_lheh3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lheh3")
+text = ""
+icon = ExtResource("3_bjj0v")
 
 [node name="ResetButton" parent="HUD/HBoxContainer" instance=ExtResource("3_tcnfn")]
 layout_mode = 2
 focus_mode = 0
-text = "Reset!"
+theme_override_colors/icon_normal_color = Color(0.698039, 0.698039, 0.698039, 1)
+theme_override_colors/icon_pressed_color = Color(0.355314, 0.355314, 0.355313, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ecph7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ecph7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ecph7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ecph7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ecph7")
+text = ""
+icon = ExtResource("5_5s2ms")
 script = null
 
 [node name="FightButton" type="Button" parent="HUD/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
-text = "Fight!"
+theme_override_colors/icon_normal_color = Color(0.698039, 0.698039, 0.698039, 1)
+theme_override_colors/icon_pressed_color = Color(0.355314, 0.355314, 0.355313, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_f5lp8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_f5lp8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_f5lp8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_f5lp8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f5lp8")
+icon = ExtResource("6_k85s3")
+flat = true
 
 [node name="WarningPopup" type="PopupPanel" parent="HUD"]
 initial_position = 1
@@ -162,8 +201,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = 360.0
+offset_bottom = 169.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -387,7 +426,9 @@ libraries = {
 [connection signal="pressed" from="HUD/HBoxContainer/FightButton" to="." method="_on_fight_button_pressed"]
 [connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Retry" to="HUD/WarningPopup" method="hide"]
 [connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="drop_over" from="DropPoints" to="." method="_on_drop_points_drop_over"]
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
+[connection signal="drop_started" from="DropPoints" to="." method="_on_drop_points_drop_started"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
 [connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]
 [connection signal="finished" from="Instructions/Tutorial_AI" to="." method="_on_tutorial_ai_finished"]

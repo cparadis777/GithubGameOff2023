@@ -7,7 +7,7 @@ var container_slots:Dictionary
 
 
 func generate_slots(shape:Vector2) -> void:
-	for i in shape[0]:	
+	for i in shape[0]:
 		for j in shape[1]:
 			var new_slot = containerSlotScene.instantiate()
 			self.add_child(new_slot)

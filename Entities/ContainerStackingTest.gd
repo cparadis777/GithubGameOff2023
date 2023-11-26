@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var target_weight:int
-@export var scene_path: String
+@export var scene_path: String # GeneratedPlayspace.tscn
 var current_weight:int
 var ignore_invalid_path : bool = false
 
@@ -81,3 +81,10 @@ func _on_placement_instructions_finished():
 func _on_confirm_pressed():
 	ignore_invalid_path = true
 	_on_fight_button_pressed()
+
+
+func _on_drop_points_drop_started():
+	$HUD/HBoxContainer/ResetButton.disabled = true
+
+func _on_drop_points_drop_over():
+	$HUD/HBoxContainer/ResetButton.disabled = false

@@ -15,14 +15,14 @@ var direction
 @export var speed_multiplier : float = 2.75
 var dash_speed : float
 var timer
-var damage : float
+#var damage : float
 
 func _ready():
 	super()
 
 	await owner.ready
-	damage = player.damage_defaults[name]
-	dash_speed = player.speed * speed_multiplier
+	#damage = Globals.player_damage_defaults[name] * Globals.player_stats["damage_multiplier"]
+	dash_speed = Globals.player_stats["speed"] * speed_multiplier
 
 	if player.has_method("_on_dash_started"):
 		started.connect(player._on_dash_started)
@@ -44,6 +44,7 @@ func enter(_msg := {}) -> void:
 	
 	player.velocity.x = dash_speed * direction
 	$DashHurtBox/DashCollisionShape.disabled = false
+	
 	started.emit() # so player can play animation
 
 func exit():
@@ -70,7 +71,7 @@ func _on_dash_hurt_box_body_entered(body):
 	if state_machine.state == self:
 		if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 			var attackPacket = AttackPacket.new()
-			attackPacket.damage = player.damage_defaults[name]
+			attackPacket.damage = Globals.player_damage_defaults[name] * Globals.player_stats["damage_multiplier"]
 			attackPacket.originator = self
 			attackPacket.recipient = body
 			attackPacket.impact_vector = player.velocity.normalized() + Vector2.UP * 0.5

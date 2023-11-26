@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://cu7af7a6swpqy"]
+
+[ext_resource type="Texture2D" uid="uid://bpvrp2w1kuaoi" path="res://art/placeholder/arrow-down.png" id="1_cltdx"]
+[ext_resource type="Script" path="res://UI/difficulty_adjuster.gd" id="1_ltqjy"]
+[ext_resource type="Texture2D" uid="uid://biggcjqs3yfsb" path="res://art/placeholder/arrow-up.png" id="2_vwjo5"]
+[ext_resource type="AudioStream" uid="uid://ccn60h0iwfwbg" path="res://audio/sfx/placeholder/button_hover.wav" id="3_gt4yg"]
+[ext_resource type="AudioStream" uid="uid://ditqh6y1ovspx" path="res://audio/sfx/placeholder/button_press.wav" id="4_ol7rw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wshmx"]
+
+[sub_resource type="Theme" id="Theme_86d5m"]
+Button/constants/h_separation = 0
+Button/font_sizes/font_size = 8
+Button/styles/normal = SubResource("StyleBoxFlat_wshmx")
+
+[node name="DifficultyAdjuster" type="HBoxContainer"]
+size_flags_vertical = 4
+script = ExtResource("1_ltqjy")
+
+[node name="ClickNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ol7rw")
+
+[node name="HoverNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gt4yg")
+
+[node name="DownButton" type="TextureButton" parent="."]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.5
+focus_mode = 0
+theme = SubResource("Theme_86d5m")
+texture_normal = ExtResource("1_cltdx")
+texture_pressed = ExtResource("1_cltdx")
+texture_hover = ExtResource("1_cltdx")
+texture_disabled = ExtResource("1_cltdx")
+texture_focused = ExtResource("1_cltdx")
+
+[node name="UpButton" type="TextureButton" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.5
+focus_mode = 0
+texture_normal = ExtResource("2_vwjo5")
+texture_pressed = ExtResource("2_vwjo5")
+texture_hover = ExtResource("2_vwjo5")
+texture_disabled = ExtResource("2_vwjo5")
+texture_focused = ExtResource("2_vwjo5")
+
+[node name="DifficultyLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 8
+text = "Difficulty: Trivial"
+
+[connection signal="mouse_entered" from="DownButton" to="." method="_on_down_button_mouse_entered"]
+[connection signal="pressed" from="DownButton" to="." method="_on_down_button_pressed"]
+[connection signal="mouse_entered" from="UpButton" to="." method="_on_up_button_mouse_entered"]
+[connection signal="pressed" from="UpButton" to="." method="_on_up_button_pressed"]

@@ -1,10 +1,8 @@
-[gd_scene load_steps=58 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=56 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
 [ext_resource type="Script" path="res://Entities/Player/LookaheadCameraFollower.gd" id="2_x7k1v"]
-[ext_resource type="Texture2D" uid="uid://g1vlv65nat5l" path="res://art/placeholder/white_turkeyleg_animation_blank.png" id="3_340x3"]
-[ext_resource type="Texture2D" uid="uid://dww0mincdfcua" path="res://Entities/Player/atlas_texture_player_parts.tres" id="4_gxpwb"]
 [ext_resource type="Texture2D" uid="uid://b5kqk4ulv38a2" path="res://art/player/speed_lines.png" id="4_nhl25"]
 [ext_resource type="PackedScene" uid="uid://bxyn1mq357nt6" path="res://Entities/Player/cyber_ronin_sprites.tscn" id="5_tbet1"]
 [ext_resource type="Script" path="res://Utilities/UtilityScripts/StateMachine.gd" id="10_6ualt"]
@@ -33,6 +31,8 @@
 [ext_resource type="AudioStream" uid="uid://gnqxeny4xp4r" path="res://audio/sfx/player_sfx/player_punch2.mp3" id="27_sll0y"]
 [ext_resource type="Script" path="res://Entities/Player/FastPunch.gd" id="28_amcrx"]
 [ext_resource type="AudioStream" uid="uid://53nu3fgsjlc7" path="res://audio/sfx/player_sfx/player_punch3_uppercut.mp3" id="28_n44v8"]
+[ext_resource type="Script" path="res://Entities/Player/Duck.gd" id="28_qvkao"]
+[ext_resource type="Script" path="res://Entities/Player/WallHang.gd" id="29_71l80"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 7.0
@@ -116,12 +116,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8hms"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o20hr"]
-atlas = ExtResource("4_gxpwb")
-region = Rect2(191, 193.5, 106, 104)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ucv"]
 size = Vector2(16, 15)
 
@@ -129,7 +123,7 @@ size = Vector2(16, 15)
 size = Vector2(20, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghqx3"]
-size = Vector2(46, 37.4751)
+size = Vector2(59, 37.4751)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_10l48"]
 streams_count = 3
@@ -189,8 +183,6 @@ drag_top_margin = 0.2
 drag_right_margin = 0.2
 drag_bottom_margin = 0.2
 
-[node name="Sprite2D" type="Sprite2D" parent="Lookahead"]
-
 [node name="MovementCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -19)
 shape = SubResource("CapsuleShape2D_ghh7o")
@@ -216,134 +208,6 @@ sprite_frames = SubResource("SpriteFrames_3ov6f")
 frame = 9
 offset = Vector2(-15.7046, 1.14441e-05)
 
-[node name="PushBox" type="AnimatableBody2D" parent="Body"]
-position = Vector2(24, -18)
-collision_layer = 0
-collision_mask = 0
-
-[node name="PushBoxColShape" type="CollisionShape2D" parent="Body/PushBox"]
-shape = SubResource("RectangleShape2D_a8hms")
-
-[node name="Actions" type="Node2D" parent="Body"]
-
-[node name="descending_kick" type="Node2D" parent="Body/Actions"]
-
-[node name="Torso" type="Node2D" parent="Body"]
-visible = false
-position = Vector2(0, -31)
-rotation = 0.321755
-
-[node name="BodySprite" type="Sprite2D" parent="Body/Torso"]
-position = Vector2(-1, -10)
-rotation = 1.57079
-scale = Vector2(0.33, 0.1)
-texture = ExtResource("4_gxpwb")
-region_enabled = true
-region_rect = Rect2(213, 297.5, 67, 127)
-
-[node name="Neck" type="Sprite2D" parent="Body/Torso/BodySprite"]
-position = Vector2(-25.5632, -1.32771)
-rotation = -3.03936
-scale = Vector2(0.320375, 0.357319)
-texture = ExtResource("3_340x3")
-offset = Vector2(19.174, -0.495834)
-
-[node name="Head" type="Sprite2D" parent="Body/Torso/BodySprite/Neck"]
-position = Vector2(10.9225, 3.58452)
-rotation = 1.72086
-scale = Vector2(4, 2)
-texture = SubResource("AtlasTexture_o20hr")
-offset = Vector2(-3.72169, -34.7528)
-
-[node name="ShoulderR" type="Node2D" parent="Body/Torso"]
-position = Vector2(-7, -18)
-
-[node name="UpperArmR" type="Sprite2D" parent="Body/Torso/ShoulderR"]
-rotation = 2.55395
-scale = Vector2(0.261688, 0.261688)
-texture = ExtResource("4_gxpwb")
-offset = Vector2(18.6845, 1.07569)
-region_enabled = true
-region_rect = Rect2(180, 291.5, 53, 45)
-
-[node name="Lower" type="Sprite2D" parent="Body/Torso/ShoulderR/UpperArmR"]
-position = Vector2(38.9393, 1.84035)
-rotation = -0.572171
-scale = Vector2(0.773518, 0.773518)
-texture = ExtResource("3_340x3")
-offset = Vector2(18.6845, 1.07569)
-
-[node name="ShoulderL" type="Node2D" parent="Body/Torso"]
-modulate = Color(0.729412, 0.729412, 0.729412, 1)
-z_index = -1
-position = Vector2(5, -19)
-
-[node name="UpperArmL" type="Sprite2D" parent="Body/Torso/ShoulderL"]
-rotation = 1.14933
-scale = Vector2(0.261688, 0.261688)
-texture = ExtResource("3_340x3")
-offset = Vector2(18.6845, 1.07569)
-
-[node name="LowerArmL" type="Sprite2D" parent="Body/Torso/ShoulderL/UpperArmL"]
-position = Vector2(38.9393, 1.84035)
-rotation = -1.57612
-scale = Vector2(0.773518, 0.773518)
-texture = ExtResource("3_340x3")
-offset = Vector2(18.6845, 1.07569)
-
-[node name="HipR" type="Node2D" parent="Body/Torso"]
-z_index = 1
-
-[node name="LegUpperR" type="Sprite2D" parent="Body/Torso/HipR"]
-position = Vector2(-2.85476, 0.568854)
-rotation = 1.9165
-scale = Vector2(0.5, 0.17)
-texture = ExtResource("4_gxpwb")
-offset = Vector2(17.7187, 0.855423)
-region_enabled = true
-region_rect = Rect2(193, 426.5, 46, 56)
-
-[node name="LegLowerR" type="Sprite2D" parent="Body/Torso/HipR/LegUpperR"]
-position = Vector2(41.6033, -0.811409)
-rotation = 1.44145
-scale = Vector2(1, 0.8)
-texture = ExtResource("4_gxpwb")
-offset = Vector2(17.7187, 0.855423)
-region_enabled = true
-region_rect = Rect2(184, 470.5, 39, 41)
-
-[node name="FootR" type="Sprite2D" parent="Body/Torso/HipR/LegUpperR/LegLowerR"]
-position = Vector2(40.485, -0.480497)
-rotation = -1.41912
-scale = Vector2(0.581697, 0.581696)
-texture = ExtResource("3_340x3")
-offset = Vector2(17.7187, 0.855423)
-
-[node name="HipL" type="Node2D" parent="Body/Torso"]
-modulate = Color(0.662745, 0.662745, 0.662745, 1)
-z_index = -1
-position = Vector2(4.74341, -1.58116)
-
-[node name="LegUpperL" type="Sprite2D" parent="Body/Torso/HipL"]
-position = Vector2(-2.85476, 0.568854)
-rotation = 0.499649
-scale = Vector2(0.417663, 0.417663)
-texture = ExtResource("3_340x3")
-offset = Vector2(17.7187, 0.855423)
-
-[node name="LegLowerL" type="Sprite2D" parent="Body/Torso/HipL/LegUpperL"]
-position = Vector2(41.6033, -0.811409)
-rotation = 0.280511
-texture = ExtResource("3_340x3")
-offset = Vector2(17.7187, 0.855423)
-
-[node name="FootL" type="Sprite2D" parent="Body/Torso/HipL/LegUpperL/LegLowerL"]
-position = Vector2(40.485, -0.480497)
-rotation = -1.41912
-scale = Vector2(0.581697, 0.581696)
-texture = ExtResource("3_340x3")
-offset = Vector2(17.7187, 0.855423)
-
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("10_6ualt")
 initial_state = NodePath("Idle")
@@ -362,6 +226,7 @@ script = ExtResource("23_r318r")
 
 [node name="DescendingKick" type="Node2D" parent="StateMachine"]
 script = ExtResource("16_7kpt4")
+speed_multiplier = 3.25
 
 [node name="UnstuckTimer" type="Timer" parent="StateMachine/DescendingKick"]
 wait_time = 3.0
@@ -376,11 +241,16 @@ position = Vector2(7, -6.5)
 shape = SubResource("RectangleShape2D_k6ucv")
 disabled = true
 
+[node name="DescendingKickTimer" type="Timer" parent="StateMachine/DescendingKick"]
+wait_time = 0.33
+
 [node name="Landing" type="Node2D" parent="StateMachine"]
 script = ExtResource("25_hj8m7")
 
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("18_6dmrt")
+dash_duration = 0.3
+speed_multiplier = 3.25
 
 [node name="DashHurtBox" type="Area2D" parent="StateMachine/Dash"]
 collision_layer = 0
@@ -433,6 +303,7 @@ horizontal_alignment = 1
 
 [node name="StrongPunch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("charge_vfx")]
 script = ExtResource("27_487ye")
+stepping_back = true
 charge_vfx = NodePath("CPUParticles2D")
 
 [node name="HurtBox" type="Area2D" parent="StateMachine/StrongPunch"]
@@ -441,7 +312,7 @@ collision_layer = 0
 collision_mask = 10
 
 [node name="StrongCollisionShape" type="CollisionShape2D" parent="StateMachine/StrongPunch/HurtBox"]
-position = Vector2(-13, -4.26243)
+position = Vector2(-6.5, -4.26243)
 shape = SubResource("RectangleShape2D_ghqx3")
 disabled = true
 
@@ -505,6 +376,12 @@ bus = &"sfx"
 [node name="InTransit" type="Node2D" parent="StateMachine"]
 script = ExtResource("26_teftq")
 
+[node name="Duck" type="Node2D" parent="StateMachine"]
+script = ExtResource("28_qvkao")
+
+[node name="WallHang" type="Node2D" parent="StateMachine"]
+script = ExtResource("29_71l80")
+
 [node name="Debug" type="Node2D" parent="."]
 visible = false
 position = Vector2(-15, -56)
@@ -537,6 +414,7 @@ shape = SubResource("RectangleShape2D_m8oiq")
 
 [connection signal="timeout" from="StateMachine/DescendingKick/UnstuckTimer" to="StateMachine/DescendingKick" method="_on_unstuck_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/DescendingKick/HurtBox" to="StateMachine/DescendingKick" method="_on_hurt_box_body_entered"]
+[connection signal="timeout" from="StateMachine/DescendingKick/DescendingKickTimer" to="StateMachine/DescendingKick" method="_on_descending_kick_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/Dash/DashHurtBox" to="StateMachine/Dash" method="_on_dash_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/Dead/Timer" to="StateMachine/Dead" method="_on_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/StrongPunch/HurtBox" to="StateMachine/StrongPunch" method="_on_hurt_box_body_entered"]

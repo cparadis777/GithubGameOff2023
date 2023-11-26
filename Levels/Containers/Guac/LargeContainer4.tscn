@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b0pdl3tlo5xbs"]
+[gd_scene load_steps=21 format=3 uid="uid://b0pdl3tlo5xbs"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_at00n"]
 [ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_86yso"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="9_3h2nx"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_25gqt"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="11_a2x7r"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="12_i7lm2"]
 [ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="12_j1ldf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
@@ -150,86 +151,145 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
 
-[node name="MovingPlatform" parent="." instance=ExtResource("11_a2x7r")]
-position = Vector2(-258, 98)
-speed = 80.0
-show_piston = true
-tween_duration = 3.0
+[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_j1ldf")
+bus = &"sfx"
 
-[node name="MovingPlatform6" parent="." instance=ExtResource("11_a2x7r")]
-position = Vector2(-334, 0)
+[node name="Platforms" type="Node2D" parent="."]
 
-[node name="Location2" parent="MovingPlatform6/PositionMarkers" index="0"]
-position = Vector2(0, -107)
-
-[node name="MovingPlatform2" parent="." instance=ExtResource("11_a2x7r")]
-position = Vector2(-109, 98)
-tween_duration = 4.0
-
-[node name="MovingPlatform5" parent="." instance=ExtResource("11_a2x7r")]
-position = Vector2(-179, 25)
-
-[node name="Location2" parent="MovingPlatform5/PositionMarkers" index="0"]
-position = Vector2(0, -126)
-
-[node name="MovingPlatform3" parent="." instance=ExtResource("11_a2x7r")]
-position = Vector2(-1, 4)
-
-[node name="MovingPlatform4" parent="." instance=ExtResource("11_a2x7r")]
-position = Vector2(-1, 4)
-
-[node name="TrapSpikes" parent="." instance=ExtResource("9_3h2nx")]
-position = Vector2(-300, 161)
-
-[node name="TrapSpikes2" parent="." instance=ExtResource("9_3h2nx")]
-position = Vector2(-236, 161)
-
-[node name="TrapSpikes4" parent="." instance=ExtResource("9_3h2nx")]
-position = Vector2(-173, 161)
-
-[node name="TrapSpikes3" parent="." instance=ExtResource("9_3h2nx")]
-position = Vector2(160, 161)
-
-[node name="TrapSpikes5" parent="." instance=ExtResource("9_3h2nx")]
-position = Vector2(224, 161)
-
-[node name="TrapSpikes6" parent="." instance=ExtResource("9_3h2nx")]
-position = Vector2(287, 161)
-
-[node name="ShootyNPC" parent="." instance=ExtResource("10_25gqt")]
-position = Vector2(-336, -16)
-
-[node name="ShootyNPC2" parent="." instance=ExtResource("10_25gqt")]
-position = Vector2(-178, 11)
-
-[node name="ShootyNPC3" parent="." instance=ExtResource("10_25gqt")]
-position = Vector2(305, -79)
-
-[node name="MovingPlatform7" parent="." instance=ExtResource("11_a2x7r")]
+[node name="MovingPlatform7" parent="Platforms" instance=ExtResource("11_a2x7r")]
 position = Vector2(117, 104)
 speed = 80.0
 tween_duration = 4.0
 
-[node name="MovingPlatform9" parent="." instance=ExtResource("11_a2x7r")]
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform7/AnimatableBody2D/Piston" index="0"]
+position = Vector2(0, 41)
+
+[node name="CraneCables" parent="Platforms/MovingPlatform7/AnimatableBody2D" index="3"]
+visible = false
+
+[node name="MovingPlatform9" parent="Platforms" instance=ExtResource("11_a2x7r")]
 position = Vector2(266, 104)
-show_piston = true
 tween_duration = 3.0
 
-[node name="MovingPlatform11" parent="." instance=ExtResource("11_a2x7r")]
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform9/AnimatableBody2D/Piston" index="0"]
+position = Vector2(0, 41)
+
+[node name="CraneCables" parent="Platforms/MovingPlatform9/AnimatableBody2D" index="3"]
+visible = false
+
+[node name="MovingPlatform11" parent="Platforms" instance=ExtResource("11_a2x7r")]
 position = Vector2(196, 10)
 
-[node name="Location2" parent="MovingPlatform11/PositionMarkers" index="0"]
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform11/AnimatableBody2D/Piston" index="0"]
+position = Vector2(2.08165e-12, 136)
+
+[node name="CraneCables" parent="Platforms/MovingPlatform11/AnimatableBody2D" index="3"]
+visible = false
+
+[node name="Location2" parent="Platforms/MovingPlatform11/PositionMarkers" index="0"]
 position = Vector2(0, -115)
 
-[node name="BasicPlatform" parent="." instance=ExtResource("8_w7efc")]
+[node name="MovingPlatform" parent="Platforms" instance=ExtResource("11_a2x7r")]
+position = Vector2(-258, 98)
+speed = 80.0
+tween_duration = 3.0
+
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform/AnimatableBody2D/Piston" index="0"]
+position = Vector2(2.08165e-12, 48)
+
+[node name="CraneCables" parent="Platforms/MovingPlatform/AnimatableBody2D" index="3"]
+visible = false
+
+[node name="MovingPlatform6" parent="Platforms" instance=ExtResource("11_a2x7r")]
+position = Vector2(-334, 0)
+
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform6/AnimatableBody2D/Piston" index="0"]
+position = Vector2(-7, 145)
+
+[node name="CraneCables" parent="Platforms/MovingPlatform6/AnimatableBody2D" index="3"]
+visible = false
+
+[node name="Location2" parent="Platforms/MovingPlatform6/PositionMarkers" index="0"]
+position = Vector2(0, -107)
+
+[node name="MovingPlatform2" parent="Platforms" instance=ExtResource("11_a2x7r")]
+position = Vector2(-109, 98)
+tween_duration = 4.0
+
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform2/AnimatableBody2D/Piston" index="0"]
+position = Vector2(2.08165e-12, 48)
+
+[node name="CraneCables" parent="Platforms/MovingPlatform2/AnimatableBody2D" index="3"]
+visible = false
+
+[node name="MovingPlatform5" parent="Platforms" instance=ExtResource("11_a2x7r")]
+position = Vector2(-179, 25)
+
+[node name="FloorHeightMarker" parent="Platforms/MovingPlatform5/AnimatableBody2D/Piston" index="0"]
+position = Vector2(0, 121)
+
+[node name="CraneCables" parent="Platforms/MovingPlatform5/AnimatableBody2D" index="3"]
+visible = false
+
+[node name="Location2" parent="Platforms/MovingPlatform5/PositionMarkers" index="0"]
+position = Vector2(0, -126)
+
+[node name="MovingPlatform3" parent="Platforms" instance=ExtResource("11_a2x7r")]
+position = Vector2(-1, 37)
+show_piston = false
+
+[node name="CraneCables" parent="Platforms/MovingPlatform3/AnimatableBody2D" index="3"]
+visible = false
+
+[node name="Location2" parent="Platforms/MovingPlatform3/PositionMarkers" index="0"]
+position = Vector2(1, -87)
+
+[node name="BasicPlatform" parent="Platforms" instance=ExtResource("8_w7efc")]
 position = Vector2(306, -73)
 
-[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_j1ldf")
+[node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("12_i7lm2")]
+position = Vector2(0, -94)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="ShootyNPC" parent="Enemies" instance=ExtResource("10_25gqt")]
+position = Vector2(-336, -16)
+
+[node name="ShootyNPC2" parent="Enemies" instance=ExtResource("10_25gqt")]
+position = Vector2(-178, 11)
+
+[node name="ShootyNPC3" parent="Enemies" instance=ExtResource("10_25gqt")]
+position = Vector2(305, -79)
+
+[node name="Traps" type="Node2D" parent="."]
+
+[node name="TrapSpikes" parent="Traps" instance=ExtResource("9_3h2nx")]
+position = Vector2(-300, 161)
+
+[node name="TrapSpikes2" parent="Traps" instance=ExtResource("9_3h2nx")]
+position = Vector2(-236, 161)
+
+[node name="TrapSpikes4" parent="Traps" instance=ExtResource("9_3h2nx")]
+position = Vector2(-173, 161)
+
+[node name="TrapSpikes3" parent="Traps" instance=ExtResource("9_3h2nx")]
+position = Vector2(160, 161)
+
+[node name="TrapSpikes5" parent="Traps" instance=ExtResource("9_3h2nx")]
+position = Vector2(224, 161)
+
+[node name="TrapSpikes6" parent="Traps" instance=ExtResource("9_3h2nx")]
+position = Vector2(287, 161)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
 
-[editable path="MovingPlatform6"]
-[editable path="MovingPlatform5"]
-[editable path="MovingPlatform11"]
+[editable path="Platforms/MovingPlatform7"]
+[editable path="Platforms/MovingPlatform9"]
+[editable path="Platforms/MovingPlatform11"]
+[editable path="Platforms/MovingPlatform"]
+[editable path="Platforms/MovingPlatform6"]
+[editable path="Platforms/MovingPlatform2"]
+[editable path="Platforms/MovingPlatform5"]
+[editable path="Platforms/MovingPlatform3"]

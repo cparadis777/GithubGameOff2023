@@ -6,8 +6,9 @@ extends CharacterBody2D
 
 @export var damage_to_block : float = 80
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+var SPEED = 300.0
+var JUMP_VELOCITY = -400.0
+var base_damage = 10
 
 var original_doll_scale : Vector2
 var last_known_direction : int = 1
@@ -63,12 +64,25 @@ func _ready():
 		died.connect(owner._on_NPC_died)
 
 func activate():
+	if State == States.INITIALIZING:
+		State = States.ALERT
+		set_difficulty(Globals.difficulty)
+		$DecisionTimer.start()
 
-	State = States.ALERT
-
+func set_difficulty(difficulty : Globals.DifficultyScales):
+	health_max += difficulty * 5.0
+	SPEED += float(difficulty)/40.0 * 100.0
+	base_damage *= (1+float(difficulty)/20.0)
 
 func _physics_process(delta):
-	if State == States.ALERT:
+	if State in [ States.DYING, States.DEAD]:
+		velocity.x = 0
+		apply_gravity(delta)
+		sync_to_moving_platforms(delta)
+		move_and_slide()
+		return
+		
+	elif State == States.ALERT:
 		if current_goal == Goals.ATTACK:
 			for attack in $Behaviours/Attacks.get_children():
 				if attack.has_method("is_active") and attack.is_active():
@@ -80,9 +94,11 @@ func _physics_process(delta):
 			
 		for movement in $Behaviours/Movement.get_children():
 			if movement.is_active():
-				velocity += movement.get_movement_vector(delta)
+				if $Behaviours/Movement/WalkTowardPlayer/CliffSensor.is_colliding():
+					velocity += movement.get_movement_vector(delta)
 		update_animations()
 		apply_gravity(delta)
+		sync_to_moving_platforms(delta)
 		move_and_slide()
 	elif State in [States.IDLE, States.IFRAMES]:
 		# no new horizontal movement
@@ -92,6 +108,7 @@ func _physics_process(delta):
 		point_at_player()
 		flip_sprites()
 
+	
 	if velocity.x != 0:
 		last_known_direction = sign(velocity.x)
 
@@ -100,7 +117,19 @@ func apply_gravity(delta):
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
+	else:
+		velocity.y = 0 # could impede jumping ability
+	
+func sync_to_moving_platforms(_delta):
+	var sensor : RayCast2D = $Behaviours/Movement/WalkTowardPlayer/PlatformSensor
+	if sensor.is_colliding():
+		var thing_underfoot = sensor.get_collider()
+		if is_on_floor() and thing_underfoot.is_in_group("MovingPlatforms"):
+			if thing_underfoot.owner.get("velocity") != null:
+				velocity.y = thing_underfoot.owner.velocity.y
+			
+	
+	
 func point_at_player():
 	if player == null:
 		player = get_tree().get_nodes_in_group("Player")[0]
@@ -127,11 +156,24 @@ func update_animations():
 			$AnimationPlayer.play("walk")
 
 func begin_dying():
-	died.emit(name)
-	print("dockworker dying")
+	disable_all_timers()
 	State = States.DYING
+	died.emit(name)
 	$AnimationPlayer.play("die")
-	$HitBox.set_deferred("disabled", true)
+	#$HitBox.set_deferred("disabled", true)
+	set_collision_layer_value(2, false)
+	
+	set_collision_mask_value(1, false) # player
+	set_collision_mask_value(2, false) # other NPCs
+	
+	
+
+func disable_all_timers():
+	var timers = find_children("", "Timer")
+	for timer in timers:
+		timer.stop()
+	
+	
 
 func begin_decaying():
 	State = States.DEAD
@@ -157,15 +199,18 @@ func knockback(knockbackVector):
 
 	
 func _on_hit(attackPacket : AttackPacket):
-	if State in [ States.IDLE, States.ALERT ]: # no defensive block
+	if State in [States.DYING, States.DEAD]:
+		return
+		
+	elif State in [ States.IDLE, States.ALERT ]: # no defensive block
 
 		health -= attackPacket.damage
 		hurt.emit(attackPacket)
 
 		$AnimationPlayer.play("hurt")
-		initiate_iframes()
 		if attackPacket.knockback:
 			knockback(attackPacket.impact_vector * attackPacket.knockback_speed)
+		initiate_iframes() # after knockback
 	
 	elif State == States.DEFENDING: # remove some damage from the attack
 		attackPacket.damage_blocked = min(attackPacket.damage, damage_to_block)
@@ -179,9 +224,9 @@ func _on_hit(attackPacket : AttackPacket):
 			health -= (attackPacket.damage - attackPacket.damage_blocked)
 			$AnimationPlayer.play("hurt")
 			$Behaviours/Attacks/HeavyMeleeAttack.stop()
-			initiate_iframes()
 			if attackPacket.knockback:
 				knockback(attackPacket.impact_vector)
+			initiate_iframes() # after knockback
 
 
 func _on_decay_timer_timeout():
@@ -201,12 +246,17 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_i_frames_timer_timeout():
-	State = previous_state
-	$HurtFlash.hide()
-	if health <= 0:
-		begin_dying()
-
+	assert(State == States.IFRAMES, "dock worker iframes timeout but State != iframes. State == " + States.keys()[State])
+	if State not in [States.DYING, States.DEAD]:
+		$HurtFlash.hide()
+		if health <= 0.0:
+			begin_dying()
+		else:
+			State = previous_state
+		
 
 
 func _on_decision_timer_timeout():
-	current_goal = Goals.values().pick_random()
+	if State not in [ States.DYING, States.DEAD, States.IFRAMES ]:
+		current_goal = Goals.values().pick_random()
+		$DecisionTimer.start()

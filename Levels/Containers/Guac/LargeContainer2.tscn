@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dt181ly2upt1t"]
+[gd_scene load_steps=22 format=3 uid="uid://dt181ly2upt1t"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_jly3a"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_8e5ns"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="11_1bll8"]
 [ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="12_5ykac"]
 [ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="14_lwvc5"]
+[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="14_puw5g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -154,6 +155,7 @@ shape = SubResource("RectangleShape2D_m7xia")
 
 [node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_5ykac")
+bus = &"sfx"
 
 [node name="Platforms" type="Node2D" parent="."]
 
@@ -194,6 +196,9 @@ position = Vector2(-280, -49)
 
 [node name="ShootyNPC2" parent="Enemies" instance=ExtResource("11_1bll8")]
 position = Vector2(127, 109)
+
+[node name="NewRunner" parent="Enemies" instance=ExtResource("14_puw5g")]
+position = Vector2(208, -94)
 
 [node name="Props" type="Node2D" parent="."]
 
