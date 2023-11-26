@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=27 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
+[ext_resource type="Texture2D" uid="uid://dtuuvvgnlqgjt" path="res://art/UI/Container Stacking/panel.png" id="2_4w6nr"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
 [ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="2_o08nb"]
 [ext_resource type="Texture2D" uid="uid://bchnf4aqjpah4" path="res://art/UI/quit-button.png" id="3_bjj0v"]
@@ -8,9 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="3_tcnfn"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="4_unqhl"]
 [ext_resource type="Texture2D" uid="uid://csox7vcjw1kao" path="res://art/UI/reset-button.png" id="5_5s2ms"]
-[ext_resource type="Texture2D" uid="uid://bjavw36yhsh82" path="res://art/UI/fight-button.png" id="6_k85s3"]
+[ext_resource type="Texture2D" uid="uid://dw66l7w5dq4cj" path="res://art/UI/Container Stacking/fight-button-normal.png" id="6_ck12f"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
+[ext_resource type="Texture2D" uid="uid://o8cl2ckv7j3b" path="res://art/UI/Container Stacking/fight-button-hover.png" id="7_dc8un"]
 [ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="8_18gwl"]
+[ext_resource type="Texture2D" uid="uid://4f4h20iu6o3g" path="res://art/UI/Container Stacking/fight-button-pressed.png" id="8_yixi3"]
 [ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="9_0cocc"]
 [ext_resource type="AudioStream" uid="uid://cjmpwks4nk12x" path="res://audio/sfx/container_sfx/containerdropped.ogg" id="9_3vpfd"]
 [ext_resource type="PackedScene" uid="uid://diik2yboc0mbr" path="res://Entities/Droppable/TerminalContainer.tscn" id="9_d655n"]
@@ -20,8 +23,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lheh3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ecph7"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f5lp8"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_m3gb7"]
 streams_count = 1
@@ -146,14 +147,24 @@ scene_path = "res://Levels/GeneratedPlayspace.tscn"
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
-anchors_preset = 10
+[node name="Panel" type="TextureRect" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-grow_horizontal = 2
+offset_left = -231.0
+offset_top = 9.0
+offset_right = -7.0
+offset_bottom = 66.0
+grow_horizontal = 0
 mouse_filter = 2
+texture = ExtResource("2_4w6nr")
 
-[node name="QuitButton-ReturnToMenu" parent="HUD/HBoxContainer" instance=ExtResource("6_n282g")]
+[node name="QuitButton-ReturnToMenu" parent="HUD/Panel" instance=ExtResource("6_n282g")]
 layout_mode = 2
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 78.0
+offset_bottom = 50.0
 focus_mode = 0
 theme_override_colors/icon_normal_color = Color(0.698039, 0.698039, 0.698039, 1)
 theme_override_colors/icon_pressed_color = Color(0.355314, 0.355314, 0.355313, 1)
@@ -168,8 +179,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_lheh3")
 text = ""
 icon = ExtResource("3_bjj0v")
 
-[node name="ResetButton" parent="HUD/HBoxContainer" instance=ExtResource("3_tcnfn")]
+[node name="ResetButton" parent="HUD/Panel" instance=ExtResource("3_tcnfn")]
 layout_mode = 2
+offset_left = 77.0
+offset_top = 6.0
+offset_right = 181.0
+offset_bottom = 50.0
 focus_mode = 0
 theme_override_colors/icon_normal_color = Color(0.698039, 0.698039, 0.698039, 1)
 theme_override_colors/icon_pressed_color = Color(0.355314, 0.355314, 0.355313, 1)
@@ -183,19 +198,16 @@ text = ""
 icon = ExtResource("5_5s2ms")
 script = null
 
-[node name="FightButton" type="Button" parent="HUD/HBoxContainer"]
+[node name="FightButton" type="TextureButton" parent="HUD/Panel"]
 layout_mode = 2
+offset_left = 147.0
+offset_top = 10.0
+offset_right = 254.0
+offset_bottom = 54.0
 focus_mode = 0
-theme_override_colors/icon_normal_color = Color(0.698039, 0.698039, 0.698039, 1)
-theme_override_colors/icon_pressed_color = Color(0.355314, 0.355314, 0.355313, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_f5lp8")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_f5lp8")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_f5lp8")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_f5lp8")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_f5lp8")
-icon = ExtResource("6_k85s3")
-flat = true
+texture_normal = ExtResource("6_ck12f")
+texture_pressed = ExtResource("8_yixi3")
+texture_hover = ExtResource("7_dc8un")
 
 [node name="WarningPopup" type="PopupPanel" parent="HUD"]
 initial_position = 1
@@ -445,8 +457,8 @@ libraries = {
 stream = ExtResource("16_wc7sc")
 volume_db = -4.0
 
-[connection signal="pressed" from="HUD/HBoxContainer/ResetButton" to="DropPoints" method="reset_dropped_containers"]
-[connection signal="pressed" from="HUD/HBoxContainer/FightButton" to="." method="_on_fight_button_pressed"]
+[connection signal="pressed" from="HUD/Panel/ResetButton" to="DropPoints" method="reset_dropped_containers"]
+[connection signal="pressed" from="HUD/Panel/FightButton" to="." method="_on_fight_button_pressed"]
 [connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Retry" to="HUD/WarningPopup" method="hide"]
 [connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
 [connection signal="drop_over" from="DropPoints" to="." method="_on_drop_points_drop_over"]
