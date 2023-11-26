@@ -1,16 +1,13 @@
-[gd_scene load_steps=29 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=26 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="Texture2D" uid="uid://dtuuvvgnlqgjt" path="res://art/UI/Container Stacking/panel.png" id="2_4w6nr"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
 [ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="2_o08nb"]
-[ext_resource type="Texture2D" uid="uid://bchnf4aqjpah4" path="res://art/UI/quit-button.png" id="3_bjj0v"]
+[ext_resource type="Script" path="res://Menus/ContainerStackingUI/Panel.gd" id="3_b313w"]
 [ext_resource type="Script" path="res://Levels/DropPoints.gd" id="3_i3vix"]
-[ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="3_tcnfn"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="4_unqhl"]
-[ext_resource type="Texture2D" uid="uid://csox7vcjw1kao" path="res://art/UI/reset-button.png" id="5_5s2ms"]
 [ext_resource type="Texture2D" uid="uid://dw66l7w5dq4cj" path="res://art/UI/Container Stacking/fight-button-normal.png" id="6_ck12f"]
-[ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="6_n282g"]
 [ext_resource type="Texture2D" uid="uid://o8cl2ckv7j3b" path="res://art/UI/Container Stacking/fight-button-hover.png" id="7_dc8un"]
 [ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="8_18gwl"]
 [ext_resource type="Texture2D" uid="uid://4f4h20iu6o3g" path="res://art/UI/Container Stacking/fight-button-pressed.png" id="8_yixi3"]
@@ -20,11 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://jc5uk1hcdw8v" path="res://art/UI/Container Stacking/reset-button-normal.png" id="10_boduy"]
 [ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="10_bp55l"]
 [ext_resource type="Texture2D" uid="uid://bcehka4wp5evg" path="res://art/UI/Container Stacking/reset-button-pressed.png" id="11_s0x0g"]
+[ext_resource type="Texture2D" uid="uid://d2a0nxn41556j" path="res://art/UI/Container Stacking/quit-button-normal.png" id="13_3wp8r"]
+[ext_resource type="Texture2D" uid="uid://cke2uwpvjqvn8" path="res://art/UI/Container Stacking/quit-button-pressed.png" id="14_ykucd"]
 [ext_resource type="AudioStream" uid="uid://765736xedns2" path="res://audio/music/DockSeaAmbient.mp3" id="16_wc7sc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lheh3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ecph7"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_m3gb7"]
 streams_count = 1
@@ -160,46 +155,7 @@ offset_bottom = 66.0
 grow_horizontal = 0
 mouse_filter = 2
 texture = ExtResource("2_4w6nr")
-
-[node name="QuitButton-ReturnToMenu" parent="HUD/Panel" instance=ExtResource("6_n282g")]
-layout_mode = 2
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 78.0
-offset_bottom = 50.0
-focus_mode = 0
-theme_override_colors/icon_normal_color = Color(0.698039, 0.698039, 0.698039, 1)
-theme_override_colors/icon_pressed_color = Color(0.355314, 0.355314, 0.355313, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
-theme_override_constants/icon_max_width = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_lheh3")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_lheh3")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_lheh3")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_lheh3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_lheh3")
-text = ""
-icon = ExtResource("3_bjj0v")
-
-[node name="ResetButtonOld" parent="HUD/Panel" instance=ExtResource("3_tcnfn")]
-visible = false
-layout_mode = 2
-offset_left = 77.0
-offset_top = 6.0
-offset_right = 181.0
-offset_bottom = 50.0
-focus_mode = 0
-theme_override_colors/icon_normal_color = Color(0.698039, 0.698039, 0.698039, 1)
-theme_override_colors/icon_pressed_color = Color(0.355314, 0.355314, 0.355313, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ecph7")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_ecph7")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ecph7")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ecph7")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ecph7")
-text = ""
-icon = ExtResource("5_5s2ms")
-script = null
+script = ExtResource("3_b313w")
 
 [node name="FightButton" type="TextureButton" parent="HUD/Panel"]
 layout_mode = 2
@@ -220,6 +176,15 @@ offset_right = 133.0
 offset_bottom = 54.0
 texture_normal = ExtResource("10_boduy")
 texture_pressed = ExtResource("11_s0x0g")
+
+[node name="QuitButton" type="TextureButton" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 69.0
+offset_bottom = 54.0
+texture_normal = ExtResource("13_3wp8r")
+texture_pressed = ExtResource("14_ykucd")
 
 [node name="WarningPopup" type="PopupPanel" parent="HUD"]
 initial_position = 1
@@ -469,9 +434,9 @@ libraries = {
 stream = ExtResource("16_wc7sc")
 volume_db = -4.0
 
-[connection signal="pressed" from="HUD/Panel/ResetButtonOld" to="DropPoints" method="reset_dropped_containers"]
 [connection signal="pressed" from="HUD/Panel/FightButton" to="." method="_on_fight_button_pressed"]
 [connection signal="pressed" from="HUD/Panel/ResetButton" to="DropPoints" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="HUD/Panel/QuitButton" to="HUD/Panel" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Retry" to="HUD/WarningPopup" method="hide"]
 [connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
 [connection signal="drop_over" from="DropPoints" to="." method="_on_drop_points_drop_over"]
