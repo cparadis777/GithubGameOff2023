@@ -86,7 +86,7 @@ func _on_confirm_pressed():
 
 
 func _on_drop_points_drop_started():
-	$HUD/HBoxContainer/ResetButton.disabled = true
+	$HUD/Panel/ResetButton.disabled = true
 
 func _on_drop_points_drop_over():
-	$HUD/HBoxContainer/ResetButton.disabled = false
+	$HUD/Panel/ResetButton.disabled = false
