@@ -292,7 +292,7 @@ func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 
 
 #receive injury
-func _on_hit(attackPacket):
+func _on_hit(attackPacket : AttackPacket):
 	if ( # a whole litany of exceptions
 			iframes == true
 			or state_machine.state.name in ["Dying", "Dead", "InTransit", "Dash", "DescendingKick"]
@@ -302,6 +302,10 @@ func _on_hit(attackPacket):
 			return
 	
 	else:
+		if attackPacket.damage_type == Globals.DamageTypes.ELECTRICAL:
+			$Audio/HurtNoiseEnergy.play()
+		elif attackPacket.damage_type == Globals.DamageTypes.IMPACT:
+			$Audio/HurtNoiseImpact.play()
 		health -= attackPacket.damage
 		Globals.player_stats["health"] = health
 		injured.emit(attackPacket)

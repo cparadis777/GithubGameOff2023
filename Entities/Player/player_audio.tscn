@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dxjihdq7d8mpk"]
+[gd_scene load_steps=34 format=3 uid="uid://dxjihdq7d8mpk"]
 
 [ext_resource type="AudioStream" uid="uid://dc7gsumgrm00a" path="res://audio/sfx/player_sfx/voicestab_strong.mp3" id="1_1s63b"]
 [ext_resource type="AudioStream" uid="uid://t0fsnacyiibe" path="res://audio/sfx/player_sfx/descending_kick.mp3" id="2_ex3y0"]
@@ -19,6 +19,9 @@
 [ext_resource type="AudioStream" uid="uid://br5l83jx1plaa" path="res://audio/sfx/player_sfx/windup2.mp3" id="17_k3t6a"]
 [ext_resource type="AudioStream" uid="uid://dnnrx2b3i55sw" path="res://audio/sfx/player_sfx/player_bigpunch_swing.mp3" id="18_4o1xj"]
 [ext_resource type="AudioStream" uid="uid://ddnyec60dy814" path="res://audio/sfx/player_sfx/player_bigpunch_impact.mp3" id="19_dsasc"]
+[ext_resource type="AudioStream" uid="uid://bh8kh8js2x6fs" path="res://audio/sfx/placeholder/explosion-short.wav" id="20_iphql"]
+[ext_resource type="AudioStream" uid="uid://c73fsai0eiuyk" path="res://audio/sfx/placeholder/bad_noise_electric.wav" id="21_x18ah"]
+[ext_resource type="AudioStream" uid="uid://qcrtjt277lh1" path="res://audio/sfx/placeholder/electric.wav" id="22_p1jk2"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_55nlg"]
 streams_count = 1
@@ -80,6 +83,19 @@ streams_count = 2
 stream_0/stream = ExtResource("16_h3f7u")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("17_k3t6a")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o4ku2"]
+streams_count = 1
+random_pitch = 1.2
+stream_0/stream = ExtResource("20_iphql")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i63aw"]
+streams_count = 2
+stream_0/stream = ExtResource("21_x18ah")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("22_p1jk2")
 stream_1/weight = 1.0
 
 [node name="Audio" type="Node2D"]
@@ -152,3 +168,12 @@ bus = &"sfx"
 stream = ExtResource("19_dsasc")
 pitch_scale = 0.67
 bus = &"sfx"
+
+[node name="HurtNoiseImpact" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_o4ku2")
+pitch_scale = 1.2
+
+[node name="HurtNoiseEnergy" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_i63aw")
+volume_db = 5.0
+pitch_scale = 1.4
