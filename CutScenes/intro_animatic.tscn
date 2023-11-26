@@ -535,7 +535,7 @@ text = "MegaShip - HN83725"
 [node name="ShippingContainers" type="Node2D" parent="Slide2-Workplace"]
 
 [node name="Sprite2D3" type="Sprite2D" parent="Slide2-Workplace/ShippingContainers"]
-position = Vector2(279, 48)
+position = Vector2(262.5, -240)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("4_dco4t")
 
@@ -545,7 +545,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_asvyr")
 
 [node name="Sprite2D5" type="Sprite2D" parent="Slide2-Workplace/ShippingContainers"]
-position = Vector2(283, -241)
+position = Vector2(272.5, 48.5)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_n5ip3")
 
@@ -560,15 +560,21 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("4_dco4t")
 
 [node name="Panel" type="PanelContainer" parent="Slide2-Workplace"]
-offset_left = 110.0
-offset_top = 60.0
-offset_right = 150.0
-offset_bottom = 100.0
+visible = false
+offset_left = 111.0
+offset_top = 1.0
+offset_right = 207.0
+offset_bottom = 53.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_pos6s")
 
-[node name="WorkplaceLabel" type="Label" parent="Slide2-Workplace/Panel"]
+[node name="WorkplaceLabel" type="Label" parent="Slide2-Workplace"]
 custom_minimum_size = Vector2(96, 2.08165e-12)
-layout_mode = 2
+offset_left = 138.5
+offset_top = 16.5
+offset_right = 234.5
+offset_bottom = 68.5
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 text = "This is my workplace"
