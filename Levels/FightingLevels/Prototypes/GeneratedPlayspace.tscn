@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://bj3d6rfcnc2am"]
 
-[ext_resource type="Script" path="res://Levels/GeneratedPlayspace.gd" id="1_guo8s"]
-[ext_resource type="Script" path="res://Levels/ContainerGrid.gd" id="2_0shpo"]
+[ext_resource type="Script" path="res://Levels/FightingLevels/Prototypes/GeneratedPlayspace.gd" id="1_guo8s"]
+[ext_resource type="Script" path="res://Levels/FightingLevels/Prototypes/ContainerGrid.gd" id="2_0shpo"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_5n0k1"]
 [ext_resource type="PackedScene" uid="uid://c2slp1rb0plu" path="res://Utilities/UtilityScenes/ContainerSlot.tscn" id="3_xh56m"]
 [ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_yhops"]

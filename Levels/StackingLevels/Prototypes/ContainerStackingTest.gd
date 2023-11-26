@@ -2,6 +2,7 @@ extends Node2D
 
 @export var target_weight:int
 @export var scene_path: String # GeneratedPlayspace.tscn
+@export var has_tutorial:bool = true
 var current_weight:int
 var ignore_invalid_path : bool = false
 
@@ -15,11 +16,13 @@ func _ready():
 
 	await get_tree().create_timer(0.25).timeout
 	#$Instructions/controls.popup()
-	$"Instructions/Tutorial_AI".show()
+	#$"Instructions/Tutorial_AI".show()
 	$HUD/WarningPopup.hide()
+	if !self.has_tutorial:
+		$crane.move_ready = true
 	
 	AudioManager.play_track("CraneLevelTheme")
-	$DockSeaAmbient.play()
+	#$DockSeaAmbient.play()
 
 
 func add_weight(weight:int) -> void:

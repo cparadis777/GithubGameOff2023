@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://mq11awte3lc6"]
+[gd_scene load_steps=12 format=3 uid="uid://mq11awte3lc6"]
 
 [ext_resource type="Script" path="res://Entities/Droppable/DroppableContainer.gd" id="1_rwau2"]
 [ext_resource type="Texture2D" uid="uid://bg37ae5f0jil0" path="res://art/low_res_containers/low_res_containers.png" id="2_0da3g"]
+[ext_resource type="Gradient" uid="uid://dbpa1ruxcl7nr" path="res://Entities/Droppable/ConnectionLineGradient.tres" id="3_8kjbt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ejcc"]
 atlas = ExtResource("2_0da3g")
@@ -79,18 +80,22 @@ text = "(0,0)"
 points = PackedVector2Array(-24, 0, 0, 0)
 width = 2.0
 default_color = Color(1, 0, 0, 1)
+gradient = ExtResource("3_8kjbt")
 
 [node name="UpLine" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, -12)
+points = PackedVector2Array(0, -12, 0, 0)
 width = 2.0
 default_color = Color(1, 0, 0, 1)
+gradient = ExtResource("3_8kjbt")
 
 [node name="RightLine" type="Line2D" parent="."]
 points = PackedVector2Array(24, 0, 0, 0)
 width = 2.0
 default_color = Color(1, 0, 0, 1)
+gradient = ExtResource("3_8kjbt")
 
 [node name="DownLine" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, 12)
+points = PackedVector2Array(0, 12, 0, 0)
 width = 2.0
 default_color = Color(1, 0, 0, 1)
+gradient = ExtResource("3_8kjbt")

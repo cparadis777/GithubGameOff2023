@@ -7,6 +7,20 @@ var playspace_parameters: Dictionary
 var beat_the_boss_screen : PackedScene = preload("res://CutScenes/BeatTheBossWinCutscene.tscn")
 var player_dead_scene: PackedScene = preload("res://CutScenes/PlayerDeadLoseCutscene.tscn")
 
+var current_fight_level_idx = 0
+var current_stack_level_idx = 0
+
+
+var stacklevels = [
+				preload("res://Levels/StackingLevels/StackingLevel1.tscn"),
+				preload("res://Levels/StackingLevels/StackingLevel2.tscn")
+				]
+var fightlevels = [
+				preload("res://Levels/FightingLevels/FightLevel1.tscn"),
+				preload("res://Levels/FightingLevels/FightLevel2.tscn")
+				]
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -45,7 +59,7 @@ func reset_playspace():
 #		var playspace = get_tree().get_root().get_node("GeneratedPlayspace")
 #		playspace.reset()
 	
-	change_scene_to("res://Levels/GeneratedPlayspace.tscn")
+	change_scene_to(fightlevels[current_fight_level_idx])
 		
 	
 func set_playspace_parameters(data:Dictionary) -> void:
@@ -82,3 +96,18 @@ func _on_damage_packet_processed(attackPacket: AttackPacket):
 	var damage_to_display = attackPacket.damage - attackPacket.damage_blocked
 	
 	popup_text(str(damage_to_display).pad_decimals(0), location, color)
+
+func change_to_next_fight_scene():
+	if self.current_fight_level_idx == null:
+		self.current_fight_level_idx = 0
+		change_scene_to(self.fightlevels[self.current_fight_level_idx])
+	else:
+		self.current_fight_level_idx += 1
+		change_scene_to(self.fightlevels[self.current_fight_level_idx])
+
+func change_to_next_stack_scene():
+	if self.current_stack_level_idx == null:
+		self.current_stack_level_idx = 0
+		change_scene_to(self.stacklevels[self.current_stack_level_idx])
+	self.current_stack_level_idx += 0
+	change_scene_to(self.stacklevels[self.current_stack_level_idx])
