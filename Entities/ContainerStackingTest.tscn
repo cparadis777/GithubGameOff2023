@@ -201,8 +201,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 360.0
-offset_bottom = 169.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -426,7 +426,9 @@ libraries = {
 [connection signal="pressed" from="HUD/HBoxContainer/FightButton" to="." method="_on_fight_button_pressed"]
 [connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Retry" to="HUD/WarningPopup" method="hide"]
 [connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="drop_over" from="DropPoints" to="." method="_on_drop_points_drop_over"]
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
+[connection signal="drop_started" from="DropPoints" to="." method="_on_drop_points_drop_started"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
 [connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]
 [connection signal="finished" from="Instructions/Tutorial_AI" to="." method="_on_tutorial_ai_finished"]

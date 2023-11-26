@@ -81,3 +81,10 @@ func _on_placement_instructions_finished():
 func _on_confirm_pressed():
 	ignore_invalid_path = true
 	_on_fight_button_pressed()
+
+
+func _on_drop_points_drop_started():
+	$HUD/HBoxContainer/ResetButton.disabled = true
+
+func _on_drop_points_drop_over():
+	$HUD/HBoxContainer/ResetButton.disabled = false
