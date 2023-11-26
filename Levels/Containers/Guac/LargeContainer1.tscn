@@ -195,9 +195,6 @@ position = Vector2(-294, 80)
 [node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("12_sh8xs")]
 position = Vector2(-88, 27)
 
-[node name="JumpThroughPlatform4" parent="Platforms" instance=ExtResource("12_sh8xs")]
-position = Vector2(-88, 27)
-
 [node name="JumpThroughPlatform6" parent="Platforms" instance=ExtResource("12_sh8xs")]
 position = Vector2(1, -72)
 
