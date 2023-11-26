@@ -623,6 +623,7 @@ offset_left = 54.0
 offset_top = -860.5
 offset_right = 127.0
 offset_bottom = -829.5
+focus_neighbor_right = NodePath("../SkipTutorialButton")
 
 [node name="SkipTutorialButton" parent="Slide4-TitleMenu/Control-Panel" instance=ExtResource("13_66hro")]
 self_modulate = Color(1, 1, 1, 0)
@@ -630,6 +631,7 @@ offset_left = 150.5
 offset_top = -869.999
 offset_right = 252.5
 offset_bottom = -822.999
+focus_neighbor_left = NodePath("../TutorialButton")
 
 [node name="ManifestLabel" type="AnimatedSprite2D" parent="Slide4-TitleMenu"]
 self_modulate = Color(1, 1, 1, 0)
