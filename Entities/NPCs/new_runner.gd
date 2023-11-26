@@ -8,7 +8,7 @@ var SPEED = 100.0
 var JUMP_VELOCITY = -400.0
 var kick_speed_multiplier = 3.0
 
-enum States { INITIALIZING, RUNNING, JUMPING, ATTACKING, IFRAMES, DEAD }
+enum States { INITIALIZING, RUNNING, JUMPING, IDLE, ATTACKING, IFRAMES, DEAD }
 var State : States = States.INITIALIZING:
 	set(value):
 		previous_state = State
@@ -29,7 +29,7 @@ signal hit(attackPacket) # ie: hit someone else
 
 
 func _ready():
-	randomize()
+	
 	
 	hurt.connect(StageManager._on_damage_packet_processed)
 	
@@ -39,8 +39,10 @@ func _ready():
 	$AnimationPlayer.play("RESET")
 
 func activate():
-	State = States.RUNNING
-	$DecisionTimer.start()
+	if State == States.INITIALIZING:
+		set_difficulty(Globals.difficulty)
+		State = States.RUNNING
+		$DecisionTimer.start()
 	
 func set_difficulty(difficulty : Globals.DifficultyScales):
 	health_max += difficulty * 5.0
@@ -48,35 +50,65 @@ func set_difficulty(difficulty : Globals.DifficultyScales):
 	base_damage *= (1+float(difficulty)/20.0)	
 
 func _physics_process(delta):
-	apply_gravity(delta)
-
+	apply_gravity(delta) # all states
+	sync_motion_to_platforms(delta) # all states
 	if State == States.RUNNING:
 		if direction != 0:
 			velocity.x = direction * SPEED
 			$AnimatedSprite2D.scale.x = direction
+			detect_obstacles_and_cliffs(delta)
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	elif State == States.ATTACKING:
 		velocity.x = direction * SPEED * kick_speed_multiplier
+	elif State == States.DEAD:
+		velocity.x = 0
+	elif State == States.IDLE:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+	move_and_slide() # all states
 
-	move_and_slide()
+func detect_obstacles_and_cliffs(delta):
+	if State == States.DEAD:
+		return
+		
+	elif State == States.RUNNING and is_on_floor():
+		if (
+			not $Sensors/CliffDetector.is_colliding() # cliff
+			or  $Sensors/ObstacleDetector.is_colliding() # obstacle
+			):
+				if randf() < 0.67:
+					turn_around()
+				else:
+					jump()
+
+func sync_motion_to_platforms(delta):
+	var potential_platform = $Sensors/PlatformDetector.get_collider()
+	if potential_platform != null and potential_platform.is_in_group("MovingPlatforms"):
+		if potential_platform.owner.get("velocity"):
+			velocity.y = potential_platform.owner.velocity.y
 
 func apply_gravity(delta):
-	if not is_on_floor(): # in the air
+	if not is_on_floor(): # all states
 		velocity.y += gravity * delta
-		
-	elif is_on_floor and not floor_last_frame: # don't prevent jumping
-		#just landed
-		State = States.RUNNING
-		velocity.y = 0
-		
+	
+	if State == States.JUMPING:
+		if is_on_floor() and not floor_last_frame: # don't prevent new jumps
+			#just landed
+			State = States.RUNNING
+			velocity.y = 0
+			
 	floor_last_frame = is_on_floor()
 	
 func jump():
 	velocity.y = JUMP_VELOCITY
 	State = States.JUMPING
 
+func idle():
+	State == States.IDLE
+	
+	
 func attack():
 	State = States.ATTACKING
 
@@ -86,27 +118,37 @@ func turn_around():
 func _on_decision_timer_timeout():
 	if State in [ States.DEAD]:
 		velocity.x = 0
+		$DecisionTimer.stop()
 		return
-		
-	elif State == States.RUNNING:
-		var player = get_tree().get_first_node_in_group("Player")
-		if player != null:
-			var dir_to_player
-			if player.global_position.x > global_position.x:
-				dir_to_player = 1
-			else:
-				dir_to_player = -1
-			if direction != dir_to_player and randf() < 0.85:
-				turn_around()
-			elif direction == dir_to_player and randf() < 0.75:
-				if randf() < 0.8:
-					attack()
-				else: # 0.2
-					turn_around()
-			elif randf() < 0.5:
-				jump()
-	$DecisionTimer.start()
+	else:
+		$DecisionTimer.start()
 
+	if State in [States.RUNNING, States.JUMPING, States.IDLE ]:
+		choose_new_behaviour()
+
+func choose_new_behaviour():
+	var player = get_tree().get_first_node_in_group("Player")
+	randomize()
+	var random_nums = [ randf(), randf(), randf(), randf() ]
+	if player != null:
+		var dir_to_player
+		if player.global_position.x > global_position.x:
+			dir_to_player = 1
+		else:
+			dir_to_player = -1
+		if direction != dir_to_player and random_nums[0] < 0.85:
+			turn_around()
+		elif direction == dir_to_player and random_nums[1] < 0.75:
+			if random_nums[2] < 0.8:
+				attack()
+			else: # 0.2
+				turn_around()
+		elif random_nums[3] < 0.1:
+			idle()
+		elif random_nums[3] < 0.5:
+			jump()
+		
+	
 	
 	
 func _on_animation_player_animation_finished(anim_name):

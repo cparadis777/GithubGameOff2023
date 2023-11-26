@@ -131,7 +131,7 @@ scale = Vector2(1.64063, 1.30729)
 [node name="Enemies" type="Node2D" parent="." index="6"]
 
 [node name="RunningAssassin" parent="Enemies" index="0" instance=ExtResource("7_nwxtu")]
-position = Vector2(-247, 166)
+position = Vector2(56, -6)
 
 [node name="NPC_02_DockWorker" parent="Enemies" index="1" instance=ExtResource("8_ec66x")]
 position = Vector2(264, 169)
@@ -149,7 +149,7 @@ position = Vector2(251, -79)
 position = Vector2(-281, -79)
 
 [node name="NewRunner2" parent="Enemies" index="6" instance=ExtResource("11_sfrnw")]
-position = Vector2(-304, 168)
+position = Vector2(-203, 63)
 
 [node name="EnemySpawnPoints" type="Node2D" parent="." index="7"]
 

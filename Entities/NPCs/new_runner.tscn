@@ -607,7 +607,6 @@ wait_time = 0.75
 one_shot = true
 
 [node name="StateLabel" type="Label" parent="."]
-visible = false
 offset_left = -24.0
 offset_top = -91.0
 offset_right = 16.0
@@ -624,6 +623,23 @@ stream = SubResource("AudioStreamRandomizer_l1450")
 volume_db = -9.0
 max_distance = 350.0
 bus = &"sfx"
+
+[node name="Sensors" type="Node2D" parent="."]
+
+[node name="CliffDetector" type="RayCast2D" parent="Sensors"]
+position = Vector2(18.75, 0)
+target_position = Vector2(2.08165e-12, 16)
+collision_mask = 16
+
+[node name="PlatformDetector" type="RayCast2D" parent="Sensors"]
+position = Vector2(1.90735e-06, 0)
+target_position = Vector2(2.08165e-12, 16)
+collision_mask = 17
+
+[node name="ObstacleDetector" type="RayCast2D" parent="Sensors"]
+position = Vector2(8.75, -7.5)
+target_position = Vector2(16, 2.08165e-12)
+collision_mask = 16
 
 [connection signal="body_entered" from="AnimatedSprite2D/Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

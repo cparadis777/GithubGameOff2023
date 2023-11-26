@@ -101,7 +101,7 @@ func drop_done() -> void:
 	tween.tween_property(container_dropping, "position", Vector2(0, -5), 0.2).set_ease(tween.EASE_OUT)
 	tween.tween_property(container_dropping, "position", Vector2(0,0), 0.1)
 
-	emit_signal("weight_added", self.container_dropping.weigth)
+	emit_signal("weight_added", self.container_dropping.weight)
 	emit_signal("drop_over")
 
 
