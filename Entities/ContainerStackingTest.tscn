@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://one3l2j3vodd"]
+[gd_scene load_steps=29 format=3 uid="uid://one3l2j3vodd"]
 
 [ext_resource type="Script" path="res://Entities/ContainerStackingTest.gd" id="1_f2v7x"]
 [ext_resource type="Texture2D" uid="uid://dtuuvvgnlqgjt" path="res://art/UI/Container Stacking/panel.png" id="2_4w6nr"]
@@ -17,7 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="9_0cocc"]
 [ext_resource type="AudioStream" uid="uid://cjmpwks4nk12x" path="res://audio/sfx/container_sfx/containerdropped.ogg" id="9_3vpfd"]
 [ext_resource type="PackedScene" uid="uid://diik2yboc0mbr" path="res://Entities/Droppable/TerminalContainer.tscn" id="9_d655n"]
+[ext_resource type="Texture2D" uid="uid://jc5uk1hcdw8v" path="res://art/UI/Container Stacking/reset-button-normal.png" id="10_boduy"]
 [ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="10_bp55l"]
+[ext_resource type="Texture2D" uid="uid://bcehka4wp5evg" path="res://art/UI/Container Stacking/reset-button-pressed.png" id="11_s0x0g"]
 [ext_resource type="AudioStream" uid="uid://765736xedns2" path="res://audio/music/DockSeaAmbient.mp3" id="16_wc7sc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lheh3"]
@@ -179,7 +181,8 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_lheh3")
 text = ""
 icon = ExtResource("3_bjj0v")
 
-[node name="ResetButton" parent="HUD/Panel" instance=ExtResource("3_tcnfn")]
+[node name="ResetButtonOld" parent="HUD/Panel" instance=ExtResource("3_tcnfn")]
+visible = false
 layout_mode = 2
 offset_left = 77.0
 offset_top = 6.0
@@ -208,6 +211,15 @@ focus_mode = 0
 texture_normal = ExtResource("6_ck12f")
 texture_pressed = ExtResource("8_yixi3")
 texture_hover = ExtResource("7_dc8un")
+
+[node name="ResetButton" type="TextureButton" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 14.0
+offset_right = 133.0
+offset_bottom = 54.0
+texture_normal = ExtResource("10_boduy")
+texture_pressed = ExtResource("11_s0x0g")
 
 [node name="WarningPopup" type="PopupPanel" parent="HUD"]
 initial_position = 1
@@ -457,8 +469,9 @@ libraries = {
 stream = ExtResource("16_wc7sc")
 volume_db = -4.0
 
-[connection signal="pressed" from="HUD/Panel/ResetButton" to="DropPoints" method="reset_dropped_containers"]
+[connection signal="pressed" from="HUD/Panel/ResetButtonOld" to="DropPoints" method="reset_dropped_containers"]
 [connection signal="pressed" from="HUD/Panel/FightButton" to="." method="_on_fight_button_pressed"]
+[connection signal="pressed" from="HUD/Panel/ResetButton" to="DropPoints" method="_on_reset_button_pressed"]
 [connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Retry" to="HUD/WarningPopup" method="hide"]
 [connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
 [connection signal="drop_over" from="DropPoints" to="." method="_on_drop_points_drop_over"]

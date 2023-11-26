@@ -217,3 +217,7 @@ func check_unneeded_exits() ->void:
 			print("Added back %s to %s" % [Utils.Directions.keys()[self.exit_direction], coord])
 		
 		# print(current_drop_point.container.entrances)
+
+
+func _on_reset_button_pressed() -> void:
+	reset_dropped_containers()
