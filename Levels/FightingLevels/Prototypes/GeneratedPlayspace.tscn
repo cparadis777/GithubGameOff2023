@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bj3d6rfcnc2am"]
+[gd_scene load_steps=16 format=3 uid="uid://bj3d6rfcnc2am"]
 
 [ext_resource type="Script" path="res://Levels/FightingLevels/Prototypes/GeneratedPlayspace.gd" id="1_guo8s"]
 [ext_resource type="Script" path="res://Levels/FightingLevels/Prototypes/ContainerGrid.gd" id="2_0shpo"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="4_yhops"]
 [ext_resource type="PackedScene" uid="uid://dqe41rrauj6by" path="res://Entities/Environment/Containers/LargeEmptyContainer.tscn" id="6_n8nav"]
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="7_ifxbb"]
+[ext_resource type="AudioStream" uid="uid://chy3if1m4qsn0" path="res://audio/sfx/TutorialAIVoice/opening_doors.ogg" id="8_vddra"]
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="9_nkiwv"]
 [ext_resource type="PackedScene" uid="uid://dhxm77joahdfb" path="res://Entities/Environment/Containers/special/terminal_container.tscn" id="9_rtv3m"]
 [ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="10_gr7p4"]
@@ -72,6 +73,10 @@ container_exit_flags = 2
 doors_unlocked = true
 show_exterior_on_start = false
 
+[node name="OpeningDoorsVoice" parent="StartContainer" index="10"]
+stream = ExtResource("8_vddra")
+volume_db = 4.0
+
 [node name="TerminalContainer" parent="." instance=ExtResource("9_rtv3m")]
 position = Vector2(1921, -1443)
 container_exit_flags = 1
@@ -83,8 +88,7 @@ override_text = "The boss is currently
 on the bridge,
 operating the crane.;
 He left strict instructions
-not to be disturbed.;
-Doors will remain locked
+not to be disturbed.;Doors will remain locked
 so long as employees
 remain in any given room.
 "
