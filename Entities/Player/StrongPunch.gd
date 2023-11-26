@@ -169,8 +169,6 @@ func _on_hurt_box_body_entered(body):
 		if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 			var charge_multiplier = clampf(float(final_charge_duration) / 500.0, 1.0, 3.5)
 			var actual_damage = floor(Globals.player_damage_defaults[name] * Globals.player_stats["damage_multiplier"] * charge_multiplier)
-			var knockback_magnitude = 3.0
-			#var uppercut = false
 			if not this_punch_already_landed:
 				$ImpactAudio.play()
 				this_punch_already_landed = true
@@ -180,7 +178,8 @@ func _on_hurt_box_body_entered(body):
 			attackPacket.recipient = body
 			attackPacket.damage = actual_damage
 			attackPacket.knockback = true
-			attackPacket.impact_vector = Vector2(player.get_last_known_direction(), -1) * knockback_magnitude
+			attackPacket.impact_vector = Vector2(player.get_last_known_direction(), -1)
+			attackPacket.knockback_speed = 2.0
 			hit.connect(body._on_hit)
 			hit.emit(attackPacket)
 			hit.disconnect(body._on_hit)

@@ -22,7 +22,7 @@ func _ready():
 		$crane.move_ready = true
 	
 	AudioManager.play_track("CraneLevelTheme")
-	$DockSeaAmbient.play()
+	#$DockSeaAmbient.play()
 
 
 func add_weight(weight:int) -> void:
@@ -89,7 +89,7 @@ func _on_confirm_pressed():
 
 
 func _on_drop_points_drop_started():
-	$HUD/HBoxContainer/ResetButton.disabled = true
+	$HUD/Panel/ResetButton.disabled = true
 
 func _on_drop_points_drop_over():
-	$HUD/HBoxContainer/ResetButton.disabled = false
+	$HUD/Panel/ResetButton.disabled = false

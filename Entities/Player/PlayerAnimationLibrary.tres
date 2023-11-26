@@ -1410,7 +1410,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_r2a28"]
 resource_name = "strong_punch"
-length = 0.9
+length = 0.8
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1419,7 +1419,7 @@ tracks/0/path = NodePath("StateMachine/StrongPunch/HurtBox/StrongCollisionShape:
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.9),
+"times": PackedFloat32Array(0, 0.5, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -1431,7 +1431,7 @@ tracks/1/path = NodePath("Body/CyberRoninSprites:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.35, 0.4, 0.9),
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.4, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [&"charge_start", &"charge", &"fully_charged", &"charged_punch", &"idle"]
@@ -1443,7 +1443,7 @@ tracks/2/path = NodePath("Body/CyberRoninSprites:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4, 0.45, 0.5, 0.8, 0.85, 0.9),
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.45, 0.5, 0.7, 0.75, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(18, -31), Vector2(22, -31), Vector2(22, -31), Vector2(23, -31), Vector2(-30, -32), Vector2(-30, -31), Vector2(-29, -32), Vector2(18, -31)]
@@ -1467,7 +1467,7 @@ tracks/4/path = NodePath("Audio/WhipCrack:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.4, 0.95),
+"times": PackedFloat32Array(0.4, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -1638,7 +1638,7 @@ tracks/17/path = NodePath("Body/CyberRoninSprites:frame")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(0.4, 0.85),
+"times": PackedFloat32Array(0.4, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0, 6]

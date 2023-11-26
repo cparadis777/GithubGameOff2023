@@ -46,7 +46,7 @@ var max_stats_upper_limits = {
 
 @export var player_damage_defaults := {
 	"FastPunch":50,
-	"StrongPunch":100, # plus charge time
+	"StrongPunch":80, # time multiples for charge time
 	"DescendingKick":150,
 	"Dash":30 # dash was OP, becaus it offers useful mobility and damage
 }

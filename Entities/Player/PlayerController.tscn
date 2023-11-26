@@ -123,7 +123,7 @@ size = Vector2(16, 15)
 size = Vector2(20, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghqx3"]
-size = Vector2(59, 37.4751)
+size = Vector2(17, 37.4751)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_10l48"]
 streams_count = 3
@@ -303,7 +303,7 @@ horizontal_alignment = 1
 
 [node name="StrongPunch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("charge_vfx")]
 script = ExtResource("27_487ye")
-stepping_back = true
+cancel_frames_active = true
 charge_vfx = NodePath("CPUParticles2D")
 
 [node name="HurtBox" type="Area2D" parent="StateMachine/StrongPunch"]
@@ -312,7 +312,7 @@ collision_layer = 0
 collision_mask = 10
 
 [node name="StrongCollisionShape" type="CollisionShape2D" parent="StateMachine/StrongPunch/HurtBox"]
-position = Vector2(-6.5, -4.26243)
+position = Vector2(-30.5, -4.26243)
 shape = SubResource("RectangleShape2D_ghqx3")
 disabled = true
 
