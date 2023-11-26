@@ -246,7 +246,7 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_i_frames_timer_timeout():
-	assert(State == States.IFRAMES, "dock worker iframes timeout but State != iframes")
+	assert(State == States.IFRAMES, "dock worker iframes timeout but State != iframes. State == " + States.keys()[State])
 	if State not in [States.DYING, States.DEAD]:
 		$HurtFlash.hide()
 		if health <= 0.0:
