@@ -7,8 +7,8 @@ var playspace_parameters: Dictionary
 var beat_the_boss_screen : PackedScene = preload("res://CutScenes/BeatTheBossWinCutscene.tscn")
 var player_dead_scene: PackedScene = preload("res://CutScenes/PlayerDeadLoseCutscene.tscn")
 
-var current_fight_level_idx = null
-var current_stack_level_idx = null
+var current_fight_level_idx = 0
+var current_stack_level_idx = 0
 
 
 var stacklevels = [
@@ -59,7 +59,7 @@ func reset_playspace():
 #		var playspace = get_tree().get_root().get_node("GeneratedPlayspace")
 #		playspace.reset()
 	
-	change_scene_to(stacklevels[current_stack_level_idx])
+	change_scene_to(fightlevels[current_fight_level_idx])
 		
 	
 func set_playspace_parameters(data:Dictionary) -> void:
