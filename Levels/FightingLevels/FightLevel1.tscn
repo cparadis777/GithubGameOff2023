@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://dqe41rrauj6by" path="res://Entities/Environment/Containers/LargeEmptyContainer.tscn" id="6_63eem"]
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="7_nn4vb"]
 [ext_resource type="AudioStream" uid="uid://chy3if1m4qsn0" path="res://audio/sfx/TutorialAIVoice/opening_doors.ogg" id="8_qinkv"]
-[ext_resource type="PackedScene" uid="uid://dhxm77joahdfb" path="res://Entities/Environment/Containers/special/terminal_container.tscn" id="9_kx1r5"]
 [ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="10_mknoa"]
 [ext_resource type="Texture2D" uid="uid://67m50eh8jeq1" path="res://art/materials/shaders/2DOmniLight.png" id="11_xm0wy"]
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="12_xaucd"]
+[ext_resource type="PackedScene" uid="uid://f81lk2428snl" path="res://Entities/Environment/Containers/special/TerminalContainer.tscn" id="13_8vlpw"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="13_tij1x"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d5jlm"]
@@ -77,10 +77,6 @@ show_exterior_on_start = false
 stream = ExtResource("8_qinkv")
 volume_db = 4.0
 
-[node name="TerminalContainer" parent="." instance=ExtResource("9_kx1r5")]
-position = Vector2(1921, -1443)
-container_exit_flags = 1
-
 [node name="AI_Tutorial_Text" parent="." instance=ExtResource("10_mknoa")]
 light_mask = 2
 position = Vector2(-785, 184)
@@ -115,6 +111,9 @@ visible = false
 environment = SubResource("Environment_j2q28")
 
 [node name="ParallaxBackground2" parent="." instance=ExtResource("13_tij1x")]
+
+[node name="TerminalContainer" parent="." instance=ExtResource("13_8vlpw")]
+position = Vector2(1921, -1444)
 
 [connection signal="finished" from="AI_Tutorial_Text" to="BigArrow" method="show"]
 
