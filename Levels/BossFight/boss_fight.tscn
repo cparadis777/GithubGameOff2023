@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ci2y2jwgnuun5"]
+[gd_scene load_steps=27 format=3 uid="uid://ci2y2jwgnuun5"]
 
 [ext_resource type="Script" path="res://Levels/BossFight/BossFight.gd" id="1_h8arg"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_akm5b"]
@@ -12,9 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://4ubg2v861dlv" path="res://Entities/NPCs/boss_npc.tscn" id="7_waqrp"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="8_c4bua"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="9_tjew5"]
+[ext_resource type="PackedScene" uid="uid://d14b0n2jkrj85" path="res://Entities/Projectiles/falling_robot.tscn" id="12_wlx50"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="13_o5i0a"]
 [ext_resource type="Script" path="res://Levels/BossFight/BossFightCinematic.gd" id="14_gg47m"]
 [ext_resource type="AudioStream" uid="uid://px8em5ufndah" path="res://audio/sfx/placeholder/ha-ha-ha---ha.wav" id="15_ayayn"]
+[ext_resource type="PackedScene" uid="uid://dh3odxs6vlefi" path="res://Entities/Projectiles/bullet_tossed_shipping_container.tscn" id="15_t45xl"]
 [ext_resource type="AudioStream" uid="uid://c6l3b17t5jrnt" path="res://audio/sfx/placeholder/flame.wav" id="16_rmxvp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vbhb"]
@@ -459,11 +461,23 @@ position = Vector2(445, -451)
 position = Vector2(395, -451)
 linked_nodes = [null]
 
+[node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("5_e40gm")]
+position = Vector2(83, -36)
+
+[node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("5_e40gm")]
+position = Vector2(628, -293)
+
+[node name="JumpThroughPlatform4" parent="Platforms" instance=ExtResource("5_e40gm")]
+position = Vector2(627, 125)
+
 [node name="ShippingContainers" type="Node2D" parent="."]
 
 [node name="FallingBossContainer" parent="ShippingContainers" instance=ExtResource("7_f3s0p")]
+position = Vector2(396, -119)
 collision_layer = 8
 collision_mask = 9
+
+[node name="FallingRobot" parent="ShippingContainers" instance=ExtResource("12_wlx50")]
 
 [node name="Player" parent="." instance=ExtResource("8_c4bua")]
 position = Vector2(26, 355)
@@ -473,6 +487,9 @@ position = Vector2(106, 361)
 
 [node name="Sprite2D" parent="BossNPC/Appearance" index="0"]
 material = SubResource("ShaderMaterial_nlpgs")
+
+[node name="SimpleShootAttack" parent="BossNPC/Behaviours/Attacks" index="1"]
+bullet_scene = ExtResource("15_t45xl")
 
 [node name="Panel" type="Panel" parent="BossNPC"]
 visible = false

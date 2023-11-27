@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d14b0n2jkrj85"]
+
+[ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="1_qy5bf"]
+[ext_resource type="Script" path="res://Entities/Projectiles/falling_robot.gd" id="1_xqmx7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rr52r"]
+size = Vector2(121, 119)
+
+[node name="FallingRobot" type="RigidBody2D"]
+position = Vector2(83, 51)
+script = ExtResource("1_xqmx7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qy5bf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_rr52r")
