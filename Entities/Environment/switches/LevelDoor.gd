@@ -59,4 +59,4 @@ func _on_body_exited(body):
 	if body == StageManager.current_player:
 		player_near = false
 		%Label.hide()
-		%Sprite2D.show()
+		%Sprite2D.hide()

@@ -60,11 +60,11 @@ button_texture = ExtResource("4_5x4wx")
 position = Vector2(-84, 19)
 texture = ExtResource("4_5x4wx")
 
-[node name="ButtonSprite" parent="AttackDemo/ButtonSprite" index="0"]
-position = Vector2(20, 0)
+[node name="ButtonSprite2" type="Sprite2D" parent="AttackDemo" index="3"]
+position = Vector2(-65, 19)
 texture = ExtResource("10_v6gc3")
 
-[node name="CyberRoninSprites" parent="AttackDemo" index="3"]
+[node name="CyberRoninSprites" parent="AttackDemo" index="4"]
 animation = &"strong_punch"
 flip_h = true
 
