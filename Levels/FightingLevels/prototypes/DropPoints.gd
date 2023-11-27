@@ -16,6 +16,8 @@ signal weight_added(weight)
 signal drop_started
 signal drop_over
 signal weight_reset()
+signal valid_level
+signal invalid_level
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -96,7 +98,10 @@ func drop_done() -> void:
 	old_parent.remove_child(self.container_dropping)
 	self.drop_point_targeted.add_child(self.container_dropping)
 	self.container_dropping.position = (Vector2(0,0))
-	self.validate_level()
+	if self.validate_level():
+		emit_signal("valid_level")
+	else:
+		emit_signal("invalid_level")
 	var tween = get_tree().create_tween()
 	tween.tween_property(container_dropping, "position", Vector2(0, -5), 0.2).set_ease(tween.EASE_OUT)
 	tween.tween_property(container_dropping, "position", Vector2(0,0), 0.1)

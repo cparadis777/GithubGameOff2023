@@ -21,7 +21,7 @@ func _ready():
 	else:
 		$crane.move_ready = true
 	$HUD/WarningPopup.hide()
-	
+	$HUD/Panel/FightButton.disabled = true
 	AudioManager.play_track("CraneLevelTheme")
 	$DockSeaAmbient.play()
 
@@ -94,3 +94,13 @@ func _on_drop_points_drop_started():
 
 func _on_drop_points_drop_over():
 	$HUD/Panel/ResetButton.disabled = false
+
+
+
+func _on_drop_points_valid_level():
+	$HUD/Panel/FightButton.disabled = false
+
+
+func _on_drop_points_invalid_level():
+	$HUD/Panel/FightButton.disabled = true
+
