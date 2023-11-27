@@ -184,3 +184,7 @@ texture = ExtResource("7_wd7kj")
 libraries = {
 "": SubResource("AnimationLibrary_31e0y")
 }
+
+[node name="SpamTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
