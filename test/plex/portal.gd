@@ -85,7 +85,8 @@ func transport_player(body):
 	var tween = create_tween()
 	tween.tween_property(body, "global_position", $Destination.global_position, tween_duration)
 	body_in_transit = body
-	linked_portal.locked = false
+	if (linked_portal):
+		linked_portal.locked = false
 	tween.finished.connect(_on_tween_finished)
 
 
