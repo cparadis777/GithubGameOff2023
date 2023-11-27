@@ -135,7 +135,7 @@ _data = {
 "zoom_in": SubResource("Animation_iohgr")
 }
 
-[node name="ContainerStackingTest" type="Node2D"]
+[node name="StackLevel1" type="Node2D"]
 position = Vector2(1, 1)
 script = ExtResource("1_e4gt1")
 target_weight = 300
@@ -197,8 +197,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = 360.0
+offset_bottom = 169.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -225,11 +225,11 @@ text = "Yes. Fight Anyways."
 [node name="DropPoints" type="Node2D" parent="."]
 position = Vector2(-17, -113)
 script = ExtResource("12_apna7")
-exit_coord = Vector2(1, 3)
+exit_coord = Vector2(1, 2)
 entrance_direction = 3
 exit_direction = 1
 n_horizontal = 2
-n_vertical = 4
+n_vertical = 3
 container_width = 48
 container_height = 24
 
@@ -270,9 +270,6 @@ position = Vector2(79, -113)
 
 [node name="BaseContainer5" parent="Arena" instance=ExtResource("14_oaqod")]
 position = Vector2(79, -137)
-
-[node name="BaseContainer8" parent="Arena" instance=ExtResource("14_oaqod")]
-position = Vector2(79, -161)
 
 [node name="BaseContainer12" parent="Arena" instance=ExtResource("14_oaqod")]
 position = Vector2(-113, -161)
@@ -407,15 +404,15 @@ theme_override_font_sizes/font_size = 14
 text = "Start"
 
 [node name="FinishLabel" type="Label" parent="Instructions"]
-offset_left = 107.0
-offset_top = -18.0
-offset_right = 153.0
-offset_bottom = 8.0
+offset_left = 105.0
+offset_top = 6.0
+offset_right = 151.0
+offset_bottom = 32.0
 theme_override_font_sizes/font_size = 14
 text = "Finish"
 
 [node name="TerminalContainer" parent="." instance=ExtResource("19_5i2o1")]
-position = Vector2(79, -185)
+position = Vector2(79, -161)
 entrances = {
 0: false,
 1: false,

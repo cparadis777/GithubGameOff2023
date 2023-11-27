@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d0i2kn6vltvm0"]
+[gd_scene load_steps=25 format=3 uid="uid://d0i2kn6vltvm0"]
 
 [ext_resource type="Script" path="res://Levels/StackingLevels/prototypes/ContainerStackingTest.gd" id="1_vlh66"]
 [ext_resource type="Texture2D" uid="uid://dtuuvvgnlqgjt" path="res://art/UI/Container Stacking/panel.png" id="2_bp5ka"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="14_6te3c"]
 [ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="15_ucdyp"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="16_ftu3o"]
-[ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="17_2j7wx"]
 [ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="18_4akgk"]
 [ext_resource type="PackedScene" uid="uid://diik2yboc0mbr" path="res://Entities/Droppable/TerminalContainer.tscn" id="19_20mxa"]
 [ext_resource type="AudioStream" uid="uid://765736xedns2" path="res://audio/music/DockSeaAmbient.mp3" id="20_62648"]
@@ -135,11 +134,12 @@ _data = {
 "zoom_in": SubResource("Animation_iohgr")
 }
 
-[node name="ContainerStackingTest" type="Node2D"]
+[node name="StackLevel2" type="Node2D"]
 position = Vector2(1, 1)
 script = ExtResource("1_vlh66")
 target_weight = 300
 scene_path = "res://Levels/GeneratedPlayspace.tscn"
+has_tutorial = false
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 100
@@ -362,25 +362,6 @@ drop_zone = NodePath("../DropPoints")
 [node name="Instructions" type="Node2D" parent="."]
 position = Vector2(0, -177)
 
-[node name="Tutorial_AI" parent="Instructions" instance=ExtResource("17_2j7wx")]
-position = Vector2(-139, 80)
-scale = Vector2(0.5, 0.5)
-override_text = "Stack containers
-in a continuous path 
-from start to finish.;Use the levers [A] and [D]
-to move containers
-left and right.;
-To rotate the containers,
-use the pedals [Q] and [E].;
-To drop them, 
-press the [SPACE] button.;If your path doesn't lead
-anywhere, you can retry by
-pressing the RESET button.;Evilcorp Employee.
-Stack your way to a
-pay raise and be productive. 
-
-"
-
 [node name="controls" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("18_4akgk")]
 visible = false
 z_index = 1
@@ -445,5 +426,4 @@ volume_db = -4.0
 [connection signal="drop_started" from="DropPoints" to="." method="_on_drop_points_drop_started"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
 [connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]
-[connection signal="finished" from="Instructions/Tutorial_AI" to="." method="_on_tutorial_ai_finished"]
 [connection signal="finished" from="Instructions/placement" to="." method="_on_placement_instructions_finished"]

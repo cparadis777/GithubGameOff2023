@@ -2,6 +2,7 @@ extends Node2D
 
 @export var target_weight:int
 @export var scene_path: String # GeneratedPlayspace.tscn
+@export var has_tutorial:bool = true
 var current_weight:int
 var ignore_invalid_path : bool = false
 
@@ -15,7 +16,10 @@ func _ready():
 
 	await get_tree().create_timer(0.25).timeout
 	#$Instructions/controls.popup()
-	$"Instructions/Tutorial_AI".show()
+	if self.has_tutorial:
+		$"Instructions/Tutorial_AI".show()
+	else:
+		$crane.move_ready = true
 	$HUD/WarningPopup.hide()
 	
 	AudioManager.play_track("CraneLevelTheme")
