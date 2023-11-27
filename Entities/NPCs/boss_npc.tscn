@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_46dpl"]
 [ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="3_mxgy3"]
 [ext_resource type="Texture2D" uid="uid://bsgyd5cohss47" path="res://art/decals/alert.png" id="4_jtmub"]
-[ext_resource type="PackedScene" uid="uid://usfeedt27tlm" path="res://Entities/Projectiles/falling_container_boss_fight_attack.tscn" id="5_v6iel"]
+[ext_resource type="PackedScene" uid="uid://d14b0n2jkrj85" path="res://Entities/Projectiles/falling_robot.tscn" id="5_7fgqb"]
 [ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_85rgl"]
 [ext_resource type="Script" path="res://Entities/NPCs/BossRocketBoots.gd" id="7_0mmdm"]
 [ext_resource type="PackedScene" uid="uid://bo6co2dvbw2ld" path="res://Entities/NPCs/vfx/rocket_boot_flame.tscn" id="8_85cby"]
@@ -236,7 +236,7 @@ shape = SubResource("RectangleShape2D_shbba")
 
 [node name="SimpleShootAttack" parent="Behaviours/Attacks" index="1"]
 enabled = true
-bullet_scene = ExtResource("5_v6iel")
+bullet_scene = ExtResource("5_7fgqb")
 free_rotate = false
 
 [node name="AnimationPlayer" parent="." index="3"]
