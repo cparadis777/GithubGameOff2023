@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dechmjb2nhtq3"]
 
 [ext_resource type="PackedScene" uid="uid://bng5gkkfxrli5" path="res://Entities/Environment/Pickables/base_pickable.tscn" id="1_6u8hg"]
-[ext_resource type="Texture2D" uid="uid://bxp2nsrmcx2j" path="res://art/pickups/speed-pickup.png" id="2_ex8w8"]
+[ext_resource type="Texture2D" uid="uid://bbiq8m62k4y22" path="res://art/pickups/jump-pickup.png" id="2_dcv7t"]
 
 [node name="JumpPickable" instance=ExtResource("1_6u8hg")]
 pickup_type = 3
 
 [node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("2_ex8w8")
+texture = ExtResource("2_dcv7t")

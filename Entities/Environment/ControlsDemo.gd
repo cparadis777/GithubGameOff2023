@@ -28,6 +28,6 @@ func play_next_in_sequence():
 
 func _on_animation_finished():
 	if animation_sequence == null:
-		$CyberRoninSprites.play
+		$CyberRoninSprites.play()
 	else:
 		play_next_in_sequence()

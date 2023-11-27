@@ -30,10 +30,17 @@ particles_anim_loop = false
 [node name="VendingMachine" type="RigidBody2D" groups=["Kickables"]]
 position = Vector2(320, 0)
 collision_layer = 8
-collision_mask = 27
+collision_mask = 9
 mass = 0.75
 physics_material_override = SubResource("PhysicsMaterial_g7ife")
 script = ExtResource("1_26mxr")
+chance_to_spawn_anything = 1.0
+spawn_probabilities = {
+0: 0.2,
+1: 0.3,
+2: 0.3,
+3: 0.2
+}
 
 [node name="CanImage" type="Sprite2D" parent="."]
 position = Vector2(2.20891, -11.4405)
