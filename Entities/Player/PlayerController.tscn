@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=57 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
@@ -33,6 +33,7 @@
 [ext_resource type="AudioStream" uid="uid://53nu3fgsjlc7" path="res://audio/sfx/player_sfx/player_punch3_uppercut.mp3" id="28_n44v8"]
 [ext_resource type="Script" path="res://Entities/Player/Duck.gd" id="28_qvkao"]
 [ext_resource type="Script" path="res://Entities/Player/WallHang.gd" id="29_71l80"]
+[ext_resource type="Script" path="res://Entities/Player/PlayerPaused.gd" id="30_268ca"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 7.0
@@ -381,6 +382,9 @@ script = ExtResource("28_qvkao")
 
 [node name="WallHang" type="Node2D" parent="StateMachine"]
 script = ExtResource("29_71l80")
+
+[node name="Paused" type="Node2D" parent="StateMachine"]
+script = ExtResource("30_268ca")
 
 [node name="Debug" type="Node2D" parent="."]
 visible = false

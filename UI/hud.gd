@@ -30,6 +30,16 @@ func _on_player_hit(_attackPacket):
 	
 func _on_player_picked_up_health():
 	update_health_display(player.health)
+	
+func _on_player_picked_up_powerup(powerupType : Globals.PickupTypes):
+	if powerupType == Globals.PickupTypes.HEALTH:
+		return
+	else:
+		var new_cutscene = preload("res://CutScenes/powerup_cutscene.tscn").instantiate()
+		add_child(new_cutscene)
+		new_cutscene.activate(powerupType)
+		new_cutscene.position = Vector2.ZERO
+	
 
 
 

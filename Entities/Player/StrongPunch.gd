@@ -16,7 +16,12 @@ var damage
 var this_punch_already_landed : bool = false
 
 @export var stepping_back : bool = false
-@export var moving : bool = false
+@export var moving : bool = false :
+	set(value):
+		moving = value
+		_on_moving_forward()
+	get:
+		return moving
 @export var cancel_frames_active: bool = false
 
 @export var charge_vfx : Node 
@@ -121,7 +126,9 @@ func execute_punch():
 func hold_for_key_release():
 	player.animation_player.pause()
 	
-	
+func _on_moving_forward():
+	# called from setget of moving property, which is set by animation player
+	pass
 
 func enter(_msg := {}) -> void:
 	punch_direction = player.get_last_known_direction()
