@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="3_tamoy"]
 [ext_resource type="Texture2D" uid="uid://b1yn4w4s1acoc" path="res://art/placeholder/gamepad_button_right.png" id="4_x4det"]
 [ext_resource type="Texture2D" uid="uid://3kfisyqqqjqc" path="res://art/placeholder/gamepad_button_left.png" id="4_xxja8"]
-[ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Levels/StackingLevels/prototypes/ContainerStackingTest.tscn" id="5_73qyb"]
+[ext_resource type="PackedScene" uid="uid://c3l0djo5xdqai" path="res://Levels/StackingLevels/StackLevel1.tscn" id="5_gt7gr"]
 [ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="5_jonlp"]
 [ext_resource type="PackedScene" uid="uid://daqb2qqfyv1v5" path="res://Entities/Environment/Platforms/moving_girder.tscn" id="6_dn4kt"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="7_hwa8q"]
@@ -18,7 +18,7 @@ exit_flags = 4
 
 [node name="SwitchDemo" parent="BaseContainer" index="8" instance=ExtResource("3_tamoy")]
 position = Vector2(-82, 61)
-animation_name = "fast_punch"
+animation_name = "jab_left"
 label_text = "F"
 button_texture = ExtResource("4_x4det")
 
@@ -28,13 +28,12 @@ texture = ExtResource("4_xxja8")
 
 [node name="CyberRoninSprites" parent="BaseContainer/SwitchDemo" index="3"]
 visible = false
-animation = &"idle"
 flip_h = true
 
 [node name="NextLevelDoor" parent="BaseContainer" index="11"]
 position = Vector2(-111, -77)
 rotation = -1.5708
-next_scene = ExtResource("5_73qyb")
+next_scene = ExtResource("5_gt7gr")
 location = 0
 
 [node name="Player" parent="." index="1"]

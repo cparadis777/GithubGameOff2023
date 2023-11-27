@@ -1,6 +1,7 @@
-[gd_scene load_steps=57 format=3 uid="uid://bs3xmnbwmhy8h"]
+[gd_scene load_steps=59 format=3 uid="uid://bs3xmnbwmhy8h"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_8yn75"]
+[ext_resource type="Script" path="res://Entities/Player/PushBlock.gd" id="2_a4xir"]
 [ext_resource type="PackedScene" uid="uid://b4bmc8kffxqk" path="res://Entities/Player/PlayerCamera.tscn" id="2_n3cgq"]
 [ext_resource type="Script" path="res://Entities/Player/LookaheadCameraFollower.gd" id="2_x7k1v"]
 [ext_resource type="Texture2D" uid="uid://b5kqk4ulv38a2" path="res://art/player/speed_lines.png" id="4_nhl25"]
@@ -34,6 +35,8 @@
 [ext_resource type="Script" path="res://Entities/Player/Duck.gd" id="28_qvkao"]
 [ext_resource type="Script" path="res://Entities/Player/WallHang.gd" id="29_71l80"]
 [ext_resource type="Script" path="res://Entities/Player/PlayerPaused.gd" id="30_268ca"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k06m8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghh7o"]
 radius = 7.0
@@ -167,6 +170,15 @@ size = Vector2(14, 6)
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 15
 script = ExtResource("1_8yn75")
+
+[node name="PushBlock" type="Area2D" parent="."]
+position = Vector2(19, -10)
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_a4xir")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushBlock"]
+shape = SubResource("RectangleShape2D_k06m8")
 
 [node name="WallDetector" type="RayCast2D" parent="."]
 position = Vector2(0, -19)
@@ -416,6 +428,7 @@ collision_mask = 10
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_m8oiq")
 
+[connection signal="body_entered" from="PushBlock" to="PushBlock" method="_on_body_entered"]
 [connection signal="timeout" from="StateMachine/DescendingKick/UnstuckTimer" to="StateMachine/DescendingKick" method="_on_unstuck_timer_timeout"]
 [connection signal="body_entered" from="StateMachine/DescendingKick/HurtBox" to="StateMachine/DescendingKick" method="_on_hurt_box_body_entered"]
 [connection signal="timeout" from="StateMachine/DescendingKick/DescendingKickTimer" to="StateMachine/DescendingKick" method="_on_descending_kick_timer_timeout"]
