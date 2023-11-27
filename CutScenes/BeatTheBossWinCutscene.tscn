@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bjb6nx8fcj51a"]
 
 [ext_resource type="Texture2D" uid="uid://fnaryn1vw1cs" path="res://art/background/dumpster.png" id="1_tmajr"]
-[ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="2_gjnrv"]
+[ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="2_m31g4"]
 [ext_resource type="PackedScene" uid="uid://bxyn1mq357nt6" path="res://Entities/Player/cyber_ronin_sprites.tscn" id="3_0juc8"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="4_gg7re"]
 
@@ -287,8 +287,11 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -318.0
+offset_bottom = -179.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -324,7 +327,7 @@ frame = 2
 [node name="FatBoss" type="Sprite2D" parent="VBoxContainer/Container"]
 position = Vector2(-107, 71)
 rotation = -1.26445
-texture = ExtResource("2_gjnrv")
+texture = ExtResource("2_m31g4")
 
 [node name="CyberRoninSprites" parent="VBoxContainer/Container" instance=ExtResource("3_0juc8")]
 position = Vector2(-87.5, 90)
