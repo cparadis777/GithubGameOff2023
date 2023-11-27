@@ -1,49 +1,82 @@
-[gd_scene load_steps=15 format=3 uid="uid://brq0phdu6dm3j"]
+[gd_scene load_steps=13 format=3 uid="uid://brq0phdu6dm3j"]
 
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_p1blx"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_c3yes"]
-[ext_resource type="Script" path="res://Levels/placeholder/ChallengeSpawningLogic.gd" id="2_eey8x"]
-[ext_resource type="PackedScene" uid="uid://ddkm7lpck4cwy" path="res://Entities/Environment/ObstacleSpawners/ObstacleSpawner.tscn" id="3_06o56"]
-[ext_resource type="PackedScene" uid="uid://btwdkp7lrbg0d" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/assassin_on_platform.tscn" id="4_gtsx1"]
-[ext_resource type="PackedScene" uid="uid://cj18qabpjb2wu" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/dock_guy_on_platform.tscn" id="5_qj7ew"]
+[ext_resource type="Texture2D" uid="uid://s3yj6hwc0vmp" path="res://art/decals/bg decals/graffiti_1.png" id="2_sibjl"]
+[ext_resource type="Texture2D" uid="uid://pi3lcqiys8rq" path="res://art/decals/bg decals/buff_cat_poster.png" id="3_uvj3c"]
+[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="4_fb3sk"]
+[ext_resource type="Texture2D" uid="uid://c3be27uty47r" path="res://art/decals/bg decals/graffiti_2.png" id="5_2i8bd"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="6_8tapn"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="7_dolw5"]
+[ext_resource type="PackedScene" uid="uid://coqkjhe8s4lj8" path="res://Entities/Environment/Kickables/soda_can.tscn" id="7_regei"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="7_va5xi"]
-[ext_resource type="PackedScene" uid="uid://b1gw2o1d85wpr" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/three_star_trap.tscn" id="8_qqtd3"]
-[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="9_retip"]
-[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="10_wllnc"]
-[ext_resource type="PackedScene" uid="uid://biegidqhn52kc" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/shooty_guy_on_platform.tscn" id="11_cfb0o"]
+[ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="8_qgqn3"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="12_8ypmm"]
-[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="13_2ckg4"]
 
 [node name="BaseContainer" instance=ExtResource("1_p1blx")]
+num_generated_objects = 5
 
-[node name="SpawningLogic" type="Node2D" parent="." index="2"]
-position = Vector2(0, 152)
-script = ExtResource("2_eey8x")
+[node name="Decorations" type="Node2D" parent="." index="1"]
+z_index = -3
 
-[node name="Platforms" parent="SpawningLogic" index="0" instance=ExtResource("3_06o56")]
-position = Vector2(-348, -254)
+[node name="Graffiti1" type="Sprite2D" parent="Decorations" index="0"]
+position = Vector2(-214, 68)
+texture = ExtResource("2_sibjl")
 
-[node name="SpawnList" parent="SpawningLogic/Platforms" index="0"]
-resources = [PackedStringArray("assassin_on_platform", "dock_guy_on_platform", "moving_platform", "platform_jump_thru", "three_star_trap"), [ExtResource("4_gtsx1"), ExtResource("5_qj7ew"), ExtResource("6_8tapn"), ExtResource("7_va5xi"), ExtResource("8_qqtd3")]]
+[node name="graffiti3" type="Sprite2D" parent="Decorations" index="1"]
+position = Vector2(-260, -105)
+texture = ExtResource("5_2i8bd")
 
-[node name="SpawnZone" parent="SpawningLogic/Platforms" index="1"]
-offset_bottom = 205.0
+[node name="BuffCatPoster" type="Sprite2D" parent="Decorations" index="2"]
+position = Vector2(208, -70)
+texture = ExtResource("3_uvj3c")
 
-[node name="Floor" parent="SpawningLogic" index="1" instance=ExtResource("3_06o56")]
-position = Vector2(-343, 2)
+[node name="Objects" type="Node2D" parent="." index="5"]
 
-[node name="SpawnList" parent="SpawningLogic/Floor" index="0"]
-resources = [PackedStringArray("npc_02_dock_worker", "npc_03_running_assassin", "shooty_guy_on_platform", "shooty_npc", "trap_spikes"), [ExtResource("9_retip"), ExtResource("10_wllnc"), ExtResource("11_cfb0o"), ExtResource("12_8ypmm"), ExtResource("13_2ckg4")]]
+[node name="VendingMachine" parent="Objects" index="0" instance=ExtResource("7_dolw5")]
+position = Vector2(-372, -59)
 
-[node name="SpawnZone" parent="SpawningLogic/Floor" index="1"]
-offset_bottom = 15.0
+[node name="SoydaBox" parent="Objects" index="1" instance=ExtResource("8_qgqn3")]
+position = Vector2(219, -5)
 
-[node name="Exterior" parent="." index="5"]
+[node name="SodaCan" parent="Objects" index="2" instance=ExtResource("7_regei")]
+position = Vector2(67, 76)
+
+[node name="SodaCan2" parent="Objects" index="3" instance=ExtResource("7_regei")]
+position = Vector2(141, 161)
+
+[node name="SodaCan3" parent="Objects" index="4" instance=ExtResource("7_regei")]
+position = Vector2(130, 163)
+
+[node name="SodaCan4" parent="Objects" index="5" instance=ExtResource("7_regei")]
+position = Vector2(-150, 128)
+
+[node name="Exterior" parent="." index="6"]
 texture = ExtResource("2_c3yes")
 
-[node name="RunningAssassin" parent="." index="10" instance=ExtResource("10_wllnc")]
-position = Vector2(-139, 162)
+[node name="ShootyNPC2" parent="_Enemies" index="0" instance=ExtResource("12_8ypmm")]
+position = Vector2(276, -3)
 
-[editable path="SpawningLogic/Platforms"]
-[editable path="SpawningLogic/Floor"]
+[node name="ShootyNPC" parent="_Enemies" index="1" instance=ExtResource("12_8ypmm")]
+position = Vector2(-1, 78)
+
+[node name="NewRunner" parent="_Enemies" index="2" instance=ExtResource("4_fb3sk")]
+position = Vector2(-261, 165)
+
+[node name="NewRunner2" parent="_Enemies" index="3" instance=ExtResource("4_fb3sk")]
+position = Vector2(189, 167)
+
+[node name="JumpThroughPlatform" parent="_Platforms" index="0" instance=ExtResource("7_va5xi")]
+position = Vector2(2, 82)
+
+[node name="JumpThroughPlatform2" parent="_Platforms" index="1" instance=ExtResource("7_va5xi")]
+position = Vector2(257, -4)
+
+[node name="JumpThroughPlatform4" parent="_Platforms" index="2" instance=ExtResource("7_va5xi")]
+position = Vector2(0, -100)
+
+[node name="MovingPlatform" parent="_Platforms" index="3" instance=ExtResource("6_8tapn")]
+position = Vector2(-164, 137)
+
+[node name="JumpThroughPlatform3" parent="_Platforms" index="4" instance=ExtResource("7_va5xi")]
+position = Vector2(-314, -57)
