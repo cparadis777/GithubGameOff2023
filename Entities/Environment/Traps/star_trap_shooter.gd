@@ -1,5 +1,6 @@
 extends AnimatableBody2D
 
+
 enum Goals { RELAX, RELOCATE, SHOOT_PLAYER }
 
 var Goal : Goals = Goals.RELAX
@@ -31,7 +32,8 @@ func set_difficulty(difficulty : Globals.DifficultyScales):
 func activate(): # from BaseContainer _on_body_entered
 	_on_decision_timer_timeout() # get started immediately
 	if owner and owner.has_method("_on_NPC_died"):
-		died.connect(owner._on_NPC_died)
+		if not died.is_connected(owner._on_NPC_died):
+			died.connect(owner._on_NPC_died)
 	
 func choose_random_goal():
 	var dice_roll = randf()
