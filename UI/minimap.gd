@@ -12,10 +12,13 @@ func _ready():
 	$SubViewport/MapRefreshTimer.start()
 
 func create_map():
-	if !get_tree().get_root().has_node("GeneratedPlayspace"):
-		return
+	var playspace
+	playspace = get_tree().get_first_node_in_group("GeneratedPlayspace")
+	if playspace == null:
+		playspace = get_tree().get_root().find_child("FightLevel")
+	if playspace == null:
+		playspace = get_tree().get_root().find_child("GeneratedPlayspace")
 	
-	var playspace = get_tree().get_root().get_node("GeneratedPlayspace")
 	if playspace != null and playspace.has_node("ContainerGrid"):
 		for container in playspace.get_node("ContainerGrid").get_children():
 			if container.get("container_exit_flags") != null: # it's a container

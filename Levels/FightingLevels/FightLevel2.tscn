@@ -21,7 +21,7 @@ background_mode = 3
 ambient_light_energy = 0.2
 glow_enabled = true
 
-[node name="GeneratedPlayspace" type="Node2D"]
+[node name="GeneratedPlayspace" type="Node2D" groups=["GeneratedPlayspace"]]
 script = ExtResource("1_ya2wi")
 
 [node name="Player" parent="." instance=ExtResource("2_na87h")]
