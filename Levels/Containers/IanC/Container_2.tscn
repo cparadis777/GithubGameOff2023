@@ -79,9 +79,8 @@ position = Vector2(-285, -19)
 [node name="ShootyNPC2" parent="Enemies" index="1" instance=ExtResource("5_kykin")]
 position = Vector2(-90, -18)
 
-[node name="RunningAssassin2" parent="Enemies" index="2" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_2rajp")]
+[node name="RunningAssassin2" parent="Enemies" index="2" instance=ExtResource("7_2rajp")]
 position = Vector2(167, 164)
-animation_player = NodePath("")
 
 [node name="NPC_02_DockWorker" parent="Enemies" index="3" instance=ExtResource("12_pvej1")]
 position = Vector2(175, -4)
