@@ -13,7 +13,7 @@ func enter(_msg := {} ):
 	
 	var new_tutorial_bot = preload("res://UI/tutorial_ai.tscn").instantiate()
 	new_tutorial_bot.override_text = "I'm so sorry you died.\nThat didn't work out.\nLet's rewind a bit..."
-	add_child(new_tutorial_bot)
+	owner.add_sibling(new_tutorial_bot)
 	new_tutorial_bot.global_scale = Vector2.ONE
 	new_tutorial_bot.global_position = self.global_position + Vector2(-96, 96)
 	new_tutorial_bot.z_index = 5

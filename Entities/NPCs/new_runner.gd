@@ -112,19 +112,13 @@ func idle():
 func attack():
 	State = States.ATTACKING
 
+func run():
+	State = States.RUNNING
+	
 func turn_around():
 	direction *= -1
 
-func _on_decision_timer_timeout():
-	if State in [ States.DEAD]:
-		velocity.x = 0
-		$DecisionTimer.stop()
-		return
-	else:
-		$DecisionTimer.start()
 
-	if State in [States.RUNNING, States.JUMPING, States.IDLE ]:
-		choose_new_behaviour()
 
 func choose_new_behaviour():
 	var player = get_tree().get_first_node_in_group("Player")
@@ -145,8 +139,10 @@ func choose_new_behaviour():
 				turn_around()
 		elif random_nums[3] < 0.1:
 			idle()
-		elif random_nums[3] < 0.5:
+		elif random_nums[3] < 0.2:
 			jump()
+		else:
+			run()
 		
 	
 	
@@ -183,16 +179,16 @@ func _on_state_changed(prev_state, new_state):
 			velocity.x = 0
 			$AnimationPlayer.play("die")
 		States.IFRAMES:
-			pass
+			$AnimationPlayer.play("hurt")
 	$StateLabel.text = States.keys()[State]
 	
 	
 func _on_hit(attackPacket : AttackPacket):
 	if State not in [ States.INITIALIZING, States.DEAD, States.IFRAMES ]:
-		$AnimationPlayer.play("hurt")
 		health -= attackPacket.damage
 		#velocity = attackPacket.impact_vector * attackPacket.knockback_speed
 		hurt.emit(attackPacket)
+		State = States.IFRAMES
 		
 
 
@@ -207,4 +203,16 @@ func _on_hurtbox_body_entered(body):
 		hit.connect(body._on_hit)
 		hit.emit(attackPacket)
 		hit.disconnect(body._on_hit)
-	
+
+
+func _on_decision_timer_timeout():
+	if State in [ States.DEAD ]:
+		velocity.x = 0
+		$DecisionTimer.stop()
+		return
+	else:
+		$DecisionTimer.start()
+
+	if State in [States.RUNNING, States.JUMPING, States.IDLE ]:
+		choose_new_behaviour()
+

@@ -33,7 +33,6 @@ hframes = 7
 
 [node name="RobotHead" type="Sprite2D" parent="SubViewport"]
 z_index = 1
-scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_ed7yr")
 
 [node name="MapRefreshTimer" type="Timer" parent="SubViewport"]
