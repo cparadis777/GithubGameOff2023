@@ -62,7 +62,7 @@ position = Vector2(-14, -63)
 animation_name = "land"
 label_text = "S"
 
-[node name="CyberRoninSprites" parent="FallDemo" index="1"]
+[node name="CyberRoninSprites" parent="FallDemo" index="3"]
 animation = &"land"
 frame = 1
 frame_progress = 0.452775

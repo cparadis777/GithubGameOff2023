@@ -51,19 +51,17 @@ position = Vector2(108, -9)
 [node name="AttackDemo" parent="." index="4" instance=ExtResource("3_mcvid")]
 z_index = -1
 position = Vector2(132, 54)
-animation_name = "fast_punch"
+animation_name = "jab_right;jab_left;uppercut;strong_punch"
 label_text = "[,], [.]"
 button_texture = ExtResource("4_5x4wx")
 
-[node name="CyberRoninSprites" parent="AttackDemo" index="1"]
-animation = &"fast_punch"
-frame = 6
-frame_progress = 1.0
-flip_h = true
-
-[node name="ButtonSprite" parent="AttackDemo" index="3"]
+[node name="ButtonSprite" parent="AttackDemo" index="2"]
 position = Vector2(-84, 19)
 texture = ExtResource("4_5x4wx")
+
+[node name="CyberRoninSprites" parent="AttackDemo" index="3"]
+animation = &"strong_punch"
+flip_h = true
 
 [node name="Obstacles" type="Node2D" parent="." index="5"]
 
