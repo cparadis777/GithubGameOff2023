@@ -10,13 +10,18 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if linear_velocity.is_zero_approx():
-		freeze = true
-		$Hurtbox.monitoring = false
+func _physics_process(delta):
+	if !freeze:
+		if linear_velocity.y < 0.1:
+			freeze = true
+			$Hurtbox.monitoring = false
+			
 
 func activate(initial_velocity):
-	linear_velocity = initial_velocity
+	global_position = get_tree().get_first_node_in_group("CraneJaws").global_position + Vector2.DOWN * 96
+	
+	rotation = 0
+	#apply_central_impulse( initial_velocity )
 
 func _on_hurtbox_body_entered(body):
 	if body.is_in_group("Player") and not linear_velocity.is_zero_approx():

@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://usfeedt27tlm"]
+[gd_scene load_steps=12 format=3 uid="uid://usfeedt27tlm"]
 
 [ext_resource type="Texture2D" uid="uid://bg37ae5f0jil0" path="res://art/low_res_containers/low_res_containers.png" id="1_kd8uu"]
 [ext_resource type="Script" path="res://Entities/Projectiles/falling_container_boss_fight_attack.gd" id="1_mu6kq"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="3_4hu0g"]
+[ext_resource type="Script" path="res://Entities/Projectiles/ContainerShadow.gd" id="4_gb12e"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l7aty"]
+bounce = 0.1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xtn5c"]
 size = Vector2(192, 96)
@@ -14,9 +18,25 @@ size = Vector2(192, 7)
 a = Vector2(-97, 0)
 b = Vector2(95, 0)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ajdpx"]
+blend_mode = 3
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_gcv6p"]
+colors = PackedColorArray(0, 0, 0, 1, 0.43134, 0.43134, 0.43134, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qcuuo"]
+gradient = SubResource("Gradient_gcv6p")
+width = 256
+height = 1024
+fill_from = Vector2(1, 1)
+
 [node name="FallingContainerBossFightAttack" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 8
+mass = 5.0
+physics_material_override = SubResource("PhysicsMaterial_l7aty")
+lock_rotation = true
 script = ExtResource("1_mu6kq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -39,6 +59,8 @@ shape = SubResource("RectangleShape2D_75ppe")
 
 [node name="JumpThroughPlatform" parent="." instance=ExtResource("3_4hu0g")]
 position = Vector2(0, -96)
+collision_layer = 8
+collision_mask = 1
 
 [node name="Sprite2D" parent="JumpThroughPlatform" index="0"]
 position = Vector2(-1, 4)
@@ -46,6 +68,13 @@ scale = Vector2(0.58, 0.22)
 
 [node name="SolidTopCollisionShape" parent="JumpThroughPlatform" index="1"]
 shape = SubResource("SegmentShape2D_vjal6")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_ajdpx")
+position = Vector2(4, -1)
+texture = SubResource("GradientTexture2D_qcuuo")
+offset = Vector2(7, 515)
+script = ExtResource("4_gb12e")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 
