@@ -1,40 +1,308 @@
-[gd_scene load_steps=14 format=3 uid="uid://ci2y2jwgnuun5"]
+[gd_scene load_steps=25 format=3 uid="uid://ci2y2jwgnuun5"]
 
 [ext_resource type="Script" path="res://Levels/BossFight/BossFight.gd" id="1_h8arg"]
-[ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="2_46bxb"]
+[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_akm5b"]
 [ext_resource type="Texture2D" uid="uid://dcxyqxj0okyoe" path="res://art/props/crane_just_tress.png" id="3_2dpkd"]
+[ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="3_g1jfb"]
 [ext_resource type="PackedScene" uid="uid://bf8v31laj6ova" path="res://Entities/Environment/BossBattle/BossBattleCraneJaws.tscn" id="4_e0e5y"]
+[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="4_pltyu"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="5_e40gm"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="6_14wbh"]
 [ext_resource type="PackedScene" uid="uid://cl2upfk7iu6os" path="res://Entities/Environment/BossBattle/falling_boss_container.tscn" id="7_f3s0p"]
+[ext_resource type="PackedScene" uid="uid://4ubg2v861dlv" path="res://Entities/NPCs/boss_npc.tscn" id="7_waqrp"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="8_c4bua"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="9_tjew5"]
+[ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="13_o5i0a"]
+[ext_resource type="Script" path="res://Levels/BossFight/BossFightCinematic.gd" id="14_gg47m"]
+[ext_resource type="AudioStream" uid="uid://px8em5ufndah" path="res://audio/sfx/placeholder/ha-ha-ha---ha.wav" id="15_ayayn"]
+[ext_resource type="AudioStream" uid="uid://c6l3b17t5jrnt" path="res://audio/sfx/placeholder/flame.wav" id="16_rmxvp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vbhb"]
+size = Vector2(824, 65)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5qk3d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cht73"]
+size = Vector2(32, 925)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eynyb"]
 atlas = ExtResource("3_2dpkd")
 region = Rect2(354.185, 57.7037, 29.3333, 102.815)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_18qvh"]
-atlas = ExtResource("2_46bxb")
-region = Rect2(0, 0, 134, 90)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlpgs"]
+resource_local_to_scene = true
+shader = ExtResource("13_o5i0a")
+shader_parameter/iframes = false
+shader_parameter/FlashColor = Color(1, 1, 1, 1)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_funp7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_18qvh")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
+[sub_resource type="Animation" id="Animation_j6xk3"]
+resource_name = "introduce_boss"
+length = 17.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 15),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_on_paused"
+}, {
+"args": [],
+"method": &"_on_resume"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossNPC:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 5.1, 5.6, 8.1, 10, 11.2, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(106, 361), Vector2(106, 361), Vector2(106, 343), Vector2(166, -112), Vector2(300, -406), Vector2(380, -484), Vector2(434, -463)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BossNPC/Panel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 5.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BossNPC/Panel/Label:visible_characters")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 2, 3.1, 3.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0, 9, 9, 18]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BossNPC/Rocket:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 5, 12),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Player/Lookahead/Camera2D:enabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CinematicCamera:enabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CinematicCamera:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 6, 9.6, 11.1, 12.5, 15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(112, 319), Vector2(112, 319), Vector2(298, -292), Vector2(384, -405), Vector2(384, -405), Vector2(26, 323)]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BossNPC")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(16.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"activate"
+}]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Audio/AudioStreamPlayer:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Audio/FlameNoise:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(4.9, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_50taa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossNPC:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(106, 361)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossNPC/Panel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BossNPC/Panel/Label:visible_characters")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BossNPC/Rocket:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Player/Lookahead/Camera2D:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CinematicCamera:enabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CinematicCamera:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(112, 319)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Audio/AudioStreamPlayer:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Audio/FlameNoise:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jmmrf"]
+_data = {
+"RESET": SubResource("Animation_50taa"),
+"introduce_boss": SubResource("Animation_j6xk3")
+}
 
 [node name="BossFight" type="Node2D"]
 script = ExtResource("1_h8arg")
 
+[node name="ParallaxBackground" parent="." instance=ExtResource("9_tjew5")]
+follow_viewport_enabled = true
+
 [node name="DesignNotes" type="Node2D" parent="."]
+position = Vector2(-463, -317)
 
 [node name="Label" type="Label" parent="DesignNotes"]
 offset_right = 40.0
@@ -53,7 +321,12 @@ with steel when the player enters."
 
 [node name="Walls" type="Node2D" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+[node name="Roof" type="StaticBody2D" parent="Walls"]
+position = Vector2(365, -566)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Roof"]
+position = Vector2(-9, -22.5)
+shape = SubResource("RectangleShape2D_5vbhb")
 
 [node name="Floor" type="StaticBody2D" parent="Walls"]
 position = Vector2(274, 361)
@@ -63,7 +336,66 @@ collision_mask = 31
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Floor"]
 shape = SubResource("WorldBoundaryShape2D_5qk3d")
 
+[node name="Container" type="Sprite2D" parent="Walls/Floor"]
+position = Vector2(-82, 100)
+texture = ExtResource("2_akm5b")
+
+[node name="Container2" type="Sprite2D" parent="Walls/Floor"]
+position = Vector2(308, 100)
+texture = ExtResource("3_g1jfb")
+
+[node name="Container3" type="Sprite2D" parent="Walls/Floor"]
+position = Vector2(-470, -96)
+texture = ExtResource("3_g1jfb")
+
+[node name="Container4" type="Sprite2D" parent="Walls/Floor"]
+position = Vector2(-471, 99)
+texture = ExtResource("4_pltyu")
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(730, -71)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+position = Vector2(-5, -25.5)
+shape = SubResource("RectangleShape2D_cht73")
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(-12, -268)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+position = Vector2(-5, -25.5)
+shape = SubResource("RectangleShape2D_cht73")
+
+[node name="Post" type="Sprite2D" parent="Walls/LeftWall"]
+texture_repeat = 2
+position = Vector2(-16, -73)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_eynyb")
+region_rect = Rect2(24.4033, -86.626, 4.14815, 217.481)
+
+[node name="Post4" type="Sprite2D" parent="Walls/LeftWall"]
+texture_repeat = 2
+position = Vector2(-15, -277)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_eynyb")
+region_rect = Rect2(24.4033, -86.626, 4.14815, 217.481)
+
+[node name="Post2" type="Sprite2D" parent="Walls/LeftWall"]
+texture_repeat = 2
+position = Vector2(-16, 129)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_eynyb")
+region_rect = Rect2(24.4033, -86.626, 4.14815, 217.481)
+
+[node name="Post3" type="Sprite2D" parent="Walls/LeftWall"]
+texture_repeat = 2
+position = Vector2(-16, 337)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_eynyb")
+region_rect = Rect2(24.4033, -86.626, 4.14815, 217.481)
+
 [node name="Crane" type="Node2D" parent="."]
+position = Vector2(131, -7)
 
 [node name="Truss" type="Sprite2D" parent="Crane"]
 position = Vector2(253, -433)
@@ -94,12 +426,6 @@ region_rect = Rect2(24.4033, -86.626, 4.14815, 217.481)
 [node name="Jaws" parent="Crane" instance=ExtResource("4_e0e5y")]
 position = Vector2(143, -432)
 
-[node name="Boss" type="CharacterBody2D" parent="Crane/Jaws"]
-position = Vector2(296, -66)
-
-[node name="BossSprite" type="AnimatedSprite2D" parent="Crane/Jaws/Boss"]
-sprite_frames = SubResource("SpriteFrames_funp7")
-
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="JumpThroughPlatform" parent="Platforms" instance=ExtResource("5_e40gm")]
@@ -116,9 +442,52 @@ collision_layer = 8
 collision_mask = 9
 
 [node name="Player" parent="." instance=ExtResource("8_c4bua")]
-position = Vector2(459, 344)
+position = Vector2(26, 355)
+
+[node name="BossNPC" parent="." instance=ExtResource("7_waqrp")]
+position = Vector2(106, 361)
+
+[node name="Sprite2D" parent="BossNPC/Appearance" index="0"]
+material = SubResource("ShaderMaterial_nlpgs")
+
+[node name="Panel" type="Panel" parent="BossNPC"]
+visible = false
+custom_minimum_size = Vector2(96, 64)
+offset_left = -47.5295
+offset_top = -160.016
+offset_right = -7.5295
+offset_bottom = -120.016
+
+[node name="Label" type="Label" parent="BossNPC/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Ha Ha Ha
+... Ha"
+visible_characters = 0
+visible_ratio = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jmmrf")
+}
+script = ExtResource("14_gg47m")
 
-[node name="ParallaxBackground" parent="." instance=ExtResource("9_tjew5")]
-follow_viewport_enabled = true
+[node name="CinematicCamera" type="Camera2D" parent="."]
+position = Vector2(112, 319)
+enabled = false
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("15_ayayn")
+bus = &"sfx"
+
+[node name="FlameNoise" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("16_rmxvp")
+volume_db = 7.0
+bus = &"sfx"
+
+[editable path="Player"]
+[editable path="BossNPC"]
+[editable path="BossNPC/Behaviours/Attacks/SimpleMeleeAttack"]

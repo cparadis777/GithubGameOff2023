@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://usfeedt27tlm"]
+
+[ext_resource type="Texture2D" uid="uid://bg37ae5f0jil0" path="res://art/low_res_containers/low_res_containers.png" id="1_kd8uu"]
+[ext_resource type="Script" path="res://Entities/Projectiles/falling_container_boss_fight_attack.gd" id="1_mu6kq"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="3_4hu0g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtn5c"]
+size = Vector2(192, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75ppe"]
+size = Vector2(192, 7)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vjal6"]
+a = Vector2(-97, 0)
+b = Vector2(95, 0)
+
+[node name="FallingContainerBossFightAttack" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_mu6kq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -48)
+scale = Vector2(4, 4)
+texture = ExtResource("1_kd8uu")
+hframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -48)
+shape = SubResource("RectangleShape2D_xtn5c")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, 6)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-1, -9)
+shape = SubResource("RectangleShape2D_75ppe")
+
+[node name="JumpThroughPlatform" parent="." instance=ExtResource("3_4hu0g")]
+position = Vector2(0, -96)
+
+[node name="Sprite2D" parent="JumpThroughPlatform" index="0"]
+position = Vector2(-1, 4)
+scale = Vector2(0.58, 0.22)
+
+[node name="SolidTopCollisionShape" parent="JumpThroughPlatform" index="1"]
+shape = SubResource("SegmentShape2D_vjal6")
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+
+[editable path="JumpThroughPlatform"]

@@ -366,3 +366,9 @@ func _pickable_picked_up(pickup_type):
 				Globals.player_stats["jump_velocity"] += 50
 				JUMP_VELOCITY = Globals.player_stats["jump_velocity"]
 	hud._on_player_picked_up_powerup(pickup_type)
+
+func _on_paused():
+	state_machine.transition_to("Paused")
+
+func _on_resume():
+	state_machine.transition_to("Idle")
