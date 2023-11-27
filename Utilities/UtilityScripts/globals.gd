@@ -35,6 +35,7 @@ var player_stats = {
 	"speed" : 150,
 	"jump_velocity": 375,
 	"damage_multiplier" : 1.0,
+	"completed_levels" : [] # at end of game, it'll look like [1,2]
 }
 
 var max_stats_upper_limits = {

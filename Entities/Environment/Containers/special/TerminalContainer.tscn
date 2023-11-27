@@ -11,6 +11,8 @@ visible = false
 
 [node name="Props" type="Node2D" parent="." index="9"]
 
+[node name="ContainerInterior" parent="." index="10"]
+visible = true
+
 [node name="TerminalToCrane" parent="." index="15" instance=ExtResource("2_muo11")]
 position = Vector2(-160, 144)
-next_scene_path = "res://Levels/StackingLevels/StackLevel2.tscn"

@@ -55,6 +55,10 @@ func _ready():
 	if (has_node("SpawningLogic")):
 		$SpawningLogic.spawn_random_shit(num_generated_objects)
 	
+	if has_node("ContainerInterior"):
+		$ContainerInterior.show()
+		$ContainerInterior.monitoring = true
+		
 	set_all_doors_locked(!doors_unlocked)
 		
 	await get_tree().create_timer(1.2).timeout
