@@ -23,7 +23,7 @@ next_scene = ExtResource("2_c7ax0")
 
 [node name="JumpDemo" parent="BaseContainer" index="11" instance=ExtResource("2_x0nsj")]
 position = Vector2(-56, 2)
-animation_name = "jump_peak"
+animation_name = "jump_launch;jump_peak"
 label_text = " [space]"
 button_texture = ExtResource("3_4y1op")
 
@@ -55,3 +55,4 @@ position = Vector2(-1, 47)
 position = Vector2(108, -11)
 
 [editable path="BaseContainer"]
+[editable path="BaseContainer/JumpDemo"]
