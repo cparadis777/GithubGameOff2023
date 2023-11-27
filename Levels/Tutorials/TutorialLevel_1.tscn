@@ -24,7 +24,7 @@ animation_name = "run"
 label_text = "A             D
 <-            ->"
 
-[node name="Label" parent="BaseContainer/RunDemo" index="2"]
+[node name="Label" parent="BaseContainer/RunDemo" index="1"]
 metadata/_edit_use_anchors_ = true
 
 [node name="ExteriorN" parent="ExteriorTextures" index="1"]

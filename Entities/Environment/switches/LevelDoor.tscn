@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b75mqcyc3pmmw"]
+[gd_scene load_steps=6 format=3 uid="uid://b75mqcyc3pmmw"]
 
 [ext_resource type="Script" path="res://Entities/Environment/switches/LevelDoor.gd" id="1_uedfe"]
 [ext_resource type="Texture2D" uid="uid://gjt4qop4npq3" path="res://art/placeholder/container-exit.png" id="2_sllgx"]
 [ext_resource type="PackedScene" uid="uid://ca7vyxdwydm0c" path="res://Utilities/UtilityScenes/zero_rotation.tscn" id="3_aiba5"]
+[ext_resource type="Texture2D" uid="uid://b1yn4w4s1acoc" path="res://art/placeholder/gamepad_button_right.png" id="4_56rmm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3jmv"]
 size = Vector2(38.5, 65)
@@ -23,12 +24,19 @@ texture = ExtResource("2_sllgx")
 [node name="Label" type="Label" parent="ZeroRotation"]
 unique_name_in_owner = true
 visible = false
-offset_left = -9.0
+offset_left = -14.0
 offset_top = -36.0
-offset_right = 9.0
+offset_right = 14.0
 offset_bottom = -10.0
 text = "[ F ]"
 horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="ZeroRotation"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-4, 21)
+scale = Vector2(1.71875, 1.71875)
+texture = ExtResource("4_56rmm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqqakuyl2wa2g"]
+[gd_scene load_steps=13 format=3 uid="uid://bqqakuyl2wa2g"]
 
 [ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_gusit"]
 [ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="2_f55js"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dalsqh1oenpf0" path="res://art/props/shipping_container_graffiti.png" id="4_wudpb"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="5_c8b1f"]
 [ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="7_uighd"]
+[ext_resource type="Texture2D" uid="uid://bgcsjypnwti41" path="res://art/placeholder/gamepad_button_up.png" id="10_v6gc3"]
 
 [node name="BaseLevel" instance=ExtResource("1_gusit")]
 exit_flags = 1
@@ -58,6 +59,10 @@ button_texture = ExtResource("4_5x4wx")
 [node name="ButtonSprite" parent="AttackDemo" index="2"]
 position = Vector2(-84, 19)
 texture = ExtResource("4_5x4wx")
+
+[node name="ButtonSprite" parent="AttackDemo/ButtonSprite" index="0"]
+position = Vector2(20, 0)
+texture = ExtResource("10_v6gc3")
 
 [node name="CyberRoninSprites" parent="AttackDemo" index="3"]
 animation = &"strong_punch"

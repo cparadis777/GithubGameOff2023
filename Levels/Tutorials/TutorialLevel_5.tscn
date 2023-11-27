@@ -22,14 +22,14 @@ animation_name = "fast_punch"
 label_text = "F"
 button_texture = ExtResource("4_x4det")
 
-[node name="CyberRoninSprites" parent="BaseContainer/SwitchDemo" index="1"]
+[node name="ButtonSprite" parent="BaseContainer/SwitchDemo" index="2"]
+position = Vector2(-84, 19)
+texture = ExtResource("4_xxja8")
+
+[node name="CyberRoninSprites" parent="BaseContainer/SwitchDemo" index="3"]
 visible = false
 animation = &"idle"
 flip_h = true
-
-[node name="ButtonSprite" parent="BaseContainer/SwitchDemo" index="3"]
-position = Vector2(-84, 19)
-texture = ExtResource("4_xxja8")
 
 [node name="NextLevelDoor" parent="BaseContainer" index="11"]
 position = Vector2(-111, -77)
