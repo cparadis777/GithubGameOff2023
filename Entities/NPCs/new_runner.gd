@@ -4,8 +4,8 @@ var health_max = 100
 var health = health_max
 var base_damage = 10
 
-var SPEED = 100.0
-var JUMP_VELOCITY = -200.0
+var SPEED = 150.0
+var JUMP_VELOCITY = -150.0
 var kick_speed_multiplier = 3.0
 
 enum States { INITIALIZING, RUNNING, JUMPING, IDLE, ATTACKING, IFRAMES, DEAD }
@@ -66,13 +66,13 @@ func _physics_process(delta):
 	elif State == States.IDLE:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	elif State == States.JUMPING:
-		if velocity.y > 0 and is_on_floor():
+		if velocity.y >= 0 and is_on_floor():
 			land()
 	
 	
 	move_and_slide() # all states
 
-func detect_obstacles_and_cliffs(_delta):
+func detect_obstacles_and_cliffs(delta):
 	if State == States.DEAD:
 		return
 		
@@ -81,10 +81,12 @@ func detect_obstacles_and_cliffs(_delta):
 			not $Sensors/CliffDetector.is_colliding() # cliff
 			or  $Sensors/ObstacleDetector.is_colliding() # obstacle
 			):
-				if randf() < 0.85:
+				if randf() < 0.65 * delta:
 					turn_around()
-				else:
+				elif randf() < 0.65 * delta:
 					jump()
+				elif randf() < 0.3 * delta:
+					attack()
 
 func sync_motion_to_platforms(_delta):
 	var potential_platform = $Sensors/PlatformDetector.get_collider()
@@ -95,10 +97,6 @@ func sync_motion_to_platforms(_delta):
 func apply_gravity(delta):
 	if not is_on_floor(): # all states
 		velocity.y += gravity * delta
-	
-	if State == States.JUMPING:
-		if is_on_floor() and not floor_last_frame: # don't prevent new jumps
-			land()
 			
 	floor_last_frame = is_on_floor()
 	
@@ -192,6 +190,8 @@ func _on_state_changed(prev_state, new_state):
 			$AnimationPlayer.play("die")
 		States.IFRAMES:
 			$AnimationPlayer.play("hurt")
+		States.JUMPING:
+			$AnimationPlayer.play("jump")
 	$StateLabel.text = States.keys()[State]
 	
 	
@@ -225,5 +225,5 @@ func _on_decision_timer_timeout():
 	
 	elif State in [States.RUNNING, States.JUMPING, States.IDLE ]:
 		choose_new_behaviour()
-
+	$DecisionTimer.set_wait_time(randf_range(0.8, 2.5))
 	$DecisionTimer.start()
