@@ -10,7 +10,7 @@ func _ready():
 func _physics_process(_delta):
 	pass
 
-func activate(velocity):
+func activate(_velocity):
 	global_position = get_tree().get_first_node_in_group("CraneJaws").global_position + Vector2.DOWN * 128
 	
 	

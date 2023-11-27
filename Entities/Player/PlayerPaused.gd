@@ -6,7 +6,7 @@ func _ready():
 	pass # Replace with function body.
 
 
-func enter(msg = {}):
+func enter(_msg = {}):
 	pass
 	
 func resume():
