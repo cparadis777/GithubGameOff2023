@@ -5,7 +5,7 @@ extends EntityState
 
 # Typed reference to the player node.
 var player: CharacterBody2D
-
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
 	# The states are children of the `Player` node so their `_ready()` callback will execute first.
@@ -19,3 +19,13 @@ func _ready() -> void:
 	# help prevent some bugs that are difficult to understand.
 	assert(player != null)
 
+func sync_motion_to_platforms(_delta):
+	var potential_platforms = player.get_node("PlatformDetector").get_overlapping_bodies()
+	for potential_platform in potential_platforms:
+		if potential_platform != null and potential_platform.is_in_group("MovingPlatforms"):
+			if potential_platform.owner.get("velocity"):
+				player.velocity.y = potential_platform.owner.velocity.y
+
+func apply_gravity(delta):
+	if not player.is_on_floor(): # all states
+		player.velocity.y += gravity * delta

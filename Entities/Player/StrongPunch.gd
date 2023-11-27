@@ -45,7 +45,8 @@ func physics_update(delta):
 			execute_punch()
 	elif SubState == SubStates.EXECUTING and moving:
 		move_forward(delta)
-
+	apply_gravity(delta)
+	sync_motion_to_platforms(delta)
 	allow_early_exit()
 	
 func allow_early_exit():
