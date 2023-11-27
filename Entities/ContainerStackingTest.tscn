@@ -164,9 +164,10 @@ offset_top = 10.0
 offset_right = 254.0
 offset_bottom = 54.0
 focus_mode = 0
-texture_normal = ExtResource("6_ck12f")
+disabled = true
+texture_normal = ExtResource("7_dc8un")
 texture_pressed = ExtResource("8_yixi3")
-texture_hover = ExtResource("7_dc8un")
+texture_disabled = ExtResource("6_ck12f")
 
 [node name="ResetButton" type="TextureButton" parent="HUD/Panel"]
 layout_mode = 0
@@ -442,6 +443,7 @@ volume_db = -4.0
 [connection signal="drop_over" from="DropPoints" to="." method="_on_drop_points_drop_over"]
 [connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
 [connection signal="drop_started" from="DropPoints" to="." method="_on_drop_points_drop_started"]
+[connection signal="level_validated" from="DropPoints" to="HUD/Panel" method="_on_drop_points_level_validated"]
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
 [connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]
 [connection signal="finished" from="Instructions/Tutorial_AI" to="." method="_on_tutorial_ai_finished"]
