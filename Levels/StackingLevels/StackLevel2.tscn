@@ -51,42 +51,6 @@ shader_parameter/vignette_opacity = 0.5
 
 [sub_resource type="Animation" id="Animation_5g3e2"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera2D:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, 2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera2D:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Camera2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -177)]
-}
 
 [sub_resource type="Animation" id="Animation_iohgr"]
 resource_name = "zoom_in"
@@ -140,6 +104,11 @@ script = ExtResource("1_vlh66")
 target_weight = 300
 scene_path = "res://Levels/FightingLevels/FightLevel2.tscn"
 has_tutorial = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-159, -278)
+anchor_mode = 0
+zoom = Vector2(2, 2)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 100
@@ -198,7 +167,7 @@ anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 360.0
-offset_bottom = 221.0
+offset_bottom = 377.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -236,11 +205,6 @@ container_height = 24
 [node name="BangNoise" type="AudioStreamPlayer" parent="DropPoints"]
 stream = SubResource("AudioStreamRandomizer_m3gb7")
 volume_db = 5.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -177)
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
 
 [node name="Arena" type="Node2D" parent="."]
 
@@ -358,7 +322,7 @@ offset_bottom = 298.0
 color = Color(1, 1, 1, 0)
 
 [node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("16_ftu3o")]
-position = Vector2(-17, -237)
+position = Vector2(-16, -236)
 n_columns = 3
 drop_zone = NodePath("../DropPoints")
 

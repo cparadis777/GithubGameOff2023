@@ -68,6 +68,9 @@ position = Vector2(2880, -480)
 [node name="EmptyContainer8" parent="." instance=ExtResource("6_hipa8")]
 position = Vector2(2880, -960)
 
+[node name="EmptyContainer10" parent="." instance=ExtResource("6_hipa8")]
+position = Vector2(2880, -1441)
+
 [node name="StartContainer" parent="." instance=ExtResource("7_jyj4m")]
 position = Vector2(-960, 0)
 container_exit_flags = 2
@@ -79,7 +82,7 @@ stream = ExtResource("8_b250f")
 volume_db = 4.0
 
 [node name="TerminalContainer" parent="." instance=ExtResource("9_bhj8c")]
-position = Vector2(2880, -1440)
+position = Vector2(2880, -1906)
 container_exit_flags = 1
 
 [node name="BigArrow" type="Polygon2D" parent="."]

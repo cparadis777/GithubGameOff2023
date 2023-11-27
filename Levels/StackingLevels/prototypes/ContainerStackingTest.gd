@@ -9,6 +9,7 @@ var ignore_invalid_path : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Camera2D.make_current()
 	$ProgressBar.value = 0
 	var fight_button = find_child("FightButton")
 	if not fight_button.pressed.is_connected(_on_fight_button_pressed):
