@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dofi4vfeurgj5"]
+[gd_scene load_steps=14 format=3 uid="uid://dofi4vfeurgj5"]
 
 [ext_resource type="Script" path="res://Levels/FightingLevels/prototypes/GeneratedPlayspace.gd" id="1_ya2wi"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_na87h"]
@@ -9,8 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="7_jyj4m"]
 [ext_resource type="AudioStream" uid="uid://chy3if1m4qsn0" path="res://audio/sfx/TutorialAIVoice/opening_doors.ogg" id="8_b250f"]
 [ext_resource type="PackedScene" uid="uid://dhxm77joahdfb" path="res://Entities/Environment/Containers/special/terminal_container.tscn" id="9_bhj8c"]
-[ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="10_duies"]
-[ext_resource type="Texture2D" uid="uid://67m50eh8jeq1" path="res://art/materials/shaders/2DOmniLight.png" id="11_jh0oq"]
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="12_hekx0"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="13_r57rd"]
 
@@ -52,20 +50,23 @@ position = Vector2(0, 481)
 [node name="EmptyContainer5" parent="." instance=ExtResource("6_hipa8")]
 position = Vector2(-960, 481)
 
+[node name="EmptyContainer9" parent="." instance=ExtResource("6_hipa8")]
+position = Vector2(1920, 480)
+
 [node name="EmptyContainer3" parent="." instance=ExtResource("6_hipa8")]
 position = Vector2(960, 481)
 
 [node name="EmptyContainer4" parent="." instance=ExtResource("6_hipa8")]
-position = Vector2(1921, 480)
+position = Vector2(2880, 480)
 
 [node name="EmptyContainer6" parent="." instance=ExtResource("6_hipa8")]
-position = Vector2(1921, -1)
+position = Vector2(2880, 0)
 
 [node name="EmptyContainer7" parent="." instance=ExtResource("6_hipa8")]
-position = Vector2(1921, -483)
+position = Vector2(2880, -480)
 
 [node name="EmptyContainer8" parent="." instance=ExtResource("6_hipa8")]
-position = Vector2(1921, -962)
+position = Vector2(2880, -960)
 
 [node name="StartContainer" parent="." instance=ExtResource("7_jyj4m")]
 position = Vector2(-960, 0)
@@ -78,28 +79,8 @@ stream = ExtResource("8_b250f")
 volume_db = 4.0
 
 [node name="TerminalContainer" parent="." instance=ExtResource("9_bhj8c")]
-position = Vector2(1921, -1443)
+position = Vector2(2880, -1440)
 container_exit_flags = 1
-
-[node name="AI_Tutorial_Text" parent="." instance=ExtResource("10_duies")]
-light_mask = 2
-position = Vector2(-785, 184)
-override_text = "The boss is currently
-on the bridge,
-operating the crane.;
-He left strict instructions
-not to be disturbed.;Doors will remain locked
-so long as employees
-remain in any given room.
-"
-
-[node name="PointLight2D" type="PointLight2D" parent="AI_Tutorial_Text"]
-light_mask = 2
-visibility_layer = 0
-position = Vector2(70, -125)
-color = Color(0.839216, 0.564706, 0.803922, 1)
-texture = ExtResource("11_jh0oq")
-texture_scale = 5.0
 
 [node name="BigArrow" type="Polygon2D" parent="."]
 visible = false
@@ -115,7 +96,5 @@ visible = false
 environment = SubResource("Environment_j2q28")
 
 [node name="ParallaxBackground2" parent="." instance=ExtResource("13_r57rd")]
-
-[connection signal="finished" from="AI_Tutorial_Text" to="BigArrow" method="show"]
 
 [editable path="StartContainer"]
