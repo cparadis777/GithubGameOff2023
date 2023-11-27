@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://1qgkxr0pbqda"]
+[gd_scene load_steps=42 format=3 uid="uid://1qgkxr0pbqda"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/new_runner.gd" id="1_fp71k"]
 [ext_resource type="Texture2D" uid="uid://31kl312x0p86" path="res://art/Enemies/Cyber-Sprinter/cyber-sprinter_attack.png" id="2_cprnx"]
@@ -185,9 +185,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cv76b"]
 size = Vector2(20, 42)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjgys"]
-size = Vector2(243, 36)
-
 [sub_resource type="Animation" id="Animation_7y08d"]
 length = 0.001
 tracks/0/type = "value"
@@ -277,31 +274,31 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("AnimatedSprite2D/PlayerDetector:monitoring")
+tracks/7/path = NodePath("AnimatedSprite2D/Hurtbox/CollisionShape2D:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(13, -40)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("AnimatedSprite2D/Hurtbox/CollisionShape2D:position")
+tracks/8/path = NodePath("AnimatedSprite2D/Hurtbox:monitoring")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(13, -40)]
+"update": 1,
+"values": [false]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("AnimatedSprite2D/Hurtbox:monitoring")
+tracks/9/path = NodePath("AttackNoises:playing")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -313,22 +310,10 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("AttackNoises:playing")
+tracks/10/path = NodePath("HurtNoises:playing")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("HurtNoises:playing")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -453,34 +438,22 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AnimatedSprite2D/PlayerDetector:monitoring")
+tracks/4/path = NodePath("AnimatedSprite2D:animation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [&"idle"]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AnimatedSprite2D:animation")
+tracks/5/path = NodePath("AnimatedSprite2D:material:shader_parameter/iframes")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"idle"]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("AnimatedSprite2D:material:shader_parameter/iframes")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -613,21 +586,13 @@ monitorable = false
 position = Vector2(13, -40)
 shape = SubResource("RectangleShape2D_cv76b")
 
-[node name="PlayerDetector" type="Area2D" parent="AnimatedSprite2D"]
-position = Vector2(7, -39)
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/PlayerDetector"]
-position = Vector2(121, 0)
-shape = SubResource("RectangleShape2D_rjgys")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_8y3y1")
 }
 
 [node name="DecisionTimer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 4.0
 one_shot = true
 
 [node name="StateLabel" type="Label" parent="."]

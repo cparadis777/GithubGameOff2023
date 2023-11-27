@@ -5,7 +5,7 @@ var health = health_max
 var base_damage = 10
 
 var SPEED = 100.0
-var JUMP_VELOCITY = -400.0
+var JUMP_VELOCITY = -200.0
 var kick_speed_multiplier = 3.0
 
 enum States { INITIALIZING, RUNNING, JUMPING, IDLE, ATTACKING, IFRAMES, DEAD }
@@ -59,13 +59,16 @@ func _physics_process(delta):
 			detect_obstacles_and_cliffs(delta)
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-
 	elif State == States.ATTACKING:
 		velocity.x = direction * SPEED * kick_speed_multiplier
 	elif State == States.DEAD:
 		velocity.x = 0
 	elif State == States.IDLE:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	elif State == States.JUMPING:
+		if velocity.y > 0 and is_on_floor():
+			land()
+	
 	
 	move_and_slide() # all states
 
@@ -78,7 +81,7 @@ func detect_obstacles_and_cliffs(_delta):
 			not $Sensors/CliffDetector.is_colliding() # cliff
 			or  $Sensors/ObstacleDetector.is_colliding() # obstacle
 			):
-				if randf() < 0.67:
+				if randf() < 0.85:
 					turn_around()
 				else:
 					jump()
@@ -95,15 +98,18 @@ func apply_gravity(delta):
 	
 	if State == States.JUMPING:
 		if is_on_floor() and not floor_last_frame: # don't prevent new jumps
-			#just landed
-			State = States.RUNNING
-			velocity.y = 0
+			land()
 			
 	floor_last_frame = is_on_floor()
 	
 func jump():
-	velocity.y = JUMP_VELOCITY
-	State = States.JUMPING
+	if is_on_floor():
+		velocity.y = JUMP_VELOCITY
+		State = States.JUMPING
+
+func land():
+	State = States.RUNNING
+	velocity.y = 0
 
 func idle():
 	State = States.IDLE
@@ -121,32 +127,38 @@ func turn_around():
 
 
 func choose_new_behaviour():
-	var player = get_tree().get_first_node_in_group("Player")
 	randomize()
 	var random_nums = [ randf(), randf(), randf(), randf() ]
-	if player != null:
-		var dir_to_player
-		if player.global_position.x > global_position.x:
-			dir_to_player = 1
-		else:
-			dir_to_player = -1
-		if direction != dir_to_player and random_nums[0] < 0.85:
-			turn_around()
-		elif direction == dir_to_player and random_nums[1] < 0.75:
-			if random_nums[2] < 0.8:
-				attack()
-			else: # 0.2
-				turn_around()
-		elif random_nums[3] < 0.1:
-			idle()
-		elif random_nums[3] < 0.2:
-			jump()
-		else:
-			run()
-		
+
+	var movement_roll = random_nums.pop_back()
+	if movement_roll < 0.1:
+		idle()
+	elif movement_roll < 0.2 and is_on_floor():
+		jump()
+	else: # 70%
+		run()
+
+	var turn_around_roll = random_nums.pop_back()
+	if is_facing_player() and turn_around_roll < 0.1:
+		turn_around()
+	elif not is_facing_player() and turn_around_roll < 0.75:
+		turn_around()
 	
-	
-	
+	var engagement_roll = random_nums.pop_back()
+	if is_facing_player() and engagement_roll < 0.67:
+		attack()
+
+
+func is_facing_player():
+	var player = get_tree().get_first_node_in_group("Player")
+	if player == null:
+		return
+	if player.global_position.x > global_position.x:
+		return true
+	else:
+		return false
+
+
 func _on_animation_player_animation_finished(anim_name):
 	match anim_name:
 		"attack":
@@ -210,9 +222,8 @@ func _on_decision_timer_timeout():
 		velocity.x = 0
 		$DecisionTimer.stop()
 		return
-	else:
-		$DecisionTimer.start()
-
-	if State in [States.RUNNING, States.JUMPING, States.IDLE ]:
+	
+	elif State in [States.RUNNING, States.JUMPING, States.IDLE ]:
 		choose_new_behaviour()
 
+	$DecisionTimer.start()
