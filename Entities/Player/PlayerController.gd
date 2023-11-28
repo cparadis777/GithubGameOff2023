@@ -138,7 +138,7 @@ func initiate_debugging_protocol():
 
 func zoom_camera(direction : int):
 	#var camera = get_viewport().get_camera_2d()
-	var zoom_levels = [ Vector2(2, 2), Vector2(1.5, 1.5), Vector2(1.0,1.0), Vector2(0.75, 0.75), Vector2(0.5,0.5), Vector2(0.25, 0.25) ]
+	var zoom_levels = [ Vector2(3,3), Vector2(2, 2), Vector2(1.5, 1.5), Vector2(1.0,1.0), Vector2(0.75, 0.75), Vector2(0.5,0.5), Vector2(0.25, 0.25) ]
 	var zoom_index = (zoom_levels.find(camera.zoom) + direction)%zoom_levels.size()
 	camera.zoom = zoom_levels[zoom_index]
 	

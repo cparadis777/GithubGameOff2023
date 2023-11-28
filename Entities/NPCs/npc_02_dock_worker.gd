@@ -134,13 +134,14 @@ func point_at_player():
 	if player == null:
 		player = get_tree().get_first_node_in_group("Player")
 	
-	if global_position.x < player.global_position.x:
-		velocity.x = abs(velocity.x) * 1
-	else:
-		velocity.x = abs(velocity.x) * -1
+	if player != null and is_instance_valid(player):
+		if global_position.x < player.global_position.x:
+			velocity.x = abs(velocity.x) * 1
+		else:
+			velocity.x = abs(velocity.x) * -1
 
-	if velocity.x == 0:
-		last_known_direction = sign(player.global_position.x - global_position.x)
+		if velocity.x == 0:
+			last_known_direction = sign(player.global_position.x - global_position.x)
 
 
 func flip_sprites():

@@ -1,6 +1,6 @@
 extends Node2D
 enum container_types { BENGAL, ICE, EAGLE }
-@export var type : container_types = container_types.BENGAL
+@export var container_type : container_types = container_types.BENGAL
 var textures = {
 	container_types.BENGAL: preload("res://art/low_res_containers/shipping_container_bengal_security-LOWRES.png"),
 	container_types.ICE: preload("res://art/low_res_containers/shipping_container_ice_and_freezy_LOWRES.png"),
@@ -9,11 +9,21 @@ var textures = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$RigidBody2D/Left.texture = textures[type]
-	$RigidBody2D2/Right.texture = textures[type]
+	pass
+#	$LeftPiece/Sprite.texture = textures[type]
+#	$RightPiece/Sprite.texture = textures[type]
+#	$SpawnTimer.start()
+
+func activate(container_type, body_struck):
+	$LeftPiece/Sprite.texture = textures[container_type]
+	$RightPiece/Sprite.texture = textures[container_type]
+	break_apart(body_struck)
 	$SpawnTimer.start()
 	
-
+func break_apart(body): # crack over the head of the player
+	var magnitude : float = 4.0
+	$LeftPiece.apply_central_impulse((($LeftPiece.global_position - body.global_position).normalized() + Vector2.UP) * magnitude)
+	$RightPiece.apply_central_impulse((($RightPiece.global_position - body.global_position).normalized() + Vector2.UP) * magnitude)
 
 
 func spawn_enemy():
@@ -31,6 +41,7 @@ func spawn_enemy():
 	new_enemy.activate()
 	make_noise($EnemySpawnNoise)
 
+
 func make_noise(audio_node : AudioStreamPlayer2D):
 	var noise = audio_node.duplicate()
 	noise.finished.connect(noise.queue_free)
@@ -44,5 +55,5 @@ func _on_spawn_timer_timeout():
 		for i in range(randi_range(3,5)):
 			spawn_enemy()
 
-		await get_tree().create_timer(5).timeout
-		queue_free()
+	await get_tree().create_timer(5).timeout
+	queue_free()

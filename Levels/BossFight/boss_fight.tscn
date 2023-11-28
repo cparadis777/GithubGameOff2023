@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ci2y2jwgnuun5"]
+[gd_scene load_steps=29 format=3 uid="uid://ci2y2jwgnuun5"]
 
 [ext_resource type="Script" path="res://Levels/BossFight/BossFight.gd" id="1_h8arg"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_akm5b"]
@@ -33,6 +33,18 @@ resource_local_to_scene = true
 shader = ExtResource("13_o5i0a")
 shader_parameter/iframes = false
 shader_parameter/FlashColor = Color(1, 1, 1, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_noto6"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_0yjki"]
+offsets = PackedFloat32Array(0, 0.040619, 0.137331, 0.882012, 0.94971, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.501961, 0.396078, 0.396078, 0.396078, 0.768627, 0.396078, 0.396078, 0.396078, 0.768627, 1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7jphy"]
+gradient = SubResource("Gradient_0yjki")
+width = 256
+height = 1600
 
 [sub_resource type="Animation" id="Animation_50taa"]
 length = 0.001
@@ -560,8 +572,15 @@ position = Vector2(2.69413e-05, 158)
 [node name="Line2D" parent="CraneJaws/Jaws" index="0"]
 points = PackedVector2Array(2.08165e-12, -160, 2.08165e-12, -16)
 
+[node name="Shadow" type="Sprite2D" parent="CraneJaws/Jaws"]
+show_behind_parent = true
+z_index = -2
+material = SubResource("CanvasItemMaterial_noto6")
+position = Vector2(3, 129)
+texture = SubResource("GradientTexture2D_7jphy")
+offset = Vector2(0, 510)
+
 [node name="ReloadTimer" type="Timer" parent="CraneJaws"]
-wait_time = 5.0
 one_shot = true
 
 [node name="MoveTimer" type="Timer" parent="CraneJaws"]
