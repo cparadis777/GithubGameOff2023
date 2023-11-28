@@ -11,7 +11,8 @@ var move_ready:bool
 var current_column:int
 var markers:Array
 var move_time:float = 0.5
-
+var fight_button:TextureButton
+var reset_button:TextureButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +21,11 @@ func _ready():
 	#self.move_ready = true
 	%WeightLabel.text = "%s,000 kg" % self.current_container.weight
 	%TypeLabel.text = "%s" % self.current_container.type
+	if owner && owner.has_node("HUD"):
+		fight_button = owner.get_node("HUD/Panel/FightButton")
+		reset_button = owner.get_node("HUD/Panel/ResetButton")
+	else:
+		print("crane is not child of ContainerStackingTest ")
 	
 
 func activate():
@@ -48,7 +54,12 @@ func _unhandled_input(event):
 		elif event.is_action_pressed("rotate_right"):
 			self.rotate_container("CW")	
 			$CraneSounds/Rotate.play()
-
+		elif event.is_action_pressed("fight"):
+			if !fight_button.disabled:
+				owner._on_fight_button_pressed()
+		elif event.is_action_pressed("reset"):
+			if !reset_button.disabled:
+				owner.get_node("DropPoints").reset_dropped_containers()
 func select_random_container() -> StaticBody2D:
 	var new_container = containers.pick_random().instantiate()
 	#new_container.get_node("Exterior").self_modulate = Utils.random_color()
