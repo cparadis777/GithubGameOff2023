@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b4h8trxb28bud"]
+[gd_scene load_steps=27 format=3 uid="uid://b4h8trxb28bud"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_jtbjr"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_d8uup"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="14_go2vh"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="14_r0v0q"]
 [ext_resource type="PackedScene" uid="uid://cxtontreijkdo" path="res://Entities/Environment/portals/opening_doors_voice.tscn" id="18_0slne"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="19_vkb6j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xia"]
 size = Vector2(796, 340)
@@ -298,6 +299,9 @@ scale = Vector2(2.5, 2.50521)
 texture = ExtResource("7_204tu")
 
 [node name="OpeningDoorsVoice" parent="." instance=ExtResource("18_0slne")]
+
+[node name="VendingMachine" parent="." instance=ExtResource("19_vkb6j")]
+position = Vector2(379, -30)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

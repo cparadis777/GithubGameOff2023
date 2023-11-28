@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cl58fohj8ntaf"]
+[gd_scene load_steps=7 format=3 uid="uid://cl58fohj8ntaf"]
 
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_0qqog"]
 [ext_resource type="PackedScene" uid="uid://dm2tosesjfq22" path="res://Entities/Environment/destructible_wall.tscn" id="2_nr7aq"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="4_07ovh"]
 [ext_resource type="PackedScene" uid="uid://cmpouufnlcxkn" path="res://Entities/Environment/Platforms/basic_platform.tscn" id="5_0arwi"]
 [ext_resource type="PackedScene" uid="uid://b1gw2o1d85wpr" path="res://Entities/Environment/ObstacleSpawners/CompoundObstacles/three_star_trap.tscn" id="5_711eo"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="6_ea4f4"]
 
 [node name="BaseContainer" instance=ExtResource("1_0qqog")]
 
@@ -45,3 +46,6 @@ position = Vector2(-1, 97)
 
 [node name="BasicPlatform3" parent="." index="23" instance=ExtResource("5_0arwi")]
 position = Vector2(-1, -81)
+
+[node name="VendingMachine" parent="." index="24" instance=ExtResource("6_ea4f4")]
+position = Vector2(72, 165)
