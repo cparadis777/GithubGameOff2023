@@ -9,10 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="5_e40gm"]
 [ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="6_14wbh"]
 [ext_resource type="PackedScene" uid="uid://cl2upfk7iu6os" path="res://Entities/Environment/BossBattle/falling_boss_container.tscn" id="7_f3s0p"]
+[ext_resource type="Script" path="res://Entities/NPCs/Behaviours/DropContainersAttack.gd" id="7_vsokq"]
 [ext_resource type="PackedScene" uid="uid://4ubg2v861dlv" path="res://Entities/NPCs/boss_npc.tscn" id="7_waqrp"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="8_c4bua"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="9_tjew5"]
-[ext_resource type="PackedScene" uid="uid://d14b0n2jkrj85" path="res://Entities/Projectiles/falling_robot.tscn" id="12_wlx50"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="13_o5i0a"]
 [ext_resource type="Script" path="res://Levels/BossFight/BossFightCinematic.gd" id="14_gg47m"]
 [ext_resource type="AudioStream" uid="uid://px8em5ufndah" path="res://audio/sfx/placeholder/ha-ha-ha---ha.wav" id="15_ayayn"]
@@ -315,6 +315,20 @@ tracks/11/keys = {
 "update": 0,
 "values": [Vector2(836, 924), Vector2(836, 924), Vector2(1017, 223), Vector2(1027, 246), Vector2(1027, 246), Vector2(694, 1005)]
 }
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath(".")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(15.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"activate"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jmmrf"]
 _data = {
@@ -459,8 +473,30 @@ scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_eynyb")
 region_rect = Rect2(24.4033, -86.626, 4.14815, 217.481)
 
-[node name="Jaws" parent="Crane" groups=["CraneJaws"] instance=ExtResource("4_e0e5y")]
-position = Vector2(143, -432)
+[node name="DropContainersAttack" type="Node2D" parent="Crane"]
+z_index = -1
+position = Vector2(201, -550)
+script = ExtResource("7_vsokq")
+
+[node name="Jaws" parent="Crane/DropContainersAttack" instance=ExtResource("4_e0e5y")]
+position = Vector2(2.69413e-05, 158)
+
+[node name="Line2D" parent="Crane/DropContainersAttack/Jaws" index="0"]
+points = PackedVector2Array(2.08165e-12, -160, 2.08165e-12, -16)
+
+[node name="ReloadTimer" type="Timer" parent="Crane/DropContainersAttack"]
+wait_time = 5.0
+one_shot = true
+
+[node name="MoveTimer" type="Timer" parent="Crane/DropContainersAttack"]
+one_shot = true
+
+[node name="Label" type="Label" parent="Crane/DropContainersAttack"]
+offset_left = -48.0
+offset_top = 110.0
+offset_right = -8.0
+offset_bottom = 133.0
+text = "State"
 
 [node name="Platforms" type="Node2D" parent="."]
 position = Vector2(670, 680)
@@ -473,24 +509,24 @@ position = Vector2(395, -451)
 linked_nodes = [null]
 
 [node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("5_e40gm")]
-position = Vector2(83, -36)
+position = Vector2(1, -36)
 
 [node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("5_e40gm")]
-position = Vector2(628, -293)
+position = Vector2(708, -293)
 
 [node name="JumpThroughPlatform4" parent="Platforms" instance=ExtResource("5_e40gm")]
-position = Vector2(627, 125)
+position = Vector2(707, 125)
 
 [node name="ShippingContainers" type="Node2D" parent="."]
 position = Vector2(670, 680)
 
 [node name="FallingBossContainer" parent="ShippingContainers" instance=ExtResource("7_f3s0p")]
-position = Vector2(517, -113)
+position = Vector2(1100, -515)
 collision_layer = 8
 collision_mask = 9
 
-[node name="FallingRobot" parent="ShippingContainers" instance=ExtResource("12_wlx50")]
-position = Vector2(585, -374)
+[node name="BrokenContainerPieces" parent="ShippingContainers" instance=ExtResource("19_gj47u")]
+position = Vector2(978, -346)
 
 [node name="Player" parent="." instance=ExtResource("8_c4bua")]
 position = Vector2(809, 1035)
@@ -544,9 +580,10 @@ stream = ExtResource("16_rmxvp")
 volume_db = 7.0
 bus = &"sfx"
 
-[node name="BrokenContainerPieces" parent="." instance=ExtResource("19_gj47u")]
-position = Vector2(732, 417)
+[connection signal="timeout" from="Crane/DropContainersAttack/ReloadTimer" to="Crane/DropContainersAttack" method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="Crane/DropContainersAttack/MoveTimer" to="Crane/DropContainersAttack" method="_on_move_timer_timeout"]
 
+[editable path="Crane/DropContainersAttack/Jaws"]
 [editable path="Player"]
 [editable path="BossNPC"]
 [editable path="BossNPC/Behaviours/Attacks/SimpleMeleeAttack"]
