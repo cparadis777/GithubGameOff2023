@@ -24,7 +24,7 @@ func _on_body_entered(body):
 func spawn_pieces():
 	var pieces = preload("res://Entities/Projectiles/broken_container_pieces.tscn").instantiate()
 	pieces.type = type
-	get_tree().get_root().add_child(pieces)
-	pieces.global_position = global_position
-	pieces.global_rotation = global_rotation
+	get_tree().get_root().call_deferred("add_child", pieces)
+	pieces.set_deferred("global_position", global_position)
+	pieces.set_deferred("global_rotation", global_rotation)
 	

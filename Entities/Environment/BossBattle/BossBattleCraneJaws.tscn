@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bf8v31laj6ova"]
+[gd_scene load_steps=2 format=3 uid="uid://bf8v31laj6ova"]
 
 [ext_resource type="Texture2D" uid="uid://cucxmeo2p3j11" path="res://art/props/crane_just_crane.png" id="1_san12"]
-[ext_resource type="Texture2D" uid="uid://bg37ae5f0jil0" path="res://art/low_res_containers/low_res_containers.png" id="2_ax6tu"]
 
 [node name="Jaws" type="Node2D"]
 
@@ -13,10 +12,7 @@ default_color = Color(0.541176, 0.541176, 0.541176, 1)
 texture = ExtResource("1_san12")
 hframes = 6
 
-[node name="HeldBossContainer" type="Sprite2D" parent="JawsSprite"]
+[node name="Muzzle" type="Marker2D" parent="JawsSprite"]
 z_index = -1
 position = Vector2(2.08165e-12, 81)
 scale = Vector2(5, 5)
-texture = ExtResource("2_ax6tu")
-hframes = 7
-frame = 5
