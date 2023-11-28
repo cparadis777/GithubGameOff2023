@@ -6,9 +6,10 @@ extends NPC_Behaviour
 
 enum States { INACTIVE, IDLE, MOVING, RELOADING }
 var State : States = States.INACTIVE
-var speed : float = 40.0
+var speed : float = 250.0
 var direction : int = 1
 var original_position : Vector2
+var max_distance : float = 725
 
 func _ready():
 	original_position = global_position
@@ -20,7 +21,6 @@ func _process(delta):
 	elif State == States.MOVING:
 		position.x += direction * speed * delta
 		maybe_reverse_direction(delta)
-	var max_distance = 400
 	if global_position.distance_squared_to(original_position) > max_distance * max_distance:
 		direction = sign(original_position.x - global_position.x)
 
@@ -33,7 +33,7 @@ func spawn_crate():
 	
 
 func maybe_reverse_direction(delta):
-	var chance_per_second = 0.25
+	var chance_per_second = 0.15
 	if randf() < chance_per_second * delta:
 		direction *= -1
 	
@@ -63,6 +63,7 @@ func _on_reload_timer_timeout():
 
 
 func _on_move_timer_timeout():
-	spawn_crate()
+	if randf() < 0.67:
+		spawn_crate()
 	$ReloadTimer.start()
 	State = States.RELOADING

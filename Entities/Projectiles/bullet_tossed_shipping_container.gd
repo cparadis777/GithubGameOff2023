@@ -18,14 +18,20 @@ func _ready():
 
 func _physics_process(_delta):
 	if dropped and linear_velocity.is_zero_approx() and !at_rest:
-		at_rest = true
-		freeze = true
-		$PlayerDetector.collision_layer = 0
-		$PlayerDetector.collision_mask = 0
-		self.collision_layer = 0 # allow player to pass
-		$PlayerDetector.monitoring = false
-		spawn_platform()
-		
+		create_static_platform_from_rigid_body()
+
+
+func create_static_platform_from_rigid_body():
+	at_rest = true
+	freeze = true
+	$PlayerDetector.collision_layer = 0
+	$PlayerDetector.collision_mask = 0
+	self.collision_layer = 0 # allow player to pass
+	$PlayerDetector.monitoring = false
+	spawn_platform()
+	$Shadow.hide()
+
+
 func spawn_platform():
 	var platform_scene = preload("res://Levels/BossFight/platforms/spawn_platform_for_top_of_container.tscn").instantiate()
 	add_child(platform_scene)
@@ -33,11 +39,14 @@ func spawn_platform():
 
 
 func spawn_pieces():
-	var pieces = preload("res://Entities/Projectiles/broken_container_pieces.tscn").instantiate()
-	pieces.type = type
-	get_tree().get_root().call_deferred("add_child", pieces)
-	pieces.set_deferred("global_position", global_position)
-	pieces.set_deferred("global_rotation", global_rotation)
+	var num_max_containers = 10
+	var num_current_containers = get_tree().get_nodes_in_group("BossContainers").size()
+	if num_current_containers < num_max_containers:
+		var pieces = preload("res://Entities/Projectiles/broken_container_pieces.tscn").instantiate()
+		pieces.type = type
+		get_tree().get_root().call_deferred("add_child", pieces)
+		pieces.set_deferred("global_position", global_position)
+		pieces.set_deferred("global_rotation", global_rotation)
 	
 
 

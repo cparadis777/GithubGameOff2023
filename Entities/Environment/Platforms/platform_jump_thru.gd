@@ -19,7 +19,8 @@ func _ready():
 func allow_player_to_pass():
 	set_collision_mask_value(1, false)
 	set_collision_layer_value(4, false)
-	$Sprite2D.z_index -= 1
+	if has_node("Sprite2D"):
+		$Sprite2D.z_index -= 1
 	$ReactivateTimer.start()
 
 func setup_timer():
@@ -32,4 +33,5 @@ func setup_timer():
 func _on_reactivate_timer_timeout():
 	set_collision_mask_value(1, true)
 	set_collision_layer_value(4, true)
-	$Sprite2D.z_index += 1
+	if has_node("Sprite2D"):
+		$Sprite2D.z_index += 1
