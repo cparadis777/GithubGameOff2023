@@ -205,21 +205,21 @@ func check_unneeded_exits() ->void:
 				if current_drop_point.neighbors[direction] == null:
 					if current_drop_point.container.entrances[direction]:
 						current_drop_point.container.entrances[direction] = false
-						print("Removed %s from %s" % [Utils.Directions.keys()[direction], coord])
+						#print("Removed %s from %s" % [Utils.Directions.keys()[direction], coord])
 				elif current_drop_point.neighbors[direction].is_filled == false:
 					if current_drop_point.container.entrances[direction]:
 						current_drop_point.container.entrances[direction] = false
-						print("Removed %s from %s" % [Utils.Directions.keys()[direction], coord])
+						#print("Removed %s from %s" % [Utils.Directions.keys()[direction], coord])
 				elif current_drop_point.neighbors[direction].container.entrances[Utils.get_opposite_direction(direction)] == false:
 					if current_drop_point.container.entrances[direction]:
 						current_drop_point.container.entrances[direction] = false
-						print("Removed %s from %s" % [Utils.Directions.keys()[direction], coord])
+						#print("Removed %s from %s" % [Utils.Directions.keys()[direction], coord])
 		if coord == self.entrance_coord:
 			current_drop_point.container.entrances[self.entrance_direction] = true
-			print("Added back %s to %s" % [Utils.Directions.keys()[self.entrance_direction], coord])
+			#print("Added back %s to %s" % [Utils.Directions.keys()[self.entrance_direction], coord])
 		if coord == self.exit_coord:
 			current_drop_point.container.entrances[self.exit_direction] = true 
-			print("Added back %s to %s" % [Utils.Directions.keys()[self.exit_direction], coord])
+			#print("Added back %s to %s" % [Utils.Directions.keys()[self.exit_direction], coord])
 		
 		# print(current_drop_point.container.entrances)
 

@@ -26,7 +26,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 signal hurt(attackPacket)
 signal hit(attackPacket) # ie: hit someone else
-
+signal died
 
 func _ready():
 	
@@ -37,6 +37,14 @@ func _ready():
 #	if StageManager.current_level == null:
 #		activate()
 	$AnimationPlayer.play("RESET")
+
+	died.connect(StageManager._on_NPC_died)
+	
+	#var owner = get_owner()
+	if (owner and owner.has_method("_on_NPC_died")):
+		owner.num_enemies += 1
+		died.connect(owner._on_NPC_died)
+
 
 func activate():
 	if State == States.INITIALIZING:
@@ -188,6 +196,7 @@ func _on_state_changed(prev_state, new_state):
 			$DecisionTimer.stop()
 			velocity.x = 0
 			$AnimationPlayer.play("die")
+			died.emit(name)
 		States.IFRAMES:
 			$AnimationPlayer.play("hurt")
 		States.JUMPING:

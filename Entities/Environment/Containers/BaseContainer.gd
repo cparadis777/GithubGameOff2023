@@ -142,9 +142,9 @@ func _on_switch_toggled(_pressed):
 	
 func _on_NPC_died(_name):
 	num_enemies -= 1;
-	print("enemies left: %d" % num_enemies)
+	#print("enemies left: %d" % num_enemies)
 	if (unlock_on_enemies_defeated and num_enemies <= 0):
-		print("container beaten")
+		#print("container beaten")
 		unlock_all_doors()
 
 

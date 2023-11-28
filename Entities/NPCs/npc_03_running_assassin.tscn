@@ -411,6 +411,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_dp3bv"]
 resource_name = "die"
 length = 0.67
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -480,9 +481,12 @@ tracks/5/path = NodePath("Appearance/AnimatedSprite2D")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.6),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.05, 0.6),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}, {
 "args": [],
 "method": &"stop"
 }]
@@ -515,6 +519,7 @@ tracks/7/keys = {
 [sub_resource type="Animation" id="Animation_ft728"]
 resource_name = "hurt"
 length = 0.2
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -643,7 +648,8 @@ shape = SubResource("CapsuleShape2D_pfrcw")
 [node name="Sprite2D" parent="Appearance" index="0"]
 visible = false
 material = SubResource("ShaderMaterial_bo3ta")
-position = Vector2(2.08165e-12, -32)
+position = Vector2(1.58432, -9.5059)
+rotation = -2.18777
 scale = Vector2(1, 1)
 texture = ExtResource("3_gwwjw")
 hframes = 8

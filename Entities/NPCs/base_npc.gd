@@ -30,6 +30,7 @@ signal hurt
 signal died(name)
 
 func _ready():
+	
 	if !animation_player:
 		animation_player = $AnimationPlayer
 	#$AnimationPlayer.play("RESET")
@@ -75,7 +76,7 @@ func _physics_process(delta):
 		apply_gravity(delta)
 		sync_to_moving_platform(delta)
 		move_and_slide() # modifies velocity
-		update_animations()
+		#update_animations()
 		if is_on_top_of_player():
 			jump()
 		elif is_on_floor() and is_at_end_of_platform() or is_obstructed():
@@ -138,19 +139,22 @@ func apply_gravity(delta):
 		
 
 func play_death_tween_if_needed():
+	$AnimationPlayer.stop()
+	$Appearance/AnimatedSprite2D.stop()
 	var tween = create_tween()
 	tween.parallel().tween_property(self, "rotation", PI * 0.5, 0.33)
 	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
 
 func die():
-	$AnimationPlayer.stop()
+	#$AnimationPlayer.stop()
 	State = States.DEAD
-	play_death_animation() # should include audio
 	#decision_timer.stop()
 	abort_attacks_in_progress()
 	disable_collision_layers_and_masks()
 	died.emit(name)
 	stop_all_timers()
+	$AnimationPlayer.stop()
+	call_deferred("play_death_animation") # should include audio
 
 func stop_all_timers():
 	var timers = find_children("", "Timer")
@@ -158,6 +162,7 @@ func stop_all_timers():
 		timer.stop()
 
 func play_death_animation():
+	$Appearance/AnimatedSprite2D.stop()
 	if has_node("AnimationPlayer") and $AnimationPlayer.has_animation("die"):
 		$AnimationPlayer.play("die")
 	else:
@@ -185,8 +190,8 @@ func _on_hit(attackPacket : AttackPacket):
 			velocity = attackPacket.impact_vector * attackPacket.knockback_speed * knockbackMultiplier
 		else: # no knockback
 			State = States.IFRAMES
-		$IframesTimer.start()
 		$AnimationPlayer.play("hurt")
+		$IframesTimer.start()
 			#$HurtEffect/Star.show()
 		hurt.emit(attackPacket)
 
@@ -204,11 +209,12 @@ func resume_attacking():
 				attack.start()
 
 func _on_iframes_timer_timeout():
-	$AnimationPlayer.play("RESET")
 	if State in [States.DYING, States.DEAD]:
 		return
+	
+	$AnimationPlayer.play("RESET")
 		
-	elif health <= 0:
+	if health <= 0:
 		die()
 		return
 		
