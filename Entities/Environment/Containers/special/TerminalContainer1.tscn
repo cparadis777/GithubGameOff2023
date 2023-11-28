@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bn1d5gkg3ad5x" path="res://Entities/Environment/portals/terminal_to_crane_scene.tscn" id="2_muo11"]
 
 [node name="TerminalContainer" instance=ExtResource("1_v74g4")]
+container_exit_flags = 2
 doors_unlocked = true
 
 [node name="Interior" parent="." index="0"]
