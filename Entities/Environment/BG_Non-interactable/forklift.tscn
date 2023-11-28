@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://w1ok2lnb4x5g"]
+
+[ext_resource type="PackedScene" uid="uid://cfeyc76xirsc4" path="res://Entities/Environment/BG_Non-interactable/frozen_lung.tscn" id="1_0xipd"]
+[ext_resource type="Texture2D" uid="uid://buncm6saitxth" path="res://art/props/forklift.png" id="2_kjaxw"]
+
+[node name="forklift" instance=ExtResource("1_0xipd")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_kjaxw")

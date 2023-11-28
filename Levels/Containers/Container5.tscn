@@ -66,9 +66,6 @@ size = Vector2(384, 192)
 
 [node name="SoydaContainer" type="StaticBody2D"]
 script = ExtResource("1_phhsw")
-enter_right = true
-enter_down = true
-doors_open = true
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
