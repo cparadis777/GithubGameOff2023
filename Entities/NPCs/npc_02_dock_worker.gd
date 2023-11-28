@@ -132,7 +132,7 @@ func sync_to_moving_platforms(_delta):
 	
 func point_at_player():
 	if player == null:
-		player = get_tree().get_nodes_in_group("Player")[0]
+		player = get_tree().get_first_node_in_group("Player")
 	
 	if global_position.x < player.global_position.x:
 		velocity.x = abs(velocity.x) * 1

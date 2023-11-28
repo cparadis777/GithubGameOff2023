@@ -135,12 +135,13 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.501961, 0.396078, 0.396078, 0.3
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nl6ah"]
 gradient = SubResource("Gradient_0yjki")
-width = 138
-height = 1024
+width = 256
+height = 1600
 
-[node name="RigidBodyBossCrateDestructible" type="RigidBody2D"]
+[node name="RigidBodyBossCrateDestructible" type="RigidBody2D" groups=["BossContainers"]]
 collision_layer = 24
 collision_mask = 24
+lock_rotation = true
 script = ExtResource("2_s5e10")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
@@ -154,9 +155,11 @@ position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_w7s56")
 
 [node name="ContainerExteriorSprite" type="Sprite2D" parent="."]
+z_index = -1
 scale = Vector2(0.75, 0.75)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_krmud")
 autoplay = "default"
@@ -195,6 +198,7 @@ color_ramp = SubResource("Gradient_hwbxs")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 show_behind_parent = true
+z_index = -2
 material = SubResource("CanvasItemMaterial_58g76")
 position = Vector2(-2.38419e-07, 14)
 rotation = 0.17762

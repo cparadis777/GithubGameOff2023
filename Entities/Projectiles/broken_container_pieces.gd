@@ -29,10 +29,20 @@ func spawn_enemy():
 	var distance = 32.0
 	new_enemy.global_position = global_position + Vector2(randf_range(-distance,distance), randf_range(-distance,distance))
 	new_enemy.activate()
+	make_noise($EnemySpawnNoise)
+
+func make_noise(audio_node : AudioStreamPlayer2D):
+	var noise = audio_node.duplicate()
+	noise.finished.connect(noise.queue_free)
+	add_child(noise)
+	noise.play()
 
 func _on_spawn_timer_timeout():
-	for i in range(randi_range(3,5)):
-		spawn_enemy()
+	var max_enemies = 25
+	if get_tree().get_nodes_in_group("Enemies").size() < max_enemies:
+		
+		for i in range(randi_range(3,5)):
+			spawn_enemy()
 
-	await get_tree().create_timer(5).timeout
-	queue_free()
+		await get_tree().create_timer(5).timeout
+		queue_free()
