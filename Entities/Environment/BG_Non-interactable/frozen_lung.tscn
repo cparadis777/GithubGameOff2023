@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfeyc76xirsc4"]
+
+[ext_resource type="Texture2D" uid="uid://do05ptsrvhgy7" path="res://art/props/frozen_lung_knocked_over.png" id="1_r324c"]
+
+[node name="frozen_lung" type="Node2D"]
+z_index = -1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_r324c")

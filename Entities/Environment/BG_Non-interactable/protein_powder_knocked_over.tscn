@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://baolvybk46kht"]
+
+[ext_resource type="PackedScene" uid="uid://cfeyc76xirsc4" path="res://Entities/Environment/BG_Non-interactable/frozen_lung.tscn" id="1_0qsyc"]
+[ext_resource type="Texture2D" uid="uid://dp8tkb6kdtbth" path="res://art/props/protein_powder_knocked_over.png" id="2_i6oee"]
+
+[node name="protein_powder-knocked_over" instance=ExtResource("1_0qsyc")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_i6oee")

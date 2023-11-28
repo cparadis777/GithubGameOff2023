@@ -152,7 +152,6 @@ shape = SubResource("RectangleShape2D_m7xia")
 
 [node name="MovingPlatform" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-258, 98)
-speed = 80.0
 tween_duration = 3.0
 
 [node name="MovingPlatform6" parent="." instance=ExtResource("11_a2x7r")]
@@ -206,7 +205,6 @@ position = Vector2(305, -79)
 
 [node name="MovingPlatform7" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(117, 104)
-speed = 80.0
 tween_duration = 4.0
 
 [node name="MovingPlatform9" parent="." instance=ExtResource("11_a2x7r")]

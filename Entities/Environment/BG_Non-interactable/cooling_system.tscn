@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnhc0fubgb50v"]
+
+[ext_resource type="PackedScene" uid="uid://cfeyc76xirsc4" path="res://Entities/Environment/BG_Non-interactable/frozen_lung.tscn" id="1_uccd4"]
+[ext_resource type="Texture2D" uid="uid://dwg28mkpn5uuo" path="res://art/props/cooling_system.png" id="2_b13se"]
+
+[node name="cooling_system" instance=ExtResource("1_uccd4")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_b13se")
