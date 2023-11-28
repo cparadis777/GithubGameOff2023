@@ -23,10 +23,11 @@ func activate(travelVector):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if velocity != null:
-		if affected_by_gravity:
-			velocity.y += world_gravity * delta
-		global_position += velocity * delta
+	if world_gravity != null:
+		if velocity != null:
+			if affected_by_gravity:
+				velocity.y += world_gravity * delta
+			global_position += velocity * delta
 
 
 func _on_timer_timeout():

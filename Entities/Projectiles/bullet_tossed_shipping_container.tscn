@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dh3odxs6vlefi"]
+[gd_scene load_steps=10 format=3 uid="uid://dh3odxs6vlefi"]
 
 [ext_resource type="PackedScene" uid="uid://djnr2ahjg2mm1" path="res://Entities/Projectiles/bullet_basic.tscn" id="1_jvptl"]
 [ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="2_nu1ca"]
+[ext_resource type="Script" path="res://Entities/Projectiles/bullet_tossed_shipping_container.gd" id="2_s5e10"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdl8y"]
 atlas = ExtResource("2_nu1ca")
@@ -21,16 +22,40 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7s56"]
 size = Vector2(126, 61)
 
-[node name="BulletBasic" instance=ExtResource("1_jvptl")]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58g76"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_0yjki"]
+offsets = PackedFloat32Array(0, 0.040619, 0.137331, 0.882012, 0.94971, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.501961, 0.396078, 0.396078, 0.396078, 0.768627, 0.396078, 0.396078, 0.396078, 0.768627, 1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nl6ah"]
+gradient = SubResource("Gradient_0yjki")
+width = 138
+height = 1024
+
+[node name="TossedShippingContainer" instance=ExtResource("1_jvptl")]
 collision_mask = 1
+script = ExtResource("2_s5e10")
+types = 0
 damage = 25.0
 affected_by_gravity = true
 extra_initial_velocity = Vector2(100, -300)
 
-[node name="AnimatedSprite2D" parent="." index="0"]
+[node name="ContainerExteriorSprite" type="Sprite2D" parent="." index="0"]
+
+[node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(0.33, 0.33)
 sprite_frames = SubResource("SpriteFrames_krmud")
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_w7s56")
+
+[node name="Shadow" type="Sprite2D" parent="." index="6"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_58g76")
+position = Vector2(-2.38419e-07, 14)
+rotation = 0.17762
+texture = SubResource("GradientTexture2D_nl6ah")
+offset = Vector2(0, 510)
