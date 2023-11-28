@@ -33,7 +33,7 @@ func _ready():
 	
 	if !animation_player:
 		animation_player = $AnimationPlayer
-	#$AnimationPlayer.play("RESET")
+	#animation_player.play("RESET")
 	velocity = Vector2.ZERO
 	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)
@@ -51,7 +51,7 @@ func activate():
 		set_difficulty(Globals.difficulty)
 		activate_weapons()
 		State = States.RUNNING
-		$AnimationPlayer.play("run")
+		animation_player.play("run")
 		decision_timer.start()
 	
 func set_difficulty(difficulty : Globals.DifficultyScales):
@@ -137,23 +137,30 @@ func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
+func play_death_animation():
+	$Appearance/AnimatedSprite2D.stop()
+	if has_node("AnimationPlayer") and animation_player.has_animation("die"):
+		animation_player.play("die")
+	else:
+		play_death_tween_if_needed()
+
 
 func play_death_tween_if_needed():
-	$AnimationPlayer.stop()
+	animation_player.stop()
 	$Appearance/AnimatedSprite2D.stop()
 	var tween = create_tween()
 	tween.parallel().tween_property(self, "rotation", PI * 0.5, 0.33)
 	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
 
 func die():
-	#$AnimationPlayer.stop()
+	#animation_player.stop()
 	State = States.DEAD
 	#decision_timer.stop()
 	abort_attacks_in_progress()
 	disable_collision_layers_and_masks()
 	died.emit(name)
 	stop_all_timers()
-	$AnimationPlayer.stop()
+	#animation_player.stop()
 	call_deferred("play_death_animation") # should include audio
 
 func stop_all_timers():
@@ -161,12 +168,6 @@ func stop_all_timers():
 	for timer in timers:
 		timer.stop()
 
-func play_death_animation():
-	$Appearance/AnimatedSprite2D.stop()
-	if has_node("AnimationPlayer") and $AnimationPlayer.has_animation("die"):
-		$AnimationPlayer.play("die")
-	else:
-		play_death_tween_if_needed()
 
 
 func disable_collision_layers_and_masks():
@@ -190,7 +191,7 @@ func _on_hit(attackPacket : AttackPacket):
 			velocity = attackPacket.impact_vector * attackPacket.knockback_speed * knockbackMultiplier
 		else: # no knockback
 			State = States.IFRAMES
-		$AnimationPlayer.play("hurt")
+		animation_player.play("hurt")
 		$IframesTimer.start()
 			#$HurtEffect/Star.show()
 		hurt.emit(attackPacket)
@@ -212,7 +213,7 @@ func _on_iframes_timer_timeout():
 	if State in [States.DYING, States.DEAD]:
 		return
 	
-	$AnimationPlayer.play("RESET")
+	animation_player.play("RESET")
 		
 	if health <= 0:
 		die()
@@ -300,7 +301,7 @@ func _on_animation_player_animation_finished(anim_name):
 	
 	elif anim_name in ["shoot"]:
 		State = States.IDLE
-		$AnimationPlayer.play("idle")
+		animation_player.play("idle")
 		velocity.x = 0
 		decision_timer.stop()
 		choose_new_behaviour()
