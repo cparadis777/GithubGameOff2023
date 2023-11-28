@@ -49,8 +49,7 @@ func reset_playspace():
 	if Globals.player_stats["completed_levels"].size() == 0:
 		change_scene_to("res://Levels/FightingLevels/FightLevel1.tscn")
 	else:
-		var curr_level = Globals.player_stats["completed_levels"][-1] + 1
-		change_scene_to("res://Levels/FightingLevels/FightLevel%s.tscn" % curr_level)
+		change_scene_to("res://Levels/FightingLevels/FightLevel%s.tscn" % (Globals.player_stats["completed_levels"][-1] + 1)) 
 		
 	
 func set_playspace_parameters(data:Dictionary) -> void:

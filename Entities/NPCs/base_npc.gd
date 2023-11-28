@@ -101,7 +101,7 @@ func sync_to_moving_platform(_delta):
 	var sensor : RayCast2D = $Behaviours/Sensors/MovingPlatformSensor
 	if sensor.is_colliding():
 		var thing_underfoot = sensor.get_collider()
-		if is_on_floor() and thing_underfoot.is_in_group("MovingPlatforms"):
+		if is_on_floor() and thing_underfoot != null and thing_underfoot.is_in_group("MovingPlatforms"):
 			if thing_underfoot.owner.get("velocity") != null:
 				velocity.y = thing_underfoot.owner.velocity.y
 			

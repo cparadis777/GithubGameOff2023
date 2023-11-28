@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ci2y2jwgnuun5"]
+[gd_scene load_steps=28 format=3 uid="uid://ci2y2jwgnuun5"]
 
 [ext_resource type="Script" path="res://Levels/BossFight/BossFight.gd" id="1_h8arg"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_akm5b"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://px8em5ufndah" path="res://audio/sfx/placeholder/ha-ha-ha---ha.wav" id="15_ayayn"]
 [ext_resource type="PackedScene" uid="uid://dh3odxs6vlefi" path="res://Entities/Projectiles/bullet_tossed_shipping_container.tscn" id="15_t45xl"]
 [ext_resource type="AudioStream" uid="uid://c6l3b17t5jrnt" path="res://audio/sfx/placeholder/flame.wav" id="16_rmxvp"]
+[ext_resource type="PackedScene" uid="uid://cpycw3r5oj1u0" path="res://Entities/Projectiles/broken_container_pieces.tscn" id="19_gj47u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vbhb"]
 size = Vector2(824, 65)
@@ -323,6 +324,7 @@ _data = {
 
 [node name="BossFight" type="Node2D"]
 script = ExtResource("1_h8arg")
+metadata/_edit_vertical_guides_ = []
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("9_tjew5")]
 scale = Vector2(3.5, 3.5)
@@ -483,14 +485,15 @@ position = Vector2(627, 125)
 position = Vector2(670, 680)
 
 [node name="FallingBossContainer" parent="ShippingContainers" instance=ExtResource("7_f3s0p")]
-position = Vector2(396, -119)
+position = Vector2(517, -113)
 collision_layer = 8
 collision_mask = 9
 
 [node name="FallingRobot" parent="ShippingContainers" instance=ExtResource("12_wlx50")]
+position = Vector2(585, -374)
 
 [node name="Player" parent="." instance=ExtResource("8_c4bua")]
-position = Vector2(696, 1035)
+position = Vector2(809, 1035)
 
 [node name="BossNPC" parent="." instance=ExtResource("7_waqrp")]
 position = Vector2(941, 895)
@@ -540,6 +543,9 @@ bus = &"sfx"
 stream = ExtResource("16_rmxvp")
 volume_db = 7.0
 bus = &"sfx"
+
+[node name="BrokenContainerPieces" parent="." instance=ExtResource("19_gj47u")]
+position = Vector2(732, 417)
 
 [editable path="Player"]
 [editable path="BossNPC"]
