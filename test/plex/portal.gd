@@ -55,7 +55,7 @@ func _on_area_2d_body_entered(body):
 
 func _on_delay_opening_timer_timeout():
 	# player still present after a short interval.
-	if player_present():
+	if player_present() and not live_enemies_present():
 		open_door()
 		if linked_portal != null and is_instance_valid(linked_portal) and linked_portal.has_method("open_door"):
 			linked_portal.open_door()
@@ -64,6 +64,12 @@ func _on_delay_opening_timer_timeout():
 		if body_to_transport != null:
 			transport_player(body_to_transport)
 
+func live_enemies_present():
+	var live_enemies = false
+	for body in $Area2D.get_overlapping_bodies():
+		if body.is_in_group("Enemies") and body.State != body.States.DEAD:
+			live_enemies = true
+	return live_enemies
 
 func player_present():
 	var player_body = null

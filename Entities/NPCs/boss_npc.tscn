@@ -213,7 +213,9 @@ streams_count = 1
 stream_0/stream = ExtResource("6_85rgl")
 stream_0/weight = 1.0
 
-[node name="BossNPC" instance=ExtResource("1_dhliq")]
+[node name="BossNPC" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_dhliq")]
+health_max = 1000.0
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" parent="Appearance" index="0"]
 material = SubResource("ShaderMaterial_qjb73")
