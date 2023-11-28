@@ -30,7 +30,7 @@ particles_anim_loop = false
 [node name="VendingMachine" type="RigidBody2D" groups=["Kickables"]]
 position = Vector2(320, 0)
 collision_layer = 8
-collision_mask = 9
+collision_mask = 25
 mass = 0.75
 physics_material_override = SubResource("PhysicsMaterial_g7ife")
 script = ExtResource("1_26mxr")

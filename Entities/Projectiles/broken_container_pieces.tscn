@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpycw3r5oj1u0"]
+
+[ext_resource type="Script" path="res://Entities/Projectiles/broken_container_pieces.gd" id="1_fqssp"]
+[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="2_lsl1k"]
+
+[node name="BrokenContainerPieces" type="Node2D"]
+script = ExtResource("1_fqssp")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="Left" type="Polygon2D" parent="RigidBody2D"]
+texture = ExtResource("2_lsl1k")
+polygon = PackedVector2Array(202, 187, 2, 186, -1, 2, 201, 4, 195, 86, 251, 63)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(202, 187, 2, 186, -1, 2, 201, 4, 195, 86, 251, 63)
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+
+[node name="Right" type="Polygon2D" parent="RigidBody2D2"]
+texture = ExtResource("2_lsl1k")
+polygon = PackedVector2Array(199, 5, 379, 4, 379, 187, 202, 187, 249, 63, 197, 87)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D2"]
+polygon = PackedVector2Array(199, 5, 379, 4, 379, 187, 202, 187, 249, 63, 197, 87)
