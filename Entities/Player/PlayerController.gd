@@ -352,16 +352,16 @@ func _pickable_picked_up(pickup_type):
 		Globals.PickupTypes.DAMAGE:
 			# this could get out of control, but it's fine for now
 			if Globals.player_stats["damage_multiplier"] < Globals.max_stats_upper_limits["damage_multiplier"]:
-				Globals.player_stats["damage_multiplier"] *= 1.25
+				Globals.player_stats["damage_multiplier"] *= 1.15
 #				for damage_type in Globals.player_damage_defaults.keys():
 #					Globals.player_damage_defaults[damage_type] *= 1.25
 		Globals.PickupTypes.SPEED:
 			if Globals.player_stats["speed"] < Globals.max_stats_upper_limits["speed"]:
-				Globals.player_stats["speed"] += 50
+				Globals.player_stats["speed"] += 25
 				SPEED = Globals.player_stats["speed"]
 		Globals.PickupTypes.JUMP:
 			if Globals.player_stats["jump_velocity"] < Globals.max_stats_upper_limits["jump_velocity"]:
-				Globals.player_stats["jump_velocity"] += 50
+				Globals.player_stats["jump_velocity"] += 25
 				JUMP_VELOCITY = Globals.player_stats["jump_velocity"]
 	hud._on_player_picked_up_powerup(pickup_type)
 

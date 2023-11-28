@@ -42,7 +42,7 @@ var max_stats_upper_limits = {
 	"health" : 200,
 	"speed" : 500,
 	"damage_multiplier" : 5.0,
-	"jump_velocity" : 300,
+	"jump_velocity" : 600,
 } 
 
 @export var player_damage_defaults := {
