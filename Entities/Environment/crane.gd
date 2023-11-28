@@ -60,6 +60,9 @@ func _unhandled_input(event):
 		elif event.is_action_pressed("reset"):
 			if !reset_button.disabled:
 				owner.get_node("DropPoints").reset_dropped_containers()
+		elif event.is_action_pressed("quit"):
+			get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+
 func select_random_container() -> StaticBody2D:
 	var new_container = containers.pick_random().instantiate()
 	#new_container.get_node("Exterior").self_modulate = Utils.random_color()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0i2kn6vltvm0"]
+[gd_scene load_steps=28 format=3 uid="uid://d0i2kn6vltvm0"]
 
 [ext_resource type="Script" path="res://Levels/StackingLevels/prototypes/ContainerStackingTest.gd" id="1_vlh66"]
 [ext_resource type="Texture2D" uid="uid://dtuuvvgnlqgjt" path="res://art/UI/Container Stacking/panel.png" id="2_bp5ka"]
@@ -11,7 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://d2a0nxn41556j" path="res://art/UI/Container Stacking/quit-button-normal.png" id="9_5jqyf"]
 [ext_resource type="Texture2D" uid="uid://cke2uwpvjqvn8" path="res://art/UI/Container Stacking/quit-button-pressed.png" id="10_ow70u"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="11_lokuu"]
+[ext_resource type="Texture2D" uid="uid://b1yn4w4s1acoc" path="res://art/placeholder/gamepad_button_right.png" id="11_pq53r"]
+[ext_resource type="Texture2D" uid="uid://bgcsjypnwti41" path="res://art/placeholder/gamepad_button_up.png" id="12_8ipbd"]
 [ext_resource type="Script" path="res://Levels/FightingLevels/prototypes/DropPoints.gd" id="12_gr6wu"]
+[ext_resource type="Texture2D" uid="uid://3kfisyqqqjqc" path="res://art/placeholder/gamepad_button_left.png" id="13_44aey"]
 [ext_resource type="AudioStream" uid="uid://cjmpwks4nk12x" path="res://audio/sfx/container_sfx/containerdropped.ogg" id="13_81pew"]
 [ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="14_6te3c"]
 [ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="15_ucdyp"]
@@ -155,6 +158,27 @@ offset_bottom = 54.0
 texture_normal = ExtResource("9_5jqyf")
 texture_pressed = ExtResource("10_ow70u")
 
+[node name="Quit" type="TextureRect" parent="HUD/Panel"]
+offset_left = 31.0
+offset_top = 57.0
+offset_right = 51.0
+offset_bottom = 77.0
+texture = ExtResource("11_pq53r")
+
+[node name="Fight" type="TextureRect" parent="HUD/Panel"]
+offset_left = 173.0
+offset_top = 57.0
+offset_right = 193.0
+offset_bottom = 77.0
+texture = ExtResource("12_8ipbd")
+
+[node name="Reset" type="TextureRect" parent="HUD/Panel"]
+offset_left = 94.0
+offset_top = 57.0
+offset_right = 114.0
+offset_bottom = 77.0
+texture = ExtResource("13_44aey")
+
 [node name="WarningPopup" type="PopupPanel" parent="HUD"]
 initial_position = 1
 size = Vector2i(364, 173)
@@ -166,8 +190,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = 360.0
+offset_bottom = 611.0
 grow_horizontal = 2
 grow_vertical = 2
 
