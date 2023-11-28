@@ -159,6 +159,7 @@ texture_normal = ExtResource("9_5jqyf")
 texture_pressed = ExtResource("10_ow70u")
 
 [node name="Quit" type="TextureRect" parent="HUD/Panel"]
+layout_mode = 0
 offset_left = 31.0
 offset_top = 57.0
 offset_right = 51.0
@@ -166,6 +167,7 @@ offset_bottom = 77.0
 texture = ExtResource("11_pq53r")
 
 [node name="Fight" type="TextureRect" parent="HUD/Panel"]
+layout_mode = 0
 offset_left = 173.0
 offset_top = 57.0
 offset_right = 193.0
@@ -173,6 +175,7 @@ offset_bottom = 77.0
 texture = ExtResource("12_8ipbd")
 
 [node name="Reset" type="TextureRect" parent="HUD/Panel"]
+layout_mode = 0
 offset_left = 94.0
 offset_top = 57.0
 offset_right = 114.0
@@ -191,7 +194,7 @@ anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 360.0
-offset_bottom = 611.0
+offset_bottom = 221.0
 grow_horizontal = 2
 grow_vertical = 2
 
