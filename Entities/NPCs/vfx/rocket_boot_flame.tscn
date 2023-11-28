@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://bo6co2dvbw2ld"]
+
+[ext_resource type="Texture2D" uid="uid://cv1tqiimb53j5" path="res://art/placeholder/rocket_flame.png" id="1_wmsqa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke6nq"]
+atlas = ExtResource("1_wmsqa")
+region = Rect2(0, 0, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ceke"]
+atlas = ExtResource("1_wmsqa")
+region = Rect2(32, 0, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4py4v"]
+atlas = ExtResource("1_wmsqa")
+region = Rect2(64, 0, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t548"]
+atlas = ExtResource("1_wmsqa")
+region = Rect2(96, 0, 32, 39)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vvg4w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke6nq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ceke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4py4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t548")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 5.0
+}]
+
+[node name="RocketBootFlame" type="AnimatedSprite2D"]
+position = Vector2(-17.4275, 17.4275)
+sprite_frames = SubResource("SpriteFrames_vvg4w")
+animation = &"fire"
+autoplay = "fire"
+frame = 1
+frame_progress = 0.390196

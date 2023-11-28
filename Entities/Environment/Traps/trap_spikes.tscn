@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfrpi07byqc2e"]
+[gd_scene load_steps=7 format=3 uid="uid://cfrpi07byqc2e"]
 
 [ext_resource type="Texture2D" uid="uid://brpnbwebteufp" path="res://Entities/Environment/Traps/Spikes.png" id="1_g7516"]
 [ext_resource type="Script" path="res://Entities/Environment/Traps/trap_spikes.gd" id="1_i2o6i"]
@@ -8,6 +8,15 @@ size = Vector2(53, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jy86d"]
 size = Vector2(63, 2.5)
+
+[sub_resource type="Gradient" id="Gradient_wbyo8"]
+offsets = PackedFloat32Array(0, 0.536585, 1)
+colors = PackedColorArray(0.440979, 0.440979, 0.440979, 1, 0.190762, 0.190762, 0.190762, 1, 0.507314, 0.507314, 0.507314, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_madpu"]
+gradient = SubResource("Gradient_wbyo8")
+height = 6
+fill_from = Vector2(1, 1)
 
 [node name="TrapSpikes" type="Area2D"]
 collision_layer = 24
@@ -28,5 +37,9 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_jy86d")
+
+[node name="FloorSprite" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0, 10)
+texture = SubResource("GradientTexture2D_madpu")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dr840r1p2wh3c"]
+[gd_scene load_steps=12 format=3 uid="uid://dr840r1p2wh3c"]
 
 [ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_p2ip4"]
 [ext_resource type="PackedScene" uid="uid://3hmjsshx00lt" path="res://Levels/Tutorials/TutorialLevel_2.tscn" id="2_jo36j"]
 [ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="2_s1744"]
+[ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="4_mdmm4"]
 [ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="4_tsn3v"]
+[ext_resource type="Texture2D" uid="uid://bpymgdts33j4k" path="res://art/props/shipping_container_generic-export.png" id="5_4vpkp"]
+[ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="5_bd6jv"]
 [ext_resource type="Script" path="res://audio/InvokeMusic.gd" id="5_bqvrp"]
+[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="6_h7b0j"]
+[ext_resource type="Texture2D" uid="uid://bf4wjs11rnb7v" path="res://art/props/shipping_container_pain4gainz.png" id="7_1c3g8"]
+[ext_resource type="Texture2D" uid="uid://dalsqh1oenpf0" path="res://art/props/shipping_container_graffiti.png" id="8_ao6v5"]
 
 [node name="Tutorial1" instance=ExtResource("1_p2ip4")]
 exit_flags = 2
@@ -18,16 +24,37 @@ animation_name = "run"
 label_text = "A             D
 <-            ->"
 
-[node name="Label" parent="BaseContainer/RunDemo" index="2"]
+[node name="Label" parent="BaseContainer/RunDemo" index="1"]
 metadata/_edit_use_anchors_ = true
+
+[node name="ExteriorN" parent="ExteriorTextures" index="1"]
+texture = ExtResource("4_mdmm4")
+
+[node name="ExteriorSE" parent="ExteriorTextures" index="2"]
+texture = ExtResource("5_bd6jv")
+
+[node name="ExteriorE" parent="ExteriorTextures" index="3"]
+texture = ExtResource("6_h7b0j")
+
+[node name="ExteriorNE" parent="ExteriorTextures" index="4"]
+texture = ExtResource("6_h7b0j")
+
+[node name="ExteriorSW" parent="ExteriorTextures" index="5"]
+texture = ExtResource("5_4vpkp")
+
+[node name="ExteriorW" parent="ExteriorTextures" index="6"]
+texture = ExtResource("8_ao6v5")
+
+[node name="ExteriorNW" parent="ExteriorTextures" index="7"]
+texture = ExtResource("7_1c3g8")
 
 [node name="AI_Tutorial_Text" parent="." index="3" instance=ExtResource("4_tsn3v")]
 position = Vector2(-266, 115)
-override_text = "At EvilCorp, we pride ourselves
-on workplace safety.;
-Please run through this short 
-refresher course to demonstrate 
-your compliance."
+override_text = "At EvilCorp, we pride 
+ourselves on 
+workplace safety.;Run through this short 
+refresher course to 
+demonstrate your compliance."
 
 [node name="InvokeMusic" type="Node" parent="." index="4"]
 script = ExtResource("5_bqvrp")

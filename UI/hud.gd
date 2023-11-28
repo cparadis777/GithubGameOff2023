@@ -1,6 +1,6 @@
 extends CanvasLayer
 var player
-
+@onready var minimap = %minimap
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,9 +25,25 @@ func update_health_display(health_remaining : float):
 
 func _on_player_hit(_attackPacket):
 	update_health_display(player.health)
+	if _attackPacket.damage > 5:
+		$AnimationPlayer.play("big_hit")
 	
 func _on_player_picked_up_health():
 	update_health_display(player.health)
+	
+
+func _on_player_picked_up_powerup(powerupType : Globals.PickupTypes):
+	if not $SpamTimer.is_stopped():
+		return
+		
+	if powerupType == Globals.PickupTypes.HEALTH:
+		return
+	else:
+		var new_cutscene = preload("res://CutScenes/powerup_cutscene.tscn").instantiate()
+		add_child(new_cutscene)
+		new_cutscene.activate(powerupType)
+		new_cutscene.position = Vector2.ZERO
+		$SpamTimer.start()
 
 
 

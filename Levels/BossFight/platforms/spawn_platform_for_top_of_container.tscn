@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://daoapi6eorqu1"]
+
+[ext_resource type="Script" path="res://Entities/Environment/Platforms/platform_jump_thru.gd" id="1_vacys"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_bae1q"]
+a = Vector2(-151, 1)
+b = Vector2(147, 1)
+
+[node name="Platform" type="StaticBody2D" groups=["JumpThroughPlatforms"]]
+collision_layer = 24
+collision_mask = 31
+script = ExtResource("1_vacys")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -65)
+shape = SubResource("SegmentShape2D_bae1q")
+one_way_collision = true
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(0, 13)
+points = PackedVector2Array(-149, -77, 148, -78)
+default_color = Color(0.305882, 0.427451, 0.67451, 1)

@@ -44,6 +44,7 @@ func enter(_msg := {}) -> void:
 	
 	player.velocity.x = dash_speed * direction
 	$DashHurtBox/DashCollisionShape.disabled = false
+	
 	started.emit() # so player can play animation
 
 func exit():

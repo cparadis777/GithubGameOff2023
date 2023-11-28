@@ -11,7 +11,7 @@ extends StaticBody2D
 
 @export var num_generated_objects:int = 0
 
-var weigth:int = 100
+var weight:int = 100
 var grid_position:Vector2 = Vector2(100,100)
 var type: ContainerProperties.container_type = ContainerProperties.container_type.BLUE
 var num_enemies = 0
@@ -55,6 +55,10 @@ func _ready():
 	if (has_node("SpawningLogic")):
 		$SpawningLogic.spawn_random_shit(num_generated_objects)
 	
+	if has_node("ContainerInterior"):
+		$ContainerInterior.show()
+		$ContainerInterior.monitoring = true
+		
 	set_all_doors_locked(!doors_unlocked)
 		
 	await get_tree().create_timer(1.2).timeout

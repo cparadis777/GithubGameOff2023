@@ -6,6 +6,7 @@ enum SubStates { INITIALIZING, CHARGING, EXECUTING, FINISHED }
 var SubState = SubStates.INITIALIZING
 
 var time_of_entry : int # msec
+var punch_direction : int
 var last_polling_time : int = time_of_entry
 var interval_between_polls : int = 200 #msec
 
@@ -14,7 +15,13 @@ var damage
 
 var this_punch_already_landed : bool = false
 
-@export var moving : bool = false
+@export var stepping_back : bool = false
+@export var moving : bool = false :
+	set(value):
+		moving = value
+		_on_moving_forward()
+	get:
+		return moving
 @export var cancel_frames_active: bool = false
 
 @export var charge_vfx : Node 
@@ -32,7 +39,8 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_update(delta):
-	
+	if SubState == SubStates.CHARGING and stepping_back:
+		move_backward(delta)
 	if SubState == SubStates.CHARGING:
 		var current_time = Time.get_ticks_msec()
 		if current_time > last_polling_time + interval_between_polls:
@@ -42,7 +50,9 @@ func physics_update(delta):
 			execute_punch()
 	elif SubState == SubStates.EXECUTING and moving:
 		move_forward(delta)
-
+	# this doesn't seem to work, likely because the position of the sprite is set in animation
+#	apply_gravity(delta)
+#	sync_motion_to_platforms(delta)
 	allow_early_exit()
 	
 func allow_early_exit():
@@ -90,9 +100,12 @@ func amplify_vfx(delta):
 		
 	#charge_vfx.amount += int(25.0 * delta)
 		
-	
+func move_backward(_delta):
+	player.velocity.x = Globals.player_stats["speed"] * -2.25 * punch_direction
+	player.move_and_slide()
+		
 func move_forward(_delta):
-	player.velocity.x = Globals.player_stats["speed"] * 1.25 * player.get_last_known_direction()
+	player.velocity.x = Globals.player_stats["speed"] * 3.25 * punch_direction
 	player.move_and_slide()
 
 # moved to property track in animation player
@@ -113,9 +126,12 @@ func execute_punch():
 func hold_for_key_release():
 	player.animation_player.pause()
 	
-	
+func _on_moving_forward():
+	# called from setget of moving property, which is set by animation player
+	pass
 
 func enter(_msg := {}) -> void:
+	punch_direction = player.get_last_known_direction()
 	this_punch_already_landed = false
 	final_charge_duration = 0
 	time_of_entry = Time.get_ticks_msec()
@@ -162,8 +178,6 @@ func _on_hurt_box_body_entered(body):
 		if body.is_in_group("Enemies") or body.is_in_group("Kickables"):
 			var charge_multiplier = clampf(float(final_charge_duration) / 500.0, 1.0, 3.5)
 			var actual_damage = floor(Globals.player_damage_defaults[name] * Globals.player_stats["damage_multiplier"] * charge_multiplier)
-			var knockback_magnitude = 3.0
-			#var uppercut = false
 			if not this_punch_already_landed:
 				$ImpactAudio.play()
 				this_punch_already_landed = true
@@ -173,7 +187,8 @@ func _on_hurt_box_body_entered(body):
 			attackPacket.recipient = body
 			attackPacket.damage = actual_damage
 			attackPacket.knockback = true
-			attackPacket.impact_vector = Vector2(player.get_last_known_direction(), -1) * knockback_magnitude
+			attackPacket.impact_vector = Vector2(player.get_last_known_direction(), -1)
+			attackPacket.knockback_speed = 2.0
 			hit.connect(body._on_hit)
 			hit.emit(attackPacket)
 			hit.disconnect(body._on_hit)

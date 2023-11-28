@@ -13,7 +13,7 @@ func _ready():
 func enter(_msg := {}) -> void:
 	$CPUParticles2D.emitting = true
 	$Timer.start()
-	printerr("Player is dying, and can't recover. We should probably give the player a chance to grab a health pickup, instead of just dying every time.")
+	#printerr("Player is dying, and can't recover. We should probably give the player a chance to grab a health pickup, instead of just dying every time.")
 	
 func exit():
 	pass

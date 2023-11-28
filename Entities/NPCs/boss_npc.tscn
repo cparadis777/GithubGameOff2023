@@ -1,11 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://4ubg2v861dlv"]
+[gd_scene load_steps=21 format=3 uid="uid://4ubg2v861dlv"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_dhliq"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_46dpl"]
 [ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="3_mxgy3"]
-[ext_resource type="PackedScene" uid="uid://dh3odxs6vlefi" path="res://Entities/Projectiles/bullet_tossed_shipping_container.tscn" id="4_60mf1"]
 [ext_resource type="Texture2D" uid="uid://bsgyd5cohss47" path="res://art/decals/alert.png" id="4_jtmub"]
+[ext_resource type="PackedScene" uid="uid://d14b0n2jkrj85" path="res://Entities/Projectiles/falling_robot.tscn" id="5_7fgqb"]
 [ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_85rgl"]
+[ext_resource type="Script" path="res://Entities/NPCs/BossRocketBoots.gd" id="7_0mmdm"]
+[ext_resource type="PackedScene" uid="uid://bo6co2dvbw2ld" path="res://Entities/NPCs/vfx/rocket_boot_flame.tscn" id="8_85cby"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qjb73"]
 resource_local_to_scene = true
@@ -233,8 +235,7 @@ position = Vector2(25.804, -4.29216)
 shape = SubResource("RectangleShape2D_shbba")
 
 [node name="SimpleShootAttack" parent="Behaviours/Attacks" index="1"]
-enabled = true
-bullet_scene = ExtResource("4_60mf1")
+bullet_scene = ExtResource("5_7fgqb")
 free_rotate = false
 
 [node name="AnimationPlayer" parent="." index="3"]
@@ -244,5 +245,14 @@ libraries = {
 
 [node name="ShootNoises" parent="." index="8"]
 stream = SubResource("AudioStreamRandomizer_1360e")
+
+[node name="Rocket" type="Node2D" parent="." index="11"]
+visible = false
+script = ExtResource("7_0mmdm")
+
+[node name="RocketBoots" parent="Rocket" index="0" instance=ExtResource("8_85cby")]
+
+[node name="RocketBoots2" parent="Rocket" index="1" instance=ExtResource("8_85cby")]
+position = Vector2(15.8432, 17.4275)
 
 [editable path="Behaviours/Attacks/SimpleMeleeAttack"]

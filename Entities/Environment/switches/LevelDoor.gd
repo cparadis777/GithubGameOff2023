@@ -17,7 +17,8 @@ signal level_exited()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	%Label.hide();
+	%Label.hide()
+	%Sprite2D.hide()
 	pass # Replace with function body.
 
 func exit_level():
@@ -52,8 +53,10 @@ func _on_body_entered(body):
 	if body == StageManager.current_player:
 		player_near = true
 		%Label.show()
+		%Sprite2D.show()
 	
 func _on_body_exited(body):
 	if body == StageManager.current_player:
 		player_near = false
 		%Label.hide()
+		%Sprite2D.hide()

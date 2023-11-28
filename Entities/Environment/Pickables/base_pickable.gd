@@ -9,6 +9,8 @@ var move_speed : float = 100.0
 var PickupTypes = Globals.PickupTypes
 @export var pickup_type : Globals.PickupTypes = Globals.PickupTypes.HEALTH
 
+var already_picked : bool = false
+
 signal picked_up(pickup_type)
 
 # Called when the node enters the scene tree for the first time.
@@ -39,10 +41,13 @@ func _on_magnet_area_body_entered(body):
 		chase_target()
 
 func pickup(body):
-	if not picked_up.is_connected(body._pickable_picked_up):
-		picked_up.connect(body._pickable_picked_up)
-	picked_up.emit(pickup_type)
-	pop()
+	if not already_picked:
+		already_picked = true
+		if not picked_up.is_connected(body._pickable_picked_up):
+			picked_up.connect(body._pickable_picked_up)
+		picked_up.emit(pickup_type)
+		pop()
+	
 
 func pop():
 	$PickupNoise.play()

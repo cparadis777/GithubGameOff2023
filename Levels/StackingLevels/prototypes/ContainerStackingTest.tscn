@@ -1,0 +1,448 @@
+[gd_scene load_steps=26 format=3 uid="uid://one3l2j3vodd"]
+
+[ext_resource type="Script" path="res://Levels/StackingLevels/prototypes/ContainerStackingTest.gd" id="1_f2v7x"]
+[ext_resource type="Texture2D" uid="uid://dtuuvvgnlqgjt" path="res://art/UI/Container Stacking/panel.png" id="2_4w6nr"]
+[ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="2_30gk4"]
+[ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="2_o08nb"]
+[ext_resource type="Script" path="res://Menus/ContainerStackingUI/Panel.gd" id="3_b313w"]
+[ext_resource type="Script" path="res://Levels/FightingLevels/prototypes/DropPoints.gd" id="3_i3vix"]
+[ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="4_unqhl"]
+[ext_resource type="Texture2D" uid="uid://dw66l7w5dq4cj" path="res://art/UI/Container Stacking/fight-button-normal.png" id="6_ck12f"]
+[ext_resource type="Texture2D" uid="uid://o8cl2ckv7j3b" path="res://art/UI/Container Stacking/fight-button-hover.png" id="7_dc8un"]
+[ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="8_18gwl"]
+[ext_resource type="Texture2D" uid="uid://4f4h20iu6o3g" path="res://art/UI/Container Stacking/fight-button-pressed.png" id="8_yixi3"]
+[ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="9_0cocc"]
+[ext_resource type="AudioStream" uid="uid://cjmpwks4nk12x" path="res://audio/sfx/container_sfx/containerdropped.ogg" id="9_3vpfd"]
+[ext_resource type="PackedScene" uid="uid://diik2yboc0mbr" path="res://Entities/Droppable/TerminalContainer.tscn" id="9_d655n"]
+[ext_resource type="Texture2D" uid="uid://jc5uk1hcdw8v" path="res://art/UI/Container Stacking/reset-button-normal.png" id="10_boduy"]
+[ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="10_bp55l"]
+[ext_resource type="Texture2D" uid="uid://bcehka4wp5evg" path="res://art/UI/Container Stacking/reset-button-pressed.png" id="11_s0x0g"]
+[ext_resource type="Texture2D" uid="uid://d2a0nxn41556j" path="res://art/UI/Container Stacking/quit-button-normal.png" id="13_3wp8r"]
+[ext_resource type="Texture2D" uid="uid://cke2uwpvjqvn8" path="res://art/UI/Container Stacking/quit-button-pressed.png" id="14_ykucd"]
+[ext_resource type="AudioStream" uid="uid://765736xedns2" path="res://audio/music/DockSeaAmbient.mp3" id="16_wc7sc"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_m3gb7"]
+streams_count = 1
+stream_0/stream = ExtResource("9_3vpfd")
+stream_0/weight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6bsu"]
+shader = ExtResource("2_o08nb")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.195
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 25.101
+shader_parameter/roll_variation = 2.493
+shader_parameter/distort_intensity = 0.012
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.192
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="Animation" id="Animation_5g3e2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -177)]
+}
+
+[sub_resource type="Animation" id="Animation_iohgr"]
+resource_name = "zoom_in"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(8, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-64, 64)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -177)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1u85b"]
+_data = {
+"RESET": SubResource("Animation_5g3e2"),
+"zoom_in": SubResource("Animation_iohgr")
+}
+
+[node name="ContainerStackingTest" type="Node2D"]
+position = Vector2(1, 1)
+script = ExtResource("1_f2v7x")
+target_weight = 300
+scene_path = "res://Levels/GeneratedPlayspace.tscn"
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Panel" type="TextureRect" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -231.0
+offset_top = 9.0
+offset_right = -7.0
+offset_bottom = 66.0
+grow_horizontal = 0
+mouse_filter = 2
+texture = ExtResource("2_4w6nr")
+script = ExtResource("3_b313w")
+
+[node name="FightButton" type="TextureButton" parent="HUD/Panel"]
+layout_mode = 2
+offset_left = 147.0
+offset_top = 10.0
+offset_right = 254.0
+offset_bottom = 54.0
+focus_mode = 0
+texture_normal = ExtResource("7_dc8un")
+texture_pressed = ExtResource("8_yixi3")
+texture_disabled = ExtResource("6_ck12f")
+
+[node name="ResetButton" type="TextureButton" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 14.0
+offset_right = 133.0
+offset_bottom = 54.0
+texture_normal = ExtResource("10_boduy")
+texture_pressed = ExtResource("11_s0x0g")
+
+[node name="QuitButton" type="TextureButton" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 69.0
+offset_bottom = 54.0
+texture_normal = ExtResource("13_3wp8r")
+texture_pressed = ExtResource("14_ykucd")
+
+[node name="WarningPopup" type="PopupPanel" parent="HUD"]
+initial_position = 1
+size = Vector2i(364, 173)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/WarningPopup"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HUD/WarningPopup/VBoxContainer"]
+layout_mode = 2
+text = "With this stack of shipping containers, you don't have a valid path to the bridge.
+You won't be able to reach the boss to enact your revenge. 
+Are you sure?"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/WarningPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Retry" type="Button" parent="HUD/WarningPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "No. Let me fix the stack."
+
+[node name="Confirm" type="Button" parent="HUD/WarningPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Yes. Fight Anyways."
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("4_unqhl")]
+
+[node name="DropPoints" type="Node2D" parent="."]
+position = Vector2(-17, -113)
+script = ExtResource("3_i3vix")
+exit_coord = Vector2(1, 3)
+entrance_direction = 3
+exit_direction = 1
+n_horizontal = 2
+n_vertical = 4
+container_width = 48
+container_height = 24
+
+[node name="BangNoise" type="AudioStreamPlayer" parent="DropPoints"]
+stream = SubResource("AudioStreamRandomizer_m3gb7")
+volume_db = 5.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -177)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="Arena" type="Node2D" parent="."]
+
+[node name="BaseContainer" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-17, -89)
+
+[node name="BaseContainer10" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-113, -137)
+
+[node name="BaseContainer9" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-113, -113)
+
+[node name="BaseContainer6" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-113, -89)
+
+[node name="BaseContainer7" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-65, -89)
+
+[node name="BaseContainer2" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(31, -89)
+
+[node name="BaseContainer3" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(79, -89)
+
+[node name="BaseContainer4" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(79, -113)
+
+[node name="BaseContainer5" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(79, -137)
+
+[node name="BaseContainer8" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(79, -161)
+
+[node name="BaseContainer12" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-113, -161)
+
+[node name="BaseContainer18" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-161, -137)
+
+[node name="BaseContainer19" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-161, -113)
+
+[node name="BaseContainer20" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-161, -89)
+
+[node name="BaseContainer21" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-161, -161)
+
+[node name="BaseContainer22" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-161, -185)
+
+[node name="BaseContainer11" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-113, -185)
+
+[node name="BaseContainer13" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(127, -137)
+
+[node name="BaseContainer14" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(127, -113)
+
+[node name="BaseContainer15" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(127, -89)
+
+[node name="BaseContainer16" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(127, -161)
+
+[node name="BaseContainer17" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(127, -185)
+
+[node name="EmptyContainer3" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-65, -137)
+
+[node name="EmptyContainer4" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-65, -161)
+
+[node name="EmptyContainer5" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(-65, -185)
+
+[node name="BaseContainer23" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(175, -137)
+
+[node name="BaseContainer24" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(175, -113)
+
+[node name="BaseContainer25" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(175, -89)
+
+[node name="BaseContainer26" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(175, -161)
+
+[node name="BaseContainer27" parent="Arena" instance=ExtResource("10_bp55l")]
+position = Vector2(175, -185)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+z_index = 1
+offset_left = -113.0
+offset_top = -97.0
+offset_right = -5.99999
+offset_bottom = -86.0
+rotation = -1.5708
+max_value = 1.0
+show_percentage = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_f6bsu")
+offset_left = -698.0
+offset_top = -613.0
+offset_right = 686.0
+offset_bottom = 298.0
+color = Color(1, 1, 1, 0)
+
+[node name="crane" parent="." instance=ExtResource("2_30gk4")]
+position = Vector2(-17, -225)
+n_columns = 2
+
+[node name="Instructions" type="Node2D" parent="."]
+position = Vector2(0, -177)
+
+[node name="Tutorial_AI" parent="Instructions" instance=ExtResource("9_0cocc")]
+position = Vector2(-139, 80)
+scale = Vector2(0.5, 0.5)
+override_text = "Stack containers
+in a continuous path 
+from start to finish.;Use the levers [A] and [D]
+to move containers
+left and right.;
+To rotate the containers,
+use the pedals [Q] and [E].;
+To drop them, 
+press the [SPACE] button.;If your path doesn't lead
+anywhere, you can retry by
+pressing the RESET button.;Evilcorp Employee.
+Stack your way to a
+pay raise and be productive. 
+
+"
+
+[node name="controls" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("8_18gwl")]
+visible = false
+z_index = 1
+position = Vector2(-9, -1)
+next_slide = NodePath("../placement")
+info_text = "Use A,D or Left,Right to move crane.
+Q,E or <,> to rotate container exits.
+Press space to drop Container."
+
+[node name="placement" parent="Instructions" instance=ExtResource("8_18gwl")]
+visible = false
+z_index = 1
+position = Vector2(-9, -1)
+info_text = "Place containers 
+to create a contiguous path 
+from Start to Finish."
+
+[node name="StartLabel" type="Label" parent="Instructions"]
+offset_left = -124.0
+offset_top = 53.0
+offset_right = -84.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 14
+text = "Start"
+
+[node name="FinishLabel" type="Label" parent="Instructions"]
+offset_left = 107.0
+offset_top = -18.0
+offset_right = 153.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 14
+text = "Finish"
+
+[node name="TerminalContainer" parent="." instance=ExtResource("9_d655n")]
+position = Vector2(79, -185)
+entrances = {
+0: false,
+1: false,
+2: false,
+3: true
+}
+
+[node name="TerminalContainer2" parent="." instance=ExtResource("9_d655n")]
+position = Vector2(-65, -113)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1u85b")
+}
+
+[node name="DockSeaAmbient" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_wc7sc")
+volume_db = -4.0
+
+[connection signal="pressed" from="HUD/Panel/FightButton" to="." method="_on_fight_button_pressed"]
+[connection signal="pressed" from="HUD/Panel/ResetButton" to="DropPoints" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="HUD/Panel/QuitButton" to="HUD/Panel" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Retry" to="HUD/WarningPopup" method="hide"]
+[connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="drop_over" from="DropPoints" to="." method="_on_drop_points_drop_over"]
+[connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
+[connection signal="drop_started" from="DropPoints" to="." method="_on_drop_points_drop_started"]
+[connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
+[connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]
+[connection signal="finished" from="Instructions/Tutorial_AI" to="." method="_on_tutorial_ai_finished"]
+[connection signal="finished" from="Instructions/placement" to="." method="_on_placement_instructions_finished"]

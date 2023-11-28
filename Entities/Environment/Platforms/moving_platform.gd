@@ -9,7 +9,7 @@ extends Node2D
 @export var trigger_node_path : NodePath
 var trigger_node
 
-@export var speed = 50.0
+@export var speed = 80.0
 #var velocity : Vector2 = Vector2.ZERO
 
 @export var show_piston : bool = true

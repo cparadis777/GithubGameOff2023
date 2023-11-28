@@ -7,8 +7,10 @@ var kicked = false
 
 var original_position : Vector2
 
+@export var chance_to_spawn_anything: float = 0.67
+
 @export var spawn_probabilities = {
-	Globals.PickupTypes.HEALTH : 0.5,
+	Globals.PickupTypes.HEALTH : 0.4,
 	Globals.PickupTypes.DAMAGE : 0.2,
 	Globals.PickupTypes.JUMP : 0.2,
 	Globals.PickupTypes.SPEED : 0.2,
@@ -65,19 +67,21 @@ func spawn_random_pickup():
 		if dice_roll < running_chance:
 			pickup_scene = pickup_scenes[type]
 			dice_roll = 100.0 # so no one else can get it.
+
+	if pickup_scene != null:
+		var pickup = pickup_scene.instantiate()
 	
-	var pickup = pickup_scene.instantiate()
-	
-	call_deferred("add_sibling", pickup)
-	await pickup.ready
-	pickup.global_position = global_position
-	pickup.position += Vector2.ONE.rotated(randf()*TAU) * 3.0
-	
+		call_deferred("add_sibling", pickup)
+		await pickup.ready
+		pickup.global_position = global_position
+		pickup.position += Vector2.ONE.rotated(randf()*TAU) * 3.0
+		
 
 func _on_hit(attackPacket : AttackPacket):
 	if !kicked:
 		spawn_soda_cans(attackPacket.impact_vector)
-		spawn_random_pickup()
+		if randf() < chance_to_spawn_anything:
+			spawn_random_pickup()
 		kicked = true
 
 	freeze = false # act as a rigid body, not a static body

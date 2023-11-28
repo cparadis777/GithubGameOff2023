@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cytpnn70hcfsb"]
+[gd_scene load_steps=7 format=3 uid="uid://cytpnn70hcfsb"]
 
 [ext_resource type="Script" path="res://Menus/settings_menu.gd" id="1_3y8nf"]
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="1_sb44g"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://ct3ytlk7bqmvm" path="res://Menus/audio_settings_menu.tscn" id="4_jl8ts"]
 [ext_resource type="PackedScene" uid="uid://b45i070ptb576" path="res://Menus/graphics_settings_menu.tscn" id="5_2ci1o"]
 [ext_resource type="PackedScene" uid="uid://boxf3isucgo4t" path="res://Entities/Environment/music_visualizer.tscn" id="7_vo0f8"]
-[ext_resource type="AudioStream" uid="uid://cm3eeinwv8b04" path="res://audio/music/placeholder/Kevin MacLeod - 04 - Black Vortex.ogg" id="8_12uvy"]
 
 [node name="Settings_Menu" type="Control"]
 layout_mode = 3
@@ -82,6 +81,5 @@ render_target_update_mode = 4
 [node name="MusicVisualizer" parent="PanelContainer/MarginContainer/VBoxContainer/Footer/SubViewportContainer/SubViewport" instance=ExtResource("7_vo0f8")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_12uvy")
 autoplay = true
 bus = &"music"

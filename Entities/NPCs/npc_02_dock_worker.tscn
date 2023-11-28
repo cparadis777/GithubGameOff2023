@@ -765,7 +765,7 @@ _data = {
 
 [node name="NPC_02_DockWorker" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 2
-collision_mask = 25
+collision_mask = 19
 script = ExtResource("1_513fr")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
@@ -809,6 +809,15 @@ bus = &"sfx"
 
 [node name="WalkTowardPlayer" type="Node2D" parent="Behaviours/Movement"]
 script = ExtResource("2_f7ga5")
+
+[node name="CliffSensor" type="RayCast2D" parent="Behaviours/Movement/WalkTowardPlayer"]
+position = Vector2(22, 2.08165e-12)
+target_position = Vector2(2.08165e-12, 16)
+collision_mask = 16
+
+[node name="PlatformSensor" type="RayCast2D" parent="Behaviours/Movement/WalkTowardPlayer"]
+target_position = Vector2(2.08165e-12, 16)
+collision_mask = 16
 
 [node name="Attacks" type="Node2D" parent="Behaviours"]
 
@@ -889,7 +898,7 @@ one_shot = true
 
 [node name="DecisionTimer" type="Timer" parent="."]
 wait_time = 1.5
-autostart = true
+one_shot = true
 
 [connection signal="timeout" from="Behaviours/Attacks/HeavyMeleeAttack/RecoilTimer" to="Behaviours/Attacks/HeavyMeleeAttack" method="_on_recoil_timer_timeout"]
 [connection signal="timeout" from="Behaviours/Attacks/HeavyMeleeAttack/ReloadTimer" to="Behaviours/Attacks/HeavyMeleeAttack" method="_on_reload_timer_timeout"]

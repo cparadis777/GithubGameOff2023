@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxtontreijkdo"]
+
+[ext_resource type="AudioStream" uid="uid://chy3if1m4qsn0" path="res://audio/sfx/TutorialAIVoice/opening_doors.ogg" id="1_ere0o"]
+
+[node name="OpeningDoorsVoice" type="AudioStreamPlayer"]
+stream = ExtResource("1_ere0o")
+bus = &"sfx"

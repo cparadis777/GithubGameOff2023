@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c8qshoquywcr3"]
+[gd_scene load_steps=20 format=3 uid="uid://c8qshoquywcr3"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_rtxks"]
 [ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_1dccq"]
@@ -11,7 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="8_78j8k"]
 [ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="9_je7k7"]
 [ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="10_bekvs"]
-[ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="11_lklqy"]
+[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="12_w2sde"]
+[ext_resource type="PackedScene" uid="uid://cxtontreijkdo" path="res://Entities/Environment/portals/opening_doors_voice.tscn" id="13_4ov67"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -121,6 +122,7 @@ position = Vector2(0, 169)
 
 [node name="Exterior" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 position = Vector2(4.72069e-05, -0.500001)
 scale = Vector2(2.5, 2.50521)
 texture = ExtResource("7_d2kd4")
@@ -147,10 +149,6 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContainerInterior"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_m7xia")
-
-[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_lklqy")
-bus = &"sfx"
 
 [node name="Traps" type="Node2D" parent="."]
 
@@ -186,6 +184,12 @@ animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 position = Vector2(240, 163)
 animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 
+[node name="NewRunner" parent="Enemies" instance=ExtResource("12_w2sde")]
+position = Vector2(-307, 168)
+
+[node name="NewRunner2" parent="Enemies" instance=ExtResource("12_w2sde")]
+position = Vector2(297, 169)
+
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="MovingPlatform" parent="Platforms" instance=ExtResource("8_78j8k")]
@@ -205,6 +209,8 @@ position = Vector2(-5, 9)
 
 [node name="FloorHeightMarker" parent="Platforms/MovingPlatform3/AnimatableBody2D/Piston" index="0"]
 position = Vector2(0, 32)
+
+[node name="OpeningDoorsVoice" parent="." instance=ExtResource("13_4ov67")]
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

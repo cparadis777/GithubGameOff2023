@@ -8,8 +8,8 @@ var gravity
 
 var original_doll_scale : Vector2
 
-enum States { WAITING, ACTIVE }
-var State = States.WAITING
+enum States { INACTIVE, ACTIVE }
+var State = States.INACTIVE
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +20,9 @@ func _ready():
 
 func activate():
 	State = States.ACTIVE
+
+func deactivate():
+	State = States.INACTIVE
 
 func is_active():
 	return (State == States.ACTIVE)
@@ -61,11 +64,16 @@ func choose_direction():
 		direction_x = -1.0
 	return direction_x
 
+
 func update_goal(): # Decision_timer_timeout
 	# find the player, get a path towards them
 	if StageManager.current_player != null:
 		target_location = StageManager.current_player.global_position
+
 		
 func _on_decision_timer_timeout():
-	update_goal()
+	if owner.State not in [owner.States.DYING, owner.States.DEAD]:
+		update_goal()
+	else:
+		decision_timer.stop()
 	

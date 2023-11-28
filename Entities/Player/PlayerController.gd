@@ -62,14 +62,16 @@ func _ready():
 	original_sprite_position = $Body/CyberRoninSprites.position
 	$AnimationPlayer.play("RESET")
 
-func flip_sprites():
+func orient_sprites_to_velocity():
 	if abs(velocity.x) > 0:
-		$Body.scale.x = sign(velocity.x) * original_body_scale.x
-		state_machine.scale.x = $Body.scale.x
+		face(sign(velocity.x))
+#		$Body.scale.x = sign(velocity.x) * original_body_scale.x
+#		state_machine.scale.x = $Body.scale.x
 
-
-
-
+func face(dir):
+	$Body.scale.x = dir * original_body_scale.x
+	state_machine.scale.x = dir
+	
 func get_last_known_direction():
 	if $Body.scale.x > 0:
 		return 1
@@ -78,7 +80,8 @@ func get_last_known_direction():
 
 
 func _physics_process(_delta):
-	flip_sprites()
+	if state_machine.state.name != "StrongPunch":
+		orient_sprites_to_velocity()
 	$Debug.global_rotation = 0.0 # for the state label
 	if Input.is_action_just_pressed("debug"):
 		initiate_debugging_protocol()
@@ -96,8 +99,11 @@ func play_run_animation():
 func play_jump_peak_animation():
 	# wait for a signal from Air state
 	# includes frames for falling.
-	$Body/CyberRoninSprites.play("jump_peak")
+	$AnimationPlayer.play("jump_peak")
+	#$Body/CyberRoninSprites.play("jump_peak")
 
+func play_fall_animation():
+	$AnimationPlayer.play("fall")
 
 func play_idle_animation():
 	if $AnimationPlayer.current_animation != "idle":
@@ -115,10 +121,8 @@ func reset_rotation():
 	animation_player.play("RESET")
 
 func initiate_debugging_protocol():
-	if Engine.time_scale == 1.0:
-		Engine.time_scale = 0.25
-	else:
-		Engine.time_scale = 1.0
+	zoom_camera(1)
+
 	print("Player detected")
 	print("nodes in group Player: " + str(get_tree().get_nodes_in_group("Player")))
 	
@@ -134,7 +138,7 @@ func initiate_debugging_protocol():
 
 func zoom_camera(direction : int):
 	#var camera = get_viewport().get_camera_2d()
-	var zoom_levels = [ Vector2(1.5, 1.5), Vector2(1.0,1.0), Vector2(0.75, 0.75), Vector2(0.5,0.5), Vector2(0.25, 0.25) ]
+	var zoom_levels = [ Vector2(3,3), Vector2(2, 2), Vector2(1.5, 1.5), Vector2(1.0,1.0), Vector2(0.75, 0.75), Vector2(0.5,0.5), Vector2(0.25, 0.25) ]
 	var zoom_index = (zoom_levels.find(camera.zoom) + direction)%zoom_levels.size()
 	camera.zoom = zoom_levels[zoom_index]
 	
@@ -194,7 +198,7 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_state_transitioned(_stateName):
-	pass # see incoming signals below, from various states.
+	reset_sprite_position()
 
 
 func _on_jumped(): # from Air state
@@ -202,6 +206,9 @@ func _on_jumped(): # from Air state
 
 func _on_peak_amplitude_reached(): # from Air state
 	play_jump_peak_animation()
+
+func _on_started_fall_descent():
+	play_fall_animation()
 
 func _on_double_jump_hover_initiated(): # from Air state
 	play_somersault_animation("initiate")
@@ -283,9 +290,20 @@ func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 
 
 #receive injury
-func _on_hit(attackPacket):
-	if !iframes and (state_machine.state.name not in [ "Dying", "Dead", "InTransit", "Dash", "DescendingKick"]):
-		
+func _on_hit(attackPacket : AttackPacket):
+	if ( # a whole litany of exceptions
+			iframes == true
+			or state_machine.state.name in ["Dying", "Dead", "InTransit", "Dash", "DescendingKick"]
+			or state_machine.state.name == "StrongPunch" and state_machine.state.stepping_back == true
+			or state_machine.state.name == "StrongPunch" and state_machine.state.moving == true
+		):
+			return
+	
+	else:
+		if attackPacket.damage_type == Globals.DamageTypes.ELECTRICAL:
+			$Audio/HurtNoiseEnergy.play()
+		elif attackPacket.damage_type == Globals.DamageTypes.IMPACT:
+			$Audio/HurtNoiseImpact.play()
 		health -= attackPacket.damage
 		Globals.player_stats["health"] = health
 		injured.emit(attackPacket)
@@ -345,3 +363,10 @@ func _pickable_picked_up(pickup_type):
 			if Globals.player_stats["jump_velocity"] < Globals.max_stats_upper_limits["jump_velocity"]:
 				Globals.player_stats["jump_velocity"] += 50
 				JUMP_VELOCITY = Globals.player_stats["jump_velocity"]
+	hud._on_player_picked_up_powerup(pickup_type)
+
+func _on_paused():
+	state_machine.transition_to("Paused")
+
+func _on_resume():
+	state_machine.transition_to("Idle")

@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpycw3r5oj1u0"]
+
+[ext_resource type="Script" path="res://Entities/Projectiles/broken_container_pieces.gd" id="1_fqssp"]
+[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="2_lsl1k"]
+[ext_resource type="AudioStream" uid="uid://b16invhatvmw4" path="res://audio/sfx/placeholder/yeah.wav" id="3_yo04r"]
+[ext_resource type="AudioStream" uid="uid://cmjkejxf1gu83" path="res://audio/sfx/placeholder/get_him.wav" id="4_jo6pp"]
+[ext_resource type="AudioStream" uid="uid://ck14qo7ox2mc" path="res://audio/sfx/placeholder/huh.wav" id="5_y4ckd"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ost3l"]
+streams_count = 3
+stream_0/stream = ExtResource("3_yo04r")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_jo6pp")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_y4ckd")
+stream_2/weight = 1.0
+
+[node name="BrokenContainerPieces" type="Node2D"]
+script = ExtResource("1_fqssp")
+
+[node name="LeftPiece" type="RigidBody2D" parent="."]
+position = Vector2(-101, -1)
+collision_layer = 24
+collision_mask = 25
+
+[node name="Sprite" type="Polygon2D" parent="LeftPiece"]
+position = Vector2(-68.8, -62.5)
+texture = ExtResource("2_lsl1k")
+texture_scale = Vector2(1.5, 1.5)
+polygon = PackedVector2Array(117, 127, -1, 126, -1, 2, 133, 2, 114, 64, 143, 73)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LeftPiece"]
+position = Vector2(-68.8, -62.5)
+polygon = PackedVector2Array(117, 127, -1, 126, -1, 2, 133, 2, 114, 64, 143, 73)
+
+[node name="RightPiece" type="RigidBody2D" parent="."]
+position = Vector2(66, -1)
+collision_layer = 24
+collision_mask = 25
+
+[node name="Sprite" type="Polygon2D" parent="RightPiece"]
+position = Vector2(-181.6, -61.9)
+texture = ExtResource("2_lsl1k")
+texture_scale = Vector2(1.5, 1.5)
+polygon = PackedVector2Array(141, 0, 256, 0, 256, 127, 121, 127, 147, 70, 118, 60)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RightPiece"]
+position = Vector2(-181.6, -61.9)
+polygon = PackedVector2Array(141, 0, 256, 0, 256, 127, 121, 127, 147, 70, 118, 60)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="EnemySpawnNoise" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ost3l")
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

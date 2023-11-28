@@ -27,10 +27,12 @@ particles_anim_loop = false
 
 [node name="SoydaBox" type="RigidBody2D" groups=["Kickables"]]
 collision_layer = 8
-collision_mask = 27
+collision_mask = 25
 mass = 0.75
 physics_material_override = SubResource("PhysicsMaterial_g7ife")
 script = ExtResource("1_j5cn8")
+max_hits = 1
+chance_to_spawn_anything = 0.2
 
 [node name="CanImage" type="Sprite2D" parent="."]
 position = Vector2(1, 10)

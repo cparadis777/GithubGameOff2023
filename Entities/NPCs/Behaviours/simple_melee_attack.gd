@@ -10,13 +10,18 @@ var npc
 enum States { INACTIVE, ACTIVE }
 var State = States.INACTIVE
 
+signal started
 signal hit
+signal finished
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await owner.ready
 	npc = owner
 	scale_for_difficulty()
+	started.connect(owner._on_melee_attack_started)
+	finished.connect(owner._on_melee_attack_finished)
 	
 func scale_for_difficulty():
 	damage = base_damage * (1+float(Globals.difficulty)/20.0)
@@ -39,10 +44,9 @@ func launch_attack():
 	
 
 func execute_attack():
-
-	if npc.get("animation_player") and npc.animation_player.has_animation("attack"):
-		npc.animation_player.play("attack")
-	$AnimationPlayer.play("attack")
+	started.emit() # make the NPC play their own animation
+	$AttackReload.start()
+	#$AnimationPlayer.play("attack")
 			
 
 func start():
@@ -51,6 +55,8 @@ func start():
 func stop():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("RESET")
+	$AttackDelay.stop()
+	$AttackReload.stop()
 	
 	
 
@@ -59,7 +65,7 @@ func _on_attack_delay_timeout():
 		execute_attack()
 	
 func _on_attack_reload_timeout():
-	pass
+	finished.emit()
 	
 
 func is_enemy(body):
@@ -84,5 +90,11 @@ func inflict_harm(body):
 		printerr("simple_melee_attack tried to connect, but the recipient has no _on_hit method. " + owner.name + " , " + body.name)
 
 func _on_melee_collision_area_body_entered(body):
-	if is_enemy(body):
-		inflict_harm(body)
+	if owner.State not in [ owner.States.DYING, owner.States.DEAD ]:
+		if is_enemy(body):
+			inflict_harm(body)
+
+
+#func _on_animation_player_animation_finished(anim_name):
+#	if anim_name == "attack":
+#		finished.emit()
