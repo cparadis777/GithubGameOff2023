@@ -25,7 +25,7 @@ glow_enabled = true
 script = ExtResource("1_ya2wi")
 
 [node name="Player" parent="." instance=ExtResource("2_na87h")]
-position = Vector2(-625, 149)
+position = Vector2(-679, 165)
 
 [node name="ContainerGrid" type="Node2D" parent="."]
 script = ExtResource("3_btxt6")

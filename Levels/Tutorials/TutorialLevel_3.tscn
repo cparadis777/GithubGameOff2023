@@ -41,10 +41,6 @@ button_texture = ExtResource("6_mlgsp")
 position = Vector2(-31, 18)
 texture = ExtResource("6_mlgsp")
 
-[node name="CyberRoninSprites" parent="BaseContainer/DoubleJumpDemo" index="4"]
-frame = 0
-frame_progress = 0.0
-
 [node name="Player" parent="." index="1"]
 position = Vector2(-159, 94)
 

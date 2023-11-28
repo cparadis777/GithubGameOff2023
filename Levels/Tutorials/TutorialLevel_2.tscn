@@ -35,10 +35,6 @@ animation_name = "jump_launch;jump_peak"
 label_text = " [space]"
 button_texture = ExtResource("3_4y1op")
 
-[node name="CyberRoninSprites" parent="BaseContainer/JumpDemo" index="3"]
-frame = 0
-frame_progress = 0.0
-
 [node name="Player" parent="." index="1"]
 position = Vector2(-159, 94)
 
