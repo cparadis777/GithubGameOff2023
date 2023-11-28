@@ -44,12 +44,12 @@ func reset_playspace():
 #	if get_tree().get_root().has_node("GeneratedPlayspace"):
 #		var playspace = get_tree().get_root().get_node("GeneratedPlayspace")
 #		playspace.reset()
-	var base_path = "res://Levels/FightingLevels/FightLevel"
-	var extension = ".tscn"
+	#var base_path = "res://Levels/FightingLevels/FightLevel"
+	#var extension = ".tscn"
 	if Globals.player_stats["completed_levels"].size() == 0:
-		change_scene_to(base_path + "1" + extension)
+		change_scene_to("res://Levels/FightingLevels/FightLevel1.tscn")
 	else:
-		change_scene_to(base_path + Globals.player_stats["completed_levels"][-1] + extension)
+		change_scene_to("res://Levels/FightingLevels/FightLevel%s.tscn" % Globals.player_stats["completed_levels"][-1])
 		
 	
 func set_playspace_parameters(data:Dictionary) -> void:
