@@ -60,7 +60,7 @@ func spawn_enemy():
 	var jitterVec = Vector2(randf_range(-jitter_distance,jitter_distance), randf_range(-jitter_distance,jitter_distance))
 	var rand_direction = [-1, 1].pick_random()
 	var spawn_point = global_position + (Vector2.ONE * 76) * rand_direction
-	new_enemy.global_position = global_position + jitterVec
+	new_enemy.global_position = spawn_point + jitterVec
 	new_enemy.activate()
 	make_noise($EnemySpawnNoise)
 

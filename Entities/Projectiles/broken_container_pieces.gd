@@ -14,7 +14,8 @@ func _ready():
 #	$RightPiece/Sprite.texture = textures[type]
 #	$SpawnTimer.start()
 
-func activate(container_type, body_struck):
+func activate(containerType, body_struck):
+	container_type = containerType
 	$LeftPiece/Sprite.texture = textures[container_type]
 	$RightPiece/Sprite.texture = textures[container_type]
 	break_apart(body_struck)

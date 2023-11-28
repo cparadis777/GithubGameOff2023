@@ -22,7 +22,7 @@ func activate():
 	$CraneJaws.activate()
 	$CraneJaws.start()
 	
-.
+
 
 func _on_end_of_world_npc_digester_body_entered(body):
 	body.queue_free() # fell off the world
