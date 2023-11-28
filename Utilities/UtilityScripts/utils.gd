@@ -10,12 +10,16 @@ func directions_to_flags(directions:Dictionary) -> DirectionFlags:
 		if dir is Utils.Directions && directions[dir]:
 			match dir:
 				Directions.UP:
+					@warning_ignore("int_as_enum_without_cast")
 					flags |= DirectionFlags.UP
 				Directions.RIGHT:
+					@warning_ignore("int_as_enum_without_cast")
 					flags |= DirectionFlags.RIGHT
 				Directions.DOWN: 
+					@warning_ignore("int_as_enum_without_cast")
 					flags |= DirectionFlags.DOWN
 				Directions.LEFT: 
+					@warning_ignore("int_as_enum_without_cast")
 					flags |= DirectionFlags.LEFT
 				_:
 					pass

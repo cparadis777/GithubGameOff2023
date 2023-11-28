@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c5vova3vmv6p7"]
+[gd_scene load_steps=31 format=3 uid="uid://c5vova3vmv6p7"]
 
 [ext_resource type="Script" path="res://Entities/Environment/crane.gd" id="1_iyal4"]
 [ext_resource type="PackedScene" uid="uid://drrt45f45qnjy" path="res://Entities/Droppable/BlueDroppableContainer.tscn" id="2_rgicc"]
@@ -11,6 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://ekj2echyvjcm" path="res://Entities/Droppable/PurpleDroppableContainer.tscn" id="6_33pt5"]
 [ext_resource type="PackedScene" uid="uid://c46xev2xk4g62" path="res://Entities/Droppable/YellowDroppableContainer.tscn" id="7_7172x"]
 [ext_resource type="Texture2D" uid="uid://b0yde4ayaofm0" path="res://art/props/lattice_320x180.png" id="9_ob7oa"]
+[ext_resource type="AudioStream" uid="uid://b2pim4e2jd1bp" path="res://audio/sfx/crane_sfx/opencraneclaw2.ogg" id="11_0bkot"]
+[ext_resource type="AudioStream" uid="uid://om8nhoxb4wed" path="res://audio/sfx/crane_sfx/cranemove.ogg" id="12_ep24g"]
+[ext_resource type="PackedScene" uid="uid://cu7af7a6swpqy" path="res://UI/difficulty_adjuster.tscn" id="12_pw8pi"]
+[ext_resource type="AudioStream" uid="uid://6b8h36kyv1l5" path="res://audio/sfx/crane_sfx/cranerotate.ogg" id="13_rtu0d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2goie"]
 atlas = ExtResource("5_qrdko")
@@ -31,14 +35,6 @@ region = Rect2(156, 0, 52, 72)
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpm80"]
 atlas = ExtResource("5_qrdko")
 region = Rect2(208, 0, 52, 72)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l8ys8"]
-atlas = ExtResource("5_qrdko")
-region = Rect2(260, 0, 52, 72)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7cqqk"]
-atlas = ExtResource("5_qrdko")
-region = Rect2(260, 0, 52, 72)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cgvk1"]
 atlas = ExtResource("5_qrdko")
@@ -79,12 +75,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_tpm80")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l8ys8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7cqqk")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_cgvk1")
 }, {
 "duration": 1.0,
@@ -101,27 +91,40 @@ animations = [{
 }],
 "loop": false,
 "name": &"Close",
-"speed": 5.0
+"speed": 15.0
 }]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_svq6g"]
+streams_count = 1
+random_pitch = 1.05
+stream_0/stream = ExtResource("11_0bkot")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3i5p0"]
+streams_count = 1
+random_pitch = 1.05
+stream_0/stream = ExtResource("12_ep24g")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dejxs"]
+streams_count = 1
+random_pitch = 1.05
+stream_0/stream = ExtResource("13_rtu0d")
+stream_0/weight = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4rse"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
 
 [node name="crane" type="Node2D"]
 script = ExtResource("1_iyal4")
 n_columns = 5
 containers = Array[PackedScene]([ExtResource("2_rgicc"), ExtResource("3_wwyy3"), ExtResource("4_r6wi7"), ExtResource("5_4v4gy"), ExtResource("6_33pt5"), ExtResource("7_7172x")])
 container_width = 48
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -64.0
-offset_top = -24.0
-theme = ExtResource("4_l15jl")
-scroll_active = false
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-visible = false
-offset_left = -56.0
-offset_bottom = 24.0
-theme = ExtResource("4_l15jl")
-scroll_active = false
 
 [node name="CraneTruss" type="Sprite2D" parent="."]
 z_index = 2
@@ -139,7 +142,73 @@ position = Vector2(24, -29)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_uctfk")
 animation = &"Close"
-frame = 11
+frame = 9
 frame_progress = 1.0
+
+[node name="CraneSounds" type="Node" parent="."]
+
+[node name="Drop" type="AudioStreamPlayer2D" parent="CraneSounds"]
+stream = SubResource("AudioStreamRandomizer_svq6g")
+volume_db = 2.5
+
+[node name="Move" type="AudioStreamPlayer2D" parent="CraneSounds"]
+stream = SubResource("AudioStreamRandomizer_3i5p0")
+volume_db = 1.0
+
+[node name="Rotate" type="AudioStreamPlayer2D" parent="CraneSounds"]
+stream = SubResource("AudioStreamRandomizer_dejxs")
+volume_db = -2.0
+pitch_scale = 1.2
+
+[node name="ScaleSign" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(64, 48)
+offset_left = -142.0
+offset_top = -21.0
+offset_right = -30.0
+offset_bottom = 43.0
+theme = ExtResource("4_l15jl")
+theme_override_styles/panel = SubResource("StyleBoxFlat_w4rse")
+
+[node name="MarginContainer" type="MarginContainer" parent="ScaleSign"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleSign/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="WeightLabel" type="RichTextLabel" parent="ScaleSign/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("4_l15jl")
+text = "20,000kg"
+fit_content = true
+scroll_active = false
+
+[node name="TypeLabel" type="RichTextLabel" parent="ScaleSign/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_l15jl")
+theme_override_font_sizes/normal_font_size = 12
+text = "Days since accident: 0"
+fit_content = true
+scroll_active = false
+
+[node name="AccidentLabel" type="Label" parent="ScaleSign/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Days Since Last Accident: 0"
+
+[node name="Difficulty" parent="ScaleSign/MarginContainer/VBoxContainer" instance=ExtResource("12_pw8pi")]
+layout_mode = 2
 
 [connection signal="animation_finished" from="CraneJaw" to="." method="_on_crane_jaw_animation_finished"]

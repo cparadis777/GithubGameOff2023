@@ -1164,4 +1164,4 @@ animations = [{
 material = ExtResource("1_a2rkb")
 position = Vector2(18, -31)
 sprite_frames = SubResource("SpriteFrames_adh0r")
-animation = &"death"
+animation = &"charged_punch"

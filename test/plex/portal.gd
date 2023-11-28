@@ -14,12 +14,23 @@ var directions = {
 var distance = 196
 @export var linked_portal : Node
 @export var tween_duration : float = 1.25
-@export var locked = false
+@export var locked = false:
+	set(value):
+		locked = value
+		if name == "RIGHT" or name == "LEFT":
+			if value:
+				$DoorSprite.frame = 0
+			else:
+				$DoorSprite.frame = 17
 
 
 func _ready():
 	if directions.has(name):
 		$Destination.global_position = global_position + directions[name] * distance
+	
+	if name == "RIGHT" or name == "LEFT":
+		if !locked:
+			$DoorSprite.frame = 17
 
 	await get_tree().create_timer(0.5).timeout
 	link_nearby_door()
@@ -37,7 +48,6 @@ func link_nearby_door():
 				linked_portal = candidate.owner
 				
 
-
 func _on_area_2d_body_entered(body):
 	if "player" in body.name.to_lower() and body.state_machine.state.name != "InTransit" and !locked:
 		$Area2D/DelayOpeningTimer.start()
@@ -45,7 +55,7 @@ func _on_area_2d_body_entered(body):
 
 func _on_delay_opening_timer_timeout():
 	# player still present after a short interval.
-	if player_present():
+	if player_present() and not live_enemies_present():
 		open_door()
 		if linked_portal != null and is_instance_valid(linked_portal) and linked_portal.has_method("open_door"):
 			linked_portal.open_door()
@@ -54,6 +64,12 @@ func _on_delay_opening_timer_timeout():
 		if body_to_transport != null:
 			transport_player(body_to_transport)
 
+func live_enemies_present():
+	var live_enemies = false
+	for body in $Area2D.get_overlapping_bodies():
+		if body.is_in_group("Enemies") and body.State != body.States.DEAD:
+			live_enemies = true
+	return live_enemies
 
 func player_present():
 	var player_body = null
@@ -75,12 +91,17 @@ func transport_player(body):
 	var tween = create_tween()
 	tween.tween_property(body, "global_position", $Destination.global_position, tween_duration)
 	body_in_transit = body
+	if (linked_portal):
+		linked_portal.locked = false
 	tween.finished.connect(_on_tween_finished)
 
 
 func close_door():
 	if has_node("AnimationPlayer"):
-		$AnimationPlayer.play("close")
+		if (locked):
+			$AnimationPlayer.play("close")
+		else:
+			$AnimationPlayer.play("close_unlocked")
 
 
 func _on_tween_finished():
@@ -96,5 +117,6 @@ func interact():
 		$Area2D/DelayOpeningTimer.stop()
 		_on_delay_opening_timer_timeout()
 	else:
-		$LockedNoise.play()
+		if $AnimationPlayer.has_animation("locked"):
+			$AnimationPlayer.play("locked")
 		

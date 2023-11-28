@@ -9,7 +9,7 @@ extends Node2D
 @export var trigger_node_path : NodePath
 var trigger_node
 
-@export var speed = 50.0
+@export var speed = 80.0
 #var velocity : Vector2 = Vector2.ZERO
 
 @export var show_piston : bool = true
@@ -26,19 +26,24 @@ var switch_pressed := false
 enum States { MOVING, WAITING }
 var State = States.WAITING
 
+var room_active : bool = false
+
 enum modes { TWEEN, POSITION }
-@export var mode = modes.TWEEN
+@export var mode = modes.POSITION # NPCs trying to match velocity will only work in POSITION mode
 
 var tween : Tween
 @export var tween_duration = 5.0
 
-var velocity
+var velocity = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	%Piston.hide()
+	%CraneCables.hide()
+	
 	setup_timer()
 	
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.33).timeout
 	# wait for global position to be set by instantiator
 
 	hack_workaround_for_starting_position_bug()
@@ -48,8 +53,9 @@ func _ready():
 		locations.push_back(locationMarker.global_position)
 	locations.push_back(self.global_position) # make ours go last, so there's no long delay for the tween
 
-	$Piston.visible = show_piston
-	$CraneCables.visible = show_cables
+	%Piston.visible = show_piston
+	%CraneCables.visible = show_cables
+
 	
 	if mode == modes.TWEEN:
 		setup_tween()
@@ -61,6 +67,8 @@ func _ready():
 	else:
 		link(get_node(trigger_node_path))
 
+func activate():
+	room_active = true
 
 func hack_workaround_for_starting_position_bug():
 	# weird bug in animatable body nodes.. they don't seem to respect their parent's transform on instantiation
@@ -75,6 +83,9 @@ func link(triggerNode):
 
 func _physics_process(delta):
 	$StateLabel.text = States.keys()[State]
+
+	if !room_active:
+		return
 	
 	if trigger_node != null:
 		if State == States.MOVING and (!trigger_node.pressed or !switch_pressed):

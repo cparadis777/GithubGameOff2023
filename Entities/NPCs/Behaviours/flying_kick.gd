@@ -11,7 +11,8 @@ func _ready():
 	activate() # for now
 
 func activate():
-	State = States.ACTIVE
+	pass
+	#State = States.ACTIVE
 	
 func _process(_delta):
 	pass

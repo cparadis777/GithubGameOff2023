@@ -1,25 +1,33 @@
 extends Area2D
 
 @export var speed = 150.0
-@export var velocity : Vector2
+var velocity : Vector2
 @export var damage : float = 5.0
 @export var knockback : bool = true
 @export var damage_type : Globals.DamageTypes
+@export var affected_by_gravity : bool = false
+@export var extra_initial_velocity : Vector2
+
+var world_gravity
+
 signal hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	world_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 	
 func activate(travelVector):
 	velocity = (travelVector * speed)
-	
+	velocity += Vector2(sign(travelVector.x) * extra_initial_velocity.x, extra_initial_velocity.y)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if velocity != null:
-		global_position += velocity * delta
+	if world_gravity != null:
+		if velocity != null:
+			if affected_by_gravity:
+				velocity.y += world_gravity * delta
+			global_position += velocity * delta
 
 
 func _on_timer_timeout():

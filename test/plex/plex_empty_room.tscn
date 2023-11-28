@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://wjujh5bhxu6c"]
+
+[ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="1_hluiu"]
+[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="2_2lfdq"]
+[ext_resource type="PackedScene" uid="uid://coqkjhe8s4lj8" path="res://Entities/Environment/Kickables/soda_can.tscn" id="3_awuut"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_adcks"]
+
+[node name="plex_empty_room" type="Node2D"]
+
+[node name="floor" type="StaticBody2D" parent="."]
+collision_layer = 24
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+shape = SubResource("WorldBoundaryShape2D_adcks")
+
+[node name="Player" parent="." instance=ExtResource("1_hluiu")]
+
+[node name="NewRunner" parent="." instance=ExtResource("2_2lfdq")]
+position = Vector2(190, 1)
+
+[node name="Cans" type="Node2D" parent="."]
+
+[node name="SodaCan" parent="Cans" instance=ExtResource("3_awuut")]
+position = Vector2(63, -6)
+
+[node name="SodaCan2" parent="Cans" instance=ExtResource("3_awuut")]
+position = Vector2(88, -7)
+
+[node name="SodaCan6" parent="Cans" instance=ExtResource("3_awuut")]
+position = Vector2(101, -20)
+
+[node name="SodaCan7" parent="Cans" instance=ExtResource("3_awuut")]
+position = Vector2(85, -27)
+
+[node name="SodaCan3" parent="Cans" instance=ExtResource("3_awuut")]
+position = Vector2(51, -15)
+
+[node name="SodaCan4" parent="Cans" instance=ExtResource("3_awuut")]
+position = Vector2(59, -26)
+
+[node name="SodaCan5" parent="Cans" instance=ExtResource("3_awuut")]
+position = Vector2(72, -17)

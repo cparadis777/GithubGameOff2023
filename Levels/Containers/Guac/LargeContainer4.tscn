@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://b0pdl3tlo5xbs"]
+[gd_scene load_steps=20 format=3 uid="uid://b0pdl3tlo5xbs"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_at00n"]
+[ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_86yso"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_yn05a"]
 [ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_3k56c"]
 [ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_0mnlq"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="9_3h2nx"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_25gqt"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="11_a2x7r"]
+[ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="12_j1ldf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -33,6 +35,8 @@ size = Vector2(796, 340)
 collision_layer = 24
 collision_mask = 7
 script = ExtResource("1_at00n")
+
+[node name="DarkeningLayer" parent="." instance=ExtResource("2_86yso")]
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
@@ -118,6 +122,7 @@ position = Vector2(0, 169)
 
 [node name="Exterior" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 position = Vector2(4.72069e-05, -0.500001)
 scale = Vector2(2.5, 2.50521)
 texture = ExtResource("7_7q80c")
@@ -147,11 +152,14 @@ shape = SubResource("RectangleShape2D_m7xia")
 
 [node name="MovingPlatform" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-258, 98)
-show_piston = true
+speed = 80.0
 tween_duration = 3.0
 
 [node name="MovingPlatform6" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-334, 0)
+
+[node name="Location2" parent="MovingPlatform6/PositionMarkers" index="0"]
+position = Vector2(0, -107)
 
 [node name="MovingPlatform2" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-109, 98)
@@ -159,6 +167,9 @@ tween_duration = 4.0
 
 [node name="MovingPlatform5" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-179, 25)
+
+[node name="Location2" parent="MovingPlatform5/PositionMarkers" index="0"]
+position = Vector2(0, -126)
 
 [node name="MovingPlatform3" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-1, 4)
@@ -185,28 +196,38 @@ position = Vector2(224, 161)
 position = Vector2(287, 161)
 
 [node name="ShootyNPC" parent="." instance=ExtResource("10_25gqt")]
-position = Vector2(-336, -4)
+position = Vector2(-336, -16)
 
 [node name="ShootyNPC2" parent="." instance=ExtResource("10_25gqt")]
-position = Vector2(-178, 24)
+position = Vector2(-178, 11)
 
 [node name="ShootyNPC3" parent="." instance=ExtResource("10_25gqt")]
 position = Vector2(305, -79)
 
 [node name="MovingPlatform7" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(117, 104)
+speed = 80.0
 tween_duration = 4.0
 
 [node name="MovingPlatform9" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(266, 104)
-show_piston = true
 tween_duration = 3.0
 
 [node name="MovingPlatform11" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(196, 10)
 
+[node name="Location2" parent="MovingPlatform11/PositionMarkers" index="0"]
+position = Vector2(0, -115)
+
 [node name="BasicPlatform" parent="." instance=ExtResource("8_w7efc")]
 position = Vector2(306, -73)
 
+[node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_j1ldf")
+
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]
+
+[editable path="MovingPlatform6"]
+[editable path="MovingPlatform5"]
+[editable path="MovingPlatform11"]

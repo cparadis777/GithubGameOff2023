@@ -22,6 +22,10 @@ func exit():
 	super()
 
 func physics_update(_delta):
+	var moving_platform =  player.detect_moving_platform()
+	if moving_platform != null:
+		player.velocity.y = moving_platform.owner.velocity.y
+		
 	if player.detect_npcs_underfoot().size() > 0:
 		state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
 	elif Input.is_action_just_pressed("jump"):
@@ -34,6 +38,8 @@ func physics_update(_delta):
 	elif Input.is_action_just_pressed("fast_punch"):
 		state_machine.transition_to("fast_punch")
 
+	player.move_and_slide()
+	
 func _on_player_animation_finished(anim_name):
 	if anim_name == "land":
 		if abs(player.velocity.x) > 0.05: 

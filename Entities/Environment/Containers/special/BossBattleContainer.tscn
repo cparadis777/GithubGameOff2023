@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhxm77joahdfb"]
+
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_ltvre"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_jpjn4"]
+[ext_resource type="PackedScene" uid="uid://4ubg2v861dlv" path="res://Entities/NPCs/boss_npc.tscn" id="3_maith"]
+[ext_resource type="PackedScene" uid="uid://b3xj54nccstg3" path="res://Entities/Environment/portals/trigger_volume_scene_change.tscn" id="4_g2kmr"]
+
+[node name="TerminalContainer" instance=ExtResource("1_ltvre")]
+doors_unlocked = true
+
+[node name="Interior" parent="." index="0"]
+visible = false
+
+[node name="Platforms" type="Node2D" parent="." index="9"]
+
+[node name="JumpThroughPlatform" parent="Platforms" index="0" instance=ExtResource("2_jpjn4")]
+position = Vector2(134, 60)
+
+[node name="JumpThroughPlatform2" parent="Platforms" index="1" instance=ExtResource("2_jpjn4")]
+position = Vector2(273, -28)
+
+[node name="NPCs" type="Node2D" parent="." index="10"]
+
+[node name="BossNPC" parent="NPCs" index="0" instance=ExtResource("3_maith")]
+position = Vector2(312, -30)
+
+[node name="Props" type="Node2D" parent="." index="11"]
+
+[node name="TriggerVolumeSceneChange" parent="." index="17" instance=ExtResource("4_g2kmr")]
+position = Vector2(-234, 60)

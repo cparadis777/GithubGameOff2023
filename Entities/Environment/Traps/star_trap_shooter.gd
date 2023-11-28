@@ -1,5 +1,6 @@
 extends AnimatableBody2D
 
+
 enum Goals { RELAX, RELOCATE, SHOOT_PLAYER }
 
 var Goal : Goals = Goals.RELAX
@@ -10,18 +11,30 @@ var previous_goal : Goals
 
 var health_max : float = 20
 var health = health_max
+var base_damage = 10
+
 
 signal hurt(attackPacket)
+signal died(name)
 
 func _ready():
 	$CPUParticles2D.emitting = false
-	
+	set_difficulty(Globals.difficulty)
+	if has_node("Arrow"):
+		$Arrow.hide()
+		
+func set_difficulty(difficulty : Globals.DifficultyScales):
+	health_max += difficulty * 10.0
+	SPEED += float(difficulty)/40.0 * 100.0
+	base_damage *= (1+float(difficulty)/20.0)
+
 
 func activate(): # from BaseContainer _on_body_entered
-	$DecisionTimer.start()
+	_on_decision_timer_timeout() # get started immediately
+	if owner and owner.has_method("_on_NPC_died"):
+		if not died.is_connected(owner._on_NPC_died):
+			died.connect(owner._on_NPC_died)
 	
-
-
 func choose_random_goal():
 	var dice_roll = randf()
 	var probabilities
@@ -67,6 +80,7 @@ func die():
 	$Behaviours/Attacks/ShootStars.stop()
 	$CPUParticles2D.lifetime = 1.0
 	$CPUParticles2D.emitting = true
+	died.emit(name)
 	await get_tree().create_timer(0.8).timeout
 	queue_free()
 	

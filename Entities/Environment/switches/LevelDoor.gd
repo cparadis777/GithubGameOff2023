@@ -17,7 +17,8 @@ signal level_exited()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	%Label.hide();
+	%Label.hide()
+	%Sprite2D.hide()
 	pass # Replace with function body.
 
 func exit_level():
@@ -39,21 +40,23 @@ func _process(_delta):
 	if pressed && move_player:
 		match(location):
 			Utils.Directions.LEFT:
-				StageManager.current_player.velocity.x = -(StageManager.current_player.speed)
+				StageManager.current_player.velocity.x = -(Globals.player_stats["speed"])
 			Utils.Directions.RIGHT:
-				StageManager.current_player.velocity.x = StageManager.current_player.speed
+				StageManager.current_player.velocity.x = Globals.player_stats["speed"]
 			Utils.Directions.UP:
-				StageManager.current_player.velocity.y = -(StageManager.current_player.speed)
+				StageManager.current_player.velocity.y = -(Globals.player_stats["speed"])
 			Utils.Directions.DOWN:
-				StageManager.current_player.velocity.y = StageManager.current_player.speed
+				StageManager.current_player.velocity.y = Globals.player_stats["speed"]
 		
 
 func _on_body_entered(body):
 	if body == StageManager.current_player:
 		player_near = true
 		%Label.show()
+		%Sprite2D.show()
 	
 func _on_body_exited(body):
 	if body == StageManager.current_player:
 		player_near = false
 		%Label.hide()
+		%Sprite2D.hide()

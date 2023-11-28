@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck4rqmg74d03b"]
+
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_7eyr2"]
+[ext_resource type="PackedScene" uid="uid://b3xj54nccstg3" path="res://Entities/Environment/portals/trigger_volume_scene_change.tscn" id="2_reqww"]
+
+[node name="TerminalContainer" instance=ExtResource("1_7eyr2")]
+doors_unlocked = true
+
+[node name="Interior" parent="." index="0"]
+visible = false
+
+[node name="Props" type="Node2D" parent="." index="9"]
+
+[node name="ContainerInterior" parent="." index="10"]
+visible = true
+
+[node name="TriggerVolumeSceneChange" parent="." index="15" instance=ExtResource("2_reqww")]
+position = Vector2(-249, 41)

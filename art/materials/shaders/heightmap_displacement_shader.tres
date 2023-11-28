@@ -106,7 +106,7 @@ void vertex() {
 
 // MultiplyAdd:11
 	vec3 n_in11p2 = vec3(0.00000, 0.00000, 0.00000);
-	vec3 n_out11p0 = (vec3(n_out3p0.xyz) * vec3(n_out10p0.xyz)) + n_in11p2;
+	vec3 n_out11p0 = fma(vec3(n_out3p0.xyz), vec3(n_out10p0.xyz), n_in11p2);
 
 
 // FloatParameter:9
@@ -115,12 +115,12 @@ void vertex() {
 
 // MultiplyAdd:8
 	float n_in8p2 = 0.00000;
-	float n_out8p0 = (n_out11p0.x * n_out9p0) + n_in8p2;
+	float n_out8p0 = fma(n_out11p0.x, n_out9p0, n_in8p2);
 
 
 // MultiplyAdd:7
 	float n_in7p1 = 1.00000;
-	float n_out7p0 = (n_out6p1 * n_in7p1) + n_out8p0;
+	float n_out7p0 = fma(n_out6p1, n_in7p1, n_out8p0);
 
 
 // VectorCompose:2

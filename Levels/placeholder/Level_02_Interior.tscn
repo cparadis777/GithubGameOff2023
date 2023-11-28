@@ -148,9 +148,6 @@ position = Vector2(-221.775, -121.565)
 [node name="MovingPlatform" parent="Platforms" instance=ExtResource("8_ybspo")]
 position = Vector2(269.755, -41)
 
-[node name="FloorHeightMarker" parent="Platforms/MovingPlatform/Piston" index="0"]
-position = Vector2(0, 41)
-
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="Wall" type="StaticBody2D" parent="Walls"]

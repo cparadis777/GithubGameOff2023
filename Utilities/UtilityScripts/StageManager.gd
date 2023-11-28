@@ -22,10 +22,16 @@ func change_scene_to(scene):
 
 func _on_NPC_died(npc_name):
 	if "boss" in npc_name.to_lower():
+		increase_difficulty()
 		end_game("win")
 
+func increase_difficulty():
+	Globals.difficulty = min(Globals.difficulty + 1, Globals.DifficultyScales.keys().size()-1) # in case they want to play again
+
+
 func _on_player_dead_and_buried():
-	end_game("lose")
+	#end_game("lose") # seems a bit harsh
+	reset_playspace()
 	
 func end_game(status):
 	match status:
@@ -34,7 +40,18 @@ func end_game(status):
 		"lose":
 			change_scene_to(player_dead_scene)
 
-
+func reset_playspace():
+#	if get_tree().get_root().has_node("GeneratedPlayspace"):
+#		var playspace = get_tree().get_root().get_node("GeneratedPlayspace")
+#		playspace.reset()
+	#var base_path = "res://Levels/FightingLevels/FightLevel"
+	#var extension = ".tscn"
+	if Globals.player_stats["completed_levels"].size() == 0:
+		change_scene_to("res://Levels/FightingLevels/FightLevel1.tscn")
+	else:
+		change_scene_to("res://Levels/FightingLevels/FightLevel%s.tscn" % (Globals.player_stats["completed_levels"][-1] + 1)) 
+		
+	
 func set_playspace_parameters(data:Dictionary) -> void:
 	self.playspace_parameters = data
 
@@ -66,4 +83,6 @@ func _on_damage_packet_processed(attackPacket: AttackPacket):
 		color = Color.DARK_RED
 	else:
 		color = Color.BLUE_VIOLET
-	popup_text(attackPacket.damage - attackPacket.damage_blocked, location, color)
+	var damage_to_display = attackPacket.damage - attackPacket.damage_blocked
+	
+	popup_text(str(damage_to_display).pad_decimals(0), location, color)

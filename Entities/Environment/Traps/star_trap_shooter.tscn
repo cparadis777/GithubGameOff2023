@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5en3lqt0m2df"]
+[gd_scene load_steps=21 format=3 uid="uid://c5en3lqt0m2df"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Traps/star_trap_shooter.gd" id="1_6i0da"]
 [ext_resource type="Texture2D" uid="uid://c4mkrso2beskh" path="res://art/placeholder/star_trap.png" id="1_vmtbw"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_vuwjt"]
 [ext_resource type="PackedScene" uid="uid://gtmk5sbwr3hj" path="res://Entities/Environment/Traps/Behaviours/shoot_stars.tscn" id="3_m0oxd"]
+[ext_resource type="Script" path="res://Utilities/UtilityScenes/zero_rotation.gd" id="5_3wawd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfoww"]
 
@@ -206,6 +207,8 @@ libraries = {
 }
 
 [node name="Debug" type="Node2D" parent="."]
+visible = false
+script = ExtResource("5_3wawd")
 
 [node name="StateLabel" type="Label" parent="Debug"]
 offset_left = -15.0

@@ -37,7 +37,8 @@ func physics_update(delta):
 func allow_player_to_change_direction_midair():
 	# Horizontal movement.
 	var input_direction_x = Input.get_axis("move_left", "move_right")
-	player.velocity.x = player.speed * input_direction_x
+	player.velocity.x = Globals.player_stats["speed"] * input_direction_x
+	
 
 func apply_gravity(delta):
 	if SubState in [ SubStates.HOVERING, SubStates.SOMERSAULTING]:
@@ -57,12 +58,15 @@ func check_for_jump_button_release():
 
 func check_for_attack_requests():
 	if Input.is_action_just_pressed("strong_punch"):
-		player.velocity.x = Input.get_axis("move_left", "move_right") * player.SPEED
-		player.set_direction(sign(player.velocity.x))
+#		player.velocity.x = Input.get_axis("move_left", "move_right") * Globals.player_stats["speed"]
+#		if player.velocity.x != 0:
+#			player.set_direction(sign(player.velocity.x))
 		state_machine.transition_to("DescendingKick")
+
 	elif Input.is_action_just_pressed("fast_punch"):
-		player.velocity.x = Input.get_axis("move_left", "move_right") * player.SPEED
-		player.set_direction(sign(player.velocity.x))
+#		player.velocity.x = Input.get_axis("move_left", "move_right") * Globals.player_stats["speed"]
+#		if player.velocity.x != 0:
+#			player.set_direction(sign(player.velocity.x))
 		state_machine.transition_to("Dash")
 
 

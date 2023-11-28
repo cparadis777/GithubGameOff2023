@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcwwg0f3h5ib1"]
+[gd_scene load_steps=15 format=3 uid="uid://bcwwg0f3h5ib1"]
 
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_p7dnn"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_eoye4"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="5_kykin"]
 [ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="7_2rajp"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="10_qfiey"]
+[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="11_so1os"]
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="12_pvej1"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="13_e4q5p"]
 [ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="14_a7hhv"]
@@ -78,19 +79,17 @@ position = Vector2(-285, -19)
 [node name="ShootyNPC2" parent="Enemies" index="1" instance=ExtResource("5_kykin")]
 position = Vector2(-90, -18)
 
-[node name="RunningAssassin" parent="Enemies" index="2" instance=ExtResource("7_2rajp")]
-position = Vector2(-215, 84)
-
-[node name="RunningAssassin2" parent="Enemies" index="3" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_2rajp")]
+[node name="RunningAssassin2" parent="Enemies" index="2" instance=ExtResource("7_2rajp")]
 position = Vector2(167, 164)
-animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 
-[node name="RunningAssassin3" parent="Enemies" index="4" node_paths=PackedStringArray("animation_player") instance=ExtResource("7_2rajp")]
-position = Vector2(290, 167)
-animation_player = NodePath("../RunningAssassin/AnimationPlayer")
-
-[node name="NPC_02_DockWorker" parent="Enemies" index="5" instance=ExtResource("12_pvej1")]
+[node name="NPC_02_DockWorker" parent="Enemies" index="3" instance=ExtResource("12_pvej1")]
 position = Vector2(175, -4)
+
+[node name="NewRunner" parent="Enemies" index="4" instance=ExtResource("11_so1os")]
+position = Vector2(-177, 92)
+
+[node name="NewRunner2" parent="Enemies" index="5" instance=ExtResource("11_so1os")]
+position = Vector2(141, 170)
 
 [node name="EnemySpawnPoints" type="Node2D" parent="." index="7"]
 
@@ -98,6 +97,7 @@ position = Vector2(175, -4)
 
 [node name="StarTrap-Shooter" parent="Traps" index="0" instance=ExtResource("4_6jjch")]
 position = Vector2(1, -20)
+sync_to_physics = false
 
 [node name="TrapSpikes2" parent="Traps" index="1" instance=ExtResource("5_8168g")]
 position = Vector2(-138, 163)
@@ -109,5 +109,5 @@ position = Vector2(-287, 163)
 position = Vector2(-54, -110)
 rotation = 3.14159
 
-[node name="Exterior" parent="." index="9"]
+[node name="Exterior" parent="." index="10"]
 texture = ExtResource("2_eoye4")

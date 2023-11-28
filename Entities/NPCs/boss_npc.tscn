@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://4ubg2v861dlv"]
+[gd_scene load_steps=21 format=3 uid="uid://4ubg2v861dlv"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_dhliq"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_46dpl"]
-[ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="3_3i86w"]
+[ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="3_mxgy3"]
+[ext_resource type="Texture2D" uid="uid://bsgyd5cohss47" path="res://art/decals/alert.png" id="4_jtmub"]
+[ext_resource type="PackedScene" uid="uid://d14b0n2jkrj85" path="res://Entities/Projectiles/falling_robot.tscn" id="5_7fgqb"]
+[ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_85rgl"]
+[ext_resource type="Script" path="res://Entities/NPCs/BossRocketBoots.gd" id="7_0mmdm"]
+[ext_resource type="PackedScene" uid="uid://bo6co2dvbw2ld" path="res://Entities/NPCs/vfx/rocket_boot_flame.tscn" id="8_85cby"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qjb73"]
 resource_local_to_scene = true
@@ -10,13 +15,246 @@ shader = ExtResource("2_46dpl")
 shader_parameter/iframes = false
 shader_parameter/FlashColor = Color(1, 1, 1, 1)
 
-[node name="BossNPC" instance=ExtResource("1_dhliq")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_iyfrp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jtmub")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shbba"]
+size = Vector2(27.6079, 59.4157)
+
+[sub_resource type="Animation" id="Animation_iaf2y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:material:shader_parameter/iframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtNoises:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Appearance/Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Appearance/ShootingVFX:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ShootNoises:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qhpe2"]
+resource_name = "attack"
+
+[sub_resource type="Animation" id="Animation_io00w"]
+resource_name = "die"
+
+[sub_resource type="Animation" id="Animation_ft728"]
+resource_name = "hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Appearance/Sprite2D:material:shader_parameter/iframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtNoises:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gsqip"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_plb34"]
+resource_name = "run"
+
+[sub_resource type="Animation" id="Animation_hak88"]
+resource_name = "shoot"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Behaviours/Attacks/SimpleShootAttack")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"launch_bullet"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Appearance/ShootingVFX:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShootNoises:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_do0c7"]
+_data = {
+"RESET": SubResource("Animation_iaf2y"),
+"attack": SubResource("Animation_qhpe2"),
+"die": SubResource("Animation_io00w"),
+"hurt": SubResource("Animation_ft728"),
+"idle": SubResource("Animation_gsqip"),
+"run": SubResource("Animation_plb34"),
+"shoot": SubResource("Animation_hak88")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1360e"]
+streams_count = 1
+stream_0/stream = ExtResource("6_85rgl")
+stream_0/weight = 1.0
+
+[node name="BossNPC" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_dhliq")]
+health_max = 1000.0
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" parent="Appearance" index="0"]
 material = SubResource("ShaderMaterial_qjb73")
+position = Vector2(20.5961, -60.204)
 scale = Vector2(1, 1)
-texture = ExtResource("3_3i86w")
+texture = ExtResource("3_mxgy3")
+offset = Vector2(-34.855, 14.2588)
+
+[node name="ShootingVFX" type="AnimatedSprite2D" parent="Appearance" index="2"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_iyfrp")
+offset = Vector2(17.4275, -79.2158)
+
+[node name="SimpleMeleeAttack" parent="Behaviours/Attacks" index="0"]
+enabled = false
+
+[node name="CollisionShape2D" parent="Behaviours/Attacks/SimpleMeleeAttack/MeleeCollisionArea" index="0"]
+position = Vector2(25.804, -4.29216)
+shape = SubResource("RectangleShape2D_shbba")
 
 [node name="SimpleShootAttack" parent="Behaviours/Attacks" index="1"]
-enabled = false
-horizontal_only = true
+bullet_scene = ExtResource("5_7fgqb")
+free_rotate = false
+
+[node name="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_do0c7")
+}
+
+[node name="ShootNoises" parent="." index="8"]
+stream = SubResource("AudioStreamRandomizer_1360e")
+
+[node name="Rocket" type="Node2D" parent="." index="11"]
+visible = false
+script = ExtResource("7_0mmdm")
+
+[node name="RocketBoots" parent="Rocket" index="0" instance=ExtResource("8_85cby")]
+
+[node name="RocketBoots2" parent="Rocket" index="1" instance=ExtResource("8_85cby")]
+position = Vector2(15.8432, 17.4275)
+
+[editable path="Behaviours/Attacks/SimpleMeleeAttack"]

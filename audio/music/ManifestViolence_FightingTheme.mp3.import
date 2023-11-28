@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/ManifestViolence_FightingTheme.mp3-9637dc862d
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

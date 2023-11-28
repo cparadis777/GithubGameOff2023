@@ -6,7 +6,7 @@
 size = Vector2(241, 119)
 
 [node name="FallingBossContainer" type="RigidBody2D"]
-position = Vector2(445, -373)
+position = Vector2(-1, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)

@@ -1,0 +1,426 @@
+[gd_scene load_steps=28 format=3 uid="uid://d0i2kn6vltvm0"]
+
+[ext_resource type="Script" path="res://Levels/StackingLevels/prototypes/ContainerStackingTest.gd" id="1_vlh66"]
+[ext_resource type="Texture2D" uid="uid://dtuuvvgnlqgjt" path="res://art/UI/Container Stacking/panel.png" id="2_bp5ka"]
+[ext_resource type="Script" path="res://Menus/ContainerStackingUI/Panel.gd" id="3_b3v0u"]
+[ext_resource type="Texture2D" uid="uid://o8cl2ckv7j3b" path="res://art/UI/Container Stacking/fight-button-hover.png" id="4_w77a7"]
+[ext_resource type="Texture2D" uid="uid://4f4h20iu6o3g" path="res://art/UI/Container Stacking/fight-button-pressed.png" id="5_oe22q"]
+[ext_resource type="Texture2D" uid="uid://dw66l7w5dq4cj" path="res://art/UI/Container Stacking/fight-button-normal.png" id="6_alghs"]
+[ext_resource type="Texture2D" uid="uid://jc5uk1hcdw8v" path="res://art/UI/Container Stacking/reset-button-normal.png" id="7_coj20"]
+[ext_resource type="Texture2D" uid="uid://bcehka4wp5evg" path="res://art/UI/Container Stacking/reset-button-pressed.png" id="8_56qaq"]
+[ext_resource type="Texture2D" uid="uid://d2a0nxn41556j" path="res://art/UI/Container Stacking/quit-button-normal.png" id="9_5jqyf"]
+[ext_resource type="Texture2D" uid="uid://cke2uwpvjqvn8" path="res://art/UI/Container Stacking/quit-button-pressed.png" id="10_ow70u"]
+[ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="11_lokuu"]
+[ext_resource type="Texture2D" uid="uid://b1yn4w4s1acoc" path="res://art/placeholder/gamepad_button_right.png" id="11_pq53r"]
+[ext_resource type="Texture2D" uid="uid://bgcsjypnwti41" path="res://art/placeholder/gamepad_button_up.png" id="12_8ipbd"]
+[ext_resource type="Script" path="res://Levels/FightingLevels/prototypes/DropPoints.gd" id="12_gr6wu"]
+[ext_resource type="Texture2D" uid="uid://3kfisyqqqjqc" path="res://art/placeholder/gamepad_button_left.png" id="13_44aey"]
+[ext_resource type="AudioStream" uid="uid://cjmpwks4nk12x" path="res://audio/sfx/container_sfx/containerdropped.ogg" id="13_81pew"]
+[ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="14_6te3c"]
+[ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="15_ucdyp"]
+[ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="16_ftu3o"]
+[ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="18_4akgk"]
+[ext_resource type="PackedScene" uid="uid://diik2yboc0mbr" path="res://Entities/Droppable/TerminalContainer.tscn" id="19_20mxa"]
+[ext_resource type="AudioStream" uid="uid://765736xedns2" path="res://audio/music/DockSeaAmbient.mp3" id="20_62648"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_m3gb7"]
+streams_count = 1
+stream_0/stream = ExtResource("13_81pew")
+stream_0/weight = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6bsu"]
+shader = ExtResource("15_ucdyp")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.195
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 25.101
+shader_parameter/roll_variation = 2.493
+shader_parameter/distort_intensity = 0.012
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.192
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="Animation" id="Animation_5g3e2"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_iohgr"]
+resource_name = "zoom_in"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(8, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-64, 64)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -177)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1u85b"]
+_data = {
+"RESET": SubResource("Animation_5g3e2"),
+"zoom_in": SubResource("Animation_iohgr")
+}
+
+[node name="StackLevel2" type="Node2D"]
+position = Vector2(1, 1)
+script = ExtResource("1_vlh66")
+target_weight = 300
+scene_path = "res://Levels/FightingLevels/FightLevel2.tscn"
+has_tutorial = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-159, -278)
+anchor_mode = 0
+zoom = Vector2(2, 2)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Panel" type="TextureRect" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -231.0
+offset_top = 9.0
+offset_right = -7.0
+offset_bottom = 66.0
+grow_horizontal = 0
+mouse_filter = 2
+texture = ExtResource("2_bp5ka")
+script = ExtResource("3_b3v0u")
+
+[node name="FightButton" type="TextureButton" parent="HUD/Panel"]
+layout_mode = 2
+offset_left = 147.0
+offset_top = 10.0
+offset_right = 254.0
+offset_bottom = 54.0
+focus_mode = 0
+texture_normal = ExtResource("4_w77a7")
+texture_pressed = ExtResource("5_oe22q")
+texture_disabled = ExtResource("6_alghs")
+
+[node name="ResetButton" type="TextureButton" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 14.0
+offset_right = 133.0
+offset_bottom = 54.0
+texture_normal = ExtResource("7_coj20")
+texture_pressed = ExtResource("8_56qaq")
+
+[node name="QuitButton" type="TextureButton" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 69.0
+offset_bottom = 54.0
+texture_normal = ExtResource("9_5jqyf")
+texture_pressed = ExtResource("10_ow70u")
+
+[node name="Quit" type="TextureRect" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 57.0
+offset_right = 51.0
+offset_bottom = 77.0
+texture = ExtResource("11_pq53r")
+
+[node name="Fight" type="TextureRect" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 173.0
+offset_top = 57.0
+offset_right = 193.0
+offset_bottom = 77.0
+texture = ExtResource("12_8ipbd")
+
+[node name="Reset" type="TextureRect" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 57.0
+offset_right = 114.0
+offset_bottom = 77.0
+texture = ExtResource("13_44aey")
+
+[node name="WarningPopup" type="PopupPanel" parent="HUD"]
+initial_position = 1
+size = Vector2i(364, 173)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/WarningPopup"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 360.0
+offset_bottom = 221.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HUD/WarningPopup/VBoxContainer"]
+layout_mode = 2
+text = "With this stack of shipping containers, you don't have a valid path to the bridge.
+You won't be able to reach the boss to enact your revenge. 
+Are you sure?"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/WarningPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Retry" type="Button" parent="HUD/WarningPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "No. Let me fix the stack."
+
+[node name="Confirm" type="Button" parent="HUD/WarningPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Yes. Fight Anyways."
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("11_lokuu")]
+
+[node name="DropPoints" type="Node2D" parent="."]
+position = Vector2(-17, -113)
+script = ExtResource("12_gr6wu")
+exit_coord = Vector2(2, 4)
+entrance_direction = 3
+exit_direction = 1
+n_horizontal = 3
+n_vertical = 5
+container_width = 48
+container_height = 24
+
+[node name="BangNoise" type="AudioStreamPlayer" parent="DropPoints"]
+stream = SubResource("AudioStreamRandomizer_m3gb7")
+volume_db = 5.0
+
+[node name="Arena" type="Node2D" parent="."]
+
+[node name="BaseContainer" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-17, -89)
+
+[node name="BaseContainer10" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-113, -137)
+
+[node name="BaseContainer9" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-113, -113)
+
+[node name="BaseContainer6" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-113, -89)
+
+[node name="BaseContainer7" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-65, -89)
+
+[node name="BaseContainer2" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(31, -89)
+
+[node name="BaseContainer3" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(79, -89)
+
+[node name="BaseContainer5" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(175, -209)
+
+[node name="BaseContainer12" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-113, -161)
+
+[node name="BaseContainer18" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-161, -137)
+
+[node name="BaseContainer19" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-161, -113)
+
+[node name="BaseContainer20" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-161, -89)
+
+[node name="BaseContainer21" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-161, -161)
+
+[node name="BaseContainer22" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-161, -185)
+
+[node name="BaseContainer11" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-113, -185)
+
+[node name="BaseContainer13" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(127, -137)
+
+[node name="BaseContainer14" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(127, -113)
+
+[node name="BaseContainer15" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(127, -89)
+
+[node name="BaseContainer16" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(127, -161)
+
+[node name="BaseContainer17" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(127, -185)
+
+[node name="EmptyContainer3" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-65, -137)
+
+[node name="EmptyContainer4" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-65, -161)
+
+[node name="EmptyContainer8" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-65, -209)
+
+[node name="EmptyContainer7" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-161, -209)
+
+[node name="EmptyContainer6" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-113, -209)
+
+[node name="EmptyContainer5" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(-65, -185)
+
+[node name="BaseContainer23" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(175, -137)
+
+[node name="BaseContainer24" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(175, -113)
+
+[node name="BaseContainer25" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(175, -89)
+
+[node name="BaseContainer26" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(175, -161)
+
+[node name="BaseContainer27" parent="Arena" instance=ExtResource("14_6te3c")]
+position = Vector2(175, -185)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+z_index = 1
+offset_left = -113.0
+offset_top = -97.0
+offset_right = -5.99999
+offset_bottom = -86.0
+rotation = -1.5708
+max_value = 1.0
+show_percentage = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_f6bsu")
+offset_left = -698.0
+offset_top = -613.0
+offset_right = 686.0
+offset_bottom = 298.0
+color = Color(1, 1, 1, 0)
+
+[node name="crane" parent="." node_paths=PackedStringArray("drop_zone") instance=ExtResource("16_ftu3o")]
+position = Vector2(-16, -236)
+n_columns = 3
+drop_zone = NodePath("../DropPoints")
+
+[node name="Instructions" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, -177)
+
+[node name="controls" parent="Instructions" node_paths=PackedStringArray("next_slide") instance=ExtResource("18_4akgk")]
+visible = false
+z_index = 1
+position = Vector2(-9, -1)
+next_slide = NodePath("../placement")
+info_text = "Use A,D or Left,Right to move crane.
+Q,E or <,> to rotate container exits.
+Press space to drop Container."
+
+[node name="placement" parent="Instructions" instance=ExtResource("18_4akgk")]
+visible = false
+z_index = 1
+position = Vector2(-9, -1)
+info_text = "Place containers 
+to create a contiguous path 
+from Start to Finish."
+
+[node name="StartLabel" type="Label" parent="Instructions"]
+offset_left = -124.0
+offset_top = 53.0
+offset_right = -84.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 14
+text = "Start"
+
+[node name="FinishLabel" type="Label" parent="Instructions"]
+offset_left = 107.0
+offset_top = -18.0
+offset_right = 153.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 14
+text = "Finish"
+
+[node name="TerminalContainer" parent="." instance=ExtResource("19_20mxa")]
+position = Vector2(127, -209)
+entrances = {
+0: false,
+1: false,
+2: false,
+3: true
+}
+
+[node name="TerminalContainer2" parent="." instance=ExtResource("19_20mxa")]
+position = Vector2(-65, -113)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1u85b")
+}
+
+[node name="DockSeaAmbient" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_62648")
+volume_db = -4.0
+
+[connection signal="pressed" from="HUD/Panel/FightButton" to="." method="_on_fight_button_pressed"]
+[connection signal="pressed" from="HUD/Panel/ResetButton" to="DropPoints" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="HUD/Panel/QuitButton" to="HUD/Panel" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Retry" to="HUD/WarningPopup" method="hide"]
+[connection signal="pressed" from="HUD/WarningPopup/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="drop_over" from="DropPoints" to="." method="_on_drop_points_drop_over"]
+[connection signal="drop_over" from="DropPoints" to="crane" method="refesh_container"]
+[connection signal="drop_started" from="DropPoints" to="." method="_on_drop_points_drop_started"]
+[connection signal="invalid_level" from="DropPoints" to="." method="_on_drop_points_invalid_level"]
+[connection signal="valid_level" from="DropPoints" to="." method="_on_drop_points_valid_level"]
+[connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
+[connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]
+[connection signal="finished" from="Instructions/placement" to="." method="_on_placement_instructions_finished"]

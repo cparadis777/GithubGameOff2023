@@ -10,7 +10,7 @@ wait_time = 1.1
 one_shot = true
 
 [node name="ReloadTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.5
 one_shot = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

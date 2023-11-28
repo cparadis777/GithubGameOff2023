@@ -1,0 +1,213 @@
+[gd_scene load_steps=15 format=3 uid="uid://bi4yx6hcnmept"]
+
+[ext_resource type="Script" path="res://CutScenes/powerup_cutscene.gd" id="1_7sh6q"]
+[ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="1_755le"]
+[ext_resource type="PackedScene" uid="uid://bxyn1mq357nt6" path="res://Entities/Player/cyber_ronin_sprites.tscn" id="2_umj3e"]
+[ext_resource type="Texture2D" uid="uid://bte3vdsntt4qf" path="res://art/pickups/damage-pickup.png" id="4_es5or"]
+[ext_resource type="AudioStream" uid="uid://c0gqg5tikslm3" path="res://audio/sfx/placeholder/time_slowdown.wav" id="4_vg47p"]
+[ext_resource type="AudioStream" uid="uid://bfkyv3qrgqid8" path="res://audio/sfx/placeholder/time_speed_up.wav" id="5_5rjbp"]
+[ext_resource type="Texture2D" uid="uid://bj1p1ghcc78pd" path="res://art/pickups/health-pickup.png" id="5_28dq6"]
+[ext_resource type="Texture2D" uid="uid://bbiq8m62k4y22" path="res://art/pickups/jump-pickup.png" id="6_4eemr"]
+[ext_resource type="Texture2D" uid="uid://bxp2nsrmcx2j" path="res://art/pickups/speed-pickup.png" id="7_wgvxv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2plpo"]
+bg_color = Color(0.247059, 0.133333, 0.388235, 1)
+skew = Vector2(0.3, 2.08165e-12)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.509804, 0.505882, 0.2, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_euqxv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_es5or")
+}],
+"loop": true,
+"name": &"DAMAGE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_28dq6")
+}],
+"loop": true,
+"name": &"HEALTH",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_4eemr")
+}],
+"loop": true,
+"name": &"JUMP",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wgvxv")
+}],
+"loop": true,
+"name": &"SPEED",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_60fmo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-296, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TimeSlowDownNoise:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TimeSpeedUpNoise:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_x2wju"]
+resource_name = "slide_across"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.3, 0.35, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-296, -3), Vector2(457, 2.08165e-12), Vector2(457, 2.08165e-12), Vector2(457, 2.08165e-12), Vector2(457, 2.08165e-12), Vector2(700, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TimeSlowDownNoise:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TimeSpeedUpNoise:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"speed_up"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p0wlg"]
+_data = {
+"RESET": SubResource("Animation_60fmo"),
+"slide_across": SubResource("Animation_x2wju")
+}
+
+[node name="Powerup" type="Node2D"]
+position = Vector2(-1, 1)
+script = ExtResource("1_7sh6q")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -296.0
+offset_top = -3.0
+offset_right = -57.9993
+offset_bottom = 361.0
+theme = ExtResource("1_755le")
+theme_override_styles/panel = SubResource("StyleBoxFlat_2plpo")
+
+[node name="CyberRoninSprites" parent="Panel" instance=ExtResource("2_umj3e")]
+position = Vector2(210, 201)
+scale = Vector2(5, 5)
+animation = &"fully_charged"
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 25.0
+offset_right = 273.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 32
+text = "Power UP!"
+
+[node name="PowerupType" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 88.0
+offset_right = 244.0
+offset_bottom = 148.0
+theme_override_font_sizes/font_size = 32
+text = "DAMAGE ++"
+
+[node name="PowerupIcon" type="AnimatedSprite2D" parent="Panel"]
+position = Vector2(-10, 182)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_euqxv")
+animation = &"JUMP"
+
+[node name="TimeSlowDownNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vg47p")
+volume_db = -12.0
+bus = &"sfx"
+
+[node name="TimeSpeedUpNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_5rjbp")
+volume_db = -12.0
+bus = &"sfx"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p0wlg")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

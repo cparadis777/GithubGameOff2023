@@ -4,7 +4,7 @@ var melee_range : float = 35.0
 var current_attack_num = 0
 var attacks_per_sequence = 3
 
-@export var damage : float = 10.0
+#var damage : float = 10.0
 @export var inflict_knockback : bool = true
 
 var active : bool = false
@@ -13,13 +13,18 @@ var npc
 enum States { INITIALIZING, IDLE, ATTACKING, RELOADING, PAUSED }
 var State : States 
 
+signal hit
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	npc = owner
-
+	#damage = npc.base_damage
+	
 
 func activate():
 	active = true
+	
+
 
 func attempt_to_attack():
 	if $RecoilTimer.is_stopped() and $ReloadTimer.is_stopped():
@@ -61,8 +66,10 @@ func _on_hurt_box_body_entered(body):
 			var attackPacket = AttackPacket.new()
 			attackPacket.originator = self
 			attackPacket.recipient = body
-			attackPacket.damage_type = Globals.DamageTypes.IMPACT
+			attackPacket.damage = npc.base_damage
 			attackPacket.impact_vector = global_position.direction_to(body.global_position)
 			attackPacket.damage_type = Globals.DamageTypes.IMPACT
 			
-			body._on_hit(attackPacket)
+			hit.connect(body._on_hit)
+			hit.emit(attackPacket)
+			hit.disconnect(body._on_hit)

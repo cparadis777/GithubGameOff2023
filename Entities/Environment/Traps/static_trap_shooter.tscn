@@ -10,9 +10,10 @@ shader_parameter/iframes = false
 shader_parameter/FlashColor = Color(1, 1, 1, 1)
 
 [node name="Static_Trap_Shooter" instance=ExtResource("1_btsuc")]
+sync_to_physics = false
 mobile = false
 
-[node name="Polygon2D" type="Polygon2D" parent="." index="0"]
+[node name="Arrow" type="Polygon2D" parent="." index="0"]
 color = Color(0.780392, 0.541176, 0.815686, 1)
 polygon = PackedVector2Array(1, -6, 26, -6, 26, -14, 38, 0, 26, 12, 26, 6, 1, 6)
 

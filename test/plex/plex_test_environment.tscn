@@ -48,9 +48,6 @@ position = Vector2(-3, -161)
 [node name="Location2" parent="InteriorContainerLevelMockup08/MovingPlatform/PositionMarkers" index="0"]
 position = Vector2(0, -96)
 
-[node name="FloorHeightMarker" parent="InteriorContainerLevelMockup08/MovingPlatform/Piston" index="0"]
-position = Vector2(-3, 178)
-
 [node name="InteriorContainerLevelMockup09" parent="." instance=ExtResource("1_6pytm")]
 position = Vector2(986, -926)
 

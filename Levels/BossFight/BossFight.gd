@@ -10,7 +10,20 @@ extends Node2D
 func _ready():
 	pass # Replace with function body.
 
-
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel") and $AnimationPlayer.current_animation != "":
+		$AnimationPlayer.seek(15.0)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
+
+func activate():
+	$CraneJaws.activate()
+	$CraneJaws.start()
+	
+
+
+func _on_end_of_world_npc_digester_body_entered(body):
+	body.queue_free() # fell off the world
+

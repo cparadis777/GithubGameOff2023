@@ -1,52 +1,74 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqqakuyl2wa2g"]
+[gd_scene load_steps=11 format=3 uid="uid://b2c7l0vqc2yep"]
 
-[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_gusit"]
-[ext_resource type="PackedScene" uid="uid://fw4qtohyprb3" path="res://Levels/Tutorials/TutorialLevel_5.tscn" id="2_grqj8"]
-[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_p65xb"]
-[ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="3_mcvid"]
-[ext_resource type="Texture2D" uid="uid://3kfisyqqqjqc" path="res://art/placeholder/gamepad_button_left.png" id="4_5x4wx"]
-[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="4_qjlwe"]
-[ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="7_uighd"]
+[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_b3qkh"]
+[ext_resource type="PackedScene" uid="uid://bqqakuyl2wa2g" path="res://Levels/Tutorials/TutorialLevel_5.tscn" id="2_2joxt"]
+[ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="2_73pb8"]
+[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="3_g6ph8"]
+[ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="3_hahvy"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="4_85ikw"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="4_fymxv"]
+[ext_resource type="Texture2D" uid="uid://bpymgdts33j4k" path="res://art/props/shipping_container_generic-export.png" id="4_hu7hp"]
+[ext_resource type="Texture2D" uid="uid://bf4wjs11rnb7v" path="res://art/props/shipping_container_pain4gainz.png" id="5_j4fda"]
+[ext_resource type="Texture2D" uid="uid://dalsqh1oenpf0" path="res://art/props/shipping_container_graffiti.png" id="5_vt0r3"]
 
-[node name="BaseLevel" instance=ExtResource("1_gusit")]
-exit_flags = 1
+[node name="BaseLevel" instance=ExtResource("1_b3qkh")]
+exit_flags = 8
 
-[node name="NextLevelDoor" parent="BaseContainer" index="9"]
-position = Vector2(-173, 63)
-rotation = -3.14159
-next_scene = ExtResource("2_grqj8")
-location = 3
+[node name="Exterior" parent="BaseContainer" index="3"]
+texture = ExtResource("5_j4fda")
+
+[node name="NextLevelDoor" parent="BaseContainer" index="10"]
+position = Vector2(121, 77)
+rotation = 1.57079
+next_scene = ExtResource("2_2joxt")
+location = 2
 
 [node name="Player" parent="." index="1"]
-position = Vector2(149, -42)
+position = Vector2(-180, -13)
 
-[node name="JumpThroughPlatform" parent="." index="3" instance=ExtResource("2_p65xb")]
-position = Vector2(108, -9)
+[node name="ExteriorS" parent="ExteriorTextures" index="0"]
+texture = ExtResource("3_hahvy")
 
-[node name="AttackDemo" parent="." index="4" instance=ExtResource("3_mcvid")]
-position = Vector2(132, 54)
-animation_name = "fast_punch"
-label_text = "[,], [.]"
-button_texture = ExtResource("4_5x4wx")
+[node name="ExteriorN" parent="ExteriorTextures" index="1"]
+texture = ExtResource("4_hu7hp")
 
-[node name="CyberRoninSprites" parent="AttackDemo" index="1"]
-animation = &"fast_punch"
-frame = 6
-frame_progress = 1.0
-flip_h = true
+[node name="ExteriorSE" parent="ExteriorTextures" index="2"]
+texture = ExtResource("5_j4fda")
 
-[node name="ButtonSprite" parent="AttackDemo" index="3"]
-position = Vector2(-84, 19)
-texture = ExtResource("4_5x4wx")
+[node name="ExteriorE" parent="ExteriorTextures" index="3"]
+texture = ExtResource("5_vt0r3")
 
-[node name="Obstacles" type="Node2D" parent="." index="5"]
+[node name="ExteriorNE" parent="ExteriorTextures" index="4"]
+texture = ExtResource("4_hu7hp")
 
-[node name="VendingMachine" parent="Obstacles" index="0" instance=ExtResource("4_qjlwe")]
-position = Vector2(-131, 96)
+[node name="ExteriorSW" parent="ExteriorTextures" index="5"]
+texture = ExtResource("3_hahvy")
 
-[node name="TrashCan" parent="." index="6" instance=ExtResource("7_uighd")]
-position = Vector2(-187, 0.999996)
-rotation = 1.91288
+[node name="ExteriorW" parent="ExteriorTextures" index="6"]
+texture = ExtResource("3_g6ph8")
+
+[node name="ExteriorNW" parent="ExteriorTextures" index="7"]
+texture = ExtResource("3_g6ph8")
+
+[node name="JumpThroughPlatform" parent="." index="3" instance=ExtResource("4_85ikw")]
+position = Vector2(59, -11)
+
+[node name="JumpThroughPlatform2" parent="." index="4" instance=ExtResource("4_85ikw")]
+position = Vector2(-107, -11)
+
+[node name="FallDemo" parent="." index="5" instance=ExtResource("2_73pb8")]
+z_index = -1
+position = Vector2(-14, -63)
+animation_name = "land"
+label_text = "S"
+
+[node name="CyberRoninSprites" parent="FallDemo" index="3"]
+animation = &"land"
+frame = 1
+frame_progress = 0.452775
+
+[node name="VendingMachine" parent="." index="6" instance=ExtResource("4_fymxv")]
+position = Vector2(122, -11)
 
 [editable path="BaseContainer"]
-[editable path="AttackDemo"]
+[editable path="FallDemo"]

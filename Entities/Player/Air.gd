@@ -4,11 +4,12 @@ extends PlayerState
 var already_used_double_jump : bool = false
 var already_used_dash : bool = false
 var already_signalled_peak_amplitude : bool = false
+var already_signalled_descent : bool = false
 var involuntary_jump : bool = false
 
 signal jumped
 signal peak_amplitude_reached
-
+signal starting_descent
 
 func _ready():
 	super()
@@ -19,6 +20,8 @@ func _ready():
 		jumped.connect(player._on_jumped)
 	if player.has_method("_on_peak_amplitude_reached"):
 		peak_amplitude_reached.connect(player._on_peak_amplitude_reached)
+	if player.has_method("_on_started_fall_descent"):
+		starting_descent.connect(player._on_started_fall_descent)
 
 # If we get a message asking us to jump, we jump.
 func enter(msg := {}) -> void:
@@ -34,17 +37,18 @@ func enter(msg := {}) -> void:
 		player.velocity.y = 0.5 * player.JUMP_VELOCITY
 	already_used_double_jump = msg.has("double_jumped")
 	already_used_dash = msg.has("dashed") # one line version of: if msg.has "dashed": already_used_dash = true
-	
+	already_signalled_descent = false
 
 # Note: Not the same as built in function physics_process!
 func physics_update(delta: float) -> void:
+	land_if_possible() # must be after move_and_slide
+
 	allow_player_to_change_direction_midair()
 	apply_gravity(delta)
 	end_jump_early_if_player_releases_button()
 	check_for_double_jump_requests()
 	check_for_attack_requests()
 	player.move_and_slide()
-	land_if_possible() # must be after move_and_slide
 	
 
 func check_for_double_jump_requests():
@@ -63,13 +67,17 @@ func check_for_attack_requests():
 func allow_player_to_change_direction_midair():
 	# Horizontal movement.
 	var input_direction_x = Input.get_axis("move_left", "move_right")
-	player.velocity.x = player.speed * input_direction_x
+	player.velocity.x = Globals.player_stats["speed"] * input_direction_x
 
 
 	
 func land_if_possible():
 	if player.velocity.y >= 0 and player.is_on_floor():
-		state_machine.transition_to("Landing")
+		var moving_platform = player.detect_moving_platform()
+		if moving_platform == null:
+			state_machine.transition_to("Landing")
+		else:
+			state_machine.transition_to("Idle")
 
 
 func apply_gravity(delta):
@@ -81,7 +89,11 @@ func apply_gravity(delta):
 			already_signalled_peak_amplitude = true
 	else: # going down (double accel):
 		player.velocity.y += 2.0 * player.gravity * delta
-
+	
+	# why would this break dropping through platforms?
+#	if player.velocity.y > 30.0 and not already_signalled_descent:
+#		starting_descent.emit()
+#		already_signalled_descent = true
 
 
 func end_jump_early_if_player_releases_button():

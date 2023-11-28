@@ -79,6 +79,14 @@ expand_mode = 3
 [node name="Buttons3" parent="VBoxContainer/Body/MarginContainer/Body" instance=ExtResource("7_mi8of")]
 layout_mode = 2
 
+[node name="TutorialButton" parent="VBoxContainer/Body/MarginContainer/Body/Buttons3" index="2"]
+focus_neighbor_right = NodePath("../../Buttons2/SettingsButton")
+focus_neighbor_bottom = NodePath("../SkipTutorialButton")
+
+[node name="SkipTutorialButton" parent="VBoxContainer/Body/MarginContainer/Body/Buttons3" index="3"]
+focus_neighbor_top = NodePath("../TutorialButton")
+focus_neighbor_right = NodePath("../../Buttons2/QuitButton")
+
 [node name="Buttons2" type="VBoxContainer" parent="VBoxContainer/Body/MarginContainer/Body"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -87,10 +95,14 @@ alignment = 1
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer/Body/MarginContainer/Body/Buttons2"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../Buttons3/TutorialButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
 text = "SETTINGS"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/Body/MarginContainer/Body/Buttons2"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../Buttons3/SkipTutorialButton")
+focus_neighbor_top = NodePath("../SettingsButton")
 text = "QUIT"
 
 [node name="Footer" type="HBoxContainer" parent="VBoxContainer"]
@@ -113,3 +125,5 @@ stream = ExtResource("7_bpl7k")
 
 [node name="ClickNoise" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("8_jgwm5")
+
+[editable path="VBoxContainer/Body/MarginContainer/Body/Buttons3"]

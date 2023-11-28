@@ -11,15 +11,22 @@ var move_ready:bool
 var current_column:int
 var markers:Array
 var move_time:float = 0.5
-
+var fight_button:TextureButton
+var reset_button:TextureButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.create_markers()
 	self.set_current_container(select_random_container())
 	#self.move_ready = true
-	$RichTextLabel.text = "%s kg" % self.current_container.weigth
-	$RichTextLabel2.text = "%s" % self.current_container.type
+	%WeightLabel.text = "%s,000 kg" % self.current_container.weight
+	%TypeLabel.text = "%s" % self.current_container.type
+	if owner && owner.has_node("HUD"):
+		fight_button = owner.get_node("HUD/Panel/FightButton")
+		reset_button = owner.get_node("HUD/Panel/ResetButton")
+	else:
+		print("crane is not child of ContainerStackingTest ")
+	
 
 func activate():
 	self.move_ready = true
@@ -35,20 +42,32 @@ func _unhandled_input(event):
 	if self.move_ready:
 		if event.is_action_pressed("move_right"):
 			self.move_container(Utils.Directions.RIGHT)
+			$CraneSounds/Move.play()
 		elif event.is_action_pressed("move_left"):
 			self.move_container(Utils.Directions.LEFT)
+			$CraneSounds/Move.play()
 		elif event.is_action_pressed("jump"):
 			self.place_container()
 		elif event.is_action_pressed("rotate_left"):
 			self.rotate_container("CCW")
+			$CraneSounds/Rotate.play()
 		elif event.is_action_pressed("rotate_right"):
 			self.rotate_container("CW")	
+			$CraneSounds/Rotate.play()
+		elif event.is_action_pressed("fight"):
+			if !fight_button.disabled:
+				owner._on_fight_button_pressed()
+		elif event.is_action_pressed("reset"):
+			if !reset_button.disabled:
+				owner.get_node("DropPoints").reset_dropped_containers()
+		elif event.is_action_pressed("quit"):
+			get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
 
 func select_random_container() -> StaticBody2D:
 	var new_container = containers.pick_random().instantiate()
 	#new_container.get_node("Exterior").self_modulate = Utils.random_color()
 	self.randomize_container_access(new_container)
-	new_container.weigth = 100 * randf()
+	new_container.weight = 100 * randf()
 	return new_container
 
 func set_current_container(container:StaticBody2D):
@@ -56,7 +75,7 @@ func set_current_container(container:StaticBody2D):
 	self.add_child(self.current_container)
 	self.current_container.position = markers[current_column].position
 	$CraneJaw.position[0] = markers[current_column].position[0]
-	$RichTextLabel2.text = "%s" % self.current_container.type
+	%TypeLabel.text = "%s" % self.current_container.type
 
 func create_markers() -> void:
 	for i in range(n_columns):
@@ -91,6 +110,7 @@ func move_container(direction:Utils.Directions) -> void:
 		
 func place_container() -> void:
 	if drop_zone.check_drop_possible(self.current_column):
+		$CraneSounds/Drop.play()
 		self.move_ready = false
 		drop_zone.place_container(self.current_container, current_column)
 		self.current_container = null
@@ -99,7 +119,7 @@ func place_container() -> void:
 func refesh_container() -> void:
 	self.set_current_container(select_random_container())
 	self.move_ready = true
-	$RichTextLabel.text = "%s kg" % self.current_container.weigth
+	%WeightLabel.text = "%s,000 kg" % self.current_container.weight
 
 func move_done()->void:
 	self.move_ready = true

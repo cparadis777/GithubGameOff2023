@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dttldmdwah7bk"]
+[gd_scene load_steps=7 format=3 uid="uid://dttldmdwah7bk"]
 
 [ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="1_a863l"]
-[ext_resource type="PackedScene" uid="uid://one3l2j3vodd" path="res://Entities/ContainerStackingTest.tscn" id="3_8qbco"]
 [ext_resource type="PackedScene" uid="uid://bdqawiqxlij23" path="res://Levels/placeholder/MockLevel.tscn" id="4_rdf1v"]
+[ext_resource type="PackedScene" uid="uid://dm0h5iyg1t6xj" path="res://UI/Title/start-button.tscn" id="4_xst20"]
 [ext_resource type="PackedScene" uid="uid://bpcm0ph14ms2a" path="res://Levels/placeholder/Level_02_Interior.tscn" id="5_7bqgq"]
-[ext_resource type="PackedScene" uid="uid://dr840r1p2wh3c" path="res://Levels/Tutorials/TutorialLevel_1.tscn" id="6_rlsbl"]
+[ext_resource type="PackedScene" uid="uid://dwd8f536qu5go" path="res://UI/Title/skip_tutorial_button.tscn" id="5_klu46"]
+[ext_resource type="PackedScene" uid="uid://c3l0djo5xdqai" path="res://Levels/StackingLevels/StackLevel1.tscn" id="6_7i38v"]
 
 [node name="Buttons" type="GridContainer"]
 anchors_preset = 8
@@ -33,14 +34,9 @@ text = "Guac Level 2"
 script = ExtResource("1_a863l")
 scene = ExtResource("5_7bqgq")
 
-[node name="TutorialButton" type="Button" parent="."]
+[node name="TutorialButton" parent="." instance=ExtResource("4_xst20")]
 layout_mode = 2
-text = "Play"
-script = ExtResource("1_a863l")
-scene = ExtResource("6_rlsbl")
 
-[node name="ContainerStackingStartButton" type="Button" parent="."]
+[node name="SkipTutorialButton" parent="." instance=ExtResource("5_klu46")]
 layout_mode = 2
-text = "Skip Tutorial"
-script = ExtResource("1_a863l")
-scene = ExtResource("3_8qbco")
+scene = ExtResource("6_7i38v")
