@@ -1,74 +1,73 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2c7l0vqc2yep"]
+[gd_scene load_steps=12 format=3 uid="uid://c2rnjwgxgpyud"]
 
-[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_b3qkh"]
-[ext_resource type="PackedScene" uid="uid://bqqakuyl2wa2g" path="res://Levels/Tutorials/TutorialLevel_4.tscn" id="2_2joxt"]
-[ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="2_73pb8"]
-[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="3_g6ph8"]
-[ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="3_hahvy"]
-[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="4_85ikw"]
-[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="4_fymxv"]
-[ext_resource type="Texture2D" uid="uid://bpymgdts33j4k" path="res://art/props/shipping_container_generic-export.png" id="4_hu7hp"]
-[ext_resource type="Texture2D" uid="uid://bf4wjs11rnb7v" path="res://art/props/shipping_container_pain4gainz.png" id="5_j4fda"]
-[ext_resource type="Texture2D" uid="uid://dalsqh1oenpf0" path="res://art/props/shipping_container_graffiti.png" id="5_vt0r3"]
+[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_tdb17"]
+[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_yaelw"]
+[ext_resource type="PackedScene" uid="uid://b2c7l0vqc2yep" path="res://Levels/Tutorials/TutorialLevel_4.tscn" id="3_yyy4x"]
+[ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="4_4x810"]
+[ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="5_yp6p6"]
+[ext_resource type="Texture2D" uid="uid://bvg7st7se3cvj" path="res://art/placeholder/gamepad_button_down.png" id="6_mlgsp"]
+[ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="7_bir7t"]
+[ext_resource type="Texture2D" uid="uid://bf4wjs11rnb7v" path="res://art/props/shipping_container_pain4gainz.png" id="8_ls0ga"]
+[ext_resource type="Texture2D" uid="uid://bpymgdts33j4k" path="res://art/props/shipping_container_generic-export.png" id="9_o2x2a"]
+[ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="10_36woi"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="11_7f2mr"]
 
-[node name="BaseLevel" instance=ExtResource("1_b3qkh")]
-exit_flags = 8
+[node name="BaseLevel" instance=ExtResource("1_tdb17")]
+exit_flags = 2
 
 [node name="Exterior" parent="BaseContainer" index="3"]
-texture = ExtResource("5_j4fda")
+texture = ExtResource("2_yaelw")
 
 [node name="NextLevelDoor" parent="BaseContainer" index="10"]
-position = Vector2(121, 77)
-rotation = 1.57079
-next_scene = ExtResource("2_2joxt")
-location = 2
+position = Vector2(1, -78)
+rotation = -1.5708
+next_scene = ExtResource("3_yyy4x")
+location = 0
+
+[node name="AI_Tutorial_Text" parent="BaseContainer" index="11" instance=ExtResource("4_4x810")]
+z_index = 2
+position = Vector2(-256, 99)
+override_text = "Jump with space or
+double jump
+by pressing space twice."
+
+[node name="DoubleJumpDemo" parent="BaseContainer" index="12" instance=ExtResource("5_yp6p6")]
+position = Vector2(105, 46)
+animation_name = "jump_launch;double_jump;jump_peak"
+label_text = " [space], [space]"
+button_texture = ExtResource("6_mlgsp")
+
+[node name="ButtonSprite2" type="Sprite2D" parent="BaseContainer/DoubleJumpDemo" index="3"]
+position = Vector2(-31, 18)
+texture = ExtResource("6_mlgsp")
+
+[node name="CyberRoninSprites" parent="BaseContainer/DoubleJumpDemo" index="4"]
+frame = 0
+frame_progress = 0.0
 
 [node name="Player" parent="." index="1"]
-position = Vector2(-180, -13)
+position = Vector2(-159, 94)
 
 [node name="ExteriorS" parent="ExteriorTextures" index="0"]
-texture = ExtResource("3_hahvy")
+texture = ExtResource("7_bir7t")
 
 [node name="ExteriorN" parent="ExteriorTextures" index="1"]
-texture = ExtResource("4_hu7hp")
+texture = ExtResource("2_yaelw")
 
 [node name="ExteriorSE" parent="ExteriorTextures" index="2"]
-texture = ExtResource("5_j4fda")
+texture = ExtResource("7_bir7t")
 
 [node name="ExteriorE" parent="ExteriorTextures" index="3"]
-texture = ExtResource("5_vt0r3")
+texture = ExtResource("8_ls0ga")
 
 [node name="ExteriorNE" parent="ExteriorTextures" index="4"]
-texture = ExtResource("4_hu7hp")
-
-[node name="ExteriorSW" parent="ExteriorTextures" index="5"]
-texture = ExtResource("3_hahvy")
-
-[node name="ExteriorW" parent="ExteriorTextures" index="6"]
-texture = ExtResource("3_g6ph8")
+texture = ExtResource("9_o2x2a")
 
 [node name="ExteriorNW" parent="ExteriorTextures" index="7"]
-texture = ExtResource("3_g6ph8")
+texture = ExtResource("10_36woi")
 
-[node name="JumpThroughPlatform" parent="." index="3" instance=ExtResource("4_85ikw")]
-position = Vector2(59, -11)
-
-[node name="JumpThroughPlatform2" parent="." index="4" instance=ExtResource("4_85ikw")]
-position = Vector2(-107, -11)
-
-[node name="FallDemo" parent="." index="5" instance=ExtResource("2_73pb8")]
-z_index = -1
-position = Vector2(-14, -63)
-animation_name = "land"
-label_text = "S"
-
-[node name="CyberRoninSprites" parent="FallDemo" index="3"]
-animation = &"land"
-frame = 1
-frame_progress = 0.452775
-
-[node name="VendingMachine" parent="." index="6" instance=ExtResource("4_fymxv")]
-position = Vector2(122, -11)
+[node name="JumpThroughPlatform2" parent="." index="3" instance=ExtResource("11_7f2mr")]
+position = Vector2(0, -28)
 
 [editable path="BaseContainer"]
-[editable path="FallDemo"]
+[editable path="BaseContainer/DoubleJumpDemo"]

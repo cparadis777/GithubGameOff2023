@@ -1,78 +1,81 @@
-[gd_scene load_steps=13 format=3 uid="uid://fw4qtohyprb3"]
+[gd_scene load_steps=13 format=3 uid="uid://bqqakuyl2wa2g"]
 
-[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_4cqgm"]
-[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_y80d6"]
-[ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="3_tamoy"]
-[ext_resource type="Texture2D" uid="uid://b1yn4w4s1acoc" path="res://art/placeholder/gamepad_button_right.png" id="4_x4det"]
-[ext_resource type="Texture2D" uid="uid://3kfisyqqqjqc" path="res://art/placeholder/gamepad_button_left.png" id="4_xxja8"]
-[ext_resource type="PackedScene" uid="uid://c3l0djo5xdqai" path="res://Levels/StackingLevels/StackLevel1.tscn" id="5_gt7gr"]
-[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="5_jonlp"]
-[ext_resource type="PackedScene" uid="uid://daqb2qqfyv1v5" path="res://Entities/Environment/Platforms/moving_girder.tscn" id="6_dn4kt"]
-[ext_resource type="PackedScene" uid="uid://c5vkmfj3r4dpb" path="res://Entities/Environment/switches/ToggleSwitch.tscn" id="7_hwa8q"]
-[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="8_jds6t"]
-[ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="9_13p8r"]
-[ext_resource type="Texture2D" uid="uid://bf4wjs11rnb7v" path="res://art/props/shipping_container_pain4gainz.png" id="10_twnis"]
+[ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_gusit"]
+[ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="2_f55js"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_p65xb"]
+[ext_resource type="PackedScene" uid="uid://fw4qtohyprb3" path="res://Levels/Tutorials/TutorialLevel_6.tscn" id="3_bmnyi"]
+[ext_resource type="Texture2D" uid="uid://bf4wjs11rnb7v" path="res://art/props/shipping_container_pain4gainz.png" id="3_hm04c"]
+[ext_resource type="PackedScene" uid="uid://cf0bsniunrbvk" path="res://Entities/Environment/ControlsDemo.tscn" id="3_mcvid"]
+[ext_resource type="Texture2D" uid="uid://3kfisyqqqjqc" path="res://art/placeholder/gamepad_button_left.png" id="4_5x4wx"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="4_qjlwe"]
+[ext_resource type="Texture2D" uid="uid://dalsqh1oenpf0" path="res://art/props/shipping_container_graffiti.png" id="4_wudpb"]
+[ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="5_c8b1f"]
+[ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="7_uighd"]
+[ext_resource type="Texture2D" uid="uid://bgcsjypnwti41" path="res://art/placeholder/gamepad_button_up.png" id="10_v6gc3"]
 
-[node name="BaseLevel" instance=ExtResource("1_4cqgm")]
-exit_flags = 4
+[node name="BaseLevel" instance=ExtResource("1_gusit")]
+exit_flags = 1
 
-[node name="SwitchDemo" parent="BaseContainer" index="8" instance=ExtResource("3_tamoy")]
-position = Vector2(-82, 61)
-animation_name = "jab_left"
-label_text = "F"
-button_texture = ExtResource("4_x4det")
+[node name="Exterior" parent="BaseContainer" index="3"]
+texture = ExtResource("2_f55js")
 
-[node name="ButtonSprite" parent="BaseContainer/SwitchDemo" index="2"]
-position = Vector2(-84, 19)
-texture = ExtResource("4_xxja8")
-
-[node name="CyberRoninSprites" parent="BaseContainer/SwitchDemo" index="3"]
-visible = false
-flip_h = true
-
-[node name="NextLevelDoor" parent="BaseContainer" index="11"]
-position = Vector2(-111, -77)
-rotation = -1.5708
-next_scene = ExtResource("5_gt7gr")
-location = 0
+[node name="NextLevelDoor" parent="BaseContainer" index="10"]
+position = Vector2(-173, 63)
+rotation = -3.14159
+next_scene = ExtResource("3_bmnyi")
+location = 3
 
 [node name="Player" parent="." index="1"]
-position = Vector2(171, 88)
-
-[node name="Obstacles" type="Node2D" parent="." index="2"]
-
-[node name="VendingMachine" parent="Obstacles" index="0" instance=ExtResource("5_jonlp")]
-position = Vector2(-57, 93)
-
-[node name="MovingGirder" parent="." index="3" instance=ExtResource("6_dn4kt")]
-position = Vector2(10, 87)
-trigger_node_path = NodePath("../Switch")
-autostart = false
+position = Vector2(149, -42)
 
 [node name="ExteriorN" parent="ExteriorTextures" index="1"]
-texture = ExtResource("8_jds6t")
+texture = ExtResource("3_hm04c")
+
+[node name="ExteriorSE" parent="ExteriorTextures" index="2"]
+texture = ExtResource("3_hm04c")
 
 [node name="ExteriorE" parent="ExteriorTextures" index="3"]
-texture = ExtResource("9_13p8r")
+texture = ExtResource("3_hm04c")
 
 [node name="ExteriorNE" parent="ExteriorTextures" index="4"]
-texture = ExtResource("10_twnis")
+texture = ExtResource("4_wudpb")
 
-[node name="ExteriorSW" parent="ExteriorTextures" index="5"]
-texture = ExtResource("8_jds6t")
+[node name="ExteriorW" parent="ExteriorTextures" index="6"]
+texture = ExtResource("2_f55js")
 
-[node name="JumpThroughPlatform" parent="." index="5" instance=ExtResource("2_y80d6")]
-position = Vector2(-107, -44)
+[node name="ExteriorNW" parent="ExteriorTextures" index="7"]
+texture = ExtResource("5_c8b1f")
 
-[node name="Switch" parent="." index="6" node_paths=PackedStringArray("linked_nodes") instance=ExtResource("7_hwa8q")]
-position = Vector2(-123, 94)
-linked_nodes = [NodePath("../MovingGirder")]
+[node name="JumpThroughPlatform" parent="." index="3" instance=ExtResource("2_p65xb")]
+position = Vector2(108, -9)
 
-[node name="Label" parent="Switch" index="2"]
-visible = false
+[node name="AttackDemo" parent="." index="4" instance=ExtResource("3_mcvid")]
+z_index = -1
+position = Vector2(132, 54)
+animation_name = "jab_right;jab_left;uppercut;strong_punch"
+label_text = "[,], [.]"
+button_texture = ExtResource("4_5x4wx")
 
-[connection signal="toggled" from="Switch" to="MovingGirder" method="_on_switch_toggled"]
+[node name="ButtonSprite" parent="AttackDemo" index="2"]
+position = Vector2(-84, 19)
+texture = ExtResource("4_5x4wx")
+
+[node name="ButtonSprite2" type="Sprite2D" parent="AttackDemo" index="3"]
+position = Vector2(-65, 19)
+texture = ExtResource("10_v6gc3")
+
+[node name="CyberRoninSprites" parent="AttackDemo" index="4"]
+animation = &"strong_punch"
+flip_h = true
+
+[node name="Obstacles" type="Node2D" parent="." index="5"]
+
+[node name="VendingMachine" parent="Obstacles" index="0" instance=ExtResource("4_qjlwe")]
+position = Vector2(-131, 96)
+
+[node name="TrashCan" parent="." index="6" instance=ExtResource("7_uighd")]
+position = Vector2(-187, 0.999996)
+rotation = 1.91288
 
 [editable path="BaseContainer"]
-[editable path="BaseContainer/SwitchDemo"]
-[editable path="Switch"]
+[editable path="AttackDemo"]

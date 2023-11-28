@@ -27,6 +27,10 @@ label_text = "A             D
 [node name="Label" parent="BaseContainer/RunDemo" index="1"]
 metadata/_edit_use_anchors_ = true
 
+[node name="CyberRoninSprites" parent="BaseContainer/RunDemo" index="3"]
+frame = 0
+frame_progress = 0.0
+
 [node name="ExteriorN" parent="ExteriorTextures" index="1"]
 texture = ExtResource("4_mdmm4")
 
