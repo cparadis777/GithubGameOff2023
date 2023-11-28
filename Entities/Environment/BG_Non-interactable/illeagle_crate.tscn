@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0o0mvp8q2dwl"]
+
+[ext_resource type="PackedScene" uid="uid://cfeyc76xirsc4" path="res://Entities/Environment/BG_Non-interactable/frozen_lung.tscn" id="1_l2act"]
+[ext_resource type="Texture2D" uid="uid://c6scswmvy22si" path="res://art/props/illeagle_crate.png" id="2_q3rmv"]
+
+[node name="illeagle-crate" instance=ExtResource("1_l2act")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_q3rmv")
