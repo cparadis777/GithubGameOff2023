@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dc7akumi6wfug"]
+[gd_scene load_steps=17 format=3 uid="uid://dc7akumi6wfug"]
 
 [ext_resource type="Script" path="res://Levels/FightingLevels/prototypes/GeneratedPlayspace.gd" id="1_4kjqn"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_fy7vb"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="12_xaucd"]
 [ext_resource type="PackedScene" uid="uid://f81lk2428snl" path="res://Entities/Environment/Containers/special/TerminalContainer1.tscn" id="13_8vlpw"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="13_tij1x"]
+[ext_resource type="PackedScene" uid="uid://dw5kmbygnkfyw" path="res://Entities/Environment/Popups/tutorial_bot_trigger_volume.tscn" id="14_uxrk1"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d5jlm"]
 blend_mode = 1
@@ -111,6 +112,8 @@ environment = SubResource("Environment_j2q28")
 
 [node name="TerminalContainer" parent="." instance=ExtResource("13_8vlpw")]
 position = Vector2(1921, -964)
+
+[node name="TutorialBotTriggerVolume" parent="TerminalContainer" instance=ExtResource("14_uxrk1")]
 
 [connection signal="finished" from="AI_Tutorial_Text" to="BigArrow" method="show"]
 

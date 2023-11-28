@@ -534,6 +534,7 @@ _data = {
 script = ExtResource("4_kj0ql")
 
 [node name="Muse_AI" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0.7, 0.7, 0.7, 0.7)
 position = Vector2(0, -33)
 scale = Vector2(1.5, 1.5)
@@ -542,12 +543,14 @@ animation = &"idle"
 frame_progress = 0.0319443
 
 [node name="Text_Bubble" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(107, -153)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0teyj")
 frame_progress = 0.0290046
 
 [node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
 self_modulate = Color(0.835294, 0.537255, 0.647059, 1)
 texture_filter = 1
 offset_left = 19.0

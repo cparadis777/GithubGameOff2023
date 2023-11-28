@@ -52,6 +52,7 @@ var messages = [
 	you very soon!"
 ]
 
+@export var activated_immediately : bool = true
 var typing_speed = 0.075
 var current_message = 0
 var display = ""
@@ -66,12 +67,20 @@ func _ready():
 	$Label.hide()
 	$SpaceBar_UI.hide()
 	$Muse_AI.play("idle")
-	$AnimationPlayer.play("hello")
-	$spawn_timer.start()
+
+	if activated_immediately:
+		activate()
+		
 #	var current_message = 0
 #	var display = ""
 #	var current_character = 0
 #	done_talking = false
+
+
+func activate():
+	show()
+	$AnimationPlayer.play("hello")
+	$spawn_timer.start()
 
 func reset_dialogue():
 	current_message = 0
