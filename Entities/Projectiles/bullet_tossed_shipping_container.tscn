@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dh3odxs6vlefi"]
+[gd_scene load_steps=14 format=3 uid="uid://dh3odxs6vlefi"]
 
 [ext_resource type="Script" path="res://Entities/Projectiles/PlayerDetector.gd" id="2_dliqr"]
 [ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="2_nu1ca"]
 [ext_resource type="Script" path="res://Entities/Projectiles/bullet_tossed_shipping_container.gd" id="2_s5e10"]
-[ext_resource type="PackedScene" uid="uid://daoapi6eorqu1" path="res://Levels/BossFight/platforms/spawn_platform_for_top_of_container.tscn" id="4_5kv0x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7s56"]
 size = Vector2(284, 138)
@@ -139,8 +138,8 @@ width = 256
 height = 1600
 
 [node name="RigidBodyBossCrateDestructible" type="RigidBody2D" groups=["BossContainers"]]
-collision_layer = 24
-collision_mask = 24
+collision_layer = 16
+collision_mask = 16
 lock_rotation = true
 script = ExtResource("2_s5e10")
 
@@ -204,8 +203,6 @@ position = Vector2(-2.38419e-07, 14)
 rotation = 0.17762
 texture = SubResource("GradientTexture2D_nl6ah")
 offset = Vector2(0, 510)
-
-[node name="Platform" parent="." instance=ExtResource("4_5kv0x")]
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

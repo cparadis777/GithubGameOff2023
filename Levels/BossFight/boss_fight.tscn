@@ -491,15 +491,19 @@ linked_nodes = [null]
 
 [node name="JumpThroughPlatform2" parent="Platforms" instance=ExtResource("5_e40gm")]
 position = Vector2(22, -44)
+collision_layer = 8
 
 [node name="JumpThroughPlatform5" parent="Platforms" instance=ExtResource("5_e40gm")]
 position = Vector2(33, -601)
+collision_layer = 8
 
 [node name="JumpThroughPlatform3" parent="Platforms" instance=ExtResource("5_e40gm")]
 position = Vector2(1615, -293)
+collision_layer = 8
 
 [node name="JumpThroughPlatform4" parent="Platforms" instance=ExtResource("5_e40gm")]
 position = Vector2(1614, 125)
+collision_layer = 8
 
 [node name="ShippingContainers" type="Node2D" parent="."]
 position = Vector2(242, 976)
