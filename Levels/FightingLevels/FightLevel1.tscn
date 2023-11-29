@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://dc7akumi6wfug"]
+[gd_scene load_steps=22 format=3 uid="uid://dc7akumi6wfug"]
 
 [ext_resource type="Script" path="res://Levels/FightingLevels/prototypes/GeneratedPlayspace.gd" id="1_4kjqn"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_fy7vb"]
 [ext_resource type="Script" path="res://Levels/FightingLevels/prototypes/ContainerGrid.gd" id="3_cmtwa"]
 [ext_resource type="PackedScene" uid="uid://c2slp1rb0plu" path="res://Utilities/UtilityScenes/ContainerSlot.tscn" id="4_2f8no"]
-[ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="5_coc2e"]
 [ext_resource type="PackedScene" uid="uid://dqe41rrauj6by" path="res://Entities/Environment/Containers/LargeEmptyContainer.tscn" id="6_63eem"]
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="7_nn4vb"]
 [ext_resource type="AudioStream" uid="uid://chy3if1m4qsn0" path="res://audio/sfx/TutorialAIVoice/opening_doors.ogg" id="8_qinkv"]
@@ -55,11 +54,6 @@ script = ExtResource("3_cmtwa")
 containerSlotScene = ExtResource("4_2f8no")
 container_width = 960
 container_height = 480
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="ContainerGrid"]
-visible = false
-texture = ExtResource("5_coc2e")
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
