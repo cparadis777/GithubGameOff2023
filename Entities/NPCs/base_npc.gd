@@ -199,7 +199,9 @@ func _on_hit(attackPacket : AttackPacket):
 			velocity = attackPacket.impact_vector * attackPacket.knockback_speed * knockbackMultiplier
 		else: # no knockback
 			State = States.IFRAMES
-		animation_player.play("hurt")
+		
+		if is_instance_valid(animation_player):
+			animation_player.play("hurt")
 		$IframesTimer.start()
 			#$HurtEffect/Star.show()
 		hurt.emit(attackPacket)
