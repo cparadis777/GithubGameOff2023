@@ -5,7 +5,7 @@ var damage = base_damage
 signal hit
 
 func _ready():
-	damage = base_damage * ( 1 + Globals.difficulty / Globals.DifficultyScales.size())
+	damage = base_damage * ( 1.0 + float(Globals.difficulty) / float(Globals.DifficultyScales.size()))
 	
 	
 func harm(body):

@@ -120,15 +120,15 @@ func is_on_top_of_player():
 	if area.get_overlapping_bodies().has(get_tree().get_first_node_in_group("Player")):
 		return true
 
-
-func update_animations():
-	
-	if State in [States.RUNNING] and abs(velocity.x) < 0.1:
-		animation_player.play("idle")
-	elif State in [States.RUNNING] and abs(velocity.x) >= 0.1:
-		if animation_player.current_animation != "run":
-			animation_player.play("run")
-	
+#
+#func update_animations():
+#
+#	if State in [States.RUNNING] and abs(velocity.x) < 0.1:
+#		animation_player.play("idle")
+#	elif State in [States.RUNNING] and abs(velocity.x) >= 0.1:
+#		if animation_player.current_animation != "run":
+#			animation_player.play("run")
+#
 #	if animation_player.current_animation == "":
 #		if animations[State] != "" and animation_player.has_animation(animations[State]):
 #			animation_player.play(animations[State])
@@ -137,20 +137,20 @@ func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-func play_death_animation():
-	$Appearance/AnimatedSprite2D.stop()
-	if has_node("AnimationPlayer") and animation_player.has_animation("die"):
-		animation_player.play("die")
-	else:
-		play_death_tween_if_needed()
-
-
-func play_death_tween_if_needed():
-	animation_player.stop()
-	$Appearance/AnimatedSprite2D.stop()
-	var tween = create_tween()
-	tween.parallel().tween_property(self, "rotation", PI * 0.5, 0.33)
-	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
+#func play_death_animation():
+#	$Appearance/AnimatedSprite2D.stop()
+#	if has_node("AnimationPlayer") and animation_player.has_animation("die"):
+#		animation_player.play("die")
+#	else:
+#		play_death_tween_if_needed()
+#
+#
+#func play_death_tween_if_needed():
+#	animation_player.stop()
+#	$Appearance/AnimatedSprite2D.stop()
+#	var tween = create_tween()
+#	tween.parallel().tween_property(self, "rotation", PI * 0.5, 0.33)
+#	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
 
 func die():
 	#animation_player.stop()
@@ -292,7 +292,9 @@ func select_random_state():
 	return new_state
 	
 func select_random_direction():
-	
+	if !is_instance_valid(StageManager.current_player):
+		return
+		
 	var chance_to_turn_around
 	var dir_to_player = sign(global_position.direction_to(get_tree().get_first_node_in_group("Player").global_position).x)
 	if dir_to_player == direction: # already going the correct way
@@ -326,8 +328,9 @@ func _on_animation_player_animation_finished(anim_name):
 
 func _on_melee_attack_started():
 	State = States.ATTACKING
-	animation_player.stop()
-	animation_player.call_deferred("play", "attack")
+	if is_instance_valid(animation_player):
+		animation_player.stop()
+		animation_player.call_deferred("play", "attack")
 	decision_timer.stop()
 	
 func _on_melee_attack_finished():

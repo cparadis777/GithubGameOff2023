@@ -4,7 +4,7 @@ extends Node2D
 var iframes_timer : Timer
 signal started
 signal finished
-@export var iframes_duration : float = 0.4
+@export var iframes_duration : float = 1.0
 
 @onready var active: bool:
 	get:
@@ -30,12 +30,13 @@ func _ready():
 	add_child(iframes_timer)
 	
 	
-	
+
 
 func start():
 	iframes_timer.start()
 	started.emit()
 	$HurtFlash.show()
+	
 
 
 func _on_iframes_timer_timeout():
