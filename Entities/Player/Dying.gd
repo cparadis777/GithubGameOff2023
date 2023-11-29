@@ -8,6 +8,7 @@ func _ready():
 	await owner.ready
 	$Timer.timeout.connect(_on_death_timer_timeout)
 
+	
 	died.connect(player._on_player_died)
 
 func enter(_msg := {}) -> void:

@@ -377,3 +377,7 @@ func _on_paused():
 
 func _on_resume():
 	state_machine.transition_to("Idle")
+
+func _on_container_entered(containerNode):
+	hud._on_container_entered(containerNode)
+

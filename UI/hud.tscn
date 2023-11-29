@@ -157,10 +157,18 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="minimap" parent="Control/HBoxContainer" instance=ExtResource("5_vg5dj")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="minimap" parent="Control/HBoxContainer/VBoxContainer" instance=ExtResource("5_vg5dj")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
+
+[node name="ContainerName" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "ContainerName"
 
 [node name="PauseMenu" parent="." instance=ExtResource("3_jpu2h")]
 visible = false

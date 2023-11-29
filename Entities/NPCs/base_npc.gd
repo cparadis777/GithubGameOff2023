@@ -42,7 +42,7 @@ func _ready():
 	if (owner and owner.has_method("_on_NPC_died")):
 		owner.num_enemies += 1
 		died.connect(owner._on_NPC_died)
-	
+	$Behaviours/DecisionMaking/DecisionTimer.one_shot = true
 	
 	
 	
@@ -251,8 +251,11 @@ func _on_decision_timer_timeout():
 		decision_timer.start()
 
 func choose_new_behaviour():
-	if State in [ States.DYING, States.DEAD ]:
-		return
+	if (
+			!is_instance_valid(self)
+			or State in [ States.DYING, States.DEAD ]
+		):
+			return
 	
 	else:
 		# run back and forth, but favour running toward the player
@@ -261,16 +264,19 @@ func choose_new_behaviour():
 		State = States.RUNNING
 
 		if State == States.RUNNING:
-			animation_player.play("run")
+			if is_instance_valid(animation_player):
+				animation_player.play("run")
 			select_random_direction()
 			velocity.x = direction * SPEED
 
 		elif State == States.IDLE:
-			animation_player.play("idle")
+			if is_instance_valid(animation_player):
+				animation_player.play("idle")
 			velocity.x = 0
 
-		decision_timer.set_wait_time(decision_wait_time * randf_range(0.8, 1.25))
-		decision_timer.start()
+		if health > 0:
+			decision_timer.set_wait_time(decision_wait_time * randf_range(0.8, 1.25))
+			decision_timer.start()
 
 
 func select_random_state():

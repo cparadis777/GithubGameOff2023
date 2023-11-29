@@ -20,8 +20,13 @@ func _ready():
 	iframes_timer.set_wait_time(iframes_duration)
 	iframes_timer.timeout.connect(_on_iframes_timer_timeout)
 	
-	started.connect(owner._on_iframes_started)
-	finished.connect(owner._on_iframes_finished)
+	if owner.has_method("_on_iframes_started"):
+		started.connect(owner._on_iframes_started)
+	else:
+		printerr(self.name , ": error connecting signal to owner: ", owner.name)
+		printerr("owner has no method: _on_iframes_started")
+	if owner.has_method("_on_iframes_finished"):
+		finished.connect(owner._on_iframes_finished)
 	add_child(iframes_timer)
 	
 	

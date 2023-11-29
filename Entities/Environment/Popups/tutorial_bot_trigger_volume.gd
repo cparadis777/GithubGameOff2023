@@ -31,7 +31,10 @@ func _on_body_entered(body):
 		
 	if !played and body.is_in_group("Player"):
 		played = true
-		$AI_Tutorial_Text.activate()
+		var tutorial_bot = get_node("AI_Tutorial_Text")
+		if tutorial_bot != null and is_instance_valid(tutorial_bot):
+			if tutorial_bot.has_method("activate"):
+				tutorial_bot.activate()
 
 func _on_switch_toggled(pressed):
 	if has_node("AI_Tutorial_Text"):

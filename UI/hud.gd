@@ -1,5 +1,6 @@
 extends CanvasLayer
 var player
+var current_container
 @onready var minimap = %minimap
 
 # Called when the node enters the scene tree for the first time.
@@ -45,5 +46,7 @@ func _on_player_picked_up_powerup(powerupType : Globals.PickupTypes):
 		new_cutscene.position = Vector2.ZERO
 		$SpamTimer.start()
 
-
+func _on_container_entered(containerNode):
+	current_container = containerNode
+	$Control/HBoxContainer/VBoxContainer/ContainerName.text = containerNode.name
 

@@ -40,6 +40,10 @@ var has_entrance = {
 # entrance_arrows:Dictionary = {Utils.Directions.LEFT: null}
 # Called when the node enters the scene tree for the first time.
 
+signal entered
+signal exited
+
+
 func _ready():
 	if (show_exterior_on_start):
 		$Exterior.visible = true
@@ -190,6 +194,9 @@ func _on_container_interior_body_entered(body:Node2D):
 		activate_npcs()
 		activate_moving_platforms()
 		setup_backup_enemy_check()
-
-
-
+		StageManager.current_container = self
+		
+		if body.has_method("_on_container_entered"):
+			entered.connect(body._on_container_entered)
+			entered.emit(self)
+			entered.disconnect(body._on_container_entered)
