@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=24 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="4_nvirp"]
 [ext_resource type="PackedScene" uid="uid://gtmk5sbwr3hj" path="res://Entities/Environment/Traps/Behaviours/shoot_stars.tscn" id="5_68bjg"]
 [ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="5_p2jwr"]
+[ext_resource type="PackedScene" uid="uid://dvnwulonqs455" path="res://Entities/NPCs/vfx/blood_splats.tscn" id="6_smikv"]
 [ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_x6jli"]
 [ext_resource type="PackedScene" uid="uid://ca7vyxdwydm0c" path="res://Utilities/UtilityScenes/zero_rotation.tscn" id="9_4vev6"]
 
@@ -112,6 +113,20 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtEffect/BloodSplats")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_gsqip"]
@@ -224,8 +239,11 @@ position = Vector2(0, -45.9452)
 scale = Vector2(0.33, 0.33)
 
 [node name="Star" type="Polygon2D" parent="HurtEffect"]
+visible = false
 color = Color(1, 1, 0.25098, 1)
 polygon = PackedVector2Array(0, -53.8668, 6.33727, -11.0902, 49.1138, -22.1804, 9.5059, 7.92158, 31.6863, 47.5295, 0, 19.0118, -39.6079, 44.3609, -11.0902, 7.92158, -52.2824, -19.0118, -11.0902, -12.6745)
+
+[node name="BloodSplats" parent="HurtEffect" instance=ExtResource("6_smikv")]
 
 [node name="HurtNoises" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_s8act")
