@@ -23,23 +23,23 @@
 script = ExtResource("1_b372s")
 debug_mode = true
 
-[node name="Container1" type="Node" parent="."]
+[node name="Container1_Soyda" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 5
 container_exit_flags = 15
 packed_scene = ExtResource("3_bhmu2")
 
-[node name="Container2" type="Node" parent="."]
+[node name="Container2_Rave" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
 packed_scene = ExtResource("4_8x4k3")
 
-[node name="IanContainer3" type="Node" parent="."]
+[node name="IanContainer3_PygDen" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
 packed_scene = ExtResource("5_l31yl")
 
-[node name="IanContainer4" type="Node" parent="."]
+[node name="IanContainer4_Gym" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
 packed_scene = ExtResource("6_t0vnt")
@@ -54,60 +54,60 @@ script = ExtResource("2_5buau")
 container_exit_flags = 15
 packed_scene = ExtResource("7_80lyl")
 
-[node name="GuacContainer" type="Node" parent="."]
+[node name="GuacContainer_Uprising" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 1
 container_exit_flags = 15
 packed_scene = ExtResource("5_sbeep")
 
-[node name="GuacContainer2" type="Node" parent="."]
+[node name="GuacContainer2_Teamster" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 4
 container_exit_flags = 15
 packed_scene = ExtResource("6_6rpnx")
 
-[node name="GuacContainer3" type="Node" parent="."]
+[node name="GuacContainer3_Gears" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
 packed_scene = ExtResource("7_fsu81")
 
-[node name="GuacContainer4" type="Node" parent="."]
+[node name="GuacContainer4_HideyHole" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 4
 container_exit_flags = 15
 packed_scene = ExtResource("8_3o4p7")
 
-[node name="GuacContainer5" type="Node" parent="."]
+[node name="GuacContainer5_Ice1" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 2
 container_exit_flags = 15
 packed_scene = ExtResource("9_bjhbe")
 
-[node name="GuacContainer6" type="Node" parent="."]
+[node name="GuacContainer6_PygDen2" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 3
 container_exit_flags = 15
 packed_scene = ExtResource("10_0a6bj")
 
-[node name="GuacContainer7" type="Node" parent="."]
+[node name="GuacContainer7_Chill" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 5
 container_exit_flags = 15
 packed_scene = ExtResource("11_mdedf")
 
-[node name="GuacContainer8" type="Node" parent="."]
+[node name="GuacContainer8_Towers" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 1
 container_exit_flags = 15
 packed_scene = ExtResource("13_5ksko")
 
-[node name="GuacContainer9" type="Node" parent="."]
+[node name="GuacContainer9_Sharp" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 1
 container_exit_flags = 15
 packed_scene = ExtResource("14_66st2")
 
-[node name="GuacContainer10" type="Node" parent="."]
+[node name="GuacContainer10_Tide" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 4
 container_exit_flags = 15

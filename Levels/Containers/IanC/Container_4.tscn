@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="11_c5ofi"]
 [ext_resource type="PackedScene" uid="uid://dfu4vkk6mgup0" path="res://Entities/Environment/BG_Non-interactable/protein_powder.tscn" id="15_66ui6"]
 
-[node name="BaseContainer" instance=ExtResource("1_e0cjp")]
+[node name="SquattersGym" instance=ExtResource("1_e0cjp")]
 
 [node name="BGDecor" type="Node2D" parent="." index="1"]
 

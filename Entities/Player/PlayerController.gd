@@ -128,7 +128,7 @@ func reset_rotation():
 
 func initiate_debugging_protocol():
 	zoom_camera(1)
-
+	health = Globals.player_stats["max_health"]
 	print("Player detected")
 	print("nodes in group Player: " + str(get_tree().get_nodes_in_group("Player")))
 	
