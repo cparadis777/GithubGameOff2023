@@ -62,15 +62,20 @@ var done_talking = false
 signal finished
 
 func _ready():
-	if override_text != "":
-		messages = override_text.split(";")
+	$AnimationPlayer.play("RESET")
+	setup_messages(override_text)
 	$Label.hide()
 	$SpaceBar_UI.hide()
 	$Muse_AI.play("idle")
 
+func setup_messages(overrideText):
+	if overrideText != "":
+		messages = overrideText.split(";")
+
+
 	if activated_immediately:
 		activate()
-		
+
 #	var current_message = 0
 #	var display = ""
 #	var current_character = 0
