@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="13_e4q5p"]
 [ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="14_a7hhv"]
 
-[node name="BaseContainer" instance=ExtResource("1_p7dnn")]
+[node name="FriendlyRave" instance=ExtResource("1_p7dnn")]
 
 [node name="Platforms" type="Node2D" parent="." index="3"]
 

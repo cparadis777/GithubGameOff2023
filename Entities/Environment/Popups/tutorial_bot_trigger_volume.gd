@@ -10,9 +10,7 @@ func _ready():
 		$AI_Tutorial_Text.setup_messages(override_text)
 		
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
 
 
 func is_room_clear():
@@ -36,9 +34,9 @@ func _on_body_entered(body):
 			if tutorial_bot.has_method("activate"):
 				tutorial_bot.activate()
 
-func _on_switch_toggled(pressed):
+func _on_switch_toggled(_pressed):
 	if has_node("AI_Tutorial_Text"):
 		$AI_Tutorial_Text.activate()
 	
-func _on_linked(node):
+func _on_linked(_node):
 	pass

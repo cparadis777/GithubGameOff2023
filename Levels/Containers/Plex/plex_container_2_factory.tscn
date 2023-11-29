@@ -17,7 +17,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.490196, 0.435294, 0.180392, 1)
 
-[node name="PlexContainer2_factory" instance=ExtResource("1_4avli")]
+[node name="AutomatedAssembly" instance=ExtResource("1_4avli")]
 
 [node name="Stripe1" type="Sprite2D" parent="." index="1"]
 z_index = -3

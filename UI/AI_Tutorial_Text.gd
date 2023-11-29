@@ -67,14 +67,17 @@ func _ready():
 	$Label.hide()
 	$SpaceBar_UI.hide()
 	$Muse_AI.play("idle")
+	if activated_immediately:
+		activate()
+	else:
+		hide()
 
 func setup_messages(overrideText):
 	if overrideText != "":
 		messages = overrideText.split(";")
 
 
-	if activated_immediately:
-		activate()
+
 
 #	var current_message = 0
 #	var display = ""

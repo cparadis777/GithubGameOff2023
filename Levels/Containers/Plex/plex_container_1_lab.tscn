@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dsulw1jicubyq" path="res://art/decals/bg decals/weird_lab_conspiracy_poster_02.png" id="6_ff025"]
 [ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="7_pimxr"]
 
-[node name="PlexContainer1_lab" instance=ExtResource("1_6p1n4")]
+[node name="MysteriousLab" instance=ExtResource("1_6p1n4")]
 
 [node name="Wall" type="Sprite2D" parent="." index="1"]
 z_index = -3
