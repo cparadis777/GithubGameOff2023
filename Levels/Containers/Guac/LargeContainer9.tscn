@@ -117,17 +117,14 @@ show_piston = false
 [node name="JumpThroughPlatform" parent="." index="43" instance=ExtResource("6_pfol0")]
 position = Vector2(-128, -20)
 
-[node name="JumpThroughPlatform2" parent="." index="44" instance=ExtResource("6_pfol0")]
+[node name="JumpThroughPlatform3" parent="." index="44" instance=ExtResource("6_pfol0")]
 position = Vector2(150, -20)
 
-[node name="JumpThroughPlatform3" parent="." index="45" instance=ExtResource("6_pfol0")]
-position = Vector2(150, -20)
-
-[node name="NPC_02_DockWorker" parent="." index="46" instance=ExtResource("7_g2o0t")]
+[node name="NPC_02_DockWorker" parent="." index="45" instance=ExtResource("7_g2o0t")]
 position = Vector2(-73, -22)
 
-[node name="NPC_02_DockWorker2" parent="." index="47" instance=ExtResource("7_g2o0t")]
+[node name="NPC_02_DockWorker2" parent="." index="46" instance=ExtResource("7_g2o0t")]
 position = Vector2(88, -22)
 
-[node name="VendingMachine" parent="." index="48" instance=ExtResource("8_du8an")]
+[node name="VendingMachine" parent="." index="47" instance=ExtResource("8_du8an")]
 position = Vector2(151, 74)

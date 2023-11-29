@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dc7akumi6wfug"]
+[gd_scene load_steps=23 format=3 uid="uid://dc7akumi6wfug"]
 
 [ext_resource type="Script" path="res://Levels/FightingLevels/prototypes/GeneratedPlayspace.gd" id="1_4kjqn"]
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="2_fy7vb"]
@@ -13,7 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://i5f4gbypc1t6" path="res://Entities/Environment/Lights/base_canvas_modulate.tscn" id="12_xaucd"]
 [ext_resource type="PackedScene" uid="uid://f81lk2428snl" path="res://Entities/Environment/Containers/special/TerminalContainer1.tscn" id="13_8vlpw"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="13_tij1x"]
-[ext_resource type="PackedScene" uid="uid://dw5kmbygnkfyw" path="res://Entities/Environment/Popups/tutorial_bot_trigger_volume.tscn" id="14_uxrk1"]
+[ext_resource type="Texture2D" uid="uid://dp675vgflquay" path="res://art/props/yellow_girder_vertical.png" id="14_abili"]
+[ext_resource type="Texture2D" uid="uid://dcxyqxj0okyoe" path="res://art/props/crane_just_tress.png" id="15_l7n3m"]
+[ext_resource type="Texture2D" uid="uid://cucxmeo2p3j11" path="res://art/props/crane_just_crane.png" id="16_lv5mj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d5jlm"]
 blend_mode = 1
@@ -23,6 +25,24 @@ light_mode = 1
 background_mode = 3
 ambient_light_energy = 0.2
 glow_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_s8pvc"]
+colors = PackedColorArray(0.376471, 0.376471, 0.376471, 1, 0.376471, 0.376471, 0.376471, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jqaci"]
+gradient = SubResource("Gradient_s8pvc")
+width = 440
+height = 36
+fill_from = Vector2(1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_atqxq"]
+gradient = SubResource("Gradient_s8pvc")
+width = 128
+height = 1024
+fill_from = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_140wy"]
+size = Vector2(62, 1278)
 
 [node name="FightLevel1" type="Node2D" groups=["GeneratedPlayspace"]]
 script = ExtResource("1_4kjqn")
@@ -75,7 +95,7 @@ show_exterior_on_start = false
 stream = ExtResource("8_qinkv")
 volume_db = 4.0
 
-[node name="AI_Tutorial_Text" parent="." instance=ExtResource("10_mknoa")]
+[node name="AI_Bot_Start" parent="." instance=ExtResource("10_mknoa")]
 light_mask = 2
 position = Vector2(-785, 184)
 override_text = "The boss is currently
@@ -87,7 +107,7 @@ so long as employees
 remain in any given room.
 "
 
-[node name="PointLight2D" type="PointLight2D" parent="AI_Tutorial_Text"]
+[node name="PointLight2D" type="PointLight2D" parent="AI_Bot_Start"]
 light_mask = 2
 visibility_layer = 0
 position = Vector2(70, -125)
@@ -109,13 +129,83 @@ visible = false
 environment = SubResource("Environment_j2q28")
 
 [node name="ParallaxBackground2" parent="." instance=ExtResource("13_tij1x")]
+offset = Vector2(-1000, -2000)
+scale = Vector2(8, 8)
+transform = Transform2D(8, 0, 0, 8, -1000, -2000)
 
 [node name="TerminalContainer" parent="." instance=ExtResource("13_8vlpw")]
 position = Vector2(1921, -964)
 
-[node name="TutorialBotTriggerVolume" parent="TerminalContainer" instance=ExtResource("14_uxrk1")]
+[node name="Openings" parent="TerminalContainer" index="2"]
+visible = false
 
-[connection signal="finished" from="AI_Tutorial_Text" to="BigArrow" method="show"]
+[node name="Exits" parent="TerminalContainer" index="3"]
+visible = false
+
+[node name="FakeCrane" type="Node2D" parent="."]
+position = Vector2(1878, -744)
+
+[node name="Floor" type="Sprite2D" parent="FakeCrane"]
+position = Vector2(20, -15)
+scale = Vector2(2, 2)
+texture = SubResource("GradientTexture2D_jqaci")
+
+[node name="Cliff" type="Sprite2D" parent="FakeCrane"]
+position = Vector2(651, -346)
+scale = Vector2(2, 2)
+texture = SubResource("GradientTexture2D_atqxq")
+
+[node name="RightCraneWall" type="StaticBody2D" parent="FakeCrane"]
+position = Vector2(437, -433)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FakeCrane/RightCraneWall"]
+position = Vector2(-5, -187)
+shape = SubResource("RectangleShape2D_140wy")
+
+[node name="PostTall" type="Sprite2D" parent="FakeCrane/RightCraneWall"]
+texture_repeat = 2
+position = Vector2(-4, -186)
+scale = Vector2(2, 2)
+texture = ExtResource("14_abili")
+region_enabled = true
+region_rect = Rect2(-0.203979, -1.93799, 30, 639)
+
+[node name="LeftCraneWall" type="StaticBody2D" parent="FakeCrane"]
+position = Vector2(-388, -433)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FakeCrane/LeftCraneWall"]
+position = Vector2(-5, -187)
+shape = SubResource("RectangleShape2D_140wy")
+
+[node name="PostTall" type="Sprite2D" parent="FakeCrane/LeftCraneWall"]
+texture_repeat = 2
+position = Vector2(-4, -186)
+scale = Vector2(2, 2)
+texture = ExtResource("14_abili")
+region_enabled = true
+region_rect = Rect2(-0.203979, -1.93799, 30, 639)
+
+[node name="Truss" type="Sprite2D" parent="FakeCrane"]
+position = Vector2(20, -1303)
+scale = Vector2(3, 3)
+texture = ExtResource("15_l7n3m")
+region_enabled = true
+region_rect = Rect2(58, -3.5, 297, 38)
+
+[node name="Line2D" type="Line2D" parent="FakeCrane/Truss"]
+position = Vector2(8.66663, 94)
+scale = Vector2(0.5, 0.5)
+points = PackedVector2Array(2.08165e-12, -160, 2.08165e-12, -16)
+default_color = Color(0.541176, 0.541176, 0.541176, 1)
+
+[node name="JawsSprite" type="Sprite2D" parent="FakeCrane/Truss"]
+position = Vector2(8.66663, 94)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("16_lv5mj")
+hframes = 6
+
+[connection signal="finished" from="AI_Bot_Start" to="BigArrow" method="show"]
 
 [editable path="StartContainer"]
-[editable path="TerminalContainer/TutorialBotTriggerVolume"]
+[editable path="TerminalContainer"]
+[editable path="TerminalContainer/AI_Bot_End"]

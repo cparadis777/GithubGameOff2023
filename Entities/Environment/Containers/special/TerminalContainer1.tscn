@@ -19,11 +19,11 @@ visible = true
 [node name="TerminalToCrane" parent="." index="15" instance=ExtResource("2_muo11")]
 position = Vector2(-160, 144)
 
-[node name="TutorialBotTriggerVolume" parent="." index="16" instance=ExtResource("3_r0syr")]
+[node name="AI_Bot_End" parent="." index="16" instance=ExtResource("3_r0syr")]
 override_text = "Here's the console which 
 controls the crane.;
 We can use it to scale
  the final gap, 
 so we can get to the bridge."
 
-[editable path="TutorialBotTriggerVolume"]
+[editable path="AI_Bot_End"]
