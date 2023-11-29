@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://mk0polehyr7k"]
+[gd_scene load_steps=18 format=3 uid="uid://mk0polehyr7k"]
 
 [ext_resource type="Script" path="res://Utilities/UtilityScenes/ContainerCatalog.gd" id="1_b372s"]
 [ext_resource type="Script" path="res://Utilities/UtilityScenes/ContainerProperties.gd" id="2_5buau"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dt181ly2upt1t" path="res://Levels/Containers/Guac/LargeContainer2.tscn" id="5_sbeep"]
 [ext_resource type="PackedScene" uid="uid://n1c6uj18b3nd" path="res://Levels/Containers/Guac/LargeContainer3.tscn" id="6_6rpnx"]
 [ext_resource type="PackedScene" uid="uid://ufti7pfrl1ch" path="res://Levels/Containers/Plex/plex_container_1_lab.tscn" id="6_20daq"]
+[ext_resource type="PackedScene" uid="uid://bw1veyfblyydh" path="res://Levels/Containers/Plex/plex_container_2_factory.tscn" id="7_80lyl"]
 [ext_resource type="PackedScene" uid="uid://b0pdl3tlo5xbs" path="res://Levels/Containers/Guac/LargeContainer4.tscn" id="7_fsu81"]
 [ext_resource type="PackedScene" uid="uid://bqpc5e3t3s7f" path="res://Levels/Containers/Guac/LargeContainer1.tscn" id="8_3o4p7"]
 [ext_resource type="PackedScene" uid="uid://c8qshoquywcr3" path="res://Levels/Containers/Guac/LargeContainer5.tscn" id="9_bjhbe"]
@@ -45,7 +46,7 @@ packed_scene = ExtResource("6_20daq")
 [node name="PlexContainer2_factory" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
-packed_scene = ExtResource("6_20daq")
+packed_scene = ExtResource("7_80lyl")
 
 [node name="GuacContainer" type="Node" parent="."]
 script = ExtResource("2_5buau")

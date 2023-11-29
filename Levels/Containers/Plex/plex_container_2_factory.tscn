@@ -44,7 +44,7 @@ rotation = -0.364029
 texture = ExtResource("7_u8364")
 
 [node name="VendingMachine" parent="Decorations" index="1" instance=ExtResource("8_pse8l")]
-position = Vector2(178, -24)
+position = Vector2(178, -47)
 
 [node name="BotPoster" type="Panel" parent="Decorations" index="2"]
 custom_minimum_size = Vector2(366, 160)
@@ -55,6 +55,7 @@ offset_bottom = 118.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_op83c")
 
 [node name="Label" type="Label" parent="Decorations/BotPoster" index="0"]
+layout_mode = 0
 offset_left = 38.0
 offset_top = 8.0
 offset_right = 332.0
@@ -77,10 +78,10 @@ position = Vector2(-284, -72)
 position = Vector2(-61, -91)
 
 [node name="NewRunner2" parent="_Enemies" index="3" instance=ExtResource("4_6qdwp")]
-position = Vector2(233, -25)
+position = Vector2(247, -48)
 
 [node name="JumpThroughPlatform" parent="_Platforms" index="0" instance=ExtResource("5_3lck7")]
-position = Vector2(241, -21)
+position = Vector2(227, -46)
 
 [node name="JumpThroughPlatform2" parent="_Platforms" index="1" instance=ExtResource("5_3lck7")]
 position = Vector2(-243, -63)

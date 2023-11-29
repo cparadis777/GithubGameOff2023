@@ -118,3 +118,4 @@ position = Vector2(1921, -964)
 [connection signal="finished" from="AI_Tutorial_Text" to="BigArrow" method="show"]
 
 [editable path="StartContainer"]
+[editable path="TerminalContainer/TutorialBotTriggerVolume"]

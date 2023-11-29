@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://m3aj2pmakgat"]
+[gd_scene load_steps=25 format=3 uid="uid://m3aj2pmakgat"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/base_npc.gd" id="1_1uer3"]
 [ext_resource type="Material" uid="uid://cqmtwb5m26ggh" path="res://art/materials/shaders/npc_hit_flash.tres" id="2_7asby"]
 [ext_resource type="Texture2D" uid="uid://bi724p8u5kyfb" path="res://art/placeholder/EUC.png" id="3_6th61"]
 [ext_resource type="PackedScene" uid="uid://6xs2ww7uhsl5" path="res://Entities/NPCs/Behaviours/simple_melee_attack.tscn" id="4_50gad"]
+[ext_resource type="PackedScene" uid="uid://dgpc8yd7cxdsf" path="res://Entities/NPCs/corpse.tscn" id="4_cucvt"]
 [ext_resource type="AudioStream" uid="uid://c1c3joy7luc7v" path="res://audio/sfx/placeholder/enemy_hurt_1.wav" id="4_nvirp"]
 [ext_resource type="PackedScene" uid="uid://gtmk5sbwr3hj" path="res://Entities/Environment/Traps/Behaviours/shoot_stars.tscn" id="5_68bjg"]
 [ext_resource type="AudioStream" uid="uid://dydj2wcdqq0uu" path="res://audio/sfx/placeholder/enemy_hurt_2.wav" id="5_p2jwr"]
@@ -179,6 +180,8 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_6th61")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Appearance"]
+
+[node name="Corpse" parent="Appearance" instance=ExtResource("4_cucvt")]
 
 [node name="Behaviours" type="Node2D" parent="."]
 

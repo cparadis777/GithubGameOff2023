@@ -37,7 +37,7 @@ func _ready():
 	velocity = Vector2.ZERO
 	hurt.connect(StageManager._on_damage_packet_processed)
 	died.connect(StageManager._on_NPC_died)
-	
+	$Appearance/Corpse.hide()
 	#var owner = get_owner()
 	if (owner and owner.has_method("_on_NPC_died")):
 		owner.num_enemies += 1
@@ -155,13 +155,21 @@ func play_death_tween_if_needed():
 func die():
 	#animation_player.stop()
 	State = States.DEAD
+	spawn_corpse()
 	#decision_timer.stop()
 	abort_attacks_in_progress()
 	disable_collision_layers_and_masks()
 	died.emit(name)
 	stop_all_timers()
 	#animation_player.stop()
-	call_deferred("play_death_animation") # should include audio
+	#call_deferred("play_death_animation") # should include audio
+	queue_free()
+
+func spawn_corpse():
+	var new_corpse = $Appearance/Corpse.duplicate()
+	add_sibling(new_corpse)
+	new_corpse.global_position = global_position
+	new_corpse.activate()
 
 func stop_all_timers():
 	var timers = find_children("", "Timer")
@@ -213,7 +221,9 @@ func _on_iframes_timer_timeout():
 	if State in [States.DYING, States.DEAD]:
 		return
 	
-	animation_player.play("RESET")
+	if is_instance_valid(animation_player):
+		animation_player.play("RESET")
+	
 		
 	if health <= 0:
 		die()

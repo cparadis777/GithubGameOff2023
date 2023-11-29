@@ -12,7 +12,6 @@ script = ExtResource("1_osawf")
 
 [node name="AI_Tutorial_Text" parent="." instance=ExtResource("1_dnlev")]
 position = Vector2(20, 69)
-override_text = "Here's the console which controls the crane. We can use it to bridge the final gap, so we can get to the bridge."
 activated_immediately = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
