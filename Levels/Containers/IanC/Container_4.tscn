@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6lwdyus4t1k6"]
+
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_e0cjp"]
+[ext_resource type="Texture2D" uid="uid://bf4wjs11rnb7v" path="res://art/props/shipping_container_pain4gainz.png" id="2_pxgf3"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="2_qtc3r"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="3_pda0t"]
+[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="4_0asai"]
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="5_jbqnv"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_xd8t8"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="7_ouna6"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="8_subri"]
+[ext_resource type="PackedScene" uid="uid://c5en3lqt0m2df" path="res://Entities/Environment/Traps/star_trap_shooter.tscn" id="10_6ly8e"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="11_c5ofi"]
+
+[node name="BaseContainer" instance=ExtResource("1_e0cjp")]
+unlock_on_enemies_defeated = false
+
+[node name="VendingMachine" parent="." index="2" instance=ExtResource("8_subri")]
+position = Vector2(-71, -17)
+
+[node name="Exterior" parent="." index="5"]
+texture = ExtResource("2_pxgf3")
+
+[node name="TrapSpikes2" parent="_Traps" index="0" instance=ExtResource("7_ouna6")]
+position = Vector2(90, 158)
+
+[node name="TrapSpikes3" parent="_Traps" index="1" instance=ExtResource("7_ouna6")]
+position = Vector2(169, 67)
+
+[node name="StarTrap-Shooter" parent="_Traps" index="2" instance=ExtResource("10_6ly8e")]
+position = Vector2(-339, -114)
+
+[node name="StarTrap-Shooter2" parent="_Traps" index="3" instance=ExtResource("10_6ly8e")]
+position = Vector2(341, -114)
+
+[node name="NewRunner" parent="_Enemies" index="0" instance=ExtResource("4_0asai")]
+position = Vector2(53, 73)
+
+[node name="RunningAssassin" parent="_Enemies" index="1" instance=ExtResource("5_jbqnv")]
+position = Vector2(-295, -25)
+
+[node name="NPC_02_DockWorker" parent="_Enemies" index="2" instance=ExtResource("6_xd8t8")]
+position = Vector2(-299, 168)
+
+[node name="RunningAssassin2" parent="_Enemies" index="3" instance=ExtResource("5_jbqnv")]
+position = Vector2(170, -108)
+
+[node name="JumpThroughPlatform" parent="_Platforms" index="0" instance=ExtResource("3_pda0t")]
+position = Vector2(56, -100)
+
+[node name="JumpThroughPlatform2" parent="_Platforms" index="1" instance=ExtResource("3_pda0t")]
+position = Vector2(222, -100)
+
+[node name="JumpThroughPlatform3" parent="_Platforms" index="2" instance=ExtResource("3_pda0t")]
+position = Vector2(-258, -17)
+
+[node name="JumpThroughPlatform4" parent="_Platforms" index="3" instance=ExtResource("3_pda0t")]
+position = Vector2(-23, -17)
+
+[node name="JumpThroughPlatform5" parent="_Platforms" index="4" instance=ExtResource("3_pda0t")]
+position = Vector2(56, 76)
+
+[node name="JumpThroughPlatform6" parent="_Platforms" index="5" instance=ExtResource("3_pda0t")]
+position = Vector2(222, 76)
+
+[node name="MovingPlatform" parent="_Platforms" index="6" instance=ExtResource("2_qtc3r")]
+position = Vector2(-139, 136)
+
+[node name="ShootyNPC" parent="." index="15" instance=ExtResource("11_c5ofi")]
+position = Vector2(168, 165)
