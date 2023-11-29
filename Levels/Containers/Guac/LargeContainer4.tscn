@@ -153,29 +153,35 @@ shape = SubResource("RectangleShape2D_m7xia")
 
 [node name="MovingPlatform" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-258, 98)
+show_piston = false
 tween_duration = 3.0
 
 [node name="MovingPlatform6" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-334, 0)
+show_piston = false
 
 [node name="Location2" parent="MovingPlatform6/PositionMarkers" index="0"]
 position = Vector2(0, -107)
 
 [node name="MovingPlatform2" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-109, 98)
+show_piston = false
 tween_duration = 4.0
 
 [node name="MovingPlatform5" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-179, 25)
+show_piston = false
 
 [node name="Location2" parent="MovingPlatform5/PositionMarkers" index="0"]
 position = Vector2(0, -126)
 
 [node name="MovingPlatform3" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-1, 4)
+show_piston = false
 
 [node name="MovingPlatform4" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-1, 4)
+show_piston = false
 
 [node name="TrapSpikes" parent="." instance=ExtResource("9_3h2nx")]
 position = Vector2(-300, 161)
@@ -206,14 +212,17 @@ position = Vector2(305, -79)
 
 [node name="MovingPlatform7" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(117, 104)
+show_piston = false
 tween_duration = 4.0
 
 [node name="MovingPlatform9" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(266, 104)
+show_piston = false
 tween_duration = 3.0
 
 [node name="MovingPlatform11" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(196, 10)
+show_piston = false
 
 [node name="Location2" parent="MovingPlatform11/PositionMarkers" index="0"]
 position = Vector2(0, -115)
