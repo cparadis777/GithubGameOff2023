@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="11_7thc7"]
 [ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="11_sfrnw"]
 
-[node name="BaseContainer" instance=ExtResource("1_41hb8")]
+[node name="SoydaLounge" instance=ExtResource("1_41hb8")]
 
 [node name="Interior" parent="." index="0"]
 texture = ExtResource("2_id1wg")

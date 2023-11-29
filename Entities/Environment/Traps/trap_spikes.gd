@@ -1,8 +1,13 @@
 extends Area2D
-@export var damage = 5
+@export var base_damage = 5
+var damage = base_damage
 
 signal hit
 
+func _ready():
+	damage = base_damage * ( 1 + Globals.difficulty / Globals.DifficultyScales.size())
+	
+	
 func harm(body):
 	var attackPacket = AttackPacket.new()
 	attackPacket.damage = damage
@@ -23,3 +28,9 @@ func _on_body_entered(body):
 	# can harm player or NPCs
 	if body.has_method("_on_hit"):
 		harm(body)
+
+
+func _on_continuous_damage_timer_timeout():
+	for body in get_overlapping_bodies():
+		if body.is_in_group("Player") or body.is_in_group("Enemies"):
+			harm(body)

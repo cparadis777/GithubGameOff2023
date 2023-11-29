@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_rj1gy"]
 [ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="7_004e7"]
 
-[node name="BaseContainer" instance=ExtResource("1_872oe")]
+[node name="ChilloutLounge" instance=ExtResource("1_872oe")]
 
 [node name="VendingMachine15" parent="." index="14" instance=ExtResource("2_rl061")]
 position = Vector2(213, 105)

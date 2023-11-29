@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="8_qgqn3"]
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="12_8ypmm"]
 
-[node name="BaseContainer" instance=ExtResource("1_p1blx")]
+[node name="PygDen" instance=ExtResource("1_p1blx")]
 num_generated_objects = 5
 
 [node name="Decorations" type="Node2D" parent="." index="1"]

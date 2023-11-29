@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cmpouufnlcxkn" path="res://Entities/Environment/Platforms/basic_platform.tscn" id="5_0arwi"]
 [ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="6_ea4f4"]
 
-[node name="BaseContainer" instance=ExtResource("1_0qqog")]
+[node name="TwoTowers" instance=ExtResource("1_0qqog")]
 
 [node name="DestructibleWall" parent="." index="14" instance=ExtResource("2_nr7aq")]
 position = Vector2(-96, 168)
