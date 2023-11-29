@@ -164,6 +164,7 @@ position = Vector2(180, 50)
 
 [node name="MovingPlatform" parent="Platforms" instance=ExtResource("11_vp46x")]
 position = Vector2(0, -10)
+show_piston = false
 
 [node name="FloorHeightMarker" parent="Platforms/MovingPlatform/AnimatableBody2D/Piston" index="0"]
 position = Vector2(0, 45)

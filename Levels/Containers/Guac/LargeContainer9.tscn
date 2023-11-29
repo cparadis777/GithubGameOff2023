@@ -104,12 +104,15 @@ position = Vector2(201, 68)
 
 [node name="MovingPlatform" parent="." index="40" instance=ExtResource("5_5s2qx")]
 position = Vector2(-308, 39)
+show_piston = false
 
 [node name="MovingPlatform3" parent="." index="41" instance=ExtResource("5_5s2qx")]
 position = Vector2(-1, 27)
+show_piston = false
 
 [node name="MovingPlatform2" parent="." index="42" instance=ExtResource("5_5s2qx")]
 position = Vector2(321, 39)
+show_piston = false
 
 [node name="JumpThroughPlatform" parent="." index="43" instance=ExtResource("6_pfol0")]
 position = Vector2(-128, -20)

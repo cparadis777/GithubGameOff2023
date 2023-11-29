@@ -55,6 +55,7 @@ offset_bottom = 118.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_op83c")
 
 [node name="Label" type="Label" parent="Decorations/BotPoster" index="0"]
+layout_mode = 0
 offset_left = 38.0
 offset_top = 8.0
 offset_right = 332.0
