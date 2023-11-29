@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://bw1veyfblyydh"]
+
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_4avli"]
+[ext_resource type="Texture2D" uid="uid://7tmwvppqgnst" path="res://art/decals/industrial_hazard_stripe.png" id="2_x7h6q"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="3_q273e"]
+[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="4_6qdwp"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="5_3lck7"]
+[ext_resource type="Texture2D" uid="uid://mgiu36qxxirc" path="res://art/decals/meet_new_employees.png" id="6_07f8s"]
+[ext_resource type="Texture2D" uid="uid://dsulw1jicubyq" path="res://art/decals/bg decals/weird_lab_conspiracy_poster_02.png" id="7_u8364"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="8_pse8l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_op83c"]
+bg_color = Color(0.203922, 0.121569, 0.180392, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.490196, 0.435294, 0.180392, 1)
+
+[node name="PlexContainer2_factory" instance=ExtResource("1_4avli")]
+
+[node name="Stripe1" type="Sprite2D" parent="." index="1"]
+z_index = -3
+texture_repeat = 2
+position = Vector2(0, 132)
+texture = ExtResource("2_x7h6q")
+region_enabled = true
+region_rect = Rect2(-210.75, -210.75, 717.75, 12)
+
+[node name="Stripe2" type="Sprite2D" parent="." index="2"]
+z_index = -3
+texture_repeat = 2
+position = Vector2(0, -137)
+texture = ExtResource("2_x7h6q")
+region_enabled = true
+region_rect = Rect2(-210.75, -210.75, 717.75, 12)
+
+[node name="Decorations" type="Node2D" parent="." index="3"]
+z_index = -4
+
+[node name="ScaryWallArt" type="Sprite2D" parent="Decorations" index="0"]
+position = Vector2(286, 51)
+rotation = -0.364029
+texture = ExtResource("7_u8364")
+
+[node name="VendingMachine" parent="Decorations" index="1" instance=ExtResource("8_pse8l")]
+position = Vector2(178, -24)
+
+[node name="BotPoster" type="Panel" parent="Decorations" index="2"]
+custom_minimum_size = Vector2(366, 160)
+offset_left = -358.0
+offset_top = -42.0
+offset_right = 8.0
+offset_bottom = 118.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_op83c")
+
+[node name="Label" type="Label" parent="Decorations/BotPoster" index="0"]
+offset_left = 38.0
+offset_top = 8.0
+offset_right = 332.0
+offset_bottom = 60.0
+text = "Human staff: Do not be Afraid.
+Please Welcome our new Colleagues."
+horizontal_alignment = 1
+
+[node name="BotPoster" type="Sprite2D" parent="Decorations/BotPoster" index="1"]
+position = Vector2(184, 107)
+texture = ExtResource("6_07f8s")
+
+[node name="ShootyNPC" parent="_Enemies" index="0" instance=ExtResource("3_q273e")]
+position = Vector2(46, 66)
+
+[node name="ShootyNPC2" parent="_Enemies" index="1" instance=ExtResource("3_q273e")]
+position = Vector2(-284, -72)
+
+[node name="NewRunner" parent="_Enemies" index="2" instance=ExtResource("4_6qdwp")]
+position = Vector2(-61, -91)
+
+[node name="NewRunner2" parent="_Enemies" index="3" instance=ExtResource("4_6qdwp")]
+position = Vector2(233, -25)
+
+[node name="JumpThroughPlatform" parent="_Platforms" index="0" instance=ExtResource("5_3lck7")]
+position = Vector2(241, -21)
+
+[node name="JumpThroughPlatform2" parent="_Platforms" index="1" instance=ExtResource("5_3lck7")]
+position = Vector2(-243, -63)
+
+[node name="JumpThroughPlatform3" parent="_Platforms" index="2" instance=ExtResource("5_3lck7")]
+position = Vector2(98, 70)
+
+[node name="JumpThroughPlatform4" parent="_Platforms" index="3" instance=ExtResource("5_3lck7")]
+position = Vector2(1, -86)
