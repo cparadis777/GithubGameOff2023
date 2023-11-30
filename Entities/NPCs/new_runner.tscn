@@ -679,8 +679,8 @@ collision_mask = 18
 hit_from_inside = true
 
 [node name="PlayerDetector" type="RayCast2D" parent="Sensors"]
-position = Vector2(7, -38)
-target_position = Vector2(96, 2.08165e-12)
+position = Vector2(7, -26)
+target_position = Vector2(160, 2.08165e-12)
 
 [node name="BloodSplats" parent="." instance=ExtResource("10_orvtx")]
 position = Vector2(0, -43)

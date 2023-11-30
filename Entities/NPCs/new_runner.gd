@@ -72,7 +72,7 @@ func _physics_process(delta):
 			else:
 				turn_around()
 		elif is_in_melee_range():
-			if randf() < 0.7 * delta:
+			if randf() < 1.5 * delta:
 				attack()
 		elif randf() < 0.35 * delta:
 			attack()
@@ -188,12 +188,15 @@ func choose_new_behaviour():
 
 func is_facing_player():
 	var player = get_tree().get_first_node_in_group("Player")
+	
 	if player == null:
-		return
-	if player.global_position.x > global_position.x:
+		return null
+	var actual_dir = sign(player.global_position.x - self.global_position.x)
+	if actual_dir == direction:
 		return true
 	else:
 		return false
+	
 
 
 func _on_animation_player_animation_finished(anim_name):
