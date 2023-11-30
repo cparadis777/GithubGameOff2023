@@ -8,7 +8,10 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
+
+func start_music():
+	AudioManager.play_track("FightingTheme")
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel") and $AnimationPlayer.current_animation != "":
