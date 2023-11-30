@@ -9,7 +9,17 @@ func _ready():
 	await owner.ready
 	$PauseMenu.hide()
 	update_health_display(player.health)
-	
+
+func _process(delta):
+	#%SpeedrunTimer.text = str(Time.get_ticks_msec()/1000.0).pad_decimals(2)
+	%SpeedrunTimer.text = "Time: " + convertMillisecondsToTimeString(Time.get_ticks_msec())
+
+func convertMillisecondsToTimeString(milliseconds: int) -> String:
+	var seconds = milliseconds / 1000
+	var minutes = seconds / 60
+	seconds %= 60
+
+	return (str(minutes).pad_zeros(2) + ":" + str(seconds).pad_zeros(2))
 
 func update_health_display(health_remaining : float):
 	var heart_value = 10.0

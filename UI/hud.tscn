@@ -169,6 +169,13 @@ size_flags_horizontal = 10
 [node name="ContainerName" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "ContainerName"
+horizontal_alignment = 2
+
+[node name="SpeedrunTimer" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00:00"
+horizontal_alignment = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("3_jpu2h")]
 visible = false
