@@ -1,18 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://tcanqah85n85"]
+[gd_scene load_steps=13 format=3 uid="uid://tcanqah85n85"]
 
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="1_htj5v"]
 [ext_resource type="Script" path="res://Menus/main_menu.gd" id="2_l1a6d"]
 [ext_resource type="PackedScene" uid="uid://cg316itqsfouf" path="res://Levels/placeholder/Level_01.tscn" id="3_5wtxl"]
 [ext_resource type="Shader" uid="uid://chvota4j62bo5" path="res://art/materials/shaders/pixelify_shader.tres" id="3_20pk7"]
-[ext_resource type="Texture2D" uid="uid://bkjabti7gg0v" path="res://art/placeholder/GenericBackdrop-AI-gen.png" id="3_od4jc"]
+[ext_resource type="Texture2D" uid="uid://ckpwl45q4au14" path="res://art/background/title-sequence-background.png" id="5_62ftw"]
+[ext_resource type="Texture2D" uid="uid://dybihv4jvf75c" path="res://art/UI/Title/manifest-violence.png" id="6_bpdf7"]
 [ext_resource type="Texture2D" uid="uid://ds7wrp282t8d6" path="res://art/placeholder/GameOffLogo.png" id="6_s2pix"]
 [ext_resource type="AudioStream" uid="uid://ccn60h0iwfwbg" path="res://audio/sfx/placeholder/button_hover.wav" id="7_bpl7k"]
 [ext_resource type="PackedScene" uid="uid://dttldmdwah7bk" path="res://Menus/scene_selection_buttons.tscn" id="7_mi8of"]
 [ext_resource type="AudioStream" uid="uid://ditqh6y1ovspx" path="res://audio/sfx/placeholder/button_press.wav" id="8_jgwm5"]
+[ext_resource type="Theme" uid="uid://co8g7pj45ls2g" path="res://UI/Themes/green_button_theme.tres" id="9_niha3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dvqlr"]
 shader = ExtResource("3_20pk7")
-shader_parameter/PixelSize = 0.016
+shader_parameter/PixelSize = 0.001
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
@@ -34,8 +36,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_od4jc")
+texture = ExtResource("5_62ftw")
 expand_mode = 3
+stretch_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -45,18 +48,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Title" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="Title" type="Label" parent="VBoxContainer/Header"]
-custom_minimum_size = Vector2(280, 2.08165e-12)
-layout_mode = 2
-text = "Welcome to Our Amazing Game"
-horizontal_alignment = 1
-autowrap_mode = 3
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.2
+texture = ExtResource("6_bpdf7")
+stretch_mode = 2
 
 [node name="Body" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -89,21 +87,24 @@ focus_neighbor_right = NodePath("../../Buttons2/QuitButton")
 
 [node name="Buttons2" type="VBoxContainer" parent="VBoxContainer/Body/MarginContainer/Body"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 alignment = 1
-
-[node name="SettingsButton" type="Button" parent="VBoxContainer/Body/MarginContainer/Body/Buttons2"]
-layout_mode = 2
-focus_neighbor_left = NodePath("../../Buttons3/TutorialButton")
-focus_neighbor_bottom = NodePath("../QuitButton")
-text = "SETTINGS"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/Body/MarginContainer/Body/Buttons2"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../Buttons3/SkipTutorialButton")
 focus_neighbor_top = NodePath("../SettingsButton")
+theme = ExtResource("9_niha3")
 text = "QUIT"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/Body/MarginContainer/Body/Buttons2"]
+visible = false
+layout_mode = 2
+focus_neighbor_left = NodePath("../../Buttons3/TutorialButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+text = "SETTINGS"
 
 [node name="Footer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
