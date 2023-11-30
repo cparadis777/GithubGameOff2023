@@ -53,7 +53,8 @@ func _ready():
 	if (has_node("Exits")):
 		exits_container_node = $Exits
 	else:
-		print_debug("using deprecated BaseContainer. Use res://Entities/Environment/Containers/LargeContainer.tscn instead")
+		pass #Tutorial scenes are still using deprecated containers. seems ok.
+		#print_debug("using deprecated BaseContainer. Use res://Entities/Environment/Containers/LargeContainer.tscn instead")
 	remove_unneeded_doors()
 	
 	if (has_node("SpawningLogic")):

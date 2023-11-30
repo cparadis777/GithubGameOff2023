@@ -10,13 +10,13 @@ func _ready():
 	$PauseMenu.hide()
 	update_health_display(player.health)
 
-func _process(delta):
+func _process(_delta):
 	#%SpeedrunTimer.text = str(Time.get_ticks_msec()/1000.0).pad_decimals(2)
 	%SpeedrunTimer.text = "Time: " + convertMillisecondsToTimeString(Time.get_ticks_msec())
 
 func convertMillisecondsToTimeString(milliseconds: int) -> String:
-	var seconds = milliseconds / 1000
-	var minutes = seconds / 60
+	var seconds = int(float(milliseconds) / 1000.0)
+	var minutes = int(float(seconds) / 60.0)
 	seconds %= 60
 
 	return (str(minutes).pad_zeros(2) + ":" + str(seconds).pad_zeros(2))

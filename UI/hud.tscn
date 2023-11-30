@@ -116,41 +116,92 @@ grow_horizontal = 2
 
 [node name="HealthLabel" type="Label" parent="Control/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 text = "Health"
 
 [node name="HealthIcons" type="GridContainer" parent="Control/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_vertical = 0
 columns = 10
 
 [node name="Heart" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
 layout_mode = 2
 
 [node name="Heart2" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
 layout_mode = 2
 
 [node name="Heart3" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
 layout_mode = 2
 
 [node name="Heart4" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
 layout_mode = 2
 
 [node name="Heart5" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
 layout_mode = 2
 
 [node name="Heart6" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
 layout_mode = 2
 
 [node name="Heart7" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
 layout_mode = 2
 
 [node name="Heart8" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
 layout_mode = 2
 
 [node name="Heart9" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
 layout_mode = 2
 
 [node name="Heart10" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
+layout_mode = 2
+
+[node name="Heart11" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
+layout_mode = 2
+
+[node name="Heart12" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
+layout_mode = 2
+
+[node name="Heart13" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
+layout_mode = 2
+
+[node name="Heart14" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
+layout_mode = 2
+
+[node name="Heart15" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
+layout_mode = 2
+
+[node name="Heart16" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
+layout_mode = 2
+
+[node name="Heart17" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
+layout_mode = 2
+
+[node name="Heart18" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
+layout_mode = 2
+
+[node name="Heart19" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
+layout_mode = 2
+
+[node name="Heart20" parent="Control/HBoxContainer/HealthIcons" instance=ExtResource("3_8whcm")]
+visible = false
 layout_mode = 2
 
 [node name="QuitButton-ReturnToMenu" parent="Control/HBoxContainer" instance=ExtResource("3_ueh2v")]
