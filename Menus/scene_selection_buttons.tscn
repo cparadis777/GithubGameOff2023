@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dttldmdwah7bk"]
+[gd_scene load_steps=13 format=3 uid="uid://dttldmdwah7bk"]
 
 [ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="1_a863l"]
 [ext_resource type="PackedScene" uid="uid://bdqawiqxlij23" path="res://Levels/placeholder/MockLevel.tscn" id="4_rdf1v"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dwd8f536qu5go" path="res://UI/Title/skip_tutorial_button.tscn" id="5_klu46"]
 [ext_resource type="Theme" uid="uid://co8g7pj45ls2g" path="res://UI/Themes/green_button_theme.tres" id="6_t3uf2"]
 [ext_resource type="Script" path="res://Menus/QuitForRealButton.gd" id="7_8ionk"]
+[ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="8_jugc6"]
+[ext_resource type="PackedScene" uid="uid://da0yo0hv15fc3" path="res://Levels/TheTowerOfGrind.tscn" id="9_q1kj1"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1hk3o"]
 blend_mode = 1
@@ -35,6 +37,8 @@ offset_right = 22.5
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_t3uf2")
+theme_override_constants/v_separation = 12
 
 [node name="LevelMockupButton" type="Button" parent="."]
 visible = false
@@ -55,6 +59,22 @@ layout_mode = 2
 
 [node name="SkipTutorialButton" parent="." instance=ExtResource("5_klu46")]
 layout_mode = 2
+
+[node name="TowerOfPain" parent="." instance=ExtResource("8_jugc6")]
+layout_mode = 2
+text = "Tower of Pain"
+scene = ExtResource("9_q1kj1")
+
+[node name="TextureRect2" type="TextureRect" parent="TowerOfPain"]
+material = SubResource("CanvasItemMaterial_1hk3o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_i2awe")
 
 [node name="QuitButton" type="Button" parent="."]
 layout_mode = 2

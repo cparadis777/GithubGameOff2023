@@ -88,7 +88,8 @@ func _on_hit(attackPacket : AttackPacket):
 	var knockbackMultiplier = 1.5
 	$HurtNoises.play()
 	apply_central_impulse( (attackPacket.impact_vector + Vector2.UP) * attackPacket.knockback_speed * knockbackMultiplier)
-	hits += 1
+	#hits += 1
+	hits += floor(attackPacket.damage / 25.0)
 	spawn_cracks()
 	if hits > max_hits:
 		die()
