@@ -14,7 +14,7 @@ func activate():
 func _physics_process(delta):
 	if visible:
 		apply_gravity(delta)
-	position += velocity
+	position += velocity * delta
 	
 func apply_gravity(delta):
 	if $PlatformDetector.get_overlapping_bodies().size() == 0:

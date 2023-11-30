@@ -5,22 +5,25 @@ var room_num : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	randomize()
+	var num_available = ContainerCatalog.get_children().size()
+	var containers : Array = []
+	for i in range(2):
+		containers.append_array(ContainerCatalog.get_children())
+	
+	containers.shuffle()
+	
+	for i in range(containers.size()):
+		spawn_container(containers.pop_back())
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
-
-func _on_timer_timeout():
+func spawn_container(container_metadata):
 	#spawn a room
-	var new_room_metadata = ContainerCatalog.get_children().pick_random()
+	var new_room_metadata = container_metadata
 	var new_room = new_room_metadata.packed_scene.instantiate()
-	print("name before entering tree: " , new_room.name)
 	new_room.name = str(room_num) + "_" + new_room.name
 	add_child(new_room)
-	print("name after entering tree: ", new_room.name)
 	new_room.global_position = location
 	if new_room.has_node("Exterior"):
 		new_room.get_node("Exterior").hide()

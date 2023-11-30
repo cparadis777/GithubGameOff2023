@@ -29,8 +29,8 @@ func create_playspace(playspace_parameters:Dictionary = {}) -> void:
 	if playspace_parameters.is_empty():
 		return
 
-	#var playspace_size:Vector2 = playspace_parameters["shape"]
-	#self.container_grid.generate_slots(playspace_size)
+	var playspace_size:Vector2 = playspace_parameters["shape"]
+	self.container_grid.generate_slots(playspace_size)
 	var containers:Dictionary = ContainerCatalog.generate_playspace(playspace_parameters["containers"])
 	
 	for coordinate in containers:
