@@ -136,12 +136,16 @@ visible = false
 [node name="Exits" parent="TerminalContainer" index="3"]
 visible = false
 
+[node name="AI_Bot_End" parent="TerminalContainer" index="16"]
+z_index = 1
+
 [node name="FakeCrane" type="Node2D" parent="."]
 position = Vector2(1878, -744)
 
 [node name="Floor" type="Sprite2D" parent="FakeCrane"]
-position = Vector2(20, -15)
-scale = Vector2(2, 2)
+z_index = -1
+position = Vector2(20, -29)
+scale = Vector2(2, 2.77778)
 texture = SubResource("GradientTexture2D_jqaci")
 
 [node name="Cliff" type="Sprite2D" parent="FakeCrane"]

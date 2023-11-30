@@ -720,5 +720,6 @@ visible = false
 
 [connection signal="animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_animation_changed"]
 
+[editable path="Appearance/Corpse"]
 [editable path="Behaviours/Attacks/SimpleMeleeAttack"]
 [editable path="Behaviours/Defenses/BloodSmear"]

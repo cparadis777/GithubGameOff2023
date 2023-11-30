@@ -15,7 +15,6 @@ emitting = false
 amount = 3
 one_shot = true
 explosiveness = 1.0
-local_coords = true
 texture = ExtResource("1_6vwgg")
 emission_shape = 3
 emission_rect_extents = Vector2(32, 32)
