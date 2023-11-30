@@ -33,8 +33,12 @@ func increase_difficulty():
 
 
 func _on_player_dead_and_buried():
+	change_scene_to("res://CutScenes/PlayerDeadLoseCutscene.tscn")
 	#end_game("lose") # seems a bit harsh
-	reset_playspace()
+	
+	#reset_playspace()
+
+
 	
 func end_game(status):
 	match status:
