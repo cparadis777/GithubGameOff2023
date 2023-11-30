@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://hp12r1oleh6b"]
+[gd_scene load_steps=10 format=3 uid="uid://hp12r1oleh6b"]
 
-[ext_resource type="Texture2D" uid="uid://fnaryn1vw1cs" path="res://art/background/dumpster.png" id="1_116lv"]
-[ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="2_2vwna"]
+[ext_resource type="Texture2D" uid="uid://dww6g07nrh6c7" path="res://art/background/dumpster_new.png" id="1_6dcsa"]
+[ext_resource type="Texture2D" uid="uid://dwjhj57y6nhsv" path="res://art/background/dumpster_front_facade_new.png" id="2_5a060"]
+[ext_resource type="Texture2D" uid="uid://p543icdcdsbl" path="res://art/Enemies/Cyber-Boss/cyber-boss-carry.png" id="2_fpb08"]
 [ext_resource type="PackedScene" uid="uid://bxyn1mq357nt6" path="res://Entities/Player/cyber_ronin_sprites.tscn" id="3_mq5j5"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="4_cjtup"]
+[ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="5_0qpqp"]
 
 [sub_resource type="Animation" id="Animation_3p82p"]
 length = 0.001
@@ -177,7 +179,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 5, 6.6, 7.9, 8.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-51, 125), Vector2(118.301, 124), Vector2(169, 64), Vector2(227, 67), Vector2(240, 90)]
+"values": [Vector2(-25, 87), Vector2(150, 87), Vector2(169, 64), Vector2(227, 67), Vector2(240, 100)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -334,20 +336,18 @@ size_flags_vertical = 3
 
 [node name="Dumpster" type="Sprite2D" parent="VBoxContainer/Container"]
 position = Vector2(230, 67)
-texture = ExtResource("1_116lv")
-hframes = 3
+texture = ExtResource("1_6dcsa")
+hframes = 2
 
 [node name="dumpster_front_facade" type="Sprite2D" parent="VBoxContainer/Container/Dumpster"]
 visible = false
 z_index = 1
-position = Vector2(-1, 0)
-texture = ExtResource("1_116lv")
-hframes = 3
-frame = 2
+position = Vector2(0, 37)
+texture = ExtResource("2_5a060")
 
 [node name="FatBoss" type="Sprite2D" parent="VBoxContainer/Container"]
 position = Vector2(-107, 71)
-texture = ExtResource("2_2vwna")
+texture = ExtResource("2_fpb08")
 
 [node name="CyberRoninSprites" parent="VBoxContainer/Container" instance=ExtResource("3_mq5j5")]
 position = Vector2(-87.5, 90)
@@ -360,6 +360,10 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "Thanks For Playing"
 horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Container"]
+position = Vector2(191, 227)
+texture = ExtResource("5_0qpqp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
