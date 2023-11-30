@@ -3,7 +3,7 @@ extends Node2D
 @export var target_weight:int
 @export var scene_path: String # GeneratedPlayspace.tscn
 @export var has_tutorial:bool = true
-var current_weight:int
+var current_weight:int # total weight.. not just the current container
 var ignore_invalid_path : bool = false
 
 
@@ -73,7 +73,11 @@ func popup_invalid_level_warning():
 
 	
 func _on_drop_points_weight_reset():
+	
+	Globals.scale_weight = 0
 	self.current_weight = 0
+	$crane.total_weight = 0
+	$crane._on_weight_reset()
 	self.add_weight(0)
 
 

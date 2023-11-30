@@ -126,10 +126,14 @@ func place_container() -> void:
 
 func update_sign():
 	$ScaleSign/MarginContainer/VBoxContainer/Difficulty.update()
+	display_weight()
 
 func refesh_container() -> void:
 	self.set_current_container(select_random_container())
 	self.move_ready = true
+	display_weight()
+
+func display_weight():
 	%WeightLabel.text = "%s,000 kg" % total_weight
 
 
@@ -174,3 +178,6 @@ func rotate_container(rotation_direction:String) -> void:
 
 func _on_crane_jaw_animation_finished():
 	$CraneJaw.set_frame(0)
+
+func _on_weight_reset():
+	update_sign()
