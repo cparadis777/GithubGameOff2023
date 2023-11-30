@@ -24,6 +24,7 @@ stream = ExtResource("4_ol7rw")
 stream = ExtResource("3_gt4yg")
 
 [node name="DownButton" type="TextureButton" parent="."]
+visible = false
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -38,6 +39,7 @@ texture_disabled = ExtResource("1_cltdx")
 texture_focused = ExtResource("1_cltdx")
 
 [node name="UpButton" type="TextureButton" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4

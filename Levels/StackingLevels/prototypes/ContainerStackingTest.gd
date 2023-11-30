@@ -54,6 +54,7 @@ func press_escape_to_show_or_hide_tutorial(event):
 				
 
 func _on_fight_button_pressed():
+	Globals.set_difficulty_based_on_weight()
 	if $DropPoints.validate_level() or ignore_invalid_path:
 		StageManager.set_playspace_parameters($DropPoints.export_data())
 		if scene_path != "":
@@ -105,3 +106,6 @@ func _on_drop_points_valid_level():
 func _on_drop_points_invalid_level():
 	$HUD/Panel/FightButton.disabled = true
 
+func _on_crane_dropped_container():
+	Globals.set_difficulty_based_on_weight()
+	

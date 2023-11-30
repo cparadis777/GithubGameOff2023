@@ -13,20 +13,24 @@ var markers:Array
 var move_time:float = 0.5
 var fight_button:TextureButton
 var reset_button:TextureButton
+var total_weight : float = 0.0
+
+signal dropped_container
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.create_markers()
 	self.set_current_container(select_random_container())
 	#self.move_ready = true
-	%WeightLabel.text = "%s,000 kg" % self.current_container.weight
+	%WeightLabel.text = "%s,000 kg" % total_weight
 	%TypeLabel.text = "%s" % self.current_container.type
 	if owner && owner.has_node("HUD"):
 		fight_button = owner.get_node("HUD/Panel/FightButton")
 		reset_button = owner.get_node("HUD/Panel/ResetButton")
 	else:
 		print("crane is not child of ContainerStackingTest ")
-	
+	dropped_container.connect(owner._on_crane_dropped_container)
+	update_sign()
 
 func activate():
 	self.move_ready = true
@@ -111,15 +115,24 @@ func move_container(direction:Utils.Directions) -> void:
 func place_container() -> void:
 	if drop_zone.check_drop_possible(self.current_column):
 		$CraneSounds/Drop.play()
+		total_weight += current_container.weight
+		Globals.scale_weight = total_weight
 		self.move_ready = false
 		drop_zone.place_container(self.current_container, current_column)
 		self.current_container = null
 		$CraneJaw.play()
-		
+		dropped_container.emit()
+		update_sign()
+
+func update_sign():
+	$ScaleSign/MarginContainer/VBoxContainer/Difficulty.update()
+
 func refesh_container() -> void:
 	self.set_current_container(select_random_container())
 	self.move_ready = true
-	%WeightLabel.text = "%s,000 kg" % self.current_container.weight
+	%WeightLabel.text = "%s,000 kg" % total_weight
+
+
 
 func move_done()->void:
 	self.move_ready = true
