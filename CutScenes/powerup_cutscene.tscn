@@ -4,11 +4,11 @@
 [ext_resource type="Theme" uid="uid://salqa0d7og24" path="res://UI/Themes/main_menu_theme.tres" id="1_755le"]
 [ext_resource type="PackedScene" uid="uid://bxyn1mq357nt6" path="res://Entities/Player/cyber_ronin_sprites.tscn" id="2_umj3e"]
 [ext_resource type="Texture2D" uid="uid://bte3vdsntt4qf" path="res://art/pickups/damage-pickup.png" id="4_es5or"]
-[ext_resource type="AudioStream" uid="uid://c0gqg5tikslm3" path="res://audio/sfx/placeholder/time_slowdown.wav" id="4_vg47p"]
-[ext_resource type="AudioStream" uid="uid://bfkyv3qrgqid8" path="res://audio/sfx/placeholder/time_speed_up.wav" id="5_5rjbp"]
 [ext_resource type="Texture2D" uid="uid://bj1p1ghcc78pd" path="res://art/pickups/health-pickup.png" id="5_28dq6"]
 [ext_resource type="Texture2D" uid="uid://bbiq8m62k4y22" path="res://art/pickups/jump-pickup.png" id="6_4eemr"]
 [ext_resource type="Texture2D" uid="uid://bxp2nsrmcx2j" path="res://art/pickups/speed-pickup.png" id="7_wgvxv"]
+[ext_resource type="AudioStream" uid="uid://dn426qx1mwru8" path="res://audio/sfx/powerup_sfx/slow_down_powerup.ogg" id="8_l4wbj"]
+[ext_resource type="AudioStream" uid="uid://rh1ludwboalx" path="res://audio/sfx/powerup_sfx/speed_up_powerup.ogg" id="9_h63tt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2plpo"]
 bg_color = Color(0.247059, 0.133333, 0.388235, 1)
@@ -95,7 +95,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_x2wju"]
 resource_name = "slide_across"
-length = 0.5
+length = 2.6
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -128,7 +128,7 @@ tracks/2/path = NodePath("TimeSpeedUpNoise:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -161,7 +161,7 @@ script = ExtResource("1_7sh6q")
 [node name="Panel" type="Panel" parent="."]
 offset_left = -296.0
 offset_top = -3.0
-offset_right = -57.9993
+offset_right = -57.9994
 offset_bottom = 361.0
 theme = ExtResource("1_755le")
 theme_override_styles/panel = SubResource("StyleBoxFlat_2plpo")
@@ -196,13 +196,13 @@ sprite_frames = SubResource("SpriteFrames_euqxv")
 animation = &"JUMP"
 
 [node name="TimeSlowDownNoise" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_vg47p")
-volume_db = -12.0
+stream = ExtResource("8_l4wbj")
+volume_db = -7.0
 bus = &"sfx"
 
 [node name="TimeSpeedUpNoise" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_5rjbp")
-volume_db = -12.0
+stream = ExtResource("9_h63tt")
+volume_db = -7.0
 bus = &"sfx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
