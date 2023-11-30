@@ -77,7 +77,7 @@ func _physics_process(delta):
 		apply_gravity(delta)
 		sync_to_moving_platform(delta)
 		move_and_slide() # modifies velocity
-		#update_animations()
+		update_animations()
 		if is_on_top_of_player():
 			jump()
 		elif is_on_floor() and is_at_end_of_platform() or is_obstructed():
@@ -121,15 +121,17 @@ func is_on_top_of_player():
 	if area.get_overlapping_bodies().has(get_tree().get_first_node_in_group("Player")):
 		return true
 
-#
-#func update_animations():
-#
-#	if State in [States.RUNNING] and abs(velocity.x) < 0.1:
-#		animation_player.play("idle")
-#	elif State in [States.RUNNING] and abs(velocity.x) >= 0.1:
-#		if animation_player.current_animation != "run":
-#			animation_player.play("run")
-#
+
+func update_animations():
+	if not is_instance_valid(animation_player):
+		return
+
+	if State in [States.RUNNING] and abs(velocity.x) < 0.1:
+		animation_player.play("idle")
+	elif State in [States.RUNNING] and abs(velocity.x) >= 0.1:
+		if animation_player.current_animation != "run":
+			animation_player.play("run")
+
 #	if animation_player.current_animation == "":
 #		if animations[State] != "" and animation_player.has_animation(animations[State]):
 #			animation_player.play(animations[State])

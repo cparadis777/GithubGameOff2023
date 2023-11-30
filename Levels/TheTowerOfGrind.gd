@@ -19,7 +19,8 @@ func _ready():
 	AudioManager.play_track("FightingTheme")
 
 func spawn_container(container_metadata):
-	#spawn a room
+	#spawn a flag scene to establish location, then spawn a room inside
+	var new_flag_location = Node2D.new()
 	var new_room_metadata = container_metadata
 	var new_room = new_room_metadata.packed_scene.instantiate()
 	new_room.name = str(room_num) + "_" + new_room.name
@@ -27,9 +28,10 @@ func spawn_container(container_metadata):
 		new_room.container_exit_flags = 4 # up only
 	else:
 		new_room.container_exit_flags = 12 # up and down
-	
-	add_child(new_room)
-	new_room.global_position = location
+	$ContainerGrid.add_child(new_flag_location)
+	new_flag_location.global_position = location
+	new_flag_location.add_child(new_room)
+	#new_room.global_position = location
 	if new_room.has_node("Exterior"):
 		new_room.get_node("Exterior").hide()
 	location += Vector2.UP * 420

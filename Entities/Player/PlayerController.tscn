@@ -124,7 +124,7 @@ animations = [{
 size = Vector2(23, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_46i3j"]
-size = Vector2(20, 38)
+size = Vector2(20, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghqx3"]
 size = Vector2(17, 37.4751)
@@ -270,7 +270,7 @@ collision_layer = 0
 collision_mask = 10
 
 [node name="DashCollisionShape" type="CollisionShape2D" parent="StateMachine/Dash/DashHurtBox"]
-position = Vector2(13, -19)
+position = Vector2(13, -18.5)
 shape = SubResource("RectangleShape2D_46i3j")
 
 [node name="Dying" type="Node2D" parent="StateMachine"]

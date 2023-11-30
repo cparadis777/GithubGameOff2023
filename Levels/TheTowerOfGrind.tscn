@@ -2,5 +2,7 @@
 
 [ext_resource type="Script" path="res://Levels/TheTowerOfGrind.gd" id="1_x4cqj"]
 
-[node name="TheSkyscraper" type="Node2D"]
+[node name="TheSkyscraper" type="Node2D" groups=["GeneratedPlayspace"]]
 script = ExtResource("1_x4cqj")
+
+[node name="ContainerGrid" type="Node2D" parent="."]

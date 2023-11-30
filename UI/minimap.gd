@@ -19,9 +19,11 @@ func create_map():
 	if playspace == null:
 		playspace = get_tree().get_root().find_child("GeneratedPlayspace")
 	
+	var container_nodes : Array = []
 	if playspace != null and playspace.has_node("ContainerGrid"):
-		for slot in playspace.get_node("ContainerGrid").get_children():
-			
+		container_nodes = playspace.get_node("ContainerGrid").get_children()
+
+		for slot in container_nodes:
 			if slot.get_child_count() > 0:
 				var container = slot.get_child(0)
 				if container.get("container_exit_flags") != null: # it's a container
