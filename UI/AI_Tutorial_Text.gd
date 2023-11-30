@@ -58,6 +58,7 @@ var current_message = 0
 var display = ""
 var current_character = 0
 var done_talking = false
+var byebye_already_played : bool = false
 
 signal finished
 
@@ -125,9 +126,11 @@ func stop_dialogue():
 	
 func go_next_message():
 	if (current_message == len(messages) - 1):
-		$spawn_timer.start()
-		done_talking = true
-		$AnimationPlayer.play("byebye")
+		if not byebye_already_played:
+			$spawn_timer.start()
+			done_talking = true
+			$AnimationPlayer.play("byebye")
+			byebye_already_played = true
 	else:
 		
 		current_message += 1
