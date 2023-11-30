@@ -119,6 +119,8 @@ func show_entire_message():
 	current_character = len(messages[current_message])
 	display = messages[current_message]
 	$Label.text = display
+	$SpaceBar_UI.show()
+	$SpaceBar_UI.set_modulate(Color.WHITE)
 	
 func stop_dialogue():
 	finished.emit()
@@ -138,7 +140,7 @@ func go_next_message():
 		current_character = 0
 		$next_char.start()
 		$Muse_AI.play("speaking")
-		$SpaceBar_UI.hide	()
+		$SpaceBar_UI.hide()
 	
 func _on_next_char_timeout():
 	if (current_character < len(messages[current_message])) && !done_talking:
