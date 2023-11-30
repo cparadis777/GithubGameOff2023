@@ -30,9 +30,9 @@ position = Vector2(-18.9999, -26.0001)
 [node name="AI_Tutorial_Text" parent="BaseContainer" index="11" instance=ExtResource("4_4x810")]
 z_index = 2
 position = Vector2(-256, 99)
-override_text = "Jump with space or
-double jump
-by pressing space twice."
+override_text = "Press jump again,
+while in the air
+to double jump."
 
 [node name="DoubleJumpDemo" parent="BaseContainer" index="12" instance=ExtResource("5_yp6p6")]
 position = Vector2(105, 46)
