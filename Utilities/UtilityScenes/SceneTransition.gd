@@ -16,10 +16,10 @@ func change_scene(scene: PackedScene, anim_length: float = 0.5, hold: float = 0.
 
 
 func fade_out():
-	$AnimationPlayer.play("dissolve")
+	$AnimationPlayer.play("drop_down")
 	
 func fade_in():
-	$AnimationPlayer.play("resolve")
+	$AnimationPlayer.play("drop_out")
 	
 
 func _on_animation_player_animation_finished(anim_name):
