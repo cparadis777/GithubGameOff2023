@@ -24,6 +24,9 @@ rotation = -1.5708
 next_scene = ExtResource("3_yyy4x")
 location = 0
 
+[node name="ZeroRotation" parent="BaseContainer/NextLevelDoor" index="2"]
+position = Vector2(-18.9999, -26.0001)
+
 [node name="AI_Tutorial_Text" parent="BaseContainer" index="11" instance=ExtResource("4_4x810")]
 z_index = 2
 position = Vector2(-256, 99)
@@ -34,7 +37,7 @@ by pressing space twice."
 [node name="DoubleJumpDemo" parent="BaseContainer" index="12" instance=ExtResource("5_yp6p6")]
 position = Vector2(105, 46)
 animation_name = "jump_launch;double_jump;jump_peak"
-label_text = " [space], [space]"
+label_text = " [space] x2"
 button_texture = ExtResource("6_mlgsp")
 
 [node name="ButtonSprite2" type="Sprite2D" parent="BaseContainer/DoubleJumpDemo" index="3"]
@@ -66,4 +69,5 @@ texture = ExtResource("10_36woi")
 position = Vector2(0, -28)
 
 [editable path="BaseContainer"]
+[editable path="BaseContainer/NextLevelDoor"]
 [editable path="BaseContainer/DoubleJumpDemo"]

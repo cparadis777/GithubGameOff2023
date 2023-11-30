@@ -36,6 +36,16 @@ rotation = -1.5708
 next_scene = ExtResource("5_gt7gr")
 location = 0
 
+[node name="ZeroRotation" parent="BaseContainer/NextLevelDoor" index="2"]
+position = Vector2(-17.9999, -27.0001)
+
+[node name="Label" parent="BaseContainer/NextLevelDoor/ZeroRotation" index="0"]
+visible = true
+
+[node name="Sprite2D" parent="BaseContainer/NextLevelDoor/ZeroRotation" index="1"]
+visible = true
+position = Vector2(-1.00001, 1.99999)
+
 [node name="Player" parent="." index="1"]
 position = Vector2(171, 88)
 
@@ -75,4 +85,5 @@ visible = false
 
 [editable path="BaseContainer"]
 [editable path="BaseContainer/SwitchDemo"]
+[editable path="BaseContainer/NextLevelDoor"]
 [editable path="Switch"]
