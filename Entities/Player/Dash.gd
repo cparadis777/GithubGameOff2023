@@ -80,7 +80,8 @@ func _on_dash_hurt_box_body_entered(body):
 			hit.connect(body._on_hit)
 			hit.emit(attackPacket)
 			hit.disconnect(body._on_hit)
-			player.velocity = -player.velocity
-			state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
+			#player.velocity = -player.velocity
+			#state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
+			state_machine.transition_to("Air")
 			
 
