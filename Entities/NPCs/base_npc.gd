@@ -9,6 +9,7 @@ extends CharacterBody2D
 var health = health_max
 
 @export var animation_player : Node
+@export var chance_to_spawn_health : float = 0.05
 
 enum States { INITIALIZING, PAUSED, IDLE, RUNNING, JUMPING, KNOCKBACK, IFRAMES, ATTACKING, DYING, DEAD }
 var State = States.INITIALIZING
@@ -155,6 +156,7 @@ func apply_gravity(delta):
 func die():
 	#animation_player.stop()
 	State = States.DEAD
+	maybe_spawn_health()
 	spawn_corpse()
 	#decision_timer.stop()
 	abort_attacks_in_progress()
@@ -164,6 +166,14 @@ func die():
 	#animation_player.stop()
 	#call_deferred("play_death_animation") # should include audio
 	queue_free()
+
+func maybe_spawn_health():
+	if randf() < chance_to_spawn_health:
+		var healthScene = preload("res://Entities/Environment/Pickables/health_pickable.tscn").instantiate()
+		add_sibling(healthScene)
+		var jitter = Vector2(randf_range(-24,24), randf_range(-6, 18))
+		healthScene.global_position = global_position + jitter
+		
 
 func spawn_corpse():
 	var new_corpse = $Appearance/Corpse.duplicate()
