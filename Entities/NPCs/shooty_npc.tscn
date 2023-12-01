@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c001oq7jof7bq"]
+[gd_scene load_steps=38 format=3 uid="uid://c001oq7jof7bq"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_58hki"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_vhw04"]
@@ -60,6 +60,26 @@ region = Rect2(270, 0, 90, 92)
 atlas = ExtResource("4_60g6j")
 region = Rect2(360, 0, 90, 92)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_iiowk"]
+atlas = ExtResource("4_60g6j")
+region = Rect2(0, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd48a"]
+atlas = ExtResource("4_60g6j")
+region = Rect2(90, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqef8"]
+atlas = ExtResource("4_60g6j")
+region = Rect2(180, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i1p5"]
+atlas = ExtResource("4_60g6j")
+region = Rect2(270, 0, 90, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7471x"]
+atlas = ExtResource("4_60g6j")
+region = Rect2(360, 0, 90, 92)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_0bkw0"]
 animations = [{
 "frames": [{
@@ -103,6 +123,26 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iiowk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd48a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqef8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3i1p5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7471x")
+}],
+"loop": true,
+"name": &"run",
 "speed": 5.0
 }]
 

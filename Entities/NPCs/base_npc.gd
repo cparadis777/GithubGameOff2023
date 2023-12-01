@@ -129,7 +129,8 @@ func update_animations():
 	if State == States.RUNNING:
 		if is_instance_valid(animation_player):
 			animation_player.play("run")
-
+			if has_node("Appearance/AnimatedSprite2D") and is_instance_valid($Appearance/AnimatedSprite2D):
+				$Appearance/AnimatedSprite2D.play("run")
 #	if State in [States.RUNNING] and abs(velocity.x) < 0.01:
 #		animation_player.play("idle")
 #	elif State in [States.RUNNING] and abs(velocity.x) >= 0.01:
@@ -243,6 +244,8 @@ func turn_around():
 	if State == States.RUNNING:
 		if is_instance_valid(animation_player):
 			animation_player.play("run")
+		else:
+			printerr("Why isn't animation_player valid?")
 		velocity.x = SPEED * direction
 		#velocity.x = clamp(velocity.x, -SPEED, SPEED )
 	

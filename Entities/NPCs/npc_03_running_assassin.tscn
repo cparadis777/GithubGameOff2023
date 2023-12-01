@@ -683,6 +683,7 @@ material = SubResource("ShaderMaterial_bo3ta")
 position = Vector2(0, -3.8147e-06)
 sprite_frames = SubResource("SpriteFrames_bcuiu")
 animation = &"idle"
+autoplay = "run"
 offset = Vector2(9.5059, -61.7883)
 
 [node name="Jump" type="Node2D" parent="Behaviours/Movement" index="0"]

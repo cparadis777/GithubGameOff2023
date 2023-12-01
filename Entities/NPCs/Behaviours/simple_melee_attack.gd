@@ -20,8 +20,9 @@ func _ready():
 	await owner.ready
 	npc = owner
 	scale_for_difficulty()
-	started.connect(owner._on_melee_attack_started)
-	finished.connect(owner._on_melee_attack_finished)
+	if owner.has_method("_on_melee_attack_started"):
+		started.connect(owner._on_melee_attack_started)
+		finished.connect(owner._on_melee_attack_finished)
 	
 func scale_for_difficulty():
 	damage = base_damage * (1+float(Globals.difficulty)/20.0)
