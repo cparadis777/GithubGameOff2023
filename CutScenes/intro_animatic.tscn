@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=26 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
@@ -16,8 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bwnbumcecneus" path="res://art/UI/Title/manifest-violence-animated.png" id="11_qmvf4"]
 [ext_resource type="PackedScene" uid="uid://dm0h5iyg1t6xj" path="res://UI/Title/start-button.tscn" id="12_73lfk"]
 [ext_resource type="PackedScene" uid="uid://dwd8f536qu5go" path="res://UI/Title/skip_tutorial_button.tscn" id="13_66hro"]
-[ext_resource type="AudioStream" uid="uid://ditqh6y1ovspx" path="res://audio/sfx/placeholder/button_press.wav" id="17_arteh"]
-[ext_resource type="AudioStream" uid="uid://ccn60h0iwfwbg" path="res://audio/sfx/placeholder/button_hover.wav" id="18_nlg1c"]
+[ext_resource type="PackedScene" uid="uid://15sduewv6y65" path="res://UI/button_audio.tscn" id="17_o70j3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pos6s"]
 bg_color = Color(0, 0, 0, 1)
@@ -686,12 +685,8 @@ theme_override_fonts/font = ExtResource("8_5k53j")
 theme_override_font_sizes/font_size = 32
 text = "Manifest Violence"
 
-[node name="Audio" type="Node" parent="."]
-
-[node name="ClickNoise" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("17_arteh")
-
-[node name="HoverNoise" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("18_nlg1c")
+[node name="Audio" parent="." instance=ExtResource("17_o70j3")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+
+[editable path="Audio"]

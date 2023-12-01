@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://d0i2kn6vltvm0"]
+[gd_scene load_steps=30 format=3 uid="uid://d0i2kn6vltvm0"]
 
 [ext_resource type="Script" path="res://Levels/StackingLevels/prototypes/ContainerStackingTest.gd" id="1_vlh66"]
 [ext_resource type="Texture2D" uid="uid://dtuuvvgnlqgjt" path="res://art/UI/Container Stacking/panel.png" id="2_bp5ka"]
 [ext_resource type="Script" path="res://Menus/ContainerStackingUI/Panel.gd" id="3_b3v0u"]
 [ext_resource type="Texture2D" uid="uid://o8cl2ckv7j3b" path="res://art/UI/Container Stacking/fight-button-hover.png" id="4_w77a7"]
 [ext_resource type="Texture2D" uid="uid://4f4h20iu6o3g" path="res://art/UI/Container Stacking/fight-button-pressed.png" id="5_oe22q"]
+[ext_resource type="Texture2D" uid="uid://bypropdlfkb5u" path="res://art/UI/Container Stacking/fight-button-hover2.png" id="6_8tmjv"]
 [ext_resource type="Texture2D" uid="uid://dw66l7w5dq4cj" path="res://art/UI/Container Stacking/fight-button-normal.png" id="6_alghs"]
 [ext_resource type="Texture2D" uid="uid://jc5uk1hcdw8v" path="res://art/UI/Container Stacking/reset-button-normal.png" id="7_coj20"]
 [ext_resource type="Texture2D" uid="uid://bcehka4wp5evg" path="res://art/UI/Container Stacking/reset-button-pressed.png" id="8_56qaq"]
@@ -17,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://3kfisyqqqjqc" path="res://art/placeholder/gamepad_button_left.png" id="13_44aey"]
 [ext_resource type="AudioStream" uid="uid://cjmpwks4nk12x" path="res://audio/sfx/container_sfx/containerdropped.ogg" id="13_81pew"]
 [ext_resource type="PackedScene" uid="uid://dixj38xxr3o83" path="res://Entities/Droppable/EmptyDroppableContainer.tscn" id="14_6te3c"]
+[ext_resource type="PackedScene" uid="uid://15sduewv6y65" path="res://UI/button_audio.tscn" id="14_ahg48"]
 [ext_resource type="Shader" path="res://CRTMonitor.gdshader" id="15_ucdyp"]
 [ext_resource type="PackedScene" uid="uid://c5vova3vmv6p7" path="res://Entities/Environment/crane.tscn" id="16_ftu3o"]
 [ext_resource type="PackedScene" uid="uid://cmx61qarjfirk" path="res://UI/info_popup.tscn" id="18_4akgk"]
@@ -138,6 +140,7 @@ offset_bottom = 54.0
 focus_mode = 0
 texture_normal = ExtResource("4_w77a7")
 texture_pressed = ExtResource("5_oe22q")
+texture_hover = ExtResource("6_8tmjv")
 texture_disabled = ExtResource("6_alghs")
 
 [node name="ResetButton" type="TextureButton" parent="HUD/Panel"]
@@ -182,6 +185,8 @@ offset_right = 114.0
 offset_bottom = 77.0
 texture = ExtResource("13_44aey")
 
+[node name="Audio" parent="HUD/Panel" instance=ExtResource("14_ahg48")]
+
 [node name="WarningPopup" type="PopupPanel" parent="HUD"]
 initial_position = 1
 size = Vector2i(364, 173)
@@ -194,7 +199,7 @@ anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 360.0
-offset_bottom = 221.0
+offset_bottom = 299.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -424,3 +429,5 @@ volume_db = -4.0
 [connection signal="weight_added" from="DropPoints" to="." method="add_weight"]
 [connection signal="weight_reset" from="DropPoints" to="." method="_on_drop_points_weight_reset"]
 [connection signal="finished" from="Instructions/placement" to="." method="_on_placement_instructions_finished"]
+
+[editable path="HUD/Panel/Audio"]

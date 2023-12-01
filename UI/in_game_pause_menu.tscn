@@ -27,6 +27,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 layout_mode = 2
@@ -45,4 +46,10 @@ layout_mode = 2
 layout_mode = 2
 text = "Resume Game"
 
+[node name="QuitButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Quit"
+
 [connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
