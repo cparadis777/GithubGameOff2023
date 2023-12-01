@@ -126,11 +126,15 @@ func update_animations():
 	if not is_instance_valid(animation_player):
 		return
 
-	if State in [States.RUNNING] and abs(velocity.x) < 0.1:
-		animation_player.play("idle")
-	elif State in [States.RUNNING] and abs(velocity.x) >= 0.1:
-		if animation_player.current_animation != "run":
+	if State == States.RUNNING:
+		if is_instance_valid(animation_player):
 			animation_player.play("run")
+
+#	if State in [States.RUNNING] and abs(velocity.x) < 0.01:
+#		animation_player.play("idle")
+#	elif State in [States.RUNNING] and abs(velocity.x) >= 0.01:
+#		if animation_player.current_animation != "run":
+#			animation_player.play("run")
 
 #	if animation_player.current_animation == "":
 #		if animations[State] != "" and animation_player.has_animation(animations[State]):
@@ -251,6 +255,8 @@ func turn_around():
 	
 	direction = -direction
 	if State == States.RUNNING:
+		if is_instance_valid(animation_player):
+			animation_player.play("run")
 		velocity.x = SPEED * direction
 		#velocity.x = clamp(velocity.x, -SPEED, SPEED )
 	
