@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://cj2k4stikljcw"]
+
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_n0l73"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="2_rro8i"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="3_lcbp1"]
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="4_kxt8p"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="5_psejs"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="6_elncu"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="7_ypk0f"]
+
+[node name="InexorableTide" instance=ExtResource("1_n0l73")]
+
+[node name="TrapSpikes" parent="." index="14" instance=ExtResource("3_lcbp1")]
+position = Vector2(-366, 55)
+
+[node name="TrapSpikes2" parent="." index="15" instance=ExtResource("3_lcbp1")]
+position = Vector2(-303, 55)
+
+[node name="TrapSpikes3" parent="." index="16" instance=ExtResource("3_lcbp1")]
+position = Vector2(-107, 55)
+
+[node name="TrapSpikes4" parent="." index="17" instance=ExtResource("3_lcbp1")]
+position = Vector2(-43, 55)
+
+[node name="TrapSpikes5" parent="." index="18" instance=ExtResource("3_lcbp1")]
+position = Vector2(21, 55)
+
+[node name="TrapSpikes7" parent="." index="19" instance=ExtResource("3_lcbp1")]
+position = Vector2(-43, -20)
+
+[node name="TrapSpikes8" parent="." index="20" instance=ExtResource("3_lcbp1")]
+position = Vector2(21, -20)
+
+[node name="TrapSpikes6" parent="." index="21" instance=ExtResource("3_lcbp1")]
+position = Vector2(83, 55)
+
+[node name="TrapSpikes9" parent="." index="22" instance=ExtResource("3_lcbp1")]
+position = Vector2(367, 55)
+
+[node name="RunningAssassin" parent="." index="23" instance=ExtResource("4_kxt8p")]
+position = Vector2(-168, 59)
+
+[node name="RunningAssassin3" parent="." index="24" node_paths=PackedStringArray("animation_player") instance=ExtResource("4_kxt8p")]
+position = Vector2(158, 62)
+animation_player = NodePath("../RunningAssassin/AnimationPlayer")
+
+[node name="RunningAssassin4" parent="." index="25" node_paths=PackedStringArray("animation_player") instance=ExtResource("4_kxt8p")]
+position = Vector2(278, 61)
+animation_player = NodePath("../RunningAssassin/AnimationPlayer")
+
+[node name="ShootyNPC" parent="." index="26" instance=ExtResource("5_psejs")]
+position = Vector2(368, -5)
+
+[node name="VendingMachine" parent="." index="27" instance=ExtResource("6_elncu")]
+position = Vector2(-377, -83)
+
+[node name="NPC_02_DockWorker" parent="." index="28" instance=ExtResource("7_ypk0f")]
+position = Vector2(-173, -7)
+
+[node name="JumpThroughPlatform" parent="." index="29" instance=ExtResource("2_rro8i")]
+position = Vector2(-202, 68)
+
+[node name="JumpThroughPlatform2" parent="." index="30" instance=ExtResource("2_rro8i")]
+position = Vector2(230, 64)
+
+[node name="JumpThroughPlatform3" parent="." index="31" instance=ExtResource("2_rro8i")]
+position = Vector2(-133, -4)
+
+[node name="JumpThroughPlatform4" parent="." index="32" instance=ExtResource("2_rro8i")]
+position = Vector2(313, -9)
+
+[node name="JumpThroughPlatform6" parent="." index="33" instance=ExtResource("2_rro8i")]
+position = Vector2(58, -83)
+
+[node name="JumpThroughPlatform5" parent="." index="34" instance=ExtResource("2_rro8i")]
+position = Vector2(-310, -82)
+
+[node name="TrapSpikes10" parent="." index="35" instance=ExtResource("3_lcbp1")]
+position = Vector2(-235, -17)
+
+[node name="TrapSpikes11" parent="." index="36" instance=ExtResource("3_lcbp1")]
+position = Vector2(-299, -17)
+
+[node name="TrapSpikes12" parent="." index="37" instance=ExtResource("3_lcbp1")]
+position = Vector2(-362, -17)
+
+[node name="TrapSpikes14" parent="." index="38" instance=ExtResource("3_lcbp1")]
+position = Vector2(367, -94)
+
+[node name="TrapSpikes15" parent="." index="39" instance=ExtResource("3_lcbp1")]
+position = Vector2(304, -94)
+
+[node name="TrapSpikes16" parent="." index="40" instance=ExtResource("3_lcbp1")]
+position = Vector2(160, -24)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://hnjmjxrwiiyw"]
+
+[ext_resource type="PackedScene" uid="uid://cfeyc76xirsc4" path="res://Entities/Environment/BG_Non-interactable/frozen_lung.tscn" id="1_mbq3u"]
+[ext_resource type="Texture2D" uid="uid://cv6ttbgdx8326" path="res://art/props/frozen_heart.png" id="2_65310"]
+
+[node name="frozen_heart" instance=ExtResource("1_mbq3u")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_65310")

@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://hp12r1oleh6b"]
+[gd_scene load_steps=13 format=3 uid="uid://hp12r1oleh6b"]
 
-[ext_resource type="Texture2D" uid="uid://fnaryn1vw1cs" path="res://art/background/dumpster.png" id="1_116lv"]
-[ext_resource type="Texture2D" uid="uid://bgshbgpn8pkkc" path="res://art/placeholder/fat_mob_boss.png" id="2_2vwna"]
+[ext_resource type="Script" path="res://CutScenes/PlayerDeadLoseCutscene.gd" id="1_3svc0"]
+[ext_resource type="Texture2D" uid="uid://dww6g07nrh6c7" path="res://art/background/dumpster_new.png" id="1_6dcsa"]
+[ext_resource type="Texture2D" uid="uid://dwjhj57y6nhsv" path="res://art/background/dumpster_front_facade_new.png" id="2_5a060"]
+[ext_resource type="Texture2D" uid="uid://p543icdcdsbl" path="res://art/Enemies/Cyber-Boss/cyber-boss-carry.png" id="2_fpb08"]
 [ext_resource type="PackedScene" uid="uid://bxyn1mq357nt6" path="res://Entities/Player/cyber_ronin_sprites.tscn" id="3_mq5j5"]
 [ext_resource type="PackedScene" uid="uid://dpa685co3h1vf" path="res://Menus/quit_button_return_to_menu.tscn" id="4_cjtup"]
+[ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="5_0qpqp"]
+[ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="8_1i05a"]
+[ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="8_h66hu"]
 
 [sub_resource type="Animation" id="Animation_3p82p"]
 length = 0.001
@@ -82,19 +87,19 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("VBoxContainer/Container/Thanks:visible")
+tracks/6/path = NodePath("VBoxContainer/HBoxContainer/QuitButton-ReturnToMenu:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("VBoxContainer/HBoxContainer/QuitButton-ReturnToMenu:visible")
+tracks/7/path = NodePath("VBoxContainer/HBoxContainer/Credits:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -106,50 +111,50 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("VBoxContainer/HBoxContainer/Credits:visible")
+tracks/8/path = NodePath("VBoxContainer/Container/CyberRoninSprites:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [-2.19108]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("VBoxContainer/Container/CyberRoninSprites:rotation")
+tracks/9/path = NodePath("VBoxContainer/Container/CyberRoninSprites:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-2.19108]
+"update": 1,
+"values": [true]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("VBoxContainer/Container/CyberRoninSprites:visible")
+tracks/10/path = NodePath("VBoxContainer/Container/Dumpster/dumpster_front_facade:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("VBoxContainer/Container/Dumpster/dumpster_front_facade:visible")
+tracks/11/path = NodePath("VBoxContainer/Container/FatBoss:texture")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [ExtResource("2_fpb08")]
 }
 
 [sub_resource type="Animation" id="Animation_iib52"]
@@ -162,10 +167,10 @@ tracks/0/path = NodePath("VBoxContainer/Container/FatBoss:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 4.4, 7.7, 8.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-73, 93), Vector2(96.3014, 92)]
+"values": [Vector2(-73, 93), Vector2(96.3014, 92), Vector2(96.3014, 92), Vector2(-64, 92)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -174,10 +179,10 @@ tracks/1/path = NodePath("VBoxContainer/Container/CyberRoninSprites:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 5, 6.6, 7.9, 8.8),
+"times": PackedFloat32Array(0, 4.4, 5.7, 6.5, 7.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-51, 125), Vector2(118.301, 124), Vector2(169, 64), Vector2(227, 67), Vector2(240, 90)]
+"values": [Vector2(-25, 87), Vector2(150, 87), Vector2(169, 64), Vector2(227, 67), Vector2(240, 100)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -186,7 +191,7 @@ tracks/2/path = NodePath("VBoxContainer/Container/CyberRoninSprites:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1.1, 4.3, 5.9),
+"times": PackedFloat32Array(1.1, 3.7, 5.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [&"run", &"idle", &"idle"]
@@ -198,7 +203,7 @@ tracks/3/path = NodePath("VBoxContainer/Container/CyberRoninSprites:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.9, 1.1, 3.1, 5.9, 7.3),
+"times": PackedFloat32Array(0.9, 1.1, 2.5, 5, 5.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [7, 0, 7, 0, 7]
@@ -210,7 +215,7 @@ tracks/4/path = NodePath("VBoxContainer/Container/Dumpster:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(1.1, 1.2, 5.1, 9.3),
+"times": PackedFloat32Array(1.1, 1.2, 4.5, 7.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 0, 1, 0]
@@ -222,7 +227,7 @@ tracks/5/path = NodePath("VBoxContainer/Container/FatBoss:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.1, 9.3),
+"times": PackedFloat32Array(1.1, 8.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -230,74 +235,88 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("VBoxContainer/Container/Thanks:visible")
+tracks/6/path = NodePath("VBoxContainer/HBoxContainer/QuitButton-ReturnToMenu:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(1.1, 9.9),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("VBoxContainer/HBoxContainer/QuitButton-ReturnToMenu:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(1.1, 9.9),
+"times": PackedFloat32Array(1.1, 9.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, true]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("VBoxContainer/HBoxContainer/Credits:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(1.1, 9.3),
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("VBoxContainer/HBoxContainer/Credits:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.1, 8.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("VBoxContainer/Container/CyberRoninSprites:rotation")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 6.6, 7.9, 8.8),
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("VBoxContainer/Container/CyberRoninSprites:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 5.7, 6.5, 7.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [-3.86359, -4.6101, -4.19681, -3.76284]
 }
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("VBoxContainer/Container/CyberRoninSprites:visible")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 8.8),
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("VBoxContainer/Container/CyberRoninSprites:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 7.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("VBoxContainer/Container/Dumpster/dumpster_front_facade:visible")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 5.1, 9.2),
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("VBoxContainer/Container/Dumpster/dumpster_front_facade:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 4.5, 8.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("AI_Tutorial_Text")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(8.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"activate"
+}]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("VBoxContainer/Container/FatBoss:texture")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 7.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_fpb08"), ExtResource("8_1i05a")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2yiy8"]
@@ -314,6 +333,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+script = ExtResource("1_3svc0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -334,32 +354,27 @@ size_flags_vertical = 3
 
 [node name="Dumpster" type="Sprite2D" parent="VBoxContainer/Container"]
 position = Vector2(230, 67)
-texture = ExtResource("1_116lv")
-hframes = 3
+texture = ExtResource("1_6dcsa")
+hframes = 2
 
 [node name="dumpster_front_facade" type="Sprite2D" parent="VBoxContainer/Container/Dumpster"]
 visible = false
 z_index = 1
-position = Vector2(-1, 0)
-texture = ExtResource("1_116lv")
-hframes = 3
-frame = 2
+position = Vector2(0, 37)
+texture = ExtResource("2_5a060")
 
 [node name="FatBoss" type="Sprite2D" parent="VBoxContainer/Container"]
 position = Vector2(-107, 71)
-texture = ExtResource("2_2vwna")
+texture = ExtResource("2_fpb08")
 
 [node name="CyberRoninSprites" parent="VBoxContainer/Container" instance=ExtResource("3_mq5j5")]
 position = Vector2(-87.5, 90)
 rotation = -2.19108
 animation = &"run"
 
-[node name="Thanks" type="Label" parent="VBoxContainer/Container"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Thanks For Playing"
-horizontal_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Container"]
+position = Vector2(191, 227)
+texture = ExtResource("5_0qpqp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -378,3 +393,12 @@ autoplay = "dumpster_fire"
 libraries = {
 "": SubResource("AnimationLibrary_2yiy8")
 }
+
+[node name="AI_Tutorial_Text" parent="." instance=ExtResource("8_h66hu")]
+position = Vector2(414, 248)
+override_text = "Let's get you put
+back together.
+"
+activated_immediately = false
+
+[connection signal="finished" from="AI_Tutorial_Text" to="." method="_on_ai_tutorial_text_finished"]

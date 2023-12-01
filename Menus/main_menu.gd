@@ -6,16 +6,16 @@ extends Control
 func _ready():
 	connect_button_audio()
 	connect_button_signals()
-	$VBoxContainer/Body/MarginContainer/Body/Buttons3/TutorialButton.grab_focus()
+	$VBoxContainer/Body/MarginContainer/Body/Buttons3/PlayButton.grab_focus()
 
 
 func connect_button_audio():
 	for container in $VBoxContainer/Body/MarginContainer/Body.get_children():
-		if container is VBoxContainer:
-			for button in container.get_children():
+		for button in container.get_children():
+			if button is Button or button is TextureButton:
 				button.mouse_entered.connect($Audio/HoverNoise.play)
 				button.pressed.connect($Audio/ClickNoise.play)
-
+				button.focus_entered.connect($Audio/HoverNoise.play)
 
 func connect_button_signals():
 	for button in %Buttons2.get_children():

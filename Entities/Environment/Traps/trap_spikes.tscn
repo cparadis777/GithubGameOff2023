@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfrpi07byqc2e"]
+[gd_scene load_steps=8 format=3 uid="uid://cfrpi07byqc2e"]
 
 [ext_resource type="Texture2D" uid="uid://brpnbwebteufp" path="res://Entities/Environment/Traps/Spikes.png" id="1_g7516"]
 [ext_resource type="Script" path="res://Entities/Environment/Traps/trap_spikes.gd" id="1_i2o6i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_altrb"]
-size = Vector2(53, 12)
+size = Vector2(53, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jy86d"]
-size = Vector2(63, 2.5)
+size = Vector2(63, 6.25)
 
 [sub_resource type="Gradient" id="Gradient_wbyo8"]
 offsets = PackedFloat32Array(0, 0.536585, 1)
@@ -18,13 +18,16 @@ gradient = SubResource("Gradient_wbyo8")
 height = 6
 fill_from = Vector2(1, 1)
 
-[node name="TrapSpikes" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhhu6"]
+size = Vector2(5, 20)
+
+[node name="TrapSpikes" type="Area2D" groups=["Sharp"]]
 collision_layer = 24
 collision_mask = 3
 script = ExtResource("1_i2o6i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
+position = Vector2(-0.5, 3)
 shape = SubResource("RectangleShape2D_altrb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -35,11 +38,36 @@ collision_layer = 24
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 8)
+position = Vector2(0, 9.875)
 shape = SubResource("RectangleShape2D_jy86d")
 
 [node name="FloorSprite" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(0, 10)
 texture = SubResource("GradientTexture2D_madpu")
 
+[node name="NPC_control" type="Node2D" parent="."]
+
+[node name="NucToBlockNPCsLeft" type="StaticBody2D" parent="NPC_control"]
+position = Vector2(-30, 3)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC_control/NucToBlockNPCsLeft"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_vhhu6")
+
+[node name="NubToBlockNPCsRight" type="StaticBody2D" parent="NPC_control"]
+position = Vector2(29, 3)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC_control/NubToBlockNPCsRight"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_vhhu6")
+
+[node name="ContinuousDamageTimer" type="Timer" parent="."]
+wait_time = 1.2
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="ContinuousDamageTimer" to="." method="_on_continuous_damage_timer_timeout"]

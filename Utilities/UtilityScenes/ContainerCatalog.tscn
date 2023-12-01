@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://mk0polehyr7k"]
+[gd_scene load_steps=19 format=3 uid="uid://mk0polehyr7k"]
 
 [ext_resource type="Script" path="res://Utilities/UtilityScenes/ContainerCatalog.gd" id="1_b372s"]
 [ext_resource type="Script" path="res://Utilities/UtilityScenes/ContainerProperties.gd" id="2_5buau"]
@@ -7,69 +7,110 @@
 [ext_resource type="PackedScene" uid="uid://brq0phdu6dm3j" path="res://Levels/Containers/IanC/Container_3.tscn" id="5_l31yl"]
 [ext_resource type="PackedScene" uid="uid://dt181ly2upt1t" path="res://Levels/Containers/Guac/LargeContainer2.tscn" id="5_sbeep"]
 [ext_resource type="PackedScene" uid="uid://n1c6uj18b3nd" path="res://Levels/Containers/Guac/LargeContainer3.tscn" id="6_6rpnx"]
+[ext_resource type="PackedScene" uid="uid://ufti7pfrl1ch" path="res://Levels/Containers/Plex/plex_container_1_lab.tscn" id="6_20daq"]
+[ext_resource type="PackedScene" uid="uid://c6lwdyus4t1k6" path="res://Levels/Containers/IanC/Container_4.tscn" id="6_t0vnt"]
+[ext_resource type="PackedScene" uid="uid://bw1veyfblyydh" path="res://Levels/Containers/Plex/plex_container_2_factory.tscn" id="7_80lyl"]
 [ext_resource type="PackedScene" uid="uid://b0pdl3tlo5xbs" path="res://Levels/Containers/Guac/LargeContainer4.tscn" id="7_fsu81"]
 [ext_resource type="PackedScene" uid="uid://bqpc5e3t3s7f" path="res://Levels/Containers/Guac/LargeContainer1.tscn" id="8_3o4p7"]
 [ext_resource type="PackedScene" uid="uid://c8qshoquywcr3" path="res://Levels/Containers/Guac/LargeContainer5.tscn" id="9_bjhbe"]
 [ext_resource type="PackedScene" uid="uid://b4h8trxb28bud" path="res://Levels/Containers/Guac/LargeContainer6.tscn" id="10_0a6bj"]
 [ext_resource type="PackedScene" uid="uid://dk4rauivduof1" path="res://Levels/Containers/Guac/LargeContainer7.tscn" id="11_mdedf"]
+[ext_resource type="PackedScene" uid="uid://cl58fohj8ntaf" path="res://Levels/Containers/Guac/LargeContainer8.tscn" id="13_5ksko"]
+[ext_resource type="PackedScene" uid="uid://cq356j7cqfto5" path="res://Levels/Containers/Guac/LargeContainer9.tscn" id="14_66st2"]
+[ext_resource type="PackedScene" uid="uid://cj2k4stikljcw" path="res://Levels/Containers/Guac/LargeContainer10.tscn" id="15_k8xw5"]
 
 [node name="ContainerCatalog" type="Node"]
 script = ExtResource("1_b372s")
 debug_mode = true
 
-[node name="Container1" type="Node" parent="."]
+[node name="Container1_Soyda" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 5
 container_exit_flags = 15
 packed_scene = ExtResource("3_bhmu2")
 
-[node name="Container2" type="Node" parent="."]
+[node name="Container2_Rave" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
 packed_scene = ExtResource("4_8x4k3")
 
-[node name="IanContainer3" type="Node" parent="."]
+[node name="IanContainer3_PygDen" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
 packed_scene = ExtResource("5_l31yl")
 
-[node name="GuacContainer" type="Node" parent="."]
+[node name="IanContainer4_Gym" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_exit_flags = 15
+packed_scene = ExtResource("6_t0vnt")
+
+[node name="PlexContainer1_lab" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_type = 2
+container_exit_flags = 15
+packed_scene = ExtResource("6_20daq")
+
+[node name="PlexContainer2_factory" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_type = 1
+container_exit_flags = 15
+packed_scene = ExtResource("7_80lyl")
+
+[node name="GuacContainer_Uprising" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 1
 container_exit_flags = 15
 packed_scene = ExtResource("5_sbeep")
 
-[node name="GuacContainer2" type="Node" parent="."]
+[node name="GuacContainer2_Teamster" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 4
 container_exit_flags = 15
 packed_scene = ExtResource("6_6rpnx")
 
-[node name="GuacContainer3" type="Node" parent="."]
+[node name="GuacContainer3_Gears" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_exit_flags = 15
 packed_scene = ExtResource("7_fsu81")
 
-[node name="GuacContainer4" type="Node" parent="."]
+[node name="GuacContainer4_HideyHole" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 4
 container_exit_flags = 15
 packed_scene = ExtResource("8_3o4p7")
 
-[node name="GuacContainer5" type="Node" parent="."]
-script = ExtResource("2_5buau")
-container_type = 4
-container_exit_flags = 15
-packed_scene = ExtResource("9_bjhbe")
-
-[node name="GuacContainer6" type="Node" parent="."]
-script = ExtResource("2_5buau")
-container_type = 4
-container_exit_flags = 15
-packed_scene = ExtResource("10_0a6bj")
-
-[node name="GuacContainer7" type="Node" parent="."]
+[node name="GuacContainer5_Ice1" type="Node" parent="."]
 script = ExtResource("2_5buau")
 container_type = 2
 container_exit_flags = 15
+packed_scene = ExtResource("9_bjhbe")
+
+[node name="GuacContainer6_PygDen2" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_type = 3
+container_exit_flags = 15
+packed_scene = ExtResource("10_0a6bj")
+
+[node name="GuacContainer7_Chill" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_type = 5
+container_exit_flags = 15
 packed_scene = ExtResource("11_mdedf")
+
+[node name="GuacContainer8_Towers" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_type = 1
+container_exit_flags = 15
+packed_scene = ExtResource("13_5ksko")
+
+[node name="GuacContainer9_Sharp" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_type = 1
+container_exit_flags = 15
+packed_scene = ExtResource("14_66st2")
+
+[node name="GuacContainer10_Tide" type="Node" parent="."]
+script = ExtResource("2_5buau")
+container_type = 4
+container_exit_flags = 15
+packed_scene = ExtResource("15_k8xw5")

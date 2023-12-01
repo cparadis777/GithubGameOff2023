@@ -1,20 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dm2tosesjfq22"]
+[gd_scene load_steps=8 format=3 uid="uid://dm2tosesjfq22"]
 
 [ext_resource type="Script" path="res://Entities/Environment/destructible_wall.gd" id="1_dmkyx"]
 [ext_resource type="Texture2D" uid="uid://d0id0y38gcmhm" path="res://art/props/random_rock_debris.png" id="2_pg4u0"]
+[ext_resource type="Texture2D" uid="uid://pyuflx4m0ii5" path="res://art/props/wall-breakable.png" id="2_y2hwo"]
 [ext_resource type="AudioStream" uid="uid://cymibnijhml5u" path="res://audio/sfx/placeholder/pot_crash.wav" id="3_s845f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_goag4"]
 size = Vector2(13, 97)
-
-[sub_resource type="Gradient" id="Gradient_5r1bj"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5nex5"]
-gradient = SubResource("Gradient_5r1bj")
-width = 12
-height = 96
-fill_from = Vector2(0.530488, 1)
-fill_to = Vector2(0.509146, 0)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hwbpm"]
 particles_animation = true
@@ -28,7 +20,8 @@ stream_0/stream = ExtResource("3_s845f")
 stream_0/weight = 1.0
 
 [node name="DestructibleWall" type="StaticBody2D" groups=["Kickables"]]
-collision_layer = 8
+collision_layer = 24
+collision_mask = 7
 script = ExtResource("1_dmkyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -37,7 +30,7 @@ shape = SubResource("RectangleShape2D_goag4")
 
 [node name="WallSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -49)
-texture = SubResource("GradientTexture2D_5nex5")
+texture = ExtResource("2_y2hwo")
 
 [node name="DebrisParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_hwbpm")

@@ -61,12 +61,22 @@ func _physics_process(delta):
 	apply_gravity(delta) # all states
 	sync_motion_to_platforms(delta) # all states
 	if State == States.RUNNING:
-		if direction != 0:
-			velocity.x = direction * SPEED
-			$AnimatedSprite2D.scale.x = direction
-			detect_obstacles_and_cliffs(delta)
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = direction * SPEED
+		$AnimatedSprite2D.scale.x = direction
+		$Sensors.scale.x = direction
+		if is_obstructed():
+			turn_around()
+		elif at_cliff():
+			if randf() < 0.3:
+				jump()
+			else:
+				turn_around()
+		elif is_in_melee_range():
+			if randf() < 1.5 * delta:
+				attack()
+		elif randf() < 0.35 * delta:
+			attack()
+
 	elif State == States.ATTACKING:
 		velocity.x = direction * SPEED * kick_speed_multiplier
 	elif State == States.DEAD:
@@ -77,25 +87,43 @@ func _physics_process(delta):
 		if velocity.y >= 0 and is_on_floor():
 			land()
 	
-	
 	move_and_slide() # all states
 
-func detect_obstacles_and_cliffs(delta):
-	if State == States.DEAD:
-		return
-		
-	elif State == States.RUNNING and is_on_floor():
-		if (
-			not $Sensors/CliffDetector.is_colliding() # cliff
-			or  $Sensors/ObstacleDetector.is_colliding() # obstacle
-			):
-				if randf() < 0.65 * delta:
-					turn_around()
-				elif randf() < 0.65 * delta:
-					jump()
-				elif randf() < 0.3 * delta:
-					attack()
 
+func is_in_melee_range():
+	if $Sensors/PlayerDetector.is_colliding():
+		if $Sensors/PlayerDetector.get_collider().is_in_group("Player"):
+			return true
+	return false
+
+
+func is_obstructed():
+	if $Sensors/ObstacleDetector.is_colliding():
+		return true
+	else:
+		return false
+
+func at_cliff():
+	if $Sensors/PlatformDetector.is_colliding and not $Sensors/CliffDetector.is_colliding():
+		return true
+	else:
+		return false
+
+#func detect_obstacles_and_cliffs(delta):
+#	if State == States.DEAD:
+#		return
+#
+#	elif State == States.RUNNING and is_on_floor():
+#		if is_obstructed():
+#			if randf() < 0.85 * delta:
+#				turn_around()
+#
+#		elif at_cliff():
+#			if randf() < 0.65 * delta:
+#				jump()
+#			else:
+#				turn_around()
+			
 func sync_motion_to_platforms(_delta):
 	var potential_platform = $Sensors/PlatformDetector.get_collider()
 	if potential_platform != null and potential_platform.is_in_group("MovingPlatforms"):
@@ -109,11 +137,12 @@ func apply_gravity(delta):
 	floor_last_frame = is_on_floor()
 	
 func jump():
-	if is_on_floor():
+	if is_on_floor() and $RecentlyLandedTimer.is_stopped():
 		velocity.y = JUMP_VELOCITY
 		State = States.JUMPING
 
 func land():
+	$RecentlyLandedTimer.start()
 	State = States.RUNNING
 	velocity.y = 0
 
@@ -128,7 +157,9 @@ func run():
 	State = States.RUNNING
 	
 func turn_around():
-	direction *= -1
+	if $RecentlyTurnedAroundTimer.is_stopped():
+		direction *= -1
+		$RecentlyTurnedAroundTimer.start()
 
 
 
@@ -157,12 +188,15 @@ func choose_new_behaviour():
 
 func is_facing_player():
 	var player = get_tree().get_first_node_in_group("Player")
+	
 	if player == null:
-		return
-	if player.global_position.x > global_position.x:
+		return null
+	var actual_dir = sign(player.global_position.x - self.global_position.x)
+	if actual_dir == direction:
 		return true
 	else:
 		return false
+	
 
 
 func _on_animation_player_animation_finished(anim_name):
@@ -232,7 +266,7 @@ func _on_decision_timer_timeout():
 		$DecisionTimer.stop()
 		return
 	
-	elif State in [States.RUNNING, States.JUMPING, States.IDLE ]:
+	elif State in [States.RUNNING, States.IDLE ]:
 		choose_new_behaviour()
 	$DecisionTimer.set_wait_time(randf_range(0.8, 2.5))
 	$DecisionTimer.start()

@@ -1,18 +1,23 @@
-[gd_scene load_steps=20 format=3 uid="uid://c8qshoquywcr3"]
+[gd_scene load_steps=25 format=3 uid="uid://c8qshoquywcr3"]
 
-[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_rtxks"]
-[ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_1dccq"]
-[ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_0133q"]
-[ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="3_gl13u"]
-[ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="4_urxe2"]
-[ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="5_g08vb"]
-[ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="6_f8vmm"]
-[ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="7_d2kd4"]
-[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="8_78j8k"]
-[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="9_je7k7"]
-[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="10_bekvs"]
-[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="12_w2sde"]
-[ext_resource type="PackedScene" uid="uid://cxtontreijkdo" path="res://Entities/Environment/portals/opening_doors_voice.tscn" id="13_4ov67"]
+[ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_d7syb"]
+[ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_pvl8u"]
+[ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="3_q6oni"]
+[ext_resource type="PackedScene" uid="uid://cmex243kki4q7" path="res://Entities/Environment/portals/door_left.tscn" id="4_4ngjh"]
+[ext_resource type="PackedScene" uid="uid://bbo6801dg8gdr" path="res://Entities/Environment/portals/door_right.tscn" id="5_6d1cp"]
+[ext_resource type="PackedScene" uid="uid://crulnc62lfij6" path="res://Entities/Environment/portals/door_up.tscn" id="6_8amyw"]
+[ext_resource type="PackedScene" uid="uid://nb1xwmg8yxdj" path="res://Entities/Environment/portals/door_down.tscn" id="7_6771f"]
+[ext_resource type="Texture2D" uid="uid://cf107yo5xkwtt" path="res://art/props/shipping_container_generic.png" id="8_5galm"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="9_kos1d"]
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="10_rhhe5"]
+[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="11_pt3hs"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="12_46xui"]
+[ext_resource type="PackedScene" uid="uid://cxtontreijkdo" path="res://Entities/Environment/portals/opening_doors_voice.tscn" id="13_oxjgv"]
+[ext_resource type="PackedScene" uid="uid://cfeyc76xirsc4" path="res://Entities/Environment/BG_Non-interactable/frozen_lung.tscn" id="14_xce22"]
+[ext_resource type="PackedScene" uid="uid://hnjmjxrwiiyw" path="res://Entities/Environment/BG_Non-interactable/frozen_heart.tscn" id="15_l1gkv"]
+[ext_resource type="PackedScene" uid="uid://bt3w5kacd82vr" path="res://Entities/Environment/BG_Non-interactable/frozen_spleen.tscn" id="16_m47dp"]
+[ext_resource type="PackedScene" uid="uid://bb21yfdpjtd27" path="res://Entities/Environment/BG_Non-interactable/frozen_brain.tscn" id="17_ae0y6"]
+[ext_resource type="PackedScene" uid="uid://bnhc0fubgb50v" path="res://Entities/Environment/BG_Non-interactable/cooling_system.tscn" id="18_w2u6c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -31,18 +36,18 @@ size = Vector2(82, 480)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xia"]
 size = Vector2(796, 340)
 
-[node name="BaseContainer2" type="StaticBody2D"]
+[node name="IceNFreezy_01" type="StaticBody2D"]
 collision_layer = 24
 collision_mask = 7
-script = ExtResource("1_rtxks")
+script = ExtResource("1_d7syb")
 
-[node name="DarkeningLayer" parent="." instance=ExtResource("2_1dccq")]
+[node name="DarkeningLayer" parent="." instance=ExtResource("2_pvl8u")]
 
 [node name="Interior" type="Sprite2D" parent="."]
 z_index = -4
 position = Vector2(0, -6.55651e-06)
 scale = Vector2(2, 2)
-texture = ExtResource("2_0133q")
+texture = ExtResource("3_q6oni")
 
 [node name="Openings" type="Node2D" parent="."]
 
@@ -104,19 +109,19 @@ texture = SubResource("PlaceholderTexture2D_v1mhl")
 
 [node name="Exits" type="Node2D" parent="."]
 
-[node name="LEFT" parent="Exits" instance=ExtResource("3_gl13u")]
+[node name="LEFT" parent="Exits" instance=ExtResource("4_4ngjh")]
 z_index = -1
 position = Vector2(-398, 169)
 
-[node name="RIGHT" parent="Exits" instance=ExtResource("4_urxe2")]
+[node name="RIGHT" parent="Exits" instance=ExtResource("5_6d1cp")]
 z_index = -1
 position = Vector2(398, 169)
 
-[node name="UP" parent="Exits" instance=ExtResource("5_g08vb")]
+[node name="UP" parent="Exits" instance=ExtResource("6_8amyw")]
 z_index = -1
 position = Vector2(0, -171)
 
-[node name="DOWN" parent="Exits" instance=ExtResource("6_f8vmm")]
+[node name="DOWN" parent="Exits" instance=ExtResource("7_6771f")]
 z_index = -1
 position = Vector2(0, 169)
 
@@ -125,7 +130,7 @@ visible = false
 z_index = 1
 position = Vector2(4.72069e-05, -0.500001)
 scale = Vector2(2.5, 2.50521)
-texture = ExtResource("7_d2kd4")
+texture = ExtResource("8_5galm")
 
 [node name="TopCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -206)
@@ -152,65 +157,360 @@ shape = SubResource("RectangleShape2D_m7xia")
 
 [node name="Traps" type="Node2D" parent="."]
 
-[node name="TrapSpikes" parent="Traps" instance=ExtResource("9_je7k7")]
+[node name="TrapSpikes" parent="Traps" instance=ExtResource("9_kos1d")]
 position = Vector2(-258, 79)
 
-[node name="TrapSpikes2" parent="Traps" instance=ExtResource("9_je7k7")]
+[node name="TrapSpikes2" parent="Traps" instance=ExtResource("9_kos1d")]
 position = Vector2(-194, 79)
 
-[node name="TrapSpikes4" parent="Traps" instance=ExtResource("9_je7k7")]
+[node name="TrapSpikes4" parent="Traps" instance=ExtResource("9_kos1d")]
 position = Vector2(258, 78)
 
-[node name="TrapSpikes3" parent="Traps" instance=ExtResource("9_je7k7")]
+[node name="TrapSpikes3" parent="Traps" instance=ExtResource("9_kos1d")]
 position = Vector2(-4, 53)
 
-[node name="TrapSpikes5" parent="Traps" instance=ExtResource("9_je7k7")]
+[node name="TrapSpikes5" parent="Traps" instance=ExtResource("9_kos1d")]
 position = Vector2(195, 78)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="RunningAssassin" parent="Enemies" instance=ExtResource("10_bekvs")]
+[node name="RunningAssassin" parent="Enemies" instance=ExtResource("10_rhhe5")]
 position = Vector2(-200, 164)
 
-[node name="RunningAssassin2" parent="Enemies" node_paths=PackedStringArray("animation_player") instance=ExtResource("10_bekvs")]
+[node name="RunningAssassin2" parent="Enemies" node_paths=PackedStringArray("animation_player") instance=ExtResource("10_rhhe5")]
 position = Vector2(-109, 163)
 animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 
-[node name="RunningAssassin3" parent="Enemies" node_paths=PackedStringArray("animation_player") instance=ExtResource("10_bekvs")]
+[node name="RunningAssassin3" parent="Enemies" node_paths=PackedStringArray("animation_player") instance=ExtResource("10_rhhe5")]
 position = Vector2(149, 164)
 animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 
-[node name="RunningAssassin4" parent="Enemies" node_paths=PackedStringArray("animation_player") instance=ExtResource("10_bekvs")]
+[node name="RunningAssassin4" parent="Enemies" node_paths=PackedStringArray("animation_player") instance=ExtResource("10_rhhe5")]
 position = Vector2(240, 163)
 animation_player = NodePath("../RunningAssassin/AnimationPlayer")
 
-[node name="NewRunner" parent="Enemies" instance=ExtResource("12_w2sde")]
+[node name="NewRunner" parent="Enemies" instance=ExtResource("11_pt3hs")]
 position = Vector2(-307, 168)
 
-[node name="NewRunner2" parent="Enemies" instance=ExtResource("12_w2sde")]
+[node name="NewRunner2" parent="Enemies" instance=ExtResource("11_pt3hs")]
 position = Vector2(297, 169)
 
 [node name="Platforms" type="Node2D" parent="."]
 
-[node name="MovingPlatform" parent="Platforms" instance=ExtResource("8_78j8k")]
+[node name="MovingPlatform" parent="Platforms" instance=ExtResource("12_46xui")]
 position = Vector2(-106, 68)
+show_piston = false
 
 [node name="FloorHeightMarker" parent="Platforms/MovingPlatform/AnimatableBody2D/Piston" index="0"]
 position = Vector2(2.08165e-12, 76)
 
-[node name="MovingPlatform2" parent="Platforms" instance=ExtResource("8_78j8k")]
+[node name="MovingPlatform2" parent="Platforms" instance=ExtResource("12_46xui")]
 position = Vector2(102, 68)
+show_piston = false
 
 [node name="FloorHeightMarker" parent="Platforms/MovingPlatform2/AnimatableBody2D/Piston" index="0"]
 position = Vector2(2.08165e-12, 76)
 
-[node name="MovingPlatform3" parent="Platforms" instance=ExtResource("8_78j8k")]
+[node name="MovingPlatform3" parent="Platforms" instance=ExtResource("12_46xui")]
 position = Vector2(-5, 9)
+show_piston = false
+
+[node name="CollisionShape2D" parent="Platforms/MovingPlatform3/AnimatableBody2D" index="0"]
+position = Vector2(0, 7)
 
 [node name="FloorHeightMarker" parent="Platforms/MovingPlatform3/AnimatableBody2D/Piston" index="0"]
 position = Vector2(0, 32)
 
-[node name="OpeningDoorsVoice" parent="." instance=ExtResource("13_4ov67")]
+[node name="OpeningDoorsVoice" parent="." instance=ExtResource("13_oxjgv")]
+
+[node name="bg_objects" type="Node2D" parent="."]
+position = Vector2(-240, 150)
+
+[node name="frozen_lung" parent="bg_objects" instance=ExtResource("14_xce22")]
+
+[node name="frozen_lung2" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(445, 0)
+
+[node name="frozen_heart" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(4, -15)
+
+[node name="frozen_heart2" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(432, -15)
+
+[node name="frozen_heart3" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(372, 2)
+
+[node name="frozen_spleen" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(-53, -3)
+
+[node name="frozen_lung3" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(85, -1)
+
+[node name="frozen_lung4" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(530, -1)
+
+[node name="frozen_heart4" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(89, -16)
+
+[node name="frozen_heart5" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(517, -1)
+
+[node name="frozen_heart6" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(457, 1)
+
+[node name="frozen_spleen4" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(32, -4)
+
+[node name="frozen_spleen3" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(426, 0)
+
+[node name="frozen_brain" parent="bg_objects" instance=ExtResource("17_ae0y6")]
+position = Vector2(-35, 0)
+
+[node name="frozen_spleen2" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(94, 0)
+
+[node name="frozen_lung5" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(-53, 0)
+
+[node name="frozen_lung6" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(392, 0)
+
+[node name="frozen_heart7" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(-49, -15)
+
+[node name="frozen_heart8" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(379, -15)
+
+[node name="frozen_heart9" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(346, 3)
+
+[node name="frozen_spleen5" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(-106, -3)
+
+[node name="frozen_lung7" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(32, -1)
+
+[node name="frozen_lung8" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(477, -1)
+
+[node name="frozen_heart10" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(36, -16)
+
+[node name="frozen_heart12" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(404, 1)
+
+[node name="frozen_spleen6" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(-21, -4)
+
+[node name="frozen_spleen7" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(373, 0)
+
+[node name="frozen_brain2" parent="bg_objects" instance=ExtResource("17_ae0y6")]
+position = Vector2(-88, 0)
+
+[node name="frozen_spleen8" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(41, 0)
+
+[node name="frozen_lung9" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(-31, -16)
+
+[node name="frozen_lung10" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(414, -16)
+
+[node name="frozen_heart13" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(-27, -31)
+
+[node name="frozen_heart14" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(401, -31)
+
+[node name="frozen_heart15" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(358, -10)
+
+[node name="frozen_spleen9" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(-84, -19)
+
+[node name="frozen_lung11" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(54, -17)
+
+[node name="frozen_lung12" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(499, 2)
+
+[node name="frozen_heart16" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(58, -32)
+
+[node name="frozen_heart17" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(369, -17)
+
+[node name="frozen_heart18" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(358, 3)
+
+[node name="frozen_spleen10" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(1, -20)
+
+[node name="frozen_spleen11" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(395, -16)
+
+[node name="frozen_brain3" parent="bg_objects" instance=ExtResource("17_ae0y6")]
+position = Vector2(-66, -16)
+
+[node name="frozen_spleen12" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(63, -16)
+
+[node name="frozen_lung13" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(367, 7)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart11" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(1, -35)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart19" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(429, -35)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart20" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(369, -18)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen13" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(-56, -23)
+scale = Vector2(-1, 1)
+
+[node name="frozen_lung15" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(82, -21)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart21" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(86, -36)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen14" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(29, -24)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen15" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(423, -20)
+scale = Vector2(-1, 1)
+
+[node name="frozen_brain4" parent="bg_objects" instance=ExtResource("17_ae0y6")]
+position = Vector2(-38, -20)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen16" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(91, -20)
+scale = Vector2(-1, 1)
+
+[node name="frozen_lung17" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(-56, -20)
+scale = Vector2(-1, 1)
+
+[node name="frozen_lung18" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(389, -20)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart24" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(-52, -35)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart25" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(376, -35)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart26" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(343, -17)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen17" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(-109, -23)
+scale = Vector2(-1, 1)
+
+[node name="frozen_lung19" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(29, -21)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart27" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(33, -36)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart28" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(401, -19)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen18" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(-24, -24)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen19" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(370, -20)
+scale = Vector2(-1, 1)
+
+[node name="frozen_brain5" parent="bg_objects" instance=ExtResource("17_ae0y6")]
+position = Vector2(-91, -20)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen20" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(38, -20)
+scale = Vector2(-1, 1)
+
+[node name="frozen_lung21" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(-34, -36)
+scale = Vector2(-1, 1)
+
+[node name="frozen_lung22" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(411, -28)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart29" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(-30, -51)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart30" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(398, -51)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart31" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(355, -30)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen21" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(-87, -39)
+scale = Vector2(-1, 1)
+
+[node name="frozen_lung23" parent="bg_objects" instance=ExtResource("14_xce22")]
+position = Vector2(51, -37)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart32" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(55, -52)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart33" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(366, -37)
+scale = Vector2(-1, 1)
+
+[node name="frozen_heart34" parent="bg_objects" instance=ExtResource("15_l1gkv")]
+position = Vector2(355, -17)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen22" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(-14, -43)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen23" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(392, -36)
+scale = Vector2(-1, 1)
+
+[node name="frozen_brain6" parent="bg_objects" instance=ExtResource("17_ae0y6")]
+position = Vector2(-69, -36)
+scale = Vector2(-1, 1)
+
+[node name="frozen_spleen24" parent="bg_objects" instance=ExtResource("16_m47dp")]
+position = Vector2(60, -36)
+scale = Vector2(-1, 1)
+
+[node name="cooling_system" parent="bg_objects" instance=ExtResource("18_w2u6c")]
+position = Vector2(327, -7)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

@@ -19,4 +19,8 @@ func stop_all_tracks() -> void:
 
 func play_track(track_name:String) -> void:
 	self.stop_all_tracks()
-	get_node(track_name).play()
+	if get_node(track_name):
+		get_node(track_name).play()
+	else:
+		printerr("AudioManager doesn't have track named: " + track_name)
+		

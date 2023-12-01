@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c001oq7jof7bq"]
+[gd_scene load_steps=33 format=3 uid="uid://c001oq7jof7bq"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_58hki"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_vhw04"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b3k1rwmtbee8n" path="res://art/Enemies/Cyber-Droid/explosion.png" id="4_wlkl5"]
 [ext_resource type="AudioStream" uid="uid://cf0f0edqsiv82" path="res://audio/sfx/placeholder/laserShoot2.wav" id="5_g8u11"]
 [ext_resource type="AudioStream" uid="uid://u7gx17pydv6x" path="res://audio/sfx/player_sfx/powerUp.wav" id="6_qp67u"]
+[ext_resource type="Texture2D" uid="uid://5fxe6rhu6r3g" path="res://art/Enemies/Cyber-Droid/droid-shooter-death-placeholder.png" id="7_2jw6w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nphfu"]
 resource_local_to_scene = true
@@ -484,6 +485,17 @@ position = Vector2(3.16863, -36.4393)
 sprite_frames = SubResource("SpriteFrames_0bkw0")
 animation = &"idle"
 
+[node name="Fluids" parent="Appearance/Corpse" index="0"]
+self_modulate = Color(0.117647, 0.160784, 0.266667, 1)
+rotation = 1.66252
+
+[node name="DeadBody" parent="Appearance/Corpse" index="1"]
+position = Vector2(0, -40)
+rotation = 6.01753
+texture = ExtResource("7_2jw6w")
+hframes = 3
+frame = 2
+
 [node name="SimpleMeleeAttack" parent="Behaviours/Attacks" index="0"]
 enabled = false
 
@@ -511,5 +523,6 @@ volume_db = -7.0
 [node name="Debug" parent="." index="10"]
 visible = false
 
+[editable path="Appearance/Corpse"]
 [editable path="Behaviours/Attacks/SimpleMeleeAttack"]
 [editable path="Behaviours/Attacks/SimpleShootAttack"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvnwulonqs455"]
+
+[ext_resource type="Texture2D" uid="uid://du5njdkyb48qj" path="res://art/decals/blood_splats.png" id="1_6vwgg"]
+[ext_resource type="Script" path="res://Entities/NPCs/vfx/blood_splats.gd" id="2_q5dcc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eak03"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 5
+particles_anim_loop = true
+
+[node name="BloodSplats" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_eak03")
+emitting = false
+amount = 3
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("1_6vwgg")
+emission_shape = 3
+emission_rect_extents = Vector2(32, 32)
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+angle_max = 360.0
+scale_amount_min = 0.33
+scale_amount_max = 1.5
+script = ExtResource("2_q5dcc")

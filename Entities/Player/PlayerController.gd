@@ -27,6 +27,7 @@ var temporary_health_bonus = 0
 
 var iframes : bool = false
 
+var initializing : bool = true
 
 @onready var state_machine = $StateMachine
 
@@ -45,6 +46,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _enter_tree():
+	initializing = true
 	if StageManager.current_player == null:
 		StageManager.current_player = self
 		#$Lookahead/Camera2D.make_current()
@@ -62,6 +64,10 @@ func _ready():
 	original_sprite_position = $Body/CyberRoninSprites.position
 	$AnimationPlayer.play("RESET")
 
+	# wait for other scenes to get ready
+	await get_tree().create_timer(0.3).timeout
+	initializing = false
+	
 func orient_sprites_to_velocity():
 	if abs(velocity.x) > 0:
 		face(sign(velocity.x))
@@ -122,7 +128,7 @@ func reset_rotation():
 
 func initiate_debugging_protocol():
 	zoom_camera(1)
-
+	health = Globals.player_stats["max_health"]
 	print("Player detected")
 	print("nodes in group Player: " + str(get_tree().get_nodes_in_group("Player")))
 	
@@ -292,7 +298,8 @@ func _on_strong_punch_started(): # comes from $StateMachine/StrongPunch
 #receive injury
 func _on_hit(attackPacket : AttackPacket):
 	if ( # a whole litany of exceptions
-			iframes == true
+			initializing == true
+			or iframes == true
 			or state_machine.state.name in ["Dying", "Dead", "InTransit", "Dash", "DescendingKick"]
 			or state_machine.state.name == "StrongPunch" and state_machine.state.stepping_back == true
 			or state_machine.state.name == "StrongPunch" and state_machine.state.moving == true
@@ -370,3 +377,7 @@ func _on_paused():
 
 func _on_resume():
 	state_machine.transition_to("Idle")
+
+func _on_container_entered(containerNode):
+	hud._on_container_entered(containerNode)
+

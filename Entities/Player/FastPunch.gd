@@ -56,9 +56,9 @@ func _on_hurt_box_body_entered(body):
 			attackPacket.damage = Globals.player_damage_defaults[name] * Globals.player_stats["damage_multiplier"]
 			attackPacket.originator = self
 			attackPacket.recipient = body
-			attackPacket.impact_vector = Vector2(player.get_last_known_direction(), -2 * punch_num_in_sequence )
+			attackPacket.impact_vector = Vector2(player.get_last_known_direction(), -(float(punch_num_in_sequence)/3.0) )
 			attackPacket.knockback = true
-			attackPacket.knockback_speed = 25 * punch_num_in_sequence
+			attackPacket.knockback_speed = 10 * punch_num_in_sequence
 			if body.has_method("_on_hit"):
 				hit.connect(body._on_hit)
 				hit.emit(attackPacket)

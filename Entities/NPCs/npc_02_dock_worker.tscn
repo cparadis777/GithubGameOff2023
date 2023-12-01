@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://b7lbhsnpyax66"]
+[gd_scene load_steps=58 format=3 uid="uid://b7lbhsnpyax66"]
 
 [ext_resource type="Script" path="res://Entities/NPCs/npc_02_dock_worker.gd" id="1_513fr"]
 [ext_resource type="Texture2D" uid="uid://b6746tmm6cqyw" path="res://art/Enemies/Cyber-Dock-Worker/cyber-dock-worker_attack.png" id="2_bprfk"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://3fgiln43r0y0" path="res://audio/sfx/placeholder/alert.wav" id="5_ksjfc"]
 [ext_resource type="AudioStream" uid="uid://bvxslxhu2o73k" path="res://audio/sfx/placeholder/648959__ienba__heavy-book.wav" id="5_t3spr"]
 [ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_26f2k"]
+[ext_resource type="PackedScene" uid="uid://dgpc8yd7cxdsf" path="res://Entities/NPCs/corpse.tscn" id="6_w35x8"]
 [ext_resource type="Script" path="res://Entities/NPCs/Behaviours/ArmShieldDefense.gd" id="11_r72wa"]
 [ext_resource type="AudioStream" uid="uid://bniqr5ed8gb17" path="res://audio/sfx/placeholder/blipSelect.wav" id="12_sak06"]
 [ext_resource type="Texture2D" uid="uid://dnnab7ufxjo1a" path="res://art/placeholder/shieldAura.png" id="13_2ci6u"]
@@ -765,7 +766,7 @@ _data = {
 
 [node name="NPC_02_DockWorker" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 2
-collision_mask = 19
+collision_mask = 17
 script = ExtResource("1_513fr")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
@@ -786,6 +787,17 @@ sprite_frames = SubResource("SpriteFrames_7erld")
 animation = &"idle"
 frame = 7
 offset = Vector2(-3.75001, -63.7501)
+
+[node name="Corpse" parent="Sprites" instance=ExtResource("6_w35x8")]
+
+[node name="Fluids" parent="Sprites/Corpse" index="0"]
+scale = Vector2(1.5, 1.5)
+frame = 8
+
+[node name="DeadBody" parent="Sprites/Corpse" index="1"]
+position = Vector2(-34, -46)
+texture = ExtResource("4_b1df5")
+hframes = 8
 
 [node name="Behaviours" type="Node2D" parent="."]
 
@@ -908,3 +920,5 @@ one_shot = true
 [connection signal="timeout" from="BloodTimer" to="." method="_on_blood_timer_timeout"]
 [connection signal="timeout" from="IFramesTimer" to="." method="_on_i_frames_timer_timeout"]
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
+
+[editable path="Sprites/Corpse"]

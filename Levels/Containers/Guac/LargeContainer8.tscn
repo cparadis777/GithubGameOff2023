@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://cl58fohj8ntaf"]
+
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_0qqog"]
+[ext_resource type="PackedScene" uid="uid://dm2tosesjfq22" path="res://Entities/Environment/destructible_wall.tscn" id="2_nr7aq"]
+[ext_resource type="AudioStream" uid="uid://chy3if1m4qsn0" path="res://audio/sfx/TutorialAIVoice/opening_doors.ogg" id="2_y3wg3"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="4_07ovh"]
+[ext_resource type="PackedScene" uid="uid://cmpouufnlcxkn" path="res://Entities/Environment/Platforms/basic_platform.tscn" id="5_0arwi"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="6_ea4f4"]
+
+[node name="TwoTowers" instance=ExtResource("1_0qqog")]
+
+[node name="OpeningDoorsVoice" parent="." index="10"]
+stream = ExtResource("2_y3wg3")
+
+[node name="DestructibleWall" parent="." index="14" instance=ExtResource("2_nr7aq")]
+position = Vector2(-96, 168)
+
+[node name="DestructibleWall2" parent="." index="15" instance=ExtResource("2_nr7aq")]
+position = Vector2(-222, 168)
+
+[node name="ShootyNPC" parent="." index="16" instance=ExtResource("4_07ovh")]
+position = Vector2(-165, 158)
+motion_mode = 1
+floor_constant_speed = true
+SPEED = 0.0
+JUMP_VELOCITY = 0.0
+
+[node name="BasicPlatform" parent="." index="17" instance=ExtResource("5_0arwi")]
+position = Vector2(-162, 69)
+
+[node name="DestructibleWall3" parent="." index="18" instance=ExtResource("2_nr7aq")]
+position = Vector2(224, 168)
+
+[node name="DestructibleWall4" parent="." index="19" instance=ExtResource("2_nr7aq")]
+position = Vector2(98, 168)
+
+[node name="ShootyNPC2" parent="." index="20" instance=ExtResource("4_07ovh")]
+position = Vector2(155, 158)
+motion_mode = 1
+floor_constant_speed = true
+SPEED = 0.0
+JUMP_VELOCITY = 0.0
+
+[node name="BasicPlatform2" parent="." index="21" instance=ExtResource("5_0arwi")]
+position = Vector2(158, 69)
+
+[node name="BasicPlatform4" parent="." index="22" instance=ExtResource("5_0arwi")]
+position = Vector2(1, -1)
+
+[node name="BasicPlatform3" parent="." index="23" instance=ExtResource("5_0arwi")]
+position = Vector2(-1, -81)
+
+[node name="VendingMachine" parent="." index="24" instance=ExtResource("6_ea4f4")]
+position = Vector2(72, 165)

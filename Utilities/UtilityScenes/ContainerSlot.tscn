@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2slp1rb0plu"]
+[gd_scene load_steps=2 format=3 uid="uid://c2slp1rb0plu"]
 
 [ext_resource type="Script" path="res://Utilities/UtilityScenes/ContainerSlot.gd" id="1_ikhls"]
-[ext_resource type="Texture2D" uid="uid://bifl7vmbh73tx" path="res://icon.svg" id="2_0i4v6"]
 
 [node name="ContainerSlot" type="Node2D"]
 script = ExtResource("1_ikhls")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_0i4v6")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b0pdl3tlo5xbs"]
+[gd_scene load_steps=21 format=3 uid="uid://b0pdl3tlo5xbs"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_at00n"]
 [ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_86yso"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="10_25gqt"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="11_a2x7r"]
 [ext_resource type="AudioStream" uid="uid://da6k8ay25njsb" path="res://audio/sfx/placeholder/opening_doors.wav" id="12_j1ldf"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="14_p6a6n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -31,7 +32,7 @@ size = Vector2(82, 480)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xia"]
 size = Vector2(796, 340)
 
-[node name="BaseContainer2" type="StaticBody2D"]
+[node name="GearsOfProgress" type="StaticBody2D"]
 collision_layer = 24
 collision_mask = 7
 script = ExtResource("1_at00n")
@@ -152,30 +153,35 @@ shape = SubResource("RectangleShape2D_m7xia")
 
 [node name="MovingPlatform" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-258, 98)
-speed = 80.0
+show_piston = false
 tween_duration = 3.0
 
 [node name="MovingPlatform6" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-334, 0)
+show_piston = false
 
 [node name="Location2" parent="MovingPlatform6/PositionMarkers" index="0"]
 position = Vector2(0, -107)
 
 [node name="MovingPlatform2" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-109, 98)
+show_piston = false
 tween_duration = 4.0
 
 [node name="MovingPlatform5" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-179, 25)
+show_piston = false
 
 [node name="Location2" parent="MovingPlatform5/PositionMarkers" index="0"]
 position = Vector2(0, -126)
 
 [node name="MovingPlatform3" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-1, 4)
+show_piston = false
 
 [node name="MovingPlatform4" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(-1, 4)
+show_piston = false
 
 [node name="TrapSpikes" parent="." instance=ExtResource("9_3h2nx")]
 position = Vector2(-300, 161)
@@ -206,15 +212,17 @@ position = Vector2(305, -79)
 
 [node name="MovingPlatform7" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(117, 104)
-speed = 80.0
+show_piston = false
 tween_duration = 4.0
 
 [node name="MovingPlatform9" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(266, 104)
+show_piston = false
 tween_duration = 3.0
 
 [node name="MovingPlatform11" parent="." instance=ExtResource("11_a2x7r")]
 position = Vector2(196, 10)
+show_piston = false
 
 [node name="Location2" parent="MovingPlatform11/PositionMarkers" index="0"]
 position = Vector2(0, -115)
@@ -224,6 +232,9 @@ position = Vector2(306, -73)
 
 [node name="OpeningDoorsVoice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_j1ldf")
+
+[node name="VendingMachine" parent="." instance=ExtResource("14_p6a6n")]
+position = Vector2(373, -76)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

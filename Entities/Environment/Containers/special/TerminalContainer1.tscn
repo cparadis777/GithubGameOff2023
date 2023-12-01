@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://f81lk2428snl"]
+[gd_scene load_steps=4 format=3 uid="uid://f81lk2428snl"]
 
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_v74g4"]
 [ext_resource type="PackedScene" uid="uid://bn1d5gkg3ad5x" path="res://Entities/Environment/portals/terminal_to_crane_scene.tscn" id="2_muo11"]
+[ext_resource type="PackedScene" uid="uid://dw5kmbygnkfyw" path="res://Entities/Environment/Popups/tutorial_bot_trigger_volume.tscn" id="3_r0syr"]
 
 [node name="TerminalContainer" instance=ExtResource("1_v74g4")]
 container_exit_flags = 2
@@ -17,3 +18,12 @@ visible = true
 
 [node name="TerminalToCrane" parent="." index="15" instance=ExtResource("2_muo11")]
 position = Vector2(-160, 144)
+
+[node name="AI_Bot_End" parent="." index="16" instance=ExtResource("3_r0syr")]
+override_text = "Here's the console which 
+controls the crane.;
+We can use it to scale
+ the final gap, 
+so we can get to the bridge."
+
+[editable path="AI_Bot_End"]

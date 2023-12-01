@@ -46,6 +46,8 @@ func _ready():
 	$Behaviours/Attacks/HeavyMeleeAttack.activate()
 	$Behaviours/Defenses/ArmShieldDefense.activate()
 	
+	$Sprites/Corpse.hide()
+	
 	if has_node("Sprites"):
 		avatar_root = $Sprites
 	elif has_node("PaperDoll"):
@@ -158,16 +160,23 @@ func update_animations():
 
 func begin_dying():
 	disable_all_timers()
-	State = States.DYING
+	State = States.DEAD
 	died.emit(name)
-	$AnimationPlayer.play("die")
+	#$AnimationPlayer.play("die")
 	#$HitBox.set_deferred("disabled", true)
 	set_collision_layer_value(2, false)
 	
 	set_collision_mask_value(1, false) # player
 	set_collision_mask_value(2, false) # other NPCs
+	spawn_corpse()
+	call_deferred("queue_free")
 	
 	
+func spawn_corpse():
+	var new_corpse = $Sprites/Corpse.duplicate()
+	add_sibling(new_corpse)
+	new_corpse.global_position = global_position
+	new_corpse.activate()
 
 func disable_all_timers():
 	var timers = find_children("", "Timer")

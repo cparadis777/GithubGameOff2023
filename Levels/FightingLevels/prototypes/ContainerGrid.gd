@@ -16,6 +16,9 @@ func generate_slots(shape:Vector2) -> void:
 
 
 func set_container(container:Node2D, coordinate:Vector2) -> void:
-	self.add_child(container)
-	container.position = self.container_slots[coordinate].position
-	self.container_slots[coordinate].container = container
+	container.name = str(coordinate) + "_" + container.name
+	self.container_slots[coordinate].add_child(container)
+	
+	#container.position = self.container_slots[coordinate].position
+	#container.position = Vector2(coordinate.x * self.container_width, -coordinate.y *self.container_height)
+	#self.container_slots[coordinate].container = container

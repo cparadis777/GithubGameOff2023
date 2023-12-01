@@ -1,5 +1,6 @@
 extends CanvasLayer
 var player
+var current_container
 @onready var minimap = %minimap
 
 # Called when the node enters the scene tree for the first time.
@@ -8,7 +9,17 @@ func _ready():
 	await owner.ready
 	$PauseMenu.hide()
 	update_health_display(player.health)
-	
+
+func _process(_delta):
+	#%SpeedrunTimer.text = str(Time.get_ticks_msec()/1000.0).pad_decimals(2)
+	%SpeedrunTimer.text = "Time: " + convertMillisecondsToTimeString(Time.get_ticks_msec())
+
+func convertMillisecondsToTimeString(milliseconds: int) -> String:
+	var seconds = int(float(milliseconds) / 1000.0)
+	var minutes = int(float(seconds) / 60.0)
+	seconds %= 60
+
+	return (str(minutes).pad_zeros(2) + ":" + str(seconds).pad_zeros(2))
 
 func update_health_display(health_remaining : float):
 	var heart_value = 10.0
@@ -45,5 +56,7 @@ func _on_player_picked_up_powerup(powerupType : Globals.PickupTypes):
 		new_cutscene.position = Vector2.ZERO
 		$SpamTimer.start()
 
-
+func _on_container_entered(containerNode):
+	current_container = containerNode
+	$Control/HBoxContainer/VBoxContainer/ContainerName.text = containerNode.name
 

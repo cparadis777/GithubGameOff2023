@@ -3,7 +3,7 @@ extends Node2D
 @export var target_weight:int
 @export var scene_path: String # GeneratedPlayspace.tscn
 @export var has_tutorial:bool = true
-var current_weight:int
+var current_weight:int # total weight.. not just the current container
 var ignore_invalid_path : bool = false
 
 
@@ -54,6 +54,7 @@ func press_escape_to_show_or_hide_tutorial(event):
 				
 
 func _on_fight_button_pressed():
+	Globals.set_difficulty_based_on_weight()
 	if $DropPoints.validate_level() or ignore_invalid_path:
 		StageManager.set_playspace_parameters($DropPoints.export_data())
 		if scene_path != "":
@@ -72,7 +73,11 @@ func popup_invalid_level_warning():
 
 	
 func _on_drop_points_weight_reset():
+	
+	Globals.scale_weight = 0
 	self.current_weight = 0
+	$crane.total_weight = 0
+	$crane._on_weight_reset()
 	self.add_weight(0)
 
 
@@ -105,3 +110,6 @@ func _on_drop_points_valid_level():
 func _on_drop_points_invalid_level():
 	$HUD/Panel/FightButton.disabled = true
 
+func _on_crane_dropped_container():
+	Globals.set_difficulty_based_on_weight()
+	

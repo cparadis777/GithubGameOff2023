@@ -7,17 +7,23 @@ var playspace_parameters: Dictionary
 var beat_the_boss_screen : PackedScene = preload("res://CutScenes/BeatTheBossWinCutscene.tscn")
 var player_dead_scene: PackedScene = preload("res://CutScenes/PlayerDeadLoseCutscene.tscn")
 
+var current_container
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 
 func change_scene_to(scene):
-	if scene is PackedScene:
-		# add some animated transitions later.
-		get_tree().change_scene_to_packed(scene)
-	elif scene is String:
-		get_tree().change_scene_to_file(scene)
+	if not scene is PackedScene:
+		scene = load(scene)
+
+	#animated transitions
+	SceneTransition.fade_out()
+	await SceneTransition.finished
+	get_tree().change_scene_to_packed(scene)
+	SceneTransition.fade_in()
 
 
 func _on_NPC_died(npc_name):
@@ -30,8 +36,12 @@ func increase_difficulty():
 
 
 func _on_player_dead_and_buried():
+	change_scene_to("res://CutScenes/PlayerDeadLoseCutscene.tscn")
 	#end_game("lose") # seems a bit harsh
-	reset_playspace()
+	
+	#reset_playspace()
+
+
 	
 func end_game(status):
 	match status:

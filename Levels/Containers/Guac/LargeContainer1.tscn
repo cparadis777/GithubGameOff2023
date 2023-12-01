@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bqpc5e3t3s7f"]
+[gd_scene load_steps=22 format=3 uid="uid://bqpc5e3t3s7f"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_0kc34"]
 [ext_resource type="Texture2D" uid="uid://c0fjh8knm16ik" path="res://art/interiors/shipping_container_generic_INTERIOR_ORTHOGRAPHIC.png" id="2_ntdlo"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="12_e4gig"]
 [ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="12_sh8xs"]
 [ext_resource type="PackedScene" uid="uid://cxtontreijkdo" path="res://Entities/Environment/portals/opening_doors_voice.tscn" id="14_2qx3x"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="15_ftqnt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjf8p"]
 size = Vector2(400, 70)
@@ -32,7 +33,7 @@ size = Vector2(82, 480)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xia"]
 size = Vector2(796, 340)
 
-[node name="BaseContainer2" type="StaticBody2D"]
+[node name="SlackerHideyHole" type="StaticBody2D"]
 collision_layer = 24
 collision_mask = 7
 script = ExtResource("1_0kc34")
@@ -206,6 +207,9 @@ position = Vector2(282, 80)
 position = Vector2(-4, 26)
 
 [node name="OpeningDoorsVoice" parent="." instance=ExtResource("14_2qx3x")]
+
+[node name="VendingMachine" parent="." instance=ExtResource("15_ftqnt")]
+position = Vector2(377, -124)
 
 [connection signal="body_entered" from="ContainerInterior" to="." method="_on_container_interior_body_entered"]
 [connection signal="body_exited" from="ContainerInterior" to="." method="_on_container_interior_body_exited"]

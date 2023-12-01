@@ -1,11 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://dttldmdwah7bk"]
+[gd_scene load_steps=15 format=3 uid="uid://dttldmdwah7bk"]
 
 [ext_resource type="Script" path="res://Menus/scene_launch_button.gd" id="1_a863l"]
 [ext_resource type="PackedScene" uid="uid://bdqawiqxlij23" path="res://Levels/placeholder/MockLevel.tscn" id="4_rdf1v"]
 [ext_resource type="PackedScene" uid="uid://dm0h5iyg1t6xj" path="res://UI/Title/start-button.tscn" id="4_xst20"]
 [ext_resource type="PackedScene" uid="uid://bpcm0ph14ms2a" path="res://Levels/placeholder/Level_02_Interior.tscn" id="5_7bqgq"]
 [ext_resource type="PackedScene" uid="uid://dwd8f536qu5go" path="res://UI/Title/skip_tutorial_button.tscn" id="5_klu46"]
-[ext_resource type="PackedScene" uid="uid://c3l0djo5xdqai" path="res://Levels/StackingLevels/StackLevel1.tscn" id="6_7i38v"]
+[ext_resource type="Theme" uid="uid://co8g7pj45ls2g" path="res://UI/Themes/green_button_theme.tres" id="6_t3uf2"]
+[ext_resource type="PackedScene" uid="uid://dr840r1p2wh3c" path="res://Levels/Tutorials/TutorialLevel_1.tscn" id="6_x4x1t"]
+[ext_resource type="Script" path="res://Menus/QuitForRealButton.gd" id="7_8ionk"]
+[ext_resource type="PackedScene" uid="uid://c3l0djo5xdqai" path="res://Levels/StackingLevels/StackLevel1.tscn" id="8_3c18l"]
+[ext_resource type="PackedScene" uid="uid://di3cuwne2hwff" path="res://Menus/scene_launch_button.tscn" id="8_jugc6"]
+[ext_resource type="PackedScene" uid="uid://da0yo0hv15fc3" path="res://Levels/TheTowerOfGrind.tscn" id="9_q1kj1"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1hk3o"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_tx7h4"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.144186, 0.190698, 0.516279, 0.581395, 0.776744, 0.823256)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.0941176, 0, 0, 0, 1, 1, 1, 1, 0.0941176, 0, 0, 0, 1, 1, 1, 1, 0.0941176, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i2awe"]
+gradient = SubResource("Gradient_tx7h4")
+height = 26
+fill_from = Vector2(0.0107914, 0.23907)
+fill_to = Vector2(1, 0.476496)
+repeat = 1
 
 [node name="Buttons" type="GridContainer"]
 anchors_preset = 8
@@ -19,6 +39,8 @@ offset_right = 22.5
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_t3uf2")
+theme_override_constants/v_separation = 12
 
 [node name="LevelMockupButton" type="Button" parent="."]
 visible = false
@@ -34,9 +56,86 @@ text = "Guac Level 2"
 script = ExtResource("1_a863l")
 scene = ExtResource("5_7bqgq")
 
-[node name="TutorialButton" parent="." instance=ExtResource("4_xst20")]
+[node name="PlayButton" parent="." instance=ExtResource("8_jugc6")]
+unique_name_in_owner = true
 layout_mode = 2
+scene = ExtResource("6_x4x1t")
+
+[node name="TextureRect3" type="TextureRect" parent="PlayButton"]
+material = SubResource("CanvasItemMaterial_1hk3o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_i2awe")
+
+[node name="SkipTutBtn" parent="." instance=ExtResource("8_jugc6")]
+layout_mode = 2
+text = "Skip Tutorial"
+scene = ExtResource("6_x4x1t")
+
+[node name="TextureRect3" type="TextureRect" parent="SkipTutBtn"]
+material = SubResource("CanvasItemMaterial_1hk3o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_i2awe")
+
+[node name="TutorialButton" parent="." instance=ExtResource("4_xst20")]
+visible = false
+layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../SkipTutorialButton")
+scene = ExtResource("8_3c18l")
 
 [node name="SkipTutorialButton" parent="." instance=ExtResource("5_klu46")]
+visible = false
 layout_mode = 2
-scene = ExtResource("6_7i38v")
+focus_neighbor_top = NodePath("../TutorialButton")
+focus_neighbor_bottom = NodePath("../TowerOfPain")
+
+[node name="TowerOfPain" parent="." instance=ExtResource("8_jugc6")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../SkipTutorialButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+text = "Tower of Pain"
+scene = ExtResource("9_q1kj1")
+
+[node name="TextureRect2" type="TextureRect" parent="TowerOfPain"]
+material = SubResource("CanvasItemMaterial_1hk3o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_i2awe")
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_top = NodePath("../TowerOfPain")
+focus_neighbor_bottom = NodePath("../TutorialButton")
+theme = ExtResource("6_t3uf2")
+text = "QUIT"
+script = ExtResource("7_8ionk")
+
+[node name="TextureRect" type="TextureRect" parent="QuitButton"]
+material = SubResource("CanvasItemMaterial_1hk3o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_i2awe")
+
+[connection signal="pressed" from="QuitButton" to="QuitButton" method="_on_pressed"]

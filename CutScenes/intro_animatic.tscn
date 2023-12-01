@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c2lyuuos4t0d7"]
+[gd_scene load_steps=26 format=3 uid="uid://c2lyuuos4t0d7"]
 
 [ext_resource type="Script" path="res://CutScenes/intro_animatic.gd" id="1_642u7"]
 [ext_resource type="Texture2D" uid="uid://b0e1cshdxfpku" path="res://art/player/cyber-ronin.png" id="1_xlbbx"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bwnbumcecneus" path="res://art/UI/Title/manifest-violence-animated.png" id="11_qmvf4"]
 [ext_resource type="PackedScene" uid="uid://dm0h5iyg1t6xj" path="res://UI/Title/start-button.tscn" id="12_73lfk"]
 [ext_resource type="PackedScene" uid="uid://dwd8f536qu5go" path="res://UI/Title/skip_tutorial_button.tscn" id="13_66hro"]
+[ext_resource type="PackedScene" uid="uid://15sduewv6y65" path="res://UI/button_audio.tscn" id="17_o70j3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pos6s"]
 bg_color = Color(0, 0, 0, 1)
@@ -228,7 +229,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Slide4-TitleMenu/Control-Panel/Panel:self_modulate")
+tracks/14/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel:self_modulate")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -240,7 +241,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Slide4-TitleMenu/Control-Panel/TutorialButton:self_modulate")
+tracks/15/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel/TutorialButton:self_modulate")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -252,7 +253,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Slide4-TitleMenu/Control-Panel/SkipTutorialButton:self_modulate")
+tracks/16/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel/SkipTutorialButton:self_modulate")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -436,7 +437,7 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Slide4-TitleMenu/Control-Panel/Panel:self_modulate")
+tracks/14/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel:self_modulate")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -448,7 +449,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Slide4-TitleMenu/Control-Panel/TutorialButton:self_modulate")
+tracks/15/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel/TutorialButton:self_modulate")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -460,7 +461,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Slide4-TitleMenu/Control-Panel/SkipTutorialButton:self_modulate")
+tracks/16/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel/SkipTutorialButton:self_modulate")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -622,25 +623,26 @@ texture = ExtResource("10_x82pu")
 self_modulate = Color(1, 1, 1, 0)
 position = Vector2(9, -5)
 
-[node name="Panel" type="Sprite2D" parent="Slide4-TitleMenu/Control-Panel"]
+[node name="ButtonPanel" type="Sprite2D" parent="Slide4-TitleMenu/Control-Panel"]
+unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
 position = Vector2(155.5, -846)
 texture = ExtResource("11_nf0qc")
 
-[node name="TutorialButton" parent="Slide4-TitleMenu/Control-Panel" instance=ExtResource("12_73lfk")]
+[node name="TutorialButton" parent="Slide4-TitleMenu/Control-Panel/ButtonPanel" instance=ExtResource("12_73lfk")]
 self_modulate = Color(1, 1, 1, 0)
-offset_left = 54.0
-offset_top = -860.5
-offset_right = 127.0
-offset_bottom = -829.5
+offset_left = -101.5
+offset_top = -14.5
+offset_right = -28.5
+offset_bottom = 16.5
 focus_neighbor_right = NodePath("../SkipTutorialButton")
 
-[node name="SkipTutorialButton" parent="Slide4-TitleMenu/Control-Panel" instance=ExtResource("13_66hro")]
+[node name="SkipTutorialButton" parent="Slide4-TitleMenu/Control-Panel/ButtonPanel" instance=ExtResource("13_66hro")]
 self_modulate = Color(1, 1, 1, 0)
-offset_left = 150.5
-offset_top = -869.999
-offset_right = 252.5
-offset_bottom = -822.999
+offset_left = -5.0
+offset_top = -23.999
+offset_right = 97.0
+offset_bottom = 23.001
 focus_neighbor_left = NodePath("../TutorialButton")
 
 [node name="ManifestLabel" type="AnimatedSprite2D" parent="Slide4-TitleMenu"]
@@ -683,4 +685,8 @@ theme_override_fonts/font = ExtResource("8_5k53j")
 theme_override_font_sizes/font_size = 32
 text = "Manifest Violence"
 
+[node name="Audio" parent="." instance=ExtResource("17_o70j3")]
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+
+[editable path="Audio"]

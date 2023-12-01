@@ -52,26 +52,44 @@ var messages = [
 	you very soon!"
 ]
 
+@export var activated_immediately : bool = true
 var typing_speed = 0.075
 var current_message = 0
 var display = ""
 var current_character = 0
 var done_talking = false
+var byebye_already_played : bool = false
 
 signal finished
 
 func _ready():
-	if override_text != "":
-		messages = override_text.split(";")
+	$AnimationPlayer.play("RESET")
+	setup_messages(override_text)
 	$Label.hide()
 	$SpaceBar_UI.hide()
 	$Muse_AI.play("idle")
-	$AnimationPlayer.play("hello")
-	$spawn_timer.start()
+	if activated_immediately:
+		activate()
+	else:
+		hide()
+
+func setup_messages(overrideText):
+	if overrideText != "":
+		messages = overrideText.split(";")
+
+
+
+
 #	var current_message = 0
 #	var display = ""
 #	var current_character = 0
 #	done_talking = false
+
+
+func activate():
+	show()
+	$AnimationPlayer.play("hello")
+	$spawn_timer.start()
 
 func reset_dialogue():
 	current_message = 0
@@ -101,6 +119,8 @@ func show_entire_message():
 	current_character = len(messages[current_message])
 	display = messages[current_message]
 	$Label.text = display
+	$SpaceBar_UI.show()
+	$SpaceBar_UI.set_modulate(Color.WHITE)
 	
 func stop_dialogue():
 	finished.emit()
@@ -108,9 +128,11 @@ func stop_dialogue():
 	
 func go_next_message():
 	if (current_message == len(messages) - 1):
-		$spawn_timer.start()
-		done_talking = true
-		$AnimationPlayer.play("byebye")
+		if not byebye_already_played:
+			$spawn_timer.start()
+			done_talking = true
+			$AnimationPlayer.play("byebye")
+			byebye_already_played = true
 	else:
 		
 		current_message += 1
@@ -118,7 +140,7 @@ func go_next_message():
 		current_character = 0
 		$next_char.start()
 		$Muse_AI.play("speaking")
-		$SpaceBar_UI.hide	()
+		$SpaceBar_UI.hide()
 	
 func _on_next_char_timeout():
 	if (current_character < len(messages[current_message])) && !done_talking:

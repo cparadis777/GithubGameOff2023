@@ -23,3 +23,8 @@ func toggle_pause():
 
 func _on_resume_button_pressed():
 	toggle_pause()
+
+
+func _on_quit_button_pressed():
+	toggle_pause()
+	StageManager.change_scene_to("res://Menus/main_menu.tscn")

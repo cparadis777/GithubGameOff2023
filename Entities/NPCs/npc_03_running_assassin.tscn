@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://blh128dmuq6f7"]
+[gd_scene load_steps=49 format=3 uid="uid://blh128dmuq6f7"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_olg2y"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_4c1rq"]
@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://cfsablvhytn7g" path="res://audio/sfx/placeholder/karate_girl.wav" id="4_qrr87"]
 [ext_resource type="Texture2D" uid="uid://ty7sstgurklx" path="res://art/Enemies/Cyber-Sprinter/cyber-sprinter_placeholder.png" id="5_vkotl"]
 [ext_resource type="Texture2D" uid="uid://fsfojq0ndjdy" path="res://art/Enemies/Cyber-Sprinter/cyber-sprinter_run.png" id="6_8io5j"]
-[ext_resource type="Texture2D" uid="uid://cnaxu2cut8lyw" path="res://art/placeholder/boot.png" id="7_8w8fy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pfrcw"]
 radius = 12.6745
@@ -355,6 +354,18 @@ tracks/9/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("HurtEffect/BloodSplats:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ktijg"]
 resource_name = "attack"
@@ -527,7 +538,7 @@ tracks/0/path = NodePath("Appearance/Sprite2D:material:shader_parameter/iframes"
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -539,7 +550,7 @@ tracks/1/path = NodePath("HurtEffect:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -563,7 +574,19 @@ tracks/3/path = NodePath("Appearance/AnimatedSprite2D:material:shader_parameter/
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtEffect/BloodSplats:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -662,12 +685,6 @@ sprite_frames = SubResource("SpriteFrames_bcuiu")
 animation = &"idle"
 offset = Vector2(9.5059, -61.7883)
 
-[node name="Boot" type="Sprite2D" parent="Appearance" index="2"]
-visible = false
-position = Vector2(41.1922, -34.855)
-rotation = -0.874108
-texture = ExtResource("7_8w8fy")
-
 [node name="Jump" type="Node2D" parent="Behaviours/Movement" index="0"]
 
 [node name="FlyingKick" parent="Behaviours/Attacks" index="0" instance=ExtResource("4_cdrqc")]
@@ -696,5 +713,6 @@ visible = false
 
 [connection signal="animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_animation_changed"]
 
+[editable path="Appearance/Corpse"]
 [editable path="Behaviours/Attacks/SimpleMeleeAttack"]
 [editable path="Behaviours/Defenses/BloodSmear"]

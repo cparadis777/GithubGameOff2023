@@ -1,0 +1,144 @@
+[gd_scene load_steps=18 format=3 uid="uid://c6lwdyus4t1k6"]
+
+[ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_e0cjp"]
+[ext_resource type="Texture2D" uid="uid://bf4wjs11rnb7v" path="res://art/props/shipping_container_pain4gainz.png" id="2_pxgf3"]
+[ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="2_qtc3r"]
+[ext_resource type="PackedScene" uid="uid://cnpfx80vgpahc" path="res://Entities/Environment/BG_Non-interactable/workout_bench.tscn" id="2_vswy2"]
+[ext_resource type="PackedScene" uid="uid://cahv5hcfp5j82" path="res://Entities/Environment/BG_Non-interactable/workout_rack.tscn" id="3_56xnh"]
+[ext_resource type="PackedScene" uid="uid://dh6qbdrhxuk6g" path="res://Entities/Environment/Platforms/platform_jump_thru.tscn" id="3_pda0t"]
+[ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="4_0asai"]
+[ext_resource type="PackedScene" uid="uid://baolvybk46kht" path="res://Entities/Environment/BG_Non-interactable/protein_powder_knocked_over.tscn" id="4_o4d4q"]
+[ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="5_jbqnv"]
+[ext_resource type="PackedScene" uid="uid://baicuhcqcu303" path="res://Entities/Environment/BG_Non-interactable/workout_barbell.tscn" id="6_u866v"]
+[ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="6_xd8t8"]
+[ext_resource type="Texture2D" uid="uid://pi3lcqiys8rq" path="res://art/decals/bg decals/buff_cat_poster.png" id="7_2s0xs"]
+[ext_resource type="PackedScene" uid="uid://cfrpi07byqc2e" path="res://Entities/Environment/Traps/trap_spikes.tscn" id="7_ouna6"]
+[ext_resource type="PackedScene" uid="uid://c7o8et7ct0ph1" path="res://Entities/Environment/vending_machine.tscn" id="8_subri"]
+[ext_resource type="PackedScene" uid="uid://c5en3lqt0m2df" path="res://Entities/Environment/Traps/star_trap_shooter.tscn" id="10_6ly8e"]
+[ext_resource type="PackedScene" uid="uid://c001oq7jof7bq" path="res://Entities/NPCs/shooty_npc.tscn" id="11_c5ofi"]
+[ext_resource type="PackedScene" uid="uid://dfu4vkk6mgup0" path="res://Entities/Environment/BG_Non-interactable/protein_powder.tscn" id="15_66ui6"]
+
+[node name="SquattersGym" instance=ExtResource("1_e0cjp")]
+
+[node name="BGDecor" type="Node2D" parent="." index="1"]
+
+[node name="workout_bench" parent="BGDecor" index="0" instance=ExtResource("2_vswy2")]
+position = Vector2(274, 143)
+
+[node name="workout_rack" parent="BGDecor" index="1" instance=ExtResource("3_56xnh")]
+position = Vector2(201, 19)
+
+[node name="protein_powder-knocked_over" parent="BGDecor" index="2" instance=ExtResource("4_o4d4q")]
+position = Vector2(-347, 201)
+
+[node name="protein_powder-knocked_over2" parent="BGDecor" index="3" instance=ExtResource("4_o4d4q")]
+position = Vector2(-220, 194)
+
+[node name="Sprite2D" parent="BGDecor/protein_powder-knocked_over2" index="0"]
+flip_h = true
+
+[node name="protein_powder" parent="BGDecor" index="4" instance=ExtResource("15_66ui6")]
+position = Vector2(-206, 144)
+
+[node name="protein_powder2" parent="BGDecor" index="5" instance=ExtResource("15_66ui6")]
+position = Vector2(-222, 144)
+
+[node name="protein_powder4" parent="BGDecor" index="6" instance=ExtResource("15_66ui6")]
+position = Vector2(-190, 144)
+
+[node name="protein_powder5" parent="BGDecor" index="7" instance=ExtResource("15_66ui6")]
+position = Vector2(-201, 129)
+
+[node name="protein_powder3" parent="BGDecor" index="8" instance=ExtResource("15_66ui6")]
+position = Vector2(-215, 129)
+
+[node name="protein_powder6" parent="BGDecor" index="9" instance=ExtResource("15_66ui6")]
+position = Vector2(-203, -25)
+
+[node name="protein_powder7" parent="BGDecor" index="10" instance=ExtResource("15_66ui6")]
+position = Vector2(-217, -25)
+
+[node name="protein_powder10" parent="BGDecor" index="11" instance=ExtResource("15_66ui6")]
+position = Vector2(-210, -40)
+
+[node name="protein_powder8" parent="BGDecor" index="12" instance=ExtResource("15_66ui6")]
+position = Vector2(67, -108)
+
+[node name="protein_powder9" parent="BGDecor" index="13" instance=ExtResource("15_66ui6")]
+position = Vector2(53, -108)
+
+[node name="protein_powder11" parent="BGDecor" index="14" instance=ExtResource("15_66ui6")]
+position = Vector2(235, 70)
+
+[node name="workout_barbell" parent="BGDecor" index="15" instance=ExtResource("6_u866v")]
+position = Vector2(79, -112)
+rotation = 0.801018
+
+[node name="workout_barbell2" parent="BGDecor" index="16" instance=ExtResource("6_u866v")]
+position = Vector2(227, 63)
+rotation = -0.637067
+
+[node name="BuffCatPoster" type="Sprite2D" parent="BGDecor" index="17"]
+z_index = -1
+position = Vector2(-243, -58)
+texture = ExtResource("7_2s0xs")
+
+[node name="DarkeningLayer" parent="." index="2"]
+z_index = -1
+position = Vector2(4, 0)
+
+[node name="VendingMachine" parent="." index="3" instance=ExtResource("8_subri")]
+position = Vector2(-71, -17)
+
+[node name="Exterior" parent="." index="6"]
+texture = ExtResource("2_pxgf3")
+
+[node name="TrapSpikes2" parent="_Traps" index="0" instance=ExtResource("7_ouna6")]
+position = Vector2(90, 158)
+
+[node name="TrapSpikes3" parent="_Traps" index="1" instance=ExtResource("7_ouna6")]
+position = Vector2(169, 67)
+
+[node name="StarTrap-Shooter" parent="_Traps" index="2" instance=ExtResource("10_6ly8e")]
+position = Vector2(-339, -114)
+
+[node name="StarTrap-Shooter2" parent="_Traps" index="3" instance=ExtResource("10_6ly8e")]
+position = Vector2(341, -114)
+
+[node name="ShootyNPC" parent="_Enemies" index="0" instance=ExtResource("11_c5ofi")]
+position = Vector2(167, 167)
+
+[node name="NewRunner" parent="_Enemies" index="1" instance=ExtResource("4_0asai")]
+position = Vector2(53, 73)
+
+[node name="RunningAssassin" parent="_Enemies" index="2" instance=ExtResource("5_jbqnv")]
+position = Vector2(-295, -25)
+
+[node name="NPC_02_DockWorker" parent="_Enemies" index="3" instance=ExtResource("6_xd8t8")]
+position = Vector2(-299, 168)
+
+[node name="RunningAssassin2" parent="_Enemies" index="4" instance=ExtResource("5_jbqnv")]
+position = Vector2(170, -108)
+
+[node name="JumpThroughPlatform" parent="_Platforms" index="0" instance=ExtResource("3_pda0t")]
+position = Vector2(56, -100)
+
+[node name="JumpThroughPlatform2" parent="_Platforms" index="1" instance=ExtResource("3_pda0t")]
+position = Vector2(222, -100)
+
+[node name="JumpThroughPlatform3" parent="_Platforms" index="2" instance=ExtResource("3_pda0t")]
+position = Vector2(-258, -17)
+
+[node name="JumpThroughPlatform4" parent="_Platforms" index="3" instance=ExtResource("3_pda0t")]
+position = Vector2(-23, -17)
+
+[node name="JumpThroughPlatform5" parent="_Platforms" index="4" instance=ExtResource("3_pda0t")]
+position = Vector2(56, 76)
+
+[node name="JumpThroughPlatform6" parent="_Platforms" index="5" instance=ExtResource("3_pda0t")]
+position = Vector2(222, 76)
+
+[node name="MovingPlatform" parent="_Platforms" index="6" instance=ExtResource("2_qtc3r")]
+position = Vector2(-139, 136)
+
+[editable path="BGDecor/protein_powder-knocked_over2"]

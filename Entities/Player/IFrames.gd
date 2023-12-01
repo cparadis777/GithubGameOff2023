@@ -4,7 +4,7 @@ extends Node2D
 var iframes_timer : Timer
 signal started
 signal finished
-@export var iframes_duration : float = 0.4
+@export var iframes_duration : float = 1.0
 
 @onready var active: bool:
 	get:
@@ -20,17 +20,23 @@ func _ready():
 	iframes_timer.set_wait_time(iframes_duration)
 	iframes_timer.timeout.connect(_on_iframes_timer_timeout)
 	
-	started.connect(owner._on_iframes_started)
-	finished.connect(owner._on_iframes_finished)
+	if owner.has_method("_on_iframes_started"):
+		started.connect(owner._on_iframes_started)
+	else:
+		printerr(self.name , ": error connecting signal to owner: ", owner.name)
+		printerr("owner has no method: _on_iframes_started")
+	if owner.has_method("_on_iframes_finished"):
+		finished.connect(owner._on_iframes_finished)
 	add_child(iframes_timer)
 	
 	
-	
+
 
 func start():
 	iframes_timer.start()
 	started.emit()
 	$HurtFlash.show()
+	
 
 
 func _on_iframes_timer_timeout():

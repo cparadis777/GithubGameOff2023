@@ -7,7 +7,7 @@ var Goal : Goals = Goals.RELAX
 var previous_goal : Goals
 
 @export var SPEED : float = 100.0
-@export var mobile : bool = true
+var mobile : bool = false
 
 var health_max : float = 20
 var health = health_max

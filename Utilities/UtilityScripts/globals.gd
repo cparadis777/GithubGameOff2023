@@ -28,7 +28,8 @@ enum DamageTypes { WEAK_MELEE, STRONG_MELEE, IMPACT, PIERCE, FIRE, POISON, ELECT
 enum PickupTypes { HEALTH, DAMAGE, SPEED, JUMP }
 
 var difficulty : DifficultyScales = DifficultyScales.AVERAGE
-
+var scale_weight : float = 0.0
+var max_weight : float = 1100.0
 
 var player_stats = {
 	"max_health" : 100, # 1 heart = 10 points
@@ -51,3 +52,7 @@ var max_stats_upper_limits = {
 	"DescendingKick":150,
 	"Dash":30 # dash was OP, becaus it offers useful mobility and damage
 }
+
+func set_difficulty_based_on_weight():
+	# there's 20 points of difficulty.
+	difficulty = floor(clamp(scale_weight / max_weight, 0, 1) * DifficultyScales.keys().size()) as DifficultyScales

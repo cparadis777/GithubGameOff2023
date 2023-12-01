@@ -3,7 +3,7 @@ enum container_types { BENGAL, ICE, EAGLE }
 @export var container_type : container_types = container_types.BENGAL
 var textures = {
 	container_types.BENGAL: preload("res://art/low_res_containers/shipping_container_bengal_security-LOWRES.png"),
-	container_types.ICE: preload("res://art/low_res_containers/shipping_container_ice_and_freezy_LOWRES.png"),
+	container_types.ICE: preload("res://art/props/shipping_container_ice_and_freezy.png"),
 	container_types.EAGLE : preload("res://art/low_res_containers/shipping_container_ill_eagle-LOWRES.png"),
 } 
 
@@ -16,8 +16,11 @@ func _ready():
 
 func activate(containerType, body_struck):
 	container_type = containerType
-	$LeftPiece/Sprite.texture = textures[container_type]
-	$RightPiece/Sprite.texture = textures[container_type]
+#	$LeftPiece/Sprite.texture = textures[container_type]
+#	$RightPiece/Sprite.texture = textures[container_type]
+	$LeftPiece/Sprite.texture = textures[1] # make them all ice n freezy for simplicity due to time constraints
+	$RightPiece/Sprite.texture = textures[1]
+
 	break_apart(body_struck)
 	$SpawnTimer.start()
 	

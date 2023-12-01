@@ -25,8 +25,8 @@ func exit_level():
 	# print_debug("exit_level()")
 	
 	level_exited.emit(location)
-	SceneTransition.change_scene(next_scene, transition_seconds, wait_seconds)
-	
+	#SceneTransition.change_scene(next_scene, transition_seconds, wait_seconds)
+	StageManager.change_scene_to(next_scene)
 
 # Should be done on load of a level
 func enter_level():

@@ -13,10 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://bs3xmnbwmhy8h" path="res://Entities/Player/PlayerController.tscn" id="8_c4bua"]
 [ext_resource type="PackedScene" uid="uid://dagki3jiubn80" path="res://art/background/parallax_background.tscn" id="9_tjew5"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="13_o5i0a"]
+[ext_resource type="AudioStream" uid="uid://v6x2vmfp7tsm" path="res://audio/sfx/boss_sfx/boss_laugh.ogg" id="13_xblpf"]
+[ext_resource type="AudioStream" uid="uid://mt51aw1xr5gp" path="res://audio/sfx/boss_sfx/boss_rocket_boots.ogg" id="14_eijem"]
 [ext_resource type="Script" path="res://Levels/BossFight/BossFightCinematic.gd" id="14_gg47m"]
-[ext_resource type="AudioStream" uid="uid://px8em5ufndah" path="res://audio/sfx/placeholder/ha-ha-ha---ha.wav" id="15_ayayn"]
 [ext_resource type="PackedScene" uid="uid://dh3odxs6vlefi" path="res://Entities/Projectiles/bullet_tossed_shipping_container.tscn" id="15_t45xl"]
-[ext_resource type="AudioStream" uid="uid://c6l3b17t5jrnt" path="res://audio/sfx/placeholder/flame.wav" id="16_rmxvp"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5qk3d"]
 
@@ -333,7 +333,7 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0, 4.9, 11.3, 11.9, 13.2, 13.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(398, 1292), Vector2(398, 1292), Vector2(1700, 223), Vector2(1700, 246), Vector2(1700, 246), Vector2(694, 1005)]
+"values": [Vector2(398, 1292), Vector2(398, 1292), Vector2(1700, 223), Vector2(1700, 246), Vector2(1700, 246), Vector2(398, 1292)]
 }
 tracks/12/type = "method"
 tracks/12/imported = false
@@ -342,9 +342,12 @@ tracks/12/path = NodePath(".")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(15.6),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(13.6, 15.6),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"start_music"
+}, {
 "args": [],
 "method": &"activate"
 }]
@@ -551,13 +554,13 @@ visible_characters = 0
 visible_ratio = 0.0
 
 [node name="HaHaHa" type="AudioStreamPlayer" parent="BossNPC"]
-stream = ExtResource("15_ayayn")
+stream = ExtResource("13_xblpf")
 bus = &"sfx"
 
 [node name="FlameNoise" type="AudioStreamPlayer2D" parent="BossNPC"]
 position = Vector2(-1048.67, 305.333)
 scale = Vector2(0.666667, 0.666667)
-stream = ExtResource("16_rmxvp")
+stream = ExtResource("14_eijem")
 volume_db = 7.0
 bus = &"sfx"
 
@@ -612,5 +615,6 @@ position = Vector2(670, 680)
 
 [editable path="Player"]
 [editable path="BossNPC"]
+[editable path="BossNPC/Appearance/Corpse"]
 [editable path="BossNPC/Behaviours/Attacks/SimpleMeleeAttack"]
 [editable path="CraneJaws/Jaws"]

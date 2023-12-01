@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bqqakuyl2wa2g"]
+[gd_scene load_steps=14 format=3 uid="uid://bqqakuyl2wa2g"]
 
 [ext_resource type="PackedScene" uid="uid://d236kkv4xp3qw" path="res://Levels/BaseLevel.tscn" id="1_gusit"]
 [ext_resource type="Texture2D" uid="uid://bmsrysllnn6jw" path="res://art/props/shipping_container_soyda.png" id="2_f55js"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="5_c8b1f"]
 [ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="7_uighd"]
 [ext_resource type="Texture2D" uid="uid://bgcsjypnwti41" path="res://art/placeholder/gamepad_button_up.png" id="10_v6gc3"]
+[ext_resource type="PackedScene" uid="uid://cum8y1srdk0pm" path="res://UI/tutorial_ai.tscn" id="13_n3oxo"]
 
 [node name="BaseLevel" instance=ExtResource("1_gusit")]
 exit_flags = 1
@@ -76,6 +77,16 @@ position = Vector2(-131, 96)
 [node name="TrashCan" parent="." index="6" instance=ExtResource("7_uighd")]
 position = Vector2(-187, 0.999996)
 rotation = 1.91288
+
+[node name="AI_Tutorial_Text" parent="." index="7" instance=ExtResource("13_n3oxo")]
+position = Vector2(-66, 72)
+override_text = "You have a fast (<)
+and strong attack (>);Hold the strong
+attack to charge.
+You'll hear the tone change;
+Use them in the air
+to dash or kick.
+"
 
 [editable path="BaseContainer"]
 [editable path="AttackDemo"]

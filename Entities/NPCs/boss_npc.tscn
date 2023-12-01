@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://4ubg2v861dlv"]
+[gd_scene load_steps=22 format=3 uid="uid://4ubg2v861dlv"]
 
 [ext_resource type="PackedScene" uid="uid://m3aj2pmakgat" path="res://Entities/NPCs/BaseNPC.tscn" id="1_dhliq"]
 [ext_resource type="Shader" uid="uid://ofsllb4jr2er" path="res://Entities/NPCs/hit_flash_shader.tres" id="2_46dpl"]
 [ext_resource type="Texture2D" uid="uid://drt1ko3obj4xo" path="res://art/Enemies/Cyber-Boss/cyber-boss-Sheet.png" id="3_mxgy3"]
 [ext_resource type="Texture2D" uid="uid://bsgyd5cohss47" path="res://art/decals/alert.png" id="4_jtmub"]
+[ext_resource type="Texture2D" uid="uid://p543icdcdsbl" path="res://art/Enemies/Cyber-Boss/cyber-boss-carry.png" id="5_1rmlx"]
 [ext_resource type="PackedScene" uid="uid://d14b0n2jkrj85" path="res://Entities/Projectiles/falling_robot.tscn" id="5_7fgqb"]
 [ext_resource type="AudioStream" uid="uid://sffwslnfesy8" path="res://audio/sfx/placeholder/enemy_hurt_3.wav" id="6_85rgl"]
 [ext_resource type="Script" path="res://Entities/NPCs/BossRocketBoots.gd" id="7_0mmdm"]
@@ -229,6 +230,17 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_iyfrp")
 offset = Vector2(17.4275, -79.2158)
 
+[node name="Corpse" parent="Appearance" index="3"]
+visible = false
+
+[node name="Fluids" parent="Appearance/Corpse" index="0"]
+scale = Vector2(2, 2)
+frame = 5
+
+[node name="DeadBody" parent="Appearance/Corpse" index="1"]
+position = Vector2(-12.6745, 0)
+texture = ExtResource("5_1rmlx")
+
 [node name="SimpleMeleeAttack" parent="Behaviours/Attacks" index="0"]
 enabled = false
 
@@ -248,6 +260,9 @@ libraries = {
 [node name="ShootNoises" parent="." index="8"]
 stream = SubResource("AudioStreamRandomizer_1360e")
 
+[node name="Debug" parent="." index="10"]
+visible = false
+
 [node name="Rocket" type="Node2D" parent="." index="11"]
 visible = false
 script = ExtResource("7_0mmdm")
@@ -257,4 +272,5 @@ script = ExtResource("7_0mmdm")
 [node name="RocketBoots2" parent="Rocket" index="1" instance=ExtResource("8_85cby")]
 position = Vector2(15.8432, 17.4275)
 
+[editable path="Appearance/Corpse"]
 [editable path="Behaviours/Attacks/SimpleMeleeAttack"]
