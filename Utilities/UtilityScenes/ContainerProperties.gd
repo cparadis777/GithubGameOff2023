@@ -32,9 +32,15 @@ func match_type(type:ContainerProperties.container_type) -> bool:
 	return type == self.container_type
 
 func generate_fight_scene():
+	var new_container
 	if packed_scene != null:
-		return packed_scene.instantiate()
+		new_container = packed_scene.instantiate()
 	elif scene_path != "":
-		return load(scene_path).instantiate()
+		new_container = load(scene_path).instantiate()
 	else:
 		printerr("ContainerProperties for " + self.name + " needs a scene path or packed scene.")
+		return false
+
+	new_container.type = container_type
+	return new_container
+
