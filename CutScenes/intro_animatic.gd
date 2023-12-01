@@ -2,10 +2,19 @@ extends Node2D
 
 @export var starting_animation = "intro_animatic"
 var started = false
-@onready var start_button = get_node("Slide4-TitleMenu/Control-Panel/TutorialButton")
+@onready var start_button = %ButtonPanel/TutorialButton
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AudioManager.play_track("MainMenuTheme")
+	connect_button_audio()
+	
+func connect_button_audio():
+	for button in %ButtonPanel.get_children():
+		if button is Button or button is TextureButton:
+			button.mouse_entered.connect($Audio/HoverNoise.play)
+			button.pressed.connect($Audio/ClickNoise.play)
+			button.focus_entered.connect($Audio/HoverNoise.play)
+
 	
 
 func _input(event):
