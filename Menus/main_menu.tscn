@@ -77,6 +77,20 @@ expand_mode = 3
 [node name="Buttons3" parent="VBoxContainer/Body/MarginContainer/Body" instance=ExtResource("7_mi8of")]
 layout_mode = 2
 
+[node name="PlayButton" parent="VBoxContainer/Body/MarginContainer/Body/Buttons3" index="2"]
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../SkipTutBtn")
+
+[node name="SkipTutBtn" parent="VBoxContainer/Body/MarginContainer/Body/Buttons3" index="3"]
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../TowerOfPain")
+
+[node name="TowerOfPain" parent="VBoxContainer/Body/MarginContainer/Body/Buttons3" index="6"]
+focus_neighbor_top = NodePath("../SkipTutBtn")
+
+[node name="QuitButton" parent="VBoxContainer/Body/MarginContainer/Body/Buttons3" index="7"]
+focus_neighbor_bottom = NodePath("../PlayButton")
+
 [node name="Buttons2" type="VBoxContainer" parent="VBoxContainer/Body/MarginContainer/Body"]
 unique_name_in_owner = true
 visible = false

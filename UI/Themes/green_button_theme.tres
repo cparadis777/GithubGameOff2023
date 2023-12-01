@@ -1,11 +1,14 @@
 [gd_resource type="Theme" load_steps=6 format=3 uid="uid://co8g7pj45ls2g"]
 
-[ext_resource type="FontFile" uid="uid://da1i6jnlawpfn" path="res://UI/Themes/fonts/Play-Bold.ttf" id="1_31iji"]
+[ext_resource type="FontFile" uid="uid://danlaalj0k3dj" path="res://UI/Themes/fonts/Saira/Saira-BoldItalic.ttf" id="1_3cq03"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lkqc2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sj0j"]
 bg_color = Color(0.333333, 0.501961, 0.239216, 1)
-border_width_bottom = 1
-border_color = Color(0.607843, 0.713726, 0.427451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.933333, 0.952941, 0.764706, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -56,8 +59,8 @@ anti_aliasing = false
 
 [resource]
 Button/font_sizes/font_size = 20
-Button/fonts/font = ExtResource("1_31iji")
-Button/styles/focus = SubResource("StyleBoxFlat_lkqc2")
+Button/fonts/font = ExtResource("1_3cq03")
+Button/styles/focus = SubResource("StyleBoxFlat_8sj0j")
 Button/styles/hover = SubResource("StyleBoxFlat_hq0y6")
 Button/styles/normal = SubResource("StyleBoxFlat_b0uj3")
 Button/styles/pressed = SubResource("StyleBoxFlat_vi6dc")

@@ -6,7 +6,7 @@ extends Control
 func _ready():
 	connect_button_audio()
 	connect_button_signals()
-	$VBoxContainer/Body/MarginContainer/Body/Buttons3/TutorialButton.grab_focus()
+	$VBoxContainer/Body/MarginContainer/Body/Buttons3/PlayButton.grab_focus()
 
 
 func connect_button_audio():
