@@ -56,12 +56,18 @@ scene = ExtResource("5_7bqgq")
 
 [node name="TutorialButton" parent="." instance=ExtResource("4_xst20")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../SkipTutorialButton")
 
 [node name="SkipTutorialButton" parent="." instance=ExtResource("5_klu46")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../TutorialButton")
+focus_neighbor_bottom = NodePath("../TowerOfPain")
 
 [node name="TowerOfPain" parent="." instance=ExtResource("8_jugc6")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../SkipTutorialButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
 text = "Tower of Pain"
 scene = ExtResource("9_q1kj1")
 
@@ -78,8 +84,8 @@ texture = SubResource("GradientTexture2D_i2awe")
 
 [node name="QuitButton" type="Button" parent="."]
 layout_mode = 2
-focus_neighbor_left = NodePath("../../Buttons3/SkipTutorialButton")
-focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_top = NodePath("../TowerOfPain")
+focus_neighbor_bottom = NodePath("../TutorialButton")
 theme = ExtResource("6_t3uf2")
 text = "QUIT"
 script = ExtResource("7_8ionk")
