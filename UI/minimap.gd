@@ -30,6 +30,7 @@ func create_map():
 					var new_container_sprite = $SubViewport/ContainerSpriteTemplates/ContainerSpriteTemplate.duplicate()
 					$SubViewport/Rooms.add_child(new_container_sprite)
 					new_container_sprite.position = container.global_position / scale_differential + offset
+					#new_container_sprite.frame = container.type
 					new_container_sprite.frame = container.type
 					new_container_sprite.visible = true
 					#new_container_sprite.scale = Vector2.ONE * 1.25

@@ -46,11 +46,13 @@ packed_scene = ExtResource("6_t0vnt")
 
 [node name="PlexContainer1_lab" type="Node" parent="."]
 script = ExtResource("2_5buau")
+container_type = 2
 container_exit_flags = 15
 packed_scene = ExtResource("6_20daq")
 
 [node name="PlexContainer2_factory" type="Node" parent="."]
 script = ExtResource("2_5buau")
+container_type = 1
 container_exit_flags = 15
 packed_scene = ExtResource("7_80lyl")
 
