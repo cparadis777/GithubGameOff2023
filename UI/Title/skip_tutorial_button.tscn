@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwd8f536qu5go"]
+[gd_scene load_steps=6 format=3 uid="uid://dwd8f536qu5go"]
 
 [ext_resource type="Texture2D" uid="uid://brt18imoa6r85" path="res://art/UI/Title/skip-tutorial-button-open.png" id="1_g3rqg"]
 [ext_resource type="Texture2D" uid="uid://dsxbejhpr0ulg" path="res://art/UI/Title/skip-tutorial-button-closed.png" id="2_pnkx5"]
 [ext_resource type="Script" path="res://Menus/SkipTutorialButton.gd" id="3_buhgq"]
+[ext_resource type="Texture2D" uid="uid://dqwkx7brgan40" path="res://art/UI/Title/skip-tutorial-button-focus.png" id="3_owft3"]
 [ext_resource type="PackedScene" uid="uid://c3l0djo5xdqai" path="res://Levels/StackingLevels/StackLevel1.tscn" id="4_0hnkx"]
 
 [node name="SkipTutorialButton" type="TextureButton"]
 texture_normal = ExtResource("1_g3rqg")
 texture_pressed = ExtResource("2_pnkx5")
+texture_focused = ExtResource("3_owft3")
 script = ExtResource("3_buhgq")
 scene = ExtResource("4_0hnkx")

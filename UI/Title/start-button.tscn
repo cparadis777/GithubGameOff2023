@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm0h5iyg1t6xj"]
+[gd_scene load_steps=6 format=3 uid="uid://dm0h5iyg1t6xj"]
 
 [ext_resource type="Texture2D" uid="uid://bkxeff0yorbke" path="res://art/UI/Title/play-button-open.png" id="1_phhf1"]
 [ext_resource type="Texture2D" uid="uid://wnc78hacvlc7" path="res://art/UI/Title/play-button-closed.png" id="2_xg4ff"]
+[ext_resource type="Texture2D" uid="uid://bm3342ogt2081" path="res://art/UI/Title/play-button-focus.png" id="3_7vcn3"]
 [ext_resource type="Script" path="res://Menus/TutorialButton.gd" id="3_vj0gv"]
 [ext_resource type="PackedScene" uid="uid://dr840r1p2wh3c" path="res://Levels/Tutorials/TutorialLevel_1.tscn" id="4_mw3ar"]
 
 [node name="TutorialButton" type="TextureButton"]
 texture_normal = ExtResource("1_phhf1")
 texture_pressed = ExtResource("2_xg4ff")
+texture_focused = ExtResource("3_7vcn3")
 script = ExtResource("3_vj0gv")
 scene = ExtResource("4_mw3ar")
