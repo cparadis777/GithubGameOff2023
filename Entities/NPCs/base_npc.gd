@@ -144,20 +144,6 @@ func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-#func play_death_animation():
-#	$Appearance/AnimatedSprite2D.stop()
-#	if has_node("AnimationPlayer") and animation_player.has_animation("die"):
-#		animation_player.play("die")
-#	else:
-#		play_death_tween_if_needed()
-#
-#
-#func play_death_tween_if_needed():
-#	animation_player.stop()
-#	$Appearance/AnimatedSprite2D.stop()
-#	var tween = create_tween()
-#	tween.parallel().tween_property(self, "rotation", PI * 0.5, 0.33)
-#	tween.parallel().tween_property(self, "position", position + Vector2(0, 5), 0.33)
 
 func die():
 	#animation_player.stop()
@@ -240,7 +226,7 @@ func _on_iframes_timer_timeout():
 		return
 	
 	if is_instance_valid(animation_player):
-		animation_player.play("RESET")
+		animation_player.play("run")
 	
 		
 	if health <= 0:
