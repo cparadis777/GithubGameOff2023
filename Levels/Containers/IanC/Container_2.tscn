@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bcwwg0f3h5ib1"]
+[gd_scene load_steps=16 format=3 uid="uid://bcwwg0f3h5ib1"]
 
 [ext_resource type="PackedScene" uid="uid://c1v061uxxpf6m" path="res://Entities/Environment/Containers/LargeContainer.tscn" id="1_p7dnn"]
 [ext_resource type="Texture2D" uid="uid://qcigtg1vltun" path="res://art/props/shipping_container_bengal_security.png" id="2_eoye4"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b7lbhsnpyax66" path="res://Entities/NPCs/npc_02_dock_worker.tscn" id="12_pvej1"]
 [ext_resource type="PackedScene" uid="uid://b1g47w7bhxbg3" path="res://Entities/Environment/soyda_box.tscn" id="13_e4q5p"]
 [ext_resource type="PackedScene" uid="uid://b2g1ag8e5bgkg" path="res://Entities/Environment/trashcan.tscn" id="14_a7hhv"]
+[ext_resource type="AudioStream" uid="uid://chy3if1m4qsn0" path="res://audio/sfx/TutorialAIVoice/opening_doors.ogg" id="15_r7mvk"]
 
 [node name="FriendlyRave" instance=ExtResource("1_p7dnn")]
 
@@ -111,3 +112,6 @@ rotation = 3.14159
 
 [node name="Exterior" parent="." index="10"]
 texture = ExtResource("2_eoye4")
+
+[node name="OpeningDoorsVoice" parent="." index="16"]
+stream = ExtResource("15_r7mvk")

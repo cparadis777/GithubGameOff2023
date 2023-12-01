@@ -16,11 +16,14 @@ func _ready():
 
 
 func change_scene_to(scene):
-	if scene is PackedScene:
-		# add some animated transitions later.
-		get_tree().change_scene_to_packed(scene)
-	elif scene is String:
-		get_tree().change_scene_to_file(scene)
+	if not scene is PackedScene:
+		scene = load(scene)
+
+	#animated transitions
+	SceneTransition.fade_out()
+	await SceneTransition.finished
+	get_tree().change_scene_to_packed(scene)
+	SceneTransition.fade_in()
 
 
 func _on_NPC_died(npc_name):

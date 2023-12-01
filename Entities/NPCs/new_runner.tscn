@@ -661,22 +661,35 @@ bus = &"sfx"
 [node name="Sensors" type="Node2D" parent="."]
 
 [node name="CliffDetector" type="RayCast2D" parent="Sensors"]
-position = Vector2(18.75, 0)
+position = Vector2(18.75, -3)
 target_position = Vector2(2.08165e-12, 16)
 collision_mask = 16
+hit_from_inside = true
 
 [node name="PlatformDetector" type="RayCast2D" parent="Sensors"]
-position = Vector2(1.90735e-06, 0)
+position = Vector2(0, -3)
 target_position = Vector2(2.08165e-12, 16)
 collision_mask = 17
+hit_from_inside = true
 
 [node name="ObstacleDetector" type="RayCast2D" parent="Sensors"]
-position = Vector2(8.75, -7.5)
-target_position = Vector2(16, 2.08165e-12)
-collision_mask = 16
+position = Vector2(4, -8)
+target_position = Vector2(22, 2.08165e-12)
+collision_mask = 18
+hit_from_inside = true
+
+[node name="PlayerDetector" type="RayCast2D" parent="Sensors"]
+position = Vector2(7, -26)
+target_position = Vector2(160, 2.08165e-12)
 
 [node name="BloodSplats" parent="." instance=ExtResource("10_orvtx")]
 position = Vector2(0, -43)
+
+[node name="RecentlyLandedTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RecentlyTurnedAroundTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="body_entered" from="AnimatedSprite2D/Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

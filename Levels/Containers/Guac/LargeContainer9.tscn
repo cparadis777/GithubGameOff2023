@@ -25,6 +25,7 @@ position = Vector2(237, 79)
 
 [node name="DestructibleWall5" parent="." index="18" instance=ExtResource("2_5spmh")]
 position = Vector2(237, -16)
+collision_mask = 3
 
 [node name="DestructibleWall6" parent="." index="19" instance=ExtResource("2_5spmh")]
 position = Vector2(237, -111)
@@ -94,13 +95,13 @@ position = Vector2(-116, 68)
 position = Vector2(-53, 68)
 
 [node name="TrapSpikes12" parent="." index="37" instance=ExtResource("4_uxe6t")]
-position = Vector2(11, 68)
+position = Vector2(-175, 159)
 
 [node name="TrapSpikes13" parent="." index="38" instance=ExtResource("4_uxe6t")]
-position = Vector2(75, 68)
+position = Vector2(210, 161)
 
 [node name="TrapSpikes15" parent="." index="39" instance=ExtResource("4_uxe6t")]
-position = Vector2(201, 68)
+position = Vector2(147, 161)
 
 [node name="MovingPlatform" parent="." index="40" instance=ExtResource("5_5s2qx")]
 position = Vector2(-308, 39)
@@ -127,4 +128,4 @@ position = Vector2(-73, -22)
 position = Vector2(88, -22)
 
 [node name="VendingMachine" parent="." index="47" instance=ExtResource("8_du8an")]
-position = Vector2(151, 74)
+position = Vector2(198, 73)

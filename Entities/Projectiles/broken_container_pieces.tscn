@@ -1,10 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpycw3r5oj1u0"]
+[gd_scene load_steps=9 format=3 uid="uid://cpycw3r5oj1u0"]
 
 [ext_resource type="Script" path="res://Entities/Projectiles/broken_container_pieces.gd" id="1_fqssp"]
-[ext_resource type="Texture2D" uid="uid://bwbcyc2p84yws" path="res://art/props/shipping_container_ill_eagle.png" id="2_lsl1k"]
+[ext_resource type="Script" path="res://Entities/Projectiles/BrokenBossContainerHalf.gd" id="2_334ym"]
 [ext_resource type="AudioStream" uid="uid://b16invhatvmw4" path="res://audio/sfx/placeholder/yeah.wav" id="3_yo04r"]
+[ext_resource type="Texture2D" uid="uid://u8jvbcoi3o7u" path="res://art/props/shipping_container_ice_and_freezy.png" id="4_0sddx"]
 [ext_resource type="AudioStream" uid="uid://cmjkejxf1gu83" path="res://audio/sfx/placeholder/get_him.wav" id="4_jo6pp"]
 [ext_resource type="AudioStream" uid="uid://ck14qo7ox2mc" path="res://audio/sfx/placeholder/huh.wav" id="5_y4ckd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p516r"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = false
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ost3l"]
 streams_count = 3
@@ -18,14 +25,15 @@ stream_2/weight = 1.0
 [node name="BrokenContainerPieces" type="Node2D"]
 script = ExtResource("1_fqssp")
 
-[node name="LeftPiece" type="RigidBody2D" parent="."]
+[node name="LeftPiece" type="RigidBody2D" parent="." groups=["Kickables"]]
 position = Vector2(-101, -1)
 collision_layer = 24
 collision_mask = 25
+script = ExtResource("2_334ym")
 
 [node name="Sprite" type="Polygon2D" parent="LeftPiece"]
 position = Vector2(-68.8, -62.5)
-texture = ExtResource("2_lsl1k")
+texture = ExtResource("4_0sddx")
 texture_scale = Vector2(1.5, 1.5)
 polygon = PackedVector2Array(117, 127, -1, 126, -1, 2, 133, 2, 114, 64, 143, 73)
 
@@ -33,20 +41,50 @@ polygon = PackedVector2Array(117, 127, -1, 126, -1, 2, 133, 2, 114, 64, 143, 73)
 position = Vector2(-68.8, -62.5)
 polygon = PackedVector2Array(117, 127, -1, 126, -1, 2, 133, 2, 114, 64, 143, 73)
 
-[node name="RightPiece" type="RigidBody2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="LeftPiece"]
+material = SubResource("CanvasItemMaterial_p516r")
+emitting = false
+amount = 3
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("4_0sddx")
+emission_shape = 3
+emission_rect_extents = Vector2(64, 64)
+direction = Vector2(2.08165e-12, -1)
+gravity = Vector2(2.08165e-12, 980)
+initial_velocity_min = 300.0
+initial_velocity_max = 300.0
+
+[node name="RightPiece" type="RigidBody2D" parent="." groups=["Kickables"]]
 position = Vector2(66, -1)
 collision_layer = 24
 collision_mask = 25
+max_contacts_reported = 5
+script = ExtResource("2_334ym")
 
 [node name="Sprite" type="Polygon2D" parent="RightPiece"]
 position = Vector2(-181.6, -61.9)
-texture = ExtResource("2_lsl1k")
+texture = ExtResource("4_0sddx")
 texture_scale = Vector2(1.5, 1.5)
 polygon = PackedVector2Array(141, 0, 256, 0, 256, 127, 121, 127, 147, 70, 118, 60)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RightPiece"]
 position = Vector2(-181.6, -61.9)
 polygon = PackedVector2Array(141, 0, 256, 0, 256, 127, 121, 127, 147, 70, 118, 60)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="RightPiece"]
+material = SubResource("CanvasItemMaterial_p516r")
+emitting = false
+amount = 3
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("4_0sddx")
+emission_shape = 3
+emission_rect_extents = Vector2(64, 64)
+direction = Vector2(2.08165e-12, -1)
+gravity = Vector2(2.08165e-12, 980)
+initial_velocity_min = 300.0
+initial_velocity_max = 300.0
 
 [node name="SpawnTimer" type="Timer" parent="."]
 one_shot = true

@@ -9,6 +9,7 @@ extends CharacterBody2D
 var health = health_max
 
 @export var animation_player : Node
+@export var chance_to_spawn_health : float = 0.05
 
 enum States { INITIALIZING, PAUSED, IDLE, RUNNING, JUMPING, KNOCKBACK, IFRAMES, ATTACKING, DYING, DEAD }
 var State = States.INITIALIZING
@@ -76,7 +77,7 @@ func _physics_process(delta):
 		apply_gravity(delta)
 		sync_to_moving_platform(delta)
 		move_and_slide() # modifies velocity
-		#update_animations()
+		update_animations()
 		if is_on_top_of_player():
 			jump()
 		elif is_on_floor() and is_at_end_of_platform() or is_obstructed():
@@ -120,15 +121,17 @@ func is_on_top_of_player():
 	if area.get_overlapping_bodies().has(get_tree().get_first_node_in_group("Player")):
 		return true
 
-#
-#func update_animations():
-#
-#	if State in [States.RUNNING] and abs(velocity.x) < 0.1:
-#		animation_player.play("idle")
-#	elif State in [States.RUNNING] and abs(velocity.x) >= 0.1:
-#		if animation_player.current_animation != "run":
-#			animation_player.play("run")
-#
+
+func update_animations():
+	if not is_instance_valid(animation_player):
+		return
+
+	if State in [States.RUNNING] and abs(velocity.x) < 0.1:
+		animation_player.play("idle")
+	elif State in [States.RUNNING] and abs(velocity.x) >= 0.1:
+		if animation_player.current_animation != "run":
+			animation_player.play("run")
+
 #	if animation_player.current_animation == "":
 #		if animations[State] != "" and animation_player.has_animation(animations[State]):
 #			animation_player.play(animations[State])
@@ -155,6 +158,7 @@ func apply_gravity(delta):
 func die():
 	#animation_player.stop()
 	State = States.DEAD
+	maybe_spawn_health()
 	spawn_corpse()
 	#decision_timer.stop()
 	abort_attacks_in_progress()
@@ -164,6 +168,14 @@ func die():
 	#animation_player.stop()
 	#call_deferred("play_death_animation") # should include audio
 	queue_free()
+
+func maybe_spawn_health():
+	if randf() < chance_to_spawn_health:
+		var healthScene = preload("res://Entities/Environment/Pickables/health_pickable.tscn").instantiate()
+		add_sibling(healthScene)
+		var jitter = Vector2(randf_range(-24,24), randf_range(-6, 18))
+		healthScene.global_position = global_position + jitter
+		
 
 func spawn_corpse():
 	var new_corpse = $Appearance/Corpse.duplicate()

@@ -628,10 +628,11 @@ volume_db = 2.0
 
 [node name="SpaceBar_UI" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
+z_index = 1
 position = Vector2(109, -149)
 sprite_frames = SubResource("SpriteFrames_jlrnc")
 autoplay = "default"
-frame_progress = 0.401337
+frame_progress = 0.868182
 
 [node name="Hello_SFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_kxbkt")

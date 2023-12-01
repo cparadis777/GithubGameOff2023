@@ -18,8 +18,9 @@ func activate(powerupType : Globals.PickupTypes):
 
 func _on_animation_player_animation_finished(_anim_name):
 	Engine.time_scale = 1.0
+	queue_free()
 	
 func speed_up():
 	var tween = create_tween()
 	tween.tween_property(Engine, "time_scale", 1.0, 0.1)
-	tween.finished.connect(queue_free)
+	

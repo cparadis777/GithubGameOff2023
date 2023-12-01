@@ -78,9 +78,10 @@ func _on_hurt_box_body_entered(body):
 			hit.emit(attackPacket)
 			hit.disconnect(body._on_hit)	
 #			player.inflict_harm(body, Globals.player_damage_defaults["DescendingKick"], true, false)
-			player.velocity.x = -player.velocity.x
-			player.velocity.y = - 1.25 * player.JUMP_VELOCITY
-			state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
+#			player.velocity.x = -player.velocity.x
+#			player.velocity.y = - 1.25 * player.JUMP_VELOCITY
+			#state_machine.transition_to("Air", {"do_jump" = true, "involuntary" = true})
+			state_machine.transition_to("Air")
 
 
 

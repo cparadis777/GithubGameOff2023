@@ -29,7 +29,7 @@ enum PickupTypes { HEALTH, DAMAGE, SPEED, JUMP }
 
 var difficulty : DifficultyScales = DifficultyScales.AVERAGE
 var scale_weight : float = 0.0
-var max_weight : float = 1000.0
+var max_weight : float = 1100.0
 
 var player_stats = {
 	"max_health" : 100, # 1 heart = 10 points
@@ -55,6 +55,4 @@ var max_stats_upper_limits = {
 
 func set_difficulty_based_on_weight():
 	# there's 20 points of difficulty.
-	difficulty = int(clamp(scale_weight / max_weight, 0, 19) * DifficultyScales.keys().size()) as DifficultyScales
-	print("Setting difficulty based on ", scale_weight , " out of ", max_weight)
-	print(DifficultyScales.keys()[difficulty])
+	difficulty = floor(clamp(scale_weight / max_weight, 0, 1) * DifficultyScales.keys().size()) as DifficultyScales

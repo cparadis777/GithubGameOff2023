@@ -19,6 +19,7 @@ texture = ExtResource("1_6vwgg")
 emission_shape = 3
 emission_rect_extents = Vector2(32, 32)
 gravity = Vector2(2.08165e-12, 2.08165e-12)
+angle_max = 360.0
 scale_amount_min = 0.33
 scale_amount_max = 1.5
 script = ExtResource("2_q5dcc")

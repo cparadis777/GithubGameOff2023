@@ -12,7 +12,7 @@ func enter(_msg := {} ):
 	owner.face(1) # face right for tutorial text
 	
 	var new_tutorial_bot = preload("res://UI/tutorial_ai.tscn").instantiate()
-	new_tutorial_bot.override_text = "I'm so sorry you died.\nThat didn't work out.\nLet's rewind a bit..."
+	new_tutorial_bot.override_text = "I'm so sorry you're broken.\nHang in there.\nI'll come for you..."
 	owner.add_sibling(new_tutorial_bot)
 	new_tutorial_bot.global_scale = Vector2.ONE
 	new_tutorial_bot.global_position = self.global_position + Vector2(-96, 96)

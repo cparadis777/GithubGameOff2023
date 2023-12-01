@@ -75,7 +75,7 @@ func player_present():
 	var player_body = null
 	for body in $Area2D.get_overlapping_bodies():
 		if body.is_in_group("Player"):
-			if body.state_machine.state.name != "InTransit":
+			if body.state_machine.state.name not in ["InTransit", "Dying", "Dead", "Paused"]:
 				player_body = body
 		
 	return player_body
