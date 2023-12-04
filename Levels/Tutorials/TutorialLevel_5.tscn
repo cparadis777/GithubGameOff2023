@@ -79,7 +79,7 @@ position = Vector2(-187, 0.999996)
 rotation = 1.91288
 
 [node name="AI_Tutorial_Text" parent="." index="7" instance=ExtResource("13_n3oxo")]
-position = Vector2(-66, 72)
+position = Vector2(-68, 88)
 override_text = "You have a fast (<)
 and strong attack (>);Hold the strong
 attack to charge.

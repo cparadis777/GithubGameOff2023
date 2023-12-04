@@ -130,10 +130,8 @@ size = Vector2(20, 45)
 size = Vector2(17, 37.4751)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_10l48"]
-streams_count = 3
 playback_mode = 2
-random_pitch = 1.0
-random_volume_offset_db = 0.0
+streams_count = 3
 stream_0/stream = ExtResource("21_ttxvf")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("22_n1umw")
@@ -218,7 +216,6 @@ visible = false
 position = Vector2(-12.7579, -38.2736)
 scale = Vector2(2, 1)
 sprite_frames = SubResource("SpriteFrames_3ov6f")
-frame = 9
 offset = Vector2(-15.7046, 1.14441e-05)
 
 [node name="StateMachine" type="Node2D" parent="."]

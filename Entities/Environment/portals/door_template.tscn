@@ -403,5 +403,13 @@ collision_mask = 8
 position = Vector2(-98, 3)
 shape = SubResource("RectangleShape2D_53oy5")
 
+[node name="InteractLabel" type="Label" parent="."]
+offset_left = 7.0
+offset_top = -79.0
+offset_right = 47.0
+offset_bottom = -56.0
+text = "[F]"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Area2D/DelayOpeningTimer" to="." method="_on_delay_opening_timer_timeout"]

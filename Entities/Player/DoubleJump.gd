@@ -75,7 +75,7 @@ func enter(_msg := {}):
 	initiate_hover()
 
 func initiate_hover():
-	player.velocity.y = -double_jump_velocity_multiplier * player.JUMP_VELOCITY
+	player.velocity.y = -double_jump_velocity_multiplier * Globals.player_stats["jump_velocity"]
 	SubState = SubStates.HOVERING
 	initiated_hover.emit()
 

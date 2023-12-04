@@ -21,7 +21,6 @@ light_mode = 1
 [sub_resource type="Environment" id="Environment_j2q28"]
 background_mode = 3
 ambient_light_energy = 0.2
-glow_enabled = true
 
 [node name="GeneratedPlayspace" type="Node2D"]
 script = ExtResource("1_guo8s")

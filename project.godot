@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Manifest Violence - GameOff2023"
 run/main_scene="res://CutScenes/intro_animatic.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://art/player/cyber-ronin-icon.png"
 
 [autoload]
@@ -180,6 +180,8 @@ fight={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+limits/global_shader_variables/buffer_size=16384
 environment/defaults/default_clear_color=Color(0.054902, 0.0196078, 0.0823529, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true

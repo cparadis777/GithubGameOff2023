@@ -128,7 +128,13 @@ func reset_rotation():
 
 func initiate_debugging_protocol():
 	zoom_camera(1)
+	
+	var upgrades = ["health", "speed", "damage_multiplier", "jump_velocity"]
+	for upgrade in upgrades:
+		Globals.player_stats[upgrade] = Globals.max_stats_upper_limits[upgrade]
 	health = Globals.player_stats["max_health"]
+	hud.update_health_display(health)
+	
 	#print("Player detected")
 	#print("nodes in group Player: " + str(get_tree().get_nodes_in_group("Player")))
 	

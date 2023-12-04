@@ -23,6 +23,8 @@ func _input(event):
 			$AnimationPlayer.play(starting_animation)
 			started = true
 	if event.is_action_pressed("pause"):
+		if $AnimationPlayer.current_animation == "":
+			$AnimationPlayer.play(starting_animation)
 		$AnimationPlayer.seek(14.9, true)
 		start_button.grab_focus()
 

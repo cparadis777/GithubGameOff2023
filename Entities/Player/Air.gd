@@ -29,12 +29,12 @@ func enter(msg := {}) -> void:
 	
 	if msg.has("do_jump"): # up from the ground
 		already_signalled_peak_amplitude = false
-		player.velocity.y = -player.JUMP_VELOCITY
+		player.velocity.y = -Globals.player_stats["jump_velocity"]
 		if involuntary_jump:
 			player.velocity.y *= 0.5
 		jumped.emit()
 	elif msg.has("do_drop"): # down from a platform
-		player.velocity.y = 0.5 * player.JUMP_VELOCITY
+		player.velocity.y = 0.5 * Globals.player_stats["jump_velocity"]
 	already_used_double_jump = msg.has("double_jumped")
 	already_used_dash = msg.has("dashed") # one line version of: if msg.has "dashed": already_used_dash = true
 	already_signalled_descent = false

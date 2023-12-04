@@ -24,7 +24,7 @@ next_scene = ExtResource("2_c7ax0")
 
 [node name="AI_Tutorial_Text" parent="BaseContainer" index="11" instance=ExtResource("6_mf24q")]
 z_index = 2
-position = Vector2(-256, 109)
+position = Vector2(-271, 133)
 override_text = "Jump with space
 (Gamepad A button)"
 

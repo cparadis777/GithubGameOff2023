@@ -32,6 +32,9 @@ func _ready():
 		if !locked:
 			$DoorSprite.frame = 17
 
+	if has_node("InteractLabel"):
+		$InteractLabel.hide()
+
 	await get_tree().create_timer(0.5).timeout
 	link_nearby_door()
 
@@ -48,9 +51,6 @@ func link_nearby_door():
 				linked_portal = candidate.owner
 				
 
-func _on_area_2d_body_entered(body):
-	if "player" in body.name.to_lower() and body.state_machine.state.name != "InTransit" and !locked:
-		$Area2D/DelayOpeningTimer.start()
 
 
 func _on_delay_opening_timer_timeout():
@@ -120,3 +120,15 @@ func interact():
 		if $AnimationPlayer.has_animation("locked"):
 			$AnimationPlayer.play("locked")
 		
+func _on_area_2d_body_entered(body):
+	
+	if "player" in body.name.to_lower() and body.state_machine.state.name != "InTransit" and !locked:
+		if has_node("InteractLabel"):
+			$InteractLabel.show()
+		#$Area2D/DelayOpeningTimer.start()
+
+
+func _on_area_2d_body_exited(body):
+	if "player" in body.name.to_lower() and body.state_machine.state.name != "InTransit" and !locked:
+		if has_node("InteractLabel"):
+			$InteractLabel.hide()

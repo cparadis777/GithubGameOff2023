@@ -29,7 +29,7 @@ position = Vector2(-18.9999, -26.0001)
 
 [node name="AI_Tutorial_Text" parent="BaseContainer" index="11" instance=ExtResource("4_4x810")]
 z_index = 2
-position = Vector2(-256, 99)
+position = Vector2(-281, 140)
 override_text = "Press jump again,
 while in the air
 to double jump."
@@ -70,4 +70,5 @@ position = Vector2(0, -28)
 
 [editable path="BaseContainer"]
 [editable path="BaseContainer/NextLevelDoor"]
+[editable path="BaseContainer/AI_Tutorial_Text"]
 [editable path="BaseContainer/DoubleJumpDemo"]

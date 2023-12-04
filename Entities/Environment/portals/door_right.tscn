@@ -17,3 +17,9 @@ scale = Vector2(-2.5, 2.5)
 
 [node name="CollisionShape2D" parent="paired_door_detector" index="0"]
 position = Vector2(77, 1)
+
+[node name="InteractLabel" parent="." index="9"]
+offset_left = -46.0
+offset_top = -81.0
+offset_right = -6.0
+offset_bottom = -58.0

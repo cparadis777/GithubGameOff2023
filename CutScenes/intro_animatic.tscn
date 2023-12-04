@@ -121,55 +121,55 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Slide4-TitleMenu:visible")
+tracks/5/path = NodePath("Slide4/ManifestLabel:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Slide4-TitleMenu/ManifestLabel:self_modulate")
+tracks/6/path = NodePath("Slide4/in:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Slide4-TitleMenu/in:visible")
+tracks/7/path = NodePath("Slide4/in:self_modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Slide4-TitleMenu/in:self_modulate")
+tracks/8/path = NodePath("PressAnyKeyLabel:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"update": 1,
+"values": [true]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("PressAnyKeyLabel:visible")
+tracks/9/path = NodePath("Camera2D/escToSkipLabel:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -181,31 +181,31 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Camera2D/escToSkipLabel:visible")
+tracks/10/path = NodePath("Camera2D/escToSkipLabel:self_modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Camera2D/escToSkipLabel:self_modulate")
+tracks/11/path = NodePath("Slide1-Me/ThisIsMeLabel:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [true]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Slide1-Me/ThisIsMeLabel:visible")
+tracks/12/path = NodePath("ManifestViolence:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -217,19 +217,19 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("ManifestViolence:visible")
+tracks/13/path = NodePath("Slide4/Control-Panel/ButtonPanel:self_modulate")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel:self_modulate")
+tracks/14/path = NodePath("Slide4/Control-Panel/ButtonPanel/TutorialButton:self_modulate")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -241,7 +241,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel/TutorialButton:self_modulate")
+tracks/15/path = NodePath("Slide4/Control-Panel/ButtonPanel/SkipTutorialButton:self_modulate")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -253,19 +253,19 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel/SkipTutorialButton:self_modulate")
+tracks/16/path = NodePath("Slide4:modulate")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_sqojr"]
 resource_name = "intro_animatic"
-length = 12.0
+length = 16.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -329,59 +329,59 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Slide4-TitleMenu:visible")
+tracks/5/path = NodePath("Slide4/ManifestLabel:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 8.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Slide4-TitleMenu/ManifestLabel:self_modulate")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(6.2, 9.3, 9.9, 10.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Slide4-TitleMenu/in:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Slide4/in:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(8.6, 9.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Slide4-TitleMenu/in:self_modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Slide4/in:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(9.4, 9.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PressAnyKeyLabel:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("PressAnyKeyLabel:visible")
+tracks/9/path = NodePath("Camera2D/escToSkipLabel:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 8.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -389,55 +389,55 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Camera2D/escToSkipLabel:visible")
+tracks/10/path = NodePath("Camera2D/escToSkipLabel:self_modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 8.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Camera2D/escToSkipLabel:self_modulate")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
 "times": PackedFloat32Array(2, 3.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Slide1-Me/ThisIsMeLabel:visible")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Slide1-Me/ThisIsMeLabel:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
 "times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("ManifestViolence:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 14.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("ManifestViolence:visible")
+tracks/13/path = NodePath("Slide4/Control-Panel/ButtonPanel:self_modulate")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"times": PackedFloat32Array(11.1, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel:self_modulate")
+tracks/14/path = NodePath("Slide4/Control-Panel/ButtonPanel/TutorialButton:self_modulate")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -449,7 +449,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel/TutorialButton:self_modulate")
+tracks/15/path = NodePath("Slide4/Control-Panel/ButtonPanel/SkipTutorialButton:self_modulate")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -461,11 +461,11 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Slide4-TitleMenu/Control-Panel/ButtonPanel/SkipTutorialButton:self_modulate")
+tracks/16/path = NodePath("Slide4:modulate")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(11.1, 12),
+"times": PackedFloat32Array(0, 8.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -595,17 +595,16 @@ offset_right = 159.0
 offset_bottom = -697.0
 text = "This is my Boss"
 
-[node name="Slide4-TitleMenu" type="Node2D" parent="."]
-visible = false
+[node name="Slide4" type="Node2D" parent="."]
 
-[node name="ThreatLabel" type="TextureRect" parent="Slide4-TitleMenu"]
+[node name="ThreatLabel" type="TextureRect" parent="Slide4"]
 offset_left = 52.5
 offset_top = -977.5
 offset_right = 264.5
 offset_bottom = -949.5
 texture = ExtResource("9_g2bo7")
 
-[node name="in" type="TextureRect" parent="Slide4-TitleMenu"]
+[node name="in" type="TextureRect" parent="Slide4"]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 5
@@ -619,17 +618,17 @@ grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("10_x82pu")
 
-[node name="Control-Panel" type="Node2D" parent="Slide4-TitleMenu"]
+[node name="Control-Panel" type="Node2D" parent="Slide4"]
 self_modulate = Color(1, 1, 1, 0)
 position = Vector2(9, -5)
 
-[node name="ButtonPanel" type="Sprite2D" parent="Slide4-TitleMenu/Control-Panel"]
+[node name="ButtonPanel" type="Sprite2D" parent="Slide4/Control-Panel"]
 unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
 position = Vector2(155.5, -846)
 texture = ExtResource("11_nf0qc")
 
-[node name="TutorialButton" parent="Slide4-TitleMenu/Control-Panel/ButtonPanel" instance=ExtResource("12_73lfk")]
+[node name="TutorialButton" parent="Slide4/Control-Panel/ButtonPanel" instance=ExtResource("12_73lfk")]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = -101.5
 offset_top = -14.5
@@ -637,7 +636,7 @@ offset_right = -28.5
 offset_bottom = 16.5
 focus_neighbor_right = NodePath("../SkipTutorialButton")
 
-[node name="SkipTutorialButton" parent="Slide4-TitleMenu/Control-Panel/ButtonPanel" instance=ExtResource("13_66hro")]
+[node name="SkipTutorialButton" parent="Slide4/Control-Panel/ButtonPanel" instance=ExtResource("13_66hro")]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = -5.0
 offset_top = -23.999
@@ -645,7 +644,7 @@ offset_right = 97.0
 offset_bottom = 23.001
 focus_neighbor_left = NodePath("../TutorialButton")
 
-[node name="ManifestLabel" type="AnimatedSprite2D" parent="Slide4-TitleMenu"]
+[node name="ManifestLabel" type="AnimatedSprite2D" parent="Slide4"]
 self_modulate = Color(1, 1, 1, 0)
 position = Vector2(160.5, -921)
 sprite_frames = SubResource("SpriteFrames_nr6j4")

@@ -15,8 +15,8 @@ func start_music():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel") and $AnimationPlayer.current_animation != "":
-		$AnimationPlayer.seek(15.0)
-	
+		$AnimationPlayer.play("introduce_boss")
+		$AnimationPlayer.seek(13.5)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass

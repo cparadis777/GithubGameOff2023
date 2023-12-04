@@ -130,7 +130,8 @@ func update_animations():
 		if is_instance_valid(animation_player):
 			animation_player.play("run")
 			if has_node("Appearance/AnimatedSprite2D") and is_instance_valid($Appearance/AnimatedSprite2D):
-				$Appearance/AnimatedSprite2D.play("run")
+				if $Appearance/AnimatedSprite2D.sprite_frames != null and $Appearance/AnimatedSprite2D.sprite_frames.has_animation("run"):
+					$Appearance/AnimatedSprite2D.play("run")
 #	if State in [States.RUNNING] and abs(velocity.x) < 0.01:
 #		animation_player.play("idle")
 #	elif State in [States.RUNNING] and abs(velocity.x) >= 0.01:
@@ -299,7 +300,7 @@ func select_random_state():
 	return new_state
 	
 func select_random_direction():
-	if !is_instance_valid(StageManager.current_player):
+	if !is_instance_valid(StageManager.current_player) or !is_instance_valid(self):
 		return
 		
 	var chance_to_turn_around
