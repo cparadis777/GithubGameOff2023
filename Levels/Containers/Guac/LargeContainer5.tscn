@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c8qshoquywcr3"]
+[gd_scene load_steps=26 format=3 uid="uid://c8qshoquywcr3"]
 
 [ext_resource type="Script" path="res://Entities/Environment/Containers/BaseContainer.gd" id="1_d7syb"]
 [ext_resource type="PackedScene" uid="uid://co335w0up3ktv" path="res://Entities/Environment/Lights/darkening_layer.tscn" id="2_pvl8u"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://blh128dmuq6f7" path="res://Entities/NPCs/npc_03_running_assassin.tscn" id="10_rhhe5"]
 [ext_resource type="PackedScene" uid="uid://1qgkxr0pbqda" path="res://Entities/NPCs/new_runner.tscn" id="11_pt3hs"]
 [ext_resource type="PackedScene" uid="uid://c17sncorbfoal" path="res://Entities/Environment/Platforms/moving_platform.tscn" id="12_46xui"]
+[ext_resource type="PackedScene" uid="uid://cmpouufnlcxkn" path="res://Entities/Environment/Platforms/basic_platform.tscn" id="13_hx35g"]
 [ext_resource type="PackedScene" uid="uid://cxtontreijkdo" path="res://Entities/Environment/portals/opening_doors_voice.tscn" id="13_oxjgv"]
 [ext_resource type="PackedScene" uid="uid://cfeyc76xirsc4" path="res://Entities/Environment/BG_Non-interactable/frozen_lung.tscn" id="14_xce22"]
 [ext_resource type="PackedScene" uid="uid://hnjmjxrwiiyw" path="res://Entities/Environment/BG_Non-interactable/frozen_heart.tscn" id="15_l1gkv"]
@@ -166,9 +167,6 @@ position = Vector2(-194, 79)
 [node name="TrapSpikes4" parent="Traps" instance=ExtResource("9_kos1d")]
 position = Vector2(258, 78)
 
-[node name="TrapSpikes3" parent="Traps" instance=ExtResource("9_kos1d")]
-position = Vector2(-4, 53)
-
 [node name="TrapSpikes5" parent="Traps" instance=ExtResource("9_kos1d")]
 position = Vector2(195, 78)
 
@@ -220,6 +218,9 @@ position = Vector2(0, 7)
 
 [node name="FloorHeightMarker" parent="Platforms/MovingPlatform3/AnimatableBody2D/Piston" index="0"]
 position = Vector2(0, 32)
+
+[node name="BasicPlatform" parent="Platforms" instance=ExtResource("13_hx35g")]
+position = Vector2(0, 89)
 
 [node name="OpeningDoorsVoice" parent="." instance=ExtResource("13_oxjgv")]
 

@@ -92,7 +92,8 @@ func _physics_process(delta):
 
 func is_in_melee_range():
 	if $Sensors/PlayerDetector.is_colliding():
-		if $Sensors/PlayerDetector.get_collider().is_in_group("Player"):
+		var collider = $Sensors/PlayerDetector.get_collider()
+		if collider != null and collider.is_in_group("Player"):
 			return true
 	return false
 
